@@ -34,7 +34,7 @@ use SnapTrade\Configuration;
 use SnapTrade\HeaderSelector;
 use SnapTrade\ObjectSerializer;
 
-class ReferenceDataApi
+class ReferenceDataApi extends \SnapTrade\BaseApi
 {
     /**
      * @var ClientInterface
@@ -172,6 +172,8 @@ class ReferenceDataApi
     public function getCurrencyExchangeRatePairWithHttpInfo($currency_pair, string $contentType = self::contentTypes['getCurrencyExchangeRatePair'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $request = $this->getCurrencyExchangeRatePairRequest($currency_pair, $contentType);
+
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
             $options = $this->createHttpClientOption();
@@ -484,6 +486,8 @@ class ReferenceDataApi
     public function getPartnerInfoWithHttpInfo(string $contentType = self::contentTypes['getPartnerInfo'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $request = $this->getPartnerInfoRequest($contentType);
+
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
             $options = $this->createHttpClientOption();
@@ -843,6 +847,8 @@ class ReferenceDataApi
     {
         $request = $this->getSecurityTypesRequest($contentType);
 
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
         try {
             $options = $this->createHttpClientOption();
             try {
@@ -1131,6 +1137,8 @@ class ReferenceDataApi
     public function getStockExchangesWithHttpInfo(string $contentType = self::contentTypes['getStockExchanges'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $request = $this->getStockExchangesRequest($contentType);
+
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1422,6 +1430,8 @@ class ReferenceDataApi
     public function getSymbolsWithHttpInfo($symbol_query = null, string $contentType = self::contentTypes['getSymbols'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $request = $this->getSymbolsRequest($symbol_query, $contentType);
+
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1730,6 +1740,8 @@ class ReferenceDataApi
     public function getSymbolsByTickerWithHttpInfo($ticker, $symbol_id = null, string $contentType = self::contentTypes['getSymbolsByTicker'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $request = $this->getSymbolsByTickerRequest($ticker, $symbol_id, $contentType);
+
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
             $options = $this->createHttpClientOption();
@@ -2063,6 +2075,8 @@ class ReferenceDataApi
     {
         $request = $this->listAllBrokerageAuthorizationTypeRequest($brokerage, $contentType);
 
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
         try {
             $options = $this->createHttpClientOption();
             try {
@@ -2370,6 +2384,8 @@ class ReferenceDataApi
     {
         $request = $this->listAllBrokeragesRequest($contentType);
 
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
         try {
             $options = $this->createHttpClientOption();
             try {
@@ -2659,6 +2675,8 @@ class ReferenceDataApi
     {
         $request = $this->listAllCurrenciesRequest($contentType);
 
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
         try {
             $options = $this->createHttpClientOption();
             try {
@@ -2947,6 +2965,8 @@ class ReferenceDataApi
     public function listAllCurrenciesRatesWithHttpInfo(string $contentType = self::contentTypes['listAllCurrenciesRates'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $request = $this->listAllCurrenciesRatesRequest($contentType);
+
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
             $options = $this->createHttpClientOption();
@@ -3244,6 +3264,8 @@ class ReferenceDataApi
     public function symbolSearchUserAccountWithHttpInfo($user_id, $user_secret, $account_id, $symbol_query = null, string $contentType = self::contentTypes['symbolSearchUserAccount'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $request = $this->symbolSearchUserAccountRequest($user_id, $user_secret, $account_id, $symbol_query, $contentType);
+
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
             $options = $this->createHttpClientOption();

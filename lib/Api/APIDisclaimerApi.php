@@ -34,7 +34,7 @@ use SnapTrade\Configuration;
 use SnapTrade\HeaderSelector;
 use SnapTrade\ObjectSerializer;
 
-class APIDisclaimerApi
+class APIDisclaimerApi extends \SnapTrade\BaseApi
 {
     /**
      * @var ClientInterface
@@ -146,6 +146,8 @@ class APIDisclaimerApi
     public function acceptWithHttpInfo($user_id, $user_secret, $api_disclaimer_accept_request, string $contentType = self::contentTypes['accept'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $request = $this->acceptRequest($user_id, $user_secret, $api_disclaimer_accept_request, $contentType);
+
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
             $options = $this->createHttpClientOption();

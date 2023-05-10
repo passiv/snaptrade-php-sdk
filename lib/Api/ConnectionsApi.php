@@ -34,7 +34,7 @@ use SnapTrade\Configuration;
 use SnapTrade\HeaderSelector;
 use SnapTrade\ObjectSerializer;
 
-class ConnectionsApi
+class ConnectionsApi extends \SnapTrade\BaseApi
 {
     /**
      * @var ClientInterface
@@ -155,6 +155,8 @@ class ConnectionsApi
     public function detailBrokerageAuthorizationWithHttpInfo($authorization_id, $user_id, $user_secret, string $contentType = self::contentTypes['detailBrokerageAuthorization'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $request = $this->detailBrokerageAuthorizationRequest($authorization_id, $user_id, $user_secret, $contentType);
+
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
             $options = $this->createHttpClientOption();
@@ -520,6 +522,8 @@ class ConnectionsApi
     {
         $request = $this->listBrokerageAuthorizationsRequest($user_id, $user_secret, $contentType);
 
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
         try {
             $options = $this->createHttpClientOption();
             try {
@@ -862,6 +866,8 @@ class ConnectionsApi
     {
         $request = $this->removeBrokerageAuthorizationRequest($authorization_id, $user_id, $user_secret, $contentType);
 
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
         try {
             $options = $this->createHttpClientOption();
             try {
@@ -1174,6 +1180,8 @@ class ConnectionsApi
     public function sessionEventsWithHttpInfo($partner_client_id, $user_id = null, $session_id = null, string $contentType = self::contentTypes['sessionEvents'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $request = $this->sessionEventsRequest($partner_client_id, $user_id, $session_id, $contentType);
+
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
             $options = $this->createHttpClientOption();

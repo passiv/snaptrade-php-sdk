@@ -30,12 +30,11 @@ use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
 use SnapTrade\ApiException;
-use SnapTrade\BaseApi;
 use SnapTrade\Configuration;
 use SnapTrade\HeaderSelector;
 use SnapTrade\ObjectSerializer;
 
-class PortfolioManagementApi extends BaseApi
+class PortfolioManagementApi extends \SnapTrade\BaseApi
 {
     /**
      * @var ClientInterface
@@ -238,6 +237,8 @@ class PortfolioManagementApi extends BaseApi
     public function addPortfolioExcludedAssetWithHttpInfo($portfolio_group_id, $universal_symbol = null, string $contentType = self::contentTypes['addPortfolioExcludedAsset'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $request = $this->addPortfolioExcludedAssetRequest($portfolio_group_id, $universal_symbol, $contentType);
+
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
             $options = $this->createHttpClientOption();
@@ -915,6 +916,8 @@ class PortfolioManagementApi extends BaseApi
     {
         $request = $this->createRequest($user_id, $user_secret, $request_body, $contentType);
 
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
         try {
             $options = $this->createHttpClientOption();
             try {
@@ -1270,6 +1273,8 @@ class PortfolioManagementApi extends BaseApi
     {
         $request = $this->createAssetClassRequest($contentType);
 
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
         try {
             $options = $this->createHttpClientOption();
             try {
@@ -1558,6 +1563,8 @@ class PortfolioManagementApi extends BaseApi
     public function createModelPortfolioWithHttpInfo(string $contentType = self::contentTypes['createModelPortfolio'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $request = $this->createModelPortfolioRequest($contentType);
+
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1849,6 +1856,8 @@ class PortfolioManagementApi extends BaseApi
     {
         $request = $this->deleteAssetClassRequest($model_asset_class_id, $contentType);
 
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
         try {
             $options = $this->createHttpClientOption();
             try {
@@ -2110,6 +2119,8 @@ class PortfolioManagementApi extends BaseApi
     public function deleteExcludedAssetWithHttpInfo($portfolio_group_id, $symbol_id, string $contentType = self::contentTypes['deleteExcludedAsset'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $request = $this->deleteExcludedAssetRequest($portfolio_group_id, $symbol_id, $contentType);
+
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
             $options = $this->createHttpClientOption();
@@ -2394,6 +2405,8 @@ class PortfolioManagementApi extends BaseApi
     {
         $request = $this->deleteModelPortfolioByIdRequest($model_portfolio_id, $contentType);
 
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
         try {
             $options = $this->createHttpClientOption();
             try {
@@ -2654,6 +2667,8 @@ class PortfolioManagementApi extends BaseApi
     public function deletePortfoliWithHttpInfo($portfolio_group_id, string $contentType = self::contentTypes['deletePortfoli'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $request = $this->deletePortfoliRequest($portfolio_group_id, $contentType);
+
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
             $options = $this->createHttpClientOption();
@@ -2970,6 +2985,8 @@ class PortfolioManagementApi extends BaseApi
     public function deletePortfolioTargetByIdWithHttpInfo($portfolio_group_id, $target_asset_id, string $contentType = self::contentTypes['deletePortfolioTargetById'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $request = $this->deletePortfolioTargetByIdRequest($portfolio_group_id, $target_asset_id, $contentType);
+
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
             $options = $this->createHttpClientOption();
@@ -3308,6 +3325,8 @@ class PortfolioManagementApi extends BaseApi
     {
         $request = $this->detailAssetClassRequest($model_asset_class_id, $contentType);
 
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
         try {
             $options = $this->createHttpClientOption();
             try {
@@ -3625,6 +3644,8 @@ class PortfolioManagementApi extends BaseApi
     public function getCalculatedTradeByIdWithHttpInfo($portfolio_group_id, $calculated_trade_id, $trade_id, string $contentType = self::contentTypes['getCalculatedTradeById'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $request = $this->getCalculatedTradeByIdRequest($portfolio_group_id, $calculated_trade_id, $trade_id, $contentType);
+
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
             $options = $this->createHttpClientOption();
@@ -3986,6 +4007,8 @@ class PortfolioManagementApi extends BaseApi
     {
         $request = $this->getModelDetailsByIdRequest($model_portfolio_id, $contentType);
 
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
         try {
             $options = $this->createHttpClientOption();
             try {
@@ -4299,6 +4322,8 @@ class PortfolioManagementApi extends BaseApi
     public function getPortfolioBalancesWithHttpInfo($portfolio_group_id, string $contentType = self::contentTypes['getPortfolioBalances'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $request = $this->getPortfolioBalancesRequest($portfolio_group_id, $contentType);
+
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
             $options = $this->createHttpClientOption();
@@ -4614,6 +4639,8 @@ class PortfolioManagementApi extends BaseApi
     {
         $request = $this->getPortfolioDetailsByIdRequest($portfolio_group_id, $contentType);
 
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
         try {
             $options = $this->createHttpClientOption();
             try {
@@ -4928,6 +4955,8 @@ class PortfolioManagementApi extends BaseApi
     {
         $request = $this->getPortfolioInfoRequest($portfolio_group_id, $contentType);
 
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
         try {
             $options = $this->createHttpClientOption();
             try {
@@ -5241,6 +5270,8 @@ class PortfolioManagementApi extends BaseApi
     public function getPortfolioSettingsWithHttpInfo($portfolio_group_id, string $contentType = self::contentTypes['getPortfolioSettings'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $request = $this->getPortfolioSettingsRequest($portfolio_group_id, $contentType);
+
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
             $options = $this->createHttpClientOption();
@@ -5557,6 +5588,8 @@ class PortfolioManagementApi extends BaseApi
     public function getPortfolioTargetByIdWithHttpInfo($portfolio_group_id, $target_asset_id, string $contentType = self::contentTypes['getPortfolioTargetById'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $request = $this->getPortfolioTargetByIdRequest($portfolio_group_id, $target_asset_id, $contentType);
+
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
             $options = $this->createHttpClientOption();
@@ -5895,6 +5928,8 @@ class PortfolioManagementApi extends BaseApi
     {
         $request = $this->getPortfolioTargetsRequest($portfolio_group_id, $contentType);
 
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
         try {
             $options = $this->createHttpClientOption();
             try {
@@ -6208,6 +6243,8 @@ class PortfolioManagementApi extends BaseApi
     public function getPortoflioExcludedAssetsWithHttpInfo($portfolio_group_id, string $contentType = self::contentTypes['getPortoflioExcludedAssets'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $request = $this->getPortoflioExcludedAssetsRequest($portfolio_group_id, $contentType);
+
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
             $options = $this->createHttpClientOption();
@@ -6523,6 +6560,8 @@ class PortfolioManagementApi extends BaseApi
     {
         $request = $this->importModelPortfolioRequest($portfolio_group_id, $contentType);
 
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
         try {
             $options = $this->createHttpClientOption();
             try {
@@ -6835,6 +6874,8 @@ class PortfolioManagementApi extends BaseApi
     {
         $request = $this->listAssetClassesRequest($contentType);
 
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
         try {
             $options = $this->createHttpClientOption();
             try {
@@ -7125,6 +7166,8 @@ class PortfolioManagementApi extends BaseApi
     public function listCalculatedTradesWithHttpInfo($portfolio_group_id, string $contentType = self::contentTypes['listCalculatedTrades'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $request = $this->listCalculatedTradesRequest($portfolio_group_id, $contentType);
+
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
             $options = $this->createHttpClientOption();
@@ -7438,6 +7481,8 @@ class PortfolioManagementApi extends BaseApi
     {
         $request = $this->listModelPortfolioRequest($contentType);
 
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
         try {
             $options = $this->createHttpClientOption();
             try {
@@ -7728,6 +7773,8 @@ class PortfolioManagementApi extends BaseApi
     public function listPortfolioAccountsWithHttpInfo($portfolio_group_id, string $contentType = self::contentTypes['listPortfolioAccounts'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $request = $this->listPortfolioAccountsRequest($portfolio_group_id, $contentType);
+
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
             $options = $this->createHttpClientOption();
@@ -8044,6 +8091,8 @@ class PortfolioManagementApi extends BaseApi
     {
         $request = $this->modifyModelPortfolioByIdRequest($model_portfolio_id, $model_portfolio_details, $contentType);
 
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
         try {
             $options = $this->createHttpClientOption();
             try {
@@ -8327,6 +8376,8 @@ class PortfolioManagementApi extends BaseApi
     public function savePortfolioWithHttpInfo($portfolio_group_id, $request_body, string $contentType = self::contentTypes['savePortfolio'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $request = $this->savePortfolioRequest($portfolio_group_id, $request_body, $contentType);
+
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
             $options = $this->createHttpClientOption();
@@ -8662,6 +8713,8 @@ class PortfolioManagementApi extends BaseApi
     {
         $request = $this->searchPortfolioSymbolsRequest($portfolio_group_id, $symbol_query, $contentType);
 
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
         try {
             $options = $this->createHttpClientOption();
             try {
@@ -8993,6 +9046,8 @@ class PortfolioManagementApi extends BaseApi
     {
         $request = $this->setPortfolioTargetsRequest($portfolio_group_id, $target_asset, $contentType);
 
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
         try {
             $options = $this->createHttpClientOption();
             try {
@@ -9320,6 +9375,8 @@ class PortfolioManagementApi extends BaseApi
     {
         $request = $this->updateAssetClassRequest($model_asset_class_id, $model_asset_class_details, $contentType);
 
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
         try {
             $options = $this->createHttpClientOption();
             try {
@@ -9601,6 +9658,8 @@ class PortfolioManagementApi extends BaseApi
     public function updatePortfolioSettingsWithHttpInfo($portfolio_group_id, string $contentType = self::contentTypes['updatePortfolioSettings'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $request = $this->updatePortfolioSettingsRequest($portfolio_group_id, $contentType);
+
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
             $options = $this->createHttpClientOption();
@@ -9919,6 +9978,8 @@ class PortfolioManagementApi extends BaseApi
     public function updatePortfolioTargetByIdWithHttpInfo($portfolio_group_id, $target_asset_id, $target_asset, string $contentType = self::contentTypes['updatePortfolioTargetById'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $request = $this->updatePortfolioTargetByIdRequest($portfolio_group_id, $target_asset_id, $target_asset, $contentType);
+
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
             $options = $this->createHttpClientOption();

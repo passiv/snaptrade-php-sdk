@@ -34,7 +34,7 @@ use SnapTrade\Configuration;
 use SnapTrade\HeaderSelector;
 use SnapTrade\ObjectSerializer;
 
-class APIStatusApi
+class APIStatusApi extends \SnapTrade\BaseApi
 {
     /**
      * @var ClientInterface
@@ -140,6 +140,8 @@ class APIStatusApi
     public function checkWithHttpInfo(string $contentType = self::contentTypes['check'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $request = $this->checkRequest($contentType);
+
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
             $options = $this->createHttpClientOption();

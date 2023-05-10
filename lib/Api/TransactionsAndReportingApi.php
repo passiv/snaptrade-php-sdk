@@ -34,7 +34,7 @@ use SnapTrade\Configuration;
 use SnapTrade\HeaderSelector;
 use SnapTrade\ObjectSerializer;
 
-class TransactionsAndReportingApi
+class TransactionsAndReportingApi extends \SnapTrade\BaseApi
 {
     /**
      * @var ClientInterface
@@ -155,6 +155,8 @@ class TransactionsAndReportingApi
     public function getActivitiesWithHttpInfo($user_id, $user_secret, $start_date = null, $end_date = null, $accounts = null, $brokerage_authorizations = null, string $contentType = self::contentTypes['getActivities'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $request = $this->getActivitiesRequest($user_id, $user_secret, $start_date, $end_date, $accounts, $brokerage_authorizations, $contentType);
+
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
             $options = $this->createHttpClientOption();
@@ -570,6 +572,8 @@ class TransactionsAndReportingApi
     public function getReportingCustomRangeWithHttpInfo($start_date, $end_date, $user_id, $user_secret, $accounts = null, $detailed = null, $frequency = null, string $contentType = self::contentTypes['getReportingCustomRange'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $request = $this->getReportingCustomRangeRequest($start_date, $end_date, $user_id, $user_secret, $accounts, $detailed, $frequency, $contentType);
+
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
             $options = $this->createHttpClientOption();

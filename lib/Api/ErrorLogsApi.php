@@ -34,7 +34,7 @@ use SnapTrade\Configuration;
 use SnapTrade\HeaderSelector;
 use SnapTrade\ObjectSerializer;
 
-class ErrorLogsApi
+class ErrorLogsApi extends \SnapTrade\BaseApi
 {
     /**
      * @var ClientInterface
@@ -144,6 +144,8 @@ class ErrorLogsApi
     public function listUserErrorsWithHttpInfo($user_id, $user_secret, string $contentType = self::contentTypes['listUserErrors'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $request = $this->listUserErrorsRequest($user_id, $user_secret, $contentType);
+
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
             $options = $this->createHttpClientOption();

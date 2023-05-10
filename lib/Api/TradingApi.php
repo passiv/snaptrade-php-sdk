@@ -34,7 +34,7 @@ use SnapTrade\Configuration;
 use SnapTrade\HeaderSelector;
 use SnapTrade\ObjectSerializer;
 
-class TradingApi
+class TradingApi extends \SnapTrade\BaseApi
 {
     /**
      * @var ClientInterface
@@ -175,6 +175,8 @@ class TradingApi
     public function cancelUserAccountOrderWithHttpInfo($user_id, $user_secret, $account_id, $trading_cancel_user_account_order_request, string $contentType = self::contentTypes['cancelUserAccountOrder'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $request = $this->cancelUserAccountOrderRequest($user_id, $user_secret, $account_id, $trading_cancel_user_account_order_request, $contentType);
+
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
             $options = $this->createHttpClientOption();
@@ -586,6 +588,8 @@ class TradingApi
     {
         $request = $this->getCalculatedTradeImpactByIdRequest($portfolio_group_id, $calculated_trade_id, $trade_id, $contentType);
 
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
         try {
             $options = $this->createHttpClientOption();
             try {
@@ -948,6 +952,8 @@ class TradingApi
     {
         $request = $this->getCalculatedTradesImpactRequest($portfolio_group_id, $calculated_trade_id, $contentType);
 
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
         try {
             $options = $this->createHttpClientOption();
             try {
@@ -1288,6 +1294,8 @@ class TradingApi
     public function getOrderImpactWithHttpInfo($user_id, $user_secret, $manual_trade_form, string $contentType = self::contentTypes['getOrderImpact'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $request = $this->getOrderImpactRequest($user_id, $user_secret, $manual_trade_form, $contentType);
+
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1703,6 +1711,8 @@ class TradingApi
     {
         $request = $this->getUserAccountQuotesRequest($user_id, $user_secret, $symbols, $account_id, $use_ticker, $contentType);
 
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
         try {
             $options = $this->createHttpClientOption();
             try {
@@ -2109,6 +2119,8 @@ class TradingApi
     {
         $request = $this->modifyCalculatedTradeByIdRequest($portfolio_group_id, $calculated_trade_id, $trade_id, $trade, $contentType);
 
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
         try {
             $options = $this->createHttpClientOption();
             try {
@@ -2486,6 +2498,8 @@ class TradingApi
     {
         $request = $this->placeCalculatedTradesRequest($portfolio_group_id, $calculated_trade_id, $contentType);
 
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
         try {
             $options = $this->createHttpClientOption();
             try {
@@ -2826,6 +2840,8 @@ class TradingApi
     public function placeForceOrderWithHttpInfo($user_id, $user_secret, $manual_trade_form, string $contentType = self::contentTypes['placeForceOrder'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $request = $this->placeForceOrderRequest($user_id, $user_secret, $manual_trade_form, $contentType);
+
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
             $options = $this->createHttpClientOption();
@@ -3237,6 +3253,8 @@ class TradingApi
     {
         $request = $this->placeOCOOrderRequest($user_id, $user_secret, $trading_place_oco_order_request, $contentType);
 
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
         try {
             $options = $this->createHttpClientOption();
             try {
@@ -3623,6 +3641,8 @@ class TradingApi
     public function placeOrderWithHttpInfo($trade_id, $user_id, $user_secret, string $contentType = self::contentTypes['placeOrder'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $request = $this->placeOrderRequest($trade_id, $user_id, $user_secret, $contentType);
+
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
             $options = $this->createHttpClientOption();

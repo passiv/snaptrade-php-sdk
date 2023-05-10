@@ -34,7 +34,7 @@ use SnapTrade\Configuration;
 use SnapTrade\HeaderSelector;
 use SnapTrade\ObjectSerializer;
 
-class AccountInformationApi
+class AccountInformationApi extends \SnapTrade\BaseApi
 {
     /**
      * @var ClientInterface
@@ -167,6 +167,8 @@ class AccountInformationApi
     public function getAllUserHoldingsWithHttpInfo($user_id, $user_secret, $brokerage_authorizations = null, string $contentType = self::contentTypes['getAllUserHoldings'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $request = $this->getAllUserHoldingsRequest($user_id, $user_secret, $brokerage_authorizations, $contentType);
+
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
             $options = $this->createHttpClientOption();
@@ -575,6 +577,8 @@ class AccountInformationApi
     {
         $request = $this->getUserAccountBalanceRequest($user_id, $user_secret, $account_id, $contentType);
 
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
         try {
             $options = $this->createHttpClientOption();
             try {
@@ -940,6 +944,8 @@ class AccountInformationApi
     public function getUserAccountDetailsWithHttpInfo($user_id, $user_secret, $account_id, string $contentType = self::contentTypes['getUserAccountDetails'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $request = $this->getUserAccountDetailsRequest($user_id, $user_secret, $account_id, $contentType);
+
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1308,6 +1314,8 @@ class AccountInformationApi
     public function getUserAccountOrdersWithHttpInfo($user_id, $user_secret, $account_id, $state = null, string $contentType = self::contentTypes['getUserAccountOrders'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $request = $this->getUserAccountOrdersRequest($user_id, $user_secret, $account_id, $state, $contentType);
+
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1693,6 +1701,8 @@ class AccountInformationApi
     {
         $request = $this->getUserAccountPositionsRequest($user_id, $user_secret, $account_id, $contentType);
 
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
         try {
             $options = $this->createHttpClientOption();
             try {
@@ -2058,6 +2068,8 @@ class AccountInformationApi
     public function getUserHoldingsWithHttpInfo($account_id, $user_id, $user_secret, string $contentType = self::contentTypes['getUserHoldings'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $request = $this->getUserHoldingsRequest($account_id, $user_id, $user_secret, $contentType);
+
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
             $options = $this->createHttpClientOption();
@@ -2469,6 +2481,8 @@ class AccountInformationApi
     {
         $request = $this->listUserAccountsRequest($user_id, $user_secret, $contentType);
 
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
         try {
             $options = $this->createHttpClientOption();
             try {
@@ -2811,6 +2825,8 @@ class AccountInformationApi
     public function updateUserAccountWithHttpInfo($user_id, $user_secret, $account_id, string $contentType = self::contentTypes['updateUserAccount'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $request = $this->updateUserAccountRequest($user_id, $user_secret, $account_id, $contentType);
+
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
             $options = $this->createHttpClientOption();

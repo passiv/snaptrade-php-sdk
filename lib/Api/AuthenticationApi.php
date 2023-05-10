@@ -155,6 +155,8 @@ class AuthenticationApi extends \SnapTrade\BaseApi
     {
         $request = $this->deleteSnapTradeUserRequest($user_id, $contentType);
 
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
         try {
             $options = $this->createHttpClientOption();
             try {
@@ -540,6 +542,8 @@ class AuthenticationApi extends \SnapTrade\BaseApi
     public function getUserJWTWithHttpInfo($user_id, $user_secret, string $contentType = self::contentTypes['getUserJWT'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $request = $this->getUserJWTRequest($user_id, $user_secret, $contentType);
+
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
             $options = $this->createHttpClientOption();
@@ -946,6 +950,8 @@ class AuthenticationApi extends \SnapTrade\BaseApi
     public function listSnapTradeUsersWithHttpInfo(string $contentType = self::contentTypes['listSnapTradeUsers'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $request = $this->listSnapTradeUsersRequest($contentType);
+
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1713,7 +1719,7 @@ class AuthenticationApi extends \SnapTrade\BaseApi
     {
         $request = $this->registerSnapTradeUserRequest($snap_trade_register_user_request_body, $contentType);
 
-        $request = $this->beforeSendHook($request, $requestOptions, $this->config);
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
             $options = $this->createHttpClientOption();
@@ -2028,8 +2034,6 @@ class AuthenticationApi extends \SnapTrade\BaseApi
             $headerParams,
             $headers
         );
-
-        $this->beforeCreateRequestHook('POST', $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);

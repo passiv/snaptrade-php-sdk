@@ -34,7 +34,7 @@ use SnapTrade\Configuration;
 use SnapTrade\HeaderSelector;
 use SnapTrade\ObjectSerializer;
 
-class OptionsApi
+class OptionsApi extends \SnapTrade\BaseApi
 {
     /**
      * @var ClientInterface
@@ -160,6 +160,8 @@ class OptionsApi
     public function getOptionStrategyWithHttpInfo($user_id, $user_secret, $account_id, $options_get_option_strategy_request, string $contentType = self::contentTypes['getOptionStrategy'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $request = $this->getOptionStrategyRequest($user_id, $user_secret, $account_id, $options_get_option_strategy_request, $contentType);
+
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
             $options = $this->createHttpClientOption();
@@ -549,6 +551,8 @@ class OptionsApi
     public function getOptionsChainWithHttpInfo($user_id, $user_secret, $account_id, $symbol, string $contentType = self::contentTypes['getOptionsChain'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $request = $this->getOptionsChainRequest($user_id, $user_secret, $account_id, $symbol, $contentType);
+
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
             $options = $this->createHttpClientOption();
@@ -942,6 +946,8 @@ class OptionsApi
     {
         $request = $this->getOptionsStrategyQuoteRequest($user_id, $user_secret, $account_id, $option_strategy_id, $contentType);
 
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
         try {
             $options = $this->createHttpClientOption();
             try {
@@ -1331,6 +1337,8 @@ class OptionsApi
     {
         $request = $this->listOptionHoldingsRequest($user_id, $user_secret, $account_id, $contentType);
 
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
         try {
             $options = $this->createHttpClientOption();
             try {
@@ -1700,6 +1708,8 @@ class OptionsApi
     public function placeOptionStrategyWithHttpInfo($user_id, $user_secret, $account_id, $option_strategy_id, $options_place_option_strategy_request, string $contentType = self::contentTypes['placeOptionStrategy'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $request = $this->placeOptionStrategyRequest($user_id, $user_secret, $account_id, $option_strategy_id, $options_place_option_strategy_request, $contentType);
+
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
             $options = $this->createHttpClientOption();

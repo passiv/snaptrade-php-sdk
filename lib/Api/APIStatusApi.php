@@ -375,6 +375,8 @@ class APIStatusApi extends \SnapTrade\BaseApi
             $headers
         );
 
+        $this->beforeCreateRequestHook('GET', $resourcePath, $queryParams, $headers, $httpBody);
+
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(

@@ -465,6 +465,8 @@ class APIDisclaimerApi extends \SnapTrade\BaseApi
             $headers
         );
 
+        $this->beforeCreateRequestHook('POST', $resourcePath, $queryParams, $headers, $httpBody);
+
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(

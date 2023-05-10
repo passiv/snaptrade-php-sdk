@@ -445,6 +445,8 @@ class ReferenceDataApi extends \SnapTrade\BaseApi
             $headers
         );
 
+        $this->beforeCreateRequestHook('GET', $resourcePath, $queryParams, $headers, $httpBody);
+
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
@@ -805,6 +807,8 @@ class ReferenceDataApi extends \SnapTrade\BaseApi
             $headers
         );
 
+        $this->beforeCreateRequestHook('GET', $resourcePath, $queryParams, $headers, $httpBody);
+
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
@@ -1096,6 +1100,8 @@ class ReferenceDataApi extends \SnapTrade\BaseApi
             $headers
         );
 
+        $this->beforeCreateRequestHook('GET', $resourcePath, $queryParams, $headers, $httpBody);
+
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
@@ -1386,6 +1392,8 @@ class ReferenceDataApi extends \SnapTrade\BaseApi
             $headerParams,
             $headers
         );
+
+        $this->beforeCreateRequestHook('GET', $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
@@ -1694,6 +1702,8 @@ class ReferenceDataApi extends \SnapTrade\BaseApi
             $headerParams,
             $headers
         );
+
+        $this->beforeCreateRequestHook('POST', $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
@@ -2031,6 +2041,8 @@ class ReferenceDataApi extends \SnapTrade\BaseApi
             $headers
         );
 
+        $this->beforeCreateRequestHook('GET', $resourcePath, $queryParams, $headers, $httpBody);
+
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
@@ -2342,6 +2354,8 @@ class ReferenceDataApi extends \SnapTrade\BaseApi
             $headers
         );
 
+        $this->beforeCreateRequestHook('GET', $resourcePath, $queryParams, $headers, $httpBody);
+
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
@@ -2632,6 +2646,8 @@ class ReferenceDataApi extends \SnapTrade\BaseApi
             $headerParams,
             $headers
         );
+
+        $this->beforeCreateRequestHook('GET', $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
@@ -2924,6 +2940,8 @@ class ReferenceDataApi extends \SnapTrade\BaseApi
             $headers
         );
 
+        $this->beforeCreateRequestHook('GET', $resourcePath, $queryParams, $headers, $httpBody);
+
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
@@ -3214,6 +3232,8 @@ class ReferenceDataApi extends \SnapTrade\BaseApi
             $headerParams,
             $headers
         );
+
+        $this->beforeCreateRequestHook('GET', $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
@@ -3599,6 +3619,8 @@ class ReferenceDataApi extends \SnapTrade\BaseApi
             $headerParams,
             $headers
         );
+
+        $this->beforeCreateRequestHook('POST', $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);

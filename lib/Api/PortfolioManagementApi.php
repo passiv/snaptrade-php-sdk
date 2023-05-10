@@ -30,11 +30,12 @@ use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
 use SnapTrade\ApiException;
+use SnapTrade\BaseApi;
 use SnapTrade\Configuration;
 use SnapTrade\HeaderSelector;
 use SnapTrade\ObjectSerializer;
 
-class PortfolioManagementApi
+class PortfolioManagementApi extends BaseApi
 {
     /**
      * @var ClientInterface
@@ -568,6 +569,8 @@ class PortfolioManagementApi
     public function allWithHttpInfo($user_id, $user_secret, string $contentType = self::contentTypes['all'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $request = $this->allRequest($user_id, $user_secret, $contentType);
+
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
             $options = $this->createHttpClientOption();

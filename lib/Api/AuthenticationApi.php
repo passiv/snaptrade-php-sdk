@@ -34,7 +34,7 @@ use SnapTrade\Configuration;
 use SnapTrade\HeaderSelector;
 use SnapTrade\ObjectSerializer;
 
-class AuthenticationApi
+class AuthenticationApi extends \SnapTrade\BaseApi
 {
     /**
      * @var ClientInterface
@@ -1288,6 +1288,8 @@ class AuthenticationApi
     {
         $request = $this->loginSnapTradeUserRequest($user_id, $user_secret, $snap_trade_login_user_request_body, $contentType);
 
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
         try {
             $options = $this->createHttpClientOption();
             try {
@@ -1711,6 +1713,8 @@ class AuthenticationApi
     {
         $request = $this->registerSnapTradeUserRequest($snap_trade_register_user_request_body, $contentType);
 
+        $request = $this->beforeSendHook($request, $requestOptions, $this->config);
+
         try {
             $options = $this->createHttpClientOption();
             try {
@@ -2024,6 +2028,8 @@ class AuthenticationApi
             $headerParams,
             $headers
         );
+
+        $this->beforeCreateRequestHook('POST', $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);

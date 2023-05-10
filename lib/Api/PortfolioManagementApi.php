@@ -61,7 +61,7 @@ class PortfolioManagementApi
         'addPortfolioExcludedAsset' => [
             'application/json',
         ],
-        'callList' => [
+        'all' => [
             'application/json',
         ],
         'create' => [
@@ -534,40 +534,40 @@ class PortfolioManagementApi
     }
 
     /**
-     * Operation callList
+     * Operation all
      *
      * List all portfolio groups
      *
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['callList'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['all'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\PortfolioGroup[]
      */
-    public function callList($user_id, $user_secret, string $contentType = self::contentTypes['callList'][0])
+    public function all($user_id, $user_secret, string $contentType = self::contentTypes['all'][0])
     {
-        list($response) = $this->callListWithHttpInfo($user_id, $user_secret, $contentType);
+        list($response) = $this->allWithHttpInfo($user_id, $user_secret, $contentType);
         return $response;
     }
 
     /**
-     * Operation callListWithHttpInfo
+     * Operation allWithHttpInfo
      *
      * List all portfolio groups
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['callList'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['all'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \SnapTrade\Model\PortfolioGroup[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function callListWithHttpInfo($user_id, $user_secret, string $contentType = self::contentTypes['callList'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    public function allWithHttpInfo($user_id, $user_secret, string $contentType = self::contentTypes['all'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $request = $this->callListRequest($user_id, $user_secret, $contentType);
+        $request = $this->allRequest($user_id, $user_secret, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -579,7 +579,7 @@ class PortfolioManagementApi
                     !empty($this->getConfig()->getAccessToken()) &&
                     $requestOptions->shouldRetryOAuth()
                 ) {
-                    return $this->callListWithHttpInfo(
+                    return $this->allWithHttpInfo(
                         $user_id,
                         $user_secret,
                         $contentType,
@@ -667,20 +667,20 @@ class PortfolioManagementApi
     }
 
     /**
-     * Operation callListAsync
+     * Operation allAsync
      *
      * List all portfolio groups
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['callList'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['all'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function callListAsync($user_id, $user_secret, string $contentType = self::contentTypes['callList'][0])
+    public function allAsync($user_id, $user_secret, string $contentType = self::contentTypes['all'][0])
     {
-        return $this->callListAsyncWithHttpInfo($user_id, $user_secret, $contentType)
+        return $this->allAsyncWithHttpInfo($user_id, $user_secret, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -689,21 +689,21 @@ class PortfolioManagementApi
     }
 
     /**
-     * Operation callListAsyncWithHttpInfo
+     * Operation allAsyncWithHttpInfo
      *
      * List all portfolio groups
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['callList'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['all'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function callListAsyncWithHttpInfo($user_id, $user_secret, string $contentType = self::contentTypes['callList'][0])
+    public function allAsyncWithHttpInfo($user_id, $user_secret, string $contentType = self::contentTypes['all'][0])
     {
         $returnType = '\SnapTrade\Model\PortfolioGroup[]';
-        $request = $this->callListRequest($user_id, $user_secret, $contentType);
+        $request = $this->allRequest($user_id, $user_secret, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -742,16 +742,16 @@ class PortfolioManagementApi
     }
 
     /**
-     * Create request for operation 'callList'
+     * Create request for operation 'all'
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['callList'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['all'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function callListRequest($user_id, $user_secret, string $contentType = self::contentTypes['callList'][0])
+    public function allRequest($user_id, $user_secret, string $contentType = self::contentTypes['all'][0])
     {
 
         // Check if $user_id is a string
@@ -761,7 +761,7 @@ class PortfolioManagementApi
         // verify the required parameter 'user_id' is set
         if ($user_id === null || (is_array($user_id) && count($user_id) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter user_id when calling callList'
+                'Missing the required parameter user_id when calling all'
             );
         }
 
@@ -772,7 +772,7 @@ class PortfolioManagementApi
         // verify the required parameter 'user_secret' is set
         if ($user_secret === null || (is_array($user_secret) && count($user_secret) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter user_secret when calling callList'
+                'Missing the required parameter user_secret when calling all'
             );
         }
 

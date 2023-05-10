@@ -5,7 +5,7 @@ All URIs are relative to https://api.snaptrade.com/api/v1, except if the operati
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
 | [**addPortfolioExcludedAsset()**](PortfolioManagementApi.md#addPortfolioExcludedAsset) | **POST** /portfolioGroups/{portfolioGroupId}/excludedassets | Adds an asset to exclude to a portfolio group |
-| [**callList()**](PortfolioManagementApi.md#callList) | **GET** /portfolioGroups | List all portfolio groups |
+| [**all()**](PortfolioManagementApi.md#all) | **GET** /portfolioGroups | List all portfolio groups |
 | [**create()**](PortfolioManagementApi.md#create) | **POST** /portfolioGroups | Create new portfolio group |
 | [**createAssetClass()**](PortfolioManagementApi.md#createAssetClass) | **POST** /modelAssetClass | Create a new model asset class |
 | [**createModelPortfolio()**](PortfolioManagementApi.md#createModelPortfolio) | **POST** /modelPortfolio | Creates a new model portfolio |
@@ -120,10 +120,10 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
-## `callList()`
+## `all()`
 
 ```php
-callList($user_id, $user_secret): \SnapTrade\Model\PortfolioGroup[]
+all($user_id, $user_secret): \SnapTrade\Model\PortfolioGroup[]
 ```
 
 List all portfolio groups
@@ -163,14 +163,14 @@ $user_id = "John.doe@snaptrade.com";
 $user_secret = "USERSECRET123";
 
 try {
-    $result = $apiInstance->callList(
+    $result = $apiInstance->all(
         user_id: $user_id, 
         user_secret: $user_secret
     );
     print_r($result->$getId());
     print_r($result->$getName());
 } catch (\Exception $e) {
-    echo 'Exception when calling PortfolioManagementApi->callList: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling PortfolioManagementApi->all: ', $e->getMessage(), PHP_EOL;
 }
 ```
 

@@ -75,7 +75,7 @@ class GettingStartedTest extends TestCase
             "name" => "MyPortfolio"
         ]);
 
-        $response = $snaptrade->portfolioManagement->callList($userId, $userSecret);
+        $response = $snaptrade->portfolioManagement->all($userId, $userSecret);
         print_r($response);
 
         $snaptrade->apiDisclaimer->accept($userId, $userSecret, [

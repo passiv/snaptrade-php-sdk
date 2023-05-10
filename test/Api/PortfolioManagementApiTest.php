@@ -71,12 +71,12 @@ class PortfolioManagementApiTest extends TestCase
     }
 
     /**
-     * Test case for callList
+     * Test case for all
      *
      * List all portfolio groups.
      *
      */
-    public function testCallList()
+    public function testAll()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

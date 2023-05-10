@@ -121,7 +121,7 @@ Class | Method | HTTP request | Description
 *OptionsApi* | [**listOptionHoldings**](docs/Api/OptionsApi.md#listoptionholdings) | **GET** /accounts/{accountId}/options | Get the options holdings in the account
 *OptionsApi* | [**placeOptionStrategy**](docs/Api/OptionsApi.md#placeoptionstrategy) | **POST** /accounts/{accountId}/optionStrategy/{optionStrategyId}/execute | Place an option strategy order on the brokerage
 *PortfolioManagementApi* | [**addPortfolioExcludedAsset**](docs/Api/PortfolioManagementApi.md#addportfolioexcludedasset) | **POST** /portfolioGroups/{portfolioGroupId}/excludedassets | Adds an asset to exclude to a portfolio group
-*PortfolioManagementApi* | [**callList**](docs/Api/PortfolioManagementApi.md#calllist) | **GET** /portfolioGroups | List all portfolio groups
+*PortfolioManagementApi* | [**all**](docs/Api/PortfolioManagementApi.md#all) | **GET** /portfolioGroups | List all portfolio groups
 *PortfolioManagementApi* | [**create**](docs/Api/PortfolioManagementApi.md#create) | **POST** /portfolioGroups | Create new portfolio group
 *PortfolioManagementApi* | [**createAssetClass**](docs/Api/PortfolioManagementApi.md#createassetclass) | **POST** /modelAssetClass | Create a new model asset class
 *PortfolioManagementApi* | [**createModelPortfolio**](docs/Api/PortfolioManagementApi.md#createmodelportfolio) | **POST** /modelPortfolio | Creates a new model portfolio

@@ -154,8 +154,9 @@ class TransactionsAndReportingApi extends \SnapTrade\CustomApi
      */
     public function getActivitiesWithHttpInfo($user_id, $user_secret, $start_date = null, $end_date = null, $accounts = null, $brokerage_authorizations = null, string $contentType = self::contentTypes['getActivities'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $request = $this->getActivitiesRequest($user_id, $user_secret, $start_date, $end_date, $accounts, $brokerage_authorizations, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getActivitiesRequest($user_id, $user_secret, $start_date, $end_date, $accounts, $brokerage_authorizations, $contentType);
 
+        // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
@@ -301,10 +302,13 @@ class TransactionsAndReportingApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getActivitiesAsyncWithHttpInfo($user_id, $user_secret, $start_date = null, $end_date = null, $accounts = null, $brokerage_authorizations = null, string $contentType = self::contentTypes['getActivities'][0])
+    public function getActivitiesAsyncWithHttpInfo($user_id, $user_secret, $start_date = null, $end_date = null, $accounts = null, $brokerage_authorizations = null, string $contentType = self::contentTypes['getActivities'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\UniversalActivity[]';
-        $request = $this->getActivitiesRequest($user_id, $user_secret, $start_date, $end_date, $accounts, $brokerage_authorizations, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getActivitiesRequest($user_id, $user_secret, $start_date, $end_date, $accounts, $brokerage_authorizations, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -517,22 +521,20 @@ class TransactionsAndReportingApi extends \SnapTrade\CustomApi
             $headers
         );
 
-        [
-            "method" => $method,
-            "queryParams" => $queryParams,
-            "resourcePath" => $resourcePath,
-            "headers" => $headers,
-            "httpBody" => $httpBody,
-        ] = $this->beforeCreateRequestHook('GET', $resourcePath, $queryParams, $headers, $httpBody);
+        $method = 'GET';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            $method,
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
     }
 
     /**
@@ -579,8 +581,9 @@ class TransactionsAndReportingApi extends \SnapTrade\CustomApi
      */
     public function getReportingCustomRangeWithHttpInfo($start_date, $end_date, $user_id, $user_secret, $accounts = null, $detailed = null, $frequency = null, string $contentType = self::contentTypes['getReportingCustomRange'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $request = $this->getReportingCustomRangeRequest($start_date, $end_date, $user_id, $user_secret, $accounts, $detailed, $frequency, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getReportingCustomRangeRequest($start_date, $end_date, $user_id, $user_secret, $accounts, $detailed, $frequency, $contentType);
 
+        // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
@@ -729,10 +732,13 @@ class TransactionsAndReportingApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getReportingCustomRangeAsyncWithHttpInfo($start_date, $end_date, $user_id, $user_secret, $accounts = null, $detailed = null, $frequency = null, string $contentType = self::contentTypes['getReportingCustomRange'][0])
+    public function getReportingCustomRangeAsyncWithHttpInfo($start_date, $end_date, $user_id, $user_secret, $accounts = null, $detailed = null, $frequency = null, string $contentType = self::contentTypes['getReportingCustomRange'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\PerformanceCustom';
-        $request = $this->getReportingCustomRangeRequest($start_date, $end_date, $user_id, $user_secret, $accounts, $detailed, $frequency, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getReportingCustomRangeRequest($start_date, $end_date, $user_id, $user_secret, $accounts, $detailed, $frequency, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -968,22 +974,20 @@ class TransactionsAndReportingApi extends \SnapTrade\CustomApi
             $headers
         );
 
-        [
-            "method" => $method,
-            "queryParams" => $queryParams,
-            "resourcePath" => $resourcePath,
-            "headers" => $headers,
-            "httpBody" => $httpBody,
-        ] = $this->beforeCreateRequestHook('GET', $resourcePath, $queryParams, $headers, $httpBody);
+        $method = 'GET';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            $method,
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
     }
 
     /**

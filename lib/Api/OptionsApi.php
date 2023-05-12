@@ -159,9 +159,10 @@ class OptionsApi extends \SnapTrade\CustomApi
      */
     public function getOptionStrategyWithHttpInfo($user_id, $user_secret, $account_id, $options_get_option_strategy_request, string $contentType = self::contentTypes['getOptionStrategy'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $request = $this->getOptionStrategyRequest($user_id, $user_secret, $account_id, $options_get_option_strategy_request, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getOptionStrategyRequest($user_id, $user_secret, $account_id, $options_get_option_strategy_request, $contentType);
 
-        $this->beforeSendHook($request, $requestOptions, $this->config);
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
 
         try {
             $options = $this->createHttpClientOption();
@@ -300,10 +301,13 @@ class OptionsApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getOptionStrategyAsyncWithHttpInfo($user_id, $user_secret, $account_id, $options_get_option_strategy_request, string $contentType = self::contentTypes['getOptionStrategy'][0])
+    public function getOptionStrategyAsyncWithHttpInfo($user_id, $user_secret, $account_id, $options_get_option_strategy_request, string $contentType = self::contentTypes['getOptionStrategy'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\StrategyQuotes';
-        $request = $this->getOptionStrategyRequest($user_id, $user_secret, $account_id, $options_get_option_strategy_request, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getOptionStrategyRequest($user_id, $user_secret, $account_id, $options_get_option_strategy_request, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -389,8 +393,13 @@ class OptionsApi extends \SnapTrade\CustomApi
             );
         }
 
-        if (!($options_get_option_strategy_request instanceof \SnapTrade\Model\OptionsGetOptionStrategyRequest)) {
-            throw new \InvalidArgumentException('"options_get_option_strategy_request" must be instance of "\SnapTrade\Model\OptionsGetOptionStrategyRequest" when calling OptionsApi.getOptionStrategy.');
+        if ($options_get_option_strategy_request != null) {
+            if (!($options_get_option_strategy_request instanceof \SnapTrade\Model\OptionsGetOptionStrategyRequest)) {
+                if (!is_array($options_get_option_strategy_request))
+                    throw new \InvalidArgumentException('"options_get_option_strategy_request" must be associative array or an instance of \SnapTrade\Model\OptionsGetOptionStrategyRequest OptionsApi.getOptionStrategy.');
+                else
+                    $options_get_option_strategy_request = new \SnapTrade\Model\OptionsGetOptionStrategyRequest($options_get_option_strategy_request);
+            }
         }
         // verify the required parameter 'options_get_option_strategy_request' is set
         if ($options_get_option_strategy_request === null || (is_array($options_get_option_strategy_request) && count($options_get_option_strategy_request) === 0)) {
@@ -502,22 +511,20 @@ class OptionsApi extends \SnapTrade\CustomApi
             $headers
         );
 
-        [
-            "method" => $method,
-            "queryParams" => $queryParams,
-            "resourcePath" => $resourcePath,
-            "headers" => $headers,
-            "httpBody" => $httpBody,
-        ] = $this->beforeCreateRequestHook('POST', $resourcePath, $queryParams, $headers, $httpBody);
+        $method = 'POST';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            $method,
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
     }
 
     /**
@@ -558,8 +565,9 @@ class OptionsApi extends \SnapTrade\CustomApi
      */
     public function getOptionsChainWithHttpInfo($user_id, $user_secret, $account_id, $symbol, string $contentType = self::contentTypes['getOptionsChain'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $request = $this->getOptionsChainRequest($user_id, $user_secret, $account_id, $symbol, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getOptionsChainRequest($user_id, $user_secret, $account_id, $symbol, $contentType);
 
+        // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
@@ -699,10 +707,13 @@ class OptionsApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getOptionsChainAsyncWithHttpInfo($user_id, $user_secret, $account_id, $symbol, string $contentType = self::contentTypes['getOptionsChain'][0])
+    public function getOptionsChainAsyncWithHttpInfo($user_id, $user_secret, $account_id, $symbol, string $contentType = self::contentTypes['getOptionsChain'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\OptionChainInner[]';
-        $request = $this->getOptionsChainRequest($user_id, $user_secret, $account_id, $symbol, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getOptionsChainRequest($user_id, $user_secret, $account_id, $symbol, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -904,22 +915,20 @@ class OptionsApi extends \SnapTrade\CustomApi
             $headers
         );
 
-        [
-            "method" => $method,
-            "queryParams" => $queryParams,
-            "resourcePath" => $resourcePath,
-            "headers" => $headers,
-            "httpBody" => $httpBody,
-        ] = $this->beforeCreateRequestHook('GET', $resourcePath, $queryParams, $headers, $httpBody);
+        $method = 'GET';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            $method,
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
     }
 
     /**
@@ -960,8 +969,9 @@ class OptionsApi extends \SnapTrade\CustomApi
      */
     public function getOptionsStrategyQuoteWithHttpInfo($user_id, $user_secret, $account_id, $option_strategy_id, string $contentType = self::contentTypes['getOptionsStrategyQuote'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $request = $this->getOptionsStrategyQuoteRequest($user_id, $user_secret, $account_id, $option_strategy_id, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getOptionsStrategyQuoteRequest($user_id, $user_secret, $account_id, $option_strategy_id, $contentType);
 
+        // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
@@ -1101,10 +1111,13 @@ class OptionsApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getOptionsStrategyQuoteAsyncWithHttpInfo($user_id, $user_secret, $account_id, $option_strategy_id, string $contentType = self::contentTypes['getOptionsStrategyQuote'][0])
+    public function getOptionsStrategyQuoteAsyncWithHttpInfo($user_id, $user_secret, $account_id, $option_strategy_id, string $contentType = self::contentTypes['getOptionsStrategyQuote'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\StrategyQuotes';
-        $request = $this->getOptionsStrategyQuoteRequest($user_id, $user_secret, $account_id, $option_strategy_id, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getOptionsStrategyQuoteRequest($user_id, $user_secret, $account_id, $option_strategy_id, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1305,22 +1318,20 @@ class OptionsApi extends \SnapTrade\CustomApi
             $headers
         );
 
-        [
-            "method" => $method,
-            "queryParams" => $queryParams,
-            "resourcePath" => $resourcePath,
-            "headers" => $headers,
-            "httpBody" => $httpBody,
-        ] = $this->beforeCreateRequestHook('GET', $resourcePath, $queryParams, $headers, $httpBody);
+        $method = 'GET';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            $method,
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
     }
 
     /**
@@ -1359,8 +1370,9 @@ class OptionsApi extends \SnapTrade\CustomApi
      */
     public function listOptionHoldingsWithHttpInfo($user_id, $user_secret, $account_id, string $contentType = self::contentTypes['listOptionHoldings'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $request = $this->listOptionHoldingsRequest($user_id, $user_secret, $account_id, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->listOptionHoldingsRequest($user_id, $user_secret, $account_id, $contentType);
 
+        // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
@@ -1497,10 +1509,13 @@ class OptionsApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listOptionHoldingsAsyncWithHttpInfo($user_id, $user_secret, $account_id, string $contentType = self::contentTypes['listOptionHoldings'][0])
+    public function listOptionHoldingsAsyncWithHttpInfo($user_id, $user_secret, $account_id, string $contentType = self::contentTypes['listOptionHoldings'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\OptionsHoldings';
-        $request = $this->listOptionHoldingsRequest($user_id, $user_secret, $account_id, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->listOptionHoldingsRequest($user_id, $user_secret, $account_id, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1681,22 +1696,20 @@ class OptionsApi extends \SnapTrade\CustomApi
             $headers
         );
 
-        [
-            "method" => $method,
-            "queryParams" => $queryParams,
-            "resourcePath" => $resourcePath,
-            "headers" => $headers,
-            "httpBody" => $httpBody,
-        ] = $this->beforeCreateRequestHook('GET', $resourcePath, $queryParams, $headers, $httpBody);
+        $method = 'GET';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            $method,
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
     }
 
     /**
@@ -1739,9 +1752,10 @@ class OptionsApi extends \SnapTrade\CustomApi
      */
     public function placeOptionStrategyWithHttpInfo($user_id, $user_secret, $account_id, $option_strategy_id, $options_place_option_strategy_request, string $contentType = self::contentTypes['placeOptionStrategy'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $request = $this->placeOptionStrategyRequest($user_id, $user_secret, $account_id, $option_strategy_id, $options_place_option_strategy_request, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->placeOptionStrategyRequest($user_id, $user_secret, $account_id, $option_strategy_id, $options_place_option_strategy_request, $contentType);
 
-        $this->beforeSendHook($request, $requestOptions, $this->config);
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1883,10 +1897,13 @@ class OptionsApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function placeOptionStrategyAsyncWithHttpInfo($user_id, $user_secret, $account_id, $option_strategy_id, $options_place_option_strategy_request, string $contentType = self::contentTypes['placeOptionStrategy'][0])
+    public function placeOptionStrategyAsyncWithHttpInfo($user_id, $user_secret, $account_id, $option_strategy_id, $options_place_option_strategy_request, string $contentType = self::contentTypes['placeOptionStrategy'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\StrategyOrderRecord';
-        $request = $this->placeOptionStrategyRequest($user_id, $user_secret, $account_id, $option_strategy_id, $options_place_option_strategy_request, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->placeOptionStrategyRequest($user_id, $user_secret, $account_id, $option_strategy_id, $options_place_option_strategy_request, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1984,8 +2001,13 @@ class OptionsApi extends \SnapTrade\CustomApi
             );
         }
 
-        if (!($options_place_option_strategy_request instanceof \SnapTrade\Model\OptionsPlaceOptionStrategyRequest)) {
-            throw new \InvalidArgumentException('"options_place_option_strategy_request" must be instance of "\SnapTrade\Model\OptionsPlaceOptionStrategyRequest" when calling OptionsApi.placeOptionStrategy.');
+        if ($options_place_option_strategy_request != null) {
+            if (!($options_place_option_strategy_request instanceof \SnapTrade\Model\OptionsPlaceOptionStrategyRequest)) {
+                if (!is_array($options_place_option_strategy_request))
+                    throw new \InvalidArgumentException('"options_place_option_strategy_request" must be associative array or an instance of \SnapTrade\Model\OptionsPlaceOptionStrategyRequest OptionsApi.placeOptionStrategy.');
+                else
+                    $options_place_option_strategy_request = new \SnapTrade\Model\OptionsPlaceOptionStrategyRequest($options_place_option_strategy_request);
+            }
         }
         // verify the required parameter 'options_place_option_strategy_request' is set
         if ($options_place_option_strategy_request === null || (is_array($options_place_option_strategy_request) && count($options_place_option_strategy_request) === 0)) {
@@ -2105,22 +2127,20 @@ class OptionsApi extends \SnapTrade\CustomApi
             $headers
         );
 
-        [
-            "method" => $method,
-            "queryParams" => $queryParams,
-            "resourcePath" => $resourcePath,
-            "headers" => $headers,
-            "httpBody" => $httpBody,
-        ] = $this->beforeCreateRequestHook('POST', $resourcePath, $queryParams, $headers, $httpBody);
+        $method = 'POST';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            $method,
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
     }
 
     /**

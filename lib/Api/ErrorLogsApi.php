@@ -143,8 +143,9 @@ class ErrorLogsApi extends \SnapTrade\CustomApi
      */
     public function listUserErrorsWithHttpInfo($user_id, $user_secret, string $contentType = self::contentTypes['listUserErrors'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $request = $this->listUserErrorsRequest($user_id, $user_secret, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->listUserErrorsRequest($user_id, $user_secret, $contentType);
 
+        // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
@@ -278,10 +279,13 @@ class ErrorLogsApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listUserErrorsAsyncWithHttpInfo($user_id, $user_secret, string $contentType = self::contentTypes['listUserErrors'][0])
+    public function listUserErrorsAsyncWithHttpInfo($user_id, $user_secret, string $contentType = self::contentTypes['listUserErrors'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\UserErrorLog[]';
-        $request = $this->listUserErrorsRequest($user_id, $user_secret, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->listUserErrorsRequest($user_id, $user_secret, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -442,22 +446,20 @@ class ErrorLogsApi extends \SnapTrade\CustomApi
             $headers
         );
 
-        [
-            "method" => $method,
-            "queryParams" => $queryParams,
-            "resourcePath" => $resourcePath,
-            "headers" => $headers,
-            "httpBody" => $httpBody,
-        ] = $this->beforeCreateRequestHook('GET', $resourcePath, $queryParams, $headers, $httpBody);
+        $method = 'GET';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            $method,
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
     }
 
     /**

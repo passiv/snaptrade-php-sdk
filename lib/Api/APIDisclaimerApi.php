@@ -145,9 +145,10 @@ class APIDisclaimerApi extends \SnapTrade\CustomApi
      */
     public function acceptWithHttpInfo($user_id, $user_secret, $api_disclaimer_accept_request, string $contentType = self::contentTypes['accept'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $request = $this->acceptRequest($user_id, $user_secret, $api_disclaimer_accept_request, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->acceptRequest($user_id, $user_secret, $api_disclaimer_accept_request, $contentType);
 
-        $this->beforeSendHook($request, $requestOptions, $this->config);
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
 
         try {
             $options = $this->createHttpClientOption();
@@ -283,10 +284,13 @@ class APIDisclaimerApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function acceptAsyncWithHttpInfo($user_id, $user_secret, $api_disclaimer_accept_request, string $contentType = self::contentTypes['accept'][0])
+    public function acceptAsyncWithHttpInfo($user_id, $user_secret, $api_disclaimer_accept_request, string $contentType = self::contentTypes['accept'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\SnapTradeAPIDisclaimerAcceptStatus';
-        $request = $this->acceptRequest($user_id, $user_secret, $api_disclaimer_accept_request, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->acceptRequest($user_id, $user_secret, $api_disclaimer_accept_request, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -360,8 +364,13 @@ class APIDisclaimerApi extends \SnapTrade\CustomApi
             );
         }
 
-        if (!($api_disclaimer_accept_request instanceof \SnapTrade\Model\APIDisclaimerAcceptRequest)) {
-            throw new \InvalidArgumentException('"api_disclaimer_accept_request" must be instance of "\SnapTrade\Model\APIDisclaimerAcceptRequest" when calling APIDisclaimerApi.accept.');
+        if ($api_disclaimer_accept_request != null) {
+            if (!($api_disclaimer_accept_request instanceof \SnapTrade\Model\APIDisclaimerAcceptRequest)) {
+                if (!is_array($api_disclaimer_accept_request))
+                    throw new \InvalidArgumentException('"api_disclaimer_accept_request" must be associative array or an instance of \SnapTrade\Model\APIDisclaimerAcceptRequest APIDisclaimerApi.accept.');
+                else
+                    $api_disclaimer_accept_request = new \SnapTrade\Model\APIDisclaimerAcceptRequest($api_disclaimer_accept_request);
+            }
         }
         // verify the required parameter 'api_disclaimer_accept_request' is set
         if ($api_disclaimer_accept_request === null || (is_array($api_disclaimer_accept_request) && count($api_disclaimer_accept_request) === 0)) {
@@ -465,22 +474,20 @@ class APIDisclaimerApi extends \SnapTrade\CustomApi
             $headers
         );
 
-        [
-            "method" => $method,
-            "queryParams" => $queryParams,
-            "resourcePath" => $resourcePath,
-            "headers" => $headers,
-            "httpBody" => $httpBody,
-        ] = $this->beforeCreateRequestHook('POST', $resourcePath, $queryParams, $headers, $httpBody);
+        $method = 'POST';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            $method,
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
     }
 
     /**

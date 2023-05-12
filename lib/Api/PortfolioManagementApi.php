@@ -236,9 +236,10 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function addPortfolioExcludedAssetWithHttpInfo($portfolio_group_id, $universal_symbol = null, string $contentType = self::contentTypes['addPortfolioExcludedAsset'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $request = $this->addPortfolioExcludedAssetRequest($portfolio_group_id, $universal_symbol, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->addPortfolioExcludedAssetRequest($portfolio_group_id, $universal_symbol, $contentType);
 
-        $this->beforeSendHook($request, $requestOptions, $this->config);
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
 
         try {
             $options = $this->createHttpClientOption();
@@ -371,10 +372,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function addPortfolioExcludedAssetAsyncWithHttpInfo($portfolio_group_id, $universal_symbol = null, string $contentType = self::contentTypes['addPortfolioExcludedAsset'][0])
+    public function addPortfolioExcludedAssetAsyncWithHttpInfo($portfolio_group_id, $universal_symbol = null, string $contentType = self::contentTypes['addPortfolioExcludedAsset'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\ExcludedAsset';
-        $request = $this->addPortfolioExcludedAssetRequest($portfolio_group_id, $universal_symbol, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->addPortfolioExcludedAssetRequest($portfolio_group_id, $universal_symbol, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -436,8 +440,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
             );
         }
 
-        if (!($universal_symbol instanceof \SnapTrade\Model\UniversalSymbol)) {
-            throw new \InvalidArgumentException('"universal_symbol" must be instance of "\SnapTrade\Model\UniversalSymbol" when calling PortfolioManagementApi.addPortfolioExcludedAsset.');
+        if ($universal_symbol != null) {
+            if (!($universal_symbol instanceof \SnapTrade\Model\UniversalSymbol)) {
+                if (!is_array($universal_symbol))
+                    throw new \InvalidArgumentException('"universal_symbol" must be associative array or an instance of \SnapTrade\Model\UniversalSymbol PortfolioManagementApi.addPortfolioExcludedAsset.');
+                else
+                    $universal_symbol = new \SnapTrade\Model\UniversalSymbol($universal_symbol);
+            }
         }
 
 
@@ -525,22 +534,20 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
             $headers
         );
 
-        [
-            "method" => $method,
-            "queryParams" => $queryParams,
-            "resourcePath" => $resourcePath,
-            "headers" => $headers,
-            "httpBody" => $httpBody,
-        ] = $this->beforeCreateRequestHook('POST', $resourcePath, $queryParams, $headers, $httpBody);
+        $method = 'POST';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            $method,
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
     }
 
     /**
@@ -577,8 +584,9 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function allWithHttpInfo($user_id, $user_secret, string $contentType = self::contentTypes['all'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $request = $this->allRequest($user_id, $user_secret, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->allRequest($user_id, $user_secret, $contentType);
 
+        // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
@@ -712,10 +720,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function allAsyncWithHttpInfo($user_id, $user_secret, string $contentType = self::contentTypes['all'][0])
+    public function allAsyncWithHttpInfo($user_id, $user_secret, string $contentType = self::contentTypes['all'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\PortfolioGroup[]';
-        $request = $this->allRequest($user_id, $user_secret, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->allRequest($user_id, $user_secret, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -876,22 +887,20 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
             $headers
         );
 
-        [
-            "method" => $method,
-            "queryParams" => $queryParams,
-            "resourcePath" => $resourcePath,
-            "headers" => $headers,
-            "httpBody" => $httpBody,
-        ] = $this->beforeCreateRequestHook('GET', $resourcePath, $queryParams, $headers, $httpBody);
+        $method = 'GET';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            $method,
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
     }
 
     /**
@@ -930,9 +939,10 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function createWithHttpInfo($user_id, $user_secret, $request_body, string $contentType = self::contentTypes['create'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $request = $this->createRequest($user_id, $user_secret, $request_body, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->createRequest($user_id, $user_secret, $request_body, $contentType);
 
-        $this->beforeSendHook($request, $requestOptions, $this->config);
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1068,10 +1078,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function createAsyncWithHttpInfo($user_id, $user_secret, $request_body, string $contentType = self::contentTypes['create'][0])
+    public function createAsyncWithHttpInfo($user_id, $user_secret, $request_body, string $contentType = self::contentTypes['create'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\PortfolioGroup[]';
-        $request = $this->createRequest($user_id, $user_secret, $request_body, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->createRequest($user_id, $user_secret, $request_body, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1247,22 +1260,20 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
             $headers
         );
 
-        [
-            "method" => $method,
-            "queryParams" => $queryParams,
-            "resourcePath" => $resourcePath,
-            "headers" => $headers,
-            "httpBody" => $httpBody,
-        ] = $this->beforeCreateRequestHook('POST', $resourcePath, $queryParams, $headers, $httpBody);
+        $method = 'POST';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            $method,
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
     }
 
     /**
@@ -1295,8 +1306,9 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function createAssetClassWithHttpInfo(string $contentType = self::contentTypes['createAssetClass'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $request = $this->createAssetClassRequest($contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->createAssetClassRequest($contentType);
 
+        // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
@@ -1424,10 +1436,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function createAssetClassAsyncWithHttpInfo(string $contentType = self::contentTypes['createAssetClass'][0])
+    public function createAssetClassAsyncWithHttpInfo(string $contentType = self::contentTypes['createAssetClass'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\ModelAssetClassDetails';
-        $request = $this->createAssetClassRequest($contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->createAssetClassRequest($contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1546,22 +1561,20 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
             $headers
         );
 
-        [
-            "method" => $method,
-            "queryParams" => $queryParams,
-            "resourcePath" => $resourcePath,
-            "headers" => $headers,
-            "httpBody" => $httpBody,
-        ] = $this->beforeCreateRequestHook('POST', $resourcePath, $queryParams, $headers, $httpBody);
+        $method = 'POST';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            $method,
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
     }
 
     /**
@@ -1594,8 +1607,9 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function createModelPortfolioWithHttpInfo(string $contentType = self::contentTypes['createModelPortfolio'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $request = $this->createModelPortfolioRequest($contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->createModelPortfolioRequest($contentType);
 
+        // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
@@ -1723,10 +1737,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function createModelPortfolioAsyncWithHttpInfo(string $contentType = self::contentTypes['createModelPortfolio'][0])
+    public function createModelPortfolioAsyncWithHttpInfo(string $contentType = self::contentTypes['createModelPortfolio'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\ModelPortfolioDetails';
-        $request = $this->createModelPortfolioRequest($contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->createModelPortfolioRequest($contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1845,22 +1862,20 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
             $headers
         );
 
-        [
-            "method" => $method,
-            "queryParams" => $queryParams,
-            "resourcePath" => $resourcePath,
-            "headers" => $headers,
-            "httpBody" => $httpBody,
-        ] = $this->beforeCreateRequestHook('POST', $resourcePath, $queryParams, $headers, $httpBody);
+        $method = 'POST';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            $method,
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
     }
 
     /**
@@ -1894,8 +1909,9 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function deleteAssetClassWithHttpInfo($model_asset_class_id, string $contentType = self::contentTypes['deleteAssetClass'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $request = $this->deleteAssetClassRequest($model_asset_class_id, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->deleteAssetClassRequest($model_asset_class_id, $contentType);
 
+        // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
@@ -1986,10 +2002,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function deleteAssetClassAsyncWithHttpInfo($model_asset_class_id, string $contentType = self::contentTypes['deleteAssetClass'][0])
+    public function deleteAssetClassAsyncWithHttpInfo($model_asset_class_id, string $contentType = self::contentTypes['deleteAssetClass'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '';
-        $request = $this->deleteAssetClassRequest($model_asset_class_id, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->deleteAssetClassRequest($model_asset_class_id, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2115,22 +2134,20 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
             $headers
         );
 
-        [
-            "method" => $method,
-            "queryParams" => $queryParams,
-            "resourcePath" => $resourcePath,
-            "headers" => $headers,
-            "httpBody" => $httpBody,
-        ] = $this->beforeCreateRequestHook('DELETE', $resourcePath, $queryParams, $headers, $httpBody);
+        $method = 'DELETE';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            $method,
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
     }
 
     /**
@@ -2166,8 +2183,9 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function deleteExcludedAssetWithHttpInfo($portfolio_group_id, $symbol_id, string $contentType = self::contentTypes['deleteExcludedAsset'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $request = $this->deleteExcludedAssetRequest($portfolio_group_id, $symbol_id, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->deleteExcludedAssetRequest($portfolio_group_id, $symbol_id, $contentType);
 
+        // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
@@ -2261,10 +2279,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function deleteExcludedAssetAsyncWithHttpInfo($portfolio_group_id, $symbol_id, string $contentType = self::contentTypes['deleteExcludedAsset'][0])
+    public function deleteExcludedAssetAsyncWithHttpInfo($portfolio_group_id, $symbol_id, string $contentType = self::contentTypes['deleteExcludedAsset'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '';
-        $request = $this->deleteExcludedAssetRequest($portfolio_group_id, $symbol_id, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->deleteExcludedAssetRequest($portfolio_group_id, $symbol_id, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2410,22 +2431,20 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
             $headers
         );
 
-        [
-            "method" => $method,
-            "queryParams" => $queryParams,
-            "resourcePath" => $resourcePath,
-            "headers" => $headers,
-            "httpBody" => $httpBody,
-        ] = $this->beforeCreateRequestHook('DELETE', $resourcePath, $queryParams, $headers, $httpBody);
+        $method = 'DELETE';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            $method,
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
     }
 
     /**
@@ -2459,8 +2478,9 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function deleteModelPortfolioByIdWithHttpInfo($model_portfolio_id, string $contentType = self::contentTypes['deleteModelPortfolioById'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $request = $this->deleteModelPortfolioByIdRequest($model_portfolio_id, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->deleteModelPortfolioByIdRequest($model_portfolio_id, $contentType);
 
+        // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
@@ -2551,10 +2571,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function deleteModelPortfolioByIdAsyncWithHttpInfo($model_portfolio_id, string $contentType = self::contentTypes['deleteModelPortfolioById'][0])
+    public function deleteModelPortfolioByIdAsyncWithHttpInfo($model_portfolio_id, string $contentType = self::contentTypes['deleteModelPortfolioById'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '';
-        $request = $this->deleteModelPortfolioByIdRequest($model_portfolio_id, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->deleteModelPortfolioByIdRequest($model_portfolio_id, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2680,22 +2703,20 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
             $headers
         );
 
-        [
-            "method" => $method,
-            "queryParams" => $queryParams,
-            "resourcePath" => $resourcePath,
-            "headers" => $headers,
-            "httpBody" => $httpBody,
-        ] = $this->beforeCreateRequestHook('DELETE', $resourcePath, $queryParams, $headers, $httpBody);
+        $method = 'DELETE';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            $method,
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
     }
 
     /**
@@ -2730,8 +2751,9 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function deletePortfoliWithHttpInfo($portfolio_group_id, string $contentType = self::contentTypes['deletePortfoli'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $request = $this->deletePortfoliRequest($portfolio_group_id, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->deletePortfoliRequest($portfolio_group_id, $contentType);
 
+        // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
@@ -2862,10 +2884,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function deletePortfoliAsyncWithHttpInfo($portfolio_group_id, string $contentType = self::contentTypes['deletePortfoli'][0])
+    public function deletePortfoliAsyncWithHttpInfo($portfolio_group_id, string $contentType = self::contentTypes['deletePortfoli'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\PortfolioGroup';
-        $request = $this->deletePortfoliRequest($portfolio_group_id, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->deletePortfoliRequest($portfolio_group_id, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -3004,22 +3029,20 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
             $headers
         );
 
-        [
-            "method" => $method,
-            "queryParams" => $queryParams,
-            "resourcePath" => $resourcePath,
-            "headers" => $headers,
-            "httpBody" => $httpBody,
-        ] = $this->beforeCreateRequestHook('DELETE', $resourcePath, $queryParams, $headers, $httpBody);
+        $method = 'DELETE';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            $method,
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
     }
 
     /**
@@ -3056,8 +3079,9 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function deletePortfolioTargetByIdWithHttpInfo($portfolio_group_id, $target_asset_id, string $contentType = self::contentTypes['deletePortfolioTargetById'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $request = $this->deletePortfolioTargetByIdRequest($portfolio_group_id, $target_asset_id, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->deletePortfolioTargetByIdRequest($portfolio_group_id, $target_asset_id, $contentType);
 
+        // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
@@ -3191,10 +3215,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function deletePortfolioTargetByIdAsyncWithHttpInfo($portfolio_group_id, $target_asset_id, string $contentType = self::contentTypes['deletePortfolioTargetById'][0])
+    public function deletePortfolioTargetByIdAsyncWithHttpInfo($portfolio_group_id, $target_asset_id, string $contentType = self::contentTypes['deletePortfolioTargetById'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\TargetAsset';
-        $request = $this->deletePortfolioTargetByIdRequest($portfolio_group_id, $target_asset_id, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->deletePortfolioTargetByIdRequest($portfolio_group_id, $target_asset_id, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -3353,22 +3380,20 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
             $headers
         );
 
-        [
-            "method" => $method,
-            "queryParams" => $queryParams,
-            "resourcePath" => $resourcePath,
-            "headers" => $headers,
-            "httpBody" => $httpBody,
-        ] = $this->beforeCreateRequestHook('DELETE', $resourcePath, $queryParams, $headers, $httpBody);
+        $method = 'DELETE';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            $method,
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
     }
 
     /**
@@ -3403,8 +3428,9 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function detailAssetClassWithHttpInfo($model_asset_class_id, string $contentType = self::contentTypes['detailAssetClass'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $request = $this->detailAssetClassRequest($model_asset_class_id, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->detailAssetClassRequest($model_asset_class_id, $contentType);
 
+        // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
@@ -3535,10 +3561,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function detailAssetClassAsyncWithHttpInfo($model_asset_class_id, string $contentType = self::contentTypes['detailAssetClass'][0])
+    public function detailAssetClassAsyncWithHttpInfo($model_asset_class_id, string $contentType = self::contentTypes['detailAssetClass'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\ModelAssetClassDetails';
-        $request = $this->detailAssetClassRequest($model_asset_class_id, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->detailAssetClassRequest($model_asset_class_id, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -3677,22 +3706,20 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
             $headers
         );
 
-        [
-            "method" => $method,
-            "queryParams" => $queryParams,
-            "resourcePath" => $resourcePath,
-            "headers" => $headers,
-            "httpBody" => $httpBody,
-        ] = $this->beforeCreateRequestHook('GET', $resourcePath, $queryParams, $headers, $httpBody);
+        $method = 'GET';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            $method,
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
     }
 
     /**
@@ -3731,8 +3758,9 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function getCalculatedTradeByIdWithHttpInfo($portfolio_group_id, $calculated_trade_id, $trade_id, string $contentType = self::contentTypes['getCalculatedTradeById'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $request = $this->getCalculatedTradeByIdRequest($portfolio_group_id, $calculated_trade_id, $trade_id, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getCalculatedTradeByIdRequest($portfolio_group_id, $calculated_trade_id, $trade_id, $contentType);
 
+        // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
@@ -3869,10 +3897,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getCalculatedTradeByIdAsyncWithHttpInfo($portfolio_group_id, $calculated_trade_id, $trade_id, string $contentType = self::contentTypes['getCalculatedTradeById'][0])
+    public function getCalculatedTradeByIdAsyncWithHttpInfo($portfolio_group_id, $calculated_trade_id, $trade_id, string $contentType = self::contentTypes['getCalculatedTradeById'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\Trade[]';
-        $request = $this->getCalculatedTradeByIdRequest($portfolio_group_id, $calculated_trade_id, $trade_id, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getCalculatedTradeByIdRequest($portfolio_group_id, $calculated_trade_id, $trade_id, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -4051,22 +4082,20 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
             $headers
         );
 
-        [
-            "method" => $method,
-            "queryParams" => $queryParams,
-            "resourcePath" => $resourcePath,
-            "headers" => $headers,
-            "httpBody" => $httpBody,
-        ] = $this->beforeCreateRequestHook('GET', $resourcePath, $queryParams, $headers, $httpBody);
+        $method = 'GET';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            $method,
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
     }
 
     /**
@@ -4101,8 +4130,9 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function getModelDetailsByIdWithHttpInfo($model_portfolio_id, string $contentType = self::contentTypes['getModelDetailsById'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $request = $this->getModelDetailsByIdRequest($model_portfolio_id, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getModelDetailsByIdRequest($model_portfolio_id, $contentType);
 
+        // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
@@ -4233,10 +4263,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getModelDetailsByIdAsyncWithHttpInfo($model_portfolio_id, string $contentType = self::contentTypes['getModelDetailsById'][0])
+    public function getModelDetailsByIdAsyncWithHttpInfo($model_portfolio_id, string $contentType = self::contentTypes['getModelDetailsById'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\ModelPortfolioDetails';
-        $request = $this->getModelDetailsByIdRequest($model_portfolio_id, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getModelDetailsByIdRequest($model_portfolio_id, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -4375,22 +4408,20 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
             $headers
         );
 
-        [
-            "method" => $method,
-            "queryParams" => $queryParams,
-            "resourcePath" => $resourcePath,
-            "headers" => $headers,
-            "httpBody" => $httpBody,
-        ] = $this->beforeCreateRequestHook('GET', $resourcePath, $queryParams, $headers, $httpBody);
+        $method = 'GET';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            $method,
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
     }
 
     /**
@@ -4425,8 +4456,9 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function getPortfolioBalancesWithHttpInfo($portfolio_group_id, string $contentType = self::contentTypes['getPortfolioBalances'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $request = $this->getPortfolioBalancesRequest($portfolio_group_id, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getPortfolioBalancesRequest($portfolio_group_id, $contentType);
 
+        // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
@@ -4557,10 +4589,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getPortfolioBalancesAsyncWithHttpInfo($portfolio_group_id, string $contentType = self::contentTypes['getPortfolioBalances'][0])
+    public function getPortfolioBalancesAsyncWithHttpInfo($portfolio_group_id, string $contentType = self::contentTypes['getPortfolioBalances'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\Balance[]';
-        $request = $this->getPortfolioBalancesRequest($portfolio_group_id, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getPortfolioBalancesRequest($portfolio_group_id, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -4699,22 +4734,20 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
             $headers
         );
 
-        [
-            "method" => $method,
-            "queryParams" => $queryParams,
-            "resourcePath" => $resourcePath,
-            "headers" => $headers,
-            "httpBody" => $httpBody,
-        ] = $this->beforeCreateRequestHook('GET', $resourcePath, $queryParams, $headers, $httpBody);
+        $method = 'GET';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            $method,
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
     }
 
     /**
@@ -4749,8 +4782,9 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function getPortfolioDetailsByIdWithHttpInfo($portfolio_group_id, string $contentType = self::contentTypes['getPortfolioDetailsById'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $request = $this->getPortfolioDetailsByIdRequest($portfolio_group_id, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getPortfolioDetailsByIdRequest($portfolio_group_id, $contentType);
 
+        // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
@@ -4881,10 +4915,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getPortfolioDetailsByIdAsyncWithHttpInfo($portfolio_group_id, string $contentType = self::contentTypes['getPortfolioDetailsById'][0])
+    public function getPortfolioDetailsByIdAsyncWithHttpInfo($portfolio_group_id, string $contentType = self::contentTypes['getPortfolioDetailsById'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\PortfolioGroup';
-        $request = $this->getPortfolioDetailsByIdRequest($portfolio_group_id, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getPortfolioDetailsByIdRequest($portfolio_group_id, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -5023,22 +5060,20 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
             $headers
         );
 
-        [
-            "method" => $method,
-            "queryParams" => $queryParams,
-            "resourcePath" => $resourcePath,
-            "headers" => $headers,
-            "httpBody" => $httpBody,
-        ] = $this->beforeCreateRequestHook('GET', $resourcePath, $queryParams, $headers, $httpBody);
+        $method = 'GET';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            $method,
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
     }
 
     /**
@@ -5073,8 +5108,9 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function getPortfolioInfoWithHttpInfo($portfolio_group_id, string $contentType = self::contentTypes['getPortfolioInfo'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $request = $this->getPortfolioInfoRequest($portfolio_group_id, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getPortfolioInfoRequest($portfolio_group_id, $contentType);
 
+        // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
@@ -5205,10 +5241,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getPortfolioInfoAsyncWithHttpInfo($portfolio_group_id, string $contentType = self::contentTypes['getPortfolioInfo'][0])
+    public function getPortfolioInfoAsyncWithHttpInfo($portfolio_group_id, string $contentType = self::contentTypes['getPortfolioInfo'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\PortfolioGroupInfo';
-        $request = $this->getPortfolioInfoRequest($portfolio_group_id, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getPortfolioInfoRequest($portfolio_group_id, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -5347,22 +5386,20 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
             $headers
         );
 
-        [
-            "method" => $method,
-            "queryParams" => $queryParams,
-            "resourcePath" => $resourcePath,
-            "headers" => $headers,
-            "httpBody" => $httpBody,
-        ] = $this->beforeCreateRequestHook('GET', $resourcePath, $queryParams, $headers, $httpBody);
+        $method = 'GET';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            $method,
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
     }
 
     /**
@@ -5397,8 +5434,9 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function getPortfolioSettingsWithHttpInfo($portfolio_group_id, string $contentType = self::contentTypes['getPortfolioSettings'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $request = $this->getPortfolioSettingsRequest($portfolio_group_id, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getPortfolioSettingsRequest($portfolio_group_id, $contentType);
 
+        // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
@@ -5529,10 +5567,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getPortfolioSettingsAsyncWithHttpInfo($portfolio_group_id, string $contentType = self::contentTypes['getPortfolioSettings'][0])
+    public function getPortfolioSettingsAsyncWithHttpInfo($portfolio_group_id, string $contentType = self::contentTypes['getPortfolioSettings'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\PortfolioGroupSettings';
-        $request = $this->getPortfolioSettingsRequest($portfolio_group_id, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getPortfolioSettingsRequest($portfolio_group_id, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -5671,22 +5712,20 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
             $headers
         );
 
-        [
-            "method" => $method,
-            "queryParams" => $queryParams,
-            "resourcePath" => $resourcePath,
-            "headers" => $headers,
-            "httpBody" => $httpBody,
-        ] = $this->beforeCreateRequestHook('GET', $resourcePath, $queryParams, $headers, $httpBody);
+        $method = 'GET';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            $method,
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
     }
 
     /**
@@ -5723,8 +5762,9 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function getPortfolioTargetByIdWithHttpInfo($portfolio_group_id, $target_asset_id, string $contentType = self::contentTypes['getPortfolioTargetById'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $request = $this->getPortfolioTargetByIdRequest($portfolio_group_id, $target_asset_id, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getPortfolioTargetByIdRequest($portfolio_group_id, $target_asset_id, $contentType);
 
+        // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
@@ -5858,10 +5898,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getPortfolioTargetByIdAsyncWithHttpInfo($portfolio_group_id, $target_asset_id, string $contentType = self::contentTypes['getPortfolioTargetById'][0])
+    public function getPortfolioTargetByIdAsyncWithHttpInfo($portfolio_group_id, $target_asset_id, string $contentType = self::contentTypes['getPortfolioTargetById'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\TargetAsset';
-        $request = $this->getPortfolioTargetByIdRequest($portfolio_group_id, $target_asset_id, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getPortfolioTargetByIdRequest($portfolio_group_id, $target_asset_id, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -6020,22 +6063,20 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
             $headers
         );
 
-        [
-            "method" => $method,
-            "queryParams" => $queryParams,
-            "resourcePath" => $resourcePath,
-            "headers" => $headers,
-            "httpBody" => $httpBody,
-        ] = $this->beforeCreateRequestHook('GET', $resourcePath, $queryParams, $headers, $httpBody);
+        $method = 'GET';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            $method,
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
     }
 
     /**
@@ -6070,8 +6111,9 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function getPortfolioTargetsWithHttpInfo($portfolio_group_id, string $contentType = self::contentTypes['getPortfolioTargets'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $request = $this->getPortfolioTargetsRequest($portfolio_group_id, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getPortfolioTargetsRequest($portfolio_group_id, $contentType);
 
+        // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
@@ -6202,10 +6244,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getPortfolioTargetsAsyncWithHttpInfo($portfolio_group_id, string $contentType = self::contentTypes['getPortfolioTargets'][0])
+    public function getPortfolioTargetsAsyncWithHttpInfo($portfolio_group_id, string $contentType = self::contentTypes['getPortfolioTargets'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\TargetAsset[]';
-        $request = $this->getPortfolioTargetsRequest($portfolio_group_id, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getPortfolioTargetsRequest($portfolio_group_id, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -6344,22 +6389,20 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
             $headers
         );
 
-        [
-            "method" => $method,
-            "queryParams" => $queryParams,
-            "resourcePath" => $resourcePath,
-            "headers" => $headers,
-            "httpBody" => $httpBody,
-        ] = $this->beforeCreateRequestHook('GET', $resourcePath, $queryParams, $headers, $httpBody);
+        $method = 'GET';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            $method,
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
     }
 
     /**
@@ -6394,8 +6437,9 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function getPortoflioExcludedAssetsWithHttpInfo($portfolio_group_id, string $contentType = self::contentTypes['getPortoflioExcludedAssets'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $request = $this->getPortoflioExcludedAssetsRequest($portfolio_group_id, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getPortoflioExcludedAssetsRequest($portfolio_group_id, $contentType);
 
+        // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
@@ -6526,10 +6570,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getPortoflioExcludedAssetsAsyncWithHttpInfo($portfolio_group_id, string $contentType = self::contentTypes['getPortoflioExcludedAssets'][0])
+    public function getPortoflioExcludedAssetsAsyncWithHttpInfo($portfolio_group_id, string $contentType = self::contentTypes['getPortoflioExcludedAssets'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\ExcludedAsset[]';
-        $request = $this->getPortoflioExcludedAssetsRequest($portfolio_group_id, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getPortoflioExcludedAssetsRequest($portfolio_group_id, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -6668,22 +6715,20 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
             $headers
         );
 
-        [
-            "method" => $method,
-            "queryParams" => $queryParams,
-            "resourcePath" => $resourcePath,
-            "headers" => $headers,
-            "httpBody" => $httpBody,
-        ] = $this->beforeCreateRequestHook('GET', $resourcePath, $queryParams, $headers, $httpBody);
+        $method = 'GET';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            $method,
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
     }
 
     /**
@@ -6718,8 +6763,9 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function importModelPortfolioWithHttpInfo($portfolio_group_id, string $contentType = self::contentTypes['importModelPortfolio'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $request = $this->importModelPortfolioRequest($portfolio_group_id, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->importModelPortfolioRequest($portfolio_group_id, $contentType);
 
+        // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
@@ -6850,10 +6896,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function importModelPortfolioAsyncWithHttpInfo($portfolio_group_id, string $contentType = self::contentTypes['importModelPortfolio'][0])
+    public function importModelPortfolioAsyncWithHttpInfo($portfolio_group_id, string $contentType = self::contentTypes['importModelPortfolio'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\TargetAsset[]';
-        $request = $this->importModelPortfolioRequest($portfolio_group_id, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->importModelPortfolioRequest($portfolio_group_id, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -6992,22 +7041,20 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
             $headers
         );
 
-        [
-            "method" => $method,
-            "queryParams" => $queryParams,
-            "resourcePath" => $resourcePath,
-            "headers" => $headers,
-            "httpBody" => $httpBody,
-        ] = $this->beforeCreateRequestHook('POST', $resourcePath, $queryParams, $headers, $httpBody);
+        $method = 'POST';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            $method,
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
     }
 
     /**
@@ -7040,8 +7087,9 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function listAssetClassesWithHttpInfo(string $contentType = self::contentTypes['listAssetClasses'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $request = $this->listAssetClassesRequest($contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->listAssetClassesRequest($contentType);
 
+        // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
@@ -7169,10 +7217,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listAssetClassesAsyncWithHttpInfo(string $contentType = self::contentTypes['listAssetClasses'][0])
+    public function listAssetClassesAsyncWithHttpInfo(string $contentType = self::contentTypes['listAssetClasses'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\ModelAssetClassDetails[]';
-        $request = $this->listAssetClassesRequest($contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->listAssetClassesRequest($contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -7291,22 +7342,20 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
             $headers
         );
 
-        [
-            "method" => $method,
-            "queryParams" => $queryParams,
-            "resourcePath" => $resourcePath,
-            "headers" => $headers,
-            "httpBody" => $httpBody,
-        ] = $this->beforeCreateRequestHook('GET', $resourcePath, $queryParams, $headers, $httpBody);
+        $method = 'GET';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            $method,
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
     }
 
     /**
@@ -7341,8 +7390,9 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function listCalculatedTradesWithHttpInfo($portfolio_group_id, string $contentType = self::contentTypes['listCalculatedTrades'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $request = $this->listCalculatedTradesRequest($portfolio_group_id, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->listCalculatedTradesRequest($portfolio_group_id, $contentType);
 
+        // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
@@ -7473,10 +7523,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listCalculatedTradesAsyncWithHttpInfo($portfolio_group_id, string $contentType = self::contentTypes['listCalculatedTrades'][0])
+    public function listCalculatedTradesAsyncWithHttpInfo($portfolio_group_id, string $contentType = self::contentTypes['listCalculatedTrades'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\CalculatedTrade';
-        $request = $this->listCalculatedTradesRequest($portfolio_group_id, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->listCalculatedTradesRequest($portfolio_group_id, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -7615,22 +7668,20 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
             $headers
         );
 
-        [
-            "method" => $method,
-            "queryParams" => $queryParams,
-            "resourcePath" => $resourcePath,
-            "headers" => $headers,
-            "httpBody" => $httpBody,
-        ] = $this->beforeCreateRequestHook('GET', $resourcePath, $queryParams, $headers, $httpBody);
+        $method = 'GET';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            $method,
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
     }
 
     /**
@@ -7663,8 +7714,9 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function listModelPortfolioWithHttpInfo(string $contentType = self::contentTypes['listModelPortfolio'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $request = $this->listModelPortfolioRequest($contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->listModelPortfolioRequest($contentType);
 
+        // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
@@ -7792,10 +7844,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listModelPortfolioAsyncWithHttpInfo(string $contentType = self::contentTypes['listModelPortfolio'][0])
+    public function listModelPortfolioAsyncWithHttpInfo(string $contentType = self::contentTypes['listModelPortfolio'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\ModelPortfolioDetails[]';
-        $request = $this->listModelPortfolioRequest($contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->listModelPortfolioRequest($contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -7914,22 +7969,20 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
             $headers
         );
 
-        [
-            "method" => $method,
-            "queryParams" => $queryParams,
-            "resourcePath" => $resourcePath,
-            "headers" => $headers,
-            "httpBody" => $httpBody,
-        ] = $this->beforeCreateRequestHook('GET', $resourcePath, $queryParams, $headers, $httpBody);
+        $method = 'GET';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            $method,
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
     }
 
     /**
@@ -7964,8 +8017,9 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function listPortfolioAccountsWithHttpInfo($portfolio_group_id, string $contentType = self::contentTypes['listPortfolioAccounts'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $request = $this->listPortfolioAccountsRequest($portfolio_group_id, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->listPortfolioAccountsRequest($portfolio_group_id, $contentType);
 
+        // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
@@ -8096,10 +8150,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listPortfolioAccountsAsyncWithHttpInfo($portfolio_group_id, string $contentType = self::contentTypes['listPortfolioAccounts'][0])
+    public function listPortfolioAccountsAsyncWithHttpInfo($portfolio_group_id, string $contentType = self::contentTypes['listPortfolioAccounts'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\Account[]';
-        $request = $this->listPortfolioAccountsRequest($portfolio_group_id, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->listPortfolioAccountsRequest($portfolio_group_id, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -8238,22 +8295,20 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
             $headers
         );
 
-        [
-            "method" => $method,
-            "queryParams" => $queryParams,
-            "resourcePath" => $resourcePath,
-            "headers" => $headers,
-            "httpBody" => $httpBody,
-        ] = $this->beforeCreateRequestHook('GET', $resourcePath, $queryParams, $headers, $httpBody);
+        $method = 'GET';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            $method,
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
     }
 
     /**
@@ -8289,9 +8344,10 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function modifyModelPortfolioByIdWithHttpInfo($model_portfolio_id, $model_portfolio_details, string $contentType = self::contentTypes['modifyModelPortfolioById'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $request = $this->modifyModelPortfolioByIdRequest($model_portfolio_id, $model_portfolio_details, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->modifyModelPortfolioByIdRequest($model_portfolio_id, $model_portfolio_details, $contentType);
 
-        $this->beforeSendHook($request, $requestOptions, $this->config);
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
 
         try {
             $options = $this->createHttpClientOption();
@@ -8384,10 +8440,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function modifyModelPortfolioByIdAsyncWithHttpInfo($model_portfolio_id, $model_portfolio_details, string $contentType = self::contentTypes['modifyModelPortfolioById'][0])
+    public function modifyModelPortfolioByIdAsyncWithHttpInfo($model_portfolio_id, $model_portfolio_details, string $contentType = self::contentTypes['modifyModelPortfolioById'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '';
-        $request = $this->modifyModelPortfolioByIdRequest($model_portfolio_id, $model_portfolio_details, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->modifyModelPortfolioByIdRequest($model_portfolio_id, $model_portfolio_details, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -8436,8 +8495,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
             );
         }
 
-        if (!($model_portfolio_details instanceof \SnapTrade\Model\ModelPortfolioDetails)) {
-            throw new \InvalidArgumentException('"model_portfolio_details" must be instance of "\SnapTrade\Model\ModelPortfolioDetails" when calling PortfolioManagementApi.modifyModelPortfolioById.');
+        if ($model_portfolio_details != null) {
+            if (!($model_portfolio_details instanceof \SnapTrade\Model\ModelPortfolioDetails)) {
+                if (!is_array($model_portfolio_details))
+                    throw new \InvalidArgumentException('"model_portfolio_details" must be associative array or an instance of \SnapTrade\Model\ModelPortfolioDetails PortfolioManagementApi.modifyModelPortfolioById.');
+                else
+                    $model_portfolio_details = new \SnapTrade\Model\ModelPortfolioDetails($model_portfolio_details);
+            }
         }
         // verify the required parameter 'model_portfolio_details' is set
         if ($model_portfolio_details === null || (is_array($model_portfolio_details) && count($model_portfolio_details) === 0)) {
@@ -8531,22 +8595,20 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
             $headers
         );
 
-        [
-            "method" => $method,
-            "queryParams" => $queryParams,
-            "resourcePath" => $resourcePath,
-            "headers" => $headers,
-            "httpBody" => $httpBody,
-        ] = $this->beforeCreateRequestHook('POST', $resourcePath, $queryParams, $headers, $httpBody);
+        $method = 'POST';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            $method,
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
     }
 
     /**
@@ -8583,9 +8645,10 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function savePortfolioWithHttpInfo($portfolio_group_id, $request_body, string $contentType = self::contentTypes['savePortfolio'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $request = $this->savePortfolioRequest($portfolio_group_id, $request_body, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->savePortfolioRequest($portfolio_group_id, $request_body, $contentType);
 
-        $this->beforeSendHook($request, $requestOptions, $this->config);
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
 
         try {
             $options = $this->createHttpClientOption();
@@ -8718,10 +8781,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function savePortfolioAsyncWithHttpInfo($portfolio_group_id, $request_body, string $contentType = self::contentTypes['savePortfolio'][0])
+    public function savePortfolioAsyncWithHttpInfo($portfolio_group_id, $request_body, string $contentType = self::contentTypes['savePortfolio'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\PortfolioGroup';
-        $request = $this->savePortfolioRequest($portfolio_group_id, $request_body, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->savePortfolioRequest($portfolio_group_id, $request_body, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -8875,22 +8941,20 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
             $headers
         );
 
-        [
-            "method" => $method,
-            "queryParams" => $queryParams,
-            "resourcePath" => $resourcePath,
-            "headers" => $headers,
-            "httpBody" => $httpBody,
-        ] = $this->beforeCreateRequestHook('PATCH', $resourcePath, $queryParams, $headers, $httpBody);
+        $method = 'PATCH';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            $method,
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
     }
 
     /**
@@ -8927,9 +8991,10 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function searchPortfolioSymbolsWithHttpInfo($portfolio_group_id, $symbol_query = null, string $contentType = self::contentTypes['searchPortfolioSymbols'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $request = $this->searchPortfolioSymbolsRequest($portfolio_group_id, $symbol_query, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->searchPortfolioSymbolsRequest($portfolio_group_id, $symbol_query, $contentType);
 
-        $this->beforeSendHook($request, $requestOptions, $this->config);
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
 
         try {
             $options = $this->createHttpClientOption();
@@ -9062,10 +9127,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function searchPortfolioSymbolsAsyncWithHttpInfo($portfolio_group_id, $symbol_query = null, string $contentType = self::contentTypes['searchPortfolioSymbols'][0])
+    public function searchPortfolioSymbolsAsyncWithHttpInfo($portfolio_group_id, $symbol_query = null, string $contentType = self::contentTypes['searchPortfolioSymbols'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\UniversalSymbol[]';
-        $request = $this->searchPortfolioSymbolsRequest($portfolio_group_id, $symbol_query, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->searchPortfolioSymbolsRequest($portfolio_group_id, $symbol_query, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -9127,8 +9195,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
             );
         }
 
-        if (!($symbol_query instanceof \SnapTrade\Model\SymbolQuery)) {
-            throw new \InvalidArgumentException('"symbol_query" must be instance of "\SnapTrade\Model\SymbolQuery" when calling PortfolioManagementApi.searchPortfolioSymbols.');
+        if ($symbol_query != null) {
+            if (!($symbol_query instanceof \SnapTrade\Model\SymbolQuery)) {
+                if (!is_array($symbol_query))
+                    throw new \InvalidArgumentException('"symbol_query" must be associative array or an instance of \SnapTrade\Model\SymbolQuery PortfolioManagementApi.searchPortfolioSymbols.');
+                else
+                    $symbol_query = new \SnapTrade\Model\SymbolQuery($symbol_query);
+            }
         }
 
 
@@ -9216,22 +9289,20 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
             $headers
         );
 
-        [
-            "method" => $method,
-            "queryParams" => $queryParams,
-            "resourcePath" => $resourcePath,
-            "headers" => $headers,
-            "httpBody" => $httpBody,
-        ] = $this->beforeCreateRequestHook('POST', $resourcePath, $queryParams, $headers, $httpBody);
+        $method = 'POST';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            $method,
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
     }
 
     /**
@@ -9268,9 +9339,10 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function setPortfolioTargetsWithHttpInfo($portfolio_group_id, $target_asset = null, string $contentType = self::contentTypes['setPortfolioTargets'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $request = $this->setPortfolioTargetsRequest($portfolio_group_id, $target_asset, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->setPortfolioTargetsRequest($portfolio_group_id, $target_asset, $contentType);
 
-        $this->beforeSendHook($request, $requestOptions, $this->config);
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
 
         try {
             $options = $this->createHttpClientOption();
@@ -9403,10 +9475,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function setPortfolioTargetsAsyncWithHttpInfo($portfolio_group_id, $target_asset = null, string $contentType = self::contentTypes['setPortfolioTargets'][0])
+    public function setPortfolioTargetsAsyncWithHttpInfo($portfolio_group_id, $target_asset = null, string $contentType = self::contentTypes['setPortfolioTargets'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\TargetAsset[]';
-        $request = $this->setPortfolioTargetsRequest($portfolio_group_id, $target_asset, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->setPortfolioTargetsRequest($portfolio_group_id, $target_asset, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -9554,22 +9629,20 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
             $headers
         );
 
-        [
-            "method" => $method,
-            "queryParams" => $queryParams,
-            "resourcePath" => $resourcePath,
-            "headers" => $headers,
-            "httpBody" => $httpBody,
-        ] = $this->beforeCreateRequestHook('POST', $resourcePath, $queryParams, $headers, $httpBody);
+        $method = 'POST';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            $method,
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
     }
 
     /**
@@ -9605,9 +9678,10 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function updateAssetClassWithHttpInfo($model_asset_class_id, $model_asset_class_details, string $contentType = self::contentTypes['updateAssetClass'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $request = $this->updateAssetClassRequest($model_asset_class_id, $model_asset_class_details, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->updateAssetClassRequest($model_asset_class_id, $model_asset_class_details, $contentType);
 
-        $this->beforeSendHook($request, $requestOptions, $this->config);
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
 
         try {
             $options = $this->createHttpClientOption();
@@ -9700,10 +9774,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function updateAssetClassAsyncWithHttpInfo($model_asset_class_id, $model_asset_class_details, string $contentType = self::contentTypes['updateAssetClass'][0])
+    public function updateAssetClassAsyncWithHttpInfo($model_asset_class_id, $model_asset_class_details, string $contentType = self::contentTypes['updateAssetClass'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '';
-        $request = $this->updateAssetClassRequest($model_asset_class_id, $model_asset_class_details, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->updateAssetClassRequest($model_asset_class_id, $model_asset_class_details, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -9752,8 +9829,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
             );
         }
 
-        if (!($model_asset_class_details instanceof \SnapTrade\Model\ModelAssetClassDetails)) {
-            throw new \InvalidArgumentException('"model_asset_class_details" must be instance of "\SnapTrade\Model\ModelAssetClassDetails" when calling PortfolioManagementApi.updateAssetClass.');
+        if ($model_asset_class_details != null) {
+            if (!($model_asset_class_details instanceof \SnapTrade\Model\ModelAssetClassDetails)) {
+                if (!is_array($model_asset_class_details))
+                    throw new \InvalidArgumentException('"model_asset_class_details" must be associative array or an instance of \SnapTrade\Model\ModelAssetClassDetails PortfolioManagementApi.updateAssetClass.');
+                else
+                    $model_asset_class_details = new \SnapTrade\Model\ModelAssetClassDetails($model_asset_class_details);
+            }
         }
         // verify the required parameter 'model_asset_class_details' is set
         if ($model_asset_class_details === null || (is_array($model_asset_class_details) && count($model_asset_class_details) === 0)) {
@@ -9847,22 +9929,20 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
             $headers
         );
 
-        [
-            "method" => $method,
-            "queryParams" => $queryParams,
-            "resourcePath" => $resourcePath,
-            "headers" => $headers,
-            "httpBody" => $httpBody,
-        ] = $this->beforeCreateRequestHook('POST', $resourcePath, $queryParams, $headers, $httpBody);
+        $method = 'POST';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            $method,
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
     }
 
     /**
@@ -9897,8 +9977,9 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function updatePortfolioSettingsWithHttpInfo($portfolio_group_id, string $contentType = self::contentTypes['updatePortfolioSettings'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $request = $this->updatePortfolioSettingsRequest($portfolio_group_id, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->updatePortfolioSettingsRequest($portfolio_group_id, $contentType);
 
+        // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
@@ -10029,10 +10110,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function updatePortfolioSettingsAsyncWithHttpInfo($portfolio_group_id, string $contentType = self::contentTypes['updatePortfolioSettings'][0])
+    public function updatePortfolioSettingsAsyncWithHttpInfo($portfolio_group_id, string $contentType = self::contentTypes['updatePortfolioSettings'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\PortfolioGroupSettings';
-        $request = $this->updatePortfolioSettingsRequest($portfolio_group_id, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->updatePortfolioSettingsRequest($portfolio_group_id, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -10171,22 +10255,20 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
             $headers
         );
 
-        [
-            "method" => $method,
-            "queryParams" => $queryParams,
-            "resourcePath" => $resourcePath,
-            "headers" => $headers,
-            "httpBody" => $httpBody,
-        ] = $this->beforeCreateRequestHook('PATCH', $resourcePath, $queryParams, $headers, $httpBody);
+        $method = 'PATCH';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            $method,
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
     }
 
     /**
@@ -10225,9 +10307,10 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function updatePortfolioTargetByIdWithHttpInfo($portfolio_group_id, $target_asset_id, $target_asset, string $contentType = self::contentTypes['updatePortfolioTargetById'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $request = $this->updatePortfolioTargetByIdRequest($portfolio_group_id, $target_asset_id, $target_asset, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->updatePortfolioTargetByIdRequest($portfolio_group_id, $target_asset_id, $target_asset, $contentType);
 
-        $this->beforeSendHook($request, $requestOptions, $this->config);
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
 
         try {
             $options = $this->createHttpClientOption();
@@ -10363,10 +10446,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function updatePortfolioTargetByIdAsyncWithHttpInfo($portfolio_group_id, $target_asset_id, $target_asset, string $contentType = self::contentTypes['updatePortfolioTargetById'][0])
+    public function updatePortfolioTargetByIdAsyncWithHttpInfo($portfolio_group_id, $target_asset_id, $target_asset, string $contentType = self::contentTypes['updatePortfolioTargetById'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\TargetAsset';
-        $request = $this->updatePortfolioTargetByIdRequest($portfolio_group_id, $target_asset_id, $target_asset, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->updatePortfolioTargetByIdRequest($portfolio_group_id, $target_asset_id, $target_asset, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -10440,8 +10526,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
             );
         }
 
-        if (!($target_asset instanceof \SnapTrade\Model\TargetAsset)) {
-            throw new \InvalidArgumentException('"target_asset" must be instance of "\SnapTrade\Model\TargetAsset" when calling PortfolioManagementApi.updatePortfolioTargetById.');
+        if ($target_asset != null) {
+            if (!($target_asset instanceof \SnapTrade\Model\TargetAsset)) {
+                if (!is_array($target_asset))
+                    throw new \InvalidArgumentException('"target_asset" must be associative array or an instance of \SnapTrade\Model\TargetAsset PortfolioManagementApi.updatePortfolioTargetById.');
+                else
+                    $target_asset = new \SnapTrade\Model\TargetAsset($target_asset);
+            }
         }
         // verify the required parameter 'target_asset' is set
         if ($target_asset === null || (is_array($target_asset) && count($target_asset) === 0)) {
@@ -10543,22 +10634,20 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
             $headers
         );
 
-        [
-            "method" => $method,
-            "queryParams" => $queryParams,
-            "resourcePath" => $resourcePath,
-            "headers" => $headers,
-            "httpBody" => $httpBody,
-        ] = $this->beforeCreateRequestHook('PATCH', $resourcePath, $queryParams, $headers, $httpBody);
+        $method = 'PATCH';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            $method,
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
     }
 
     /**

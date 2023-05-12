@@ -574,6 +574,11 @@ class Configuration
         return $this;
     }
 
+    public function getConsumerKey()
+    {
+        return $this->consumerKey;
+    }
+
     public function setClientId($client_id)
     {
         $this->setApiKey("clientId", $client_id);

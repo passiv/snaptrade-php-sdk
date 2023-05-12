@@ -171,8 +171,9 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      */
     public function getCurrencyExchangeRatePairWithHttpInfo($currency_pair, string $contentType = self::contentTypes['getCurrencyExchangeRatePair'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $request = $this->getCurrencyExchangeRatePairRequest($currency_pair, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getCurrencyExchangeRatePairRequest($currency_pair, $contentType);
 
+        // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
@@ -303,10 +304,13 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getCurrencyExchangeRatePairAsyncWithHttpInfo($currency_pair, string $contentType = self::contentTypes['getCurrencyExchangeRatePair'][0])
+    public function getCurrencyExchangeRatePairAsyncWithHttpInfo($currency_pair, string $contentType = self::contentTypes['getCurrencyExchangeRatePair'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\ExchangeRatePairs';
-        $request = $this->getCurrencyExchangeRatePairRequest($currency_pair, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getCurrencyExchangeRatePairRequest($currency_pair, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -445,22 +449,20 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
             $headers
         );
 
-        [
-            "method" => $method,
-            "queryParams" => $queryParams,
-            "resourcePath" => $resourcePath,
-            "headers" => $headers,
-            "httpBody" => $httpBody,
-        ] = $this->beforeCreateRequestHook('GET', $resourcePath, $queryParams, $headers, $httpBody);
+        $method = 'GET';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            $method,
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
     }
 
     /**
@@ -493,8 +495,9 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      */
     public function getPartnerInfoWithHttpInfo(string $contentType = self::contentTypes['getPartnerInfo'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $request = $this->getPartnerInfoRequest($contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getPartnerInfoRequest($contentType);
 
+        // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
@@ -691,10 +694,13 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getPartnerInfoAsyncWithHttpInfo(string $contentType = self::contentTypes['getPartnerInfo'][0])
+    public function getPartnerInfoAsyncWithHttpInfo(string $contentType = self::contentTypes['getPartnerInfo'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\PartnerData';
-        $request = $this->getPartnerInfoRequest($contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getPartnerInfoRequest($contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -813,22 +819,20 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
             $headers
         );
 
-        [
-            "method" => $method,
-            "queryParams" => $queryParams,
-            "resourcePath" => $resourcePath,
-            "headers" => $headers,
-            "httpBody" => $httpBody,
-        ] = $this->beforeCreateRequestHook('GET', $resourcePath, $queryParams, $headers, $httpBody);
+        $method = 'GET';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            $method,
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
     }
 
     /**
@@ -861,8 +865,9 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      */
     public function getSecurityTypesWithHttpInfo(string $contentType = self::contentTypes['getSecurityTypes'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $request = $this->getSecurityTypesRequest($contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getSecurityTypesRequest($contentType);
 
+        // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
@@ -990,10 +995,13 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getSecurityTypesAsyncWithHttpInfo(string $contentType = self::contentTypes['getSecurityTypes'][0])
+    public function getSecurityTypesAsyncWithHttpInfo(string $contentType = self::contentTypes['getSecurityTypes'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\SecurityType[]';
-        $request = $this->getSecurityTypesRequest($contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getSecurityTypesRequest($contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1112,22 +1120,20 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
             $headers
         );
 
-        [
-            "method" => $method,
-            "queryParams" => $queryParams,
-            "resourcePath" => $resourcePath,
-            "headers" => $headers,
-            "httpBody" => $httpBody,
-        ] = $this->beforeCreateRequestHook('GET', $resourcePath, $queryParams, $headers, $httpBody);
+        $method = 'GET';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            $method,
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
     }
 
     /**
@@ -1160,8 +1166,9 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      */
     public function getStockExchangesWithHttpInfo(string $contentType = self::contentTypes['getStockExchanges'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $request = $this->getStockExchangesRequest($contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getStockExchangesRequest($contentType);
 
+        // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
@@ -1289,10 +1296,13 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getStockExchangesAsyncWithHttpInfo(string $contentType = self::contentTypes['getStockExchanges'][0])
+    public function getStockExchangesAsyncWithHttpInfo(string $contentType = self::contentTypes['getStockExchanges'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\Exchange[]';
-        $request = $this->getStockExchangesRequest($contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getStockExchangesRequest($contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1411,22 +1421,20 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
             $headers
         );
 
-        [
-            "method" => $method,
-            "queryParams" => $queryParams,
-            "resourcePath" => $resourcePath,
-            "headers" => $headers,
-            "httpBody" => $httpBody,
-        ] = $this->beforeCreateRequestHook('GET', $resourcePath, $queryParams, $headers, $httpBody);
+        $method = 'GET';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            $method,
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
     }
 
     /**
@@ -1461,9 +1469,10 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      */
     public function getSymbolsWithHttpInfo($symbol_query = null, string $contentType = self::contentTypes['getSymbols'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $request = $this->getSymbolsRequest($symbol_query, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getSymbolsRequest($symbol_query, $contentType);
 
-        $this->beforeSendHook($request, $requestOptions, $this->config);
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1593,10 +1602,13 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getSymbolsAsyncWithHttpInfo($symbol_query = null, string $contentType = self::contentTypes['getSymbols'][0])
+    public function getSymbolsAsyncWithHttpInfo($symbol_query = null, string $contentType = self::contentTypes['getSymbols'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\UniversalSymbol[]';
-        $request = $this->getSymbolsRequest($symbol_query, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getSymbolsRequest($symbol_query, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1646,8 +1658,13 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
     public function getSymbolsRequest($symbol_query = null, string $contentType = self::contentTypes['getSymbols'][0])
     {
 
-        if (!($symbol_query instanceof \SnapTrade\Model\SymbolQuery)) {
-            throw new \InvalidArgumentException('"symbol_query" must be instance of "\SnapTrade\Model\SymbolQuery" when calling ReferenceDataApi.getSymbols.');
+        if ($symbol_query != null) {
+            if (!($symbol_query instanceof \SnapTrade\Model\SymbolQuery)) {
+                if (!is_array($symbol_query))
+                    throw new \InvalidArgumentException('"symbol_query" must be associative array or an instance of \SnapTrade\Model\SymbolQuery ReferenceDataApi.getSymbols.');
+                else
+                    $symbol_query = new \SnapTrade\Model\SymbolQuery($symbol_query);
+            }
         }
 
 
@@ -1727,22 +1744,20 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
             $headers
         );
 
-        [
-            "method" => $method,
-            "queryParams" => $queryParams,
-            "resourcePath" => $resourcePath,
-            "headers" => $headers,
-            "httpBody" => $httpBody,
-        ] = $this->beforeCreateRequestHook('POST', $resourcePath, $queryParams, $headers, $httpBody);
+        $method = 'POST';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            $method,
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
     }
 
     /**
@@ -1779,8 +1794,9 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      */
     public function getSymbolsByTickerWithHttpInfo($ticker, $symbol_id = null, string $contentType = self::contentTypes['getSymbolsByTicker'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $request = $this->getSymbolsByTickerRequest($ticker, $symbol_id, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getSymbolsByTickerRequest($ticker, $symbol_id, $contentType);
 
+        // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
@@ -1914,10 +1930,13 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getSymbolsByTickerAsyncWithHttpInfo($ticker, $symbol_id = null, string $contentType = self::contentTypes['getSymbolsByTicker'][0])
+    public function getSymbolsByTickerAsyncWithHttpInfo($ticker, $symbol_id = null, string $contentType = self::contentTypes['getSymbolsByTicker'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\UniversalSymbol';
-        $request = $this->getSymbolsByTickerRequest($ticker, $symbol_id, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getSymbolsByTickerRequest($ticker, $symbol_id, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2071,22 +2090,20 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
             $headers
         );
 
-        [
-            "method" => $method,
-            "queryParams" => $queryParams,
-            "resourcePath" => $resourcePath,
-            "headers" => $headers,
-            "httpBody" => $httpBody,
-        ] = $this->beforeCreateRequestHook('GET', $resourcePath, $queryParams, $headers, $httpBody);
+        $method = 'GET';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            $method,
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
     }
 
     /**
@@ -2121,8 +2138,9 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      */
     public function listAllBrokerageAuthorizationTypeWithHttpInfo($brokerage = null, string $contentType = self::contentTypes['listAllBrokerageAuthorizationType'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $request = $this->listAllBrokerageAuthorizationTypeRequest($brokerage, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->listAllBrokerageAuthorizationTypeRequest($brokerage, $contentType);
 
+        // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
@@ -2253,10 +2271,13 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listAllBrokerageAuthorizationTypeAsyncWithHttpInfo($brokerage = null, string $contentType = self::contentTypes['listAllBrokerageAuthorizationType'][0])
+    public function listAllBrokerageAuthorizationTypeAsyncWithHttpInfo($brokerage = null, string $contentType = self::contentTypes['listAllBrokerageAuthorizationType'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\BrokerageAuthorizationTypeReadOnly[]';
-        $request = $this->listAllBrokerageAuthorizationTypeRequest($brokerage, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->listAllBrokerageAuthorizationTypeRequest($brokerage, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2390,22 +2411,20 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
             $headers
         );
 
-        [
-            "method" => $method,
-            "queryParams" => $queryParams,
-            "resourcePath" => $resourcePath,
-            "headers" => $headers,
-            "httpBody" => $httpBody,
-        ] = $this->beforeCreateRequestHook('GET', $resourcePath, $queryParams, $headers, $httpBody);
+        $method = 'GET';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            $method,
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
     }
 
     /**
@@ -2438,8 +2457,9 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      */
     public function listAllBrokeragesWithHttpInfo(string $contentType = self::contentTypes['listAllBrokerages'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $request = $this->listAllBrokeragesRequest($contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->listAllBrokeragesRequest($contentType);
 
+        // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
@@ -2567,10 +2587,13 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listAllBrokeragesAsyncWithHttpInfo(string $contentType = self::contentTypes['listAllBrokerages'][0])
+    public function listAllBrokeragesAsyncWithHttpInfo(string $contentType = self::contentTypes['listAllBrokerages'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\Brokerage[]';
-        $request = $this->listAllBrokeragesRequest($contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->listAllBrokeragesRequest($contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2689,22 +2712,20 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
             $headers
         );
 
-        [
-            "method" => $method,
-            "queryParams" => $queryParams,
-            "resourcePath" => $resourcePath,
-            "headers" => $headers,
-            "httpBody" => $httpBody,
-        ] = $this->beforeCreateRequestHook('GET', $resourcePath, $queryParams, $headers, $httpBody);
+        $method = 'GET';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            $method,
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
     }
 
     /**
@@ -2737,8 +2758,9 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      */
     public function listAllCurrenciesWithHttpInfo(string $contentType = self::contentTypes['listAllCurrencies'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $request = $this->listAllCurrenciesRequest($contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->listAllCurrenciesRequest($contentType);
 
+        // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
@@ -2866,10 +2888,13 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listAllCurrenciesAsyncWithHttpInfo(string $contentType = self::contentTypes['listAllCurrencies'][0])
+    public function listAllCurrenciesAsyncWithHttpInfo(string $contentType = self::contentTypes['listAllCurrencies'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\Currency[]';
-        $request = $this->listAllCurrenciesRequest($contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->listAllCurrenciesRequest($contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2988,22 +3013,20 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
             $headers
         );
 
-        [
-            "method" => $method,
-            "queryParams" => $queryParams,
-            "resourcePath" => $resourcePath,
-            "headers" => $headers,
-            "httpBody" => $httpBody,
-        ] = $this->beforeCreateRequestHook('GET', $resourcePath, $queryParams, $headers, $httpBody);
+        $method = 'GET';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            $method,
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
     }
 
     /**
@@ -3036,8 +3059,9 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      */
     public function listAllCurrenciesRatesWithHttpInfo(string $contentType = self::contentTypes['listAllCurrenciesRates'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $request = $this->listAllCurrenciesRatesRequest($contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->listAllCurrenciesRatesRequest($contentType);
 
+        // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
@@ -3165,10 +3189,13 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listAllCurrenciesRatesAsyncWithHttpInfo(string $contentType = self::contentTypes['listAllCurrenciesRates'][0])
+    public function listAllCurrenciesRatesAsyncWithHttpInfo(string $contentType = self::contentTypes['listAllCurrenciesRates'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\ExchangeRatePairs[]';
-        $request = $this->listAllCurrenciesRatesRequest($contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->listAllCurrenciesRatesRequest($contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -3287,22 +3314,20 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
             $headers
         );
 
-        [
-            "method" => $method,
-            "queryParams" => $queryParams,
-            "resourcePath" => $resourcePath,
-            "headers" => $headers,
-            "httpBody" => $httpBody,
-        ] = $this->beforeCreateRequestHook('GET', $resourcePath, $queryParams, $headers, $httpBody);
+        $method = 'GET';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            $method,
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
     }
 
     /**
@@ -3343,9 +3368,10 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      */
     public function symbolSearchUserAccountWithHttpInfo($user_id, $user_secret, $account_id, $symbol_query = null, string $contentType = self::contentTypes['symbolSearchUserAccount'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $request = $this->symbolSearchUserAccountRequest($user_id, $user_secret, $account_id, $symbol_query, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->symbolSearchUserAccountRequest($user_id, $user_secret, $account_id, $symbol_query, $contentType);
 
-        $this->beforeSendHook($request, $requestOptions, $this->config);
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
 
         try {
             $options = $this->createHttpClientOption();
@@ -3484,10 +3510,13 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function symbolSearchUserAccountAsyncWithHttpInfo($user_id, $user_secret, $account_id, $symbol_query = null, string $contentType = self::contentTypes['symbolSearchUserAccount'][0])
+    public function symbolSearchUserAccountAsyncWithHttpInfo($user_id, $user_secret, $account_id, $symbol_query = null, string $contentType = self::contentTypes['symbolSearchUserAccount'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\UniversalSymbol[]';
-        $request = $this->symbolSearchUserAccountRequest($user_id, $user_secret, $account_id, $symbol_query, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->symbolSearchUserAccountRequest($user_id, $user_secret, $account_id, $symbol_query, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -3573,8 +3602,13 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
             );
         }
 
-        if (!($symbol_query instanceof \SnapTrade\Model\SymbolQuery)) {
-            throw new \InvalidArgumentException('"symbol_query" must be instance of "\SnapTrade\Model\SymbolQuery" when calling ReferenceDataApi.symbolSearchUserAccount.');
+        if ($symbol_query != null) {
+            if (!($symbol_query instanceof \SnapTrade\Model\SymbolQuery)) {
+                if (!is_array($symbol_query))
+                    throw new \InvalidArgumentException('"symbol_query" must be associative array or an instance of \SnapTrade\Model\SymbolQuery ReferenceDataApi.symbolSearchUserAccount.');
+                else
+                    $symbol_query = new \SnapTrade\Model\SymbolQuery($symbol_query);
+            }
         }
 
 
@@ -3680,22 +3714,20 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
             $headers
         );
 
-        [
-            "method" => $method,
-            "queryParams" => $queryParams,
-            "resourcePath" => $resourcePath,
-            "headers" => $headers,
-            "httpBody" => $httpBody,
-        ] = $this->beforeCreateRequestHook('POST', $resourcePath, $queryParams, $headers, $httpBody);
+        $method = 'POST';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            $method,
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
     }
 
     /**

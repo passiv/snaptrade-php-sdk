@@ -61,7 +61,7 @@ class GettingStartedTest extends TestCase
 
         // 3) Create a new user on SnapTrade
         $userId = (string)time();
-        $registerResponse = $snaptrade->authentication->registerSnapTradeUser($userId);
+        $registerResponse = $snaptrade->authentication->registerSnapTradeUser(["userId" => $userId]);
         $userSecret = $registerResponse->getUserSecret();
 
         // 4) Get a redirect URI. Users will need this to connect

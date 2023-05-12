@@ -16,39 +16,31 @@ class CustomApi
     }
 
     public function beforeSendHook(
-        \GuzzleHttp\Psr7\Request $request,
+        \GuzzleHttp\Psr7\Request &$request,
         \SnapTrade\RequestOptions $requestOptions,
-        \SnapTrade\Configuration $configuration
-    ): \GuzzleHttp\Psr7\Request {
-        $path = explode($request->getUri()->getHost(), strval($request->getUri()))[1];
-        $query = $request->getUri()->getQuery();
+        \SnapTrade\Configuration $configuration,
+        $body = null
+    ) {
         $sig_object = [
-            "content" => null,
-            "path" => $path,
-            "query" => $query
+            "content" => empty($body) ? null : json_decode($body),
+            "path" => $request->getUri()->getPath(),
+            "query" => $request->getUri()->GetQuery()
         ];
         $this->sort_keys_recursive($sig_object);
-        $data = json_encode($sig_object);
+        $data = json_encode($sig_object, JSON_UNESCAPED_SLASHES);
         $hash = hash_hmac('sha256', $data, $configuration->getConsumerKey(), true);
         $hash = base64_encode($hash);
-        return $request->withHeader("Signature", $hash);
+        $request = $request->withHeader("Signature", $hash);
     }
 
     public function beforeCreateRequestHook(
-        string $method,
-        string $resourcePath,
-        array $queryParams,
-        array $headers,
-        $httpBody,
-    ): array {
+        string &$method,
+        string &$resourcePath,
+        array &$queryParams,
+        array &$headers,
+        &$httpBody,
+    ) {
         // add epoch time in seconds to query parameters
         $queryParams['timestamp'] = time();
-        return [
-            "method" => $method,
-            "queryParams" => $queryParams,
-            "resourcePath" => $resourcePath,
-            "headers" => $headers,
-            "httpBody" => $httpBody,
-        ];
     }
 }

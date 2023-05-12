@@ -1,4 +1,4 @@
 test/GettingStartedTest.php
 lib/Client.php
 lib/Configuration.php
-lib/BaseApi.php
+lib/CustomApi.php

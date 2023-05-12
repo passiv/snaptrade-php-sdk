@@ -34,7 +34,7 @@ use SnapTrade\Configuration;
 use SnapTrade\HeaderSelector;
 use SnapTrade\ObjectSerializer;
 
-class ConnectionsApi extends \SnapTrade\BaseApi
+class ConnectionsApi extends \SnapTrade\CustomApi
 {
     /**
      * @var ClientInterface
@@ -476,12 +476,18 @@ class ConnectionsApi extends \SnapTrade\BaseApi
             $headers
         );
 
-        $this->beforeCreateRequestHook('GET', $resourcePath, $queryParams, $headers, $httpBody);
+        [
+            "method" => $method,
+            "queryParams" => $queryParams,
+            "resourcePath" => $resourcePath,
+            "headers" => $headers,
+            "httpBody" => $httpBody,
+        ] = $this->beforeCreateRequestHook('GET', $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
-            'GET',
+            $method,
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
@@ -821,12 +827,18 @@ class ConnectionsApi extends \SnapTrade\BaseApi
             $headers
         );
 
-        $this->beforeCreateRequestHook('GET', $resourcePath, $queryParams, $headers, $httpBody);
+        [
+            "method" => $method,
+            "queryParams" => $queryParams,
+            "resourcePath" => $resourcePath,
+            "headers" => $headers,
+            "httpBody" => $httpBody,
+        ] = $this->beforeCreateRequestHook('GET', $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
-            'GET',
+            $method,
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
@@ -1137,12 +1149,18 @@ class ConnectionsApi extends \SnapTrade\BaseApi
             $headers
         );
 
-        $this->beforeCreateRequestHook('DELETE', $resourcePath, $queryParams, $headers, $httpBody);
+        [
+            "method" => $method,
+            "queryParams" => $queryParams,
+            "resourcePath" => $resourcePath,
+            "headers" => $headers,
+            "httpBody" => $httpBody,
+        ] = $this->beforeCreateRequestHook('DELETE', $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
-            'DELETE',
+            $method,
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
@@ -1496,12 +1514,18 @@ class ConnectionsApi extends \SnapTrade\BaseApi
             $headers
         );
 
-        $this->beforeCreateRequestHook('GET', $resourcePath, $queryParams, $headers, $httpBody);
+        [
+            "method" => $method,
+            "queryParams" => $queryParams,
+            "resourcePath" => $resourcePath,
+            "headers" => $headers,
+            "httpBody" => $httpBody,
+        ] = $this->beforeCreateRequestHook('GET', $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
-            'GET',
+            $method,
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody

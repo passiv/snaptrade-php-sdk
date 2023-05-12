@@ -34,7 +34,7 @@ use SnapTrade\Configuration;
 use SnapTrade\HeaderSelector;
 use SnapTrade\ObjectSerializer;
 
-class TradingApi extends \SnapTrade\BaseApi
+class TradingApi extends \SnapTrade\CustomApi
 {
     /**
      * @var ClientInterface
@@ -540,12 +540,18 @@ class TradingApi extends \SnapTrade\BaseApi
             $headers
         );
 
-        $this->beforeCreateRequestHook('POST', $resourcePath, $queryParams, $headers, $httpBody);
+        [
+            "method" => $method,
+            "queryParams" => $queryParams,
+            "resourcePath" => $resourcePath,
+            "headers" => $headers,
+            "httpBody" => $httpBody,
+        ] = $this->beforeCreateRequestHook('POST', $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
-            'POST',
+            $method,
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
@@ -908,12 +914,18 @@ class TradingApi extends \SnapTrade\BaseApi
             $headers
         );
 
-        $this->beforeCreateRequestHook('GET', $resourcePath, $queryParams, $headers, $httpBody);
+        [
+            "method" => $method,
+            "queryParams" => $queryParams,
+            "resourcePath" => $resourcePath,
+            "headers" => $headers,
+            "httpBody" => $httpBody,
+        ] = $this->beforeCreateRequestHook('GET', $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
-            'GET',
+            $method,
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
@@ -1251,12 +1263,18 @@ class TradingApi extends \SnapTrade\BaseApi
             $headers
         );
 
-        $this->beforeCreateRequestHook('GET', $resourcePath, $queryParams, $headers, $httpBody);
+        [
+            "method" => $method,
+            "queryParams" => $queryParams,
+            "resourcePath" => $resourcePath,
+            "headers" => $headers,
+            "httpBody" => $httpBody,
+        ] = $this->beforeCreateRequestHook('GET', $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
-            'GET',
+            $method,
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
@@ -1665,12 +1683,18 @@ class TradingApi extends \SnapTrade\BaseApi
             $headers
         );
 
-        $this->beforeCreateRequestHook('POST', $resourcePath, $queryParams, $headers, $httpBody);
+        [
+            "method" => $method,
+            "queryParams" => $queryParams,
+            "resourcePath" => $resourcePath,
+            "headers" => $headers,
+            "httpBody" => $httpBody,
+        ] = $this->beforeCreateRequestHook('POST', $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
-            'POST',
+            $method,
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
@@ -2077,12 +2101,18 @@ class TradingApi extends \SnapTrade\BaseApi
             $headers
         );
 
-        $this->beforeCreateRequestHook('GET', $resourcePath, $queryParams, $headers, $httpBody);
+        [
+            "method" => $method,
+            "queryParams" => $queryParams,
+            "resourcePath" => $resourcePath,
+            "headers" => $headers,
+            "httpBody" => $httpBody,
+        ] = $this->beforeCreateRequestHook('GET', $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
-            'GET',
+            $method,
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
@@ -2462,12 +2492,18 @@ class TradingApi extends \SnapTrade\BaseApi
             $headers
         );
 
-        $this->beforeCreateRequestHook('PATCH', $resourcePath, $queryParams, $headers, $httpBody);
+        [
+            "method" => $method,
+            "queryParams" => $queryParams,
+            "resourcePath" => $resourcePath,
+            "headers" => $headers,
+            "httpBody" => $httpBody,
+        ] = $this->beforeCreateRequestHook('PATCH', $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
-            'PATCH',
+            $method,
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
@@ -2805,12 +2841,18 @@ class TradingApi extends \SnapTrade\BaseApi
             $headers
         );
 
-        $this->beforeCreateRequestHook('POST', $resourcePath, $queryParams, $headers, $httpBody);
+        [
+            "method" => $method,
+            "queryParams" => $queryParams,
+            "resourcePath" => $resourcePath,
+            "headers" => $headers,
+            "httpBody" => $httpBody,
+        ] = $this->beforeCreateRequestHook('POST', $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
-            'POST',
+            $method,
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
@@ -3219,12 +3261,18 @@ class TradingApi extends \SnapTrade\BaseApi
             $headers
         );
 
-        $this->beforeCreateRequestHook('POST', $resourcePath, $queryParams, $headers, $httpBody);
+        [
+            "method" => $method,
+            "queryParams" => $queryParams,
+            "resourcePath" => $resourcePath,
+            "headers" => $headers,
+            "httpBody" => $httpBody,
+        ] = $this->beforeCreateRequestHook('POST', $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
-            'POST',
+            $method,
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
@@ -3610,12 +3658,18 @@ class TradingApi extends \SnapTrade\BaseApi
             $headers
         );
 
-        $this->beforeCreateRequestHook('POST', $resourcePath, $queryParams, $headers, $httpBody);
+        [
+            "method" => $method,
+            "queryParams" => $queryParams,
+            "resourcePath" => $resourcePath,
+            "headers" => $headers,
+            "httpBody" => $httpBody,
+        ] = $this->beforeCreateRequestHook('POST', $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
-            'POST',
+            $method,
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
@@ -4003,12 +4057,18 @@ class TradingApi extends \SnapTrade\BaseApi
             $headers
         );
 
-        $this->beforeCreateRequestHook('POST', $resourcePath, $queryParams, $headers, $httpBody);
+        [
+            "method" => $method,
+            "queryParams" => $queryParams,
+            "resourcePath" => $resourcePath,
+            "headers" => $headers,
+            "httpBody" => $httpBody,
+        ] = $this->beforeCreateRequestHook('POST', $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
-            'POST',
+            $method,
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody

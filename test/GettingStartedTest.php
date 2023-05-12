@@ -9,8 +9,6 @@ use PHPUnit\Framework\TestCase;
 class GettingStartedTest extends TestCase
 {
 
-    protected \SnapTrade\Client $snaptrade;
-
     /**
      * Setup before running any test cases
      */
@@ -23,10 +21,6 @@ class GettingStartedTest extends TestCase
      */
     public function setUp(): void
     {
-        $this->snaptrade = new \SnapTrade\Client(
-            clientId: getenv("SNAPTRADE_CLIENT_ID"),
-            consumerKey: getenv("SNAPTRADE_CONSUMER_KEY")
-        );
     }
 
     /**

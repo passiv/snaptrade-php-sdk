@@ -34,7 +34,7 @@ use SnapTrade\Configuration;
 use SnapTrade\HeaderSelector;
 use SnapTrade\ObjectSerializer;
 
-class ErrorLogsApi extends \SnapTrade\BaseApi
+class ErrorLogsApi extends \SnapTrade\CustomApi
 {
     /**
      * @var ClientInterface
@@ -442,12 +442,18 @@ class ErrorLogsApi extends \SnapTrade\BaseApi
             $headers
         );
 
-        $this->beforeCreateRequestHook('GET', $resourcePath, $queryParams, $headers, $httpBody);
+        [
+            "method" => $method,
+            "queryParams" => $queryParams,
+            "resourcePath" => $resourcePath,
+            "headers" => $headers,
+            "httpBody" => $httpBody,
+        ] = $this->beforeCreateRequestHook('GET', $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
-            'GET',
+            $method,
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody

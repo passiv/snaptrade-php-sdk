@@ -19,11 +19,9 @@ class Client
     /**
      * Constructor
      */
-    public function __construct(\SnapTrade\Configuration $config = null, string $clientId, string $consumerKey)
+    public function __construct(string $clientId, string $consumerKey, \SnapTrade\Configuration $config = null)
     {
         if ($config == null) {
-            $config = \SnapTrade\Configuration::getDefaultConfiguration();
-        } else {
             $config = new \SnapTrade\Configuration(
                 clientId: $clientId,
                 consumerKey: $consumerKey

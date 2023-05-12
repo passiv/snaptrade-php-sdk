@@ -34,7 +34,7 @@ use SnapTrade\Configuration;
 use SnapTrade\HeaderSelector;
 use SnapTrade\ObjectSerializer;
 
-class APIDisclaimerApi extends \SnapTrade\BaseApi
+class APIDisclaimerApi extends \SnapTrade\CustomApi
 {
     /**
      * @var ClientInterface
@@ -465,12 +465,18 @@ class APIDisclaimerApi extends \SnapTrade\BaseApi
             $headers
         );
 
-        $this->beforeCreateRequestHook('POST', $resourcePath, $queryParams, $headers, $httpBody);
+        [
+            "method" => $method,
+            "queryParams" => $queryParams,
+            "resourcePath" => $resourcePath,
+            "headers" => $headers,
+            "httpBody" => $httpBody,
+        ] = $this->beforeCreateRequestHook('POST', $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
-            'POST',
+            $method,
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody

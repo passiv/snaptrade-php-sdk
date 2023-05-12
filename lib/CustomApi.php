@@ -2,7 +2,7 @@
 
 namespace SnapTrade;
 
-class BaseApi
+class CustomApi
 {
     public function beforeSendHook(
         \GuzzleHttp\Psr7\Request $request,
@@ -18,8 +18,15 @@ class BaseApi
         array $queryParams,
         array $headers,
         $httpBody,
-    ): void {
+    ): array {
         // add epoch time in seconds to query parameters
         $queryParams['timestamp'] = time();
+        return [
+            "method" => $method,
+            "queryParams" => $queryParams,
+            "resourcePath" => $resourcePath,
+            "headers" => $headers,
+            "httpBody" => $httpBody,
+        ];
     }
 }

@@ -64,7 +64,7 @@ $config = SnapTrade\Configuration::getDefaultConfiguration()->setApiKey('timesta
 // Setting host path is optional and defaults to https://api.snaptrade.com/api/v1
 // SnapTrade\Configuration::getDefaultConfiguration()->setHost("https://api.snaptrade.com/api/v1");
 
-$apiInstance = new SnapTrade\Api\APIDisclaimerApi(
+$apiInstance = new SnapTrade\Api\AccountInformationApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     // new GuzzleHttp\Client(),
@@ -73,19 +73,20 @@ $apiInstance = new SnapTrade\Api\APIDisclaimerApi(
 
 $user_id = "John.doe@snaptrade.com";
 $user_secret = "USERSECRET123";
-$api_disclaimer_accept_request = new \SnapTrade\Model\APIDisclaimerAcceptRequest([
-    ]);
+$brokerage_authorizations = "917c8734-8470-4a3e-a18f-57c3f2ee6631"; // Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations).
 
 try {
-    $result = $apiInstance->accept(
+    $result = $apiInstance->getAllUserHoldings(
         user_id: $user_id, 
         user_secret: $user_secret, 
-        api_disclaimer_accept_request: $api_disclaimer_accept_request
+        brokerage_authorizations: $brokerage_authorizations
     );
-    print_r($result->$getAccepted());
-    print_r($result->$getTimestamp());
+    print_r($result->$getAccount());
+    print_r($result->$getBalances());
+    print_r($result->$getPositions());
+    print_r($result->$getTotalValue());
 } catch (\Exception $e) {
-    echo 'Exception when calling APIDisclaimerApi->accept: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling AccountInformationApi->getAllUserHoldings: ', $e->getMessage(), PHP_EOL;
 }
 ```
 
@@ -95,8 +96,6 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*APIDisclaimerApi* | [**accept**](docs/Api/APIDisclaimerApi.md#accept) | **POST** /snapTrade/acceptDisclaimer | Accept or Reject SnapTrade disclaimer agreement
-*APIStatusApi* | [**check**](docs/Api/APIStatusApi.md#check) | **GET** / | Get API Status
 *AccountInformationApi* | [**getAllUserHoldings**](docs/Api/AccountInformationApi.md#getalluserholdings) | **GET** /holdings | List all accounts for the user, plus balances and positions for each account.
 *AccountInformationApi* | [**getUserAccountBalance**](docs/Api/AccountInformationApi.md#getuseraccountbalance) | **GET** /accounts/{accountId}/balances | Get all cash balances of an investment account
 *AccountInformationApi* | [**getUserAccountDetails**](docs/Api/AccountInformationApi.md#getuseraccountdetails) | **GET** /accounts/{accountId} | Return details of a specific investment account
@@ -105,6 +104,8 @@ Class | Method | HTTP request | Description
 *AccountInformationApi* | [**getUserHoldings**](docs/Api/AccountInformationApi.md#getuserholdings) | **GET** /accounts/{accountId}/holdings | List balances, positions and orders for the specified account.
 *AccountInformationApi* | [**listUserAccounts**](docs/Api/AccountInformationApi.md#listuseraccounts) | **GET** /accounts | List all investment accounts for the user
 *AccountInformationApi* | [**updateUserAccount**](docs/Api/AccountInformationApi.md#updateuseraccount) | **PUT** /accounts/{accountId} | Update details of an investment account
+*ApiDisclaimerApi* | [**accept**](docs/Api/ApiDisclaimerApi.md#accept) | **POST** /snapTrade/acceptDisclaimer | Accept or Reject SnapTrade disclaimer agreement
+*ApiStatusApi* | [**check**](docs/Api/ApiStatusApi.md#check) | **GET** / | Get API Status
 *AuthenticationApi* | [**deleteSnapTradeUser**](docs/Api/AuthenticationApi.md#deletesnaptradeuser) | **DELETE** /snapTrade/deleteUser | Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user
 *AuthenticationApi* | [**getUserJWT**](docs/Api/AuthenticationApi.md#getuserjwt) | **GET** /snapTrade/encryptedJWT | Obtains an encrypted JWT tokens that should be decrypted on a user&#39;s local device
 *AuthenticationApi* | [**listSnapTradeUsers**](docs/Api/AuthenticationApi.md#listsnaptradeusers) | **GET** /snapTrade/listUsers | Get a list of all SnapTrade users you&#39;ve registered on our platform

@@ -1,10 +1,10 @@
-# SnapTrade\APIDisclaimerApi
+# SnapTrade\ApiDisclaimerApi
 
 All URIs are relative to https://api.snaptrade.com/api/v1, except if the operation defines another base path.
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
-| [**accept()**](APIDisclaimerApi.md#accept) | **POST** /snapTrade/acceptDisclaimer | Accept or Reject SnapTrade disclaimer agreement |
+| [**accept()**](ApiDisclaimerApi.md#accept) | **POST** /snapTrade/acceptDisclaimer | Accept or Reject SnapTrade disclaimer agreement |
 
 
 ## `accept()`
@@ -39,7 +39,7 @@ $config = SnapTrade\Configuration::getDefaultConfiguration()->setApiKey('timesta
 // Setting host path is optional and defaults to https://api.snaptrade.com/api/v1
 // SnapTrade\Configuration::getDefaultConfiguration()->setHost("https://api.snaptrade.com/api/v1");
 
-$apiInstance = new SnapTrade\Api\APIDisclaimerApi(
+$apiInstance = new SnapTrade\Api\ApiDisclaimerApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     // new GuzzleHttp\Client(),
@@ -60,7 +60,7 @@ try {
     print_r($result->$getAccepted());
     print_r($result->$getTimestamp());
 } catch (\Exception $e) {
-    echo 'Exception when calling APIDisclaimerApi->accept: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling ApiDisclaimerApi->accept: ', $e->getMessage(), PHP_EOL;
 }
 ```
 

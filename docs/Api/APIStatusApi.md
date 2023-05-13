@@ -1,10 +1,10 @@
-# SnapTrade\APIStatusApi
+# SnapTrade\ApiStatusApi
 
 All URIs are relative to https://api.snaptrade.com/api/v1, except if the operation defines another base path.
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
-| [**check()**](APIStatusApi.md#check) | **GET** / | Get API Status |
+| [**check()**](ApiStatusApi.md#check) | **GET** / | Get API Status |
 
 
 ## `check()`
@@ -26,7 +26,7 @@ require_once(__DIR__ . '/vendor/autoload.php');
 // Setting host path is optional and defaults to https://api.snaptrade.com/api/v1
 // SnapTrade\Configuration::getDefaultConfiguration()->setHost("https://api.snaptrade.com/api/v1");
 
-$apiInstance = new SnapTrade\Api\APIStatusApi(
+$apiInstance = new SnapTrade\Api\ApiStatusApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     // new GuzzleHttp\Client()
@@ -39,7 +39,7 @@ try {
     print_r($result->$getTimestamp());
     print_r($result->$getOnline());
 } catch (\Exception $e) {
-    echo 'Exception when calling APIStatusApi->check: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling ApiStatusApi->check: ', $e->getMessage(), PHP_EOL;
 }
 ```
 

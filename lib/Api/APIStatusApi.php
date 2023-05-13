@@ -1,6 +1,6 @@
 <?php
 /**
- * APIStatusApi
+ * ApiStatusApi
  * PHP version 7.4
  *
  * @category Class
@@ -34,7 +34,7 @@ use SnapTrade\Configuration;
 use SnapTrade\HeaderSelector;
 use SnapTrade\ObjectSerializer;
 
-class APIStatusApi extends \SnapTrade\CustomApi
+class ApiStatusApi extends \SnapTrade\CustomApi
 {
     /**
      * @var ClientInterface

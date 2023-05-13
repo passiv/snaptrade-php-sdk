@@ -1,6 +1,6 @@
 <?php
 /**
- * APIDisclaimerApi
+ * ApiDisclaimerApi
  * PHP version 7.4
  *
  * @category Class
@@ -34,7 +34,7 @@ use SnapTrade\Configuration;
 use SnapTrade\HeaderSelector;
 use SnapTrade\ObjectSerializer;
 
-class APIDisclaimerApi extends \SnapTrade\CustomApi
+class ApiDisclaimerApi extends \SnapTrade\CustomApi
 {
     /**
      * @var ClientInterface
@@ -367,7 +367,7 @@ class APIDisclaimerApi extends \SnapTrade\CustomApi
         if ($api_disclaimer_accept_request != null) {
             if (!($api_disclaimer_accept_request instanceof \SnapTrade\Model\APIDisclaimerAcceptRequest)) {
                 if (!is_array($api_disclaimer_accept_request))
-                    throw new \InvalidArgumentException('"api_disclaimer_accept_request" must be associative array or an instance of \SnapTrade\Model\APIDisclaimerAcceptRequest APIDisclaimerApi.accept.');
+                    throw new \InvalidArgumentException('"api_disclaimer_accept_request" must be associative array or an instance of \SnapTrade\Model\APIDisclaimerAcceptRequest ApiDisclaimerApi.accept.');
                 else
                     $api_disclaimer_accept_request = new \SnapTrade\Model\APIDisclaimerAcceptRequest($api_disclaimer_accept_request);
             }

@@ -5,8 +5,8 @@ namespace SnapTrade;
 class Client
 {
     public readonly \SnapTrade\Api\AccountInformationApi $accountInformation;
-    public readonly \SnapTrade\Api\APIDisclaimerApi $apiDisclaimer;
-    public readonly \SnapTrade\Api\APIStatusApi $apiStatus;
+    public readonly \SnapTrade\Api\ApiDisclaimerApi $apiDisclaimer;
+    public readonly \SnapTrade\Api\ApiStatusApi $apiStatus;
     public readonly \SnapTrade\Api\AuthenticationApi $authentication;
     public readonly \SnapTrade\Api\ConnectionsApi $connections;
     public readonly \SnapTrade\Api\ErrorLogsApi $errorLogs;
@@ -19,17 +19,25 @@ class Client
     /**
      * Constructor
      */
-    public function __construct(string $clientId, string $consumerKey, \SnapTrade\Configuration $config = null)
+    public function __construct(
+        string $consumerKey = null,
+        string $clientId = null,
+        string $Signature = null,
+        string $timestamp = null,
+        \SnapTrade\Configuration $config = null
+    )
     {
         if ($config == null) {
             $config = new \SnapTrade\Configuration(
+                consumerKey: $consumerKey,
                 clientId: $clientId,
-                consumerKey: $consumerKey
+                Signature: $Signature,
+                timestamp: $timestamp,
             );
         }
         $this->accountInformation = new \SnapTrade\Api\AccountInformationApi($config);
-        $this->apiDisclaimer = new \SnapTrade\Api\APIDisclaimerApi($config);
-        $this->apiStatus = new \SnapTrade\Api\APIStatusApi($config);
+        $this->apiDisclaimer = new \SnapTrade\Api\ApiDisclaimerApi($config);
+        $this->apiStatus = new \SnapTrade\Api\ApiStatusApi($config);
         $this->authentication = new \SnapTrade\Api\AuthenticationApi($config);
         $this->connections = new \SnapTrade\Api\ConnectionsApi($config);
         $this->errorLogs = new \SnapTrade\Api\ErrorLogsApi($config);

@@ -1,6 +1,6 @@
 <?php
 /**
- * APIStatusApiTest
+ * ApiStatusApiTest
  * PHP version 7.4
  *
  * @category Class
@@ -27,7 +27,7 @@ use \SnapTrade\ApiException;
 use \SnapTrade\ObjectSerializer;
 use PHPUnit\Framework\TestCase;
 
-class APIStatusApiTest extends TestCase
+class ApiStatusApiTest extends TestCase
 {
 
     /**

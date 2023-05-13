@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Configuration
  * PHP version 7.4
@@ -53,32 +52,6 @@ class Configuration
      * @var string
      */
     protected $accessToken = '';
-
-    /**
-     * Token url for OAuth/Application authentication
-     *
-     * @var string
-     */
-    protected string $tokenUrl = "";
-
-    /**
-     * Access token for OAuth/Application authentication
-     *
-     * @var string
-     */
-    protected string $clientId = '';
-
-    /**
-     * Access token for OAuth/Application authentication
-     *
-     * @var string
-     */
-    protected string $clientSecret = '';
-
-    /**
-     * @var string
-     */
-    protected string $consumerKey = '';
 
     /**
      * Boolean format for query string
@@ -137,13 +110,43 @@ class Configuration
     protected $tempFolderPath;
 
     /**
+     * consumerKey - client state from konfig.yaml
+     */
+    protected string $consumerKey = '';
+
+    
+    /**
+     * consumerKey - client state setter from konfig.yaml
+     */
+    public function setConsumerKey($consumerKey)
+    {
+        $this->consumerKey = $consumerKey;
+        return $this;
+    }
+
+    /**
+     * consumerKey - client state getter from konfig.yaml
+     */
+    public function getConsumerKey()
+    {
+        return $this->consumerKey;
+    }
+
+    /**
      * Constructor
      */
-    public function __construct(string $clientId = null, string $consumerKey = null)
+    public function __construct(
+        string $consumerKey = null,
+        string $clientId = null,
+        string $Signature = null,
+        string $timestamp = null,
+    )
     {
         $this->tempFolderPath = sys_get_temp_dir();
-        $this->setClientId($clientId);
         $this->setConsumerKey($consumerKey);
+        $this->setApiKey("clientId", $clientId);
+        $this->setApiKey("Signature", $Signature);
+        $this->setApiKey("timestamp", $timestamp);
     }
 
     /**
@@ -566,22 +569,5 @@ class Configuration
     public function getHostFromSettings($index, $variables = null)
     {
         return self::getHostString($this->getHostSettings(), $index, $variables);
-    }
-
-    public function setConsumerKey($consumer_key)
-    {
-        $this->consumerKey = $consumer_key;
-        return $this;
-    }
-
-    public function getConsumerKey()
-    {
-        return $this->consumerKey;
-    }
-
-    public function setClientId($client_id)
-    {
-        $this->setApiKey("clientId", $client_id);
-        return $this;
     }
 }

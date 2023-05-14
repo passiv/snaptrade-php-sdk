@@ -55,7 +55,7 @@ class GettingStartedTest extends TestCase
 
         // 3) Create a new user on SnapTrade
         $userId = (string)time();
-        $registerResponse = $snaptrade->authentication->registerSnapTradeUser(["user_id" => $userId]);
+        $registerResponse = $snaptrade->authentication->registerSnapTradeUser($userId);
         $userSecret = $registerResponse->getUserSecret();
 
         // 4) Get a redirect URI. Users will need this to connect
@@ -64,17 +64,21 @@ class GettingStartedTest extends TestCase
         print_r($redirectUri);
 
         // 5) Create/list portfolio, accept disclaimer, and obtain account holding data
-        $snaptrade->portfolioManagement->create($userId, $userSecret, [
-            "id" => (string)time(),
-            "name" => "MyPortfolio"
-        ]);
+        $snaptrade->portfolioManagement->create(
+            $userId,
+            $userSecret,
+            id: (string)time(),
+            name: "MyPortfolio"
+        );
 
         $response = $snaptrade->portfolioManagement->all($userId, $userSecret);
         print_r($response);
 
-        $snaptrade->apiDisclaimer->accept($userId, $userSecret, [
-            "accepted" => true
-        ]);
+        $snaptrade->apiDisclaimer->accept(
+            $userId,
+            $userSecret,
+            accepted: true
+        );
 
         $holdings = $snaptrade->accountInformation->getAllUserHoldings($userId, $userSecret);
         print_r($holdings);

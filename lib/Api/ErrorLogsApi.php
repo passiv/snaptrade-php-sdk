@@ -110,6 +110,14 @@ class ErrorLogsApi extends \SnapTrade\CustomApi
     }
 
     /**
+     * For initializing request body parameter
+     */
+    private function setRequestBodyProperty(&$body, $property, $value) {
+        if ($body == null) $body = [];
+        $body[$property] = $value;
+    }
+
+    /**
      * Operation listUserErrors
      *
      * Retrieve error logs on behalf of your SnapTrade users
@@ -122,8 +130,14 @@ class ErrorLogsApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\UserErrorLog[]
      */
-    public function listUserErrors($user_id, $user_secret, string $contentType = self::contentTypes['listUserErrors'][0])
+    public function listUserErrors(
+        $user_id,
+        $user_secret,
+        string $contentType = self::contentTypes['listUserErrors'][0]
+
+    )
     {
+
         list($response) = $this->listUserErrorsWithHttpInfo($user_id, $user_secret, $contentType);
         return $response;
     }
@@ -257,8 +271,14 @@ class ErrorLogsApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listUserErrorsAsync($user_id, $user_secret, string $contentType = self::contentTypes['listUserErrors'][0])
+    public function listUserErrorsAsync(
+        $user_id,
+        $user_secret,
+        string $contentType = self::contentTypes['listUserErrors'][0]
+
+    )
     {
+
         return $this->listUserErrorsAsyncWithHttpInfo($user_id, $user_secret, $contentType)
             ->then(
                 function ($response) {
@@ -346,7 +366,6 @@ class ErrorLogsApi extends \SnapTrade\CustomApi
                 'Missing the required parameter user_id when calling listUserErrors'
             );
         }
-
         // Check if $user_secret is a string
         if (!is_null($user_secret) && !is_string($user_secret)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));

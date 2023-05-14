@@ -113,6 +113,14 @@ class TransactionsAndReportingApi extends \SnapTrade\CustomApi
     }
 
     /**
+     * For initializing request body parameter
+     */
+    private function setRequestBodyProperty(&$body, $property, $value) {
+        if ($body == null) $body = [];
+        $body[$property] = $value;
+    }
+
+    /**
      * Operation getActivities
      *
      * Get transaction history for a user
@@ -129,8 +137,18 @@ class TransactionsAndReportingApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\UniversalActivity[]
      */
-    public function getActivities($user_id, $user_secret, $start_date = null, $end_date = null, $accounts = null, $brokerage_authorizations = null, string $contentType = self::contentTypes['getActivities'][0])
+    public function getActivities(
+        $user_id,
+        $user_secret,
+        $start_date = null,
+        $end_date = null,
+        $accounts = null,
+        $brokerage_authorizations = null,
+        string $contentType = self::contentTypes['getActivities'][0]
+
+    )
     {
+
         list($response) = $this->getActivitiesWithHttpInfo($user_id, $user_secret, $start_date, $end_date, $accounts, $brokerage_authorizations, $contentType);
         return $response;
     }
@@ -276,8 +294,18 @@ class TransactionsAndReportingApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getActivitiesAsync($user_id, $user_secret, $start_date = null, $end_date = null, $accounts = null, $brokerage_authorizations = null, string $contentType = self::contentTypes['getActivities'][0])
+    public function getActivitiesAsync(
+        $user_id,
+        $user_secret,
+        $start_date = null,
+        $end_date = null,
+        $accounts = null,
+        $brokerage_authorizations = null,
+        string $contentType = self::contentTypes['getActivities'][0]
+
+    )
     {
+
         return $this->getActivitiesAsyncWithHttpInfo($user_id, $user_secret, $start_date, $end_date, $accounts, $brokerage_authorizations, $contentType)
             ->then(
                 function ($response) {
@@ -373,7 +401,6 @@ class TransactionsAndReportingApi extends \SnapTrade\CustomApi
                 'Missing the required parameter user_id when calling getActivities'
             );
         }
-
         // Check if $user_secret is a string
         if (!is_null($user_secret) && !is_string($user_secret)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
@@ -384,14 +411,10 @@ class TransactionsAndReportingApi extends \SnapTrade\CustomApi
                 'Missing the required parameter user_secret when calling getActivities'
             );
         }
-
-
-
         // Check if $accounts is a string
         if (!is_null($accounts) && !is_string($accounts)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($accounts, true), gettype($accounts)));
         }
-
         // Check if $brokerage_authorizations is a string
         if (!is_null($brokerage_authorizations) && !is_string($brokerage_authorizations)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($brokerage_authorizations, true), gettype($brokerage_authorizations)));
@@ -555,8 +578,19 @@ class TransactionsAndReportingApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\PerformanceCustom
      */
-    public function getReportingCustomRange($start_date, $end_date, $user_id, $user_secret, $accounts = null, $detailed = null, $frequency = null, string $contentType = self::contentTypes['getReportingCustomRange'][0])
+    public function getReportingCustomRange(
+        $start_date,
+        $end_date,
+        $user_id,
+        $user_secret,
+        $accounts = null,
+        $detailed = null,
+        $frequency = null,
+        string $contentType = self::contentTypes['getReportingCustomRange'][0]
+
+    )
     {
+
         list($response) = $this->getReportingCustomRangeWithHttpInfo($start_date, $end_date, $user_id, $user_secret, $accounts, $detailed, $frequency, $contentType);
         return $response;
     }
@@ -705,8 +739,19 @@ class TransactionsAndReportingApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getReportingCustomRangeAsync($start_date, $end_date, $user_id, $user_secret, $accounts = null, $detailed = null, $frequency = null, string $contentType = self::contentTypes['getReportingCustomRange'][0])
+    public function getReportingCustomRangeAsync(
+        $start_date,
+        $end_date,
+        $user_id,
+        $user_secret,
+        $accounts = null,
+        $detailed = null,
+        $frequency = null,
+        string $contentType = self::contentTypes['getReportingCustomRange'][0]
+
+    )
     {
+
         return $this->getReportingCustomRangeAsyncWithHttpInfo($start_date, $end_date, $user_id, $user_secret, $accounts, $detailed, $frequency, $contentType)
             ->then(
                 function ($response) {
@@ -800,14 +845,12 @@ class TransactionsAndReportingApi extends \SnapTrade\CustomApi
                 'Missing the required parameter start_date when calling getReportingCustomRange'
             );
         }
-
         // verify the required parameter 'end_date' is set
         if ($end_date === null || (is_array($end_date) && count($end_date) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter end_date when calling getReportingCustomRange'
             );
         }
-
         // Check if $user_id is a string
         if (!is_null($user_id) && !is_string($user_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_id, true), gettype($user_id)));
@@ -818,7 +861,6 @@ class TransactionsAndReportingApi extends \SnapTrade\CustomApi
                 'Missing the required parameter user_id when calling getReportingCustomRange'
             );
         }
-
         // Check if $user_secret is a string
         if (!is_null($user_secret) && !is_string($user_secret)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
@@ -829,13 +871,10 @@ class TransactionsAndReportingApi extends \SnapTrade\CustomApi
                 'Missing the required parameter user_secret when calling getReportingCustomRange'
             );
         }
-
         // Check if $accounts is a string
         if (!is_null($accounts) && !is_string($accounts)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($accounts, true), gettype($accounts)));
         }
-
-
         // Check if $frequency is a string
         if (!is_null($frequency) && !is_string($frequency)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($frequency, true), gettype($frequency)));

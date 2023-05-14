@@ -137,6 +137,14 @@ class TradingApi extends \SnapTrade\CustomApi
     }
 
     /**
+     * For initializing request body parameter
+     */
+    private function setRequestBodyProperty(&$body, $property, $value) {
+        if ($body == null) $body = [];
+        $body[$property] = $value;
+    }
+
+    /**
      * Operation cancelUserAccountOrder
      *
      * Cancel open order in account
@@ -151,8 +159,19 @@ class TradingApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\AccountOrderRecord|\SnapTrade\Model\Model400FailedRequestResponse
      */
-    public function cancelUserAccountOrder($user_id, $user_secret, $account_id, $trading_cancel_user_account_order_request, string $contentType = self::contentTypes['cancelUserAccountOrder'][0])
+    public function cancelUserAccountOrder(
+        $user_id,
+        $user_secret,
+        $account_id,
+        $brokerage_order_id = null,
+        string $contentType = self::contentTypes['cancelUserAccountOrder'][0]
+
+    )
     {
+        $_body = [];
+        $this->setRequestBodyProperty($_body, "brokerage_order_id", $brokerage_order_id);
+        $trading_cancel_user_account_order_request = $_body;
+
         list($response) = $this->cancelUserAccountOrderWithHttpInfo($user_id, $user_secret, $account_id, $trading_cancel_user_account_order_request, $contentType);
         return $response;
     }
@@ -315,8 +334,19 @@ class TradingApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function cancelUserAccountOrderAsync($user_id, $user_secret, $account_id, $trading_cancel_user_account_order_request, string $contentType = self::contentTypes['cancelUserAccountOrder'][0])
+    public function cancelUserAccountOrderAsync(
+        $user_id,
+        $user_secret,
+        $account_id,
+        $brokerage_order_id = null,
+        string $contentType = self::contentTypes['cancelUserAccountOrder'][0]
+
+    )
     {
+        $_body = [];
+        $this->setRequestBodyProperty($_body, "brokerage_order_id", $brokerage_order_id);
+        $trading_cancel_user_account_order_request = $_body;
+
         return $this->cancelUserAccountOrderAsyncWithHttpInfo($user_id, $user_secret, $account_id, $trading_cancel_user_account_order_request, $contentType)
             ->then(
                 function ($response) {
@@ -408,7 +438,6 @@ class TradingApi extends \SnapTrade\CustomApi
                 'Missing the required parameter user_id when calling cancelUserAccountOrder'
             );
         }
-
         // Check if $user_secret is a string
         if (!is_null($user_secret) && !is_string($user_secret)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
@@ -419,7 +448,6 @@ class TradingApi extends \SnapTrade\CustomApi
                 'Missing the required parameter user_secret when calling cancelUserAccountOrder'
             );
         }
-
         // Check if $account_id is a string
         if (!is_null($account_id) && !is_string($account_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($account_id, true), gettype($account_id)));
@@ -430,7 +458,6 @@ class TradingApi extends \SnapTrade\CustomApi
                 'Missing the required parameter account_id when calling cancelUserAccountOrder'
             );
         }
-
         if ($trading_cancel_user_account_order_request != null) {
             if (!($trading_cancel_user_account_order_request instanceof \SnapTrade\Model\TradingCancelUserAccountOrderRequest)) {
                 if (!is_array($trading_cancel_user_account_order_request))
@@ -579,8 +606,15 @@ class TradingApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\Trade
      */
-    public function getCalculatedTradeImpactById($portfolio_group_id, $calculated_trade_id, $trade_id, string $contentType = self::contentTypes['getCalculatedTradeImpactById'][0])
+    public function getCalculatedTradeImpactById(
+        $portfolio_group_id,
+        $calculated_trade_id,
+        $trade_id,
+        string $contentType = self::contentTypes['getCalculatedTradeImpactById'][0]
+
+    )
     {
+
         list($response) = $this->getCalculatedTradeImpactByIdWithHttpInfo($portfolio_group_id, $calculated_trade_id, $trade_id, $contentType);
         return $response;
     }
@@ -717,8 +751,15 @@ class TradingApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getCalculatedTradeImpactByIdAsync($portfolio_group_id, $calculated_trade_id, $trade_id, string $contentType = self::contentTypes['getCalculatedTradeImpactById'][0])
+    public function getCalculatedTradeImpactByIdAsync(
+        $portfolio_group_id,
+        $calculated_trade_id,
+        $trade_id,
+        string $contentType = self::contentTypes['getCalculatedTradeImpactById'][0]
+
+    )
     {
+
         return $this->getCalculatedTradeImpactByIdAsyncWithHttpInfo($portfolio_group_id, $calculated_trade_id, $trade_id, $contentType)
             ->then(
                 function ($response) {
@@ -808,7 +849,6 @@ class TradingApi extends \SnapTrade\CustomApi
                 'Missing the required parameter portfolio_group_id when calling getCalculatedTradeImpactById'
             );
         }
-
         // Check if $calculated_trade_id is a string
         if (!is_null($calculated_trade_id) && !is_string($calculated_trade_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($calculated_trade_id, true), gettype($calculated_trade_id)));
@@ -819,7 +859,6 @@ class TradingApi extends \SnapTrade\CustomApi
                 'Missing the required parameter calculated_trade_id when calling getCalculatedTradeImpactById'
             );
         }
-
         // Check if $trade_id is a string
         if (!is_null($trade_id) && !is_string($trade_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($trade_id, true), gettype($trade_id)));
@@ -954,8 +993,14 @@ class TradingApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\TradeImpact[]
      */
-    public function getCalculatedTradesImpact($portfolio_group_id, $calculated_trade_id, string $contentType = self::contentTypes['getCalculatedTradesImpact'][0])
+    public function getCalculatedTradesImpact(
+        $portfolio_group_id,
+        $calculated_trade_id,
+        string $contentType = self::contentTypes['getCalculatedTradesImpact'][0]
+
+    )
     {
+
         list($response) = $this->getCalculatedTradesImpactWithHttpInfo($portfolio_group_id, $calculated_trade_id, $contentType);
         return $response;
     }
@@ -1089,8 +1134,14 @@ class TradingApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getCalculatedTradesImpactAsync($portfolio_group_id, $calculated_trade_id, string $contentType = self::contentTypes['getCalculatedTradesImpact'][0])
+    public function getCalculatedTradesImpactAsync(
+        $portfolio_group_id,
+        $calculated_trade_id,
+        string $contentType = self::contentTypes['getCalculatedTradesImpact'][0]
+
+    )
     {
+
         return $this->getCalculatedTradesImpactAsyncWithHttpInfo($portfolio_group_id, $calculated_trade_id, $contentType)
             ->then(
                 function ($response) {
@@ -1178,7 +1229,6 @@ class TradingApi extends \SnapTrade\CustomApi
                 'Missing the required parameter portfolio_group_id when calling getCalculatedTradesImpact'
             );
         }
-
         // Check if $calculated_trade_id is a string
         if (!is_null($calculated_trade_id) && !is_string($calculated_trade_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($calculated_trade_id, true), gettype($calculated_trade_id)));
@@ -1306,8 +1356,32 @@ class TradingApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\ManualTradeAndImpact|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\Model403FailedRequestResponse
      */
-    public function getOrderImpact($user_id, $user_secret, $manual_trade_form, string $contentType = self::contentTypes['getOrderImpact'][0])
+    public function getOrderImpact(
+        $user_id,
+        $user_secret,
+        $account_id = null,
+        $action = null,
+        $order_type = null,
+        $price = null,
+        $stop = null,
+        $time_in_force = null,
+        $units = null,
+        $universal_symbol_id = null,
+        string $contentType = self::contentTypes['getOrderImpact'][0]
+
+    )
     {
+        $_body = [];
+        $this->setRequestBodyProperty($_body, "account_id", $account_id);
+        $this->setRequestBodyProperty($_body, "action", $action);
+        $this->setRequestBodyProperty($_body, "order_type", $order_type);
+        $this->setRequestBodyProperty($_body, "price", $price);
+        $this->setRequestBodyProperty($_body, "stop", $stop);
+        $this->setRequestBodyProperty($_body, "time_in_force", $time_in_force);
+        $this->setRequestBodyProperty($_body, "units", $units);
+        $this->setRequestBodyProperty($_body, "universal_symbol_id", $universal_symbol_id);
+        $manual_trade_form = $_body;
+
         list($response) = $this->getOrderImpactWithHttpInfo($user_id, $user_secret, $manual_trade_form, $contentType);
         return $response;
     }
@@ -1490,8 +1564,32 @@ class TradingApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getOrderImpactAsync($user_id, $user_secret, $manual_trade_form, string $contentType = self::contentTypes['getOrderImpact'][0])
+    public function getOrderImpactAsync(
+        $user_id,
+        $user_secret,
+        $account_id = null,
+        $action = null,
+        $order_type = null,
+        $price = null,
+        $stop = null,
+        $time_in_force = null,
+        $units = null,
+        $universal_symbol_id = null,
+        string $contentType = self::contentTypes['getOrderImpact'][0]
+
+    )
     {
+        $_body = [];
+        $this->setRequestBodyProperty($_body, "account_id", $account_id);
+        $this->setRequestBodyProperty($_body, "action", $action);
+        $this->setRequestBodyProperty($_body, "order_type", $order_type);
+        $this->setRequestBodyProperty($_body, "price", $price);
+        $this->setRequestBodyProperty($_body, "stop", $stop);
+        $this->setRequestBodyProperty($_body, "time_in_force", $time_in_force);
+        $this->setRequestBodyProperty($_body, "units", $units);
+        $this->setRequestBodyProperty($_body, "universal_symbol_id", $universal_symbol_id);
+        $manual_trade_form = $_body;
+
         return $this->getOrderImpactAsyncWithHttpInfo($user_id, $user_secret, $manual_trade_form, $contentType)
             ->then(
                 function ($response) {
@@ -1581,7 +1679,6 @@ class TradingApi extends \SnapTrade\CustomApi
                 'Missing the required parameter user_id when calling getOrderImpact'
             );
         }
-
         // Check if $user_secret is a string
         if (!is_null($user_secret) && !is_string($user_secret)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
@@ -1592,7 +1689,6 @@ class TradingApi extends \SnapTrade\CustomApi
                 'Missing the required parameter user_secret when calling getOrderImpact'
             );
         }
-
         if ($manual_trade_form != null) {
             if (!($manual_trade_form instanceof \SnapTrade\Model\ManualTradeForm)) {
                 if (!is_array($manual_trade_form))
@@ -1735,8 +1831,17 @@ class TradingApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\SymbolsQuotes
      */
-    public function getUserAccountQuotes($user_id, $user_secret, $symbols, $account_id, $use_ticker = null, string $contentType = self::contentTypes['getUserAccountQuotes'][0])
+    public function getUserAccountQuotes(
+        $user_id,
+        $user_secret,
+        $symbols,
+        $account_id,
+        $use_ticker = null,
+        string $contentType = self::contentTypes['getUserAccountQuotes'][0]
+
+    )
     {
+
         list($response) = $this->getUserAccountQuotesWithHttpInfo($user_id, $user_secret, $symbols, $account_id, $use_ticker, $contentType);
         return $response;
     }
@@ -1879,8 +1984,17 @@ class TradingApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getUserAccountQuotesAsync($user_id, $user_secret, $symbols, $account_id, $use_ticker = null, string $contentType = self::contentTypes['getUserAccountQuotes'][0])
+    public function getUserAccountQuotesAsync(
+        $user_id,
+        $user_secret,
+        $symbols,
+        $account_id,
+        $use_ticker = null,
+        string $contentType = self::contentTypes['getUserAccountQuotes'][0]
+
+    )
     {
+
         return $this->getUserAccountQuotesAsyncWithHttpInfo($user_id, $user_secret, $symbols, $account_id, $use_ticker, $contentType)
             ->then(
                 function ($response) {
@@ -1974,7 +2088,6 @@ class TradingApi extends \SnapTrade\CustomApi
                 'Missing the required parameter user_id when calling getUserAccountQuotes'
             );
         }
-
         // Check if $user_secret is a string
         if (!is_null($user_secret) && !is_string($user_secret)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
@@ -1985,7 +2098,6 @@ class TradingApi extends \SnapTrade\CustomApi
                 'Missing the required parameter user_secret when calling getUserAccountQuotes'
             );
         }
-
         // Check if $symbols is a string
         if (!is_null($symbols) && !is_string($symbols)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($symbols, true), gettype($symbols)));
@@ -1996,7 +2108,6 @@ class TradingApi extends \SnapTrade\CustomApi
                 'Missing the required parameter symbols when calling getUserAccountQuotes'
             );
         }
-
         // Check if $account_id is a string
         if (!is_null($account_id) && !is_string($account_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($account_id, true), gettype($account_id)));
@@ -2007,7 +2118,6 @@ class TradingApi extends \SnapTrade\CustomApi
                 'Missing the required parameter account_id when calling getUserAccountQuotes'
             );
         }
-
 
 
         $resourcePath = '/accounts/{accountId}/quotes';
@@ -2154,8 +2264,33 @@ class TradingApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\Trade
      */
-    public function modifyCalculatedTradeById($portfolio_group_id, $calculated_trade_id, $trade_id, $trade = null, string $contentType = self::contentTypes['modifyCalculatedTradeById'][0])
+    public function modifyCalculatedTradeById(
+        $portfolio_group_id,
+        $calculated_trade_id,
+        $trade_id,
+        $id = null,
+        $account = null,
+        $symbol = null,
+        $universal_symbol = null,
+        $action = null,
+        $units = null,
+        $price = null,
+        $sequence = null,
+        string $contentType = self::contentTypes['modifyCalculatedTradeById'][0]
+
+    )
     {
+        $_body = null;
+        $this->setRequestBodyProperty($_body, "id", $id);
+        $this->setRequestBodyProperty($_body, "account", $account);
+        $this->setRequestBodyProperty($_body, "symbol", $symbol);
+        $this->setRequestBodyProperty($_body, "universal_symbol", $universal_symbol);
+        $this->setRequestBodyProperty($_body, "action", $action);
+        $this->setRequestBodyProperty($_body, "units", $units);
+        $this->setRequestBodyProperty($_body, "price", $price);
+        $this->setRequestBodyProperty($_body, "sequence", $sequence);
+        $trade = $_body;
+
         list($response) = $this->modifyCalculatedTradeByIdWithHttpInfo($portfolio_group_id, $calculated_trade_id, $trade_id, $trade, $contentType);
         return $response;
     }
@@ -2295,8 +2430,33 @@ class TradingApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function modifyCalculatedTradeByIdAsync($portfolio_group_id, $calculated_trade_id, $trade_id, $trade = null, string $contentType = self::contentTypes['modifyCalculatedTradeById'][0])
+    public function modifyCalculatedTradeByIdAsync(
+        $portfolio_group_id,
+        $calculated_trade_id,
+        $trade_id,
+        $id = null,
+        $account = null,
+        $symbol = null,
+        $universal_symbol = null,
+        $action = null,
+        $units = null,
+        $price = null,
+        $sequence = null,
+        string $contentType = self::contentTypes['modifyCalculatedTradeById'][0]
+
+    )
     {
+        $_body = null;
+        $this->setRequestBodyProperty($_body, "id", $id);
+        $this->setRequestBodyProperty($_body, "account", $account);
+        $this->setRequestBodyProperty($_body, "symbol", $symbol);
+        $this->setRequestBodyProperty($_body, "universal_symbol", $universal_symbol);
+        $this->setRequestBodyProperty($_body, "action", $action);
+        $this->setRequestBodyProperty($_body, "units", $units);
+        $this->setRequestBodyProperty($_body, "price", $price);
+        $this->setRequestBodyProperty($_body, "sequence", $sequence);
+        $trade = $_body;
+
         return $this->modifyCalculatedTradeByIdAsyncWithHttpInfo($portfolio_group_id, $calculated_trade_id, $trade_id, $trade, $contentType)
             ->then(
                 function ($response) {
@@ -2388,7 +2548,6 @@ class TradingApi extends \SnapTrade\CustomApi
                 'Missing the required parameter portfolio_group_id when calling modifyCalculatedTradeById'
             );
         }
-
         // Check if $calculated_trade_id is a string
         if (!is_null($calculated_trade_id) && !is_string($calculated_trade_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($calculated_trade_id, true), gettype($calculated_trade_id)));
@@ -2399,7 +2558,6 @@ class TradingApi extends \SnapTrade\CustomApi
                 'Missing the required parameter calculated_trade_id when calling modifyCalculatedTradeById'
             );
         }
-
         // Check if $trade_id is a string
         if (!is_null($trade_id) && !is_string($trade_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($trade_id, true), gettype($trade_id)));
@@ -2410,7 +2568,6 @@ class TradingApi extends \SnapTrade\CustomApi
                 'Missing the required parameter trade_id when calling modifyCalculatedTradeById'
             );
         }
-
         if ($trade != null) {
             if (!($trade instanceof \SnapTrade\Model\Trade)) {
                 if (!is_array($trade))
@@ -2550,8 +2707,14 @@ class TradingApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\TradeExecutionStatus[]
      */
-    public function placeCalculatedTrades($portfolio_group_id, $calculated_trade_id, string $contentType = self::contentTypes['placeCalculatedTrades'][0])
+    public function placeCalculatedTrades(
+        $portfolio_group_id,
+        $calculated_trade_id,
+        string $contentType = self::contentTypes['placeCalculatedTrades'][0]
+
+    )
     {
+
         list($response) = $this->placeCalculatedTradesWithHttpInfo($portfolio_group_id, $calculated_trade_id, $contentType);
         return $response;
     }
@@ -2685,8 +2848,14 @@ class TradingApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function placeCalculatedTradesAsync($portfolio_group_id, $calculated_trade_id, string $contentType = self::contentTypes['placeCalculatedTrades'][0])
+    public function placeCalculatedTradesAsync(
+        $portfolio_group_id,
+        $calculated_trade_id,
+        string $contentType = self::contentTypes['placeCalculatedTrades'][0]
+
+    )
     {
+
         return $this->placeCalculatedTradesAsyncWithHttpInfo($portfolio_group_id, $calculated_trade_id, $contentType)
             ->then(
                 function ($response) {
@@ -2774,7 +2943,6 @@ class TradingApi extends \SnapTrade\CustomApi
                 'Missing the required parameter portfolio_group_id when calling placeCalculatedTrades'
             );
         }
-
         // Check if $calculated_trade_id is a string
         if (!is_null($calculated_trade_id) && !is_string($calculated_trade_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($calculated_trade_id, true), gettype($calculated_trade_id)));
@@ -2902,8 +3070,32 @@ class TradingApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\AccountOrderRecord|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\Model403FailedRequestResponse
      */
-    public function placeForceOrder($user_id, $user_secret, $manual_trade_form, string $contentType = self::contentTypes['placeForceOrder'][0])
+    public function placeForceOrder(
+        $user_id,
+        $user_secret,
+        $account_id = null,
+        $action = null,
+        $order_type = null,
+        $price = null,
+        $stop = null,
+        $time_in_force = null,
+        $units = null,
+        $universal_symbol_id = null,
+        string $contentType = self::contentTypes['placeForceOrder'][0]
+
+    )
     {
+        $_body = [];
+        $this->setRequestBodyProperty($_body, "account_id", $account_id);
+        $this->setRequestBodyProperty($_body, "action", $action);
+        $this->setRequestBodyProperty($_body, "order_type", $order_type);
+        $this->setRequestBodyProperty($_body, "price", $price);
+        $this->setRequestBodyProperty($_body, "stop", $stop);
+        $this->setRequestBodyProperty($_body, "time_in_force", $time_in_force);
+        $this->setRequestBodyProperty($_body, "units", $units);
+        $this->setRequestBodyProperty($_body, "universal_symbol_id", $universal_symbol_id);
+        $manual_trade_form = $_body;
+
         list($response) = $this->placeForceOrderWithHttpInfo($user_id, $user_secret, $manual_trade_form, $contentType);
         return $response;
     }
@@ -3086,8 +3278,32 @@ class TradingApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function placeForceOrderAsync($user_id, $user_secret, $manual_trade_form, string $contentType = self::contentTypes['placeForceOrder'][0])
+    public function placeForceOrderAsync(
+        $user_id,
+        $user_secret,
+        $account_id = null,
+        $action = null,
+        $order_type = null,
+        $price = null,
+        $stop = null,
+        $time_in_force = null,
+        $units = null,
+        $universal_symbol_id = null,
+        string $contentType = self::contentTypes['placeForceOrder'][0]
+
+    )
     {
+        $_body = [];
+        $this->setRequestBodyProperty($_body, "account_id", $account_id);
+        $this->setRequestBodyProperty($_body, "action", $action);
+        $this->setRequestBodyProperty($_body, "order_type", $order_type);
+        $this->setRequestBodyProperty($_body, "price", $price);
+        $this->setRequestBodyProperty($_body, "stop", $stop);
+        $this->setRequestBodyProperty($_body, "time_in_force", $time_in_force);
+        $this->setRequestBodyProperty($_body, "units", $units);
+        $this->setRequestBodyProperty($_body, "universal_symbol_id", $universal_symbol_id);
+        $manual_trade_form = $_body;
+
         return $this->placeForceOrderAsyncWithHttpInfo($user_id, $user_secret, $manual_trade_form, $contentType)
             ->then(
                 function ($response) {
@@ -3177,7 +3393,6 @@ class TradingApi extends \SnapTrade\CustomApi
                 'Missing the required parameter user_id when calling placeForceOrder'
             );
         }
-
         // Check if $user_secret is a string
         if (!is_null($user_secret) && !is_string($user_secret)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
@@ -3188,7 +3403,6 @@ class TradingApi extends \SnapTrade\CustomApi
                 'Missing the required parameter user_secret when calling placeForceOrder'
             );
         }
-
         if ($manual_trade_form != null) {
             if (!($manual_trade_form instanceof \SnapTrade\Model\ManualTradeForm)) {
                 if (!is_array($manual_trade_form))
@@ -3329,8 +3543,20 @@ class TradingApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\AccountOrderRecord|\SnapTrade\Model\Model400FailedRequestResponse
      */
-    public function placeOCOOrder($user_id, $user_secret, $trading_place_oco_order_request, string $contentType = self::contentTypes['placeOCOOrder'][0])
+    public function placeOCOOrder(
+        $user_id,
+        $user_secret,
+        $first_trade_id = null,
+        $second_trade_id = null,
+        string $contentType = self::contentTypes['placeOCOOrder'][0]
+
+    )
     {
+        $_body = [];
+        $this->setRequestBodyProperty($_body, "first_trade_id", $first_trade_id);
+        $this->setRequestBodyProperty($_body, "second_trade_id", $second_trade_id);
+        $trading_place_oco_order_request = $_body;
+
         list($response) = $this->placeOCOOrderWithHttpInfo($user_id, $user_secret, $trading_place_oco_order_request, $contentType);
         return $response;
     }
@@ -3490,8 +3716,20 @@ class TradingApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function placeOCOOrderAsync($user_id, $user_secret, $trading_place_oco_order_request, string $contentType = self::contentTypes['placeOCOOrder'][0])
+    public function placeOCOOrderAsync(
+        $user_id,
+        $user_secret,
+        $first_trade_id = null,
+        $second_trade_id = null,
+        string $contentType = self::contentTypes['placeOCOOrder'][0]
+
+    )
     {
+        $_body = [];
+        $this->setRequestBodyProperty($_body, "first_trade_id", $first_trade_id);
+        $this->setRequestBodyProperty($_body, "second_trade_id", $second_trade_id);
+        $trading_place_oco_order_request = $_body;
+
         return $this->placeOCOOrderAsyncWithHttpInfo($user_id, $user_secret, $trading_place_oco_order_request, $contentType)
             ->then(
                 function ($response) {
@@ -3581,7 +3819,6 @@ class TradingApi extends \SnapTrade\CustomApi
                 'Missing the required parameter user_id when calling placeOCOOrder'
             );
         }
-
         // Check if $user_secret is a string
         if (!is_null($user_secret) && !is_string($user_secret)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
@@ -3592,7 +3829,6 @@ class TradingApi extends \SnapTrade\CustomApi
                 'Missing the required parameter user_secret when calling placeOCOOrder'
             );
         }
-
         if ($trading_place_oco_order_request != null) {
             if (!($trading_place_oco_order_request instanceof \SnapTrade\Model\TradingPlaceOCOOrderRequest)) {
                 if (!is_array($trading_place_oco_order_request))
@@ -3733,8 +3969,15 @@ class TradingApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\AccountOrderRecord|\SnapTrade\Model\Model400FailedRequestResponse
      */
-    public function placeOrder($trade_id, $user_id, $user_secret, string $contentType = self::contentTypes['placeOrder'][0])
+    public function placeOrder(
+        $trade_id,
+        $user_id,
+        $user_secret,
+        string $contentType = self::contentTypes['placeOrder'][0]
+
+    )
     {
+
         list($response) = $this->placeOrderWithHttpInfo($trade_id, $user_id, $user_secret, $contentType);
         return $response;
     }
@@ -3894,8 +4137,15 @@ class TradingApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function placeOrderAsync($trade_id, $user_id, $user_secret, string $contentType = self::contentTypes['placeOrder'][0])
+    public function placeOrderAsync(
+        $trade_id,
+        $user_id,
+        $user_secret,
+        string $contentType = self::contentTypes['placeOrder'][0]
+
+    )
     {
+
         return $this->placeOrderAsyncWithHttpInfo($trade_id, $user_id, $user_secret, $contentType)
             ->then(
                 function ($response) {
@@ -3985,7 +4235,6 @@ class TradingApi extends \SnapTrade\CustomApi
                 'Missing the required parameter trade_id when calling placeOrder'
             );
         }
-
         // Check if $user_id is a string
         if (!is_null($user_id) && !is_string($user_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_id, true), gettype($user_id)));
@@ -3996,7 +4245,6 @@ class TradingApi extends \SnapTrade\CustomApi
                 'Missing the required parameter user_id when calling placeOrder'
             );
         }
-
         // Check if $user_secret is a string
         if (!is_null($user_secret) && !is_string($user_secret)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));

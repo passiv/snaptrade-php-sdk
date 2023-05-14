@@ -122,6 +122,14 @@ class AuthenticationApi extends \SnapTrade\CustomApi
     }
 
     /**
+     * For initializing request body parameter
+     */
+    private function setRequestBodyProperty(&$body, $property, $value) {
+        if ($body == null) $body = [];
+        $body[$property] = $value;
+    }
+
+    /**
      * Operation deleteSnapTradeUser
      *
      * Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user
@@ -133,8 +141,13 @@ class AuthenticationApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\DeleteUserResponse|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\Model403FailedRequestResponse|\SnapTrade\Model\Model404FailedRequestResponse
      */
-    public function deleteSnapTradeUser($user_id, string $contentType = self::contentTypes['deleteSnapTradeUser'][0])
+    public function deleteSnapTradeUser(
+        $user_id,
+        string $contentType = self::contentTypes['deleteSnapTradeUser'][0]
+
+    )
     {
+
         list($response) = $this->deleteSnapTradeUserWithHttpInfo($user_id, $contentType);
         return $response;
     }
@@ -334,8 +347,13 @@ class AuthenticationApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function deleteSnapTradeUserAsync($user_id, string $contentType = self::contentTypes['deleteSnapTradeUser'][0])
+    public function deleteSnapTradeUserAsync(
+        $user_id,
+        string $contentType = self::contentTypes['deleteSnapTradeUser'][0]
+
+    )
     {
+
         return $this->deleteSnapTradeUserAsyncWithHttpInfo($user_id, $contentType)
             ->then(
                 function ($response) {
@@ -530,8 +548,14 @@ class AuthenticationApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\EncryptedResponse|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\Model403FailedRequestResponse|\SnapTrade\Model\Model404FailedRequestResponse
      */
-    public function getUserJWT($user_id, $user_secret, string $contentType = self::contentTypes['getUserJWT'][0])
+    public function getUserJWT(
+        $user_id,
+        $user_secret,
+        string $contentType = self::contentTypes['getUserJWT'][0]
+
+    )
     {
+
         list($response) = $this->getUserJWTWithHttpInfo($user_id, $user_secret, $contentType);
         return $response;
     }
@@ -734,8 +758,14 @@ class AuthenticationApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getUserJWTAsync($user_id, $user_secret, string $contentType = self::contentTypes['getUserJWT'][0])
+    public function getUserJWTAsync(
+        $user_id,
+        $user_secret,
+        string $contentType = self::contentTypes['getUserJWT'][0]
+
+    )
     {
+
         return $this->getUserJWTAsyncWithHttpInfo($user_id, $user_secret, $contentType)
             ->then(
                 function ($response) {
@@ -823,7 +853,6 @@ class AuthenticationApi extends \SnapTrade\CustomApi
                 'Missing the required parameter user_id when calling getUserJWT'
             );
         }
-
         // Check if $user_secret is a string
         if (!is_null($user_secret) && !is_string($user_secret)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
@@ -950,8 +979,12 @@ class AuthenticationApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return string[]|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\Model404FailedRequestResponse
      */
-    public function listSnapTradeUsers(string $contentType = self::contentTypes['listSnapTradeUsers'][0])
+    public function listSnapTradeUsers(
+        string $contentType = self::contentTypes['listSnapTradeUsers'][0]
+
+    )
     {
+
         list($response) = $this->listSnapTradeUsersWithHttpInfo($contentType);
         return $response;
     }
@@ -1125,8 +1158,12 @@ class AuthenticationApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listSnapTradeUsersAsync(string $contentType = self::contentTypes['listSnapTradeUsers'][0])
+    public function listSnapTradeUsersAsync(
+        string $contentType = self::contentTypes['listSnapTradeUsers'][0]
+
+    )
     {
+
         return $this->listSnapTradeUsersAsyncWithHttpInfo($contentType)
             ->then(
                 function ($response) {
@@ -1199,6 +1236,7 @@ class AuthenticationApi extends \SnapTrade\CustomApi
      */
     public function listSnapTradeUsersRequest(string $contentType = self::contentTypes['listSnapTradeUsers'][0])
     {
+
 
 
         $resourcePath = '/snapTrade/listUsers';
@@ -1300,8 +1338,26 @@ class AuthenticationApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\AuthenticationLoginSnapTradeUser200Response|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\Model403FailedRequestResponse|\SnapTrade\Model\Model404FailedRequestResponse
      */
-    public function loginSnapTradeUser($user_id, $user_secret, $snap_trade_login_user_request_body = null, string $contentType = self::contentTypes['loginSnapTradeUser'][0])
+    public function loginSnapTradeUser(
+        $user_id,
+        $user_secret,
+        $broker = null,
+        $immediate_redirect = null,
+        $custom_redirect = null,
+        $reconnect = null,
+        $connection_type = null,
+        string $contentType = self::contentTypes['loginSnapTradeUser'][0]
+
+    )
     {
+        $_body = null;
+        $this->setRequestBodyProperty($_body, "broker", $broker);
+        $this->setRequestBodyProperty($_body, "immediate_redirect", $immediate_redirect);
+        $this->setRequestBodyProperty($_body, "custom_redirect", $custom_redirect);
+        $this->setRequestBodyProperty($_body, "reconnect", $reconnect);
+        $this->setRequestBodyProperty($_body, "connection_type", $connection_type);
+        $snap_trade_login_user_request_body = $_body;
+
         list($response) = $this->loginSnapTradeUserWithHttpInfo($user_id, $user_secret, $snap_trade_login_user_request_body, $contentType);
         return $response;
     }
@@ -1507,8 +1563,26 @@ class AuthenticationApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function loginSnapTradeUserAsync($user_id, $user_secret, $snap_trade_login_user_request_body = null, string $contentType = self::contentTypes['loginSnapTradeUser'][0])
+    public function loginSnapTradeUserAsync(
+        $user_id,
+        $user_secret,
+        $broker = null,
+        $immediate_redirect = null,
+        $custom_redirect = null,
+        $reconnect = null,
+        $connection_type = null,
+        string $contentType = self::contentTypes['loginSnapTradeUser'][0]
+
+    )
     {
+        $_body = null;
+        $this->setRequestBodyProperty($_body, "broker", $broker);
+        $this->setRequestBodyProperty($_body, "immediate_redirect", $immediate_redirect);
+        $this->setRequestBodyProperty($_body, "custom_redirect", $custom_redirect);
+        $this->setRequestBodyProperty($_body, "reconnect", $reconnect);
+        $this->setRequestBodyProperty($_body, "connection_type", $connection_type);
+        $snap_trade_login_user_request_body = $_body;
+
         return $this->loginSnapTradeUserAsyncWithHttpInfo($user_id, $user_secret, $snap_trade_login_user_request_body, $contentType)
             ->then(
                 function ($response) {
@@ -1598,7 +1672,6 @@ class AuthenticationApi extends \SnapTrade\CustomApi
                 'Missing the required parameter user_id when calling loginSnapTradeUser'
             );
         }
-
         // Check if $user_secret is a string
         if (!is_null($user_secret) && !is_string($user_secret)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
@@ -1609,7 +1682,6 @@ class AuthenticationApi extends \SnapTrade\CustomApi
                 'Missing the required parameter user_secret when calling loginSnapTradeUser'
             );
         }
-
         if ($snap_trade_login_user_request_body != null) {
             if (!($snap_trade_login_user_request_body instanceof \SnapTrade\Model\SnapTradeLoginUserRequestBody)) {
                 if (!is_array($snap_trade_login_user_request_body))
@@ -1742,8 +1814,18 @@ class AuthenticationApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\UserIDandSecret|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\Model404FailedRequestResponse
      */
-    public function registerSnapTradeUser($snap_trade_register_user_request_body, string $contentType = self::contentTypes['registerSnapTradeUser'][0])
+    public function registerSnapTradeUser(
+        $user_id = null,
+        $rsa_public_key = null,
+        string $contentType = self::contentTypes['registerSnapTradeUser'][0]
+
+    )
     {
+        $_body = [];
+        $this->setRequestBodyProperty($_body, "user_id", $user_id);
+        $this->setRequestBodyProperty($_body, "rsa_public_key", $rsa_public_key);
+        $snap_trade_register_user_request_body = $_body;
+
         list($response) = $this->registerSnapTradeUserWithHttpInfo($snap_trade_register_user_request_body, $contentType);
         return $response;
     }
@@ -1920,8 +2002,18 @@ class AuthenticationApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function registerSnapTradeUserAsync($snap_trade_register_user_request_body, string $contentType = self::contentTypes['registerSnapTradeUser'][0])
+    public function registerSnapTradeUserAsync(
+        $user_id = null,
+        $rsa_public_key = null,
+        string $contentType = self::contentTypes['registerSnapTradeUser'][0]
+
+    )
     {
+        $_body = [];
+        $this->setRequestBodyProperty($_body, "user_id", $user_id);
+        $this->setRequestBodyProperty($_body, "rsa_public_key", $rsa_public_key);
+        $snap_trade_register_user_request_body = $_body;
+
         return $this->registerSnapTradeUserAsyncWithHttpInfo($snap_trade_register_user_request_body, $contentType)
             ->then(
                 function ($response) {

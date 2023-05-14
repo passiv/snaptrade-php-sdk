@@ -203,6 +203,14 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
     }
 
     /**
+     * For initializing request body parameter
+     */
+    private function setRequestBodyProperty(&$body, $property, $value) {
+        if ($body == null) $body = [];
+        $body[$property] = $value;
+    }
+
+    /**
      * Operation addPortfolioExcludedAsset
      *
      * Adds an asset to exclude to a portfolio group
@@ -215,8 +223,31 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\ExcludedAsset
      */
-    public function addPortfolioExcludedAsset($portfolio_group_id, $universal_symbol = null, string $contentType = self::contentTypes['addPortfolioExcludedAsset'][0])
+    public function addPortfolioExcludedAsset(
+        $portfolio_group_id,
+        $id = null,
+        $symbol = null,
+        $raw_symbol = null,
+        $description = null,
+        $currency = null,
+        $exchange = null,
+        $type = null,
+        $currencies = null,
+        string $contentType = self::contentTypes['addPortfolioExcludedAsset'][0]
+
+    )
     {
+        $_body = null;
+        $this->setRequestBodyProperty($_body, "id", $id);
+        $this->setRequestBodyProperty($_body, "symbol", $symbol);
+        $this->setRequestBodyProperty($_body, "raw_symbol", $raw_symbol);
+        $this->setRequestBodyProperty($_body, "description", $description);
+        $this->setRequestBodyProperty($_body, "currency", $currency);
+        $this->setRequestBodyProperty($_body, "exchange", $exchange);
+        $this->setRequestBodyProperty($_body, "type", $type);
+        $this->setRequestBodyProperty($_body, "currencies", $currencies);
+        $universal_symbol = $_body;
+
         list($response) = $this->addPortfolioExcludedAssetWithHttpInfo($portfolio_group_id, $universal_symbol, $contentType);
         return $response;
     }
@@ -350,8 +381,31 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function addPortfolioExcludedAssetAsync($portfolio_group_id, $universal_symbol = null, string $contentType = self::contentTypes['addPortfolioExcludedAsset'][0])
+    public function addPortfolioExcludedAssetAsync(
+        $portfolio_group_id,
+        $id = null,
+        $symbol = null,
+        $raw_symbol = null,
+        $description = null,
+        $currency = null,
+        $exchange = null,
+        $type = null,
+        $currencies = null,
+        string $contentType = self::contentTypes['addPortfolioExcludedAsset'][0]
+
+    )
     {
+        $_body = null;
+        $this->setRequestBodyProperty($_body, "id", $id);
+        $this->setRequestBodyProperty($_body, "symbol", $symbol);
+        $this->setRequestBodyProperty($_body, "raw_symbol", $raw_symbol);
+        $this->setRequestBodyProperty($_body, "description", $description);
+        $this->setRequestBodyProperty($_body, "currency", $currency);
+        $this->setRequestBodyProperty($_body, "exchange", $exchange);
+        $this->setRequestBodyProperty($_body, "type", $type);
+        $this->setRequestBodyProperty($_body, "currencies", $currencies);
+        $universal_symbol = $_body;
+
         return $this->addPortfolioExcludedAssetAsyncWithHttpInfo($portfolio_group_id, $universal_symbol, $contentType)
             ->then(
                 function ($response) {
@@ -439,7 +493,6 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
                 'Missing the required parameter portfolio_group_id when calling addPortfolioExcludedAsset'
             );
         }
-
         if ($universal_symbol != null) {
             if (!($universal_symbol instanceof \SnapTrade\Model\UniversalSymbol)) {
                 if (!is_array($universal_symbol))
@@ -563,8 +616,14 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\PortfolioGroup[]
      */
-    public function all($user_id, $user_secret, string $contentType = self::contentTypes['all'][0])
+    public function all(
+        $user_id,
+        $user_secret,
+        string $contentType = self::contentTypes['all'][0]
+
+    )
     {
+
         list($response) = $this->allWithHttpInfo($user_id, $user_secret, $contentType);
         return $response;
     }
@@ -698,8 +757,14 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function allAsync($user_id, $user_secret, string $contentType = self::contentTypes['all'][0])
+    public function allAsync(
+        $user_id,
+        $user_secret,
+        string $contentType = self::contentTypes['all'][0]
+
+    )
     {
+
         return $this->allAsyncWithHttpInfo($user_id, $user_secret, $contentType)
             ->then(
                 function ($response) {
@@ -787,7 +852,6 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
                 'Missing the required parameter user_id when calling all'
             );
         }
-
         // Check if $user_secret is a string
         if (!is_null($user_secret) && !is_string($user_secret)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
@@ -917,8 +981,20 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\PortfolioGroup[]
      */
-    public function create($user_id, $user_secret, $request_body, string $contentType = self::contentTypes['create'][0])
+    public function create(
+        $user_id,
+        $user_secret,
+        $id = null,
+        $name = null,
+        string $contentType = self::contentTypes['create'][0]
+
+    )
     {
+        $_body = [];
+        $this->setRequestBodyProperty($_body, "id", $id);
+        $this->setRequestBodyProperty($_body, "name", $name);
+        $request_body = $_body;
+
         list($response) = $this->createWithHttpInfo($user_id, $user_secret, $request_body, $contentType);
         return $response;
     }
@@ -1055,8 +1131,20 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function createAsync($user_id, $user_secret, $request_body, string $contentType = self::contentTypes['create'][0])
+    public function createAsync(
+        $user_id,
+        $user_secret,
+        $id = null,
+        $name = null,
+        string $contentType = self::contentTypes['create'][0]
+
+    )
     {
+        $_body = [];
+        $this->setRequestBodyProperty($_body, "id", $id);
+        $this->setRequestBodyProperty($_body, "name", $name);
+        $request_body = $_body;
+
         return $this->createAsyncWithHttpInfo($user_id, $user_secret, $request_body, $contentType)
             ->then(
                 function ($response) {
@@ -1146,7 +1234,6 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
                 'Missing the required parameter user_id when calling create'
             );
         }
-
         // Check if $user_secret is a string
         if (!is_null($user_secret) && !is_string($user_secret)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
@@ -1157,7 +1244,6 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
                 'Missing the required parameter user_secret when calling create'
             );
         }
-
         // verify the required parameter 'request_body' is set
         if ($request_body === null || (is_array($request_body) && count($request_body) === 0)) {
             throw new \InvalidArgumentException(
@@ -1287,8 +1373,12 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\ModelAssetClassDetails
      */
-    public function createAssetClass(string $contentType = self::contentTypes['createAssetClass'][0])
+    public function createAssetClass(
+        string $contentType = self::contentTypes['createAssetClass'][0]
+
+    )
     {
+
         list($response) = $this->createAssetClassWithHttpInfo($contentType);
         return $response;
     }
@@ -1416,8 +1506,12 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function createAssetClassAsync(string $contentType = self::contentTypes['createAssetClass'][0])
+    public function createAssetClassAsync(
+        string $contentType = self::contentTypes['createAssetClass'][0]
+
+    )
     {
+
         return $this->createAssetClassAsyncWithHttpInfo($contentType)
             ->then(
                 function ($response) {
@@ -1490,6 +1584,7 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function createAssetClassRequest(string $contentType = self::contentTypes['createAssetClass'][0])
     {
+
 
 
         $resourcePath = '/modelAssetClass';
@@ -1588,8 +1683,12 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\ModelPortfolioDetails
      */
-    public function createModelPortfolio(string $contentType = self::contentTypes['createModelPortfolio'][0])
+    public function createModelPortfolio(
+        string $contentType = self::contentTypes['createModelPortfolio'][0]
+
+    )
     {
+
         list($response) = $this->createModelPortfolioWithHttpInfo($contentType);
         return $response;
     }
@@ -1717,8 +1816,12 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function createModelPortfolioAsync(string $contentType = self::contentTypes['createModelPortfolio'][0])
+    public function createModelPortfolioAsync(
+        string $contentType = self::contentTypes['createModelPortfolio'][0]
+
+    )
     {
+
         return $this->createModelPortfolioAsyncWithHttpInfo($contentType)
             ->then(
                 function ($response) {
@@ -1791,6 +1894,7 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function createModelPortfolioRequest(string $contentType = self::contentTypes['createModelPortfolio'][0])
     {
+
 
 
         $resourcePath = '/modelPortfolio';
@@ -1890,8 +1994,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return void
      */
-    public function deleteAssetClass($model_asset_class_id, string $contentType = self::contentTypes['deleteAssetClass'][0])
+    public function deleteAssetClass(
+        $model_asset_class_id,
+        string $contentType = self::contentTypes['deleteAssetClass'][0]
+
+    )
     {
+
         $this->deleteAssetClassWithHttpInfo($model_asset_class_id, $contentType);
     }
 
@@ -1981,8 +2090,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function deleteAssetClassAsync($model_asset_class_id, string $contentType = self::contentTypes['deleteAssetClass'][0])
+    public function deleteAssetClassAsync(
+        $model_asset_class_id,
+        string $contentType = self::contentTypes['deleteAssetClass'][0]
+
+    )
     {
+
         return $this->deleteAssetClassAsyncWithHttpInfo($model_asset_class_id, $contentType)
             ->then(
                 function ($response) {
@@ -2163,8 +2277,14 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return void
      */
-    public function deleteExcludedAsset($portfolio_group_id, $symbol_id, string $contentType = self::contentTypes['deleteExcludedAsset'][0])
+    public function deleteExcludedAsset(
+        $portfolio_group_id,
+        $symbol_id,
+        string $contentType = self::contentTypes['deleteExcludedAsset'][0]
+
+    )
     {
+
         $this->deleteExcludedAssetWithHttpInfo($portfolio_group_id, $symbol_id, $contentType);
     }
 
@@ -2257,8 +2377,14 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function deleteExcludedAssetAsync($portfolio_group_id, $symbol_id, string $contentType = self::contentTypes['deleteExcludedAsset'][0])
+    public function deleteExcludedAssetAsync(
+        $portfolio_group_id,
+        $symbol_id,
+        string $contentType = self::contentTypes['deleteExcludedAsset'][0]
+
+    )
     {
+
         return $this->deleteExcludedAssetAsyncWithHttpInfo($portfolio_group_id, $symbol_id, $contentType)
             ->then(
                 function ($response) {
@@ -2333,7 +2459,6 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
                 'Missing the required parameter portfolio_group_id when calling deleteExcludedAsset'
             );
         }
-
         // Check if $symbol_id is a string
         if (!is_null($symbol_id) && !is_string($symbol_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($symbol_id, true), gettype($symbol_id)));
@@ -2459,8 +2584,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return void
      */
-    public function deleteModelPortfolioById($model_portfolio_id, string $contentType = self::contentTypes['deleteModelPortfolioById'][0])
+    public function deleteModelPortfolioById(
+        $model_portfolio_id,
+        string $contentType = self::contentTypes['deleteModelPortfolioById'][0]
+
+    )
     {
+
         $this->deleteModelPortfolioByIdWithHttpInfo($model_portfolio_id, $contentType);
     }
 
@@ -2550,8 +2680,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function deleteModelPortfolioByIdAsync($model_portfolio_id, string $contentType = self::contentTypes['deleteModelPortfolioById'][0])
+    public function deleteModelPortfolioByIdAsync(
+        $model_portfolio_id,
+        string $contentType = self::contentTypes['deleteModelPortfolioById'][0]
+
+    )
     {
+
         return $this->deleteModelPortfolioByIdAsyncWithHttpInfo($model_portfolio_id, $contentType)
             ->then(
                 function ($response) {
@@ -2731,8 +2866,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\PortfolioGroup
      */
-    public function deletePortfoli($portfolio_group_id, string $contentType = self::contentTypes['deletePortfoli'][0])
+    public function deletePortfoli(
+        $portfolio_group_id,
+        string $contentType = self::contentTypes['deletePortfoli'][0]
+
+    )
     {
+
         list($response) = $this->deletePortfoliWithHttpInfo($portfolio_group_id, $contentType);
         return $response;
     }
@@ -2863,8 +3003,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function deletePortfoliAsync($portfolio_group_id, string $contentType = self::contentTypes['deletePortfoli'][0])
+    public function deletePortfoliAsync(
+        $portfolio_group_id,
+        string $contentType = self::contentTypes['deletePortfoli'][0]
+
+    )
     {
+
         return $this->deletePortfoliAsyncWithHttpInfo($portfolio_group_id, $contentType)
             ->then(
                 function ($response) {
@@ -3058,8 +3203,14 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\TargetAsset
      */
-    public function deletePortfolioTargetById($portfolio_group_id, $target_asset_id, string $contentType = self::contentTypes['deletePortfolioTargetById'][0])
+    public function deletePortfolioTargetById(
+        $portfolio_group_id,
+        $target_asset_id,
+        string $contentType = self::contentTypes['deletePortfolioTargetById'][0]
+
+    )
     {
+
         list($response) = $this->deletePortfolioTargetByIdWithHttpInfo($portfolio_group_id, $target_asset_id, $contentType);
         return $response;
     }
@@ -3193,8 +3344,14 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function deletePortfolioTargetByIdAsync($portfolio_group_id, $target_asset_id, string $contentType = self::contentTypes['deletePortfolioTargetById'][0])
+    public function deletePortfolioTargetByIdAsync(
+        $portfolio_group_id,
+        $target_asset_id,
+        string $contentType = self::contentTypes['deletePortfolioTargetById'][0]
+
+    )
     {
+
         return $this->deletePortfolioTargetByIdAsyncWithHttpInfo($portfolio_group_id, $target_asset_id, $contentType)
             ->then(
                 function ($response) {
@@ -3282,7 +3439,6 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
                 'Missing the required parameter portfolio_group_id when calling deletePortfolioTargetById'
             );
         }
-
         // Check if $target_asset_id is a string
         if (!is_null($target_asset_id) && !is_string($target_asset_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($target_asset_id, true), gettype($target_asset_id)));
@@ -3408,8 +3564,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\ModelAssetClassDetails
      */
-    public function detailAssetClass($model_asset_class_id, string $contentType = self::contentTypes['detailAssetClass'][0])
+    public function detailAssetClass(
+        $model_asset_class_id,
+        string $contentType = self::contentTypes['detailAssetClass'][0]
+
+    )
     {
+
         list($response) = $this->detailAssetClassWithHttpInfo($model_asset_class_id, $contentType);
         return $response;
     }
@@ -3540,8 +3701,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function detailAssetClassAsync($model_asset_class_id, string $contentType = self::contentTypes['detailAssetClass'][0])
+    public function detailAssetClassAsync(
+        $model_asset_class_id,
+        string $contentType = self::contentTypes['detailAssetClass'][0]
+
+    )
     {
+
         return $this->detailAssetClassAsyncWithHttpInfo($model_asset_class_id, $contentType)
             ->then(
                 function ($response) {
@@ -3736,8 +3902,15 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\Trade[]
      */
-    public function getCalculatedTradeById($portfolio_group_id, $calculated_trade_id, $trade_id, string $contentType = self::contentTypes['getCalculatedTradeById'][0])
+    public function getCalculatedTradeById(
+        $portfolio_group_id,
+        $calculated_trade_id,
+        $trade_id,
+        string $contentType = self::contentTypes['getCalculatedTradeById'][0]
+
+    )
     {
+
         list($response) = $this->getCalculatedTradeByIdWithHttpInfo($portfolio_group_id, $calculated_trade_id, $trade_id, $contentType);
         return $response;
     }
@@ -3874,8 +4047,15 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getCalculatedTradeByIdAsync($portfolio_group_id, $calculated_trade_id, $trade_id, string $contentType = self::contentTypes['getCalculatedTradeById'][0])
+    public function getCalculatedTradeByIdAsync(
+        $portfolio_group_id,
+        $calculated_trade_id,
+        $trade_id,
+        string $contentType = self::contentTypes['getCalculatedTradeById'][0]
+
+    )
     {
+
         return $this->getCalculatedTradeByIdAsyncWithHttpInfo($portfolio_group_id, $calculated_trade_id, $trade_id, $contentType)
             ->then(
                 function ($response) {
@@ -3965,7 +4145,6 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
                 'Missing the required parameter portfolio_group_id when calling getCalculatedTradeById'
             );
         }
-
         // Check if $calculated_trade_id is a string
         if (!is_null($calculated_trade_id) && !is_string($calculated_trade_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($calculated_trade_id, true), gettype($calculated_trade_id)));
@@ -3976,7 +4155,6 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
                 'Missing the required parameter calculated_trade_id when calling getCalculatedTradeById'
             );
         }
-
         // Check if $trade_id is a string
         if (!is_null($trade_id) && !is_string($trade_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($trade_id, true), gettype($trade_id)));
@@ -4110,8 +4288,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\ModelPortfolioDetails
      */
-    public function getModelDetailsById($model_portfolio_id, string $contentType = self::contentTypes['getModelDetailsById'][0])
+    public function getModelDetailsById(
+        $model_portfolio_id,
+        string $contentType = self::contentTypes['getModelDetailsById'][0]
+
+    )
     {
+
         list($response) = $this->getModelDetailsByIdWithHttpInfo($model_portfolio_id, $contentType);
         return $response;
     }
@@ -4242,8 +4425,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getModelDetailsByIdAsync($model_portfolio_id, string $contentType = self::contentTypes['getModelDetailsById'][0])
+    public function getModelDetailsByIdAsync(
+        $model_portfolio_id,
+        string $contentType = self::contentTypes['getModelDetailsById'][0]
+
+    )
     {
+
         return $this->getModelDetailsByIdAsyncWithHttpInfo($model_portfolio_id, $contentType)
             ->then(
                 function ($response) {
@@ -4436,8 +4624,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\Balance[]
      */
-    public function getPortfolioBalances($portfolio_group_id, string $contentType = self::contentTypes['getPortfolioBalances'][0])
+    public function getPortfolioBalances(
+        $portfolio_group_id,
+        string $contentType = self::contentTypes['getPortfolioBalances'][0]
+
+    )
     {
+
         list($response) = $this->getPortfolioBalancesWithHttpInfo($portfolio_group_id, $contentType);
         return $response;
     }
@@ -4568,8 +4761,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getPortfolioBalancesAsync($portfolio_group_id, string $contentType = self::contentTypes['getPortfolioBalances'][0])
+    public function getPortfolioBalancesAsync(
+        $portfolio_group_id,
+        string $contentType = self::contentTypes['getPortfolioBalances'][0]
+
+    )
     {
+
         return $this->getPortfolioBalancesAsyncWithHttpInfo($portfolio_group_id, $contentType)
             ->then(
                 function ($response) {
@@ -4762,8 +4960,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\PortfolioGroup
      */
-    public function getPortfolioDetailsById($portfolio_group_id, string $contentType = self::contentTypes['getPortfolioDetailsById'][0])
+    public function getPortfolioDetailsById(
+        $portfolio_group_id,
+        string $contentType = self::contentTypes['getPortfolioDetailsById'][0]
+
+    )
     {
+
         list($response) = $this->getPortfolioDetailsByIdWithHttpInfo($portfolio_group_id, $contentType);
         return $response;
     }
@@ -4894,8 +5097,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getPortfolioDetailsByIdAsync($portfolio_group_id, string $contentType = self::contentTypes['getPortfolioDetailsById'][0])
+    public function getPortfolioDetailsByIdAsync(
+        $portfolio_group_id,
+        string $contentType = self::contentTypes['getPortfolioDetailsById'][0]
+
+    )
     {
+
         return $this->getPortfolioDetailsByIdAsyncWithHttpInfo($portfolio_group_id, $contentType)
             ->then(
                 function ($response) {
@@ -5088,8 +5296,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\PortfolioGroupInfo
      */
-    public function getPortfolioInfo($portfolio_group_id, string $contentType = self::contentTypes['getPortfolioInfo'][0])
+    public function getPortfolioInfo(
+        $portfolio_group_id,
+        string $contentType = self::contentTypes['getPortfolioInfo'][0]
+
+    )
     {
+
         list($response) = $this->getPortfolioInfoWithHttpInfo($portfolio_group_id, $contentType);
         return $response;
     }
@@ -5220,8 +5433,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getPortfolioInfoAsync($portfolio_group_id, string $contentType = self::contentTypes['getPortfolioInfo'][0])
+    public function getPortfolioInfoAsync(
+        $portfolio_group_id,
+        string $contentType = self::contentTypes['getPortfolioInfo'][0]
+
+    )
     {
+
         return $this->getPortfolioInfoAsyncWithHttpInfo($portfolio_group_id, $contentType)
             ->then(
                 function ($response) {
@@ -5414,8 +5632,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\PortfolioGroupSettings
      */
-    public function getPortfolioSettings($portfolio_group_id, string $contentType = self::contentTypes['getPortfolioSettings'][0])
+    public function getPortfolioSettings(
+        $portfolio_group_id,
+        string $contentType = self::contentTypes['getPortfolioSettings'][0]
+
+    )
     {
+
         list($response) = $this->getPortfolioSettingsWithHttpInfo($portfolio_group_id, $contentType);
         return $response;
     }
@@ -5546,8 +5769,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getPortfolioSettingsAsync($portfolio_group_id, string $contentType = self::contentTypes['getPortfolioSettings'][0])
+    public function getPortfolioSettingsAsync(
+        $portfolio_group_id,
+        string $contentType = self::contentTypes['getPortfolioSettings'][0]
+
+    )
     {
+
         return $this->getPortfolioSettingsAsyncWithHttpInfo($portfolio_group_id, $contentType)
             ->then(
                 function ($response) {
@@ -5741,8 +5969,14 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\TargetAsset
      */
-    public function getPortfolioTargetById($portfolio_group_id, $target_asset_id, string $contentType = self::contentTypes['getPortfolioTargetById'][0])
+    public function getPortfolioTargetById(
+        $portfolio_group_id,
+        $target_asset_id,
+        string $contentType = self::contentTypes['getPortfolioTargetById'][0]
+
+    )
     {
+
         list($response) = $this->getPortfolioTargetByIdWithHttpInfo($portfolio_group_id, $target_asset_id, $contentType);
         return $response;
     }
@@ -5876,8 +6110,14 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getPortfolioTargetByIdAsync($portfolio_group_id, $target_asset_id, string $contentType = self::contentTypes['getPortfolioTargetById'][0])
+    public function getPortfolioTargetByIdAsync(
+        $portfolio_group_id,
+        $target_asset_id,
+        string $contentType = self::contentTypes['getPortfolioTargetById'][0]
+
+    )
     {
+
         return $this->getPortfolioTargetByIdAsyncWithHttpInfo($portfolio_group_id, $target_asset_id, $contentType)
             ->then(
                 function ($response) {
@@ -5965,7 +6205,6 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
                 'Missing the required parameter portfolio_group_id when calling getPortfolioTargetById'
             );
         }
-
         // Check if $target_asset_id is a string
         if (!is_null($target_asset_id) && !is_string($target_asset_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($target_asset_id, true), gettype($target_asset_id)));
@@ -6091,8 +6330,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\TargetAsset[]
      */
-    public function getPortfolioTargets($portfolio_group_id, string $contentType = self::contentTypes['getPortfolioTargets'][0])
+    public function getPortfolioTargets(
+        $portfolio_group_id,
+        string $contentType = self::contentTypes['getPortfolioTargets'][0]
+
+    )
     {
+
         list($response) = $this->getPortfolioTargetsWithHttpInfo($portfolio_group_id, $contentType);
         return $response;
     }
@@ -6223,8 +6467,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getPortfolioTargetsAsync($portfolio_group_id, string $contentType = self::contentTypes['getPortfolioTargets'][0])
+    public function getPortfolioTargetsAsync(
+        $portfolio_group_id,
+        string $contentType = self::contentTypes['getPortfolioTargets'][0]
+
+    )
     {
+
         return $this->getPortfolioTargetsAsyncWithHttpInfo($portfolio_group_id, $contentType)
             ->then(
                 function ($response) {
@@ -6417,8 +6666,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\ExcludedAsset[]
      */
-    public function getPortoflioExcludedAssets($portfolio_group_id, string $contentType = self::contentTypes['getPortoflioExcludedAssets'][0])
+    public function getPortoflioExcludedAssets(
+        $portfolio_group_id,
+        string $contentType = self::contentTypes['getPortoflioExcludedAssets'][0]
+
+    )
     {
+
         list($response) = $this->getPortoflioExcludedAssetsWithHttpInfo($portfolio_group_id, $contentType);
         return $response;
     }
@@ -6549,8 +6803,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getPortoflioExcludedAssetsAsync($portfolio_group_id, string $contentType = self::contentTypes['getPortoflioExcludedAssets'][0])
+    public function getPortoflioExcludedAssetsAsync(
+        $portfolio_group_id,
+        string $contentType = self::contentTypes['getPortoflioExcludedAssets'][0]
+
+    )
     {
+
         return $this->getPortoflioExcludedAssetsAsyncWithHttpInfo($portfolio_group_id, $contentType)
             ->then(
                 function ($response) {
@@ -6743,8 +7002,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\TargetAsset[]
      */
-    public function importModelPortfolio($portfolio_group_id, string $contentType = self::contentTypes['importModelPortfolio'][0])
+    public function importModelPortfolio(
+        $portfolio_group_id,
+        string $contentType = self::contentTypes['importModelPortfolio'][0]
+
+    )
     {
+
         list($response) = $this->importModelPortfolioWithHttpInfo($portfolio_group_id, $contentType);
         return $response;
     }
@@ -6875,8 +7139,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function importModelPortfolioAsync($portfolio_group_id, string $contentType = self::contentTypes['importModelPortfolio'][0])
+    public function importModelPortfolioAsync(
+        $portfolio_group_id,
+        string $contentType = self::contentTypes['importModelPortfolio'][0]
+
+    )
     {
+
         return $this->importModelPortfolioAsyncWithHttpInfo($portfolio_group_id, $contentType)
             ->then(
                 function ($response) {
@@ -7068,8 +7337,12 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\ModelAssetClassDetails[]
      */
-    public function listAssetClasses(string $contentType = self::contentTypes['listAssetClasses'][0])
+    public function listAssetClasses(
+        string $contentType = self::contentTypes['listAssetClasses'][0]
+
+    )
     {
+
         list($response) = $this->listAssetClassesWithHttpInfo($contentType);
         return $response;
     }
@@ -7197,8 +7470,12 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listAssetClassesAsync(string $contentType = self::contentTypes['listAssetClasses'][0])
+    public function listAssetClassesAsync(
+        string $contentType = self::contentTypes['listAssetClasses'][0]
+
+    )
     {
+
         return $this->listAssetClassesAsyncWithHttpInfo($contentType)
             ->then(
                 function ($response) {
@@ -7271,6 +7548,7 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function listAssetClassesRequest(string $contentType = self::contentTypes['listAssetClasses'][0])
     {
+
 
 
         $resourcePath = '/modelAssetClass';
@@ -7370,8 +7648,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\CalculatedTrade
      */
-    public function listCalculatedTrades($portfolio_group_id, string $contentType = self::contentTypes['listCalculatedTrades'][0])
+    public function listCalculatedTrades(
+        $portfolio_group_id,
+        string $contentType = self::contentTypes['listCalculatedTrades'][0]
+
+    )
     {
+
         list($response) = $this->listCalculatedTradesWithHttpInfo($portfolio_group_id, $contentType);
         return $response;
     }
@@ -7502,8 +7785,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listCalculatedTradesAsync($portfolio_group_id, string $contentType = self::contentTypes['listCalculatedTrades'][0])
+    public function listCalculatedTradesAsync(
+        $portfolio_group_id,
+        string $contentType = self::contentTypes['listCalculatedTrades'][0]
+
+    )
     {
+
         return $this->listCalculatedTradesAsyncWithHttpInfo($portfolio_group_id, $contentType)
             ->then(
                 function ($response) {
@@ -7695,8 +7983,12 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\ModelPortfolioDetails[]
      */
-    public function listModelPortfolio(string $contentType = self::contentTypes['listModelPortfolio'][0])
+    public function listModelPortfolio(
+        string $contentType = self::contentTypes['listModelPortfolio'][0]
+
+    )
     {
+
         list($response) = $this->listModelPortfolioWithHttpInfo($contentType);
         return $response;
     }
@@ -7824,8 +8116,12 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listModelPortfolioAsync(string $contentType = self::contentTypes['listModelPortfolio'][0])
+    public function listModelPortfolioAsync(
+        string $contentType = self::contentTypes['listModelPortfolio'][0]
+
+    )
     {
+
         return $this->listModelPortfolioAsyncWithHttpInfo($contentType)
             ->then(
                 function ($response) {
@@ -7898,6 +8194,7 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function listModelPortfolioRequest(string $contentType = self::contentTypes['listModelPortfolio'][0])
     {
+
 
 
         $resourcePath = '/modelPortfolio';
@@ -7997,8 +8294,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\Account[]
      */
-    public function listPortfolioAccounts($portfolio_group_id, string $contentType = self::contentTypes['listPortfolioAccounts'][0])
+    public function listPortfolioAccounts(
+        $portfolio_group_id,
+        string $contentType = self::contentTypes['listPortfolioAccounts'][0]
+
+    )
     {
+
         list($response) = $this->listPortfolioAccountsWithHttpInfo($portfolio_group_id, $contentType);
         return $response;
     }
@@ -8129,8 +8431,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listPortfolioAccountsAsync($portfolio_group_id, string $contentType = self::contentTypes['listPortfolioAccounts'][0])
+    public function listPortfolioAccountsAsync(
+        $portfolio_group_id,
+        string $contentType = self::contentTypes['listPortfolioAccounts'][0]
+
+    )
     {
+
         return $this->listPortfolioAccountsAsyncWithHttpInfo($portfolio_group_id, $contentType)
             ->then(
                 function ($response) {
@@ -8324,8 +8631,21 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return void
      */
-    public function modifyModelPortfolioById($model_portfolio_id, $model_portfolio_details, string $contentType = self::contentTypes['modifyModelPortfolioById'][0])
+    public function modifyModelPortfolioById(
+        $model_portfolio_id,
+        $model_portfolio = null,
+        $model_portfolio_security = null,
+        $model_portfolio_asset_class = null,
+        string $contentType = self::contentTypes['modifyModelPortfolioById'][0]
+
+    )
     {
+        $_body = [];
+        $this->setRequestBodyProperty($_body, "model_portfolio", $model_portfolio);
+        $this->setRequestBodyProperty($_body, "model_portfolio_security", $model_portfolio_security);
+        $this->setRequestBodyProperty($_body, "model_portfolio_asset_class", $model_portfolio_asset_class);
+        $model_portfolio_details = $_body;
+
         $this->modifyModelPortfolioByIdWithHttpInfo($model_portfolio_id, $model_portfolio_details, $contentType);
     }
 
@@ -8418,8 +8738,21 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function modifyModelPortfolioByIdAsync($model_portfolio_id, $model_portfolio_details, string $contentType = self::contentTypes['modifyModelPortfolioById'][0])
+    public function modifyModelPortfolioByIdAsync(
+        $model_portfolio_id,
+        $model_portfolio = null,
+        $model_portfolio_security = null,
+        $model_portfolio_asset_class = null,
+        string $contentType = self::contentTypes['modifyModelPortfolioById'][0]
+
+    )
     {
+        $_body = [];
+        $this->setRequestBodyProperty($_body, "model_portfolio", $model_portfolio);
+        $this->setRequestBodyProperty($_body, "model_portfolio_security", $model_portfolio_security);
+        $this->setRequestBodyProperty($_body, "model_portfolio_asset_class", $model_portfolio_asset_class);
+        $model_portfolio_details = $_body;
+
         return $this->modifyModelPortfolioByIdAsyncWithHttpInfo($model_portfolio_id, $model_portfolio_details, $contentType)
             ->then(
                 function ($response) {
@@ -8494,7 +8827,6 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
                 'Missing the required parameter model_portfolio_id when calling modifyModelPortfolioById'
             );
         }
-
         if ($model_portfolio_details != null) {
             if (!($model_portfolio_details instanceof \SnapTrade\Model\ModelPortfolioDetails)) {
                 if (!is_array($model_portfolio_details))
@@ -8624,8 +8956,19 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\PortfolioGroup
      */
-    public function savePortfolio($portfolio_group_id, $request_body, string $contentType = self::contentTypes['savePortfolio'][0])
+    public function savePortfolio(
+        $portfolio_group_id,
+        $id = null,
+        $name = null,
+        string $contentType = self::contentTypes['savePortfolio'][0]
+
+    )
     {
+        $_body = [];
+        $this->setRequestBodyProperty($_body, "id", $id);
+        $this->setRequestBodyProperty($_body, "name", $name);
+        $request_body = $_body;
+
         list($response) = $this->savePortfolioWithHttpInfo($portfolio_group_id, $request_body, $contentType);
         return $response;
     }
@@ -8759,8 +9102,19 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function savePortfolioAsync($portfolio_group_id, $request_body, string $contentType = self::contentTypes['savePortfolio'][0])
+    public function savePortfolioAsync(
+        $portfolio_group_id,
+        $id = null,
+        $name = null,
+        string $contentType = self::contentTypes['savePortfolio'][0]
+
+    )
     {
+        $_body = [];
+        $this->setRequestBodyProperty($_body, "id", $id);
+        $this->setRequestBodyProperty($_body, "name", $name);
+        $request_body = $_body;
+
         return $this->savePortfolioAsyncWithHttpInfo($portfolio_group_id, $request_body, $contentType)
             ->then(
                 function ($response) {
@@ -8848,7 +9202,6 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
                 'Missing the required parameter portfolio_group_id when calling savePortfolio'
             );
         }
-
         // verify the required parameter 'request_body' is set
         if ($request_body === null || (is_array($request_body) && count($request_body) === 0)) {
             throw new \InvalidArgumentException(
@@ -8970,8 +9323,17 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\UniversalSymbol[]
      */
-    public function searchPortfolioSymbols($portfolio_group_id, $symbol_query = null, string $contentType = self::contentTypes['searchPortfolioSymbols'][0])
+    public function searchPortfolioSymbols(
+        $portfolio_group_id,
+        $substring = null,
+        string $contentType = self::contentTypes['searchPortfolioSymbols'][0]
+
+    )
     {
+        $_body = null;
+        $this->setRequestBodyProperty($_body, "substring", $substring);
+        $symbol_query = $_body;
+
         list($response) = $this->searchPortfolioSymbolsWithHttpInfo($portfolio_group_id, $symbol_query, $contentType);
         return $response;
     }
@@ -9105,8 +9467,17 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function searchPortfolioSymbolsAsync($portfolio_group_id, $symbol_query = null, string $contentType = self::contentTypes['searchPortfolioSymbols'][0])
+    public function searchPortfolioSymbolsAsync(
+        $portfolio_group_id,
+        $substring = null,
+        string $contentType = self::contentTypes['searchPortfolioSymbols'][0]
+
+    )
     {
+        $_body = null;
+        $this->setRequestBodyProperty($_body, "substring", $substring);
+        $symbol_query = $_body;
+
         return $this->searchPortfolioSymbolsAsyncWithHttpInfo($portfolio_group_id, $symbol_query, $contentType)
             ->then(
                 function ($response) {
@@ -9194,7 +9565,6 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
                 'Missing the required parameter portfolio_group_id when calling searchPortfolioSymbols'
             );
         }
-
         if ($symbol_query != null) {
             if (!($symbol_query instanceof \SnapTrade\Model\SymbolQuery)) {
                 if (!is_array($symbol_query))
@@ -9318,8 +9688,15 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\TargetAsset[]
      */
-    public function setPortfolioTargets($portfolio_group_id, $target_asset = null, string $contentType = self::contentTypes['setPortfolioTargets'][0])
+    public function setPortfolioTargets(
+        $portfolio_group_id,
+        string $contentType = self::contentTypes['setPortfolioTargets'][0]
+
+    )
     {
+        $_body = null;
+        $target_asset = $_body;
+
         list($response) = $this->setPortfolioTargetsWithHttpInfo($portfolio_group_id, $target_asset, $contentType);
         return $response;
     }
@@ -9453,8 +9830,15 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function setPortfolioTargetsAsync($portfolio_group_id, $target_asset = null, string $contentType = self::contentTypes['setPortfolioTargets'][0])
+    public function setPortfolioTargetsAsync(
+        $portfolio_group_id,
+        string $contentType = self::contentTypes['setPortfolioTargets'][0]
+
+    )
     {
+        $_body = null;
+        $target_asset = $_body;
+
         return $this->setPortfolioTargetsAsyncWithHttpInfo($portfolio_group_id, $target_asset, $contentType)
             ->then(
                 function ($response) {
@@ -9542,7 +9926,6 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
                 'Missing the required parameter portfolio_group_id when calling setPortfolioTargets'
             );
         }
-
 
 
         $resourcePath = '/portfolioGroups/{portfolioGroupId}/targets';
@@ -9658,8 +10041,19 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return void
      */
-    public function updateAssetClass($model_asset_class_id, $model_asset_class_details, string $contentType = self::contentTypes['updateAssetClass'][0])
+    public function updateAssetClass(
+        $model_asset_class_id,
+        $model_asset_class = null,
+        $model_asset_class_target = null,
+        string $contentType = self::contentTypes['updateAssetClass'][0]
+
+    )
     {
+        $_body = [];
+        $this->setRequestBodyProperty($_body, "model_asset_class", $model_asset_class);
+        $this->setRequestBodyProperty($_body, "model_asset_class_target", $model_asset_class_target);
+        $model_asset_class_details = $_body;
+
         $this->updateAssetClassWithHttpInfo($model_asset_class_id, $model_asset_class_details, $contentType);
     }
 
@@ -9752,8 +10146,19 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function updateAssetClassAsync($model_asset_class_id, $model_asset_class_details, string $contentType = self::contentTypes['updateAssetClass'][0])
+    public function updateAssetClassAsync(
+        $model_asset_class_id,
+        $model_asset_class = null,
+        $model_asset_class_target = null,
+        string $contentType = self::contentTypes['updateAssetClass'][0]
+
+    )
     {
+        $_body = [];
+        $this->setRequestBodyProperty($_body, "model_asset_class", $model_asset_class);
+        $this->setRequestBodyProperty($_body, "model_asset_class_target", $model_asset_class_target);
+        $model_asset_class_details = $_body;
+
         return $this->updateAssetClassAsyncWithHttpInfo($model_asset_class_id, $model_asset_class_details, $contentType)
             ->then(
                 function ($response) {
@@ -9828,7 +10233,6 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
                 'Missing the required parameter model_asset_class_id when calling updateAssetClass'
             );
         }
-
         if ($model_asset_class_details != null) {
             if (!($model_asset_class_details instanceof \SnapTrade\Model\ModelAssetClassDetails)) {
                 if (!is_array($model_asset_class_details))
@@ -9957,8 +10361,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\PortfolioGroupSettings
      */
-    public function updatePortfolioSettings($portfolio_group_id, string $contentType = self::contentTypes['updatePortfolioSettings'][0])
+    public function updatePortfolioSettings(
+        $portfolio_group_id,
+        string $contentType = self::contentTypes['updatePortfolioSettings'][0]
+
+    )
     {
+
         list($response) = $this->updatePortfolioSettingsWithHttpInfo($portfolio_group_id, $contentType);
         return $response;
     }
@@ -10089,8 +10498,13 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function updatePortfolioSettingsAsync($portfolio_group_id, string $contentType = self::contentTypes['updatePortfolioSettings'][0])
+    public function updatePortfolioSettingsAsync(
+        $portfolio_group_id,
+        string $contentType = self::contentTypes['updatePortfolioSettings'][0]
+
+    )
     {
+
         return $this->updatePortfolioSettingsAsyncWithHttpInfo($portfolio_group_id, $contentType)
             ->then(
                 function ($response) {
@@ -10285,8 +10699,26 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\TargetAsset
      */
-    public function updatePortfolioTargetById($portfolio_group_id, $target_asset_id, $target_asset, string $contentType = self::contentTypes['updatePortfolioTargetById'][0])
+    public function updatePortfolioTargetById(
+        $portfolio_group_id,
+        $target_asset_id,
+        $id = null,
+        $symbol = null,
+        $percent = null,
+        $is_supported = null,
+        $is_excluded = null,
+        string $contentType = self::contentTypes['updatePortfolioTargetById'][0]
+
+    )
     {
+        $_body = [];
+        $this->setRequestBodyProperty($_body, "id", $id);
+        $this->setRequestBodyProperty($_body, "symbol", $symbol);
+        $this->setRequestBodyProperty($_body, "percent", $percent);
+        $this->setRequestBodyProperty($_body, "is_supported", $is_supported);
+        $this->setRequestBodyProperty($_body, "is_excluded", $is_excluded);
+        $target_asset = $_body;
+
         list($response) = $this->updatePortfolioTargetByIdWithHttpInfo($portfolio_group_id, $target_asset_id, $target_asset, $contentType);
         return $response;
     }
@@ -10423,8 +10855,26 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function updatePortfolioTargetByIdAsync($portfolio_group_id, $target_asset_id, $target_asset, string $contentType = self::contentTypes['updatePortfolioTargetById'][0])
+    public function updatePortfolioTargetByIdAsync(
+        $portfolio_group_id,
+        $target_asset_id,
+        $id = null,
+        $symbol = null,
+        $percent = null,
+        $is_supported = null,
+        $is_excluded = null,
+        string $contentType = self::contentTypes['updatePortfolioTargetById'][0]
+
+    )
     {
+        $_body = [];
+        $this->setRequestBodyProperty($_body, "id", $id);
+        $this->setRequestBodyProperty($_body, "symbol", $symbol);
+        $this->setRequestBodyProperty($_body, "percent", $percent);
+        $this->setRequestBodyProperty($_body, "is_supported", $is_supported);
+        $this->setRequestBodyProperty($_body, "is_excluded", $is_excluded);
+        $target_asset = $_body;
+
         return $this->updatePortfolioTargetByIdAsyncWithHttpInfo($portfolio_group_id, $target_asset_id, $target_asset, $contentType)
             ->then(
                 function ($response) {
@@ -10514,7 +10964,6 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
                 'Missing the required parameter portfolio_group_id when calling updatePortfolioTargetById'
             );
         }
-
         // Check if $target_asset_id is a string
         if (!is_null($target_asset_id) && !is_string($target_asset_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($target_asset_id, true), gettype($target_asset_id)));
@@ -10525,7 +10974,6 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
                 'Missing the required parameter target_asset_id when calling updatePortfolioTargetById'
             );
         }
-
         if ($target_asset != null) {
             if (!($target_asset instanceof \SnapTrade\Model\TargetAsset)) {
                 if (!is_array($target_asset))

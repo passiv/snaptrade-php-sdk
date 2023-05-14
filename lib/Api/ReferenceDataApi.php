@@ -140,6 +140,14 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
     }
 
     /**
+     * For initializing request body parameter
+     */
+    private function setRequestBodyProperty(&$body, $property, $value) {
+        if ($body == null) $body = [];
+        $body[$property] = $value;
+    }
+
+    /**
      * Operation getCurrencyExchangeRatePair
      *
      * Return the exchange rate of a currency pair
@@ -151,8 +159,13 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\ExchangeRatePairs
      */
-    public function getCurrencyExchangeRatePair($currency_pair, string $contentType = self::contentTypes['getCurrencyExchangeRatePair'][0])
+    public function getCurrencyExchangeRatePair(
+        $currency_pair,
+        string $contentType = self::contentTypes['getCurrencyExchangeRatePair'][0]
+
+    )
     {
+
         list($response) = $this->getCurrencyExchangeRatePairWithHttpInfo($currency_pair, $contentType);
         return $response;
     }
@@ -283,8 +296,13 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getCurrencyExchangeRatePairAsync($currency_pair, string $contentType = self::contentTypes['getCurrencyExchangeRatePair'][0])
+    public function getCurrencyExchangeRatePairAsync(
+        $currency_pair,
+        string $contentType = self::contentTypes['getCurrencyExchangeRatePair'][0]
+
+    )
     {
+
         return $this->getCurrencyExchangeRatePairAsyncWithHttpInfo($currency_pair, $contentType)
             ->then(
                 function ($response) {
@@ -476,8 +494,12 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\PartnerData|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\Model401FailedRequestResponse|\SnapTrade\Model\Model404FailedRequestResponse
      */
-    public function getPartnerInfo(string $contentType = self::contentTypes['getPartnerInfo'][0])
+    public function getPartnerInfo(
+        string $contentType = self::contentTypes['getPartnerInfo'][0]
+
+    )
     {
+
         list($response) = $this->getPartnerInfoWithHttpInfo($contentType);
         return $response;
     }
@@ -674,8 +696,12 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getPartnerInfoAsync(string $contentType = self::contentTypes['getPartnerInfo'][0])
+    public function getPartnerInfoAsync(
+        string $contentType = self::contentTypes['getPartnerInfo'][0]
+
+    )
     {
+
         return $this->getPartnerInfoAsyncWithHttpInfo($contentType)
             ->then(
                 function ($response) {
@@ -748,6 +774,7 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      */
     public function getPartnerInfoRequest(string $contentType = self::contentTypes['getPartnerInfo'][0])
     {
+
 
 
         $resourcePath = '/snapTrade/partners';
@@ -846,8 +873,12 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\SecurityType[]
      */
-    public function getSecurityTypes(string $contentType = self::contentTypes['getSecurityTypes'][0])
+    public function getSecurityTypes(
+        string $contentType = self::contentTypes['getSecurityTypes'][0]
+
+    )
     {
+
         list($response) = $this->getSecurityTypesWithHttpInfo($contentType);
         return $response;
     }
@@ -975,8 +1006,12 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getSecurityTypesAsync(string $contentType = self::contentTypes['getSecurityTypes'][0])
+    public function getSecurityTypesAsync(
+        string $contentType = self::contentTypes['getSecurityTypes'][0]
+
+    )
     {
+
         return $this->getSecurityTypesAsyncWithHttpInfo($contentType)
             ->then(
                 function ($response) {
@@ -1049,6 +1084,7 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      */
     public function getSecurityTypesRequest(string $contentType = self::contentTypes['getSecurityTypes'][0])
     {
+
 
 
         $resourcePath = '/securityTypes';
@@ -1147,8 +1183,12 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\Exchange[]
      */
-    public function getStockExchanges(string $contentType = self::contentTypes['getStockExchanges'][0])
+    public function getStockExchanges(
+        string $contentType = self::contentTypes['getStockExchanges'][0]
+
+    )
     {
+
         list($response) = $this->getStockExchangesWithHttpInfo($contentType);
         return $response;
     }
@@ -1276,8 +1316,12 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getStockExchangesAsync(string $contentType = self::contentTypes['getStockExchanges'][0])
+    public function getStockExchangesAsync(
+        string $contentType = self::contentTypes['getStockExchanges'][0]
+
+    )
     {
+
         return $this->getStockExchangesAsyncWithHttpInfo($contentType)
             ->then(
                 function ($response) {
@@ -1350,6 +1394,7 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      */
     public function getStockExchangesRequest(string $contentType = self::contentTypes['getStockExchanges'][0])
     {
+
 
 
         $resourcePath = '/exchanges';
@@ -1449,8 +1494,16 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\UniversalSymbol[]
      */
-    public function getSymbols($symbol_query = null, string $contentType = self::contentTypes['getSymbols'][0])
+    public function getSymbols(
+        $substring = null,
+        string $contentType = self::contentTypes['getSymbols'][0]
+
+    )
     {
+        $_body = null;
+        $this->setRequestBodyProperty($_body, "substring", $substring);
+        $symbol_query = $_body;
+
         list($response) = $this->getSymbolsWithHttpInfo($symbol_query, $contentType);
         return $response;
     }
@@ -1581,8 +1634,16 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getSymbolsAsync($symbol_query = null, string $contentType = self::contentTypes['getSymbols'][0])
+    public function getSymbolsAsync(
+        $substring = null,
+        string $contentType = self::contentTypes['getSymbols'][0]
+
+    )
     {
+        $_body = null;
+        $this->setRequestBodyProperty($_body, "substring", $substring);
+        $symbol_query = $_body;
+
         return $this->getSymbolsAsyncWithHttpInfo($symbol_query, $contentType)
             ->then(
                 function ($response) {
@@ -1773,8 +1834,14 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\UniversalSymbol
      */
-    public function getSymbolsByTicker($ticker, $symbol_id = null, string $contentType = self::contentTypes['getSymbolsByTicker'][0])
+    public function getSymbolsByTicker(
+        $ticker,
+        $symbol_id = null,
+        string $contentType = self::contentTypes['getSymbolsByTicker'][0]
+
+    )
     {
+
         list($response) = $this->getSymbolsByTickerWithHttpInfo($ticker, $symbol_id, $contentType);
         return $response;
     }
@@ -1908,8 +1975,14 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getSymbolsByTickerAsync($ticker, $symbol_id = null, string $contentType = self::contentTypes['getSymbolsByTicker'][0])
+    public function getSymbolsByTickerAsync(
+        $ticker,
+        $symbol_id = null,
+        string $contentType = self::contentTypes['getSymbolsByTicker'][0]
+
+    )
     {
+
         return $this->getSymbolsByTickerAsyncWithHttpInfo($ticker, $symbol_id, $contentType)
             ->then(
                 function ($response) {
@@ -1997,7 +2070,6 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
                 'Missing the required parameter ticker when calling getSymbolsByTicker'
             );
         }
-
         // Check if $symbol_id is a string
         if (!is_null($symbol_id) && !is_string($symbol_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($symbol_id, true), gettype($symbol_id)));
@@ -2118,8 +2190,13 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\BrokerageAuthorizationTypeReadOnly[]
      */
-    public function listAllBrokerageAuthorizationType($brokerage = null, string $contentType = self::contentTypes['listAllBrokerageAuthorizationType'][0])
+    public function listAllBrokerageAuthorizationType(
+        $brokerage = null,
+        string $contentType = self::contentTypes['listAllBrokerageAuthorizationType'][0]
+
+    )
     {
+
         list($response) = $this->listAllBrokerageAuthorizationTypeWithHttpInfo($brokerage, $contentType);
         return $response;
     }
@@ -2250,8 +2327,13 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listAllBrokerageAuthorizationTypeAsync($brokerage = null, string $contentType = self::contentTypes['listAllBrokerageAuthorizationType'][0])
+    public function listAllBrokerageAuthorizationTypeAsync(
+        $brokerage = null,
+        string $contentType = self::contentTypes['listAllBrokerageAuthorizationType'][0]
+
+    )
     {
+
         return $this->listAllBrokerageAuthorizationTypeAsyncWithHttpInfo($brokerage, $contentType)
             ->then(
                 function ($response) {
@@ -2438,8 +2520,12 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\Brokerage[]
      */
-    public function listAllBrokerages(string $contentType = self::contentTypes['listAllBrokerages'][0])
+    public function listAllBrokerages(
+        string $contentType = self::contentTypes['listAllBrokerages'][0]
+
+    )
     {
+
         list($response) = $this->listAllBrokeragesWithHttpInfo($contentType);
         return $response;
     }
@@ -2567,8 +2653,12 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listAllBrokeragesAsync(string $contentType = self::contentTypes['listAllBrokerages'][0])
+    public function listAllBrokeragesAsync(
+        string $contentType = self::contentTypes['listAllBrokerages'][0]
+
+    )
     {
+
         return $this->listAllBrokeragesAsyncWithHttpInfo($contentType)
             ->then(
                 function ($response) {
@@ -2641,6 +2731,7 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      */
     public function listAllBrokeragesRequest(string $contentType = self::contentTypes['listAllBrokerages'][0])
     {
+
 
 
         $resourcePath = '/brokerages';
@@ -2739,8 +2830,12 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\Currency[]
      */
-    public function listAllCurrencies(string $contentType = self::contentTypes['listAllCurrencies'][0])
+    public function listAllCurrencies(
+        string $contentType = self::contentTypes['listAllCurrencies'][0]
+
+    )
     {
+
         list($response) = $this->listAllCurrenciesWithHttpInfo($contentType);
         return $response;
     }
@@ -2868,8 +2963,12 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listAllCurrenciesAsync(string $contentType = self::contentTypes['listAllCurrencies'][0])
+    public function listAllCurrenciesAsync(
+        string $contentType = self::contentTypes['listAllCurrencies'][0]
+
+    )
     {
+
         return $this->listAllCurrenciesAsyncWithHttpInfo($contentType)
             ->then(
                 function ($response) {
@@ -2942,6 +3041,7 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      */
     public function listAllCurrenciesRequest(string $contentType = self::contentTypes['listAllCurrencies'][0])
     {
+
 
 
         $resourcePath = '/currencies';
@@ -3040,8 +3140,12 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\ExchangeRatePairs[]
      */
-    public function listAllCurrenciesRates(string $contentType = self::contentTypes['listAllCurrenciesRates'][0])
+    public function listAllCurrenciesRates(
+        string $contentType = self::contentTypes['listAllCurrenciesRates'][0]
+
+    )
     {
+
         list($response) = $this->listAllCurrenciesRatesWithHttpInfo($contentType);
         return $response;
     }
@@ -3169,8 +3273,12 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listAllCurrenciesRatesAsync(string $contentType = self::contentTypes['listAllCurrenciesRates'][0])
+    public function listAllCurrenciesRatesAsync(
+        string $contentType = self::contentTypes['listAllCurrenciesRates'][0]
+
+    )
     {
+
         return $this->listAllCurrenciesRatesAsyncWithHttpInfo($contentType)
             ->then(
                 function ($response) {
@@ -3243,6 +3351,7 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      */
     public function listAllCurrenciesRatesRequest(string $contentType = self::contentTypes['listAllCurrenciesRates'][0])
     {
+
 
 
         $resourcePath = '/currencies/rates';
@@ -3345,8 +3454,19 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\UniversalSymbol[]
      */
-    public function symbolSearchUserAccount($user_id, $user_secret, $account_id, $symbol_query = null, string $contentType = self::contentTypes['symbolSearchUserAccount'][0])
+    public function symbolSearchUserAccount(
+        $user_id,
+        $user_secret,
+        $account_id,
+        $substring = null,
+        string $contentType = self::contentTypes['symbolSearchUserAccount'][0]
+
+    )
     {
+        $_body = null;
+        $this->setRequestBodyProperty($_body, "substring", $substring);
+        $symbol_query = $_body;
+
         list($response) = $this->symbolSearchUserAccountWithHttpInfo($user_id, $user_secret, $account_id, $symbol_query, $contentType);
         return $response;
     }
@@ -3486,8 +3606,19 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function symbolSearchUserAccountAsync($user_id, $user_secret, $account_id, $symbol_query = null, string $contentType = self::contentTypes['symbolSearchUserAccount'][0])
+    public function symbolSearchUserAccountAsync(
+        $user_id,
+        $user_secret,
+        $account_id,
+        $substring = null,
+        string $contentType = self::contentTypes['symbolSearchUserAccount'][0]
+
+    )
     {
+        $_body = null;
+        $this->setRequestBodyProperty($_body, "substring", $substring);
+        $symbol_query = $_body;
+
         return $this->symbolSearchUserAccountAsyncWithHttpInfo($user_id, $user_secret, $account_id, $symbol_query, $contentType)
             ->then(
                 function ($response) {
@@ -3579,7 +3710,6 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
                 'Missing the required parameter user_id when calling symbolSearchUserAccount'
             );
         }
-
         // Check if $user_secret is a string
         if (!is_null($user_secret) && !is_string($user_secret)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
@@ -3590,7 +3720,6 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
                 'Missing the required parameter user_secret when calling symbolSearchUserAccount'
             );
         }
-
         // Check if $account_id is a string
         if (!is_null($account_id) && !is_string($account_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($account_id, true), gettype($account_id)));
@@ -3601,7 +3730,6 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
                 'Missing the required parameter account_id when calling symbolSearchUserAccount'
             );
         }
-
         if ($symbol_query != null) {
             if (!($symbol_query instanceof \SnapTrade\Model\SymbolQuery)) {
                 if (!is_array($symbol_query))

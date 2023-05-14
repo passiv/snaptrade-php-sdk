@@ -122,6 +122,14 @@ class OptionsApi extends \SnapTrade\CustomApi
     }
 
     /**
+     * For initializing request body parameter
+     */
+    private function setRequestBodyProperty(&$body, $property, $value) {
+        if ($body == null) $body = [];
+        $body[$property] = $value;
+    }
+
+    /**
      * Operation getOptionStrategy
      *
      * Creates an option strategy object that will be used to place an option strategy order
@@ -136,8 +144,23 @@ class OptionsApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\StrategyQuotes
      */
-    public function getOptionStrategy($user_id, $user_secret, $account_id, $options_get_option_strategy_request, string $contentType = self::contentTypes['getOptionStrategy'][0])
+    public function getOptionStrategy(
+        $underlying_symbol_id,
+        $legs,
+        $strategy_type,
+        $user_id,
+        $user_secret,
+        $account_id,
+        string $contentType = self::contentTypes['getOptionStrategy'][0]
+
+    )
     {
+        $_body = [];
+        $this->setRequestBodyProperty($_body, "underlying_symbol_id", $underlying_symbol_id);
+        $this->setRequestBodyProperty($_body, "legs", $legs);
+        $this->setRequestBodyProperty($_body, "strategy_type", $strategy_type);
+        $options_get_option_strategy_request = $_body;
+
         list($response) = $this->getOptionStrategyWithHttpInfo($user_id, $user_secret, $account_id, $options_get_option_strategy_request, $contentType);
         return $response;
     }
@@ -277,8 +300,23 @@ class OptionsApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getOptionStrategyAsync($user_id, $user_secret, $account_id, $options_get_option_strategy_request, string $contentType = self::contentTypes['getOptionStrategy'][0])
+    public function getOptionStrategyAsync(
+        $underlying_symbol_id,
+        $legs,
+        $strategy_type,
+        $user_id,
+        $user_secret,
+        $account_id,
+        string $contentType = self::contentTypes['getOptionStrategy'][0]
+
+    )
     {
+        $_body = [];
+        $this->setRequestBodyProperty($_body, "underlying_symbol_id", $underlying_symbol_id);
+        $this->setRequestBodyProperty($_body, "legs", $legs);
+        $this->setRequestBodyProperty($_body, "strategy_type", $strategy_type);
+        $options_get_option_strategy_request = $_body;
+
         return $this->getOptionStrategyAsyncWithHttpInfo($user_id, $user_secret, $account_id, $options_get_option_strategy_request, $contentType)
             ->then(
                 function ($response) {
@@ -370,7 +408,6 @@ class OptionsApi extends \SnapTrade\CustomApi
                 'Missing the required parameter user_id when calling getOptionStrategy'
             );
         }
-
         // Check if $user_secret is a string
         if (!is_null($user_secret) && !is_string($user_secret)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
@@ -381,7 +418,6 @@ class OptionsApi extends \SnapTrade\CustomApi
                 'Missing the required parameter user_secret when calling getOptionStrategy'
             );
         }
-
         // Check if $account_id is a string
         if (!is_null($account_id) && !is_string($account_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($account_id, true), gettype($account_id)));
@@ -392,7 +428,6 @@ class OptionsApi extends \SnapTrade\CustomApi
                 'Missing the required parameter account_id when calling getOptionStrategy'
             );
         }
-
         if ($options_get_option_strategy_request != null) {
             if (!($options_get_option_strategy_request instanceof \SnapTrade\Model\OptionsGetOptionStrategyRequest)) {
                 if (!is_array($options_get_option_strategy_request))
@@ -542,8 +577,16 @@ class OptionsApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\OptionChainInner[]
      */
-    public function getOptionsChain($user_id, $user_secret, $account_id, $symbol, string $contentType = self::contentTypes['getOptionsChain'][0])
+    public function getOptionsChain(
+        $user_id,
+        $user_secret,
+        $account_id,
+        $symbol,
+        string $contentType = self::contentTypes['getOptionsChain'][0]
+
+    )
     {
+
         list($response) = $this->getOptionsChainWithHttpInfo($user_id, $user_secret, $account_id, $symbol, $contentType);
         return $response;
     }
@@ -683,8 +726,16 @@ class OptionsApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getOptionsChainAsync($user_id, $user_secret, $account_id, $symbol, string $contentType = self::contentTypes['getOptionsChain'][0])
+    public function getOptionsChainAsync(
+        $user_id,
+        $user_secret,
+        $account_id,
+        $symbol,
+        string $contentType = self::contentTypes['getOptionsChain'][0]
+
+    )
     {
+
         return $this->getOptionsChainAsyncWithHttpInfo($user_id, $user_secret, $account_id, $symbol, $contentType)
             ->then(
                 function ($response) {
@@ -776,7 +827,6 @@ class OptionsApi extends \SnapTrade\CustomApi
                 'Missing the required parameter user_id when calling getOptionsChain'
             );
         }
-
         // Check if $user_secret is a string
         if (!is_null($user_secret) && !is_string($user_secret)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
@@ -787,7 +837,6 @@ class OptionsApi extends \SnapTrade\CustomApi
                 'Missing the required parameter user_secret when calling getOptionsChain'
             );
         }
-
         // Check if $account_id is a string
         if (!is_null($account_id) && !is_string($account_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($account_id, true), gettype($account_id)));
@@ -798,7 +847,6 @@ class OptionsApi extends \SnapTrade\CustomApi
                 'Missing the required parameter account_id when calling getOptionsChain'
             );
         }
-
         // Check if $symbol is a string
         if (!is_null($symbol) && !is_string($symbol)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($symbol, true), gettype($symbol)));
@@ -946,8 +994,16 @@ class OptionsApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\StrategyQuotes
      */
-    public function getOptionsStrategyQuote($user_id, $user_secret, $account_id, $option_strategy_id, string $contentType = self::contentTypes['getOptionsStrategyQuote'][0])
+    public function getOptionsStrategyQuote(
+        $user_id,
+        $user_secret,
+        $account_id,
+        $option_strategy_id,
+        string $contentType = self::contentTypes['getOptionsStrategyQuote'][0]
+
+    )
     {
+
         list($response) = $this->getOptionsStrategyQuoteWithHttpInfo($user_id, $user_secret, $account_id, $option_strategy_id, $contentType);
         return $response;
     }
@@ -1087,8 +1143,16 @@ class OptionsApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getOptionsStrategyQuoteAsync($user_id, $user_secret, $account_id, $option_strategy_id, string $contentType = self::contentTypes['getOptionsStrategyQuote'][0])
+    public function getOptionsStrategyQuoteAsync(
+        $user_id,
+        $user_secret,
+        $account_id,
+        $option_strategy_id,
+        string $contentType = self::contentTypes['getOptionsStrategyQuote'][0]
+
+    )
     {
+
         return $this->getOptionsStrategyQuoteAsyncWithHttpInfo($user_id, $user_secret, $account_id, $option_strategy_id, $contentType)
             ->then(
                 function ($response) {
@@ -1180,7 +1244,6 @@ class OptionsApi extends \SnapTrade\CustomApi
                 'Missing the required parameter user_id when calling getOptionsStrategyQuote'
             );
         }
-
         // Check if $user_secret is a string
         if (!is_null($user_secret) && !is_string($user_secret)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
@@ -1191,7 +1254,6 @@ class OptionsApi extends \SnapTrade\CustomApi
                 'Missing the required parameter user_secret when calling getOptionsStrategyQuote'
             );
         }
-
         // Check if $account_id is a string
         if (!is_null($account_id) && !is_string($account_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($account_id, true), gettype($account_id)));
@@ -1202,7 +1264,6 @@ class OptionsApi extends \SnapTrade\CustomApi
                 'Missing the required parameter account_id when calling getOptionsStrategyQuote'
             );
         }
-
         // Check if $option_strategy_id is a string
         if (!is_null($option_strategy_id) && !is_string($option_strategy_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($option_strategy_id, true), gettype($option_strategy_id)));
@@ -1348,8 +1409,15 @@ class OptionsApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\OptionsHoldings
      */
-    public function listOptionHoldings($user_id, $user_secret, $account_id, string $contentType = self::contentTypes['listOptionHoldings'][0])
+    public function listOptionHoldings(
+        $user_id,
+        $user_secret,
+        $account_id,
+        string $contentType = self::contentTypes['listOptionHoldings'][0]
+
+    )
     {
+
         list($response) = $this->listOptionHoldingsWithHttpInfo($user_id, $user_secret, $account_id, $contentType);
         return $response;
     }
@@ -1486,8 +1554,15 @@ class OptionsApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listOptionHoldingsAsync($user_id, $user_secret, $account_id, string $contentType = self::contentTypes['listOptionHoldings'][0])
+    public function listOptionHoldingsAsync(
+        $user_id,
+        $user_secret,
+        $account_id,
+        string $contentType = self::contentTypes['listOptionHoldings'][0]
+
+    )
     {
+
         return $this->listOptionHoldingsAsyncWithHttpInfo($user_id, $user_secret, $account_id, $contentType)
             ->then(
                 function ($response) {
@@ -1577,7 +1652,6 @@ class OptionsApi extends \SnapTrade\CustomApi
                 'Missing the required parameter user_id when calling listOptionHoldings'
             );
         }
-
         // Check if $user_secret is a string
         if (!is_null($user_secret) && !is_string($user_secret)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
@@ -1588,7 +1662,6 @@ class OptionsApi extends \SnapTrade\CustomApi
                 'Missing the required parameter user_secret when calling listOptionHoldings'
             );
         }
-
         // Check if $account_id is a string
         if (!is_null($account_id) && !is_string($account_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($account_id, true), gettype($account_id)));
@@ -1728,8 +1801,24 @@ class OptionsApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\StrategyOrderRecord
      */
-    public function placeOptionStrategy($user_id, $user_secret, $account_id, $option_strategy_id, $options_place_option_strategy_request, string $contentType = self::contentTypes['placeOptionStrategy'][0])
+    public function placeOptionStrategy(
+        $order_type,
+        $time_in_force,
+        $price,
+        $user_id,
+        $user_secret,
+        $account_id,
+        $option_strategy_id,
+        string $contentType = self::contentTypes['placeOptionStrategy'][0]
+
+    )
     {
+        $_body = [];
+        $this->setRequestBodyProperty($_body, "order_type", $order_type);
+        $this->setRequestBodyProperty($_body, "time_in_force", $time_in_force);
+        $this->setRequestBodyProperty($_body, "price", $price);
+        $options_place_option_strategy_request = $_body;
+
         list($response) = $this->placeOptionStrategyWithHttpInfo($user_id, $user_secret, $account_id, $option_strategy_id, $options_place_option_strategy_request, $contentType);
         return $response;
     }
@@ -1872,8 +1961,24 @@ class OptionsApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function placeOptionStrategyAsync($user_id, $user_secret, $account_id, $option_strategy_id, $options_place_option_strategy_request, string $contentType = self::contentTypes['placeOptionStrategy'][0])
+    public function placeOptionStrategyAsync(
+        $order_type,
+        $time_in_force,
+        $price,
+        $user_id,
+        $user_secret,
+        $account_id,
+        $option_strategy_id,
+        string $contentType = self::contentTypes['placeOptionStrategy'][0]
+
+    )
     {
+        $_body = [];
+        $this->setRequestBodyProperty($_body, "order_type", $order_type);
+        $this->setRequestBodyProperty($_body, "time_in_force", $time_in_force);
+        $this->setRequestBodyProperty($_body, "price", $price);
+        $options_place_option_strategy_request = $_body;
+
         return $this->placeOptionStrategyAsyncWithHttpInfo($user_id, $user_secret, $account_id, $option_strategy_id, $options_place_option_strategy_request, $contentType)
             ->then(
                 function ($response) {
@@ -1967,7 +2072,6 @@ class OptionsApi extends \SnapTrade\CustomApi
                 'Missing the required parameter user_id when calling placeOptionStrategy'
             );
         }
-
         // Check if $user_secret is a string
         if (!is_null($user_secret) && !is_string($user_secret)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
@@ -1978,7 +2082,6 @@ class OptionsApi extends \SnapTrade\CustomApi
                 'Missing the required parameter user_secret when calling placeOptionStrategy'
             );
         }
-
         // Check if $account_id is a string
         if (!is_null($account_id) && !is_string($account_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($account_id, true), gettype($account_id)));
@@ -1989,7 +2092,6 @@ class OptionsApi extends \SnapTrade\CustomApi
                 'Missing the required parameter account_id when calling placeOptionStrategy'
             );
         }
-
         // Check if $option_strategy_id is a string
         if (!is_null($option_strategy_id) && !is_string($option_strategy_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($option_strategy_id, true), gettype($option_strategy_id)));
@@ -2000,7 +2102,6 @@ class OptionsApi extends \SnapTrade\CustomApi
                 'Missing the required parameter option_strategy_id when calling placeOptionStrategy'
             );
         }
-
         if ($options_place_option_strategy_request != null) {
             if (!($options_place_option_strategy_request instanceof \SnapTrade\Model\OptionsPlaceOptionStrategyRequest)) {
                 if (!is_array($options_place_option_strategy_request))

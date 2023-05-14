@@ -110,6 +110,14 @@ class ApiDisclaimerApi extends \SnapTrade\CustomApi
     }
 
     /**
+     * For initializing request body parameter
+     */
+    private function setRequestBodyProperty(&$body, $property, $value) {
+        if ($body == null) $body = [];
+        $body[$property] = $value;
+    }
+
+    /**
      * Operation accept
      *
      * Accept or Reject SnapTrade disclaimer agreement
@@ -123,8 +131,18 @@ class ApiDisclaimerApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\SnapTradeAPIDisclaimerAcceptStatus
      */
-    public function accept($user_id, $user_secret, $api_disclaimer_accept_request, string $contentType = self::contentTypes['accept'][0])
+    public function accept(
+        $user_id,
+        $user_secret,
+        $accepted = null,
+        string $contentType = self::contentTypes['accept'][0]
+
+    )
     {
+        $_body = [];
+        $this->setRequestBodyProperty($_body, "accepted", $accepted);
+        $api_disclaimer_accept_request = $_body;
+
         list($response) = $this->acceptWithHttpInfo($user_id, $user_secret, $api_disclaimer_accept_request, $contentType);
         return $response;
     }
@@ -261,8 +279,18 @@ class ApiDisclaimerApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function acceptAsync($user_id, $user_secret, $api_disclaimer_accept_request, string $contentType = self::contentTypes['accept'][0])
+    public function acceptAsync(
+        $user_id,
+        $user_secret,
+        $accepted = null,
+        string $contentType = self::contentTypes['accept'][0]
+
+    )
     {
+        $_body = [];
+        $this->setRequestBodyProperty($_body, "accepted", $accepted);
+        $api_disclaimer_accept_request = $_body;
+
         return $this->acceptAsyncWithHttpInfo($user_id, $user_secret, $api_disclaimer_accept_request, $contentType)
             ->then(
                 function ($response) {
@@ -352,7 +380,6 @@ class ApiDisclaimerApi extends \SnapTrade\CustomApi
                 'Missing the required parameter user_id when calling accept'
             );
         }
-
         // Check if $user_secret is a string
         if (!is_null($user_secret) && !is_string($user_secret)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
@@ -363,7 +390,6 @@ class ApiDisclaimerApi extends \SnapTrade\CustomApi
                 'Missing the required parameter user_secret when calling accept'
             );
         }
-
         if ($api_disclaimer_accept_request != null) {
             if (!($api_disclaimer_accept_request instanceof \SnapTrade\Model\APIDisclaimerAcceptRequest)) {
                 if (!is_array($api_disclaimer_accept_request))

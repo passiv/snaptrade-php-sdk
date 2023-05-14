@@ -131,6 +131,14 @@ class AccountInformationApi extends \SnapTrade\CustomApi
     }
 
     /**
+     * For initializing request body parameter
+     */
+    private function setRequestBodyProperty(&$body, $property, $value) {
+        if ($body == null) $body = [];
+        $body[$property] = $value;
+    }
+
+    /**
      * Operation getAllUserHoldings
      *
      * List all accounts for the user, plus balances and positions for each account.
@@ -144,8 +152,15 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\AccountHoldings[]|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\Model403FailedRequestResponse
      */
-    public function getAllUserHoldings($user_id, $user_secret, $brokerage_authorizations = null, string $contentType = self::contentTypes['getAllUserHoldings'][0])
+    public function getAllUserHoldings(
+        $user_id,
+        $user_secret,
+        $brokerage_authorizations = null,
+        string $contentType = self::contentTypes['getAllUserHoldings'][0]
+
+    )
     {
+
         list($response) = $this->getAllUserHoldingsWithHttpInfo($user_id, $user_secret, $brokerage_authorizations, $contentType);
         return $response;
     }
@@ -328,8 +343,15 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getAllUserHoldingsAsync($user_id, $user_secret, $brokerage_authorizations = null, string $contentType = self::contentTypes['getAllUserHoldings'][0])
+    public function getAllUserHoldingsAsync(
+        $user_id,
+        $user_secret,
+        $brokerage_authorizations = null,
+        string $contentType = self::contentTypes['getAllUserHoldings'][0]
+
+    )
     {
+
         return $this->getAllUserHoldingsAsyncWithHttpInfo($user_id, $user_secret, $brokerage_authorizations, $contentType)
             ->then(
                 function ($response) {
@@ -419,7 +441,6 @@ class AccountInformationApi extends \SnapTrade\CustomApi
                 'Missing the required parameter user_id when calling getAllUserHoldings'
             );
         }
-
         // Check if $user_secret is a string
         if (!is_null($user_secret) && !is_string($user_secret)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
@@ -430,7 +451,6 @@ class AccountInformationApi extends \SnapTrade\CustomApi
                 'Missing the required parameter user_secret when calling getAllUserHoldings'
             );
         }
-
         // Check if $brokerage_authorizations is a string
         if (!is_null($brokerage_authorizations) && !is_string($brokerage_authorizations)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($brokerage_authorizations, true), gettype($brokerage_authorizations)));
@@ -563,8 +583,15 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\Balance[]
      */
-    public function getUserAccountBalance($user_id, $user_secret, $account_id, string $contentType = self::contentTypes['getUserAccountBalance'][0])
+    public function getUserAccountBalance(
+        $user_id,
+        $user_secret,
+        $account_id,
+        string $contentType = self::contentTypes['getUserAccountBalance'][0]
+
+    )
     {
+
         list($response) = $this->getUserAccountBalanceWithHttpInfo($user_id, $user_secret, $account_id, $contentType);
         return $response;
     }
@@ -701,8 +728,15 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getUserAccountBalanceAsync($user_id, $user_secret, $account_id, string $contentType = self::contentTypes['getUserAccountBalance'][0])
+    public function getUserAccountBalanceAsync(
+        $user_id,
+        $user_secret,
+        $account_id,
+        string $contentType = self::contentTypes['getUserAccountBalance'][0]
+
+    )
     {
+
         return $this->getUserAccountBalanceAsyncWithHttpInfo($user_id, $user_secret, $account_id, $contentType)
             ->then(
                 function ($response) {
@@ -792,7 +826,6 @@ class AccountInformationApi extends \SnapTrade\CustomApi
                 'Missing the required parameter user_id when calling getUserAccountBalance'
             );
         }
-
         // Check if $user_secret is a string
         if (!is_null($user_secret) && !is_string($user_secret)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
@@ -803,7 +836,6 @@ class AccountInformationApi extends \SnapTrade\CustomApi
                 'Missing the required parameter user_secret when calling getUserAccountBalance'
             );
         }
-
         // Check if $account_id is a string
         if (!is_null($account_id) && !is_string($account_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($account_id, true), gettype($account_id)));
@@ -941,8 +973,15 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\Account[]
      */
-    public function getUserAccountDetails($user_id, $user_secret, $account_id, string $contentType = self::contentTypes['getUserAccountDetails'][0])
+    public function getUserAccountDetails(
+        $user_id,
+        $user_secret,
+        $account_id,
+        string $contentType = self::contentTypes['getUserAccountDetails'][0]
+
+    )
     {
+
         list($response) = $this->getUserAccountDetailsWithHttpInfo($user_id, $user_secret, $account_id, $contentType);
         return $response;
     }
@@ -1079,8 +1118,15 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getUserAccountDetailsAsync($user_id, $user_secret, $account_id, string $contentType = self::contentTypes['getUserAccountDetails'][0])
+    public function getUserAccountDetailsAsync(
+        $user_id,
+        $user_secret,
+        $account_id,
+        string $contentType = self::contentTypes['getUserAccountDetails'][0]
+
+    )
     {
+
         return $this->getUserAccountDetailsAsyncWithHttpInfo($user_id, $user_secret, $account_id, $contentType)
             ->then(
                 function ($response) {
@@ -1170,7 +1216,6 @@ class AccountInformationApi extends \SnapTrade\CustomApi
                 'Missing the required parameter user_id when calling getUserAccountDetails'
             );
         }
-
         // Check if $user_secret is a string
         if (!is_null($user_secret) && !is_string($user_secret)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
@@ -1181,7 +1226,6 @@ class AccountInformationApi extends \SnapTrade\CustomApi
                 'Missing the required parameter user_secret when calling getUserAccountDetails'
             );
         }
-
         // Check if $account_id is a string
         if (!is_null($account_id) && !is_string($account_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($account_id, true), gettype($account_id)));
@@ -1320,8 +1364,16 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\AccountOrderRecord[]
      */
-    public function getUserAccountOrders($user_id, $user_secret, $account_id, $state = null, string $contentType = self::contentTypes['getUserAccountOrders'][0])
+    public function getUserAccountOrders(
+        $user_id,
+        $user_secret,
+        $account_id,
+        $state = null,
+        string $contentType = self::contentTypes['getUserAccountOrders'][0]
+
+    )
     {
+
         list($response) = $this->getUserAccountOrdersWithHttpInfo($user_id, $user_secret, $account_id, $state, $contentType);
         return $response;
     }
@@ -1461,8 +1513,16 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getUserAccountOrdersAsync($user_id, $user_secret, $account_id, $state = null, string $contentType = self::contentTypes['getUserAccountOrders'][0])
+    public function getUserAccountOrdersAsync(
+        $user_id,
+        $user_secret,
+        $account_id,
+        $state = null,
+        string $contentType = self::contentTypes['getUserAccountOrders'][0]
+
+    )
     {
+
         return $this->getUserAccountOrdersAsyncWithHttpInfo($user_id, $user_secret, $account_id, $state, $contentType)
             ->then(
                 function ($response) {
@@ -1554,7 +1614,6 @@ class AccountInformationApi extends \SnapTrade\CustomApi
                 'Missing the required parameter user_id when calling getUserAccountOrders'
             );
         }
-
         // Check if $user_secret is a string
         if (!is_null($user_secret) && !is_string($user_secret)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
@@ -1565,7 +1624,6 @@ class AccountInformationApi extends \SnapTrade\CustomApi
                 'Missing the required parameter user_secret when calling getUserAccountOrders'
             );
         }
-
         // Check if $account_id is a string
         if (!is_null($account_id) && !is_string($account_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($account_id, true), gettype($account_id)));
@@ -1576,7 +1634,6 @@ class AccountInformationApi extends \SnapTrade\CustomApi
                 'Missing the required parameter account_id when calling getUserAccountOrders'
             );
         }
-
         // Check if $state is a string
         if (!is_null($state) && !is_string($state)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($state, true), gettype($state)));
@@ -1717,8 +1774,15 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\Position[]
      */
-    public function getUserAccountPositions($user_id, $user_secret, $account_id, string $contentType = self::contentTypes['getUserAccountPositions'][0])
+    public function getUserAccountPositions(
+        $user_id,
+        $user_secret,
+        $account_id,
+        string $contentType = self::contentTypes['getUserAccountPositions'][0]
+
+    )
     {
+
         list($response) = $this->getUserAccountPositionsWithHttpInfo($user_id, $user_secret, $account_id, $contentType);
         return $response;
     }
@@ -1855,8 +1919,15 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getUserAccountPositionsAsync($user_id, $user_secret, $account_id, string $contentType = self::contentTypes['getUserAccountPositions'][0])
+    public function getUserAccountPositionsAsync(
+        $user_id,
+        $user_secret,
+        $account_id,
+        string $contentType = self::contentTypes['getUserAccountPositions'][0]
+
+    )
     {
+
         return $this->getUserAccountPositionsAsyncWithHttpInfo($user_id, $user_secret, $account_id, $contentType)
             ->then(
                 function ($response) {
@@ -1946,7 +2017,6 @@ class AccountInformationApi extends \SnapTrade\CustomApi
                 'Missing the required parameter user_id when calling getUserAccountPositions'
             );
         }
-
         // Check if $user_secret is a string
         if (!is_null($user_secret) && !is_string($user_secret)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
@@ -1957,7 +2027,6 @@ class AccountInformationApi extends \SnapTrade\CustomApi
                 'Missing the required parameter user_secret when calling getUserAccountPositions'
             );
         }
-
         // Check if $account_id is a string
         if (!is_null($account_id) && !is_string($account_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($account_id, true), gettype($account_id)));
@@ -2095,8 +2164,15 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\AccountHoldingsAccount|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\Model403FailedRequestResponse
      */
-    public function getUserHoldings($account_id, $user_id, $user_secret, string $contentType = self::contentTypes['getUserHoldings'][0])
+    public function getUserHoldings(
+        $account_id,
+        $user_id,
+        $user_secret,
+        string $contentType = self::contentTypes['getUserHoldings'][0]
+
+    )
     {
+
         list($response) = $this->getUserHoldingsWithHttpInfo($account_id, $user_id, $user_secret, $contentType);
         return $response;
     }
@@ -2279,8 +2355,15 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getUserHoldingsAsync($account_id, $user_id, $user_secret, string $contentType = self::contentTypes['getUserHoldings'][0])
+    public function getUserHoldingsAsync(
+        $account_id,
+        $user_id,
+        $user_secret,
+        string $contentType = self::contentTypes['getUserHoldings'][0]
+
+    )
     {
+
         return $this->getUserHoldingsAsyncWithHttpInfo($account_id, $user_id, $user_secret, $contentType)
             ->then(
                 function ($response) {
@@ -2370,7 +2453,6 @@ class AccountInformationApi extends \SnapTrade\CustomApi
                 'Missing the required parameter account_id when calling getUserHoldings'
             );
         }
-
         // Check if $user_id is a string
         if (!is_null($user_id) && !is_string($user_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_id, true), gettype($user_id)));
@@ -2381,7 +2463,6 @@ class AccountInformationApi extends \SnapTrade\CustomApi
                 'Missing the required parameter user_id when calling getUserHoldings'
             );
         }
-
         // Check if $user_secret is a string
         if (!is_null($user_secret) && !is_string($user_secret)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
@@ -2518,8 +2599,14 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\Account[]
      */
-    public function listUserAccounts($user_id, $user_secret, string $contentType = self::contentTypes['listUserAccounts'][0])
+    public function listUserAccounts(
+        $user_id,
+        $user_secret,
+        string $contentType = self::contentTypes['listUserAccounts'][0]
+
+    )
     {
+
         list($response) = $this->listUserAccountsWithHttpInfo($user_id, $user_secret, $contentType);
         return $response;
     }
@@ -2653,8 +2740,14 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listUserAccountsAsync($user_id, $user_secret, string $contentType = self::contentTypes['listUserAccounts'][0])
+    public function listUserAccountsAsync(
+        $user_id,
+        $user_secret,
+        string $contentType = self::contentTypes['listUserAccounts'][0]
+
+    )
     {
+
         return $this->listUserAccountsAsyncWithHttpInfo($user_id, $user_secret, $contentType)
             ->then(
                 function ($response) {
@@ -2742,7 +2835,6 @@ class AccountInformationApi extends \SnapTrade\CustomApi
                 'Missing the required parameter user_id when calling listUserAccounts'
             );
         }
-
         // Check if $user_secret is a string
         if (!is_null($user_secret) && !is_string($user_secret)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
@@ -2872,8 +2964,15 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\Account[]
      */
-    public function updateUserAccount($user_id, $user_secret, $account_id, string $contentType = self::contentTypes['updateUserAccount'][0])
+    public function updateUserAccount(
+        $user_id,
+        $user_secret,
+        $account_id,
+        string $contentType = self::contentTypes['updateUserAccount'][0]
+
+    )
     {
+
         list($response) = $this->updateUserAccountWithHttpInfo($user_id, $user_secret, $account_id, $contentType);
         return $response;
     }
@@ -3010,8 +3109,15 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function updateUserAccountAsync($user_id, $user_secret, $account_id, string $contentType = self::contentTypes['updateUserAccount'][0])
+    public function updateUserAccountAsync(
+        $user_id,
+        $user_secret,
+        $account_id,
+        string $contentType = self::contentTypes['updateUserAccount'][0]
+
+    )
     {
+
         return $this->updateUserAccountAsyncWithHttpInfo($user_id, $user_secret, $account_id, $contentType)
             ->then(
                 function ($response) {
@@ -3101,7 +3207,6 @@ class AccountInformationApi extends \SnapTrade\CustomApi
                 'Missing the required parameter user_id when calling updateUserAccount'
             );
         }
-
         // Check if $user_secret is a string
         if (!is_null($user_secret) && !is_string($user_secret)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
@@ -3112,7 +3217,6 @@ class AccountInformationApi extends \SnapTrade\CustomApi
                 'Missing the required parameter user_secret when calling updateUserAccount'
             );
         }
-
         // Check if $account_id is a string
         if (!is_null($account_id) && !is_string($account_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($account_id, true), gettype($account_id)));

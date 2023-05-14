@@ -22,7 +22,7 @@ class CustomApi
         $body = null
     ) {
         $sig_object = [
-            "content" => empty($body) ? null : json_decode($body),
+            "content" => empty($body) || $body == "{}" ? null : json_decode($body),
             "path" => $request->getUri()->getPath(),
             "query" => $request->getUri()->GetQuery()
         ];

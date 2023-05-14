@@ -110,6 +110,14 @@ class ApiStatusApi extends \SnapTrade\CustomApi
     }
 
     /**
+     * For initializing request body parameter
+     */
+    private function setRequestBodyProperty(&$body, $property, $value) {
+        if ($body == null) $body = [];
+        $body[$property] = $value;
+    }
+
+    /**
      * Operation check
      *
      * Get API Status
@@ -120,8 +128,12 @@ class ApiStatusApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\Status
      */
-    public function check(string $contentType = self::contentTypes['check'][0])
+    public function check(
+        string $contentType = self::contentTypes['check'][0]
+
+    )
     {
+
         list($response) = $this->checkWithHttpInfo($contentType);
         return $response;
     }
@@ -249,8 +261,12 @@ class ApiStatusApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function checkAsync(string $contentType = self::contentTypes['check'][0])
+    public function checkAsync(
+        string $contentType = self::contentTypes['check'][0]
+
+    )
     {
+
         return $this->checkAsyncWithHttpInfo($contentType)
             ->then(
                 function ($response) {
@@ -323,6 +339,7 @@ class ApiStatusApi extends \SnapTrade\CustomApi
      */
     public function checkRequest(string $contentType = self::contentTypes['check'][0])
     {
+
 
 
         $resourcePath = '/';

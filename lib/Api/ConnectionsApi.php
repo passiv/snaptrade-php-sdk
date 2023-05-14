@@ -119,6 +119,14 @@ class ConnectionsApi extends \SnapTrade\CustomApi
     }
 
     /**
+     * For initializing request body parameter
+     */
+    private function setRequestBodyProperty(&$body, $property, $value) {
+        if ($body == null) $body = [];
+        $body[$property] = $value;
+    }
+
+    /**
      * Operation detailBrokerageAuthorization
      *
      * Get detail of a specific brokerage authorizations for the user
@@ -132,8 +140,15 @@ class ConnectionsApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\BrokerageAuthorization
      */
-    public function detailBrokerageAuthorization($authorization_id, $user_id, $user_secret, string $contentType = self::contentTypes['detailBrokerageAuthorization'][0])
+    public function detailBrokerageAuthorization(
+        $authorization_id,
+        $user_id,
+        $user_secret,
+        string $contentType = self::contentTypes['detailBrokerageAuthorization'][0]
+
+    )
     {
+
         list($response) = $this->detailBrokerageAuthorizationWithHttpInfo($authorization_id, $user_id, $user_secret, $contentType);
         return $response;
     }
@@ -270,8 +285,15 @@ class ConnectionsApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function detailBrokerageAuthorizationAsync($authorization_id, $user_id, $user_secret, string $contentType = self::contentTypes['detailBrokerageAuthorization'][0])
+    public function detailBrokerageAuthorizationAsync(
+        $authorization_id,
+        $user_id,
+        $user_secret,
+        string $contentType = self::contentTypes['detailBrokerageAuthorization'][0]
+
+    )
     {
+
         return $this->detailBrokerageAuthorizationAsyncWithHttpInfo($authorization_id, $user_id, $user_secret, $contentType)
             ->then(
                 function ($response) {
@@ -361,7 +383,6 @@ class ConnectionsApi extends \SnapTrade\CustomApi
                 'Missing the required parameter authorization_id when calling detailBrokerageAuthorization'
             );
         }
-
         // Check if $user_id is a string
         if (!is_null($user_id) && !is_string($user_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_id, true), gettype($user_id)));
@@ -372,7 +393,6 @@ class ConnectionsApi extends \SnapTrade\CustomApi
                 'Missing the required parameter user_id when calling detailBrokerageAuthorization'
             );
         }
-
         // Check if $user_secret is a string
         if (!is_null($user_secret) && !is_string($user_secret)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
@@ -509,8 +529,14 @@ class ConnectionsApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\BrokerageAuthorization[]
      */
-    public function listBrokerageAuthorizations($user_id, $user_secret, string $contentType = self::contentTypes['listBrokerageAuthorizations'][0])
+    public function listBrokerageAuthorizations(
+        $user_id,
+        $user_secret,
+        string $contentType = self::contentTypes['listBrokerageAuthorizations'][0]
+
+    )
     {
+
         list($response) = $this->listBrokerageAuthorizationsWithHttpInfo($user_id, $user_secret, $contentType);
         return $response;
     }
@@ -644,8 +670,14 @@ class ConnectionsApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listBrokerageAuthorizationsAsync($user_id, $user_secret, string $contentType = self::contentTypes['listBrokerageAuthorizations'][0])
+    public function listBrokerageAuthorizationsAsync(
+        $user_id,
+        $user_secret,
+        string $contentType = self::contentTypes['listBrokerageAuthorizations'][0]
+
+    )
     {
+
         return $this->listBrokerageAuthorizationsAsyncWithHttpInfo($user_id, $user_secret, $contentType)
             ->then(
                 function ($response) {
@@ -733,7 +765,6 @@ class ConnectionsApi extends \SnapTrade\CustomApi
                 'Missing the required parameter user_id when calling listBrokerageAuthorizations'
             );
         }
-
         // Check if $user_secret is a string
         if (!is_null($user_secret) && !is_string($user_secret)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
@@ -863,8 +894,15 @@ class ConnectionsApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return void
      */
-    public function removeBrokerageAuthorization($authorization_id, $user_id, $user_secret, string $contentType = self::contentTypes['removeBrokerageAuthorization'][0])
+    public function removeBrokerageAuthorization(
+        $authorization_id,
+        $user_id,
+        $user_secret,
+        string $contentType = self::contentTypes['removeBrokerageAuthorization'][0]
+
+    )
     {
+
         $this->removeBrokerageAuthorizationWithHttpInfo($authorization_id, $user_id, $user_secret, $contentType);
     }
 
@@ -960,8 +998,15 @@ class ConnectionsApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function removeBrokerageAuthorizationAsync($authorization_id, $user_id, $user_secret, string $contentType = self::contentTypes['removeBrokerageAuthorization'][0])
+    public function removeBrokerageAuthorizationAsync(
+        $authorization_id,
+        $user_id,
+        $user_secret,
+        string $contentType = self::contentTypes['removeBrokerageAuthorization'][0]
+
+    )
     {
+
         return $this->removeBrokerageAuthorizationAsyncWithHttpInfo($authorization_id, $user_id, $user_secret, $contentType)
             ->then(
                 function ($response) {
@@ -1038,7 +1083,6 @@ class ConnectionsApi extends \SnapTrade\CustomApi
                 'Missing the required parameter authorization_id when calling removeBrokerageAuthorization'
             );
         }
-
         // Check if $user_id is a string
         if (!is_null($user_id) && !is_string($user_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_id, true), gettype($user_id)));
@@ -1049,7 +1093,6 @@ class ConnectionsApi extends \SnapTrade\CustomApi
                 'Missing the required parameter user_id when calling removeBrokerageAuthorization'
             );
         }
-
         // Check if $user_secret is a string
         if (!is_null($user_secret) && !is_string($user_secret)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
@@ -1187,8 +1230,15 @@ class ConnectionsApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\ConnectionsSessionEvents200ResponseInner[]
      */
-    public function sessionEvents($partner_client_id, $user_id = null, $session_id = null, string $contentType = self::contentTypes['sessionEvents'][0])
+    public function sessionEvents(
+        $partner_client_id,
+        $user_id = null,
+        $session_id = null,
+        string $contentType = self::contentTypes['sessionEvents'][0]
+
+    )
     {
+
         list($response) = $this->sessionEventsWithHttpInfo($partner_client_id, $user_id, $session_id, $contentType);
         return $response;
     }
@@ -1325,8 +1375,15 @@ class ConnectionsApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function sessionEventsAsync($partner_client_id, $user_id = null, $session_id = null, string $contentType = self::contentTypes['sessionEvents'][0])
+    public function sessionEventsAsync(
+        $partner_client_id,
+        $user_id = null,
+        $session_id = null,
+        string $contentType = self::contentTypes['sessionEvents'][0]
+
+    )
     {
+
         return $this->sessionEventsAsyncWithHttpInfo($partner_client_id, $user_id, $session_id, $contentType)
             ->then(
                 function ($response) {
@@ -1416,12 +1473,10 @@ class ConnectionsApi extends \SnapTrade\CustomApi
                 'Missing the required parameter partner_client_id when calling sessionEvents'
             );
         }
-
         // Check if $user_id is a string
         if (!is_null($user_id) && !is_string($user_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_id, true), gettype($user_id)));
         }
-
         // Check if $session_id is a string
         if (!is_null($session_id) && !is_string($session_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($session_id, true), gettype($session_id)));

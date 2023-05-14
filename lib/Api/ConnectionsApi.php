@@ -122,7 +122,9 @@ class ConnectionsApi extends \SnapTrade\CustomApi
      * For initializing request body parameter
      */
     private function setRequestBodyProperty(&$body, $property, $value) {
-        if ($body == null) $body = [];
+        if ($body === null) $body = [];
+        // user did not pass in a value for this parameter
+        if ($value === SENTINEL_VALUE) return;
         $body[$property] = $value;
     }
 
@@ -374,31 +376,31 @@ class ConnectionsApi extends \SnapTrade\CustomApi
     {
 
         // Check if $authorization_id is a string
-        if (!is_null($authorization_id) && !is_string($authorization_id)) {
+        if ($authorization_id !== SENTINEL_VALUE && !is_string($authorization_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($authorization_id, true), gettype($authorization_id)));
         }
         // verify the required parameter 'authorization_id' is set
-        if ($authorization_id === null || (is_array($authorization_id) && count($authorization_id) === 0)) {
+        if ($authorization_id === SENTINEL_VALUE || (is_array($authorization_id) && count($authorization_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter authorization_id when calling detailBrokerageAuthorization'
             );
         }
         // Check if $user_id is a string
-        if (!is_null($user_id) && !is_string($user_id)) {
+        if ($user_id !== SENTINEL_VALUE && !is_string($user_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_id, true), gettype($user_id)));
         }
         // verify the required parameter 'user_id' is set
-        if ($user_id === null || (is_array($user_id) && count($user_id) === 0)) {
+        if ($user_id === SENTINEL_VALUE || (is_array($user_id) && count($user_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter user_id when calling detailBrokerageAuthorization'
             );
         }
         // Check if $user_secret is a string
-        if (!is_null($user_secret) && !is_string($user_secret)) {
+        if ($user_secret !== SENTINEL_VALUE && !is_string($user_secret)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
         }
         // verify the required parameter 'user_secret' is set
-        if ($user_secret === null || (is_array($user_secret) && count($user_secret) === 0)) {
+        if ($user_secret === SENTINEL_VALUE || (is_array($user_secret) && count($user_secret) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter user_secret when calling detailBrokerageAuthorization'
             );
@@ -412,28 +414,32 @@ class ConnectionsApi extends \SnapTrade\CustomApi
         $httpBody = '';
         $multipart = false;
 
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $user_id,
-            'userId', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $user_secret,
-            'userSecret', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
+        if ($user_id !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_id,
+                'userId', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
+        if ($user_secret !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_secret,
+                'userSecret', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
 
 
         // path params
-        if ($authorization_id !== null) {
+        if ($authorization_id !== SENTINEL_VALUE) {
             $resourcePath = str_replace(
                 '{' . 'authorizationId' . '}',
                 ObjectSerializer::toPathValue($authorization_id),
@@ -756,21 +762,21 @@ class ConnectionsApi extends \SnapTrade\CustomApi
     {
 
         // Check if $user_id is a string
-        if (!is_null($user_id) && !is_string($user_id)) {
+        if ($user_id !== SENTINEL_VALUE && !is_string($user_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_id, true), gettype($user_id)));
         }
         // verify the required parameter 'user_id' is set
-        if ($user_id === null || (is_array($user_id) && count($user_id) === 0)) {
+        if ($user_id === SENTINEL_VALUE || (is_array($user_id) && count($user_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter user_id when calling listBrokerageAuthorizations'
             );
         }
         // Check if $user_secret is a string
-        if (!is_null($user_secret) && !is_string($user_secret)) {
+        if ($user_secret !== SENTINEL_VALUE && !is_string($user_secret)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
         }
         // verify the required parameter 'user_secret' is set
-        if ($user_secret === null || (is_array($user_secret) && count($user_secret) === 0)) {
+        if ($user_secret === SENTINEL_VALUE || (is_array($user_secret) && count($user_secret) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter user_secret when calling listBrokerageAuthorizations'
             );
@@ -784,24 +790,28 @@ class ConnectionsApi extends \SnapTrade\CustomApi
         $httpBody = '';
         $multipart = false;
 
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $user_id,
-            'userId', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $user_secret,
-            'userSecret', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
+        if ($user_id !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_id,
+                'userId', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
+        if ($user_secret !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_secret,
+                'userSecret', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
 
 
 
@@ -1074,31 +1084,31 @@ class ConnectionsApi extends \SnapTrade\CustomApi
     {
 
         // Check if $authorization_id is a string
-        if (!is_null($authorization_id) && !is_string($authorization_id)) {
+        if ($authorization_id !== SENTINEL_VALUE && !is_string($authorization_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($authorization_id, true), gettype($authorization_id)));
         }
         // verify the required parameter 'authorization_id' is set
-        if ($authorization_id === null || (is_array($authorization_id) && count($authorization_id) === 0)) {
+        if ($authorization_id === SENTINEL_VALUE || (is_array($authorization_id) && count($authorization_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter authorization_id when calling removeBrokerageAuthorization'
             );
         }
         // Check if $user_id is a string
-        if (!is_null($user_id) && !is_string($user_id)) {
+        if ($user_id !== SENTINEL_VALUE && !is_string($user_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_id, true), gettype($user_id)));
         }
         // verify the required parameter 'user_id' is set
-        if ($user_id === null || (is_array($user_id) && count($user_id) === 0)) {
+        if ($user_id === SENTINEL_VALUE || (is_array($user_id) && count($user_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter user_id when calling removeBrokerageAuthorization'
             );
         }
         // Check if $user_secret is a string
-        if (!is_null($user_secret) && !is_string($user_secret)) {
+        if ($user_secret !== SENTINEL_VALUE && !is_string($user_secret)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
         }
         // verify the required parameter 'user_secret' is set
-        if ($user_secret === null || (is_array($user_secret) && count($user_secret) === 0)) {
+        if ($user_secret === SENTINEL_VALUE || (is_array($user_secret) && count($user_secret) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter user_secret when calling removeBrokerageAuthorization'
             );
@@ -1112,28 +1122,32 @@ class ConnectionsApi extends \SnapTrade\CustomApi
         $httpBody = '';
         $multipart = false;
 
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $user_id,
-            'userId', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $user_secret,
-            'userSecret', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
+        if ($user_id !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_id,
+                'userId', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
+        if ($user_secret !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_secret,
+                'userSecret', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
 
 
         // path params
-        if ($authorization_id !== null) {
+        if ($authorization_id !== SENTINEL_VALUE) {
             $resourcePath = str_replace(
                 '{' . 'authorizationId' . '}',
                 ObjectSerializer::toPathValue($authorization_id),
@@ -1232,8 +1246,8 @@ class ConnectionsApi extends \SnapTrade\CustomApi
      */
     public function sessionEvents(
         $partner_client_id,
-        $user_id = null,
-        $session_id = null,
+        $user_id = SENTINEL_VALUE,
+        $session_id = SENTINEL_VALUE,
         string $contentType = self::contentTypes['sessionEvents'][0]
 
     )
@@ -1377,8 +1391,8 @@ class ConnectionsApi extends \SnapTrade\CustomApi
      */
     public function sessionEventsAsync(
         $partner_client_id,
-        $user_id = null,
-        $session_id = null,
+        $user_id = SENTINEL_VALUE,
+        $session_id = SENTINEL_VALUE,
         string $contentType = self::contentTypes['sessionEvents'][0]
 
     )
@@ -1460,25 +1474,25 @@ class ConnectionsApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function sessionEventsRequest($partner_client_id, $user_id = null, $session_id = null, string $contentType = self::contentTypes['sessionEvents'][0])
+    public function sessionEventsRequest($partner_client_id, $user_id = SENTINEL_VALUE, $session_id = SENTINEL_VALUE, string $contentType = self::contentTypes['sessionEvents'][0])
     {
 
         // Check if $partner_client_id is a string
-        if (!is_null($partner_client_id) && !is_string($partner_client_id)) {
+        if ($partner_client_id !== SENTINEL_VALUE && !is_string($partner_client_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($partner_client_id, true), gettype($partner_client_id)));
         }
         // verify the required parameter 'partner_client_id' is set
-        if ($partner_client_id === null || (is_array($partner_client_id) && count($partner_client_id) === 0)) {
+        if ($partner_client_id === SENTINEL_VALUE || (is_array($partner_client_id) && count($partner_client_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter partner_client_id when calling sessionEvents'
             );
         }
         // Check if $user_id is a string
-        if (!is_null($user_id) && !is_string($user_id)) {
+        if ($user_id !== SENTINEL_VALUE && !is_string($user_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_id, true), gettype($user_id)));
         }
         // Check if $session_id is a string
-        if (!is_null($session_id) && !is_string($session_id)) {
+        if ($session_id !== SENTINEL_VALUE && !is_string($session_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($session_id, true), gettype($session_id)));
         }
 
@@ -1490,33 +1504,39 @@ class ConnectionsApi extends \SnapTrade\CustomApi
         $httpBody = '';
         $multipart = false;
 
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $partner_client_id,
-            'PartnerClientId', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $user_id,
-            'userId', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            false // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $session_id,
-            'sessionId', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            false // required
-        ) ?? []);
+        if ($partner_client_id !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $partner_client_id,
+                'PartnerClientId', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
+        if ($user_id !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_id,
+                'userId', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                false // required
+            ) ?? []);
+        }
+        if ($session_id !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $session_id,
+                'sessionId', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                false // required
+            ) ?? []);
+        }
 
 
 

@@ -143,7 +143,9 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * For initializing request body parameter
      */
     private function setRequestBodyProperty(&$body, $property, $value) {
-        if ($body == null) $body = [];
+        if ($body === null) $body = [];
+        // user did not pass in a value for this parameter
+        if ($value === SENTINEL_VALUE) return;
         $body[$property] = $value;
     }
 
@@ -379,11 +381,11 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
     {
 
         // Check if $currency_pair is a string
-        if (!is_null($currency_pair) && !is_string($currency_pair)) {
+        if ($currency_pair !== SENTINEL_VALUE && !is_string($currency_pair)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($currency_pair, true), gettype($currency_pair)));
         }
         // verify the required parameter 'currency_pair' is set
-        if ($currency_pair === null || (is_array($currency_pair) && count($currency_pair) === 0)) {
+        if ($currency_pair === SENTINEL_VALUE || (is_array($currency_pair) && count($currency_pair) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter currency_pair when calling getCurrencyExchangeRatePair'
             );
@@ -400,7 +402,7 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
 
 
         // path params
-        if ($currency_pair !== null) {
+        if ($currency_pair !== SENTINEL_VALUE) {
             $resourcePath = str_replace(
                 '{' . 'currencyPair' . '}',
                 ObjectSerializer::toPathValue($currency_pair),
@@ -1495,7 +1497,7 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * @return \SnapTrade\Model\UniversalSymbol[]
      */
     public function getSymbols(
-        $substring = null,
+        $substring = SENTINEL_VALUE,
         string $contentType = self::contentTypes['getSymbols'][0]
 
     )
@@ -1635,7 +1637,7 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function getSymbolsAsync(
-        $substring = null,
+        $substring = SENTINEL_VALUE,
         string $contentType = self::contentTypes['getSymbols'][0]
 
     )
@@ -1716,10 +1718,10 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getSymbolsRequest($symbol_query = null, string $contentType = self::contentTypes['getSymbols'][0])
+    public function getSymbolsRequest($symbol_query = SENTINEL_VALUE, string $contentType = self::contentTypes['getSymbols'][0])
     {
 
-        if ($symbol_query != null) {
+        if ($symbol_query !== SENTINEL_VALUE) {
             if (!($symbol_query instanceof \SnapTrade\Model\SymbolQuery)) {
                 if (!is_array($symbol_query))
                     throw new \InvalidArgumentException('"symbol_query" must be associative array or an instance of \SnapTrade\Model\SymbolQuery ReferenceDataApi.getSymbols.');
@@ -1836,7 +1838,7 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      */
     public function getSymbolsByTicker(
         $ticker,
-        $symbol_id = null,
+        $symbol_id = SENTINEL_VALUE,
         string $contentType = self::contentTypes['getSymbolsByTicker'][0]
 
     )
@@ -1977,7 +1979,7 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      */
     public function getSymbolsByTickerAsync(
         $ticker,
-        $symbol_id = null,
+        $symbol_id = SENTINEL_VALUE,
         string $contentType = self::contentTypes['getSymbolsByTicker'][0]
 
     )
@@ -2057,21 +2059,21 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getSymbolsByTickerRequest($ticker, $symbol_id = null, string $contentType = self::contentTypes['getSymbolsByTicker'][0])
+    public function getSymbolsByTickerRequest($ticker, $symbol_id = SENTINEL_VALUE, string $contentType = self::contentTypes['getSymbolsByTicker'][0])
     {
 
         // Check if $ticker is a string
-        if (!is_null($ticker) && !is_string($ticker)) {
+        if ($ticker !== SENTINEL_VALUE && !is_string($ticker)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($ticker, true), gettype($ticker)));
         }
         // verify the required parameter 'ticker' is set
-        if ($ticker === null || (is_array($ticker) && count($ticker) === 0)) {
+        if ($ticker === SENTINEL_VALUE || (is_array($ticker) && count($ticker) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter ticker when calling getSymbolsByTicker'
             );
         }
         // Check if $symbol_id is a string
-        if (!is_null($symbol_id) && !is_string($symbol_id)) {
+        if ($symbol_id !== SENTINEL_VALUE && !is_string($symbol_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($symbol_id, true), gettype($symbol_id)));
         }
 
@@ -2083,19 +2085,21 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
         $httpBody = '';
         $multipart = false;
 
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $symbol_id,
-            'symbolId', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            false // required
-        ) ?? []);
+        if ($symbol_id !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $symbol_id,
+                'symbolId', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                false // required
+            ) ?? []);
+        }
 
 
         // path params
-        if ($ticker !== null) {
+        if ($ticker !== SENTINEL_VALUE) {
             $resourcePath = str_replace(
                 '{' . 'ticker' . '}',
                 ObjectSerializer::toPathValue($ticker),
@@ -2191,7 +2195,7 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * @return \SnapTrade\Model\BrokerageAuthorizationTypeReadOnly[]
      */
     public function listAllBrokerageAuthorizationType(
-        $brokerage = null,
+        $brokerage = SENTINEL_VALUE,
         string $contentType = self::contentTypes['listAllBrokerageAuthorizationType'][0]
 
     )
@@ -2328,7 +2332,7 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function listAllBrokerageAuthorizationTypeAsync(
-        $brokerage = null,
+        $brokerage = SENTINEL_VALUE,
         string $contentType = self::contentTypes['listAllBrokerageAuthorizationType'][0]
 
     )
@@ -2406,11 +2410,11 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function listAllBrokerageAuthorizationTypeRequest($brokerage = null, string $contentType = self::contentTypes['listAllBrokerageAuthorizationType'][0])
+    public function listAllBrokerageAuthorizationTypeRequest($brokerage = SENTINEL_VALUE, string $contentType = self::contentTypes['listAllBrokerageAuthorizationType'][0])
     {
 
         // Check if $brokerage is a string
-        if (!is_null($brokerage) && !is_string($brokerage)) {
+        if ($brokerage !== SENTINEL_VALUE && !is_string($brokerage)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($brokerage, true), gettype($brokerage)));
         }
 
@@ -2422,15 +2426,17 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
         $httpBody = '';
         $multipart = false;
 
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $brokerage,
-            'brokerage', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            false // required
-        ) ?? []);
+        if ($brokerage !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $brokerage,
+                'brokerage', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                false // required
+            ) ?? []);
+        }
 
 
 
@@ -3458,7 +3464,7 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
         $user_id,
         $user_secret,
         $account_id,
-        $substring = null,
+        $substring = SENTINEL_VALUE,
         string $contentType = self::contentTypes['symbolSearchUserAccount'][0]
 
     )
@@ -3610,7 +3616,7 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
         $user_id,
         $user_secret,
         $account_id,
-        $substring = null,
+        $substring = SENTINEL_VALUE,
         string $contentType = self::contentTypes['symbolSearchUserAccount'][0]
 
     )
@@ -3697,40 +3703,40 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function symbolSearchUserAccountRequest($user_id, $user_secret, $account_id, $symbol_query = null, string $contentType = self::contentTypes['symbolSearchUserAccount'][0])
+    public function symbolSearchUserAccountRequest($user_id, $user_secret, $account_id, $symbol_query = SENTINEL_VALUE, string $contentType = self::contentTypes['symbolSearchUserAccount'][0])
     {
 
         // Check if $user_id is a string
-        if (!is_null($user_id) && !is_string($user_id)) {
+        if ($user_id !== SENTINEL_VALUE && !is_string($user_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_id, true), gettype($user_id)));
         }
         // verify the required parameter 'user_id' is set
-        if ($user_id === null || (is_array($user_id) && count($user_id) === 0)) {
+        if ($user_id === SENTINEL_VALUE || (is_array($user_id) && count($user_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter user_id when calling symbolSearchUserAccount'
             );
         }
         // Check if $user_secret is a string
-        if (!is_null($user_secret) && !is_string($user_secret)) {
+        if ($user_secret !== SENTINEL_VALUE && !is_string($user_secret)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
         }
         // verify the required parameter 'user_secret' is set
-        if ($user_secret === null || (is_array($user_secret) && count($user_secret) === 0)) {
+        if ($user_secret === SENTINEL_VALUE || (is_array($user_secret) && count($user_secret) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter user_secret when calling symbolSearchUserAccount'
             );
         }
         // Check if $account_id is a string
-        if (!is_null($account_id) && !is_string($account_id)) {
+        if ($account_id !== SENTINEL_VALUE && !is_string($account_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($account_id, true), gettype($account_id)));
         }
         // verify the required parameter 'account_id' is set
-        if ($account_id === null || (is_array($account_id) && count($account_id) === 0)) {
+        if ($account_id === SENTINEL_VALUE || (is_array($account_id) && count($account_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter account_id when calling symbolSearchUserAccount'
             );
         }
-        if ($symbol_query != null) {
+        if ($symbol_query !== SENTINEL_VALUE) {
             if (!($symbol_query instanceof \SnapTrade\Model\SymbolQuery)) {
                 if (!is_array($symbol_query))
                     throw new \InvalidArgumentException('"symbol_query" must be associative array or an instance of \SnapTrade\Model\SymbolQuery ReferenceDataApi.symbolSearchUserAccount.');
@@ -3747,28 +3753,32 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
         $httpBody = '';
         $multipart = false;
 
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $user_id,
-            'userId', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $user_secret,
-            'userSecret', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
+        if ($user_id !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_id,
+                'userId', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
+        if ($user_secret !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_secret,
+                'userSecret', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
 
 
         // path params
-        if ($account_id !== null) {
+        if ($account_id !== SENTINEL_VALUE) {
             $resourcePath = str_replace(
                 '{' . 'accountId' . '}',
                 ObjectSerializer::toPathValue($account_id),

@@ -206,7 +206,9 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * For initializing request body parameter
      */
     private function setRequestBodyProperty(&$body, $property, $value) {
-        if ($body == null) $body = [];
+        if ($body === null) $body = [];
+        // user did not pass in a value for this parameter
+        if ($value === SENTINEL_VALUE) return;
         $body[$property] = $value;
     }
 
@@ -225,14 +227,14 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function addPortfolioExcludedAsset(
         $portfolio_group_id,
-        $id = null,
-        $symbol = null,
-        $raw_symbol = null,
-        $description = null,
-        $currency = null,
-        $exchange = null,
-        $type = null,
-        $currencies = null,
+        $id = SENTINEL_VALUE,
+        $symbol = SENTINEL_VALUE,
+        $raw_symbol = SENTINEL_VALUE,
+        $description = SENTINEL_VALUE,
+        $currency = SENTINEL_VALUE,
+        $exchange = SENTINEL_VALUE,
+        $type = SENTINEL_VALUE,
+        $currencies = SENTINEL_VALUE,
         string $contentType = self::contentTypes['addPortfolioExcludedAsset'][0]
 
     )
@@ -383,14 +385,14 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function addPortfolioExcludedAssetAsync(
         $portfolio_group_id,
-        $id = null,
-        $symbol = null,
-        $raw_symbol = null,
-        $description = null,
-        $currency = null,
-        $exchange = null,
-        $type = null,
-        $currencies = null,
+        $id = SENTINEL_VALUE,
+        $symbol = SENTINEL_VALUE,
+        $raw_symbol = SENTINEL_VALUE,
+        $description = SENTINEL_VALUE,
+        $currency = SENTINEL_VALUE,
+        $exchange = SENTINEL_VALUE,
+        $type = SENTINEL_VALUE,
+        $currencies = SENTINEL_VALUE,
         string $contentType = self::contentTypes['addPortfolioExcludedAsset'][0]
 
     )
@@ -480,20 +482,20 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function addPortfolioExcludedAssetRequest($portfolio_group_id, $universal_symbol = null, string $contentType = self::contentTypes['addPortfolioExcludedAsset'][0])
+    public function addPortfolioExcludedAssetRequest($portfolio_group_id, $universal_symbol = SENTINEL_VALUE, string $contentType = self::contentTypes['addPortfolioExcludedAsset'][0])
     {
 
         // Check if $portfolio_group_id is a string
-        if (!is_null($portfolio_group_id) && !is_string($portfolio_group_id)) {
+        if ($portfolio_group_id !== SENTINEL_VALUE && !is_string($portfolio_group_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($portfolio_group_id, true), gettype($portfolio_group_id)));
         }
         // verify the required parameter 'portfolio_group_id' is set
-        if ($portfolio_group_id === null || (is_array($portfolio_group_id) && count($portfolio_group_id) === 0)) {
+        if ($portfolio_group_id === SENTINEL_VALUE || (is_array($portfolio_group_id) && count($portfolio_group_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter portfolio_group_id when calling addPortfolioExcludedAsset'
             );
         }
-        if ($universal_symbol != null) {
+        if ($universal_symbol !== SENTINEL_VALUE) {
             if (!($universal_symbol instanceof \SnapTrade\Model\UniversalSymbol)) {
                 if (!is_array($universal_symbol))
                     throw new \InvalidArgumentException('"universal_symbol" must be associative array or an instance of \SnapTrade\Model\UniversalSymbol PortfolioManagementApi.addPortfolioExcludedAsset.');
@@ -513,7 +515,7 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
 
 
         // path params
-        if ($portfolio_group_id !== null) {
+        if ($portfolio_group_id !== SENTINEL_VALUE) {
             $resourcePath = str_replace(
                 '{' . 'portfolioGroupId' . '}',
                 ObjectSerializer::toPathValue($portfolio_group_id),
@@ -843,21 +845,21 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
     {
 
         // Check if $user_id is a string
-        if (!is_null($user_id) && !is_string($user_id)) {
+        if ($user_id !== SENTINEL_VALUE && !is_string($user_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_id, true), gettype($user_id)));
         }
         // verify the required parameter 'user_id' is set
-        if ($user_id === null || (is_array($user_id) && count($user_id) === 0)) {
+        if ($user_id === SENTINEL_VALUE || (is_array($user_id) && count($user_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter user_id when calling all'
             );
         }
         // Check if $user_secret is a string
-        if (!is_null($user_secret) && !is_string($user_secret)) {
+        if ($user_secret !== SENTINEL_VALUE && !is_string($user_secret)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
         }
         // verify the required parameter 'user_secret' is set
-        if ($user_secret === null || (is_array($user_secret) && count($user_secret) === 0)) {
+        if ($user_secret === SENTINEL_VALUE || (is_array($user_secret) && count($user_secret) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter user_secret when calling all'
             );
@@ -871,24 +873,28 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
         $httpBody = '';
         $multipart = false;
 
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $user_id,
-            'userId', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $user_secret,
-            'userSecret', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
+        if ($user_id !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_id,
+                'userId', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
+        if ($user_secret !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_secret,
+                'userSecret', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
 
 
 
@@ -984,8 +990,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
     public function create(
         $user_id,
         $user_secret,
-        $id = null,
-        $name = null,
+        $id = SENTINEL_VALUE,
+        $name = SENTINEL_VALUE,
         string $contentType = self::contentTypes['create'][0]
 
     )
@@ -1134,8 +1140,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
     public function createAsync(
         $user_id,
         $user_secret,
-        $id = null,
-        $name = null,
+        $id = SENTINEL_VALUE,
+        $name = SENTINEL_VALUE,
         string $contentType = self::contentTypes['create'][0]
 
     )
@@ -1225,27 +1231,27 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
     {
 
         // Check if $user_id is a string
-        if (!is_null($user_id) && !is_string($user_id)) {
+        if ($user_id !== SENTINEL_VALUE && !is_string($user_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_id, true), gettype($user_id)));
         }
         // verify the required parameter 'user_id' is set
-        if ($user_id === null || (is_array($user_id) && count($user_id) === 0)) {
+        if ($user_id === SENTINEL_VALUE || (is_array($user_id) && count($user_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter user_id when calling create'
             );
         }
         // Check if $user_secret is a string
-        if (!is_null($user_secret) && !is_string($user_secret)) {
+        if ($user_secret !== SENTINEL_VALUE && !is_string($user_secret)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
         }
         // verify the required parameter 'user_secret' is set
-        if ($user_secret === null || (is_array($user_secret) && count($user_secret) === 0)) {
+        if ($user_secret === SENTINEL_VALUE || (is_array($user_secret) && count($user_secret) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter user_secret when calling create'
             );
         }
         // verify the required parameter 'request_body' is set
-        if ($request_body === null || (is_array($request_body) && count($request_body) === 0)) {
+        if ($request_body === SENTINEL_VALUE || (is_array($request_body) && count($request_body) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter request_body when calling create'
             );
@@ -1259,24 +1265,28 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
         $httpBody = '';
         $multipart = false;
 
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $user_id,
-            'userId', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $user_secret,
-            'userSecret', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
+        if ($user_id !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_id,
+                'userId', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
+        if ($user_secret !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_secret,
+                'userSecret', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
 
 
 
@@ -2160,11 +2170,11 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
     {
 
         // Check if $model_asset_class_id is a string
-        if (!is_null($model_asset_class_id) && !is_string($model_asset_class_id)) {
+        if ($model_asset_class_id !== SENTINEL_VALUE && !is_string($model_asset_class_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($model_asset_class_id, true), gettype($model_asset_class_id)));
         }
         // verify the required parameter 'model_asset_class_id' is set
-        if ($model_asset_class_id === null || (is_array($model_asset_class_id) && count($model_asset_class_id) === 0)) {
+        if ($model_asset_class_id === SENTINEL_VALUE || (is_array($model_asset_class_id) && count($model_asset_class_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter model_asset_class_id when calling deleteAssetClass'
             );
@@ -2181,7 +2191,7 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
 
 
         // path params
-        if ($model_asset_class_id !== null) {
+        if ($model_asset_class_id !== SENTINEL_VALUE) {
             $resourcePath = str_replace(
                 '{' . 'modelAssetClassId' . '}',
                 ObjectSerializer::toPathValue($model_asset_class_id),
@@ -2450,21 +2460,21 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
     {
 
         // Check if $portfolio_group_id is a string
-        if (!is_null($portfolio_group_id) && !is_string($portfolio_group_id)) {
+        if ($portfolio_group_id !== SENTINEL_VALUE && !is_string($portfolio_group_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($portfolio_group_id, true), gettype($portfolio_group_id)));
         }
         // verify the required parameter 'portfolio_group_id' is set
-        if ($portfolio_group_id === null || (is_array($portfolio_group_id) && count($portfolio_group_id) === 0)) {
+        if ($portfolio_group_id === SENTINEL_VALUE || (is_array($portfolio_group_id) && count($portfolio_group_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter portfolio_group_id when calling deleteExcludedAsset'
             );
         }
         // Check if $symbol_id is a string
-        if (!is_null($symbol_id) && !is_string($symbol_id)) {
+        if ($symbol_id !== SENTINEL_VALUE && !is_string($symbol_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($symbol_id, true), gettype($symbol_id)));
         }
         // verify the required parameter 'symbol_id' is set
-        if ($symbol_id === null || (is_array($symbol_id) && count($symbol_id) === 0)) {
+        if ($symbol_id === SENTINEL_VALUE || (is_array($symbol_id) && count($symbol_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter symbol_id when calling deleteExcludedAsset'
             );
@@ -2481,7 +2491,7 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
 
 
         // path params
-        if ($portfolio_group_id !== null) {
+        if ($portfolio_group_id !== SENTINEL_VALUE) {
             $resourcePath = str_replace(
                 '{' . 'portfolioGroupId' . '}',
                 ObjectSerializer::toPathValue($portfolio_group_id),
@@ -2489,7 +2499,7 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
             );
         }
         // path params
-        if ($symbol_id !== null) {
+        if ($symbol_id !== SENTINEL_VALUE) {
             $resourcePath = str_replace(
                 '{' . 'symbolId' . '}',
                 ObjectSerializer::toPathValue($symbol_id),
@@ -2750,11 +2760,11 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
     {
 
         // Check if $model_portfolio_id is a string
-        if (!is_null($model_portfolio_id) && !is_string($model_portfolio_id)) {
+        if ($model_portfolio_id !== SENTINEL_VALUE && !is_string($model_portfolio_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($model_portfolio_id, true), gettype($model_portfolio_id)));
         }
         // verify the required parameter 'model_portfolio_id' is set
-        if ($model_portfolio_id === null || (is_array($model_portfolio_id) && count($model_portfolio_id) === 0)) {
+        if ($model_portfolio_id === SENTINEL_VALUE || (is_array($model_portfolio_id) && count($model_portfolio_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter model_portfolio_id when calling deleteModelPortfolioById'
             );
@@ -2771,7 +2781,7 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
 
 
         // path params
-        if ($model_portfolio_id !== null) {
+        if ($model_portfolio_id !== SENTINEL_VALUE) {
             $resourcePath = str_replace(
                 '{' . 'modelPortfolioId' . '}',
                 ObjectSerializer::toPathValue($model_portfolio_id),
@@ -3086,11 +3096,11 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
     {
 
         // Check if $portfolio_group_id is a string
-        if (!is_null($portfolio_group_id) && !is_string($portfolio_group_id)) {
+        if ($portfolio_group_id !== SENTINEL_VALUE && !is_string($portfolio_group_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($portfolio_group_id, true), gettype($portfolio_group_id)));
         }
         // verify the required parameter 'portfolio_group_id' is set
-        if ($portfolio_group_id === null || (is_array($portfolio_group_id) && count($portfolio_group_id) === 0)) {
+        if ($portfolio_group_id === SENTINEL_VALUE || (is_array($portfolio_group_id) && count($portfolio_group_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter portfolio_group_id when calling deletePortfoli'
             );
@@ -3107,7 +3117,7 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
 
 
         // path params
-        if ($portfolio_group_id !== null) {
+        if ($portfolio_group_id !== SENTINEL_VALUE) {
             $resourcePath = str_replace(
                 '{' . 'portfolioGroupId' . '}',
                 ObjectSerializer::toPathValue($portfolio_group_id),
@@ -3430,21 +3440,21 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
     {
 
         // Check if $portfolio_group_id is a string
-        if (!is_null($portfolio_group_id) && !is_string($portfolio_group_id)) {
+        if ($portfolio_group_id !== SENTINEL_VALUE && !is_string($portfolio_group_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($portfolio_group_id, true), gettype($portfolio_group_id)));
         }
         // verify the required parameter 'portfolio_group_id' is set
-        if ($portfolio_group_id === null || (is_array($portfolio_group_id) && count($portfolio_group_id) === 0)) {
+        if ($portfolio_group_id === SENTINEL_VALUE || (is_array($portfolio_group_id) && count($portfolio_group_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter portfolio_group_id when calling deletePortfolioTargetById'
             );
         }
         // Check if $target_asset_id is a string
-        if (!is_null($target_asset_id) && !is_string($target_asset_id)) {
+        if ($target_asset_id !== SENTINEL_VALUE && !is_string($target_asset_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($target_asset_id, true), gettype($target_asset_id)));
         }
         // verify the required parameter 'target_asset_id' is set
-        if ($target_asset_id === null || (is_array($target_asset_id) && count($target_asset_id) === 0)) {
+        if ($target_asset_id === SENTINEL_VALUE || (is_array($target_asset_id) && count($target_asset_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter target_asset_id when calling deletePortfolioTargetById'
             );
@@ -3461,7 +3471,7 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
 
 
         // path params
-        if ($portfolio_group_id !== null) {
+        if ($portfolio_group_id !== SENTINEL_VALUE) {
             $resourcePath = str_replace(
                 '{' . 'portfolioGroupId' . '}',
                 ObjectSerializer::toPathValue($portfolio_group_id),
@@ -3469,7 +3479,7 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
             );
         }
         // path params
-        if ($target_asset_id !== null) {
+        if ($target_asset_id !== SENTINEL_VALUE) {
             $resourcePath = str_replace(
                 '{' . 'targetAssetId' . '}',
                 ObjectSerializer::toPathValue($target_asset_id),
@@ -3784,11 +3794,11 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
     {
 
         // Check if $model_asset_class_id is a string
-        if (!is_null($model_asset_class_id) && !is_string($model_asset_class_id)) {
+        if ($model_asset_class_id !== SENTINEL_VALUE && !is_string($model_asset_class_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($model_asset_class_id, true), gettype($model_asset_class_id)));
         }
         // verify the required parameter 'model_asset_class_id' is set
-        if ($model_asset_class_id === null || (is_array($model_asset_class_id) && count($model_asset_class_id) === 0)) {
+        if ($model_asset_class_id === SENTINEL_VALUE || (is_array($model_asset_class_id) && count($model_asset_class_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter model_asset_class_id when calling detailAssetClass'
             );
@@ -3805,7 +3815,7 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
 
 
         // path params
-        if ($model_asset_class_id !== null) {
+        if ($model_asset_class_id !== SENTINEL_VALUE) {
             $resourcePath = str_replace(
                 '{' . 'modelAssetClassId' . '}',
                 ObjectSerializer::toPathValue($model_asset_class_id),
@@ -4136,31 +4146,31 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
     {
 
         // Check if $portfolio_group_id is a string
-        if (!is_null($portfolio_group_id) && !is_string($portfolio_group_id)) {
+        if ($portfolio_group_id !== SENTINEL_VALUE && !is_string($portfolio_group_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($portfolio_group_id, true), gettype($portfolio_group_id)));
         }
         // verify the required parameter 'portfolio_group_id' is set
-        if ($portfolio_group_id === null || (is_array($portfolio_group_id) && count($portfolio_group_id) === 0)) {
+        if ($portfolio_group_id === SENTINEL_VALUE || (is_array($portfolio_group_id) && count($portfolio_group_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter portfolio_group_id when calling getCalculatedTradeById'
             );
         }
         // Check if $calculated_trade_id is a string
-        if (!is_null($calculated_trade_id) && !is_string($calculated_trade_id)) {
+        if ($calculated_trade_id !== SENTINEL_VALUE && !is_string($calculated_trade_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($calculated_trade_id, true), gettype($calculated_trade_id)));
         }
         // verify the required parameter 'calculated_trade_id' is set
-        if ($calculated_trade_id === null || (is_array($calculated_trade_id) && count($calculated_trade_id) === 0)) {
+        if ($calculated_trade_id === SENTINEL_VALUE || (is_array($calculated_trade_id) && count($calculated_trade_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter calculated_trade_id when calling getCalculatedTradeById'
             );
         }
         // Check if $trade_id is a string
-        if (!is_null($trade_id) && !is_string($trade_id)) {
+        if ($trade_id !== SENTINEL_VALUE && !is_string($trade_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($trade_id, true), gettype($trade_id)));
         }
         // verify the required parameter 'trade_id' is set
-        if ($trade_id === null || (is_array($trade_id) && count($trade_id) === 0)) {
+        if ($trade_id === SENTINEL_VALUE || (is_array($trade_id) && count($trade_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter trade_id when calling getCalculatedTradeById'
             );
@@ -4177,7 +4187,7 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
 
 
         // path params
-        if ($portfolio_group_id !== null) {
+        if ($portfolio_group_id !== SENTINEL_VALUE) {
             $resourcePath = str_replace(
                 '{' . 'portfolioGroupId' . '}',
                 ObjectSerializer::toPathValue($portfolio_group_id),
@@ -4185,7 +4195,7 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
             );
         }
         // path params
-        if ($calculated_trade_id !== null) {
+        if ($calculated_trade_id !== SENTINEL_VALUE) {
             $resourcePath = str_replace(
                 '{' . 'calculatedTradeId' . '}',
                 ObjectSerializer::toPathValue($calculated_trade_id),
@@ -4193,7 +4203,7 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
             );
         }
         // path params
-        if ($trade_id !== null) {
+        if ($trade_id !== SENTINEL_VALUE) {
             $resourcePath = str_replace(
                 '{' . 'TradeId' . '}',
                 ObjectSerializer::toPathValue($trade_id),
@@ -4508,11 +4518,11 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
     {
 
         // Check if $model_portfolio_id is a string
-        if (!is_null($model_portfolio_id) && !is_string($model_portfolio_id)) {
+        if ($model_portfolio_id !== SENTINEL_VALUE && !is_string($model_portfolio_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($model_portfolio_id, true), gettype($model_portfolio_id)));
         }
         // verify the required parameter 'model_portfolio_id' is set
-        if ($model_portfolio_id === null || (is_array($model_portfolio_id) && count($model_portfolio_id) === 0)) {
+        if ($model_portfolio_id === SENTINEL_VALUE || (is_array($model_portfolio_id) && count($model_portfolio_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter model_portfolio_id when calling getModelDetailsById'
             );
@@ -4529,7 +4539,7 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
 
 
         // path params
-        if ($model_portfolio_id !== null) {
+        if ($model_portfolio_id !== SENTINEL_VALUE) {
             $resourcePath = str_replace(
                 '{' . 'modelPortfolioId' . '}',
                 ObjectSerializer::toPathValue($model_portfolio_id),
@@ -4844,11 +4854,11 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
     {
 
         // Check if $portfolio_group_id is a string
-        if (!is_null($portfolio_group_id) && !is_string($portfolio_group_id)) {
+        if ($portfolio_group_id !== SENTINEL_VALUE && !is_string($portfolio_group_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($portfolio_group_id, true), gettype($portfolio_group_id)));
         }
         // verify the required parameter 'portfolio_group_id' is set
-        if ($portfolio_group_id === null || (is_array($portfolio_group_id) && count($portfolio_group_id) === 0)) {
+        if ($portfolio_group_id === SENTINEL_VALUE || (is_array($portfolio_group_id) && count($portfolio_group_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter portfolio_group_id when calling getPortfolioBalances'
             );
@@ -4865,7 +4875,7 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
 
 
         // path params
-        if ($portfolio_group_id !== null) {
+        if ($portfolio_group_id !== SENTINEL_VALUE) {
             $resourcePath = str_replace(
                 '{' . 'portfolioGroupId' . '}',
                 ObjectSerializer::toPathValue($portfolio_group_id),
@@ -5180,11 +5190,11 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
     {
 
         // Check if $portfolio_group_id is a string
-        if (!is_null($portfolio_group_id) && !is_string($portfolio_group_id)) {
+        if ($portfolio_group_id !== SENTINEL_VALUE && !is_string($portfolio_group_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($portfolio_group_id, true), gettype($portfolio_group_id)));
         }
         // verify the required parameter 'portfolio_group_id' is set
-        if ($portfolio_group_id === null || (is_array($portfolio_group_id) && count($portfolio_group_id) === 0)) {
+        if ($portfolio_group_id === SENTINEL_VALUE || (is_array($portfolio_group_id) && count($portfolio_group_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter portfolio_group_id when calling getPortfolioDetailsById'
             );
@@ -5201,7 +5211,7 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
 
 
         // path params
-        if ($portfolio_group_id !== null) {
+        if ($portfolio_group_id !== SENTINEL_VALUE) {
             $resourcePath = str_replace(
                 '{' . 'portfolioGroupId' . '}',
                 ObjectSerializer::toPathValue($portfolio_group_id),
@@ -5516,11 +5526,11 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
     {
 
         // Check if $portfolio_group_id is a string
-        if (!is_null($portfolio_group_id) && !is_string($portfolio_group_id)) {
+        if ($portfolio_group_id !== SENTINEL_VALUE && !is_string($portfolio_group_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($portfolio_group_id, true), gettype($portfolio_group_id)));
         }
         // verify the required parameter 'portfolio_group_id' is set
-        if ($portfolio_group_id === null || (is_array($portfolio_group_id) && count($portfolio_group_id) === 0)) {
+        if ($portfolio_group_id === SENTINEL_VALUE || (is_array($portfolio_group_id) && count($portfolio_group_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter portfolio_group_id when calling getPortfolioInfo'
             );
@@ -5537,7 +5547,7 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
 
 
         // path params
-        if ($portfolio_group_id !== null) {
+        if ($portfolio_group_id !== SENTINEL_VALUE) {
             $resourcePath = str_replace(
                 '{' . 'portfolioGroupId' . '}',
                 ObjectSerializer::toPathValue($portfolio_group_id),
@@ -5852,11 +5862,11 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
     {
 
         // Check if $portfolio_group_id is a string
-        if (!is_null($portfolio_group_id) && !is_string($portfolio_group_id)) {
+        if ($portfolio_group_id !== SENTINEL_VALUE && !is_string($portfolio_group_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($portfolio_group_id, true), gettype($portfolio_group_id)));
         }
         // verify the required parameter 'portfolio_group_id' is set
-        if ($portfolio_group_id === null || (is_array($portfolio_group_id) && count($portfolio_group_id) === 0)) {
+        if ($portfolio_group_id === SENTINEL_VALUE || (is_array($portfolio_group_id) && count($portfolio_group_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter portfolio_group_id when calling getPortfolioSettings'
             );
@@ -5873,7 +5883,7 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
 
 
         // path params
-        if ($portfolio_group_id !== null) {
+        if ($portfolio_group_id !== SENTINEL_VALUE) {
             $resourcePath = str_replace(
                 '{' . 'portfolioGroupId' . '}',
                 ObjectSerializer::toPathValue($portfolio_group_id),
@@ -6196,21 +6206,21 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
     {
 
         // Check if $portfolio_group_id is a string
-        if (!is_null($portfolio_group_id) && !is_string($portfolio_group_id)) {
+        if ($portfolio_group_id !== SENTINEL_VALUE && !is_string($portfolio_group_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($portfolio_group_id, true), gettype($portfolio_group_id)));
         }
         // verify the required parameter 'portfolio_group_id' is set
-        if ($portfolio_group_id === null || (is_array($portfolio_group_id) && count($portfolio_group_id) === 0)) {
+        if ($portfolio_group_id === SENTINEL_VALUE || (is_array($portfolio_group_id) && count($portfolio_group_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter portfolio_group_id when calling getPortfolioTargetById'
             );
         }
         // Check if $target_asset_id is a string
-        if (!is_null($target_asset_id) && !is_string($target_asset_id)) {
+        if ($target_asset_id !== SENTINEL_VALUE && !is_string($target_asset_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($target_asset_id, true), gettype($target_asset_id)));
         }
         // verify the required parameter 'target_asset_id' is set
-        if ($target_asset_id === null || (is_array($target_asset_id) && count($target_asset_id) === 0)) {
+        if ($target_asset_id === SENTINEL_VALUE || (is_array($target_asset_id) && count($target_asset_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter target_asset_id when calling getPortfolioTargetById'
             );
@@ -6227,7 +6237,7 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
 
 
         // path params
-        if ($portfolio_group_id !== null) {
+        if ($portfolio_group_id !== SENTINEL_VALUE) {
             $resourcePath = str_replace(
                 '{' . 'portfolioGroupId' . '}',
                 ObjectSerializer::toPathValue($portfolio_group_id),
@@ -6235,7 +6245,7 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
             );
         }
         // path params
-        if ($target_asset_id !== null) {
+        if ($target_asset_id !== SENTINEL_VALUE) {
             $resourcePath = str_replace(
                 '{' . 'targetAssetId' . '}',
                 ObjectSerializer::toPathValue($target_asset_id),
@@ -6550,11 +6560,11 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
     {
 
         // Check if $portfolio_group_id is a string
-        if (!is_null($portfolio_group_id) && !is_string($portfolio_group_id)) {
+        if ($portfolio_group_id !== SENTINEL_VALUE && !is_string($portfolio_group_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($portfolio_group_id, true), gettype($portfolio_group_id)));
         }
         // verify the required parameter 'portfolio_group_id' is set
-        if ($portfolio_group_id === null || (is_array($portfolio_group_id) && count($portfolio_group_id) === 0)) {
+        if ($portfolio_group_id === SENTINEL_VALUE || (is_array($portfolio_group_id) && count($portfolio_group_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter portfolio_group_id when calling getPortfolioTargets'
             );
@@ -6571,7 +6581,7 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
 
 
         // path params
-        if ($portfolio_group_id !== null) {
+        if ($portfolio_group_id !== SENTINEL_VALUE) {
             $resourcePath = str_replace(
                 '{' . 'portfolioGroupId' . '}',
                 ObjectSerializer::toPathValue($portfolio_group_id),
@@ -6886,11 +6896,11 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
     {
 
         // Check if $portfolio_group_id is a string
-        if (!is_null($portfolio_group_id) && !is_string($portfolio_group_id)) {
+        if ($portfolio_group_id !== SENTINEL_VALUE && !is_string($portfolio_group_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($portfolio_group_id, true), gettype($portfolio_group_id)));
         }
         // verify the required parameter 'portfolio_group_id' is set
-        if ($portfolio_group_id === null || (is_array($portfolio_group_id) && count($portfolio_group_id) === 0)) {
+        if ($portfolio_group_id === SENTINEL_VALUE || (is_array($portfolio_group_id) && count($portfolio_group_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter portfolio_group_id when calling getPortoflioExcludedAssets'
             );
@@ -6907,7 +6917,7 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
 
 
         // path params
-        if ($portfolio_group_id !== null) {
+        if ($portfolio_group_id !== SENTINEL_VALUE) {
             $resourcePath = str_replace(
                 '{' . 'portfolioGroupId' . '}',
                 ObjectSerializer::toPathValue($portfolio_group_id),
@@ -7222,11 +7232,11 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
     {
 
         // Check if $portfolio_group_id is a string
-        if (!is_null($portfolio_group_id) && !is_string($portfolio_group_id)) {
+        if ($portfolio_group_id !== SENTINEL_VALUE && !is_string($portfolio_group_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($portfolio_group_id, true), gettype($portfolio_group_id)));
         }
         // verify the required parameter 'portfolio_group_id' is set
-        if ($portfolio_group_id === null || (is_array($portfolio_group_id) && count($portfolio_group_id) === 0)) {
+        if ($portfolio_group_id === SENTINEL_VALUE || (is_array($portfolio_group_id) && count($portfolio_group_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter portfolio_group_id when calling importModelPortfolio'
             );
@@ -7243,7 +7253,7 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
 
 
         // path params
-        if ($portfolio_group_id !== null) {
+        if ($portfolio_group_id !== SENTINEL_VALUE) {
             $resourcePath = str_replace(
                 '{' . 'portfolioGroupId' . '}',
                 ObjectSerializer::toPathValue($portfolio_group_id),
@@ -7868,11 +7878,11 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
     {
 
         // Check if $portfolio_group_id is a string
-        if (!is_null($portfolio_group_id) && !is_string($portfolio_group_id)) {
+        if ($portfolio_group_id !== SENTINEL_VALUE && !is_string($portfolio_group_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($portfolio_group_id, true), gettype($portfolio_group_id)));
         }
         // verify the required parameter 'portfolio_group_id' is set
-        if ($portfolio_group_id === null || (is_array($portfolio_group_id) && count($portfolio_group_id) === 0)) {
+        if ($portfolio_group_id === SENTINEL_VALUE || (is_array($portfolio_group_id) && count($portfolio_group_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter portfolio_group_id when calling listCalculatedTrades'
             );
@@ -7889,7 +7899,7 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
 
 
         // path params
-        if ($portfolio_group_id !== null) {
+        if ($portfolio_group_id !== SENTINEL_VALUE) {
             $resourcePath = str_replace(
                 '{' . 'portfolioGroupId' . '}',
                 ObjectSerializer::toPathValue($portfolio_group_id),
@@ -8514,11 +8524,11 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
     {
 
         // Check if $portfolio_group_id is a string
-        if (!is_null($portfolio_group_id) && !is_string($portfolio_group_id)) {
+        if ($portfolio_group_id !== SENTINEL_VALUE && !is_string($portfolio_group_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($portfolio_group_id, true), gettype($portfolio_group_id)));
         }
         // verify the required parameter 'portfolio_group_id' is set
-        if ($portfolio_group_id === null || (is_array($portfolio_group_id) && count($portfolio_group_id) === 0)) {
+        if ($portfolio_group_id === SENTINEL_VALUE || (is_array($portfolio_group_id) && count($portfolio_group_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter portfolio_group_id when calling listPortfolioAccounts'
             );
@@ -8535,7 +8545,7 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
 
 
         // path params
-        if ($portfolio_group_id !== null) {
+        if ($portfolio_group_id !== SENTINEL_VALUE) {
             $resourcePath = str_replace(
                 '{' . 'portfolioGroupId' . '}',
                 ObjectSerializer::toPathValue($portfolio_group_id),
@@ -8633,9 +8643,9 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function modifyModelPortfolioById(
         $model_portfolio_id,
-        $model_portfolio = null,
-        $model_portfolio_security = null,
-        $model_portfolio_asset_class = null,
+        $model_portfolio = SENTINEL_VALUE,
+        $model_portfolio_security = SENTINEL_VALUE,
+        $model_portfolio_asset_class = SENTINEL_VALUE,
         string $contentType = self::contentTypes['modifyModelPortfolioById'][0]
 
     )
@@ -8740,9 +8750,9 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function modifyModelPortfolioByIdAsync(
         $model_portfolio_id,
-        $model_portfolio = null,
-        $model_portfolio_security = null,
-        $model_portfolio_asset_class = null,
+        $model_portfolio = SENTINEL_VALUE,
+        $model_portfolio_security = SENTINEL_VALUE,
+        $model_portfolio_asset_class = SENTINEL_VALUE,
         string $contentType = self::contentTypes['modifyModelPortfolioById'][0]
 
     )
@@ -8818,16 +8828,16 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
     {
 
         // Check if $model_portfolio_id is a string
-        if (!is_null($model_portfolio_id) && !is_string($model_portfolio_id)) {
+        if ($model_portfolio_id !== SENTINEL_VALUE && !is_string($model_portfolio_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($model_portfolio_id, true), gettype($model_portfolio_id)));
         }
         // verify the required parameter 'model_portfolio_id' is set
-        if ($model_portfolio_id === null || (is_array($model_portfolio_id) && count($model_portfolio_id) === 0)) {
+        if ($model_portfolio_id === SENTINEL_VALUE || (is_array($model_portfolio_id) && count($model_portfolio_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter model_portfolio_id when calling modifyModelPortfolioById'
             );
         }
-        if ($model_portfolio_details != null) {
+        if ($model_portfolio_details !== SENTINEL_VALUE) {
             if (!($model_portfolio_details instanceof \SnapTrade\Model\ModelPortfolioDetails)) {
                 if (!is_array($model_portfolio_details))
                     throw new \InvalidArgumentException('"model_portfolio_details" must be associative array or an instance of \SnapTrade\Model\ModelPortfolioDetails PortfolioManagementApi.modifyModelPortfolioById.');
@@ -8836,7 +8846,7 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
             }
         }
         // verify the required parameter 'model_portfolio_details' is set
-        if ($model_portfolio_details === null || (is_array($model_portfolio_details) && count($model_portfolio_details) === 0)) {
+        if ($model_portfolio_details === SENTINEL_VALUE || (is_array($model_portfolio_details) && count($model_portfolio_details) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter model_portfolio_details when calling modifyModelPortfolioById'
             );
@@ -8853,7 +8863,7 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
 
 
         // path params
-        if ($model_portfolio_id !== null) {
+        if ($model_portfolio_id !== SENTINEL_VALUE) {
             $resourcePath = str_replace(
                 '{' . 'modelPortfolioId' . '}',
                 ObjectSerializer::toPathValue($model_portfolio_id),
@@ -8958,8 +8968,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function savePortfolio(
         $portfolio_group_id,
-        $id = null,
-        $name = null,
+        $id = SENTINEL_VALUE,
+        $name = SENTINEL_VALUE,
         string $contentType = self::contentTypes['savePortfolio'][0]
 
     )
@@ -9104,8 +9114,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function savePortfolioAsync(
         $portfolio_group_id,
-        $id = null,
-        $name = null,
+        $id = SENTINEL_VALUE,
+        $name = SENTINEL_VALUE,
         string $contentType = self::contentTypes['savePortfolio'][0]
 
     )
@@ -9193,17 +9203,17 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
     {
 
         // Check if $portfolio_group_id is a string
-        if (!is_null($portfolio_group_id) && !is_string($portfolio_group_id)) {
+        if ($portfolio_group_id !== SENTINEL_VALUE && !is_string($portfolio_group_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($portfolio_group_id, true), gettype($portfolio_group_id)));
         }
         // verify the required parameter 'portfolio_group_id' is set
-        if ($portfolio_group_id === null || (is_array($portfolio_group_id) && count($portfolio_group_id) === 0)) {
+        if ($portfolio_group_id === SENTINEL_VALUE || (is_array($portfolio_group_id) && count($portfolio_group_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter portfolio_group_id when calling savePortfolio'
             );
         }
         // verify the required parameter 'request_body' is set
-        if ($request_body === null || (is_array($request_body) && count($request_body) === 0)) {
+        if ($request_body === SENTINEL_VALUE || (is_array($request_body) && count($request_body) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter request_body when calling savePortfolio'
             );
@@ -9220,7 +9230,7 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
 
 
         // path params
-        if ($portfolio_group_id !== null) {
+        if ($portfolio_group_id !== SENTINEL_VALUE) {
             $resourcePath = str_replace(
                 '{' . 'portfolioGroupId' . '}',
                 ObjectSerializer::toPathValue($portfolio_group_id),
@@ -9325,7 +9335,7 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function searchPortfolioSymbols(
         $portfolio_group_id,
-        $substring = null,
+        $substring = SENTINEL_VALUE,
         string $contentType = self::contentTypes['searchPortfolioSymbols'][0]
 
     )
@@ -9469,7 +9479,7 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function searchPortfolioSymbolsAsync(
         $portfolio_group_id,
-        $substring = null,
+        $substring = SENTINEL_VALUE,
         string $contentType = self::contentTypes['searchPortfolioSymbols'][0]
 
     )
@@ -9552,20 +9562,20 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function searchPortfolioSymbolsRequest($portfolio_group_id, $symbol_query = null, string $contentType = self::contentTypes['searchPortfolioSymbols'][0])
+    public function searchPortfolioSymbolsRequest($portfolio_group_id, $symbol_query = SENTINEL_VALUE, string $contentType = self::contentTypes['searchPortfolioSymbols'][0])
     {
 
         // Check if $portfolio_group_id is a string
-        if (!is_null($portfolio_group_id) && !is_string($portfolio_group_id)) {
+        if ($portfolio_group_id !== SENTINEL_VALUE && !is_string($portfolio_group_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($portfolio_group_id, true), gettype($portfolio_group_id)));
         }
         // verify the required parameter 'portfolio_group_id' is set
-        if ($portfolio_group_id === null || (is_array($portfolio_group_id) && count($portfolio_group_id) === 0)) {
+        if ($portfolio_group_id === SENTINEL_VALUE || (is_array($portfolio_group_id) && count($portfolio_group_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter portfolio_group_id when calling searchPortfolioSymbols'
             );
         }
-        if ($symbol_query != null) {
+        if ($symbol_query !== SENTINEL_VALUE) {
             if (!($symbol_query instanceof \SnapTrade\Model\SymbolQuery)) {
                 if (!is_array($symbol_query))
                     throw new \InvalidArgumentException('"symbol_query" must be associative array or an instance of \SnapTrade\Model\SymbolQuery PortfolioManagementApi.searchPortfolioSymbols.');
@@ -9585,7 +9595,7 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
 
 
         // path params
-        if ($portfolio_group_id !== null) {
+        if ($portfolio_group_id !== SENTINEL_VALUE) {
             $resourcePath = str_replace(
                 '{' . 'portfolioGroupId' . '}',
                 ObjectSerializer::toPathValue($portfolio_group_id),
@@ -9913,15 +9923,15 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function setPortfolioTargetsRequest($portfolio_group_id, $target_asset = null, string $contentType = self::contentTypes['setPortfolioTargets'][0])
+    public function setPortfolioTargetsRequest($portfolio_group_id, $target_asset = SENTINEL_VALUE, string $contentType = self::contentTypes['setPortfolioTargets'][0])
     {
 
         // Check if $portfolio_group_id is a string
-        if (!is_null($portfolio_group_id) && !is_string($portfolio_group_id)) {
+        if ($portfolio_group_id !== SENTINEL_VALUE && !is_string($portfolio_group_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($portfolio_group_id, true), gettype($portfolio_group_id)));
         }
         // verify the required parameter 'portfolio_group_id' is set
-        if ($portfolio_group_id === null || (is_array($portfolio_group_id) && count($portfolio_group_id) === 0)) {
+        if ($portfolio_group_id === SENTINEL_VALUE || (is_array($portfolio_group_id) && count($portfolio_group_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter portfolio_group_id when calling setPortfolioTargets'
             );
@@ -9938,7 +9948,7 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
 
 
         // path params
-        if ($portfolio_group_id !== null) {
+        if ($portfolio_group_id !== SENTINEL_VALUE) {
             $resourcePath = str_replace(
                 '{' . 'portfolioGroupId' . '}',
                 ObjectSerializer::toPathValue($portfolio_group_id),
@@ -10043,8 +10053,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function updateAssetClass(
         $model_asset_class_id,
-        $model_asset_class = null,
-        $model_asset_class_target = null,
+        $model_asset_class = SENTINEL_VALUE,
+        $model_asset_class_target = SENTINEL_VALUE,
         string $contentType = self::contentTypes['updateAssetClass'][0]
 
     )
@@ -10148,8 +10158,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function updateAssetClassAsync(
         $model_asset_class_id,
-        $model_asset_class = null,
-        $model_asset_class_target = null,
+        $model_asset_class = SENTINEL_VALUE,
+        $model_asset_class_target = SENTINEL_VALUE,
         string $contentType = self::contentTypes['updateAssetClass'][0]
 
     )
@@ -10224,16 +10234,16 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
     {
 
         // Check if $model_asset_class_id is a string
-        if (!is_null($model_asset_class_id) && !is_string($model_asset_class_id)) {
+        if ($model_asset_class_id !== SENTINEL_VALUE && !is_string($model_asset_class_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($model_asset_class_id, true), gettype($model_asset_class_id)));
         }
         // verify the required parameter 'model_asset_class_id' is set
-        if ($model_asset_class_id === null || (is_array($model_asset_class_id) && count($model_asset_class_id) === 0)) {
+        if ($model_asset_class_id === SENTINEL_VALUE || (is_array($model_asset_class_id) && count($model_asset_class_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter model_asset_class_id when calling updateAssetClass'
             );
         }
-        if ($model_asset_class_details != null) {
+        if ($model_asset_class_details !== SENTINEL_VALUE) {
             if (!($model_asset_class_details instanceof \SnapTrade\Model\ModelAssetClassDetails)) {
                 if (!is_array($model_asset_class_details))
                     throw new \InvalidArgumentException('"model_asset_class_details" must be associative array or an instance of \SnapTrade\Model\ModelAssetClassDetails PortfolioManagementApi.updateAssetClass.');
@@ -10242,7 +10252,7 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
             }
         }
         // verify the required parameter 'model_asset_class_details' is set
-        if ($model_asset_class_details === null || (is_array($model_asset_class_details) && count($model_asset_class_details) === 0)) {
+        if ($model_asset_class_details === SENTINEL_VALUE || (is_array($model_asset_class_details) && count($model_asset_class_details) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter model_asset_class_details when calling updateAssetClass'
             );
@@ -10259,7 +10269,7 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
 
 
         // path params
-        if ($model_asset_class_id !== null) {
+        if ($model_asset_class_id !== SENTINEL_VALUE) {
             $resourcePath = str_replace(
                 '{' . 'modelAssetClassId' . '}',
                 ObjectSerializer::toPathValue($model_asset_class_id),
@@ -10581,11 +10591,11 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
     {
 
         // Check if $portfolio_group_id is a string
-        if (!is_null($portfolio_group_id) && !is_string($portfolio_group_id)) {
+        if ($portfolio_group_id !== SENTINEL_VALUE && !is_string($portfolio_group_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($portfolio_group_id, true), gettype($portfolio_group_id)));
         }
         // verify the required parameter 'portfolio_group_id' is set
-        if ($portfolio_group_id === null || (is_array($portfolio_group_id) && count($portfolio_group_id) === 0)) {
+        if ($portfolio_group_id === SENTINEL_VALUE || (is_array($portfolio_group_id) && count($portfolio_group_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter portfolio_group_id when calling updatePortfolioSettings'
             );
@@ -10602,7 +10612,7 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
 
 
         // path params
-        if ($portfolio_group_id !== null) {
+        if ($portfolio_group_id !== SENTINEL_VALUE) {
             $resourcePath = str_replace(
                 '{' . 'portfolioGroupId' . '}',
                 ObjectSerializer::toPathValue($portfolio_group_id),
@@ -10702,11 +10712,11 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
     public function updatePortfolioTargetById(
         $portfolio_group_id,
         $target_asset_id,
-        $id = null,
-        $symbol = null,
-        $percent = null,
-        $is_supported = null,
-        $is_excluded = null,
+        $id = SENTINEL_VALUE,
+        $symbol = SENTINEL_VALUE,
+        $percent = SENTINEL_VALUE,
+        $is_supported = SENTINEL_VALUE,
+        $is_excluded = SENTINEL_VALUE,
         string $contentType = self::contentTypes['updatePortfolioTargetById'][0]
 
     )
@@ -10858,11 +10868,11 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
     public function updatePortfolioTargetByIdAsync(
         $portfolio_group_id,
         $target_asset_id,
-        $id = null,
-        $symbol = null,
-        $percent = null,
-        $is_supported = null,
-        $is_excluded = null,
+        $id = SENTINEL_VALUE,
+        $symbol = SENTINEL_VALUE,
+        $percent = SENTINEL_VALUE,
+        $is_supported = SENTINEL_VALUE,
+        $is_excluded = SENTINEL_VALUE,
         string $contentType = self::contentTypes['updatePortfolioTargetById'][0]
 
     )
@@ -10955,26 +10965,26 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
     {
 
         // Check if $portfolio_group_id is a string
-        if (!is_null($portfolio_group_id) && !is_string($portfolio_group_id)) {
+        if ($portfolio_group_id !== SENTINEL_VALUE && !is_string($portfolio_group_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($portfolio_group_id, true), gettype($portfolio_group_id)));
         }
         // verify the required parameter 'portfolio_group_id' is set
-        if ($portfolio_group_id === null || (is_array($portfolio_group_id) && count($portfolio_group_id) === 0)) {
+        if ($portfolio_group_id === SENTINEL_VALUE || (is_array($portfolio_group_id) && count($portfolio_group_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter portfolio_group_id when calling updatePortfolioTargetById'
             );
         }
         // Check if $target_asset_id is a string
-        if (!is_null($target_asset_id) && !is_string($target_asset_id)) {
+        if ($target_asset_id !== SENTINEL_VALUE && !is_string($target_asset_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($target_asset_id, true), gettype($target_asset_id)));
         }
         // verify the required parameter 'target_asset_id' is set
-        if ($target_asset_id === null || (is_array($target_asset_id) && count($target_asset_id) === 0)) {
+        if ($target_asset_id === SENTINEL_VALUE || (is_array($target_asset_id) && count($target_asset_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter target_asset_id when calling updatePortfolioTargetById'
             );
         }
-        if ($target_asset != null) {
+        if ($target_asset !== SENTINEL_VALUE) {
             if (!($target_asset instanceof \SnapTrade\Model\TargetAsset)) {
                 if (!is_array($target_asset))
                     throw new \InvalidArgumentException('"target_asset" must be associative array or an instance of \SnapTrade\Model\TargetAsset PortfolioManagementApi.updatePortfolioTargetById.');
@@ -10983,7 +10993,7 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
             }
         }
         // verify the required parameter 'target_asset' is set
-        if ($target_asset === null || (is_array($target_asset) && count($target_asset) === 0)) {
+        if ($target_asset === SENTINEL_VALUE || (is_array($target_asset) && count($target_asset) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter target_asset when calling updatePortfolioTargetById'
             );
@@ -11000,7 +11010,7 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
 
 
         // path params
-        if ($portfolio_group_id !== null) {
+        if ($portfolio_group_id !== SENTINEL_VALUE) {
             $resourcePath = str_replace(
                 '{' . 'portfolioGroupId' . '}',
                 ObjectSerializer::toPathValue($portfolio_group_id),
@@ -11008,7 +11018,7 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
             );
         }
         // path params
-        if ($target_asset_id !== null) {
+        if ($target_asset_id !== SENTINEL_VALUE) {
             $resourcePath = str_replace(
                 '{' . 'targetAssetId' . '}',
                 ObjectSerializer::toPathValue($target_asset_id),

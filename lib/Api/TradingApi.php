@@ -140,7 +140,9 @@ class TradingApi extends \SnapTrade\CustomApi
      * For initializing request body parameter
      */
     private function setRequestBodyProperty(&$body, $property, $value) {
-        if ($body == null) $body = [];
+        if ($body === null) $body = [];
+        // user did not pass in a value for this parameter
+        if ($value === SENTINEL_VALUE) return;
         $body[$property] = $value;
     }
 
@@ -163,7 +165,7 @@ class TradingApi extends \SnapTrade\CustomApi
         $user_id,
         $user_secret,
         $account_id,
-        $brokerage_order_id = null,
+        $brokerage_order_id = SENTINEL_VALUE,
         string $contentType = self::contentTypes['cancelUserAccountOrder'][0]
 
     )
@@ -338,7 +340,7 @@ class TradingApi extends \SnapTrade\CustomApi
         $user_id,
         $user_secret,
         $account_id,
-        $brokerage_order_id = null,
+        $brokerage_order_id = SENTINEL_VALUE,
         string $contentType = self::contentTypes['cancelUserAccountOrder'][0]
 
     )
@@ -429,36 +431,36 @@ class TradingApi extends \SnapTrade\CustomApi
     {
 
         // Check if $user_id is a string
-        if (!is_null($user_id) && !is_string($user_id)) {
+        if ($user_id !== SENTINEL_VALUE && !is_string($user_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_id, true), gettype($user_id)));
         }
         // verify the required parameter 'user_id' is set
-        if ($user_id === null || (is_array($user_id) && count($user_id) === 0)) {
+        if ($user_id === SENTINEL_VALUE || (is_array($user_id) && count($user_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter user_id when calling cancelUserAccountOrder'
             );
         }
         // Check if $user_secret is a string
-        if (!is_null($user_secret) && !is_string($user_secret)) {
+        if ($user_secret !== SENTINEL_VALUE && !is_string($user_secret)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
         }
         // verify the required parameter 'user_secret' is set
-        if ($user_secret === null || (is_array($user_secret) && count($user_secret) === 0)) {
+        if ($user_secret === SENTINEL_VALUE || (is_array($user_secret) && count($user_secret) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter user_secret when calling cancelUserAccountOrder'
             );
         }
         // Check if $account_id is a string
-        if (!is_null($account_id) && !is_string($account_id)) {
+        if ($account_id !== SENTINEL_VALUE && !is_string($account_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($account_id, true), gettype($account_id)));
         }
         // verify the required parameter 'account_id' is set
-        if ($account_id === null || (is_array($account_id) && count($account_id) === 0)) {
+        if ($account_id === SENTINEL_VALUE || (is_array($account_id) && count($account_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter account_id when calling cancelUserAccountOrder'
             );
         }
-        if ($trading_cancel_user_account_order_request != null) {
+        if ($trading_cancel_user_account_order_request !== SENTINEL_VALUE) {
             if (!($trading_cancel_user_account_order_request instanceof \SnapTrade\Model\TradingCancelUserAccountOrderRequest)) {
                 if (!is_array($trading_cancel_user_account_order_request))
                     throw new \InvalidArgumentException('"trading_cancel_user_account_order_request" must be associative array or an instance of \SnapTrade\Model\TradingCancelUserAccountOrderRequest TradingApi.cancelUserAccountOrder.');
@@ -467,7 +469,7 @@ class TradingApi extends \SnapTrade\CustomApi
             }
         }
         // verify the required parameter 'trading_cancel_user_account_order_request' is set
-        if ($trading_cancel_user_account_order_request === null || (is_array($trading_cancel_user_account_order_request) && count($trading_cancel_user_account_order_request) === 0)) {
+        if ($trading_cancel_user_account_order_request === SENTINEL_VALUE || (is_array($trading_cancel_user_account_order_request) && count($trading_cancel_user_account_order_request) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter trading_cancel_user_account_order_request when calling cancelUserAccountOrder'
             );
@@ -481,28 +483,32 @@ class TradingApi extends \SnapTrade\CustomApi
         $httpBody = '';
         $multipart = false;
 
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $user_id,
-            'userId', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $user_secret,
-            'userSecret', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
+        if ($user_id !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_id,
+                'userId', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
+        if ($user_secret !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_secret,
+                'userSecret', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
 
 
         // path params
-        if ($account_id !== null) {
+        if ($account_id !== SENTINEL_VALUE) {
             $resourcePath = str_replace(
                 '{' . 'accountId' . '}',
                 ObjectSerializer::toPathValue($account_id),
@@ -840,31 +846,31 @@ class TradingApi extends \SnapTrade\CustomApi
     {
 
         // Check if $portfolio_group_id is a string
-        if (!is_null($portfolio_group_id) && !is_string($portfolio_group_id)) {
+        if ($portfolio_group_id !== SENTINEL_VALUE && !is_string($portfolio_group_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($portfolio_group_id, true), gettype($portfolio_group_id)));
         }
         // verify the required parameter 'portfolio_group_id' is set
-        if ($portfolio_group_id === null || (is_array($portfolio_group_id) && count($portfolio_group_id) === 0)) {
+        if ($portfolio_group_id === SENTINEL_VALUE || (is_array($portfolio_group_id) && count($portfolio_group_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter portfolio_group_id when calling getCalculatedTradeImpactById'
             );
         }
         // Check if $calculated_trade_id is a string
-        if (!is_null($calculated_trade_id) && !is_string($calculated_trade_id)) {
+        if ($calculated_trade_id !== SENTINEL_VALUE && !is_string($calculated_trade_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($calculated_trade_id, true), gettype($calculated_trade_id)));
         }
         // verify the required parameter 'calculated_trade_id' is set
-        if ($calculated_trade_id === null || (is_array($calculated_trade_id) && count($calculated_trade_id) === 0)) {
+        if ($calculated_trade_id === SENTINEL_VALUE || (is_array($calculated_trade_id) && count($calculated_trade_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter calculated_trade_id when calling getCalculatedTradeImpactById'
             );
         }
         // Check if $trade_id is a string
-        if (!is_null($trade_id) && !is_string($trade_id)) {
+        if ($trade_id !== SENTINEL_VALUE && !is_string($trade_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($trade_id, true), gettype($trade_id)));
         }
         // verify the required parameter 'trade_id' is set
-        if ($trade_id === null || (is_array($trade_id) && count($trade_id) === 0)) {
+        if ($trade_id === SENTINEL_VALUE || (is_array($trade_id) && count($trade_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter trade_id when calling getCalculatedTradeImpactById'
             );
@@ -881,7 +887,7 @@ class TradingApi extends \SnapTrade\CustomApi
 
 
         // path params
-        if ($portfolio_group_id !== null) {
+        if ($portfolio_group_id !== SENTINEL_VALUE) {
             $resourcePath = str_replace(
                 '{' . 'portfolioGroupId' . '}',
                 ObjectSerializer::toPathValue($portfolio_group_id),
@@ -889,7 +895,7 @@ class TradingApi extends \SnapTrade\CustomApi
             );
         }
         // path params
-        if ($calculated_trade_id !== null) {
+        if ($calculated_trade_id !== SENTINEL_VALUE) {
             $resourcePath = str_replace(
                 '{' . 'calculatedTradeId' . '}',
                 ObjectSerializer::toPathValue($calculated_trade_id),
@@ -897,7 +903,7 @@ class TradingApi extends \SnapTrade\CustomApi
             );
         }
         // path params
-        if ($trade_id !== null) {
+        if ($trade_id !== SENTINEL_VALUE) {
             $resourcePath = str_replace(
                 '{' . 'tradeId' . '}',
                 ObjectSerializer::toPathValue($trade_id),
@@ -1220,21 +1226,21 @@ class TradingApi extends \SnapTrade\CustomApi
     {
 
         // Check if $portfolio_group_id is a string
-        if (!is_null($portfolio_group_id) && !is_string($portfolio_group_id)) {
+        if ($portfolio_group_id !== SENTINEL_VALUE && !is_string($portfolio_group_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($portfolio_group_id, true), gettype($portfolio_group_id)));
         }
         // verify the required parameter 'portfolio_group_id' is set
-        if ($portfolio_group_id === null || (is_array($portfolio_group_id) && count($portfolio_group_id) === 0)) {
+        if ($portfolio_group_id === SENTINEL_VALUE || (is_array($portfolio_group_id) && count($portfolio_group_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter portfolio_group_id when calling getCalculatedTradesImpact'
             );
         }
         // Check if $calculated_trade_id is a string
-        if (!is_null($calculated_trade_id) && !is_string($calculated_trade_id)) {
+        if ($calculated_trade_id !== SENTINEL_VALUE && !is_string($calculated_trade_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($calculated_trade_id, true), gettype($calculated_trade_id)));
         }
         // verify the required parameter 'calculated_trade_id' is set
-        if ($calculated_trade_id === null || (is_array($calculated_trade_id) && count($calculated_trade_id) === 0)) {
+        if ($calculated_trade_id === SENTINEL_VALUE || (is_array($calculated_trade_id) && count($calculated_trade_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter calculated_trade_id when calling getCalculatedTradesImpact'
             );
@@ -1251,7 +1257,7 @@ class TradingApi extends \SnapTrade\CustomApi
 
 
         // path params
-        if ($portfolio_group_id !== null) {
+        if ($portfolio_group_id !== SENTINEL_VALUE) {
             $resourcePath = str_replace(
                 '{' . 'portfolioGroupId' . '}',
                 ObjectSerializer::toPathValue($portfolio_group_id),
@@ -1259,7 +1265,7 @@ class TradingApi extends \SnapTrade\CustomApi
             );
         }
         // path params
-        if ($calculated_trade_id !== null) {
+        if ($calculated_trade_id !== SENTINEL_VALUE) {
             $resourcePath = str_replace(
                 '{' . 'calculatedTradeId' . '}',
                 ObjectSerializer::toPathValue($calculated_trade_id),
@@ -1359,14 +1365,14 @@ class TradingApi extends \SnapTrade\CustomApi
     public function getOrderImpact(
         $user_id,
         $user_secret,
-        $account_id = null,
-        $action = null,
-        $order_type = null,
-        $price = null,
-        $stop = null,
-        $time_in_force = null,
-        $units = null,
-        $universal_symbol_id = null,
+        $account_id = SENTINEL_VALUE,
+        $action = SENTINEL_VALUE,
+        $order_type = SENTINEL_VALUE,
+        $price = SENTINEL_VALUE,
+        $stop = SENTINEL_VALUE,
+        $time_in_force = SENTINEL_VALUE,
+        $units = SENTINEL_VALUE,
+        $universal_symbol_id = SENTINEL_VALUE,
         string $contentType = self::contentTypes['getOrderImpact'][0]
 
     )
@@ -1567,14 +1573,14 @@ class TradingApi extends \SnapTrade\CustomApi
     public function getOrderImpactAsync(
         $user_id,
         $user_secret,
-        $account_id = null,
-        $action = null,
-        $order_type = null,
-        $price = null,
-        $stop = null,
-        $time_in_force = null,
-        $units = null,
-        $universal_symbol_id = null,
+        $account_id = SENTINEL_VALUE,
+        $action = SENTINEL_VALUE,
+        $order_type = SENTINEL_VALUE,
+        $price = SENTINEL_VALUE,
+        $stop = SENTINEL_VALUE,
+        $time_in_force = SENTINEL_VALUE,
+        $units = SENTINEL_VALUE,
+        $universal_symbol_id = SENTINEL_VALUE,
         string $contentType = self::contentTypes['getOrderImpact'][0]
 
     )
@@ -1670,26 +1676,26 @@ class TradingApi extends \SnapTrade\CustomApi
     {
 
         // Check if $user_id is a string
-        if (!is_null($user_id) && !is_string($user_id)) {
+        if ($user_id !== SENTINEL_VALUE && !is_string($user_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_id, true), gettype($user_id)));
         }
         // verify the required parameter 'user_id' is set
-        if ($user_id === null || (is_array($user_id) && count($user_id) === 0)) {
+        if ($user_id === SENTINEL_VALUE || (is_array($user_id) && count($user_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter user_id when calling getOrderImpact'
             );
         }
         // Check if $user_secret is a string
-        if (!is_null($user_secret) && !is_string($user_secret)) {
+        if ($user_secret !== SENTINEL_VALUE && !is_string($user_secret)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
         }
         // verify the required parameter 'user_secret' is set
-        if ($user_secret === null || (is_array($user_secret) && count($user_secret) === 0)) {
+        if ($user_secret === SENTINEL_VALUE || (is_array($user_secret) && count($user_secret) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter user_secret when calling getOrderImpact'
             );
         }
-        if ($manual_trade_form != null) {
+        if ($manual_trade_form !== SENTINEL_VALUE) {
             if (!($manual_trade_form instanceof \SnapTrade\Model\ManualTradeForm)) {
                 if (!is_array($manual_trade_form))
                     throw new \InvalidArgumentException('"manual_trade_form" must be associative array or an instance of \SnapTrade\Model\ManualTradeForm TradingApi.getOrderImpact.');
@@ -1698,7 +1704,7 @@ class TradingApi extends \SnapTrade\CustomApi
             }
         }
         // verify the required parameter 'manual_trade_form' is set
-        if ($manual_trade_form === null || (is_array($manual_trade_form) && count($manual_trade_form) === 0)) {
+        if ($manual_trade_form === SENTINEL_VALUE || (is_array($manual_trade_form) && count($manual_trade_form) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter manual_trade_form when calling getOrderImpact'
             );
@@ -1712,24 +1718,28 @@ class TradingApi extends \SnapTrade\CustomApi
         $httpBody = '';
         $multipart = false;
 
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $user_id,
-            'userId', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $user_secret,
-            'userSecret', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
+        if ($user_id !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_id,
+                'userId', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
+        if ($user_secret !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_secret,
+                'userSecret', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
 
 
 
@@ -1836,7 +1846,7 @@ class TradingApi extends \SnapTrade\CustomApi
         $user_secret,
         $symbols,
         $account_id,
-        $use_ticker = null,
+        $use_ticker = SENTINEL_VALUE,
         string $contentType = self::contentTypes['getUserAccountQuotes'][0]
 
     )
@@ -1989,7 +1999,7 @@ class TradingApi extends \SnapTrade\CustomApi
         $user_secret,
         $symbols,
         $account_id,
-        $use_ticker = null,
+        $use_ticker = SENTINEL_VALUE,
         string $contentType = self::contentTypes['getUserAccountQuotes'][0]
 
     )
@@ -2075,45 +2085,45 @@ class TradingApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getUserAccountQuotesRequest($user_id, $user_secret, $symbols, $account_id, $use_ticker = null, string $contentType = self::contentTypes['getUserAccountQuotes'][0])
+    public function getUserAccountQuotesRequest($user_id, $user_secret, $symbols, $account_id, $use_ticker = SENTINEL_VALUE, string $contentType = self::contentTypes['getUserAccountQuotes'][0])
     {
 
         // Check if $user_id is a string
-        if (!is_null($user_id) && !is_string($user_id)) {
+        if ($user_id !== SENTINEL_VALUE && !is_string($user_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_id, true), gettype($user_id)));
         }
         // verify the required parameter 'user_id' is set
-        if ($user_id === null || (is_array($user_id) && count($user_id) === 0)) {
+        if ($user_id === SENTINEL_VALUE || (is_array($user_id) && count($user_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter user_id when calling getUserAccountQuotes'
             );
         }
         // Check if $user_secret is a string
-        if (!is_null($user_secret) && !is_string($user_secret)) {
+        if ($user_secret !== SENTINEL_VALUE && !is_string($user_secret)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
         }
         // verify the required parameter 'user_secret' is set
-        if ($user_secret === null || (is_array($user_secret) && count($user_secret) === 0)) {
+        if ($user_secret === SENTINEL_VALUE || (is_array($user_secret) && count($user_secret) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter user_secret when calling getUserAccountQuotes'
             );
         }
         // Check if $symbols is a string
-        if (!is_null($symbols) && !is_string($symbols)) {
+        if ($symbols !== SENTINEL_VALUE && !is_string($symbols)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($symbols, true), gettype($symbols)));
         }
         // verify the required parameter 'symbols' is set
-        if ($symbols === null || (is_array($symbols) && count($symbols) === 0)) {
+        if ($symbols === SENTINEL_VALUE || (is_array($symbols) && count($symbols) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter symbols when calling getUserAccountQuotes'
             );
         }
         // Check if $account_id is a string
-        if (!is_null($account_id) && !is_string($account_id)) {
+        if ($account_id !== SENTINEL_VALUE && !is_string($account_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($account_id, true), gettype($account_id)));
         }
         // verify the required parameter 'account_id' is set
-        if ($account_id === null || (is_array($account_id) && count($account_id) === 0)) {
+        if ($account_id === SENTINEL_VALUE || (is_array($account_id) && count($account_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter account_id when calling getUserAccountQuotes'
             );
@@ -2127,46 +2137,54 @@ class TradingApi extends \SnapTrade\CustomApi
         $httpBody = '';
         $multipart = false;
 
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $user_id,
-            'userId', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $user_secret,
-            'userSecret', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $symbols,
-            'symbols', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $use_ticker,
-            'use_ticker', // param base name
-            'boolean', // openApiType
-            'form', // style
-            true, // explode
-            false // required
-        ) ?? []);
+        if ($user_id !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_id,
+                'userId', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
+        if ($user_secret !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_secret,
+                'userSecret', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
+        if ($symbols !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $symbols,
+                'symbols', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
+        if ($use_ticker !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $use_ticker,
+                'use_ticker', // param base name
+                'boolean', // openApiType
+                'form', // style
+                true, // explode
+                false // required
+            ) ?? []);
+        }
 
 
         // path params
-        if ($account_id !== null) {
+        if ($account_id !== SENTINEL_VALUE) {
             $resourcePath = str_replace(
                 '{' . 'accountId' . '}',
                 ObjectSerializer::toPathValue($account_id),
@@ -2268,14 +2286,14 @@ class TradingApi extends \SnapTrade\CustomApi
         $portfolio_group_id,
         $calculated_trade_id,
         $trade_id,
-        $id = null,
-        $account = null,
-        $symbol = null,
-        $universal_symbol = null,
-        $action = null,
-        $units = null,
-        $price = null,
-        $sequence = null,
+        $id = SENTINEL_VALUE,
+        $account = SENTINEL_VALUE,
+        $symbol = SENTINEL_VALUE,
+        $universal_symbol = SENTINEL_VALUE,
+        $action = SENTINEL_VALUE,
+        $units = SENTINEL_VALUE,
+        $price = SENTINEL_VALUE,
+        $sequence = SENTINEL_VALUE,
         string $contentType = self::contentTypes['modifyCalculatedTradeById'][0]
 
     )
@@ -2434,14 +2452,14 @@ class TradingApi extends \SnapTrade\CustomApi
         $portfolio_group_id,
         $calculated_trade_id,
         $trade_id,
-        $id = null,
-        $account = null,
-        $symbol = null,
-        $universal_symbol = null,
-        $action = null,
-        $units = null,
-        $price = null,
-        $sequence = null,
+        $id = SENTINEL_VALUE,
+        $account = SENTINEL_VALUE,
+        $symbol = SENTINEL_VALUE,
+        $universal_symbol = SENTINEL_VALUE,
+        $action = SENTINEL_VALUE,
+        $units = SENTINEL_VALUE,
+        $price = SENTINEL_VALUE,
+        $sequence = SENTINEL_VALUE,
         string $contentType = self::contentTypes['modifyCalculatedTradeById'][0]
 
     )
@@ -2535,40 +2553,40 @@ class TradingApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function modifyCalculatedTradeByIdRequest($portfolio_group_id, $calculated_trade_id, $trade_id, $trade = null, string $contentType = self::contentTypes['modifyCalculatedTradeById'][0])
+    public function modifyCalculatedTradeByIdRequest($portfolio_group_id, $calculated_trade_id, $trade_id, $trade = SENTINEL_VALUE, string $contentType = self::contentTypes['modifyCalculatedTradeById'][0])
     {
 
         // Check if $portfolio_group_id is a string
-        if (!is_null($portfolio_group_id) && !is_string($portfolio_group_id)) {
+        if ($portfolio_group_id !== SENTINEL_VALUE && !is_string($portfolio_group_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($portfolio_group_id, true), gettype($portfolio_group_id)));
         }
         // verify the required parameter 'portfolio_group_id' is set
-        if ($portfolio_group_id === null || (is_array($portfolio_group_id) && count($portfolio_group_id) === 0)) {
+        if ($portfolio_group_id === SENTINEL_VALUE || (is_array($portfolio_group_id) && count($portfolio_group_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter portfolio_group_id when calling modifyCalculatedTradeById'
             );
         }
         // Check if $calculated_trade_id is a string
-        if (!is_null($calculated_trade_id) && !is_string($calculated_trade_id)) {
+        if ($calculated_trade_id !== SENTINEL_VALUE && !is_string($calculated_trade_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($calculated_trade_id, true), gettype($calculated_trade_id)));
         }
         // verify the required parameter 'calculated_trade_id' is set
-        if ($calculated_trade_id === null || (is_array($calculated_trade_id) && count($calculated_trade_id) === 0)) {
+        if ($calculated_trade_id === SENTINEL_VALUE || (is_array($calculated_trade_id) && count($calculated_trade_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter calculated_trade_id when calling modifyCalculatedTradeById'
             );
         }
         // Check if $trade_id is a string
-        if (!is_null($trade_id) && !is_string($trade_id)) {
+        if ($trade_id !== SENTINEL_VALUE && !is_string($trade_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($trade_id, true), gettype($trade_id)));
         }
         // verify the required parameter 'trade_id' is set
-        if ($trade_id === null || (is_array($trade_id) && count($trade_id) === 0)) {
+        if ($trade_id === SENTINEL_VALUE || (is_array($trade_id) && count($trade_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter trade_id when calling modifyCalculatedTradeById'
             );
         }
-        if ($trade != null) {
+        if ($trade !== SENTINEL_VALUE) {
             if (!($trade instanceof \SnapTrade\Model\Trade)) {
                 if (!is_array($trade))
                     throw new \InvalidArgumentException('"trade" must be associative array or an instance of \SnapTrade\Model\Trade TradingApi.modifyCalculatedTradeById.');
@@ -2588,7 +2606,7 @@ class TradingApi extends \SnapTrade\CustomApi
 
 
         // path params
-        if ($portfolio_group_id !== null) {
+        if ($portfolio_group_id !== SENTINEL_VALUE) {
             $resourcePath = str_replace(
                 '{' . 'portfolioGroupId' . '}',
                 ObjectSerializer::toPathValue($portfolio_group_id),
@@ -2596,7 +2614,7 @@ class TradingApi extends \SnapTrade\CustomApi
             );
         }
         // path params
-        if ($calculated_trade_id !== null) {
+        if ($calculated_trade_id !== SENTINEL_VALUE) {
             $resourcePath = str_replace(
                 '{' . 'calculatedTradeId' . '}',
                 ObjectSerializer::toPathValue($calculated_trade_id),
@@ -2604,7 +2622,7 @@ class TradingApi extends \SnapTrade\CustomApi
             );
         }
         // path params
-        if ($trade_id !== null) {
+        if ($trade_id !== SENTINEL_VALUE) {
             $resourcePath = str_replace(
                 '{' . 'tradeId' . '}',
                 ObjectSerializer::toPathValue($trade_id),
@@ -2934,21 +2952,21 @@ class TradingApi extends \SnapTrade\CustomApi
     {
 
         // Check if $portfolio_group_id is a string
-        if (!is_null($portfolio_group_id) && !is_string($portfolio_group_id)) {
+        if ($portfolio_group_id !== SENTINEL_VALUE && !is_string($portfolio_group_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($portfolio_group_id, true), gettype($portfolio_group_id)));
         }
         // verify the required parameter 'portfolio_group_id' is set
-        if ($portfolio_group_id === null || (is_array($portfolio_group_id) && count($portfolio_group_id) === 0)) {
+        if ($portfolio_group_id === SENTINEL_VALUE || (is_array($portfolio_group_id) && count($portfolio_group_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter portfolio_group_id when calling placeCalculatedTrades'
             );
         }
         // Check if $calculated_trade_id is a string
-        if (!is_null($calculated_trade_id) && !is_string($calculated_trade_id)) {
+        if ($calculated_trade_id !== SENTINEL_VALUE && !is_string($calculated_trade_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($calculated_trade_id, true), gettype($calculated_trade_id)));
         }
         // verify the required parameter 'calculated_trade_id' is set
-        if ($calculated_trade_id === null || (is_array($calculated_trade_id) && count($calculated_trade_id) === 0)) {
+        if ($calculated_trade_id === SENTINEL_VALUE || (is_array($calculated_trade_id) && count($calculated_trade_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter calculated_trade_id when calling placeCalculatedTrades'
             );
@@ -2965,7 +2983,7 @@ class TradingApi extends \SnapTrade\CustomApi
 
 
         // path params
-        if ($portfolio_group_id !== null) {
+        if ($portfolio_group_id !== SENTINEL_VALUE) {
             $resourcePath = str_replace(
                 '{' . 'portfolioGroupId' . '}',
                 ObjectSerializer::toPathValue($portfolio_group_id),
@@ -2973,7 +2991,7 @@ class TradingApi extends \SnapTrade\CustomApi
             );
         }
         // path params
-        if ($calculated_trade_id !== null) {
+        if ($calculated_trade_id !== SENTINEL_VALUE) {
             $resourcePath = str_replace(
                 '{' . 'calculatedTradeId' . '}',
                 ObjectSerializer::toPathValue($calculated_trade_id),
@@ -3073,14 +3091,14 @@ class TradingApi extends \SnapTrade\CustomApi
     public function placeForceOrder(
         $user_id,
         $user_secret,
-        $account_id = null,
-        $action = null,
-        $order_type = null,
-        $price = null,
-        $stop = null,
-        $time_in_force = null,
-        $units = null,
-        $universal_symbol_id = null,
+        $account_id = SENTINEL_VALUE,
+        $action = SENTINEL_VALUE,
+        $order_type = SENTINEL_VALUE,
+        $price = SENTINEL_VALUE,
+        $stop = SENTINEL_VALUE,
+        $time_in_force = SENTINEL_VALUE,
+        $units = SENTINEL_VALUE,
+        $universal_symbol_id = SENTINEL_VALUE,
         string $contentType = self::contentTypes['placeForceOrder'][0]
 
     )
@@ -3281,14 +3299,14 @@ class TradingApi extends \SnapTrade\CustomApi
     public function placeForceOrderAsync(
         $user_id,
         $user_secret,
-        $account_id = null,
-        $action = null,
-        $order_type = null,
-        $price = null,
-        $stop = null,
-        $time_in_force = null,
-        $units = null,
-        $universal_symbol_id = null,
+        $account_id = SENTINEL_VALUE,
+        $action = SENTINEL_VALUE,
+        $order_type = SENTINEL_VALUE,
+        $price = SENTINEL_VALUE,
+        $stop = SENTINEL_VALUE,
+        $time_in_force = SENTINEL_VALUE,
+        $units = SENTINEL_VALUE,
+        $universal_symbol_id = SENTINEL_VALUE,
         string $contentType = self::contentTypes['placeForceOrder'][0]
 
     )
@@ -3384,26 +3402,26 @@ class TradingApi extends \SnapTrade\CustomApi
     {
 
         // Check if $user_id is a string
-        if (!is_null($user_id) && !is_string($user_id)) {
+        if ($user_id !== SENTINEL_VALUE && !is_string($user_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_id, true), gettype($user_id)));
         }
         // verify the required parameter 'user_id' is set
-        if ($user_id === null || (is_array($user_id) && count($user_id) === 0)) {
+        if ($user_id === SENTINEL_VALUE || (is_array($user_id) && count($user_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter user_id when calling placeForceOrder'
             );
         }
         // Check if $user_secret is a string
-        if (!is_null($user_secret) && !is_string($user_secret)) {
+        if ($user_secret !== SENTINEL_VALUE && !is_string($user_secret)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
         }
         // verify the required parameter 'user_secret' is set
-        if ($user_secret === null || (is_array($user_secret) && count($user_secret) === 0)) {
+        if ($user_secret === SENTINEL_VALUE || (is_array($user_secret) && count($user_secret) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter user_secret when calling placeForceOrder'
             );
         }
-        if ($manual_trade_form != null) {
+        if ($manual_trade_form !== SENTINEL_VALUE) {
             if (!($manual_trade_form instanceof \SnapTrade\Model\ManualTradeForm)) {
                 if (!is_array($manual_trade_form))
                     throw new \InvalidArgumentException('"manual_trade_form" must be associative array or an instance of \SnapTrade\Model\ManualTradeForm TradingApi.placeForceOrder.');
@@ -3412,7 +3430,7 @@ class TradingApi extends \SnapTrade\CustomApi
             }
         }
         // verify the required parameter 'manual_trade_form' is set
-        if ($manual_trade_form === null || (is_array($manual_trade_form) && count($manual_trade_form) === 0)) {
+        if ($manual_trade_form === SENTINEL_VALUE || (is_array($manual_trade_form) && count($manual_trade_form) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter manual_trade_form when calling placeForceOrder'
             );
@@ -3426,24 +3444,28 @@ class TradingApi extends \SnapTrade\CustomApi
         $httpBody = '';
         $multipart = false;
 
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $user_id,
-            'userId', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $user_secret,
-            'userSecret', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
+        if ($user_id !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_id,
+                'userId', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
+        if ($user_secret !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_secret,
+                'userSecret', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
 
 
 
@@ -3546,8 +3568,8 @@ class TradingApi extends \SnapTrade\CustomApi
     public function placeOCOOrder(
         $user_id,
         $user_secret,
-        $first_trade_id = null,
-        $second_trade_id = null,
+        $first_trade_id = SENTINEL_VALUE,
+        $second_trade_id = SENTINEL_VALUE,
         string $contentType = self::contentTypes['placeOCOOrder'][0]
 
     )
@@ -3719,8 +3741,8 @@ class TradingApi extends \SnapTrade\CustomApi
     public function placeOCOOrderAsync(
         $user_id,
         $user_secret,
-        $first_trade_id = null,
-        $second_trade_id = null,
+        $first_trade_id = SENTINEL_VALUE,
+        $second_trade_id = SENTINEL_VALUE,
         string $contentType = self::contentTypes['placeOCOOrder'][0]
 
     )
@@ -3810,26 +3832,26 @@ class TradingApi extends \SnapTrade\CustomApi
     {
 
         // Check if $user_id is a string
-        if (!is_null($user_id) && !is_string($user_id)) {
+        if ($user_id !== SENTINEL_VALUE && !is_string($user_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_id, true), gettype($user_id)));
         }
         // verify the required parameter 'user_id' is set
-        if ($user_id === null || (is_array($user_id) && count($user_id) === 0)) {
+        if ($user_id === SENTINEL_VALUE || (is_array($user_id) && count($user_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter user_id when calling placeOCOOrder'
             );
         }
         // Check if $user_secret is a string
-        if (!is_null($user_secret) && !is_string($user_secret)) {
+        if ($user_secret !== SENTINEL_VALUE && !is_string($user_secret)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
         }
         // verify the required parameter 'user_secret' is set
-        if ($user_secret === null || (is_array($user_secret) && count($user_secret) === 0)) {
+        if ($user_secret === SENTINEL_VALUE || (is_array($user_secret) && count($user_secret) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter user_secret when calling placeOCOOrder'
             );
         }
-        if ($trading_place_oco_order_request != null) {
+        if ($trading_place_oco_order_request !== SENTINEL_VALUE) {
             if (!($trading_place_oco_order_request instanceof \SnapTrade\Model\TradingPlaceOCOOrderRequest)) {
                 if (!is_array($trading_place_oco_order_request))
                     throw new \InvalidArgumentException('"trading_place_oco_order_request" must be associative array or an instance of \SnapTrade\Model\TradingPlaceOCOOrderRequest TradingApi.placeOCOOrder.');
@@ -3838,7 +3860,7 @@ class TradingApi extends \SnapTrade\CustomApi
             }
         }
         // verify the required parameter 'trading_place_oco_order_request' is set
-        if ($trading_place_oco_order_request === null || (is_array($trading_place_oco_order_request) && count($trading_place_oco_order_request) === 0)) {
+        if ($trading_place_oco_order_request === SENTINEL_VALUE || (is_array($trading_place_oco_order_request) && count($trading_place_oco_order_request) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter trading_place_oco_order_request when calling placeOCOOrder'
             );
@@ -3852,24 +3874,28 @@ class TradingApi extends \SnapTrade\CustomApi
         $httpBody = '';
         $multipart = false;
 
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $user_id,
-            'userId', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $user_secret,
-            'userSecret', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
+        if ($user_id !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_id,
+                'userId', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
+        if ($user_secret !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_secret,
+                'userSecret', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
 
 
 
@@ -4226,31 +4252,31 @@ class TradingApi extends \SnapTrade\CustomApi
     {
 
         // Check if $trade_id is a string
-        if (!is_null($trade_id) && !is_string($trade_id)) {
+        if ($trade_id !== SENTINEL_VALUE && !is_string($trade_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($trade_id, true), gettype($trade_id)));
         }
         // verify the required parameter 'trade_id' is set
-        if ($trade_id === null || (is_array($trade_id) && count($trade_id) === 0)) {
+        if ($trade_id === SENTINEL_VALUE || (is_array($trade_id) && count($trade_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter trade_id when calling placeOrder'
             );
         }
         // Check if $user_id is a string
-        if (!is_null($user_id) && !is_string($user_id)) {
+        if ($user_id !== SENTINEL_VALUE && !is_string($user_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_id, true), gettype($user_id)));
         }
         // verify the required parameter 'user_id' is set
-        if ($user_id === null || (is_array($user_id) && count($user_id) === 0)) {
+        if ($user_id === SENTINEL_VALUE || (is_array($user_id) && count($user_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter user_id when calling placeOrder'
             );
         }
         // Check if $user_secret is a string
-        if (!is_null($user_secret) && !is_string($user_secret)) {
+        if ($user_secret !== SENTINEL_VALUE && !is_string($user_secret)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
         }
         // verify the required parameter 'user_secret' is set
-        if ($user_secret === null || (is_array($user_secret) && count($user_secret) === 0)) {
+        if ($user_secret === SENTINEL_VALUE || (is_array($user_secret) && count($user_secret) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter user_secret when calling placeOrder'
             );
@@ -4264,28 +4290,32 @@ class TradingApi extends \SnapTrade\CustomApi
         $httpBody = '';
         $multipart = false;
 
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $user_id,
-            'userId', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $user_secret,
-            'userSecret', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
+        if ($user_id !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_id,
+                'userId', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
+        if ($user_secret !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_secret,
+                'userSecret', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
 
 
         // path params
-        if ($trade_id !== null) {
+        if ($trade_id !== SENTINEL_VALUE) {
             $resourcePath = str_replace(
                 '{' . 'tradeId' . '}',
                 ObjectSerializer::toPathValue($trade_id),

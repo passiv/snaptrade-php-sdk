@@ -116,7 +116,9 @@ class TransactionsAndReportingApi extends \SnapTrade\CustomApi
      * For initializing request body parameter
      */
     private function setRequestBodyProperty(&$body, $property, $value) {
-        if ($body == null) $body = [];
+        if ($body === null) $body = [];
+        // user did not pass in a value for this parameter
+        if ($value === SENTINEL_VALUE) return;
         $body[$property] = $value;
     }
 
@@ -140,10 +142,10 @@ class TransactionsAndReportingApi extends \SnapTrade\CustomApi
     public function getActivities(
         $user_id,
         $user_secret,
-        $start_date = null,
-        $end_date = null,
-        $accounts = null,
-        $brokerage_authorizations = null,
+        $start_date = SENTINEL_VALUE,
+        $end_date = SENTINEL_VALUE,
+        $accounts = SENTINEL_VALUE,
+        $brokerage_authorizations = SENTINEL_VALUE,
         string $contentType = self::contentTypes['getActivities'][0]
 
     )
@@ -297,10 +299,10 @@ class TransactionsAndReportingApi extends \SnapTrade\CustomApi
     public function getActivitiesAsync(
         $user_id,
         $user_secret,
-        $start_date = null,
-        $end_date = null,
-        $accounts = null,
-        $brokerage_authorizations = null,
+        $start_date = SENTINEL_VALUE,
+        $end_date = SENTINEL_VALUE,
+        $accounts = SENTINEL_VALUE,
+        $brokerage_authorizations = SENTINEL_VALUE,
         string $contentType = self::contentTypes['getActivities'][0]
 
     )
@@ -388,35 +390,35 @@ class TransactionsAndReportingApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getActivitiesRequest($user_id, $user_secret, $start_date = null, $end_date = null, $accounts = null, $brokerage_authorizations = null, string $contentType = self::contentTypes['getActivities'][0])
+    public function getActivitiesRequest($user_id, $user_secret, $start_date = SENTINEL_VALUE, $end_date = SENTINEL_VALUE, $accounts = SENTINEL_VALUE, $brokerage_authorizations = SENTINEL_VALUE, string $contentType = self::contentTypes['getActivities'][0])
     {
 
         // Check if $user_id is a string
-        if (!is_null($user_id) && !is_string($user_id)) {
+        if ($user_id !== SENTINEL_VALUE && !is_string($user_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_id, true), gettype($user_id)));
         }
         // verify the required parameter 'user_id' is set
-        if ($user_id === null || (is_array($user_id) && count($user_id) === 0)) {
+        if ($user_id === SENTINEL_VALUE || (is_array($user_id) && count($user_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter user_id when calling getActivities'
             );
         }
         // Check if $user_secret is a string
-        if (!is_null($user_secret) && !is_string($user_secret)) {
+        if ($user_secret !== SENTINEL_VALUE && !is_string($user_secret)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
         }
         // verify the required parameter 'user_secret' is set
-        if ($user_secret === null || (is_array($user_secret) && count($user_secret) === 0)) {
+        if ($user_secret === SENTINEL_VALUE || (is_array($user_secret) && count($user_secret) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter user_secret when calling getActivities'
             );
         }
         // Check if $accounts is a string
-        if (!is_null($accounts) && !is_string($accounts)) {
+        if ($accounts !== SENTINEL_VALUE && !is_string($accounts)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($accounts, true), gettype($accounts)));
         }
         // Check if $brokerage_authorizations is a string
-        if (!is_null($brokerage_authorizations) && !is_string($brokerage_authorizations)) {
+        if ($brokerage_authorizations !== SENTINEL_VALUE && !is_string($brokerage_authorizations)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($brokerage_authorizations, true), gettype($brokerage_authorizations)));
         }
 
@@ -428,60 +430,72 @@ class TransactionsAndReportingApi extends \SnapTrade\CustomApi
         $httpBody = '';
         $multipart = false;
 
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $start_date,
-            'startDate', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            false // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $end_date,
-            'endDate', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            false // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $accounts,
-            'accounts', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            false // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $brokerage_authorizations,
-            'brokerageAuthorizations', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            false // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $user_id,
-            'userId', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $user_secret,
-            'userSecret', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
+        if ($start_date !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $start_date,
+                'startDate', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                false // required
+            ) ?? []);
+        }
+        if ($end_date !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $end_date,
+                'endDate', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                false // required
+            ) ?? []);
+        }
+        if ($accounts !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $accounts,
+                'accounts', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                false // required
+            ) ?? []);
+        }
+        if ($brokerage_authorizations !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $brokerage_authorizations,
+                'brokerageAuthorizations', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                false // required
+            ) ?? []);
+        }
+        if ($user_id !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_id,
+                'userId', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
+        if ($user_secret !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_secret,
+                'userSecret', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
 
 
 
@@ -583,9 +597,9 @@ class TransactionsAndReportingApi extends \SnapTrade\CustomApi
         $end_date,
         $user_id,
         $user_secret,
-        $accounts = null,
-        $detailed = null,
-        $frequency = null,
+        $accounts = SENTINEL_VALUE,
+        $detailed = SENTINEL_VALUE,
+        $frequency = SENTINEL_VALUE,
         string $contentType = self::contentTypes['getReportingCustomRange'][0]
 
     )
@@ -744,9 +758,9 @@ class TransactionsAndReportingApi extends \SnapTrade\CustomApi
         $end_date,
         $user_id,
         $user_secret,
-        $accounts = null,
-        $detailed = null,
-        $frequency = null,
+        $accounts = SENTINEL_VALUE,
+        $detailed = SENTINEL_VALUE,
+        $frequency = SENTINEL_VALUE,
         string $contentType = self::contentTypes['getReportingCustomRange'][0]
 
     )
@@ -836,47 +850,47 @@ class TransactionsAndReportingApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getReportingCustomRangeRequest($start_date, $end_date, $user_id, $user_secret, $accounts = null, $detailed = null, $frequency = null, string $contentType = self::contentTypes['getReportingCustomRange'][0])
+    public function getReportingCustomRangeRequest($start_date, $end_date, $user_id, $user_secret, $accounts = SENTINEL_VALUE, $detailed = SENTINEL_VALUE, $frequency = SENTINEL_VALUE, string $contentType = self::contentTypes['getReportingCustomRange'][0])
     {
 
         // verify the required parameter 'start_date' is set
-        if ($start_date === null || (is_array($start_date) && count($start_date) === 0)) {
+        if ($start_date === SENTINEL_VALUE || (is_array($start_date) && count($start_date) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter start_date when calling getReportingCustomRange'
             );
         }
         // verify the required parameter 'end_date' is set
-        if ($end_date === null || (is_array($end_date) && count($end_date) === 0)) {
+        if ($end_date === SENTINEL_VALUE || (is_array($end_date) && count($end_date) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter end_date when calling getReportingCustomRange'
             );
         }
         // Check if $user_id is a string
-        if (!is_null($user_id) && !is_string($user_id)) {
+        if ($user_id !== SENTINEL_VALUE && !is_string($user_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_id, true), gettype($user_id)));
         }
         // verify the required parameter 'user_id' is set
-        if ($user_id === null || (is_array($user_id) && count($user_id) === 0)) {
+        if ($user_id === SENTINEL_VALUE || (is_array($user_id) && count($user_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter user_id when calling getReportingCustomRange'
             );
         }
         // Check if $user_secret is a string
-        if (!is_null($user_secret) && !is_string($user_secret)) {
+        if ($user_secret !== SENTINEL_VALUE && !is_string($user_secret)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
         }
         // verify the required parameter 'user_secret' is set
-        if ($user_secret === null || (is_array($user_secret) && count($user_secret) === 0)) {
+        if ($user_secret === SENTINEL_VALUE || (is_array($user_secret) && count($user_secret) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter user_secret when calling getReportingCustomRange'
             );
         }
         // Check if $accounts is a string
-        if (!is_null($accounts) && !is_string($accounts)) {
+        if ($accounts !== SENTINEL_VALUE && !is_string($accounts)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($accounts, true), gettype($accounts)));
         }
         // Check if $frequency is a string
-        if (!is_null($frequency) && !is_string($frequency)) {
+        if ($frequency !== SENTINEL_VALUE && !is_string($frequency)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($frequency, true), gettype($frequency)));
         }
 
@@ -888,69 +902,83 @@ class TransactionsAndReportingApi extends \SnapTrade\CustomApi
         $httpBody = '';
         $multipart = false;
 
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $start_date,
-            'startDate', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $end_date,
-            'endDate', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $accounts,
-            'accounts', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            false // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $detailed,
-            'detailed', // param base name
-            'boolean', // openApiType
-            'form', // style
-            true, // explode
-            false // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $frequency,
-            'frequency', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            false // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $user_id,
-            'userId', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $user_secret,
-            'userSecret', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
+        if ($start_date !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $start_date,
+                'startDate', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
+        if ($end_date !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $end_date,
+                'endDate', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
+        if ($accounts !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $accounts,
+                'accounts', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                false // required
+            ) ?? []);
+        }
+        if ($detailed !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $detailed,
+                'detailed', // param base name
+                'boolean', // openApiType
+                'form', // style
+                true, // explode
+                false // required
+            ) ?? []);
+        }
+        if ($frequency !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $frequency,
+                'frequency', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                false // required
+            ) ?? []);
+        }
+        if ($user_id !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_id,
+                'userId', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
+        if ($user_secret !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_secret,
+                'userSecret', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
 
 
 

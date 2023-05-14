@@ -125,7 +125,9 @@ class OptionsApi extends \SnapTrade\CustomApi
      * For initializing request body parameter
      */
     private function setRequestBodyProperty(&$body, $property, $value) {
-        if ($body == null) $body = [];
+        if ($body === null) $body = [];
+        // user did not pass in a value for this parameter
+        if ($value === SENTINEL_VALUE) return;
         $body[$property] = $value;
     }
 
@@ -399,36 +401,36 @@ class OptionsApi extends \SnapTrade\CustomApi
     {
 
         // Check if $user_id is a string
-        if (!is_null($user_id) && !is_string($user_id)) {
+        if ($user_id !== SENTINEL_VALUE && !is_string($user_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_id, true), gettype($user_id)));
         }
         // verify the required parameter 'user_id' is set
-        if ($user_id === null || (is_array($user_id) && count($user_id) === 0)) {
+        if ($user_id === SENTINEL_VALUE || (is_array($user_id) && count($user_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter user_id when calling getOptionStrategy'
             );
         }
         // Check if $user_secret is a string
-        if (!is_null($user_secret) && !is_string($user_secret)) {
+        if ($user_secret !== SENTINEL_VALUE && !is_string($user_secret)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
         }
         // verify the required parameter 'user_secret' is set
-        if ($user_secret === null || (is_array($user_secret) && count($user_secret) === 0)) {
+        if ($user_secret === SENTINEL_VALUE || (is_array($user_secret) && count($user_secret) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter user_secret when calling getOptionStrategy'
             );
         }
         // Check if $account_id is a string
-        if (!is_null($account_id) && !is_string($account_id)) {
+        if ($account_id !== SENTINEL_VALUE && !is_string($account_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($account_id, true), gettype($account_id)));
         }
         // verify the required parameter 'account_id' is set
-        if ($account_id === null || (is_array($account_id) && count($account_id) === 0)) {
+        if ($account_id === SENTINEL_VALUE || (is_array($account_id) && count($account_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter account_id when calling getOptionStrategy'
             );
         }
-        if ($options_get_option_strategy_request != null) {
+        if ($options_get_option_strategy_request !== SENTINEL_VALUE) {
             if (!($options_get_option_strategy_request instanceof \SnapTrade\Model\OptionsGetOptionStrategyRequest)) {
                 if (!is_array($options_get_option_strategy_request))
                     throw new \InvalidArgumentException('"options_get_option_strategy_request" must be associative array or an instance of \SnapTrade\Model\OptionsGetOptionStrategyRequest OptionsApi.getOptionStrategy.');
@@ -437,7 +439,7 @@ class OptionsApi extends \SnapTrade\CustomApi
             }
         }
         // verify the required parameter 'options_get_option_strategy_request' is set
-        if ($options_get_option_strategy_request === null || (is_array($options_get_option_strategy_request) && count($options_get_option_strategy_request) === 0)) {
+        if ($options_get_option_strategy_request === SENTINEL_VALUE || (is_array($options_get_option_strategy_request) && count($options_get_option_strategy_request) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter options_get_option_strategy_request when calling getOptionStrategy'
             );
@@ -451,28 +453,32 @@ class OptionsApi extends \SnapTrade\CustomApi
         $httpBody = '';
         $multipart = false;
 
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $user_id,
-            'userId', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $user_secret,
-            'userSecret', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
+        if ($user_id !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_id,
+                'userId', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
+        if ($user_secret !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_secret,
+                'userSecret', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
 
 
         // path params
-        if ($account_id !== null) {
+        if ($account_id !== SENTINEL_VALUE) {
             $resourcePath = str_replace(
                 '{' . 'accountId' . '}',
                 ObjectSerializer::toPathValue($account_id),
@@ -818,41 +824,41 @@ class OptionsApi extends \SnapTrade\CustomApi
     {
 
         // Check if $user_id is a string
-        if (!is_null($user_id) && !is_string($user_id)) {
+        if ($user_id !== SENTINEL_VALUE && !is_string($user_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_id, true), gettype($user_id)));
         }
         // verify the required parameter 'user_id' is set
-        if ($user_id === null || (is_array($user_id) && count($user_id) === 0)) {
+        if ($user_id === SENTINEL_VALUE || (is_array($user_id) && count($user_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter user_id when calling getOptionsChain'
             );
         }
         // Check if $user_secret is a string
-        if (!is_null($user_secret) && !is_string($user_secret)) {
+        if ($user_secret !== SENTINEL_VALUE && !is_string($user_secret)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
         }
         // verify the required parameter 'user_secret' is set
-        if ($user_secret === null || (is_array($user_secret) && count($user_secret) === 0)) {
+        if ($user_secret === SENTINEL_VALUE || (is_array($user_secret) && count($user_secret) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter user_secret when calling getOptionsChain'
             );
         }
         // Check if $account_id is a string
-        if (!is_null($account_id) && !is_string($account_id)) {
+        if ($account_id !== SENTINEL_VALUE && !is_string($account_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($account_id, true), gettype($account_id)));
         }
         // verify the required parameter 'account_id' is set
-        if ($account_id === null || (is_array($account_id) && count($account_id) === 0)) {
+        if ($account_id === SENTINEL_VALUE || (is_array($account_id) && count($account_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter account_id when calling getOptionsChain'
             );
         }
         // Check if $symbol is a string
-        if (!is_null($symbol) && !is_string($symbol)) {
+        if ($symbol !== SENTINEL_VALUE && !is_string($symbol)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($symbol, true), gettype($symbol)));
         }
         // verify the required parameter 'symbol' is set
-        if ($symbol === null || (is_array($symbol) && count($symbol) === 0)) {
+        if ($symbol === SENTINEL_VALUE || (is_array($symbol) && count($symbol) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter symbol when calling getOptionsChain'
             );
@@ -866,37 +872,43 @@ class OptionsApi extends \SnapTrade\CustomApi
         $httpBody = '';
         $multipart = false;
 
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $user_id,
-            'userId', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $user_secret,
-            'userSecret', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $symbol,
-            'symbol', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
+        if ($user_id !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_id,
+                'userId', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
+        if ($user_secret !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_secret,
+                'userSecret', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
+        if ($symbol !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $symbol,
+                'symbol', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
 
 
         // path params
-        if ($account_id !== null) {
+        if ($account_id !== SENTINEL_VALUE) {
             $resourcePath = str_replace(
                 '{' . 'accountId' . '}',
                 ObjectSerializer::toPathValue($account_id),
@@ -1235,41 +1247,41 @@ class OptionsApi extends \SnapTrade\CustomApi
     {
 
         // Check if $user_id is a string
-        if (!is_null($user_id) && !is_string($user_id)) {
+        if ($user_id !== SENTINEL_VALUE && !is_string($user_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_id, true), gettype($user_id)));
         }
         // verify the required parameter 'user_id' is set
-        if ($user_id === null || (is_array($user_id) && count($user_id) === 0)) {
+        if ($user_id === SENTINEL_VALUE || (is_array($user_id) && count($user_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter user_id when calling getOptionsStrategyQuote'
             );
         }
         // Check if $user_secret is a string
-        if (!is_null($user_secret) && !is_string($user_secret)) {
+        if ($user_secret !== SENTINEL_VALUE && !is_string($user_secret)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
         }
         // verify the required parameter 'user_secret' is set
-        if ($user_secret === null || (is_array($user_secret) && count($user_secret) === 0)) {
+        if ($user_secret === SENTINEL_VALUE || (is_array($user_secret) && count($user_secret) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter user_secret when calling getOptionsStrategyQuote'
             );
         }
         // Check if $account_id is a string
-        if (!is_null($account_id) && !is_string($account_id)) {
+        if ($account_id !== SENTINEL_VALUE && !is_string($account_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($account_id, true), gettype($account_id)));
         }
         // verify the required parameter 'account_id' is set
-        if ($account_id === null || (is_array($account_id) && count($account_id) === 0)) {
+        if ($account_id === SENTINEL_VALUE || (is_array($account_id) && count($account_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter account_id when calling getOptionsStrategyQuote'
             );
         }
         // Check if $option_strategy_id is a string
-        if (!is_null($option_strategy_id) && !is_string($option_strategy_id)) {
+        if ($option_strategy_id !== SENTINEL_VALUE && !is_string($option_strategy_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($option_strategy_id, true), gettype($option_strategy_id)));
         }
         // verify the required parameter 'option_strategy_id' is set
-        if ($option_strategy_id === null || (is_array($option_strategy_id) && count($option_strategy_id) === 0)) {
+        if ($option_strategy_id === SENTINEL_VALUE || (is_array($option_strategy_id) && count($option_strategy_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter option_strategy_id when calling getOptionsStrategyQuote'
             );
@@ -1283,28 +1295,32 @@ class OptionsApi extends \SnapTrade\CustomApi
         $httpBody = '';
         $multipart = false;
 
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $user_id,
-            'userId', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $user_secret,
-            'userSecret', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
+        if ($user_id !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_id,
+                'userId', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
+        if ($user_secret !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_secret,
+                'userSecret', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
 
 
         // path params
-        if ($account_id !== null) {
+        if ($account_id !== SENTINEL_VALUE) {
             $resourcePath = str_replace(
                 '{' . 'accountId' . '}',
                 ObjectSerializer::toPathValue($account_id),
@@ -1312,7 +1328,7 @@ class OptionsApi extends \SnapTrade\CustomApi
             );
         }
         // path params
-        if ($option_strategy_id !== null) {
+        if ($option_strategy_id !== SENTINEL_VALUE) {
             $resourcePath = str_replace(
                 '{' . 'optionStrategyId' . '}',
                 ObjectSerializer::toPathValue($option_strategy_id),
@@ -1643,31 +1659,31 @@ class OptionsApi extends \SnapTrade\CustomApi
     {
 
         // Check if $user_id is a string
-        if (!is_null($user_id) && !is_string($user_id)) {
+        if ($user_id !== SENTINEL_VALUE && !is_string($user_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_id, true), gettype($user_id)));
         }
         // verify the required parameter 'user_id' is set
-        if ($user_id === null || (is_array($user_id) && count($user_id) === 0)) {
+        if ($user_id === SENTINEL_VALUE || (is_array($user_id) && count($user_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter user_id when calling listOptionHoldings'
             );
         }
         // Check if $user_secret is a string
-        if (!is_null($user_secret) && !is_string($user_secret)) {
+        if ($user_secret !== SENTINEL_VALUE && !is_string($user_secret)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
         }
         // verify the required parameter 'user_secret' is set
-        if ($user_secret === null || (is_array($user_secret) && count($user_secret) === 0)) {
+        if ($user_secret === SENTINEL_VALUE || (is_array($user_secret) && count($user_secret) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter user_secret when calling listOptionHoldings'
             );
         }
         // Check if $account_id is a string
-        if (!is_null($account_id) && !is_string($account_id)) {
+        if ($account_id !== SENTINEL_VALUE && !is_string($account_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($account_id, true), gettype($account_id)));
         }
         // verify the required parameter 'account_id' is set
-        if ($account_id === null || (is_array($account_id) && count($account_id) === 0)) {
+        if ($account_id === SENTINEL_VALUE || (is_array($account_id) && count($account_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter account_id when calling listOptionHoldings'
             );
@@ -1681,28 +1697,32 @@ class OptionsApi extends \SnapTrade\CustomApi
         $httpBody = '';
         $multipart = false;
 
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $user_id,
-            'userId', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $user_secret,
-            'userSecret', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
+        if ($user_id !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_id,
+                'userId', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
+        if ($user_secret !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_secret,
+                'userSecret', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
 
 
         // path params
-        if ($account_id !== null) {
+        if ($account_id !== SENTINEL_VALUE) {
             $resourcePath = str_replace(
                 '{' . 'accountId' . '}',
                 ObjectSerializer::toPathValue($account_id),
@@ -2063,46 +2083,46 @@ class OptionsApi extends \SnapTrade\CustomApi
     {
 
         // Check if $user_id is a string
-        if (!is_null($user_id) && !is_string($user_id)) {
+        if ($user_id !== SENTINEL_VALUE && !is_string($user_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_id, true), gettype($user_id)));
         }
         // verify the required parameter 'user_id' is set
-        if ($user_id === null || (is_array($user_id) && count($user_id) === 0)) {
+        if ($user_id === SENTINEL_VALUE || (is_array($user_id) && count($user_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter user_id when calling placeOptionStrategy'
             );
         }
         // Check if $user_secret is a string
-        if (!is_null($user_secret) && !is_string($user_secret)) {
+        if ($user_secret !== SENTINEL_VALUE && !is_string($user_secret)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
         }
         // verify the required parameter 'user_secret' is set
-        if ($user_secret === null || (is_array($user_secret) && count($user_secret) === 0)) {
+        if ($user_secret === SENTINEL_VALUE || (is_array($user_secret) && count($user_secret) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter user_secret when calling placeOptionStrategy'
             );
         }
         // Check if $account_id is a string
-        if (!is_null($account_id) && !is_string($account_id)) {
+        if ($account_id !== SENTINEL_VALUE && !is_string($account_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($account_id, true), gettype($account_id)));
         }
         // verify the required parameter 'account_id' is set
-        if ($account_id === null || (is_array($account_id) && count($account_id) === 0)) {
+        if ($account_id === SENTINEL_VALUE || (is_array($account_id) && count($account_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter account_id when calling placeOptionStrategy'
             );
         }
         // Check if $option_strategy_id is a string
-        if (!is_null($option_strategy_id) && !is_string($option_strategy_id)) {
+        if ($option_strategy_id !== SENTINEL_VALUE && !is_string($option_strategy_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($option_strategy_id, true), gettype($option_strategy_id)));
         }
         // verify the required parameter 'option_strategy_id' is set
-        if ($option_strategy_id === null || (is_array($option_strategy_id) && count($option_strategy_id) === 0)) {
+        if ($option_strategy_id === SENTINEL_VALUE || (is_array($option_strategy_id) && count($option_strategy_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter option_strategy_id when calling placeOptionStrategy'
             );
         }
-        if ($options_place_option_strategy_request != null) {
+        if ($options_place_option_strategy_request !== SENTINEL_VALUE) {
             if (!($options_place_option_strategy_request instanceof \SnapTrade\Model\OptionsPlaceOptionStrategyRequest)) {
                 if (!is_array($options_place_option_strategy_request))
                     throw new \InvalidArgumentException('"options_place_option_strategy_request" must be associative array or an instance of \SnapTrade\Model\OptionsPlaceOptionStrategyRequest OptionsApi.placeOptionStrategy.');
@@ -2111,7 +2131,7 @@ class OptionsApi extends \SnapTrade\CustomApi
             }
         }
         // verify the required parameter 'options_place_option_strategy_request' is set
-        if ($options_place_option_strategy_request === null || (is_array($options_place_option_strategy_request) && count($options_place_option_strategy_request) === 0)) {
+        if ($options_place_option_strategy_request === SENTINEL_VALUE || (is_array($options_place_option_strategy_request) && count($options_place_option_strategy_request) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter options_place_option_strategy_request when calling placeOptionStrategy'
             );
@@ -2125,28 +2145,32 @@ class OptionsApi extends \SnapTrade\CustomApi
         $httpBody = '';
         $multipart = false;
 
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $user_id,
-            'userId', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $user_secret,
-            'userSecret', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
+        if ($user_id !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_id,
+                'userId', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
+        if ($user_secret !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_secret,
+                'userSecret', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
 
 
         // path params
-        if ($account_id !== null) {
+        if ($account_id !== SENTINEL_VALUE) {
             $resourcePath = str_replace(
                 '{' . 'accountId' . '}',
                 ObjectSerializer::toPathValue($account_id),
@@ -2154,7 +2178,7 @@ class OptionsApi extends \SnapTrade\CustomApi
             );
         }
         // path params
-        if ($option_strategy_id !== null) {
+        if ($option_strategy_id !== SENTINEL_VALUE) {
             $resourcePath = str_replace(
                 '{' . 'optionStrategyId' . '}',
                 ObjectSerializer::toPathValue($option_strategy_id),

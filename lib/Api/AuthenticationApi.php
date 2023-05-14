@@ -125,7 +125,9 @@ class AuthenticationApi extends \SnapTrade\CustomApi
      * For initializing request body parameter
      */
     private function setRequestBodyProperty(&$body, $property, $value) {
-        if ($body == null) $body = [];
+        if ($body === null) $body = [];
+        // user did not pass in a value for this parameter
+        if ($value === SENTINEL_VALUE) return;
         $body[$property] = $value;
     }
 
@@ -430,11 +432,11 @@ class AuthenticationApi extends \SnapTrade\CustomApi
     {
 
         // Check if $user_id is a string
-        if (!is_null($user_id) && !is_string($user_id)) {
+        if ($user_id !== SENTINEL_VALUE && !is_string($user_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_id, true), gettype($user_id)));
         }
         // verify the required parameter 'user_id' is set
-        if ($user_id === null || (is_array($user_id) && count($user_id) === 0)) {
+        if ($user_id === SENTINEL_VALUE || (is_array($user_id) && count($user_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter user_id when calling deleteSnapTradeUser'
             );
@@ -448,15 +450,17 @@ class AuthenticationApi extends \SnapTrade\CustomApi
         $httpBody = '';
         $multipart = false;
 
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $user_id,
-            'userId', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
+        if ($user_id !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_id,
+                'userId', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
 
 
 
@@ -844,21 +848,21 @@ class AuthenticationApi extends \SnapTrade\CustomApi
     {
 
         // Check if $user_id is a string
-        if (!is_null($user_id) && !is_string($user_id)) {
+        if ($user_id !== SENTINEL_VALUE && !is_string($user_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_id, true), gettype($user_id)));
         }
         // verify the required parameter 'user_id' is set
-        if ($user_id === null || (is_array($user_id) && count($user_id) === 0)) {
+        if ($user_id === SENTINEL_VALUE || (is_array($user_id) && count($user_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter user_id when calling getUserJWT'
             );
         }
         // Check if $user_secret is a string
-        if (!is_null($user_secret) && !is_string($user_secret)) {
+        if ($user_secret !== SENTINEL_VALUE && !is_string($user_secret)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
         }
         // verify the required parameter 'user_secret' is set
-        if ($user_secret === null || (is_array($user_secret) && count($user_secret) === 0)) {
+        if ($user_secret === SENTINEL_VALUE || (is_array($user_secret) && count($user_secret) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter user_secret when calling getUserJWT'
             );
@@ -872,24 +876,28 @@ class AuthenticationApi extends \SnapTrade\CustomApi
         $httpBody = '';
         $multipart = false;
 
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $user_id,
-            'userId', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $user_secret,
-            'userSecret', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
+        if ($user_id !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_id,
+                'userId', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
+        if ($user_secret !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_secret,
+                'userSecret', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
 
 
 
@@ -1341,11 +1349,11 @@ class AuthenticationApi extends \SnapTrade\CustomApi
     public function loginSnapTradeUser(
         $user_id,
         $user_secret,
-        $broker = null,
-        $immediate_redirect = null,
-        $custom_redirect = null,
-        $reconnect = null,
-        $connection_type = null,
+        $broker = SENTINEL_VALUE,
+        $immediate_redirect = SENTINEL_VALUE,
+        $custom_redirect = SENTINEL_VALUE,
+        $reconnect = SENTINEL_VALUE,
+        $connection_type = SENTINEL_VALUE,
         string $contentType = self::contentTypes['loginSnapTradeUser'][0]
 
     )
@@ -1566,11 +1574,11 @@ class AuthenticationApi extends \SnapTrade\CustomApi
     public function loginSnapTradeUserAsync(
         $user_id,
         $user_secret,
-        $broker = null,
-        $immediate_redirect = null,
-        $custom_redirect = null,
-        $reconnect = null,
-        $connection_type = null,
+        $broker = SENTINEL_VALUE,
+        $immediate_redirect = SENTINEL_VALUE,
+        $custom_redirect = SENTINEL_VALUE,
+        $reconnect = SENTINEL_VALUE,
+        $connection_type = SENTINEL_VALUE,
         string $contentType = self::contentTypes['loginSnapTradeUser'][0]
 
     )
@@ -1659,30 +1667,30 @@ class AuthenticationApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function loginSnapTradeUserRequest($user_id, $user_secret, $snap_trade_login_user_request_body = null, string $contentType = self::contentTypes['loginSnapTradeUser'][0])
+    public function loginSnapTradeUserRequest($user_id, $user_secret, $snap_trade_login_user_request_body = SENTINEL_VALUE, string $contentType = self::contentTypes['loginSnapTradeUser'][0])
     {
 
         // Check if $user_id is a string
-        if (!is_null($user_id) && !is_string($user_id)) {
+        if ($user_id !== SENTINEL_VALUE && !is_string($user_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_id, true), gettype($user_id)));
         }
         // verify the required parameter 'user_id' is set
-        if ($user_id === null || (is_array($user_id) && count($user_id) === 0)) {
+        if ($user_id === SENTINEL_VALUE || (is_array($user_id) && count($user_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter user_id when calling loginSnapTradeUser'
             );
         }
         // Check if $user_secret is a string
-        if (!is_null($user_secret) && !is_string($user_secret)) {
+        if ($user_secret !== SENTINEL_VALUE && !is_string($user_secret)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
         }
         // verify the required parameter 'user_secret' is set
-        if ($user_secret === null || (is_array($user_secret) && count($user_secret) === 0)) {
+        if ($user_secret === SENTINEL_VALUE || (is_array($user_secret) && count($user_secret) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter user_secret when calling loginSnapTradeUser'
             );
         }
-        if ($snap_trade_login_user_request_body != null) {
+        if ($snap_trade_login_user_request_body !== SENTINEL_VALUE) {
             if (!($snap_trade_login_user_request_body instanceof \SnapTrade\Model\SnapTradeLoginUserRequestBody)) {
                 if (!is_array($snap_trade_login_user_request_body))
                     throw new \InvalidArgumentException('"snap_trade_login_user_request_body" must be associative array or an instance of \SnapTrade\Model\SnapTradeLoginUserRequestBody AuthenticationApi.loginSnapTradeUser.');
@@ -1699,24 +1707,28 @@ class AuthenticationApi extends \SnapTrade\CustomApi
         $httpBody = '';
         $multipart = false;
 
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $user_id,
-            'userId', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $user_secret,
-            'userSecret', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
+        if ($user_id !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_id,
+                'userId', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
+        if ($user_secret !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_secret,
+                'userSecret', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
 
 
 
@@ -1815,8 +1827,8 @@ class AuthenticationApi extends \SnapTrade\CustomApi
      * @return \SnapTrade\Model\UserIDandSecret|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\Model404FailedRequestResponse
      */
     public function registerSnapTradeUser(
-        $user_id = null,
-        $rsa_public_key = null,
+        $user_id = SENTINEL_VALUE,
+        $rsa_public_key = SENTINEL_VALUE,
         string $contentType = self::contentTypes['registerSnapTradeUser'][0]
 
     )
@@ -2003,8 +2015,8 @@ class AuthenticationApi extends \SnapTrade\CustomApi
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function registerSnapTradeUserAsync(
-        $user_id = null,
-        $rsa_public_key = null,
+        $user_id = SENTINEL_VALUE,
+        $rsa_public_key = SENTINEL_VALUE,
         string $contentType = self::contentTypes['registerSnapTradeUser'][0]
 
     )
@@ -2089,7 +2101,7 @@ class AuthenticationApi extends \SnapTrade\CustomApi
     public function registerSnapTradeUserRequest($snap_trade_register_user_request_body, string $contentType = self::contentTypes['registerSnapTradeUser'][0])
     {
 
-        if ($snap_trade_register_user_request_body != null) {
+        if ($snap_trade_register_user_request_body !== SENTINEL_VALUE) {
             if (!($snap_trade_register_user_request_body instanceof \SnapTrade\Model\SnapTradeRegisterUserRequestBody)) {
                 if (!is_array($snap_trade_register_user_request_body))
                     throw new \InvalidArgumentException('"snap_trade_register_user_request_body" must be associative array or an instance of \SnapTrade\Model\SnapTradeRegisterUserRequestBody AuthenticationApi.registerSnapTradeUser.');
@@ -2098,7 +2110,7 @@ class AuthenticationApi extends \SnapTrade\CustomApi
             }
         }
         // verify the required parameter 'snap_trade_register_user_request_body' is set
-        if ($snap_trade_register_user_request_body === null || (is_array($snap_trade_register_user_request_body) && count($snap_trade_register_user_request_body) === 0)) {
+        if ($snap_trade_register_user_request_body === SENTINEL_VALUE || (is_array($snap_trade_register_user_request_body) && count($snap_trade_register_user_request_body) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter snap_trade_register_user_request_body when calling registerSnapTradeUser'
             );

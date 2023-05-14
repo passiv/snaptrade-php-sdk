@@ -22,6 +22,10 @@
 
 namespace SnapTrade;
 
+// This value is used to help us determine if the user has passed in a value for
+// a particular argument
+define('SENTINEL_VALUE', '__SENTINEL_VALUE__');
+
 class Configuration
 {
     public const BOOLEAN_FORMAT_INT = 'int';

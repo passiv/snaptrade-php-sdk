@@ -87,4 +87,20 @@ class GettingStartedTest extends TestCase
         $deletedResponse = $snaptrade->authentication->deleteSnapTradeUser($userId);
         print_r($deletedResponse);
     }
+
+    public function testGetUserAccountBalance()
+    {
+        $snaptrade = new \SnapTrade\Client(
+            clientId: getenv("SNAPTRADE_CLIENT_ID"),
+            consumerKey: getenv("SNAPTRADE_CONSUMER_KEY")
+        );
+        $userId = getenv("SNAPTRADE_TEST_USER_ID");
+        $userSecret = getenv("SNAPTRADE_TEST_USER_SECRET");
+        $accounts = $snaptrade->accountInformation->listUserAccounts(
+            $userId,
+            $userSecret
+        );
+        $response = $snaptrade->accountInformation->getUserAccountBalance($userId, $userSecret, $accounts[0]->getId());
+        print_r($response);
+    }
 }

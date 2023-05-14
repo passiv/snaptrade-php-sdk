@@ -103,4 +103,49 @@ class GettingStartedTest extends TestCase
         $response = $snaptrade->accountInformation->getUserAccountBalance($userId, $userSecret, $accounts[0]->getId());
         print_r($response);
     }
+
+    /**
+     * Test case for setting portfolio targets
+     *
+     */
+    public function testSetPortfolioTargets()
+    {
+        $this->markTestSkipped("Can't use listAssetClasses to get asset id");
+
+        // 1) Initialize a client with your clientID and consumerKey.
+        $snaptrade = new \SnapTrade\Client(
+            clientId: getenv("SNAPTRADE_CLIENT_ID"),
+            consumerKey: getenv("SNAPTRADE_CONSUMER_KEY")
+        );
+
+        // 2) Check that the client is able to make a request to the API server.
+        $response = $snaptrade->apiStatus->check();
+        print_r($response);
+
+        // 3) Create a new user on SnapTrade
+        $userId = (string)time();
+        $registerResponse = $snaptrade->authentication->registerSnapTradeUser($userId);
+        $userSecret = $registerResponse->getUserSecret();
+
+        // 5) Create/list portfolio, accept disclaimer, and obtain account holding data
+        $portfolioId = (string)time();
+        $portfolioGroups = $snaptrade->portfolioManagement->create(
+            $userId,
+            $userSecret,
+            id: $portfolioId,
+            name: "MyPortfolio"
+        );
+
+        $assets = $snaptrade->portfolioManagement->listAssetClasses();
+        print_r($assets);
+
+        // $targetAssets = $snaptrade->portfolioManagement->setPortfolioTargets($portfolioGroups[0]->getId());
+        // print_r($targetAssets);
+        $targetAssets = $snaptrade->portfolioManagement->setPortfolioTargets($portfolioGroups[0]->getId(), [["id" =>  "2bcd7cc3-e922-4976-bce1-9858296801c3"]]);
+        print_r($targetAssets);
+
+        // 6) Delete the user
+        $deletedResponse = $snaptrade->authentication->deleteSnapTradeUser($userId);
+        print_r($deletedResponse);
+    }
 }

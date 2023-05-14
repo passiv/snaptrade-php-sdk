@@ -9700,12 +9700,12 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function setPortfolioTargets(
         $portfolio_group_id,
+        $body = SENTINEL_VALUE,
         string $contentType = self::contentTypes['setPortfolioTargets'][0]
 
     )
     {
-        $_body = null;
-        $target_asset = $_body;
+        $target_asset = $body === SENTINEL_VALUE ? null : $body;
 
         list($response) = $this->setPortfolioTargetsWithHttpInfo($portfolio_group_id, $target_asset, $contentType);
         return $response;
@@ -9842,12 +9842,12 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function setPortfolioTargetsAsync(
         $portfolio_group_id,
+        $body = SENTINEL_VALUE,
         string $contentType = self::contentTypes['setPortfolioTargets'][0]
 
     )
     {
-        $_body = null;
-        $target_asset = $_body;
+        $target_asset = $body === SENTINEL_VALUE ? null : $body;
 
         return $this->setPortfolioTargetsAsyncWithHttpInfo($portfolio_group_id, $target_asset, $contentType)
             ->then(

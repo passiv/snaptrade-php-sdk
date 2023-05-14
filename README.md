@@ -46,29 +46,9 @@ Please follow the [installation procedure](#installation--usage) and then run th
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-// Configure API key authorization: PartnerClientId
-$config = SnapTrade\Configuration::getDefaultConfiguration()->setApiKey('clientId', 'YOUR_API_KEY');
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = SnapTrade\Configuration::getDefaultConfiguration()->setApiKeyPrefix('clientId', 'Bearer');
-
-// Configure API key authorization: PartnerSignature
-$config = SnapTrade\Configuration::getDefaultConfiguration()->setApiKey('Signature', 'YOUR_API_KEY');
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = SnapTrade\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Signature', 'Bearer');
-
-// Configure API key authorization: PartnerTimestamp
-$config = SnapTrade\Configuration::getDefaultConfiguration()->setApiKey('timestamp', 'YOUR_API_KEY');
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = SnapTrade\Configuration::getDefaultConfiguration()->setApiKeyPrefix('timestamp', 'Bearer');
-
-// Setting host path is optional and defaults to https://api.snaptrade.com/api/v1
-// SnapTrade\Configuration::getDefaultConfiguration()->setHost("https://api.snaptrade.com/api/v1");
-
-$apiInstance = new SnapTrade\Api\AccountInformationApi(
-    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-    // This is optional, `GuzzleHttp\Client` will be used as default.
-    // new GuzzleHttp\Client(),
-    $config
+$snaptrade = new \SnapTrade\Client(
+    clientId: getenv("SNAPTRADE_CLIENT_ID"),
+    consumerKey: getenv("SNAPTRADE_CONSUMER_KEY")
 );
 
 $user_id = "John.doe@snaptrade.com";
@@ -76,7 +56,7 @@ $user_secret = "USERSECRET123";
 $brokerage_authorizations = "917c8734-8470-4a3e-a18f-57c3f2ee6631"; // Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations).
 
 try {
-    $result = $apiInstance->getAllUserHoldings(
+    $result = $snaptrade->accountInformation->getAllUserHoldings(
         user_id: $user_id, 
         user_secret: $user_secret, 
         brokerage_authorizations: $brokerage_authorizations

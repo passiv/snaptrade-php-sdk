@@ -1724,6 +1724,14 @@ $portfolio_group_id = "portfolioGroupId_example"; // The ID of the PortfolioGrou
 
 try {
     $result = $snaptrade->portfolioManagement->setPortfolioTargets(
+        body: [
+        [
+            "id" => "2bcd7cc3-e922-4976-bce1-9858296801c3",
+            "percent" => 90,
+            "is_supported" => True,
+            "is_excluded" => True,
+        ]
+    ],
         portfolio_group_id: $portfolio_group_id
     );
     print_r($result->$getId());

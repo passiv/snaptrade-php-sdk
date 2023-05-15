@@ -53,7 +53,7 @@ class OptionsSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPITypes = [
         'id' => 'string',
         'ticker' => 'string',
-        'strike_price' => 'int',
+        'strike_price' => 'float',
         'expiration_date' => 'string',
         'is_mini_option' => 'bool',
         'underlying_symbol' => '\SnapTrade\Model\UnderlyingSymbol',
@@ -414,7 +414,7 @@ class OptionsSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets strike_price
      *
-     * @return int|null
+     * @return float|null
      */
     public function getStrikePrice()
     {
@@ -424,7 +424,7 @@ class OptionsSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets strike_price
      *
-     * @param int|null $strike_price strike_price
+     * @param float|null $strike_price strike_price
      *
      * @return self
      */

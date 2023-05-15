@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **string** |  | [optional]
 **ticker** | **string** |  | [optional]
-**strike_price** | **int** |  | [optional]
+**strike_price** | **float** |  | [optional]
 **expiration_date** | **string** |  | [optional]
 **is_mini_option** | **bool** |  | [optional]
 **underlying_symbol** | [**\SnapTrade\Model\UnderlyingSymbol**](UnderlyingSymbol.md) |  | [optional]

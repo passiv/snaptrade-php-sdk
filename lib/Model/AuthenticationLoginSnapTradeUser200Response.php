@@ -1,6 +1,6 @@
 <?php
 /**
- * AuthenticationLoginSnapTradeUserResponse
+ * AuthenticationLoginSnapTradeUser200Response
  *
  * PHP version 7.4
  *
@@ -27,13 +27,13 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * AuthenticationLoginSnapTradeUserResponse Class Doc Comment
+ * AuthenticationLoginSnapTradeUser200Response Class Doc Comment
  *
  * @category Class
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class AuthenticationLoginSnapTradeUserResponse implements ModelInterface, ArrayAccess, \JsonSerializable
+class AuthenticationLoginSnapTradeUser200Response implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -42,7 +42,7 @@ class AuthenticationLoginSnapTradeUserResponse implements ModelInterface, ArrayA
       *
       * @var string
       */
-    protected static $openAPIModelName = 'AuthenticationLoginSnapTradeUserResponse';
+    protected static $openAPIModelName = 'Authentication_loginSnapTradeUser_200_response';
 
     /**
       * Array of property to type mappings. Used for (de)serialization

@@ -404,15 +404,15 @@ $account = [
         "created_date" => "2021-06-04T16:26:46.523Z",
     ];
 $symbol = [
-        "description" => "VANGUARD CDN AGGREGATE BOND INDEX ETF",
         "id" => "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        "description" => "VANGUARD CDN AGGREGATE BOND INDEX ETF",
         "allows_fractional_units" => True,
     ];
 $universal_symbol = [
-        "description" => "VANGUARD CDN AGGREGATE BOND INDEX ETF",
         "id" => "2bcd7cc3-e922-4976-bce1-9858296801c3",
         "symbol" => "VAB.TO",
         "raw_symbol" => "VAB",
+        "description" => "VANGUARD CDN AGGREGATE BOND INDEX ETF",
     ];
 $action = "BUY";
 $units = 6;
@@ -688,7 +688,7 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **user_id** | **string**|  | |
 | **user_secret** | **string**|  | |
-| **trading_place_oco_order_request** | [**\SnapTrade\Model\TradingPlaceOcoOrderRequest**](../Model/TradingPlaceOcoOrderRequest.md)|  | |
+| **trading_place_oco_order_request** | [**\SnapTrade\Model\TradingPlaceOCOOrderRequest**](../Model/TradingPlaceOCOOrderRequest.md)|  | |
 
 ### Return type
 

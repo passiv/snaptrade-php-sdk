@@ -3558,7 +3558,7 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
-     * @param  \SnapTrade\Model\TradingPlaceOcoOrderRequest $trading_place_oco_order_request trading_place_oco_order_request (required)
+     * @param  \SnapTrade\Model\TradingPlaceOCOOrderRequest $trading_place_oco_order_request trading_place_oco_order_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['placeOCOOrder'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
@@ -3590,7 +3590,7 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  \SnapTrade\Model\TradingPlaceOcoOrderRequest $trading_place_oco_order_request (required)
+     * @param  \SnapTrade\Model\TradingPlaceOCOOrderRequest $trading_place_oco_order_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['placeOCOOrder'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
@@ -3732,7 +3732,7 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  \SnapTrade\Model\TradingPlaceOcoOrderRequest $trading_place_oco_order_request (required)
+     * @param  \SnapTrade\Model\TradingPlaceOCOOrderRequest $trading_place_oco_order_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['placeOCOOrder'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3767,7 +3767,7 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  \SnapTrade\Model\TradingPlaceOcoOrderRequest $trading_place_oco_order_request (required)
+     * @param  \SnapTrade\Model\TradingPlaceOCOOrderRequest $trading_place_oco_order_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['placeOCOOrder'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3822,7 +3822,7 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  \SnapTrade\Model\TradingPlaceOcoOrderRequest $trading_place_oco_order_request (required)
+     * @param  \SnapTrade\Model\TradingPlaceOCOOrderRequest $trading_place_oco_order_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['placeOCOOrder'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3852,11 +3852,11 @@ class TradingApi extends \SnapTrade\CustomApi
             );
         }
         if ($trading_place_oco_order_request !== SENTINEL_VALUE) {
-            if (!($trading_place_oco_order_request instanceof \SnapTrade\Model\TradingPlaceOcoOrderRequest)) {
+            if (!($trading_place_oco_order_request instanceof \SnapTrade\Model\TradingPlaceOCOOrderRequest)) {
                 if (!is_array($trading_place_oco_order_request))
-                    throw new \InvalidArgumentException('"trading_place_oco_order_request" must be associative array or an instance of \SnapTrade\Model\TradingPlaceOcoOrderRequest TradingApi.placeOCOOrder.');
+                    throw new \InvalidArgumentException('"trading_place_oco_order_request" must be associative array or an instance of \SnapTrade\Model\TradingPlaceOCOOrderRequest TradingApi.placeOCOOrder.');
                 else
-                    $trading_place_oco_order_request = new \SnapTrade\Model\TradingPlaceOcoOrderRequest($trading_place_oco_order_request);
+                    $trading_place_oco_order_request = new \SnapTrade\Model\TradingPlaceOCOOrderRequest($trading_place_oco_order_request);
             }
         }
         // verify the required parameter 'trading_place_oco_order_request' is set

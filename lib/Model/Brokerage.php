@@ -50,10 +50,10 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'description' => 'string',
         'id' => 'string',
         'name' => 'string',
         'display_name' => 'string',
+        'description' => 'string',
         'aws_s3_logo_url' => 'string',
         'slug' => 'string',
         'url' => 'string',
@@ -78,10 +78,10 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'description' => null,
         'id' => 'uuid',
         'name' => null,
         'display_name' => null,
+        'description' => null,
         'aws_s3_logo_url' => 'url',
         'slug' => null,
         'url' => 'url',
@@ -104,10 +104,10 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'description' => false,
-		'id' => false,
+        'id' => false,
 		'name' => false,
 		'display_name' => false,
+		'description' => false,
 		'aws_s3_logo_url' => false,
 		'slug' => false,
 		'url' => false,
@@ -210,10 +210,10 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'description' => 'description',
         'id' => 'id',
         'name' => 'name',
         'display_name' => 'display_name',
+        'description' => 'description',
         'aws_s3_logo_url' => 'aws_s3_logo_url',
         'slug' => 'slug',
         'url' => 'url',
@@ -236,10 +236,10 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'description' => 'setDescription',
         'id' => 'setId',
         'name' => 'setName',
         'display_name' => 'setDisplayName',
+        'description' => 'setDescription',
         'aws_s3_logo_url' => 'setAwsS3LogoUrl',
         'slug' => 'setSlug',
         'url' => 'setUrl',
@@ -262,10 +262,10 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'description' => 'getDescription',
         'id' => 'getId',
         'name' => 'getName',
         'display_name' => 'getDisplayName',
+        'description' => 'getDescription',
         'aws_s3_logo_url' => 'getAwsS3LogoUrl',
         'slug' => 'getSlug',
         'url' => 'getUrl',
@@ -339,10 +339,10 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('description', $data ?? [], null);
         $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('display_name', $data ?? [], null);
+        $this->setIfExists('description', $data ?? [], null);
         $this->setIfExists('aws_s3_logo_url', $data ?? [], null);
         $this->setIfExists('slug', $data ?? [], null);
         $this->setIfExists('url', $data ?? [], null);
@@ -400,35 +400,6 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
         return count($this->listInvalidProperties()) === 0;
     }
 
-
-    /**
-     * Gets description
-     *
-     * @return string|null
-     */
-    public function getDescription()
-    {
-        return $this->container['description'];
-    }
-
-    /**
-     * Sets description
-     *
-     * @param string|null $description description
-     *
-     * @return self
-     */
-    public function setDescription($description)
-    {
-
-        if (is_null($description)) {
-            throw new \InvalidArgumentException('non-nullable description cannot be null');
-        }
-
-        $this->container['description'] = $description;
-
-        return $this;
-    }
 
     /**
      * Gets id
@@ -513,6 +484,35 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['display_name'] = $display_name;
+
+        return $this;
+    }
+
+    /**
+     * Gets description
+     *
+     * @return string|null
+     */
+    public function getDescription()
+    {
+        return $this->container['description'];
+    }
+
+    /**
+     * Sets description
+     *
+     * @param string|null $description description
+     *
+     * @return self
+     */
+    public function setDescription($description)
+    {
+
+        if (is_null($description)) {
+            throw new \InvalidArgumentException('non-nullable description cannot be null');
+        }
+
+        $this->container['description'] = $description;
 
         return $this;
     }

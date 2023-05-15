@@ -1,4 +1,4 @@
-# # ConnectionsSessionEventsResponseInner
+# # ConnectionsSessionEvents200ResponseInner
 
 ## Properties
 

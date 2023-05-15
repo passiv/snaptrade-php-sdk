@@ -73,18 +73,18 @@ class OptionChainInnerTest extends TestCase
     }
 
     /**
-     * Test attribute "description"
+     * Test attribute "expiry_date"
      */
-    public function testPropertyDescription()
+    public function testPropertyExpiryDate()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "expiry_date"
+     * Test attribute "description"
      */
-    public function testPropertyExpiryDate()
+    public function testPropertyDescription()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

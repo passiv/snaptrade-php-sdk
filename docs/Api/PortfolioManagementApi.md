@@ -58,10 +58,10 @@ $snaptrade = new \SnapTrade\Client(
 );
 
 $portfolio_group_id = "portfolioGroupId_example"; // The ID of the PortfolioGroup under which to exclude an asset.
-$description = "VANGUARD CDN AGGREGATE BOND INDEX ETF";
 $id = "2bcd7cc3-e922-4976-bce1-9858296801c3";
 $symbol = "VAB.TO";
 $raw_symbol = "VAB";
+$description = "VANGUARD CDN AGGREGATE BOND INDEX ETF";
 $currency = [
         "id" => "87b24961-b51e-4db8-9226-f198f6518a89",
         "code" => "USD",
@@ -78,9 +78,9 @@ $exchange = [
         "suffix" => ".TO",
     ];
 $type = [
-        "description" => "Common Stock",
         "id" => "2bcd7cc3-e922-4976-bce1-9858296801c3",
         "code" => "cs",
+        "description" => "Common Stock",
         "is_supported" => True,
     ];
 $currencies = [
@@ -94,10 +94,10 @@ $currencies = [
 try {
     $result = $snaptrade->portfolioManagement->addPortfolioExcludedAsset(
         portfolio_group_id: $portfolio_group_id, 
-        description: $description, 
         id: $id, 
         symbol: $symbol, 
         raw_symbol: $raw_symbol, 
+        description: $description, 
         currency: $currency, 
         exchange: $exchange, 
         type: $type, 
@@ -1281,7 +1281,7 @@ try {
 ## `listAssetClasses()`
 
 ```php
-listAssetClasses($user_id, $user_secret): \SnapTrade\Model\ModelAssetClassDetails[]
+listAssetClasses(): \SnapTrade\Model\ModelAssetClassDetails[]
 ```
 
 List of model asset class
@@ -1297,14 +1297,9 @@ $snaptrade = new \SnapTrade\Client(
     consumerKey: getenv("SNAPTRADE_CONSUMER_KEY")
 );
 
-$user_id = "John.doe@snaptrade.com";
-$user_secret = "USERSECRET123";
 
 try {
-    $result = $snaptrade->portfolioManagement->listAssetClasses(
-        user_id: $user_id, 
-        user_secret: $user_secret
-    );
+    $result = $snaptrade->portfolioManagement->listAssetClasses();
     print_r($result->$getModelAssetClass());
     print_r($result->$getModelAssetClassTarget());
 } catch (\Exception $e) {
@@ -1314,10 +1309,7 @@ try {
 
 ### Parameters
 
-| Name | Type | Description  | Notes |
-| ------------- | ------------- | ------------- | ------------- |
-| **user_id** | **string**|  | |
-| **user_secret** | **string**|  | |
+This endpoint does not need any parameter.
 
 ### Return type
 
@@ -1664,10 +1656,10 @@ try {
         portfolio_group_id: $portfolio_group_id, 
         substring: $substring
     );
-    print_r($result->$getDescription());
     print_r($result->$getId());
     print_r($result->$getSymbol());
     print_r($result->$getRawSymbol());
+    print_r($result->$getDescription());
     print_r($result->$getCurrency());
     print_r($result->$getExchange());
     print_r($result->$getType());
@@ -1914,10 +1906,10 @@ $portfolio_group_id = "portfolioGroupId_example"; // The ID of the PortfolioGrou
 $target_asset_id = "targetAssetId_example"; // The ID of the TargetAsset to patch.
 $id = "2bcd7cc3-e922-4976-bce1-9858296801c3";
 $symbol = [
-        "description" => "VANGUARD CDN AGGREGATE BOND INDEX ETF",
         "id" => "2bcd7cc3-e922-4976-bce1-9858296801c3",
         "symbol" => "VAB.TO",
         "raw_symbol" => "VAB",
+        "description" => "VANGUARD CDN AGGREGATE BOND INDEX ETF",
     ];
 $percent = 90;
 $is_supported = True;

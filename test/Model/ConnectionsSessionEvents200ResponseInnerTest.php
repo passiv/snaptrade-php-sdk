@@ -1,6 +1,6 @@
 <?php
 /**
- * ConnectionsSessionEventsResponseInnerTest
+ * ConnectionsSessionEvents200ResponseInnerTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * ConnectionsSessionEventsResponseInnerTest Class Doc Comment
+ * ConnectionsSessionEvents200ResponseInnerTest Class Doc Comment
  *
  * @category    Class
- * @description ConnectionsSessionEventsResponseInner
+ * @description ConnectionsSessionEvents200ResponseInner
  * @package     SnapTrade
  */
-class ConnectionsSessionEventsResponseInnerTest extends TestCase
+class ConnectionsSessionEvents200ResponseInnerTest extends TestCase
 {
 
     /**
@@ -64,9 +64,9 @@ class ConnectionsSessionEventsResponseInnerTest extends TestCase
     }
 
     /**
-     * Test "ConnectionsSessionEventsResponseInner"
+     * Test "ConnectionsSessionEvents200ResponseInner"
      */
-    public function testConnectionsSessionEventsResponseInner()
+    public function testConnectionsSessionEvents200ResponseInner()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

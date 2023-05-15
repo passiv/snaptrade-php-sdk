@@ -42,7 +42,7 @@ class OptionsGetOptionStrategyRequest implements ModelInterface, ArrayAccess, \J
       *
       * @var string
       */
-    protected static $openAPIModelName = 'OptionsGetOptionStrategyRequest';
+    protected static $openAPIModelName = 'Options_getOptionStrategy_request';
 
     /**
       * Array of property to type mappings. Used for (de)serialization

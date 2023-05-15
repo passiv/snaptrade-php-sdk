@@ -205,7 +205,7 @@ void (empty response body)
 ## `sessionEvents()`
 
 ```php
-sessionEvents($partner_client_id, $user_id, $session_id): \SnapTrade\Model\ConnectionsSessionEventsResponseInner[]
+sessionEvents($partner_client_id, $user_id, $session_id): \SnapTrade\Model\ConnectionsSessionEvents200ResponseInner[]
 ```
 
 List all session events for the partner
@@ -246,7 +246,7 @@ try {
 
 ### Return type
 
-[**\SnapTrade\Model\ConnectionsSessionEventsResponseInner[]**](../Model/ConnectionsSessionEventsResponseInner.md)
+[**\SnapTrade\Model\ConnectionsSessionEvents200ResponseInner[]**](../Model/ConnectionsSessionEvents200ResponseInner.md)
 
 ### Authorization
 

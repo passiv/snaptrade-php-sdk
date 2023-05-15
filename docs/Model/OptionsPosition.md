@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**description** | **string** |  | [optional]
 **symbol** | **string** |  | [optional]
+**description** | **string** |  | [optional]
 **option_symbol** | [**\SnapTrade\Model\OptionsSymbol**](OptionsSymbol.md) |  | [optional]
 **price** | **float** | Trade Price if limit or stop limit order | [optional]
 **units** | **float** |  | [optional]

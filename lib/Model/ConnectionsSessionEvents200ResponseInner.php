@@ -1,6 +1,6 @@
 <?php
 /**
- * ConnectionsSessionEventsResponseInner
+ * ConnectionsSessionEvents200ResponseInner
  *
  * PHP version 7.4
  *
@@ -27,13 +27,13 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * ConnectionsSessionEventsResponseInner Class Doc Comment
+ * ConnectionsSessionEvents200ResponseInner Class Doc Comment
  *
  * @category Class
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class ConnectionsSessionEventsResponseInner implements ModelInterface, ArrayAccess, \JsonSerializable
+class ConnectionsSessionEvents200ResponseInner implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -42,7 +42,7 @@ class ConnectionsSessionEventsResponseInner implements ModelInterface, ArrayAcce
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ConnectionsSessionEventsResponse_inner';
+    protected static $openAPIModelName = 'Connections_sessionEvents_200_response_inner';
 
     /**
       * Array of property to type mappings. Used for (de)serialization

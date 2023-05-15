@@ -73,18 +73,18 @@ class PositionSymbolTest extends TestCase
     }
 
     /**
-     * Test attribute "description"
+     * Test attribute "id"
      */
-    public function testPropertyDescription()
+    public function testPropertyId()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "id"
+     * Test attribute "description"
      */
-    public function testPropertyId()
+    public function testPropertyDescription()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

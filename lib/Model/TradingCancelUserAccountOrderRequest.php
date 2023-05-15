@@ -42,7 +42,7 @@ class TradingCancelUserAccountOrderRequest implements ModelInterface, ArrayAcces
       *
       * @var string
       */
-    protected static $openAPIModelName = 'TradingCancelUserAccountOrderRequest';
+    protected static $openAPIModelName = 'Trading_cancelUserAccountOrder_request';
 
     /**
       * Array of property to type mappings. Used for (de)serialization

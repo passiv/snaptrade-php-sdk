@@ -51,9 +51,9 @@ class SecurityType implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'description' => 'string',
         'id' => 'string',
         'code' => 'string',
+        'description' => 'string',
         'is_supported' => 'bool'
     ];
 
@@ -65,9 +65,9 @@ class SecurityType implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'description' => null,
         'id' => 'uuid',
         'code' => null,
+        'description' => null,
         'is_supported' => null
     ];
 
@@ -77,9 +77,9 @@ class SecurityType implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'description' => false,
-		'id' => false,
+        'id' => false,
 		'code' => false,
+		'description' => false,
 		'is_supported' => false
     ];
 
@@ -169,9 +169,9 @@ class SecurityType implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'description' => 'description',
         'id' => 'id',
         'code' => 'code',
+        'description' => 'description',
         'is_supported' => 'is_supported'
     ];
 
@@ -181,9 +181,9 @@ class SecurityType implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'description' => 'setDescription',
         'id' => 'setId',
         'code' => 'setCode',
+        'description' => 'setDescription',
         'is_supported' => 'setIsSupported'
     ];
 
@@ -193,9 +193,9 @@ class SecurityType implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'description' => 'getDescription',
         'id' => 'getId',
         'code' => 'getCode',
+        'description' => 'getDescription',
         'is_supported' => 'getIsSupported'
     ];
 
@@ -256,9 +256,9 @@ class SecurityType implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('description', $data ?? [], null);
         $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('code', $data ?? [], null);
+        $this->setIfExists('description', $data ?? [], null);
         $this->setIfExists('is_supported', $data ?? [], null);
     }
 
@@ -303,35 +303,6 @@ class SecurityType implements ModelInterface, ArrayAccess, \JsonSerializable
         return count($this->listInvalidProperties()) === 0;
     }
 
-
-    /**
-     * Gets description
-     *
-     * @return string|null
-     */
-    public function getDescription()
-    {
-        return $this->container['description'];
-    }
-
-    /**
-     * Sets description
-     *
-     * @param string|null $description description
-     *
-     * @return self
-     */
-    public function setDescription($description)
-    {
-
-        if (is_null($description)) {
-            throw new \InvalidArgumentException('non-nullable description cannot be null');
-        }
-
-        $this->container['description'] = $description;
-
-        return $this;
-    }
 
     /**
      * Gets id
@@ -387,6 +358,35 @@ class SecurityType implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['code'] = $code;
+
+        return $this;
+    }
+
+    /**
+     * Gets description
+     *
+     * @return string|null
+     */
+    public function getDescription()
+    {
+        return $this->container['description'];
+    }
+
+    /**
+     * Sets description
+     *
+     * @param string|null $description description
+     *
+     * @return self
+     */
+    public function setDescription($description)
+    {
+
+        if (is_null($description)) {
+            throw new \InvalidArgumentException('non-nullable description cannot be null');
+        }
+
+        $this->container['description'] = $description;
 
         return $this;
     }

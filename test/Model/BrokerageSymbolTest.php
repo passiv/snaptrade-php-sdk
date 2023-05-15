@@ -73,15 +73,6 @@ class BrokerageSymbolTest extends TestCase
     }
 
     /**
-     * Test attribute "description"
-     */
-    public function testPropertyDescription()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test attribute "id"
      */
     public function testPropertyId()
@@ -103,6 +94,15 @@ class BrokerageSymbolTest extends TestCase
      * Test attribute "brokerage_authorization"
      */
     public function testPropertyBrokerageAuthorization()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "description"
+     */
+    public function testPropertyDescription()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

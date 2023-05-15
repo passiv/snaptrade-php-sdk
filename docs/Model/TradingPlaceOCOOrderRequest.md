@@ -1,4 +1,4 @@
-# # TradingPlaceOcoOrderRequest
+# # TradingPlaceOCOOrderRequest
 
 ## Properties
 

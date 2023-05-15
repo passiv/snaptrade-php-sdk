@@ -45,11 +45,11 @@ try {
         accounts: $accounts, 
         brokerage_authorizations: $brokerage_authorizations
     );
-    print_r($result->$getDescription());
     print_r($result->$getId());
     print_r($result->$getAccount());
     print_r($result->$getAmount());
     print_r($result->$getCurrency());
+    print_r($result->$getDescription());
     print_r($result->$getFee());
     print_r($result->$getInstitution());
     print_r($result->$getOptionType());

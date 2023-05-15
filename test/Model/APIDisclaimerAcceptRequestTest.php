@@ -1,6 +1,6 @@
 <?php
 /**
- * CreateSnapTradeParterApiCredentialsRequestTest
+ * APIDisclaimerAcceptRequestTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * CreateSnapTradeParterApiCredentialsRequestTest Class Doc Comment
+ * APIDisclaimerAcceptRequestTest Class Doc Comment
  *
  * @category    Class
- * @description CreateSnapTradeParterApiCredentialsRequest
+ * @description APIDisclaimerAcceptRequest
  * @package     SnapTrade
  */
-class CreateSnapTradeParterApiCredentialsRequestTest extends TestCase
+class APIDisclaimerAcceptRequestTest extends TestCase
 {
 
     /**
@@ -64,45 +64,18 @@ class CreateSnapTradeParterApiCredentialsRequestTest extends TestCase
     }
 
     /**
-     * Test "CreateSnapTradeParterApiCredentialsRequest"
+     * Test "APIDisclaimerAcceptRequest"
      */
-    public function testCreateSnapTradeParterApiCredentialsRequest()
+    public function testAPIDisclaimerAcceptRequest()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "brokerage_authorization_type_id"
+     * Test attribute "accepted"
      */
-    public function testPropertyBrokerageAuthorizationTypeId()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "brokerage_api_client_id"
-     */
-    public function testPropertyBrokerageApiClientId()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "brokerage_api_client_secret"
-     */
-    public function testPropertyBrokerageApiClientSecret()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "redirect_uri"
-     */
-    public function testPropertyRedirectUri()
+    public function testPropertyAccepted()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

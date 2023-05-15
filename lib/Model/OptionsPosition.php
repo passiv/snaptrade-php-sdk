@@ -51,8 +51,8 @@ class OptionsPosition implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'description' => 'string',
         'symbol' => 'string',
+        'description' => 'string',
         'option_symbol' => '\SnapTrade\Model\OptionsSymbol',
         'price' => 'float',
         'units' => 'float',
@@ -68,8 +68,8 @@ class OptionsPosition implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'description' => null,
         'symbol' => 'uuid',
+        'description' => null,
         'option_symbol' => null,
         'price' => null,
         'units' => null,
@@ -83,8 +83,8 @@ class OptionsPosition implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'description' => false,
-		'symbol' => false,
+        'symbol' => false,
+		'description' => false,
 		'option_symbol' => false,
 		'price' => false,
 		'units' => false,
@@ -178,8 +178,8 @@ class OptionsPosition implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'description' => 'description',
         'symbol' => 'symbol',
+        'description' => 'description',
         'option_symbol' => 'option_symbol',
         'price' => 'price',
         'units' => 'units',
@@ -193,8 +193,8 @@ class OptionsPosition implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'description' => 'setDescription',
         'symbol' => 'setSymbol',
+        'description' => 'setDescription',
         'option_symbol' => 'setOptionSymbol',
         'price' => 'setPrice',
         'units' => 'setUnits',
@@ -208,8 +208,8 @@ class OptionsPosition implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'description' => 'getDescription',
         'symbol' => 'getSymbol',
+        'description' => 'getDescription',
         'option_symbol' => 'getOptionSymbol',
         'price' => 'getPrice',
         'units' => 'getUnits',
@@ -274,8 +274,8 @@ class OptionsPosition implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('description', $data ?? [], null);
         $this->setIfExists('symbol', $data ?? [], null);
+        $this->setIfExists('description', $data ?? [], null);
         $this->setIfExists('option_symbol', $data ?? [], null);
         $this->setIfExists('price', $data ?? [], null);
         $this->setIfExists('units', $data ?? [], null);
@@ -326,35 +326,6 @@ class OptionsPosition implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets description
-     *
-     * @return string|null
-     */
-    public function getDescription()
-    {
-        return $this->container['description'];
-    }
-
-    /**
-     * Sets description
-     *
-     * @param string|null $description description
-     *
-     * @return self
-     */
-    public function setDescription($description)
-    {
-
-        if (is_null($description)) {
-            throw new \InvalidArgumentException('non-nullable description cannot be null');
-        }
-
-        $this->container['description'] = $description;
-
-        return $this;
-    }
-
-    /**
      * Gets symbol
      *
      * @return string|null
@@ -379,6 +350,35 @@ class OptionsPosition implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['symbol'] = $symbol;
+
+        return $this;
+    }
+
+    /**
+     * Gets description
+     *
+     * @return string|null
+     */
+    public function getDescription()
+    {
+        return $this->container['description'];
+    }
+
+    /**
+     * Sets description
+     *
+     * @param string|null $description description
+     *
+     * @return self
+     */
+    public function setDescription($description)
+    {
+
+        if (is_null($description)) {
+            throw new \InvalidArgumentException('non-nullable description cannot be null');
+        }
+
+        $this->container['description'] = $description;
 
         return $this;
     }

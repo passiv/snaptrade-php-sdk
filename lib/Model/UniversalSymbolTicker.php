@@ -51,10 +51,10 @@ class UniversalSymbolTicker implements ModelInterface, ArrayAccess, \JsonSeriali
       * @var string[]
       */
     protected static $openAPITypes = [
-        'description' => 'string',
         'id' => 'string',
         'symbol' => 'string',
         'raw_symbol' => 'string',
+        'description' => 'string',
         'currency' => '\SnapTrade\Model\Currency',
         'exchange' => '\SnapTrade\Model\Exchange',
         'type' => '\SnapTrade\Model\SecurityType',
@@ -69,10 +69,10 @@ class UniversalSymbolTicker implements ModelInterface, ArrayAccess, \JsonSeriali
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'description' => null,
         'id' => 'uuid',
         'symbol' => null,
         'raw_symbol' => null,
+        'description' => null,
         'currency' => null,
         'exchange' => null,
         'type' => null,
@@ -85,10 +85,10 @@ class UniversalSymbolTicker implements ModelInterface, ArrayAccess, \JsonSeriali
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'description' => false,
-		'id' => false,
+        'id' => false,
 		'symbol' => false,
 		'raw_symbol' => false,
+		'description' => false,
 		'currency' => false,
 		'exchange' => false,
 		'type' => false,
@@ -181,10 +181,10 @@ class UniversalSymbolTicker implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var string[]
      */
     protected static $attributeMap = [
-        'description' => 'description',
         'id' => 'id',
         'symbol' => 'symbol',
         'raw_symbol' => 'raw_symbol',
+        'description' => 'description',
         'currency' => 'currency',
         'exchange' => 'exchange',
         'type' => 'type',
@@ -197,10 +197,10 @@ class UniversalSymbolTicker implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var string[]
      */
     protected static $setters = [
-        'description' => 'setDescription',
         'id' => 'setId',
         'symbol' => 'setSymbol',
         'raw_symbol' => 'setRawSymbol',
+        'description' => 'setDescription',
         'currency' => 'setCurrency',
         'exchange' => 'setExchange',
         'type' => 'setType',
@@ -213,10 +213,10 @@ class UniversalSymbolTicker implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var string[]
      */
     protected static $getters = [
-        'description' => 'getDescription',
         'id' => 'getId',
         'symbol' => 'getSymbol',
         'raw_symbol' => 'getRawSymbol',
+        'description' => 'getDescription',
         'currency' => 'getCurrency',
         'exchange' => 'getExchange',
         'type' => 'getType',
@@ -280,10 +280,10 @@ class UniversalSymbolTicker implements ModelInterface, ArrayAccess, \JsonSeriali
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('description', $data ?? [], null);
         $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('symbol', $data ?? [], null);
         $this->setIfExists('raw_symbol', $data ?? [], null);
+        $this->setIfExists('description', $data ?? [], null);
         $this->setIfExists('currency', $data ?? [], null);
         $this->setIfExists('exchange', $data ?? [], null);
         $this->setIfExists('type', $data ?? [], null);
@@ -331,35 +331,6 @@ class UniversalSymbolTicker implements ModelInterface, ArrayAccess, \JsonSeriali
         return count($this->listInvalidProperties()) === 0;
     }
 
-
-    /**
-     * Gets description
-     *
-     * @return string|null
-     */
-    public function getDescription()
-    {
-        return $this->container['description'];
-    }
-
-    /**
-     * Sets description
-     *
-     * @param string|null $description description
-     *
-     * @return self
-     */
-    public function setDescription($description)
-    {
-
-        if (is_null($description)) {
-            throw new \InvalidArgumentException('non-nullable description cannot be null');
-        }
-
-        $this->container['description'] = $description;
-
-        return $this;
-    }
 
     /**
      * Gets id
@@ -444,6 +415,35 @@ class UniversalSymbolTicker implements ModelInterface, ArrayAccess, \JsonSeriali
         }
 
         $this->container['raw_symbol'] = $raw_symbol;
+
+        return $this;
+    }
+
+    /**
+     * Gets description
+     *
+     * @return string|null
+     */
+    public function getDescription()
+    {
+        return $this->container['description'];
+    }
+
+    /**
+     * Sets description
+     *
+     * @param string|null $description description
+     *
+     * @return self
+     */
+    public function setDescription($description)
+    {
+
+        if (is_null($description)) {
+            throw new \InvalidArgumentException('non-nullable description cannot be null');
+        }
+
+        $this->container['description'] = $description;
 
         return $this;
     }

@@ -159,6 +159,7 @@ Class | Method | HTTP request | Description
 
 ## Models
 
+- [APIDisclaimerAcceptRequest](docs/Model/APIDisclaimerAcceptRequest.md)
 - [Account](docs/Model/Account.md)
 - [AccountHoldings](docs/Model/AccountHoldings.md)
 - [AccountHoldingsAccount](docs/Model/AccountHoldingsAccount.md)
@@ -167,7 +168,7 @@ Class | Method | HTTP request | Description
 - [AccountSimple](docs/Model/AccountSimple.md)
 - [AccountSyncStatus](docs/Model/AccountSyncStatus.md)
 - [Action](docs/Model/Action.md)
-- [AuthenticationLoginSnapTradeUserResponse](docs/Model/AuthenticationLoginSnapTradeUserResponse.md)
+- [AuthenticationLoginSnapTradeUser200Response](docs/Model/AuthenticationLoginSnapTradeUser200Response.md)
 - [Balance](docs/Model/Balance.md)
 - [Brokerage](docs/Model/Brokerage.md)
 - [BrokerageAuthorization](docs/Model/BrokerageAuthorization.md)
@@ -178,8 +179,7 @@ Class | Method | HTTP request | Description
 - [BrokerageType](docs/Model/BrokerageType.md)
 - [CalculatedTrade](docs/Model/CalculatedTrade.md)
 - [CashRestriction](docs/Model/CashRestriction.md)
-- [ConnectionsSessionEventsResponseInner](docs/Model/ConnectionsSessionEventsResponseInner.md)
-- [CreateSnapTradeParterApiCredentialsRequest](docs/Model/CreateSnapTradeParterApiCredentialsRequest.md)
+- [ConnectionsSessionEvents200ResponseInner](docs/Model/ConnectionsSessionEvents200ResponseInner.md)
 - [Currency](docs/Model/Currency.md)
 - [DeleteUserResponse](docs/Model/DeleteUserResponse.md)
 - [DividendAtDate](docs/Model/DividendAtDate.md)
@@ -234,7 +234,6 @@ Class | Method | HTTP request | Description
 - [SecurityType](docs/Model/SecurityType.md)
 - [SessionEvent](docs/Model/SessionEvent.md)
 - [SnapTradeAPIDisclaimerAcceptStatus](docs/Model/SnapTradeAPIDisclaimerAcceptStatus.md)
-- [SnapTradeApiDisclaimerRequest](docs/Model/SnapTradeApiDisclaimerRequest.md)
 - [SnapTradeHoldingsAccount](docs/Model/SnapTradeHoldingsAccount.md)
 - [SnapTradeHoldingsAccountAccountId](docs/Model/SnapTradeHoldingsAccountAccountId.md)
 - [SnapTradeHoldingsTotalValue](docs/Model/SnapTradeHoldingsTotalValue.md)
@@ -259,7 +258,7 @@ Class | Method | HTTP request | Description
 - [TradeExecutionStatus](docs/Model/TradeExecutionStatus.md)
 - [TradeImpact](docs/Model/TradeImpact.md)
 - [TradingCancelUserAccountOrderRequest](docs/Model/TradingCancelUserAccountOrderRequest.md)
-- [TradingPlaceOcoOrderRequest](docs/Model/TradingPlaceOcoOrderRequest.md)
+- [TradingPlaceOCOOrderRequest](docs/Model/TradingPlaceOCOOrderRequest.md)
 - [TransactionsStatus](docs/Model/TransactionsStatus.md)
 - [USExchange](docs/Model/USExchange.md)
 - [UnderlyingSymbol](docs/Model/UnderlyingSymbol.md)

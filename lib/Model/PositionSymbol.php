@@ -51,8 +51,8 @@ class PositionSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'description' => 'string',
         'id' => 'string',
+        'description' => 'string',
         'symbol' => '\SnapTrade\Model\UniversalSymbol',
         'local_id' => 'string',
         'is_quotable' => 'bool',
@@ -67,8 +67,8 @@ class PositionSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'description' => null,
         'id' => 'uuid',
+        'description' => null,
         'symbol' => null,
         'local_id' => null,
         'is_quotable' => null,
@@ -81,8 +81,8 @@ class PositionSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'description' => false,
-		'id' => false,
+        'id' => false,
+		'description' => false,
 		'symbol' => false,
 		'local_id' => true,
 		'is_quotable' => false,
@@ -175,8 +175,8 @@ class PositionSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'description' => 'description',
         'id' => 'id',
+        'description' => 'description',
         'symbol' => 'symbol',
         'local_id' => 'local_id',
         'is_quotable' => 'is_quotable',
@@ -189,8 +189,8 @@ class PositionSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'description' => 'setDescription',
         'id' => 'setId',
+        'description' => 'setDescription',
         'symbol' => 'setSymbol',
         'local_id' => 'setLocalId',
         'is_quotable' => 'setIsQuotable',
@@ -203,8 +203,8 @@ class PositionSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'description' => 'getDescription',
         'id' => 'getId',
+        'description' => 'getDescription',
         'symbol' => 'getSymbol',
         'local_id' => 'getLocalId',
         'is_quotable' => 'getIsQuotable',
@@ -268,8 +268,8 @@ class PositionSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('description', $data ?? [], null);
         $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('description', $data ?? [], null);
         $this->setIfExists('symbol', $data ?? [], null);
         $this->setIfExists('local_id', $data ?? [], null);
         $this->setIfExists('is_quotable', $data ?? [], null);
@@ -319,35 +319,6 @@ class PositionSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets description
-     *
-     * @return string|null
-     */
-    public function getDescription()
-    {
-        return $this->container['description'];
-    }
-
-    /**
-     * Sets description
-     *
-     * @param string|null $description description
-     *
-     * @return self
-     */
-    public function setDescription($description)
-    {
-
-        if (is_null($description)) {
-            throw new \InvalidArgumentException('non-nullable description cannot be null');
-        }
-
-        $this->container['description'] = $description;
-
-        return $this;
-    }
-
-    /**
      * Gets id
      *
      * @return string|null
@@ -372,6 +343,35 @@ class PositionSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['id'] = $id;
+
+        return $this;
+    }
+
+    /**
+     * Gets description
+     *
+     * @return string|null
+     */
+    public function getDescription()
+    {
+        return $this->container['description'];
+    }
+
+    /**
+     * Sets description
+     *
+     * @param string|null $description description
+     *
+     * @return self
+     */
+    public function setDescription($description)
+    {
+
+        if (is_null($description)) {
+            throw new \InvalidArgumentException('non-nullable description cannot be null');
+        }
+
+        $this->container['description'] = $description;
 
         return $this;
     }

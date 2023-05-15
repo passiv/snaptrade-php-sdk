@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**description** | **string** |  | [optional]
 **id** | **string** |  | [optional]
 **symbol** | **string** |  | [optional]
 **raw_symbol** | **string** |  | [optional]
+**description** | **string** |  | [optional]
 **currency** | [**\SnapTrade\Model\Currency**](Currency.md) |  | [optional]
 **exchange** | [**\SnapTrade\Model\Exchange**](Exchange.md) |  | [optional]
 **type** | [**\SnapTrade\Model\SecurityType**](SecurityType.md) |  | [optional]

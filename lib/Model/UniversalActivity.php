@@ -51,11 +51,11 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
       * @var string[]
       */
     protected static $openAPITypes = [
-        'description' => 'string',
         'id' => 'string',
         'account' => '\SnapTrade\Model\AccountSimple',
         'amount' => 'float',
         'currency' => '\SnapTrade\Model\Currency',
+        'description' => 'string',
         'fee' => 'float',
         'institution' => 'string',
         'option_type' => 'string',
@@ -76,11 +76,11 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'description' => null,
         'id' => null,
         'account' => null,
         'amount' => null,
         'currency' => null,
+        'description' => null,
         'fee' => null,
         'institution' => null,
         'option_type' => null,
@@ -99,11 +99,11 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'description' => false,
-		'id' => false,
+        'id' => false,
 		'account' => false,
 		'amount' => true,
 		'currency' => false,
+		'description' => false,
 		'fee' => false,
 		'institution' => false,
 		'option_type' => false,
@@ -202,11 +202,11 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
      * @var string[]
      */
     protected static $attributeMap = [
-        'description' => 'description',
         'id' => 'id',
         'account' => 'account',
         'amount' => 'amount',
         'currency' => 'currency',
+        'description' => 'description',
         'fee' => 'fee',
         'institution' => 'institution',
         'option_type' => 'option_type',
@@ -225,11 +225,11 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
      * @var string[]
      */
     protected static $setters = [
-        'description' => 'setDescription',
         'id' => 'setId',
         'account' => 'setAccount',
         'amount' => 'setAmount',
         'currency' => 'setCurrency',
+        'description' => 'setDescription',
         'fee' => 'setFee',
         'institution' => 'setInstitution',
         'option_type' => 'setOptionType',
@@ -248,11 +248,11 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
      * @var string[]
      */
     protected static $getters = [
-        'description' => 'getDescription',
         'id' => 'getId',
         'account' => 'getAccount',
         'amount' => 'getAmount',
         'currency' => 'getCurrency',
+        'description' => 'getDescription',
         'fee' => 'getFee',
         'institution' => 'getInstitution',
         'option_type' => 'getOptionType',
@@ -322,11 +322,11 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('description', $data ?? [], null);
         $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('account', $data ?? [], null);
         $this->setIfExists('amount', $data ?? [], null);
         $this->setIfExists('currency', $data ?? [], null);
+        $this->setIfExists('description', $data ?? [], null);
         $this->setIfExists('fee', $data ?? [], null);
         $this->setIfExists('institution', $data ?? [], null);
         $this->setIfExists('option_type', $data ?? [], null);
@@ -380,35 +380,6 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
         return count($this->listInvalidProperties()) === 0;
     }
 
-
-    /**
-     * Gets description
-     *
-     * @return string|null
-     */
-    public function getDescription()
-    {
-        return $this->container['description'];
-    }
-
-    /**
-     * Sets description
-     *
-     * @param string|null $description description
-     *
-     * @return self
-     */
-    public function setDescription($description)
-    {
-
-        if (is_null($description)) {
-            throw new \InvalidArgumentException('non-nullable description cannot be null');
-        }
-
-        $this->container['description'] = $description;
-
-        return $this;
-    }
 
     /**
      * Gets id
@@ -529,6 +500,35 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
         }
 
         $this->container['currency'] = $currency;
+
+        return $this;
+    }
+
+    /**
+     * Gets description
+     *
+     * @return string|null
+     */
+    public function getDescription()
+    {
+        return $this->container['description'];
+    }
+
+    /**
+     * Sets description
+     *
+     * @param string|null $description description
+     *
+     * @return self
+     */
+    public function setDescription($description)
+    {
+
+        if (is_null($description)) {
+            throw new \InvalidArgumentException('non-nullable description cannot be null');
+        }
+
+        $this->container['description'] = $description;
 
         return $this;
     }

@@ -42,7 +42,7 @@ class OptionsPlaceOptionStrategyRequest implements ModelInterface, ArrayAccess, 
       *
       * @var string
       */
-    protected static $openAPIModelName = 'OptionsPlaceOptionStrategyRequest';
+    protected static $openAPIModelName = 'Options_placeOptionStrategy_request';
 
     /**
       * Array of property to type mappings. Used for (de)serialization

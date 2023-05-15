@@ -10,7 +10,7 @@ All URIs are relative to https://api.snaptrade.com/api/v1, except if the operati
 ## `accept()`
 
 ```php
-accept($user_id, $user_secret, $snap_trade_api_disclaimer_request): \SnapTrade\Model\SnapTradeAPIDisclaimerAcceptStatus
+accept($user_id, $user_secret, $api_disclaimer_accept_request): \SnapTrade\Model\SnapTradeAPIDisclaimerAcceptStatus
 ```
 
 Accept or Reject SnapTrade disclaimer agreement
@@ -49,7 +49,7 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **user_id** | **string**|  | |
 | **user_secret** | **string**|  | |
-| **snap_trade_api_disclaimer_request** | [**\SnapTrade\Model\SnapTradeApiDisclaimerRequest**](../Model/SnapTradeApiDisclaimerRequest.md)|  | |
+| **api_disclaimer_accept_request** | [**\SnapTrade\Model\APIDisclaimerAcceptRequest**](../Model/APIDisclaimerAcceptRequest.md)|  | |
 
 ### Return type
 

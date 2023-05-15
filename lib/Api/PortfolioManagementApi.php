@@ -227,10 +227,10 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function addPortfolioExcludedAsset(
         $portfolio_group_id,
-        $description = SENTINEL_VALUE,
         $id = SENTINEL_VALUE,
         $symbol = SENTINEL_VALUE,
         $raw_symbol = SENTINEL_VALUE,
+        $description = SENTINEL_VALUE,
         $currency = SENTINEL_VALUE,
         $exchange = SENTINEL_VALUE,
         $type = SENTINEL_VALUE,
@@ -240,10 +240,10 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
     )
     {
         $_body = null;
-        $this->setRequestBodyProperty($_body, "description", $description);
         $this->setRequestBodyProperty($_body, "id", $id);
         $this->setRequestBodyProperty($_body, "symbol", $symbol);
         $this->setRequestBodyProperty($_body, "raw_symbol", $raw_symbol);
+        $this->setRequestBodyProperty($_body, "description", $description);
         $this->setRequestBodyProperty($_body, "currency", $currency);
         $this->setRequestBodyProperty($_body, "exchange", $exchange);
         $this->setRequestBodyProperty($_body, "type", $type);
@@ -385,10 +385,10 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function addPortfolioExcludedAssetAsync(
         $portfolio_group_id,
-        $description = SENTINEL_VALUE,
         $id = SENTINEL_VALUE,
         $symbol = SENTINEL_VALUE,
         $raw_symbol = SENTINEL_VALUE,
+        $description = SENTINEL_VALUE,
         $currency = SENTINEL_VALUE,
         $exchange = SENTINEL_VALUE,
         $type = SENTINEL_VALUE,
@@ -398,10 +398,10 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
     )
     {
         $_body = null;
-        $this->setRequestBodyProperty($_body, "description", $description);
         $this->setRequestBodyProperty($_body, "id", $id);
         $this->setRequestBodyProperty($_body, "symbol", $symbol);
         $this->setRequestBodyProperty($_body, "raw_symbol", $raw_symbol);
+        $this->setRequestBodyProperty($_body, "description", $description);
         $this->setRequestBodyProperty($_body, "currency", $currency);
         $this->setRequestBodyProperty($_body, "exchange", $exchange);
         $this->setRequestBodyProperty($_body, "type", $type);
@@ -7341,8 +7341,6 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      *
      * List of model asset class
      *
-     * @param  string $user_id user_id (required)
-     * @param  string $user_secret user_secret (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAssetClasses'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
@@ -7350,14 +7348,12 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @return \SnapTrade\Model\ModelAssetClassDetails[]
      */
     public function listAssetClasses(
-        $user_id,
-        $user_secret,
         string $contentType = self::contentTypes['listAssetClasses'][0]
 
     )
     {
 
-        list($response) = $this->listAssetClassesWithHttpInfo($user_id, $user_secret, $contentType);
+        list($response) = $this->listAssetClassesWithHttpInfo($contentType);
         return $response;
     }
 
@@ -7366,17 +7362,15 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      *
      * List of model asset class
      *
-     * @param  string $user_id (required)
-     * @param  string $user_secret (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAssetClasses'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \SnapTrade\Model\ModelAssetClassDetails[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function listAssetClassesWithHttpInfo($user_id, $user_secret, string $contentType = self::contentTypes['listAssetClasses'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    public function listAssetClassesWithHttpInfo(string $contentType = self::contentTypes['listAssetClasses'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->listAssetClassesRequest($user_id, $user_secret, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->listAssetClassesRequest($contentType);
 
         // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
@@ -7392,8 +7386,6 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
                     $requestOptions->shouldRetryOAuth()
                 ) {
                     return $this->listAssetClassesWithHttpInfo(
-                        $user_id,
-                        $user_secret,
                         $contentType,
                         $requestOptions->setRetryOAuth(false)
                     );
@@ -7483,22 +7475,18 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      *
      * List of model asset class
      *
-     * @param  string $user_id (required)
-     * @param  string $user_secret (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAssetClasses'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function listAssetClassesAsync(
-        $user_id,
-        $user_secret,
         string $contentType = self::contentTypes['listAssetClasses'][0]
 
     )
     {
 
-        return $this->listAssetClassesAsyncWithHttpInfo($user_id, $user_secret, $contentType)
+        return $this->listAssetClassesAsyncWithHttpInfo($contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -7511,17 +7499,15 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      *
      * List of model asset class
      *
-     * @param  string $user_id (required)
-     * @param  string $user_secret (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAssetClasses'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listAssetClassesAsyncWithHttpInfo($user_id, $user_secret, string $contentType = self::contentTypes['listAssetClasses'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    public function listAssetClassesAsyncWithHttpInfo(string $contentType = self::contentTypes['listAssetClasses'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\ModelAssetClassDetails[]';
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->listAssetClassesRequest($user_id, $user_secret, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->listAssetClassesRequest($contentType);
 
         // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
@@ -7565,36 +7551,14 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
     /**
      * Create request for operation 'listAssetClasses'
      *
-     * @param  string $user_id (required)
-     * @param  string $user_secret (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAssetClasses'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function listAssetClassesRequest($user_id, $user_secret, string $contentType = self::contentTypes['listAssetClasses'][0])
+    public function listAssetClassesRequest(string $contentType = self::contentTypes['listAssetClasses'][0])
     {
 
-        // Check if $user_id is a string
-        if ($user_id !== SENTINEL_VALUE && !is_string($user_id)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_id, true), gettype($user_id)));
-        }
-        // verify the required parameter 'user_id' is set
-        if ($user_id === SENTINEL_VALUE || (is_array($user_id) && count($user_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter user_id when calling listAssetClasses'
-            );
-        }
-        // Check if $user_secret is a string
-        if ($user_secret !== SENTINEL_VALUE && !is_string($user_secret)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
-        }
-        // verify the required parameter 'user_secret' is set
-        if ($user_secret === SENTINEL_VALUE || (is_array($user_secret) && count($user_secret) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter user_secret when calling listAssetClasses'
-            );
-        }
 
 
         $resourcePath = '/modelAssetClass';
@@ -7604,28 +7568,6 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
         $httpBody = '';
         $multipart = false;
 
-        if ($user_id !== SENTINEL_VALUE) {
-            // query params
-            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-                $user_id,
-                'userId', // param base name
-                'string', // openApiType
-                'form', // style
-                true, // explode
-                true // required
-            ) ?? []);
-        }
-        if ($user_secret !== SENTINEL_VALUE) {
-            // query params
-            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-                $user_secret,
-                'userSecret', // param base name
-                'string', // openApiType
-                'form', // style
-                true, // explode
-                true // required
-            ) ?? []);
-        }
 
 
 

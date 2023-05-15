@@ -155,9 +155,9 @@ $snaptrade = new \SnapTrade\Client(
 
 try {
     $result = $snaptrade->referenceData->getSecurityTypes();
-    print_r($result->$getDescription());
     print_r($result->$getId());
     print_r($result->$getCode());
+    print_r($result->$getDescription());
     print_r($result->$getIsSupported());
 } catch (\Exception $e) {
     echo 'Exception when calling ReferenceDataApi->getSecurityTypes: ', $e->getMessage(), PHP_EOL;
@@ -266,10 +266,10 @@ try {
     $result = $snaptrade->referenceData->getSymbols(
         substring: $substring
     );
-    print_r($result->$getDescription());
     print_r($result->$getId());
     print_r($result->$getSymbol());
     print_r($result->$getRawSymbol());
+    print_r($result->$getDescription());
     print_r($result->$getCurrency());
     print_r($result->$getExchange());
     print_r($result->$getType());
@@ -329,10 +329,10 @@ try {
         ticker: $ticker, 
         symbol_id: $symbol_id
     );
-    print_r($result->$getDescription());
     print_r($result->$getId());
     print_r($result->$getSymbol());
     print_r($result->$getRawSymbol());
+    print_r($result->$getDescription());
     print_r($result->$getCurrency());
     print_r($result->$getExchange());
     print_r($result->$getType());
@@ -445,10 +445,10 @@ $snaptrade = new \SnapTrade\Client(
 
 try {
     $result = $snaptrade->referenceData->listAllBrokerages();
-    print_r($result->$getDescription());
     print_r($result->$getId());
     print_r($result->$getName());
     print_r($result->$getDisplayName());
+    print_r($result->$getDescription());
     print_r($result->$getAwsS3LogoUrl());
     print_r($result->$getSlug());
     print_r($result->$getUrl());
@@ -622,10 +622,10 @@ try {
         account_id: $account_id, 
         substring: $substring
     );
-    print_r($result->$getDescription());
     print_r($result->$getId());
     print_r($result->$getSymbol());
     print_r($result->$getRawSymbol());
+    print_r($result->$getDescription());
     print_r($result->$getCurrency());
     print_r($result->$getExchange());
     print_r($result->$getType());

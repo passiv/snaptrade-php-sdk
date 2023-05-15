@@ -1,6 +1,6 @@
 <?php
 /**
- * TradingPlaceOcoOrderRequest
+ * TradingPlaceOCOOrderRequest
  *
  * PHP version 7.4
  *
@@ -27,13 +27,13 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * TradingPlaceOcoOrderRequest Class Doc Comment
+ * TradingPlaceOCOOrderRequest Class Doc Comment
  *
  * @category Class
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class TradingPlaceOcoOrderRequest implements ModelInterface, ArrayAccess, \JsonSerializable
+class TradingPlaceOCOOrderRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -42,7 +42,7 @@ class TradingPlaceOcoOrderRequest implements ModelInterface, ArrayAccess, \JsonS
       *
       * @var string
       */
-    protected static $openAPIModelName = 'TradingPlaceOcoOrderRequest';
+    protected static $openAPIModelName = 'Trading_placeOCOOrder_request';
 
     /**
       * Array of property to type mappings. Used for (de)serialization

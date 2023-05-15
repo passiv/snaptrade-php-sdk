@@ -1,6 +1,6 @@
 <?php
 /**
- * APIDisclaimerAcceptRequest
+ * SnapTradeApiDisclaimerRequest
  *
  * PHP version 7.4
  *
@@ -27,13 +27,13 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * APIDisclaimerAcceptRequest Class Doc Comment
+ * SnapTradeApiDisclaimerRequest Class Doc Comment
  *
  * @category Class
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class APIDisclaimerAcceptRequest implements ModelInterface, ArrayAccess, \JsonSerializable
+class SnapTradeApiDisclaimerRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -42,7 +42,7 @@ class APIDisclaimerAcceptRequest implements ModelInterface, ArrayAccess, \JsonSe
       *
       * @var string
       */
-    protected static $openAPIModelName = 'APIDisclaimer_accept_request';
+    protected static $openAPIModelName = 'SnapTradeApiDisclaimerRequest';
 
     /**
       * Array of property to type mappings. Used for (de)serialization

@@ -73,6 +73,15 @@ class BrokerageTest extends TestCase
     }
 
     /**
+     * Test attribute "description"
+     */
+    public function testPropertyDescription()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "id"
      */
     public function testPropertyId()
@@ -94,15 +103,6 @@ class BrokerageTest extends TestCase
      * Test attribute "display_name"
      */
     public function testPropertyDisplayName()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "description"
-     */
-    public function testPropertyDescription()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

@@ -73,6 +73,15 @@ class SecurityTypeTest extends TestCase
     }
 
     /**
+     * Test attribute "description"
+     */
+    public function testPropertyDescription()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "id"
      */
     public function testPropertyId()
@@ -85,15 +94,6 @@ class SecurityTypeTest extends TestCase
      * Test attribute "code"
      */
     public function testPropertyCode()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "description"
-     */
-    public function testPropertyDescription()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

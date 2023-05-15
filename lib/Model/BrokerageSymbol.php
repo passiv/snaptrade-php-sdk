@@ -51,10 +51,10 @@ class BrokerageSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
+        'description' => 'string',
         'id' => 'string',
         'symbol' => '\SnapTrade\Model\UniversalSymbol',
         'brokerage_authorization' => '\SnapTrade\Model\BrokerageAuthorization',
-        'description' => 'string',
         'allows_fractional_units' => 'bool'
     ];
 
@@ -66,10 +66,10 @@ class BrokerageSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
+        'description' => null,
         'id' => 'uuid',
         'symbol' => null,
         'brokerage_authorization' => null,
-        'description' => null,
         'allows_fractional_units' => null
     ];
 
@@ -79,10 +79,10 @@ class BrokerageSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'id' => false,
+        'description' => false,
+		'id' => false,
 		'symbol' => false,
 		'brokerage_authorization' => false,
-		'description' => false,
 		'allows_fractional_units' => true
     ];
 
@@ -172,10 +172,10 @@ class BrokerageSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
+        'description' => 'description',
         'id' => 'id',
         'symbol' => 'symbol',
         'brokerage_authorization' => 'brokerage_authorization',
-        'description' => 'description',
         'allows_fractional_units' => 'allows_fractional_units'
     ];
 
@@ -185,10 +185,10 @@ class BrokerageSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
+        'description' => 'setDescription',
         'id' => 'setId',
         'symbol' => 'setSymbol',
         'brokerage_authorization' => 'setBrokerageAuthorization',
-        'description' => 'setDescription',
         'allows_fractional_units' => 'setAllowsFractionalUnits'
     ];
 
@@ -198,10 +198,10 @@ class BrokerageSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
+        'description' => 'getDescription',
         'id' => 'getId',
         'symbol' => 'getSymbol',
         'brokerage_authorization' => 'getBrokerageAuthorization',
-        'description' => 'getDescription',
         'allows_fractional_units' => 'getAllowsFractionalUnits'
     ];
 
@@ -262,10 +262,10 @@ class BrokerageSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
+        $this->setIfExists('description', $data ?? [], null);
         $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('symbol', $data ?? [], null);
         $this->setIfExists('brokerage_authorization', $data ?? [], null);
-        $this->setIfExists('description', $data ?? [], null);
         $this->setIfExists('allows_fractional_units', $data ?? [], null);
     }
 
@@ -310,6 +310,35 @@ class BrokerageSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
         return count($this->listInvalidProperties()) === 0;
     }
 
+
+    /**
+     * Gets description
+     *
+     * @return string|null
+     */
+    public function getDescription()
+    {
+        return $this->container['description'];
+    }
+
+    /**
+     * Sets description
+     *
+     * @param string|null $description description
+     *
+     * @return self
+     */
+    public function setDescription($description)
+    {
+
+        if (is_null($description)) {
+            throw new \InvalidArgumentException('non-nullable description cannot be null');
+        }
+
+        $this->container['description'] = $description;
+
+        return $this;
+    }
 
     /**
      * Gets id
@@ -394,35 +423,6 @@ class BrokerageSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['brokerage_authorization'] = $brokerage_authorization;
-
-        return $this;
-    }
-
-    /**
-     * Gets description
-     *
-     * @return string|null
-     */
-    public function getDescription()
-    {
-        return $this->container['description'];
-    }
-
-    /**
-     * Sets description
-     *
-     * @param string|null $description description
-     *
-     * @return self
-     */
-    public function setDescription($description)
-    {
-
-        if (is_null($description)) {
-            throw new \InvalidArgumentException('non-nullable description cannot be null');
-        }
-
-        $this->container['description'] = $description;
 
         return $this;
     }

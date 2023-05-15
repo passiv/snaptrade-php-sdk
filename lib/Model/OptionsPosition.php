@@ -51,8 +51,8 @@ class OptionsPosition implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'symbol' => 'string',
         'description' => 'string',
+        'symbol' => 'string',
         'option_symbol' => '\SnapTrade\Model\OptionsSymbol',
         'price' => 'float',
         'units' => 'float',
@@ -68,8 +68,8 @@ class OptionsPosition implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'symbol' => 'uuid',
         'description' => null,
+        'symbol' => 'uuid',
         'option_symbol' => null,
         'price' => null,
         'units' => null,
@@ -83,8 +83,8 @@ class OptionsPosition implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'symbol' => false,
-		'description' => false,
+        'description' => false,
+		'symbol' => false,
 		'option_symbol' => false,
 		'price' => false,
 		'units' => false,
@@ -178,8 +178,8 @@ class OptionsPosition implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'symbol' => 'symbol',
         'description' => 'description',
+        'symbol' => 'symbol',
         'option_symbol' => 'option_symbol',
         'price' => 'price',
         'units' => 'units',
@@ -193,8 +193,8 @@ class OptionsPosition implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'symbol' => 'setSymbol',
         'description' => 'setDescription',
+        'symbol' => 'setSymbol',
         'option_symbol' => 'setOptionSymbol',
         'price' => 'setPrice',
         'units' => 'setUnits',
@@ -208,8 +208,8 @@ class OptionsPosition implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'symbol' => 'getSymbol',
         'description' => 'getDescription',
+        'symbol' => 'getSymbol',
         'option_symbol' => 'getOptionSymbol',
         'price' => 'getPrice',
         'units' => 'getUnits',
@@ -274,8 +274,8 @@ class OptionsPosition implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('symbol', $data ?? [], null);
         $this->setIfExists('description', $data ?? [], null);
+        $this->setIfExists('symbol', $data ?? [], null);
         $this->setIfExists('option_symbol', $data ?? [], null);
         $this->setIfExists('price', $data ?? [], null);
         $this->setIfExists('units', $data ?? [], null);
@@ -326,35 +326,6 @@ class OptionsPosition implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets symbol
-     *
-     * @return string|null
-     */
-    public function getSymbol()
-    {
-        return $this->container['symbol'];
-    }
-
-    /**
-     * Sets symbol
-     *
-     * @param string|null $symbol symbol
-     *
-     * @return self
-     */
-    public function setSymbol($symbol)
-    {
-
-        if (is_null($symbol)) {
-            throw new \InvalidArgumentException('non-nullable symbol cannot be null');
-        }
-
-        $this->container['symbol'] = $symbol;
-
-        return $this;
-    }
-
-    /**
      * Gets description
      *
      * @return string|null
@@ -379,6 +350,35 @@ class OptionsPosition implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['description'] = $description;
+
+        return $this;
+    }
+
+    /**
+     * Gets symbol
+     *
+     * @return string|null
+     */
+    public function getSymbol()
+    {
+        return $this->container['symbol'];
+    }
+
+    /**
+     * Sets symbol
+     *
+     * @param string|null $symbol symbol
+     *
+     * @return self
+     */
+    public function setSymbol($symbol)
+    {
+
+        if (is_null($symbol)) {
+            throw new \InvalidArgumentException('non-nullable symbol cannot be null');
+        }
+
+        $this->container['symbol'] = $symbol;
 
         return $this;
     }

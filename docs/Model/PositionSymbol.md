@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **string** |  | [optional]
 **description** | **string** |  | [optional]
+**id** | **string** |  | [optional]
 **symbol** | [**\SnapTrade\Model\UniversalSymbol**](UniversalSymbol.md) |  | [optional]
 **local_id** | **string** |  | [optional]
 **is_quotable** | **bool** |  | [optional]

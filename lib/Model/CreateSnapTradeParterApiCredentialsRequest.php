@@ -1,6 +1,6 @@
 <?php
 /**
- * PositionSymbol
+ * CreateSnapTradeParterApiCredentialsRequest
  *
  * PHP version 7.4
  *
@@ -27,14 +27,13 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * PositionSymbol Class Doc Comment
+ * CreateSnapTradeParterApiCredentialsRequest Class Doc Comment
  *
  * @category Class
- * @description Symbol returned in position object
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class PositionSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
+class CreateSnapTradeParterApiCredentialsRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -43,7 +42,7 @@ class PositionSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'PositionSymbol';
+    protected static $openAPIModelName = 'CreateSnapTradeParterApiCredentialsRequest';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -51,12 +50,10 @@ class PositionSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'description' => 'string',
-        'id' => 'string',
-        'symbol' => '\SnapTrade\Model\UniversalSymbol',
-        'local_id' => 'string',
-        'is_quotable' => 'bool',
-        'is_tradable' => 'bool'
+        'brokerage_authorization_type_id' => 'mixed',
+        'brokerage_api_client_id' => 'mixed',
+        'brokerage_api_client_secret' => 'mixed',
+        'redirect_uri' => 'mixed'
     ];
 
     /**
@@ -67,12 +64,10 @@ class PositionSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'description' => null,
-        'id' => 'uuid',
-        'symbol' => null,
-        'local_id' => null,
-        'is_quotable' => null,
-        'is_tradable' => null
+        'brokerage_authorization_type_id' => null,
+        'brokerage_api_client_id' => null,
+        'brokerage_api_client_secret' => null,
+        'redirect_uri' => null
     ];
 
     /**
@@ -81,12 +76,10 @@ class PositionSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'description' => false,
-		'id' => false,
-		'symbol' => false,
-		'local_id' => true,
-		'is_quotable' => false,
-		'is_tradable' => false
+        'brokerage_authorization_type_id' => true,
+		'brokerage_api_client_id' => true,
+		'brokerage_api_client_secret' => true,
+		'redirect_uri' => true
     ];
 
     /**
@@ -175,12 +168,10 @@ class PositionSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'description' => 'description',
-        'id' => 'id',
-        'symbol' => 'symbol',
-        'local_id' => 'local_id',
-        'is_quotable' => 'is_quotable',
-        'is_tradable' => 'is_tradable'
+        'brokerage_authorization_type_id' => 'brokerageAuthorizationTypeId',
+        'brokerage_api_client_id' => 'brokerageAPIClientId',
+        'brokerage_api_client_secret' => 'brokerageAPIClientSecret',
+        'redirect_uri' => 'redirectURI'
     ];
 
     /**
@@ -189,12 +180,10 @@ class PositionSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'description' => 'setDescription',
-        'id' => 'setId',
-        'symbol' => 'setSymbol',
-        'local_id' => 'setLocalId',
-        'is_quotable' => 'setIsQuotable',
-        'is_tradable' => 'setIsTradable'
+        'brokerage_authorization_type_id' => 'setBrokerageAuthorizationTypeId',
+        'brokerage_api_client_id' => 'setBrokerageApiClientId',
+        'brokerage_api_client_secret' => 'setBrokerageApiClientSecret',
+        'redirect_uri' => 'setRedirectUri'
     ];
 
     /**
@@ -203,12 +192,10 @@ class PositionSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'description' => 'getDescription',
-        'id' => 'getId',
-        'symbol' => 'getSymbol',
-        'local_id' => 'getLocalId',
-        'is_quotable' => 'getIsQuotable',
-        'is_tradable' => 'getIsTradable'
+        'brokerage_authorization_type_id' => 'getBrokerageAuthorizationTypeId',
+        'brokerage_api_client_id' => 'getBrokerageApiClientId',
+        'brokerage_api_client_secret' => 'getBrokerageApiClientSecret',
+        'redirect_uri' => 'getRedirectUri'
     ];
 
     /**
@@ -268,12 +255,10 @@ class PositionSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('description', $data ?? [], null);
-        $this->setIfExists('id', $data ?? [], null);
-        $this->setIfExists('symbol', $data ?? [], null);
-        $this->setIfExists('local_id', $data ?? [], null);
-        $this->setIfExists('is_quotable', $data ?? [], null);
-        $this->setIfExists('is_tradable', $data ?? [], null);
+        $this->setIfExists('brokerage_authorization_type_id', $data ?? [], null);
+        $this->setIfExists('brokerage_api_client_id', $data ?? [], null);
+        $this->setIfExists('brokerage_api_client_secret', $data ?? [], null);
+        $this->setIfExists('redirect_uri', $data ?? [], null);
     }
 
     /**
@@ -319,182 +304,145 @@ class PositionSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets description
+     * Gets brokerage_authorization_type_id
      *
-     * @return string|null
+     * @return mixed|null
      */
-    public function getDescription()
+    public function getBrokerageAuthorizationTypeId()
     {
-        return $this->container['description'];
+        return $this->container['brokerage_authorization_type_id'];
     }
 
     /**
-     * Sets description
+     * Sets brokerage_authorization_type_id
      *
-     * @param string|null $description description
+     * @param mixed|null $brokerage_authorization_type_id Brokerage Authorization Type ID from BrokerageAuthorizationType object
      *
      * @return self
      */
-    public function setDescription($description)
+    public function setBrokerageAuthorizationTypeId($brokerage_authorization_type_id)
     {
 
-        if (is_null($description)) {
-            throw new \InvalidArgumentException('non-nullable description cannot be null');
-        }
-
-        $this->container['description'] = $description;
-
-        return $this;
-    }
-
-    /**
-     * Gets id
-     *
-     * @return string|null
-     */
-    public function getId()
-    {
-        return $this->container['id'];
-    }
-
-    /**
-     * Sets id
-     *
-     * @param string|null $id id
-     *
-     * @return self
-     */
-    public function setId($id)
-    {
-
-        if (is_null($id)) {
-            throw new \InvalidArgumentException('non-nullable id cannot be null');
-        }
-
-        $this->container['id'] = $id;
-
-        return $this;
-    }
-
-    /**
-     * Gets symbol
-     *
-     * @return \SnapTrade\Model\UniversalSymbol|null
-     */
-    public function getSymbol()
-    {
-        return $this->container['symbol'];
-    }
-
-    /**
-     * Sets symbol
-     *
-     * @param \SnapTrade\Model\UniversalSymbol|null $symbol symbol
-     *
-     * @return self
-     */
-    public function setSymbol($symbol)
-    {
-
-        if (is_null($symbol)) {
-            throw new \InvalidArgumentException('non-nullable symbol cannot be null');
-        }
-
-        $this->container['symbol'] = $symbol;
-
-        return $this;
-    }
-
-    /**
-     * Gets local_id
-     *
-     * @return string|null
-     */
-    public function getLocalId()
-    {
-        return $this->container['local_id'];
-    }
-
-    /**
-     * Sets local_id
-     *
-     * @param string|null $local_id local_id
-     *
-     * @return self
-     */
-    public function setLocalId($local_id)
-    {
-
-        if (is_null($local_id)) {
-            array_push($this->openAPINullablesSetToNull, 'local_id');
+        if (is_null($brokerage_authorization_type_id)) {
+            array_push($this->openAPINullablesSetToNull, 'brokerage_authorization_type_id');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('local_id', $nullablesSetToNull);
+            $index = array_search('brokerage_authorization_type_id', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
 
-        $this->container['local_id'] = $local_id;
+        $this->container['brokerage_authorization_type_id'] = $brokerage_authorization_type_id;
 
         return $this;
     }
 
     /**
-     * Gets is_quotable
+     * Gets brokerage_api_client_id
      *
-     * @return bool|null
+     * @return mixed|null
      */
-    public function getIsQuotable()
+    public function getBrokerageApiClientId()
     {
-        return $this->container['is_quotable'];
+        return $this->container['brokerage_api_client_id'];
     }
 
     /**
-     * Sets is_quotable
+     * Sets brokerage_api_client_id
      *
-     * @param bool|null $is_quotable is_quotable
+     * @param mixed|null $brokerage_api_client_id API Client ID from brokerage when registering app
      *
      * @return self
      */
-    public function setIsQuotable($is_quotable)
+    public function setBrokerageApiClientId($brokerage_api_client_id)
     {
 
-        if (is_null($is_quotable)) {
-            throw new \InvalidArgumentException('non-nullable is_quotable cannot be null');
+        if (is_null($brokerage_api_client_id)) {
+            array_push($this->openAPINullablesSetToNull, 'brokerage_api_client_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('brokerage_api_client_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
-        $this->container['is_quotable'] = $is_quotable;
+        $this->container['brokerage_api_client_id'] = $brokerage_api_client_id;
 
         return $this;
     }
 
     /**
-     * Gets is_tradable
+     * Gets brokerage_api_client_secret
      *
-     * @return bool|null
+     * @return mixed|null
      */
-    public function getIsTradable()
+    public function getBrokerageApiClientSecret()
     {
-        return $this->container['is_tradable'];
+        return $this->container['brokerage_api_client_secret'];
     }
 
     /**
-     * Sets is_tradable
+     * Sets brokerage_api_client_secret
      *
-     * @param bool|null $is_tradable is_tradable
+     * @param mixed|null $brokerage_api_client_secret API Client Secret from brokerage when registering app
      *
      * @return self
      */
-    public function setIsTradable($is_tradable)
+    public function setBrokerageApiClientSecret($brokerage_api_client_secret)
     {
 
-        if (is_null($is_tradable)) {
-            throw new \InvalidArgumentException('non-nullable is_tradable cannot be null');
+        if (is_null($brokerage_api_client_secret)) {
+            array_push($this->openAPINullablesSetToNull, 'brokerage_api_client_secret');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('brokerage_api_client_secret', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
-        $this->container['is_tradable'] = $is_tradable;
+        $this->container['brokerage_api_client_secret'] = $brokerage_api_client_secret;
+
+        return $this;
+    }
+
+    /**
+     * Gets redirect_uri
+     *
+     * @return mixed|null
+     */
+    public function getRedirectUri()
+    {
+        return $this->container['redirect_uri'];
+    }
+
+    /**
+     * Sets redirect_uri
+     *
+     * @param mixed|null $redirect_uri Redirect uri from brokerage when registering app
+     *
+     * @return self
+     */
+    public function setRedirectUri($redirect_uri)
+    {
+
+        if (is_null($redirect_uri)) {
+            array_push($this->openAPINullablesSetToNull, 'redirect_uri');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('redirect_uri', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['redirect_uri'] = $redirect_uri;
 
         return $this;
     }

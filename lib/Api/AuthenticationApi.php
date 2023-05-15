@@ -1344,7 +1344,7 @@ class AuthenticationApi extends \SnapTrade\CustomApi
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \SnapTrade\Model\AuthenticationLoginSnapTradeUser200Response|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\Model403FailedRequestResponse|\SnapTrade\Model\Model404FailedRequestResponse
+     * @return \SnapTrade\Model\AuthenticationLoginSnapTradeUserResponse|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\Model403FailedRequestResponse|\SnapTrade\Model\Model404FailedRequestResponse
      */
     public function loginSnapTradeUser(
         $user_id,
@@ -1382,7 +1382,7 @@ class AuthenticationApi extends \SnapTrade\CustomApi
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \SnapTrade\Model\AuthenticationLoginSnapTradeUser200Response|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\Model403FailedRequestResponse|\SnapTrade\Model\Model404FailedRequestResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SnapTrade\Model\AuthenticationLoginSnapTradeUserResponse|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\Model403FailedRequestResponse|\SnapTrade\Model\Model404FailedRequestResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function loginSnapTradeUserWithHttpInfo($user_id, $user_secret, $snap_trade_login_user_request_body = null, string $contentType = self::contentTypes['loginSnapTradeUser'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
@@ -1442,17 +1442,17 @@ class AuthenticationApi extends \SnapTrade\CustomApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\SnapTrade\Model\AuthenticationLoginSnapTradeUser200Response' === '\SplFileObject') {
+                    if ('\SnapTrade\Model\AuthenticationLoginSnapTradeUserResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\SnapTrade\Model\AuthenticationLoginSnapTradeUser200Response' !== 'string') {
+                        if ('\SnapTrade\Model\AuthenticationLoginSnapTradeUserResponse' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\AuthenticationLoginSnapTradeUser200Response', []),
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\AuthenticationLoginSnapTradeUserResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -1503,7 +1503,7 @@ class AuthenticationApi extends \SnapTrade\CustomApi
                     ];
             }
 
-            $returnType = '\SnapTrade\Model\AuthenticationLoginSnapTradeUser200Response';
+            $returnType = '\SnapTrade\Model\AuthenticationLoginSnapTradeUserResponse';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -1524,7 +1524,7 @@ class AuthenticationApi extends \SnapTrade\CustomApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\SnapTrade\Model\AuthenticationLoginSnapTradeUser200Response',
+                        '\SnapTrade\Model\AuthenticationLoginSnapTradeUserResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1614,7 +1614,7 @@ class AuthenticationApi extends \SnapTrade\CustomApi
      */
     public function loginSnapTradeUserAsyncWithHttpInfo($user_id, $user_secret, $snap_trade_login_user_request_body = null, string $contentType = self::contentTypes['loginSnapTradeUser'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $returnType = '\SnapTrade\Model\AuthenticationLoginSnapTradeUser200Response';
+        $returnType = '\SnapTrade\Model\AuthenticationLoginSnapTradeUserResponse';
         ["request" => $request, "serializedBody" => $serializedBody] = $this->loginSnapTradeUserRequest($user_id, $user_secret, $snap_trade_login_user_request_body, $contentType);
 
         // Customization hook

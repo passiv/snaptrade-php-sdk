@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**description** | **string** |  | [optional]
 **id** | **string** |  | [optional]
 **symbol** | **string** |  | [optional]
-**description** | **string** |  | [optional]
 **currency** | [**\SnapTrade\Model\Currency**](Currency.md) |  | [optional]
 **exchange** | [**\SnapTrade\Model\USExchange**](USExchange.md) |  | [optional]
 **type** | [**\SnapTrade\Model\SecurityType**](SecurityType.md) |  | [optional]

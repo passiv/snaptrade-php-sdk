@@ -73,18 +73,18 @@ class OptionsPositionTest extends TestCase
     }
 
     /**
-     * Test attribute "symbol"
+     * Test attribute "description"
      */
-    public function testPropertySymbol()
+    public function testPropertyDescription()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "description"
+     * Test attribute "symbol"
      */
-    public function testPropertyDescription()
+    public function testPropertySymbol()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

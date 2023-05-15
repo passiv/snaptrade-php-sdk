@@ -73,6 +73,15 @@ class ManualTradeSymbolTest extends TestCase
     }
 
     /**
+     * Test attribute "description"
+     */
+    public function testPropertyDescription()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "brokerage_symbol_id"
      */
     public function testPropertyBrokerageSymbolId()
@@ -103,15 +112,6 @@ class ManualTradeSymbolTest extends TestCase
      * Test attribute "local_id"
      */
     public function testPropertyLocalId()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "description"
-     */
-    public function testPropertyDescription()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

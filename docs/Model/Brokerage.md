@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**description** | **string** |  | [optional]
 **id** | **string** |  | [optional]
 **name** | **string** |  | [optional]
 **display_name** | **string** |  | [optional]
-**description** | **string** |  | [optional]
 **aws_s3_logo_url** | **string** |  | [optional]
 **slug** | **string** |  | [optional]
 **url** | **string** |  | [optional]

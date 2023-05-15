@@ -50,8 +50,8 @@ class OptionChainInner implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'expiry_date' => 'string',
         'description' => 'string',
+        'expiry_date' => 'string',
         'listing_exchange' => 'string',
         'option_exercise_type' => 'string',
         'chain_per_root' => '\SnapTrade\Model\OptionChainInnerChainPerRootInner[]'
@@ -65,8 +65,8 @@ class OptionChainInner implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'expiry_date' => null,
         'description' => null,
+        'expiry_date' => null,
         'listing_exchange' => null,
         'option_exercise_type' => null,
         'chain_per_root' => null
@@ -78,8 +78,8 @@ class OptionChainInner implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'expiry_date' => false,
-		'description' => false,
+        'description' => false,
+		'expiry_date' => false,
 		'listing_exchange' => false,
 		'option_exercise_type' => false,
 		'chain_per_root' => false
@@ -171,8 +171,8 @@ class OptionChainInner implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'expiry_date' => 'expiryDate',
         'description' => 'description',
+        'expiry_date' => 'expiryDate',
         'listing_exchange' => 'listingExchange',
         'option_exercise_type' => 'optionExerciseType',
         'chain_per_root' => 'chainPerRoot'
@@ -184,8 +184,8 @@ class OptionChainInner implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'expiry_date' => 'setExpiryDate',
         'description' => 'setDescription',
+        'expiry_date' => 'setExpiryDate',
         'listing_exchange' => 'setListingExchange',
         'option_exercise_type' => 'setOptionExerciseType',
         'chain_per_root' => 'setChainPerRoot'
@@ -197,8 +197,8 @@ class OptionChainInner implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'expiry_date' => 'getExpiryDate',
         'description' => 'getDescription',
+        'expiry_date' => 'getExpiryDate',
         'listing_exchange' => 'getListingExchange',
         'option_exercise_type' => 'getOptionExerciseType',
         'chain_per_root' => 'getChainPerRoot'
@@ -261,8 +261,8 @@ class OptionChainInner implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('expiry_date', $data ?? [], null);
         $this->setIfExists('description', $data ?? [], null);
+        $this->setIfExists('expiry_date', $data ?? [], null);
         $this->setIfExists('listing_exchange', $data ?? [], null);
         $this->setIfExists('option_exercise_type', $data ?? [], null);
         $this->setIfExists('chain_per_root', $data ?? [], null);
@@ -311,35 +311,6 @@ class OptionChainInner implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets expiry_date
-     *
-     * @return string|null
-     */
-    public function getExpiryDate()
-    {
-        return $this->container['expiry_date'];
-    }
-
-    /**
-     * Sets expiry_date
-     *
-     * @param string|null $expiry_date expiry_date
-     *
-     * @return self
-     */
-    public function setExpiryDate($expiry_date)
-    {
-
-        if (is_null($expiry_date)) {
-            throw new \InvalidArgumentException('non-nullable expiry_date cannot be null');
-        }
-
-        $this->container['expiry_date'] = $expiry_date;
-
-        return $this;
-    }
-
-    /**
      * Gets description
      *
      * @return string|null
@@ -364,6 +335,35 @@ class OptionChainInner implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['description'] = $description;
+
+        return $this;
+    }
+
+    /**
+     * Gets expiry_date
+     *
+     * @return string|null
+     */
+    public function getExpiryDate()
+    {
+        return $this->container['expiry_date'];
+    }
+
+    /**
+     * Sets expiry_date
+     *
+     * @param string|null $expiry_date expiry_date
+     *
+     * @return self
+     */
+    public function setExpiryDate($expiry_date)
+    {
+
+        if (is_null($expiry_date)) {
+            throw new \InvalidArgumentException('non-nullable expiry_date cannot be null');
+        }
+
+        $this->container['expiry_date'] = $expiry_date;
 
         return $this;
     }

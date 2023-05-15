@@ -1,4 +1,4 @@
-# # AuthenticationLoginSnapTradeUser200Response
+# # AuthenticationLoginSnapTradeUserResponse
 
 ## Properties
 

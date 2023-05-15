@@ -614,7 +614,7 @@ $snaptrade = new \SnapTrade\Client(
 
 $user_id = "John.doe@snaptrade.com";
 $user_secret = "USERSECRET123";
-$trading_place_oco_order_request = new \SnapTrade\Model\TradingPlaceOCOOrderRequest([
+$trading_place_oco_order_request = new \SnapTrade\Model\TradingPlaceOcoOrderRequest([
     ]);
 
 try {
@@ -652,7 +652,7 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **user_id** | **string**|  | |
 | **user_secret** | **string**|  | |
-| **trading_place_oco_order_request** | [**\SnapTrade\Model\TradingPlaceOCOOrderRequest**](../Model/TradingPlaceOCOOrderRequest.md)|  | |
+| **trading_place_oco_order_request** | [**\SnapTrade\Model\TradingPlaceOcoOrderRequest**](../Model/TradingPlaceOcoOrderRequest.md)|  | |
 
 ### Return type
 

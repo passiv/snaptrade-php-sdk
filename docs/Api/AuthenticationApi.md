@@ -173,7 +173,7 @@ This endpoint does not need any parameter.
 ## `loginSnapTradeUser()`
 
 ```php
-loginSnapTradeUser($user_id, $user_secret, $snap_trade_login_user_request_body): \SnapTrade\Model\AuthenticationLoginSnapTradeUser200Response
+loginSnapTradeUser($user_id, $user_secret, $snap_trade_login_user_request_body): \SnapTrade\Model\AuthenticationLoginSnapTradeUserResponse
 ```
 
 Generate a redirect URI to securely login a user to the SnapTrade Connection Portal
@@ -205,6 +205,10 @@ try {
         user_secret: $user_secret, 
         snap_trade_login_user_request_body: $snap_trade_login_user_request_body
     );
+    print_r($result->$getRedirectUri());
+    print_r($result->$getSessionId());
+    print_r($result->$getEncryptedSharedKey());
+    print_r($result->$getEncryptedMessageData());
 } catch (\Exception $e) {
     echo 'Exception when calling AuthenticationApi->loginSnapTradeUser: ', $e->getMessage(), PHP_EOL;
 }
@@ -220,7 +224,7 @@ try {
 
 ### Return type
 
-[**\SnapTrade\Model\AuthenticationLoginSnapTradeUser200Response**](../Model/AuthenticationLoginSnapTradeUser200Response.md)
+[**\SnapTrade\Model\AuthenticationLoginSnapTradeUserResponse**](../Model/AuthenticationLoginSnapTradeUserResponse.md)
 
 ### Authorization
 

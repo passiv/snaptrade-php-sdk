@@ -59,10 +59,10 @@ $snaptrade = new \SnapTrade\Client(
 
 $portfolio_group_id = "portfolioGroupId_example"; // The ID of the PortfolioGroup under which to exclude an asset.
 $universal_symbol = new \SnapTrade\Model\UniversalSymbol([
+        "description" => "VANGUARD CDN AGGREGATE BOND INDEX ETF",
         "id" => "2bcd7cc3-e922-4976-bce1-9858296801c3",
         "symbol" => "VAB.TO",
         "raw_symbol" => "VAB",
-        "description" => "VANGUARD CDN AGGREGATE BOND INDEX ETF",
     ]);
 
 try {
@@ -1249,7 +1249,7 @@ try {
 ## `listAssetClasses()`
 
 ```php
-listAssetClasses(): \SnapTrade\Model\ModelAssetClassDetails[]
+listAssetClasses($user_id, $user_secret): \SnapTrade\Model\ModelAssetClassDetails[]
 ```
 
 List of model asset class
@@ -1265,9 +1265,14 @@ $snaptrade = new \SnapTrade\Client(
     consumerKey: getenv("SNAPTRADE_CONSUMER_KEY")
 );
 
+$user_id = "John.doe@snaptrade.com";
+$user_secret = "USERSECRET123";
 
 try {
-    $result = $snaptrade->portfolioManagement->listAssetClasses();
+    $result = $snaptrade->portfolioManagement->listAssetClasses(
+        user_id: $user_id, 
+        user_secret: $user_secret
+    );
     print_r($result->$getModelAssetClass());
     print_r($result->$getModelAssetClassTarget());
 } catch (\Exception $e) {
@@ -1277,7 +1282,10 @@ try {
 
 ### Parameters
 
-This endpoint does not need any parameter.
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **user_id** | **string**|  | |
+| **user_secret** | **string**|  | |
 
 ### Return type
 
@@ -1612,10 +1620,10 @@ try {
         portfolio_group_id: $portfolio_group_id, 
         symbol_query: $symbol_query
     );
+    print_r($result->$getDescription());
     print_r($result->$getId());
     print_r($result->$getSymbol());
     print_r($result->$getRawSymbol());
-    print_r($result->$getDescription());
     print_r($result->$getCurrency());
     print_r($result->$getExchange());
     print_r($result->$getType());

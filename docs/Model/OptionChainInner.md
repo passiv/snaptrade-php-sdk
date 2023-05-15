@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**expiry_date** | **string** |  | [optional]
 **description** | **string** |  | [optional]
+**expiry_date** | **string** |  | [optional]
 **listing_exchange** | **string** |  | [optional]
 **option_exercise_type** | **string** |  | [optional]
 **chain_per_root** | [**\SnapTrade\Model\OptionChainInnerChainPerRootInner[]**](OptionChainInnerChainPerRootInner.md) |  | [optional]

@@ -51,10 +51,10 @@ class UniversalSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
+        'description' => 'string',
         'id' => 'string',
         'symbol' => 'string',
         'raw_symbol' => 'string',
-        'description' => 'string',
         'currency' => '\SnapTrade\Model\Currency',
         'exchange' => '\SnapTrade\Model\Exchange',
         'type' => '\SnapTrade\Model\SecurityType',
@@ -69,10 +69,10 @@ class UniversalSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
+        'description' => null,
         'id' => 'uuid',
         'symbol' => null,
         'raw_symbol' => null,
-        'description' => null,
         'currency' => null,
         'exchange' => null,
         'type' => null,
@@ -85,10 +85,10 @@ class UniversalSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'id' => false,
+        'description' => true,
+		'id' => false,
 		'symbol' => false,
 		'raw_symbol' => false,
-		'description' => true,
 		'currency' => false,
 		'exchange' => false,
 		'type' => false,
@@ -181,10 +181,10 @@ class UniversalSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
+        'description' => 'description',
         'id' => 'id',
         'symbol' => 'symbol',
         'raw_symbol' => 'raw_symbol',
-        'description' => 'description',
         'currency' => 'currency',
         'exchange' => 'exchange',
         'type' => 'type',
@@ -197,10 +197,10 @@ class UniversalSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
+        'description' => 'setDescription',
         'id' => 'setId',
         'symbol' => 'setSymbol',
         'raw_symbol' => 'setRawSymbol',
-        'description' => 'setDescription',
         'currency' => 'setCurrency',
         'exchange' => 'setExchange',
         'type' => 'setType',
@@ -213,10 +213,10 @@ class UniversalSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
+        'description' => 'getDescription',
         'id' => 'getId',
         'symbol' => 'getSymbol',
         'raw_symbol' => 'getRawSymbol',
-        'description' => 'getDescription',
         'currency' => 'getCurrency',
         'exchange' => 'getExchange',
         'type' => 'getType',
@@ -280,10 +280,10 @@ class UniversalSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
+        $this->setIfExists('description', $data ?? [], null);
         $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('symbol', $data ?? [], null);
         $this->setIfExists('raw_symbol', $data ?? [], null);
-        $this->setIfExists('description', $data ?? [], null);
         $this->setIfExists('currency', $data ?? [], null);
         $this->setIfExists('exchange', $data ?? [], null);
         $this->setIfExists('type', $data ?? [], null);
@@ -331,6 +331,42 @@ class UniversalSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
         return count($this->listInvalidProperties()) === 0;
     }
 
+
+    /**
+     * Gets description
+     *
+     * @return string|null
+     */
+    public function getDescription()
+    {
+        return $this->container['description'];
+    }
+
+    /**
+     * Sets description
+     *
+     * @param string|null $description description
+     *
+     * @return self
+     */
+    public function setDescription($description)
+    {
+
+        if (is_null($description)) {
+            array_push($this->openAPINullablesSetToNull, 'description');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('description', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['description'] = $description;
+
+        return $this;
+    }
 
     /**
      * Gets id
@@ -415,42 +451,6 @@ class UniversalSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['raw_symbol'] = $raw_symbol;
-
-        return $this;
-    }
-
-    /**
-     * Gets description
-     *
-     * @return string|null
-     */
-    public function getDescription()
-    {
-        return $this->container['description'];
-    }
-
-    /**
-     * Sets description
-     *
-     * @param string|null $description description
-     *
-     * @return self
-     */
-    public function setDescription($description)
-    {
-
-        if (is_null($description)) {
-            array_push($this->openAPINullablesSetToNull, 'description');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('description', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['description'] = $description;
 
         return $this;
     }

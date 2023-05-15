@@ -10,7 +10,7 @@ All URIs are relative to https://api.snaptrade.com/api/v1, except if the operati
 ## `accept()`
 
 ```php
-accept($user_id, $user_secret, $api_disclaimer_accept_request): \SnapTrade\Model\SnapTradeAPIDisclaimerAcceptStatus
+accept($user_id, $user_secret, $snap_trade_api_disclaimer_request): \SnapTrade\Model\SnapTradeAPIDisclaimerAcceptStatus
 ```
 
 Accept or Reject SnapTrade disclaimer agreement
@@ -28,14 +28,14 @@ $snaptrade = new \SnapTrade\Client(
 
 $user_id = "John.doe@snaptrade.com";
 $user_secret = "USERSECRET123";
-$api_disclaimer_accept_request = new \SnapTrade\Model\APIDisclaimerAcceptRequest([
+$snap_trade_api_disclaimer_request = new \SnapTrade\Model\SnapTradeApiDisclaimerRequest([
     ]);
 
 try {
     $result = $snaptrade->apiDisclaimer->accept(
         user_id: $user_id, 
         user_secret: $user_secret, 
-        api_disclaimer_accept_request: $api_disclaimer_accept_request
+        snap_trade_api_disclaimer_request: $snap_trade_api_disclaimer_request
     );
     print_r($result->$getAccepted());
     print_r($result->$getTimestamp());
@@ -50,7 +50,7 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **user_id** | **string**|  | |
 | **user_secret** | **string**|  | |
-| **api_disclaimer_accept_request** | [**\SnapTrade\Model\APIDisclaimerAcceptRequest**](../Model/APIDisclaimerAcceptRequest.md)|  | |
+| **snap_trade_api_disclaimer_request** | [**\SnapTrade\Model\SnapTradeApiDisclaimerRequest**](../Model/SnapTradeApiDisclaimerRequest.md)|  | |
 
 ### Return type
 

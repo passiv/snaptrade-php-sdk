@@ -1242,7 +1242,7 @@ class ConnectionsApi extends \SnapTrade\CustomApi
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \SnapTrade\Model\ConnectionsSessionEvents200ResponseInner[]
+     * @return \SnapTrade\Model\ConnectionsSessionEventsResponseInner[]
      */
     public function sessionEvents(
         $partner_client_id,
@@ -1269,7 +1269,7 @@ class ConnectionsApi extends \SnapTrade\CustomApi
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \SnapTrade\Model\ConnectionsSessionEvents200ResponseInner[], HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SnapTrade\Model\ConnectionsSessionEventsResponseInner[], HTTP status code, HTTP response headers (array of strings)
      */
     public function sessionEventsWithHttpInfo($partner_client_id, $user_id = null, $session_id = null, string $contentType = self::contentTypes['sessionEvents'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
@@ -1329,23 +1329,23 @@ class ConnectionsApi extends \SnapTrade\CustomApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\SnapTrade\Model\ConnectionsSessionEvents200ResponseInner[]' === '\SplFileObject') {
+                    if ('\SnapTrade\Model\ConnectionsSessionEventsResponseInner[]' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\SnapTrade\Model\ConnectionsSessionEvents200ResponseInner[]' !== 'string') {
+                        if ('\SnapTrade\Model\ConnectionsSessionEventsResponseInner[]' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\ConnectionsSessionEvents200ResponseInner[]', []),
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\ConnectionsSessionEventsResponseInner[]', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = '\SnapTrade\Model\ConnectionsSessionEvents200ResponseInner[]';
+            $returnType = '\SnapTrade\Model\ConnectionsSessionEventsResponseInner[]';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -1366,7 +1366,7 @@ class ConnectionsApi extends \SnapTrade\CustomApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\SnapTrade\Model\ConnectionsSessionEvents200ResponseInner[]',
+                        '\SnapTrade\Model\ConnectionsSessionEventsResponseInner[]',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1421,7 +1421,7 @@ class ConnectionsApi extends \SnapTrade\CustomApi
      */
     public function sessionEventsAsyncWithHttpInfo($partner_client_id, $user_id = null, $session_id = null, string $contentType = self::contentTypes['sessionEvents'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $returnType = '\SnapTrade\Model\ConnectionsSessionEvents200ResponseInner[]';
+        $returnType = '\SnapTrade\Model\ConnectionsSessionEventsResponseInner[]';
         ["request" => $request, "serializedBody" => $serializedBody] = $this->sessionEventsRequest($partner_client_id, $user_id, $session_id, $contentType);
 
         // Customization hook

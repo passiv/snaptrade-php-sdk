@@ -4,11 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**description** | **string** |  | [optional]
 **id** | **string** |  | [optional]
 **account** | [**\SnapTrade\Model\AccountSimple**](AccountSimple.md) |  | [optional]
 **amount** | **float** |  | [optional]
 **currency** | [**\SnapTrade\Model\Currency**](Currency.md) |  | [optional]
-**description** | **string** |  | [optional]
 **fee** | **float** |  | [optional]
 **institution** | **string** |  | [optional]
 **option_type** | **string** | If an option transaction, then it&#39;s type (BUY_TO_OPEN, SELL_TO_CLOSE, etc), otherwise empty string | [optional]

@@ -126,7 +126,7 @@ class ApiDisclaimerApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
-     * @param  \SnapTrade\Model\APIDisclaimerAcceptRequest $api_disclaimer_accept_request api_disclaimer_accept_request (required)
+     * @param  \SnapTrade\Model\SnapTradeApiDisclaimerRequest $snap_trade_api_disclaimer_request snap_trade_api_disclaimer_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['accept'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
@@ -143,9 +143,9 @@ class ApiDisclaimerApi extends \SnapTrade\CustomApi
     {
         $_body = [];
         $this->setRequestBodyProperty($_body, "accepted", $accepted);
-        $api_disclaimer_accept_request = $_body;
+        $snap_trade_api_disclaimer_request = $_body;
 
-        list($response) = $this->acceptWithHttpInfo($user_id, $user_secret, $api_disclaimer_accept_request, $contentType);
+        list($response) = $this->acceptWithHttpInfo($user_id, $user_secret, $snap_trade_api_disclaimer_request, $contentType);
         return $response;
     }
 
@@ -156,16 +156,16 @@ class ApiDisclaimerApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  \SnapTrade\Model\APIDisclaimerAcceptRequest $api_disclaimer_accept_request (required)
+     * @param  \SnapTrade\Model\SnapTradeApiDisclaimerRequest $snap_trade_api_disclaimer_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['accept'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \SnapTrade\Model\SnapTradeAPIDisclaimerAcceptStatus, HTTP status code, HTTP response headers (array of strings)
      */
-    public function acceptWithHttpInfo($user_id, $user_secret, $api_disclaimer_accept_request, string $contentType = self::contentTypes['accept'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    public function acceptWithHttpInfo($user_id, $user_secret, $snap_trade_api_disclaimer_request, string $contentType = self::contentTypes['accept'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->acceptRequest($user_id, $user_secret, $api_disclaimer_accept_request, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->acceptRequest($user_id, $user_secret, $snap_trade_api_disclaimer_request, $contentType);
 
         // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
@@ -183,7 +183,7 @@ class ApiDisclaimerApi extends \SnapTrade\CustomApi
                     return $this->acceptWithHttpInfo(
                         $user_id,
                         $user_secret,
-                        $api_disclaimer_accept_request,
+                        $snap_trade_api_disclaimer_request,
                         $contentType,
                         $requestOptions->setRetryOAuth(false)
                     );
@@ -275,7 +275,7 @@ class ApiDisclaimerApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  \SnapTrade\Model\APIDisclaimerAcceptRequest $api_disclaimer_accept_request (required)
+     * @param  \SnapTrade\Model\SnapTradeApiDisclaimerRequest $snap_trade_api_disclaimer_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['accept'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -291,9 +291,9 @@ class ApiDisclaimerApi extends \SnapTrade\CustomApi
     {
         $_body = [];
         $this->setRequestBodyProperty($_body, "accepted", $accepted);
-        $api_disclaimer_accept_request = $_body;
+        $snap_trade_api_disclaimer_request = $_body;
 
-        return $this->acceptAsyncWithHttpInfo($user_id, $user_secret, $api_disclaimer_accept_request, $contentType)
+        return $this->acceptAsyncWithHttpInfo($user_id, $user_secret, $snap_trade_api_disclaimer_request, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -308,16 +308,16 @@ class ApiDisclaimerApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  \SnapTrade\Model\APIDisclaimerAcceptRequest $api_disclaimer_accept_request (required)
+     * @param  \SnapTrade\Model\SnapTradeApiDisclaimerRequest $snap_trade_api_disclaimer_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['accept'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function acceptAsyncWithHttpInfo($user_id, $user_secret, $api_disclaimer_accept_request, string $contentType = self::contentTypes['accept'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    public function acceptAsyncWithHttpInfo($user_id, $user_secret, $snap_trade_api_disclaimer_request, string $contentType = self::contentTypes['accept'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\SnapTradeAPIDisclaimerAcceptStatus';
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->acceptRequest($user_id, $user_secret, $api_disclaimer_accept_request, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->acceptRequest($user_id, $user_secret, $snap_trade_api_disclaimer_request, $contentType);
 
         // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
@@ -363,13 +363,13 @@ class ApiDisclaimerApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  \SnapTrade\Model\APIDisclaimerAcceptRequest $api_disclaimer_accept_request (required)
+     * @param  \SnapTrade\Model\SnapTradeApiDisclaimerRequest $snap_trade_api_disclaimer_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['accept'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function acceptRequest($user_id, $user_secret, $api_disclaimer_accept_request, string $contentType = self::contentTypes['accept'][0])
+    public function acceptRequest($user_id, $user_secret, $snap_trade_api_disclaimer_request, string $contentType = self::contentTypes['accept'][0])
     {
 
         // Check if $user_id is a string
@@ -392,18 +392,18 @@ class ApiDisclaimerApi extends \SnapTrade\CustomApi
                 'Missing the required parameter user_secret when calling accept'
             );
         }
-        if ($api_disclaimer_accept_request !== SENTINEL_VALUE) {
-            if (!($api_disclaimer_accept_request instanceof \SnapTrade\Model\APIDisclaimerAcceptRequest)) {
-                if (!is_array($api_disclaimer_accept_request))
-                    throw new \InvalidArgumentException('"api_disclaimer_accept_request" must be associative array or an instance of \SnapTrade\Model\APIDisclaimerAcceptRequest ApiDisclaimerApi.accept.');
+        if ($snap_trade_api_disclaimer_request !== SENTINEL_VALUE) {
+            if (!($snap_trade_api_disclaimer_request instanceof \SnapTrade\Model\SnapTradeApiDisclaimerRequest)) {
+                if (!is_array($snap_trade_api_disclaimer_request))
+                    throw new \InvalidArgumentException('"snap_trade_api_disclaimer_request" must be associative array or an instance of \SnapTrade\Model\SnapTradeApiDisclaimerRequest ApiDisclaimerApi.accept.');
                 else
-                    $api_disclaimer_accept_request = new \SnapTrade\Model\APIDisclaimerAcceptRequest($api_disclaimer_accept_request);
+                    $snap_trade_api_disclaimer_request = new \SnapTrade\Model\SnapTradeApiDisclaimerRequest($snap_trade_api_disclaimer_request);
             }
         }
-        // verify the required parameter 'api_disclaimer_accept_request' is set
-        if ($api_disclaimer_accept_request === SENTINEL_VALUE || (is_array($api_disclaimer_accept_request) && count($api_disclaimer_accept_request) === 0)) {
+        // verify the required parameter 'snap_trade_api_disclaimer_request' is set
+        if ($snap_trade_api_disclaimer_request === SENTINEL_VALUE || (is_array($snap_trade_api_disclaimer_request) && count($snap_trade_api_disclaimer_request) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter api_disclaimer_accept_request when calling accept'
+                'Missing the required parameter snap_trade_api_disclaimer_request when calling accept'
             );
         }
 
@@ -448,12 +448,12 @@ class ApiDisclaimerApi extends \SnapTrade\CustomApi
         );
 
         // for model (json/xml)
-        if (isset($api_disclaimer_accept_request)) {
+        if (isset($snap_trade_api_disclaimer_request)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($api_disclaimer_accept_request));
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($snap_trade_api_disclaimer_request));
             } else {
-                $httpBody = $api_disclaimer_accept_request;
+                $httpBody = $snap_trade_api_disclaimer_request;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {

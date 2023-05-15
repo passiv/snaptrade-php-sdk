@@ -1,6 +1,6 @@
 <?php
 /**
- * UniversalSymbolTest
+ * AuthenticationLoginSnapTradeUserResponseTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * UniversalSymbolTest Class Doc Comment
+ * AuthenticationLoginSnapTradeUserResponseTest Class Doc Comment
  *
  * @category    Class
- * @description Universal symbol
+ * @description AuthenticationLoginSnapTradeUserResponse
  * @package     SnapTrade
  */
-class UniversalSymbolTest extends TestCase
+class AuthenticationLoginSnapTradeUserResponseTest extends TestCase
 {
 
     /**
@@ -64,81 +64,45 @@ class UniversalSymbolTest extends TestCase
     }
 
     /**
-     * Test "UniversalSymbol"
+     * Test "AuthenticationLoginSnapTradeUserResponse"
      */
-    public function testUniversalSymbol()
+    public function testAuthenticationLoginSnapTradeUserResponse()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "description"
+     * Test attribute "redirect_uri"
      */
-    public function testPropertyDescription()
+    public function testPropertyRedirectUri()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "id"
+     * Test attribute "session_id"
      */
-    public function testPropertyId()
+    public function testPropertySessionId()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "symbol"
+     * Test attribute "encrypted_shared_key"
      */
-    public function testPropertySymbol()
+    public function testPropertyEncryptedSharedKey()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "raw_symbol"
+     * Test attribute "encrypted_message_data"
      */
-    public function testPropertyRawSymbol()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "currency"
-     */
-    public function testPropertyCurrency()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "exchange"
-     */
-    public function testPropertyExchange()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "type"
-     */
-    public function testPropertyType()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "currencies"
-     */
-    public function testPropertyCurrencies()
+    public function testPropertyEncryptedMessageData()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

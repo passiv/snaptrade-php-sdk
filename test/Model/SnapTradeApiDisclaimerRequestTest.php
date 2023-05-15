@@ -1,6 +1,6 @@
 <?php
 /**
- * AuthenticationLoginSnapTradeUser200ResponseTest
+ * SnapTradeApiDisclaimerRequestTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * AuthenticationLoginSnapTradeUser200ResponseTest Class Doc Comment
+ * SnapTradeApiDisclaimerRequestTest Class Doc Comment
  *
  * @category    Class
- * @description AuthenticationLoginSnapTradeUser200Response
+ * @description SnapTradeApiDisclaimerRequest
  * @package     SnapTrade
  */
-class AuthenticationLoginSnapTradeUser200ResponseTest extends TestCase
+class SnapTradeApiDisclaimerRequestTest extends TestCase
 {
 
     /**
@@ -64,45 +64,18 @@ class AuthenticationLoginSnapTradeUser200ResponseTest extends TestCase
     }
 
     /**
-     * Test "AuthenticationLoginSnapTradeUser200Response"
+     * Test "SnapTradeApiDisclaimerRequest"
      */
-    public function testAuthenticationLoginSnapTradeUser200Response()
+    public function testSnapTradeApiDisclaimerRequest()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "redirect_uri"
+     * Test attribute "accepted"
      */
-    public function testPropertyRedirectUri()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "session_id"
-     */
-    public function testPropertySessionId()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "encrypted_shared_key"
-     */
-    public function testPropertyEncryptedSharedKey()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "encrypted_message_data"
-     */
-    public function testPropertyEncryptedMessageData()
+    public function testPropertyAccepted()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

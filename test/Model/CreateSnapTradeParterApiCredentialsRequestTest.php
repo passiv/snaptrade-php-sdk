@@ -1,6 +1,6 @@
 <?php
 /**
- * APIDisclaimerAcceptRequestTest
+ * CreateSnapTradeParterApiCredentialsRequestTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * APIDisclaimerAcceptRequestTest Class Doc Comment
+ * CreateSnapTradeParterApiCredentialsRequestTest Class Doc Comment
  *
  * @category    Class
- * @description APIDisclaimerAcceptRequest
+ * @description CreateSnapTradeParterApiCredentialsRequest
  * @package     SnapTrade
  */
-class APIDisclaimerAcceptRequestTest extends TestCase
+class CreateSnapTradeParterApiCredentialsRequestTest extends TestCase
 {
 
     /**
@@ -64,18 +64,45 @@ class APIDisclaimerAcceptRequestTest extends TestCase
     }
 
     /**
-     * Test "APIDisclaimerAcceptRequest"
+     * Test "CreateSnapTradeParterApiCredentialsRequest"
      */
-    public function testAPIDisclaimerAcceptRequest()
+    public function testCreateSnapTradeParterApiCredentialsRequest()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "accepted"
+     * Test attribute "brokerage_authorization_type_id"
      */
-    public function testPropertyAccepted()
+    public function testPropertyBrokerageAuthorizationTypeId()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "brokerage_api_client_id"
+     */
+    public function testPropertyBrokerageApiClientId()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "brokerage_api_client_secret"
+     */
+    public function testPropertyBrokerageApiClientSecret()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "redirect_uri"
+     */
+    public function testPropertyRedirectUri()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

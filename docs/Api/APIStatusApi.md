@@ -23,18 +23,14 @@ Check whether the API is operational and verify timestamps.
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-// Setting host path is optional and defaults to https://api.snaptrade.com/api/v1
-// SnapTrade\Configuration::getDefaultConfiguration()->setHost("https://api.snaptrade.com/api/v1");
-
-$apiInstance = new SnapTrade\Api\ApiStatusApi(
-    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-    // This is optional, `GuzzleHttp\Client` will be used as default.
-    // new GuzzleHttp\Client()
+$snaptrade = new \SnapTrade\Client(
+    clientId: getenv("SNAPTRADE_CLIENT_ID"),
+    consumerKey: getenv("SNAPTRADE_CONSUMER_KEY")
 );
 
 
 try {
-    $result = $apiInstance->check();
+    $result = $snaptrade->apiStatus->check();
     print_r($result->$getVersion());
     print_r($result->$getTimestamp());
     print_r($result->$getOnline());

@@ -25,29 +25,9 @@ Creates an option strategy object that will be used to place an option strategy 
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-// Configure API key authorization: PartnerClientId
-$config = SnapTrade\Configuration::getDefaultConfiguration()->setApiKey('clientId', 'YOUR_API_KEY');
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = SnapTrade\Configuration::getDefaultConfiguration()->setApiKeyPrefix('clientId', 'Bearer');
-
-// Configure API key authorization: PartnerSignature
-$config = SnapTrade\Configuration::getDefaultConfiguration()->setApiKey('Signature', 'YOUR_API_KEY');
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = SnapTrade\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Signature', 'Bearer');
-
-// Configure API key authorization: PartnerTimestamp
-$config = SnapTrade\Configuration::getDefaultConfiguration()->setApiKey('timestamp', 'YOUR_API_KEY');
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = SnapTrade\Configuration::getDefaultConfiguration()->setApiKeyPrefix('timestamp', 'Bearer');
-
-// Setting host path is optional and defaults to https://api.snaptrade.com/api/v1
-// SnapTrade\Configuration::getDefaultConfiguration()->setHost("https://api.snaptrade.com/api/v1");
-
-$apiInstance = new SnapTrade\Api\OptionsApi(
-    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-    // This is optional, `GuzzleHttp\Client` will be used as default.
-    // new GuzzleHttp\Client(),
-    $config
+$snaptrade = new \SnapTrade\Client(
+    clientId: getenv("SNAPTRADE_CLIENT_ID"),
+    consumerKey: getenv("SNAPTRADE_CONSUMER_KEY")
 );
 
 $user_id = "John.doe@snaptrade.com";
@@ -66,7 +46,7 @@ $options_get_option_strategy_request = new \SnapTrade\Model\OptionsGetOptionStra
     ]);
 
 try {
-    $result = $apiInstance->getOptionStrategy(
+    $result = $snaptrade->options->getOptionStrategy(
         user_id: $user_id, 
         user_secret: $user_secret, 
         account_id: $account_id, 
@@ -123,29 +103,9 @@ Get the options chain
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-// Configure API key authorization: PartnerClientId
-$config = SnapTrade\Configuration::getDefaultConfiguration()->setApiKey('clientId', 'YOUR_API_KEY');
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = SnapTrade\Configuration::getDefaultConfiguration()->setApiKeyPrefix('clientId', 'Bearer');
-
-// Configure API key authorization: PartnerSignature
-$config = SnapTrade\Configuration::getDefaultConfiguration()->setApiKey('Signature', 'YOUR_API_KEY');
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = SnapTrade\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Signature', 'Bearer');
-
-// Configure API key authorization: PartnerTimestamp
-$config = SnapTrade\Configuration::getDefaultConfiguration()->setApiKey('timestamp', 'YOUR_API_KEY');
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = SnapTrade\Configuration::getDefaultConfiguration()->setApiKeyPrefix('timestamp', 'Bearer');
-
-// Setting host path is optional and defaults to https://api.snaptrade.com/api/v1
-// SnapTrade\Configuration::getDefaultConfiguration()->setHost("https://api.snaptrade.com/api/v1");
-
-$apiInstance = new SnapTrade\Api\OptionsApi(
-    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-    // This is optional, `GuzzleHttp\Client` will be used as default.
-    // new GuzzleHttp\Client(),
-    $config
+$snaptrade = new \SnapTrade\Client(
+    clientId: getenv("SNAPTRADE_CLIENT_ID"),
+    consumerKey: getenv("SNAPTRADE_CONSUMER_KEY")
 );
 
 $user_id = "John.doe@snaptrade.com";
@@ -154,7 +114,7 @@ $account_id = "accountId_example"; // The ID of the account get positions.
 $symbol = "symbol_example"; // Universal symbol ID if symbol
 
 try {
-    $result = $apiInstance->getOptionsChain(
+    $result = $snaptrade->options->getOptionsChain(
         user_id: $user_id, 
         user_secret: $user_secret, 
         account_id: $account_id, 
@@ -205,29 +165,9 @@ Get latest market data of option strategy
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-// Configure API key authorization: PartnerClientId
-$config = SnapTrade\Configuration::getDefaultConfiguration()->setApiKey('clientId', 'YOUR_API_KEY');
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = SnapTrade\Configuration::getDefaultConfiguration()->setApiKeyPrefix('clientId', 'Bearer');
-
-// Configure API key authorization: PartnerSignature
-$config = SnapTrade\Configuration::getDefaultConfiguration()->setApiKey('Signature', 'YOUR_API_KEY');
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = SnapTrade\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Signature', 'Bearer');
-
-// Configure API key authorization: PartnerTimestamp
-$config = SnapTrade\Configuration::getDefaultConfiguration()->setApiKey('timestamp', 'YOUR_API_KEY');
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = SnapTrade\Configuration::getDefaultConfiguration()->setApiKeyPrefix('timestamp', 'Bearer');
-
-// Setting host path is optional and defaults to https://api.snaptrade.com/api/v1
-// SnapTrade\Configuration::getDefaultConfiguration()->setHost("https://api.snaptrade.com/api/v1");
-
-$apiInstance = new SnapTrade\Api\OptionsApi(
-    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-    // This is optional, `GuzzleHttp\Client` will be used as default.
-    // new GuzzleHttp\Client(),
-    $config
+$snaptrade = new \SnapTrade\Client(
+    clientId: getenv("SNAPTRADE_CLIENT_ID"),
+    consumerKey: getenv("SNAPTRADE_CONSUMER_KEY")
 );
 
 $user_id = "John.doe@snaptrade.com";
@@ -236,7 +176,7 @@ $account_id = "accountId_example"; // The ID of the account get positions.
 $option_strategy_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"; // Option strategy id obtained from response when creating option strategy object
 
 try {
-    $result = $apiInstance->getOptionsStrategyQuote(
+    $result = $snaptrade->options->getOptionsStrategyQuote(
         user_id: $user_id, 
         user_secret: $user_secret, 
         account_id: $account_id, 
@@ -293,29 +233,9 @@ Get the options holdings in the account
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-// Configure API key authorization: PartnerClientId
-$config = SnapTrade\Configuration::getDefaultConfiguration()->setApiKey('clientId', 'YOUR_API_KEY');
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = SnapTrade\Configuration::getDefaultConfiguration()->setApiKeyPrefix('clientId', 'Bearer');
-
-// Configure API key authorization: PartnerSignature
-$config = SnapTrade\Configuration::getDefaultConfiguration()->setApiKey('Signature', 'YOUR_API_KEY');
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = SnapTrade\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Signature', 'Bearer');
-
-// Configure API key authorization: PartnerTimestamp
-$config = SnapTrade\Configuration::getDefaultConfiguration()->setApiKey('timestamp', 'YOUR_API_KEY');
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = SnapTrade\Configuration::getDefaultConfiguration()->setApiKeyPrefix('timestamp', 'Bearer');
-
-// Setting host path is optional and defaults to https://api.snaptrade.com/api/v1
-// SnapTrade\Configuration::getDefaultConfiguration()->setHost("https://api.snaptrade.com/api/v1");
-
-$apiInstance = new SnapTrade\Api\OptionsApi(
-    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-    // This is optional, `GuzzleHttp\Client` will be used as default.
-    // new GuzzleHttp\Client(),
-    $config
+$snaptrade = new \SnapTrade\Client(
+    clientId: getenv("SNAPTRADE_CLIENT_ID"),
+    consumerKey: getenv("SNAPTRADE_CONSUMER_KEY")
 );
 
 $user_id = "John.doe@snaptrade.com";
@@ -323,7 +243,7 @@ $user_secret = "USERSECRET123";
 $account_id = "accountId_example"; // The ID of the account get positions.
 
 try {
-    $result = $apiInstance->listOptionHoldings(
+    $result = $snaptrade->options->listOptionHoldings(
         user_id: $user_id, 
         user_secret: $user_secret, 
         account_id: $account_id
@@ -378,29 +298,9 @@ Place an option strategy order on the brokerage
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-// Configure API key authorization: PartnerClientId
-$config = SnapTrade\Configuration::getDefaultConfiguration()->setApiKey('clientId', 'YOUR_API_KEY');
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = SnapTrade\Configuration::getDefaultConfiguration()->setApiKeyPrefix('clientId', 'Bearer');
-
-// Configure API key authorization: PartnerSignature
-$config = SnapTrade\Configuration::getDefaultConfiguration()->setApiKey('Signature', 'YOUR_API_KEY');
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = SnapTrade\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Signature', 'Bearer');
-
-// Configure API key authorization: PartnerTimestamp
-$config = SnapTrade\Configuration::getDefaultConfiguration()->setApiKey('timestamp', 'YOUR_API_KEY');
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = SnapTrade\Configuration::getDefaultConfiguration()->setApiKeyPrefix('timestamp', 'Bearer');
-
-// Setting host path is optional and defaults to https://api.snaptrade.com/api/v1
-// SnapTrade\Configuration::getDefaultConfiguration()->setHost("https://api.snaptrade.com/api/v1");
-
-$apiInstance = new SnapTrade\Api\OptionsApi(
-    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-    // This is optional, `GuzzleHttp\Client` will be used as default.
-    // new GuzzleHttp\Client(),
-    $config
+$snaptrade = new \SnapTrade\Client(
+    clientId: getenv("SNAPTRADE_CLIENT_ID"),
+    consumerKey: getenv("SNAPTRADE_CONSUMER_KEY")
 );
 
 $user_id = "John.doe@snaptrade.com";
@@ -414,7 +314,7 @@ $options_place_option_strategy_request = new \SnapTrade\Model\OptionsPlaceOption
     ]);
 
 try {
-    $result = $apiInstance->placeOptionStrategy(
+    $result = $snaptrade->options->placeOptionStrategy(
         user_id: $user_id, 
         user_secret: $user_secret, 
         account_id: $account_id, 

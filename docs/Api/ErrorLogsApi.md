@@ -21,36 +21,16 @@ Retrieve error logs on behalf of your SnapTrade users
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-// Configure API key authorization: PartnerClientId
-$config = SnapTrade\Configuration::getDefaultConfiguration()->setApiKey('clientId', 'YOUR_API_KEY');
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = SnapTrade\Configuration::getDefaultConfiguration()->setApiKeyPrefix('clientId', 'Bearer');
-
-// Configure API key authorization: PartnerSignature
-$config = SnapTrade\Configuration::getDefaultConfiguration()->setApiKey('Signature', 'YOUR_API_KEY');
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = SnapTrade\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Signature', 'Bearer');
-
-// Configure API key authorization: PartnerTimestamp
-$config = SnapTrade\Configuration::getDefaultConfiguration()->setApiKey('timestamp', 'YOUR_API_KEY');
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = SnapTrade\Configuration::getDefaultConfiguration()->setApiKeyPrefix('timestamp', 'Bearer');
-
-// Setting host path is optional and defaults to https://api.snaptrade.com/api/v1
-// SnapTrade\Configuration::getDefaultConfiguration()->setHost("https://api.snaptrade.com/api/v1");
-
-$apiInstance = new SnapTrade\Api\ErrorLogsApi(
-    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-    // This is optional, `GuzzleHttp\Client` will be used as default.
-    // new GuzzleHttp\Client(),
-    $config
+$snaptrade = new \SnapTrade\Client(
+    clientId: getenv("SNAPTRADE_CLIENT_ID"),
+    consumerKey: getenv("SNAPTRADE_CONSUMER_KEY")
 );
 
 $user_id = "John.doe@snaptrade.com";
 $user_secret = "USERSECRET123";
 
 try {
-    $result = $apiInstance->listUserErrors(
+    $result = $snaptrade->errorLogs->listUserErrors(
         user_id: $user_id, 
         user_secret: $user_secret
     );

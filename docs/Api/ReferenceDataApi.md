@@ -260,13 +260,11 @@ $snaptrade = new \SnapTrade\Client(
     consumerKey: getenv("SNAPTRADE_CONSUMER_KEY")
 );
 
-$symbol_query = new \SnapTrade\Model\SymbolQuery([
-        "substring" => "apple",
-    ]);
+$substring = "apple";
 
 try {
     $result = $snaptrade->referenceData->getSymbols(
-        symbol_query: $symbol_query
+        substring: $substring
     );
     print_r($result->$getDescription());
     print_r($result->$getId());
@@ -615,16 +613,14 @@ $snaptrade = new \SnapTrade\Client(
 $user_id = "John.doe@snaptrade.com";
 $user_secret = "USERSECRET123";
 $account_id = "accountId_example"; // The ID of the account get positions.
-$symbol_query = new \SnapTrade\Model\SymbolQuery([
-        "substring" => "apple",
-    ]);
+$substring = "apple";
 
 try {
     $result = $snaptrade->referenceData->symbolSearchUserAccount(
         user_id: $user_id, 
         user_secret: $user_secret, 
         account_id: $account_id, 
-        symbol_query: $symbol_query
+        substring: $substring
     );
     print_r($result->$getDescription());
     print_r($result->$getId());

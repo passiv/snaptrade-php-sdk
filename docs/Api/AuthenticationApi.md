@@ -191,19 +191,21 @@ $snaptrade = new \SnapTrade\Client(
 
 $user_id = "John.doe@snaptrade.com";
 $user_secret = "USERSECRET123";
-$snap_trade_login_user_request_body = new \SnapTrade\Model\SnapTradeLoginUserRequestBody([
-        "broker" => "ALPACA",
-        "immediate_redirect" => True,
-        "custom_redirect" => "https://passiv.com",
-        "reconnect" => "8b5f262d-4bb9-365d-888a-202bd3b15fa1",
-        "connection_type" => "read",
-    ]);
+$broker = "ALPACA";
+$immediate_redirect = True;
+$custom_redirect = "https://passiv.com";
+$reconnect = "8b5f262d-4bb9-365d-888a-202bd3b15fa1";
+$connection_type = "read";
 
 try {
     $result = $snaptrade->authentication->loginSnapTradeUser(
         user_id: $user_id, 
         user_secret: $user_secret, 
-        snap_trade_login_user_request_body: $snap_trade_login_user_request_body
+        broker: $broker, 
+        immediate_redirect: $immediate_redirect, 
+        custom_redirect: $custom_redirect, 
+        reconnect: $reconnect, 
+        connection_type: $connection_type
     );
     print_r($result->$getRedirectUri());
     print_r($result->$getSessionId());
@@ -258,14 +260,13 @@ $snaptrade = new \SnapTrade\Client(
     consumerKey: getenv("SNAPTRADE_CONSUMER_KEY")
 );
 
-$snap_trade_register_user_request_body = new \SnapTrade\Model\SnapTradeRegisterUserRequestBody([
-        "user_id" => "snaptrade-user-123",
-        "rsa_public_key" => "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQC7vbqajDw4o6gJy8UtmIbkcpnkO3Kwc4qsEnSZp/TR+fQi62F79RHWmwKOtFmwteURgLbj7D/WGuNLGOfa/2vse3G2eHnHl5CB8ruRX9fBl/KgwCVr2JaEuUm66bBQeP5XeBotdR4cvX38uPYivCDdPjJ1QWPdspTBKcxeFbccDw==",
-    ]);
+$user_id = "snaptrade-user-123"; // SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as it's unique to a user
+$rsa_public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQC7vbqajDw4o6gJy8UtmIbkcpnkO3Kwc4qsEnSZp/TR+fQi62F79RHWmwKOtFmwteURgLbj7D/WGuNLGOfa/2vse3G2eHnHl5CB8ruRX9fBl/KgwCVr2JaEuUm66bBQeP5XeBotdR4cvX38uPYivCDdPjJ1QWPdspTBKcxeFbccDw=="; // Open SSH RSA public key
 
 try {
     $result = $snaptrade->authentication->registerSnapTradeUser(
-        snap_trade_register_user_request_body: $snap_trade_register_user_request_body
+        user_id: $user_id, 
+        rsa_public_key: $rsa_public_key
     );
     print_r($result->$getUserId());
     print_r($result->$getUserSecret());

@@ -58,17 +58,50 @@ $snaptrade = new \SnapTrade\Client(
 );
 
 $portfolio_group_id = "portfolioGroupId_example"; // The ID of the PortfolioGroup under which to exclude an asset.
-$universal_symbol = new \SnapTrade\Model\UniversalSymbol([
-        "description" => "VANGUARD CDN AGGREGATE BOND INDEX ETF",
+$description = "VANGUARD CDN AGGREGATE BOND INDEX ETF";
+$id = "2bcd7cc3-e922-4976-bce1-9858296801c3";
+$symbol = "VAB.TO";
+$raw_symbol = "VAB";
+$currency = [
+        "id" => "87b24961-b51e-4db8-9226-f198f6518a89",
+        "code" => "USD",
+        "name" => "US Dollar",
+    ];
+$exchange = [
         "id" => "2bcd7cc3-e922-4976-bce1-9858296801c3",
-        "symbol" => "VAB.TO",
-        "raw_symbol" => "VAB",
-    ]);
+        "code" => "TSX",
+        "mic_code" => "XTSE",
+        "name" => "Toronto Stock Exchange",
+        "timezone" => "America/New_York",
+        "start_time" => "09:30:00",
+        "close_time" => "57600",
+        "suffix" => ".TO",
+    ];
+$type = [
+        "description" => "Common Stock",
+        "id" => "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        "code" => "cs",
+        "is_supported" => True,
+    ];
+$currencies = [
+        [
+            "id" => "87b24961-b51e-4db8-9226-f198f6518a89",
+            "code" => "USD",
+            "name" => "US Dollar",
+        ]
+    ];
 
 try {
     $result = $snaptrade->portfolioManagement->addPortfolioExcludedAsset(
         portfolio_group_id: $portfolio_group_id, 
-        universal_symbol: $universal_symbol
+        description: $description, 
+        id: $id, 
+        symbol: $symbol, 
+        raw_symbol: $raw_symbol, 
+        currency: $currency, 
+        exchange: $exchange, 
+        type: $type, 
+        currencies: $currencies
     );
     print_r($result->$getSymbol());
 } catch (\Exception $e) {
@@ -179,16 +212,15 @@ $snaptrade = new \SnapTrade\Client(
 
 $user_id = "John.doe@snaptrade.com";
 $user_secret = "USERSECRET123";
-$request_body = [
-        "id" => "2bcd7cc3-e922-4976-bce1-9858296801c3",
-        "name" => "Combined Retirement Portfolio",
-    ];
+$id = "2bcd7cc3-e922-4976-bce1-9858296801c3";
+$name = "Combined Retirement Portfolio";
 
 try {
     $result = $snaptrade->portfolioManagement->create(
         user_id: $user_id, 
         user_secret: $user_secret, 
-        request_body: $request_body
+        id: $id, 
+        name: $name
     );
     print_r($result->$getId());
     print_r($result->$getName());
@@ -1493,13 +1525,28 @@ $snaptrade = new \SnapTrade\Client(
 );
 
 $model_portfolio_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"; // The ID of the model portfolio to update.
-$model_portfolio_details = new \SnapTrade\Model\ModelPortfolioDetails([
-    ]); // Use this endpoint change model asset class name and to add or remove a model portfolio security/model portfolio asset class. <br /><br /> * The model portfolio name and model portfolio model type is required. <br /> * The model portfolio model type must be either 0 or 1. [0 -> Securities based, 1 -> Asset Class based] <br /><br /> * If the model portfolio type is 0, the model portfolio asset class must be an empty array. <br /> * If the model portfolio type is 1, the model portfolio security must be an empty array. <br /><br /> * When updating the model portfolio security, the percent is required. Only the symbol id is required for the symbol object <br /> * When updating the model portfolio asset classes, the percent is required. Only the model asset class id is required for the model asset class object <br /><br /> * To remove all model portfolio securities or model portfolio asset class, set then to an empty array
+$model_portfolio = [
+        "id" => "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        "name" => "Passiv 5x Aggressive Growth Fund",
+        "model_type" => -1,
+    ];
+$model_portfolio_security = [
+        [
+            "percent" => 100,
+        ]
+    ];
+$model_portfolio_asset_class = [
+        [
+            "percent" => 100,
+        ]
+    ];
 
 try {
     $snaptrade->portfolioManagement->modifyModelPortfolioById(
         model_portfolio_id: $model_portfolio_id, 
-        model_portfolio_details: $model_portfolio_details
+        model_portfolio: $model_portfolio, 
+        model_portfolio_security: $model_portfolio_security, 
+        model_portfolio_asset_class: $model_portfolio_asset_class
     );
 } catch (\Exception $e) {
     echo 'Exception when calling PortfolioManagementApi->modifyModelPortfolioById: ', $e->getMessage(), PHP_EOL;
@@ -1550,15 +1597,14 @@ $snaptrade = new \SnapTrade\Client(
 );
 
 $portfolio_group_id = "portfolioGroupId_example"; // The ID of the PortfolioGroup to update.
-$request_body = [
-        "id" => "2bcd7cc3-e922-4976-bce1-9858296801c3",
-        "name" => "Combined Retirement Portfolio",
-    ];
+$id = "2bcd7cc3-e922-4976-bce1-9858296801c3";
+$name = "Combined Retirement Portfolio";
 
 try {
     $result = $snaptrade->portfolioManagement->savePortfolio(
         portfolio_group_id: $portfolio_group_id, 
-        request_body: $request_body
+        id: $id, 
+        name: $name
     );
     print_r($result->$getId());
     print_r($result->$getName());
@@ -1611,14 +1657,12 @@ $snaptrade = new \SnapTrade\Client(
 );
 
 $portfolio_group_id = "portfolioGroupId_example"; // The ID of the PortfolioGroup to search under
-$symbol_query = new \SnapTrade\Model\SymbolQuery([
-        "substring" => "apple",
-    ]);
+$substring = "apple";
 
 try {
     $result = $snaptrade->portfolioManagement->searchPortfolioSymbols(
         portfolio_group_id: $portfolio_group_id, 
-        symbol_query: $symbol_query
+        substring: $substring
     );
     print_r($result->$getDescription());
     print_r($result->$getId());
@@ -1677,19 +1721,10 @@ $snaptrade = new \SnapTrade\Client(
 );
 
 $portfolio_group_id = "portfolioGroupId_example"; // The ID of the PortfolioGroup under which to create the target asset.
-$target_asset = [
-        [
-            "id" => "2bcd7cc3-e922-4976-bce1-9858296801c3",
-            "percent" => 90,
-            "is_supported" => True,
-            "is_excluded" => True,
-        ]
-    ];
 
 try {
     $result = $snaptrade->portfolioManagement->setPortfolioTargets(
-        portfolio_group_id: $portfolio_group_id, 
-        target_asset: $target_asset
+        portfolio_group_id: $portfolio_group_id
     );
     print_r($result->$getId());
     print_r($result->$getSymbol());
@@ -1746,13 +1781,20 @@ $snaptrade = new \SnapTrade\Client(
 );
 
 $model_asset_class_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"; // The ID of the model asset class to update.
-$model_asset_class_details = new \SnapTrade\Model\ModelAssetClassDetails([
-    ]); // Use this endpoint change model asset class name and to add or remove a model asset class target. <br /><br /> * Only the model asset class name is required for the model asset class object. <br /> * Only the symbol id is required for the symbol object in the model asset class target object. <br /> * To remove all model asset class targets, set the model asset class target as an empty array
+$model_asset_class = [
+        "id" => "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        "name" => "Bonds",
+    ];
+$model_asset_class_target = [
+        [
+        ]
+    ];
 
 try {
     $snaptrade->portfolioManagement->updateAssetClass(
         model_asset_class_id: $model_asset_class_id, 
-        model_asset_class_details: $model_asset_class_details
+        model_asset_class: $model_asset_class, 
+        model_asset_class_target: $model_asset_class_target
     );
 } catch (\Exception $e) {
     echo 'Exception when calling PortfolioManagementApi->updateAssetClass: ', $e->getMessage(), PHP_EOL;
@@ -1862,18 +1904,26 @@ $snaptrade = new \SnapTrade\Client(
 
 $portfolio_group_id = "portfolioGroupId_example"; // The ID of the PortfolioGroup under which to patch the target asset.
 $target_asset_id = "targetAssetId_example"; // The ID of the TargetAsset to patch.
-$target_asset = new \SnapTrade\Model\TargetAsset([
+$id = "2bcd7cc3-e922-4976-bce1-9858296801c3";
+$symbol = [
+        "description" => "VANGUARD CDN AGGREGATE BOND INDEX ETF",
         "id" => "2bcd7cc3-e922-4976-bce1-9858296801c3",
-        "percent" => 90,
-        "is_supported" => True,
-        "is_excluded" => True,
-    ]);
+        "symbol" => "VAB.TO",
+        "raw_symbol" => "VAB",
+    ];
+$percent = 90;
+$is_supported = True;
+$is_excluded = True;
 
 try {
     $result = $snaptrade->portfolioManagement->updatePortfolioTargetById(
         portfolio_group_id: $portfolio_group_id, 
         target_asset_id: $target_asset_id, 
-        target_asset: $target_asset
+        id: $id, 
+        symbol: $symbol, 
+        percent: $percent, 
+        is_supported: $is_supported, 
+        is_excluded: $is_excluded
     );
     print_r($result->$getId());
     print_r($result->$getSymbol());

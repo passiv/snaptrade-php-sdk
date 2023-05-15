@@ -38,16 +38,14 @@ $snaptrade = new \SnapTrade\Client(
 $user_id = "John.doe@snaptrade.com";
 $user_secret = "USERSECRET123";
 $account_id = "accountId_example"; // The ID of the account get positions.
-$trading_cancel_user_account_order_request = new \SnapTrade\Model\TradingCancelUserAccountOrderRequest([
-        "brokerage_order_id" => "2bcd7cc3-e922-4976-bce1-9858296801c3",
-    ]); // The Order ID to be canceled
+$brokerage_order_id = "2bcd7cc3-e922-4976-bce1-9858296801c3";
 
 try {
     $result = $snaptrade->trading->cancelUserAccountOrder(
         user_id: $user_id, 
         user_secret: $user_secret, 
         account_id: $account_id, 
-        trading_cancel_user_account_order_request: $trading_cancel_user_account_order_request
+        brokerage_order_id: $brokerage_order_id
     );
     print_r($result->$getBrokerageOrderId());
     print_r($result->$getStatus());
@@ -247,21 +245,27 @@ $snaptrade = new \SnapTrade\Client(
 
 $user_id = "John.doe@snaptrade.com";
 $user_secret = "USERSECRET123";
-$manual_trade_form = new \SnapTrade\Model\ManualTradeForm([
-        "account_id" => "2bcd7cc3-e922-4976-bce1-9858296801c3",
-        "action" => "BUY",
-        "order_type" => "Limit",
-        "price" => 31.33,
-        "stop" => 31.33,
-        "time_in_force" => "Day",
-        "universal_symbol_id" => "2bcd7cc3-e922-4976-bce1-9858296801c3",
-    ]);
+$account_id = "2bcd7cc3-e922-4976-bce1-9858296801c3";
+$action = "BUY";
+$order_type = "Limit";
+$price = 31.33; // Trade Price if limit or stop limit order
+$stop = 31.33; // Stop Price. If stop loss or stop limit order, the price to trigger the stop
+$time_in_force = "Day";
+$units = 3.14; // Trade Units
+$universal_symbol_id = "2bcd7cc3-e922-4976-bce1-9858296801c3";
 
 try {
     $result = $snaptrade->trading->getOrderImpact(
         user_id: $user_id, 
         user_secret: $user_secret, 
-        manual_trade_form: $manual_trade_form
+        account_id: $account_id, 
+        action: $action, 
+        order_type: $order_type, 
+        price: $price, 
+        stop: $stop, 
+        time_in_force: $time_in_force, 
+        units: $units, 
+        universal_symbol_id: $universal_symbol_id
     );
     print_r($result->$getTrade());
     print_r($result->$getTradeImpacts());
@@ -389,20 +393,45 @@ $snaptrade = new \SnapTrade\Client(
 $portfolio_group_id = "portfolioGroupId_example"; // The ID of the PortfolioGroup to perform rebalancing calculations
 $calculated_trade_id = "calculatedTradeId_example"; // The ID of calculated trade to get account impact
 $trade_id = "tradeId_example"; // The ID of trade object
-$trade = new \SnapTrade\Model\Trade([
+$id = "2bcd7cc3-e922-4976-bce1-9858296801c3";
+$account = [
         "id" => "2bcd7cc3-e922-4976-bce1-9858296801c3",
-        "action" => "BUY",
-        "units" => 6,
-        "price" => 24.81,
-        "sequence" => 1,
-    ]);
+        "brokerage_authorization" => "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        "portfolio_group" => "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        "name" => "Registered Retirement Savings Account",
+        "number" => "Q6542138443",
+        "institution_name" => "Alpaca",
+        "created_date" => "2021-06-04T16:26:46.523Z",
+    ];
+$symbol = [
+        "description" => "VANGUARD CDN AGGREGATE BOND INDEX ETF",
+        "id" => "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        "allows_fractional_units" => True,
+    ];
+$universal_symbol = [
+        "description" => "VANGUARD CDN AGGREGATE BOND INDEX ETF",
+        "id" => "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        "symbol" => "VAB.TO",
+        "raw_symbol" => "VAB",
+    ];
+$action = "BUY";
+$units = 6;
+$price = 24.81;
+$sequence = 1;
 
 try {
     $result = $snaptrade->trading->modifyCalculatedTradeById(
         portfolio_group_id: $portfolio_group_id, 
         calculated_trade_id: $calculated_trade_id, 
         trade_id: $trade_id, 
-        trade: $trade
+        id: $id, 
+        account: $account, 
+        symbol: $symbol, 
+        universal_symbol: $universal_symbol, 
+        action: $action, 
+        units: $units, 
+        price: $price, 
+        sequence: $sequence
     );
     print_r($result->$getId());
     print_r($result->$getAccount());
@@ -529,21 +558,27 @@ $snaptrade = new \SnapTrade\Client(
 
 $user_id = "John.doe@snaptrade.com";
 $user_secret = "USERSECRET123";
-$manual_trade_form = new \SnapTrade\Model\ManualTradeForm([
-        "account_id" => "2bcd7cc3-e922-4976-bce1-9858296801c3",
-        "action" => "BUY",
-        "order_type" => "Limit",
-        "price" => 31.33,
-        "stop" => 31.33,
-        "time_in_force" => "Day",
-        "universal_symbol_id" => "2bcd7cc3-e922-4976-bce1-9858296801c3",
-    ]);
+$account_id = "2bcd7cc3-e922-4976-bce1-9858296801c3";
+$action = "BUY";
+$order_type = "Limit";
+$price = 31.33; // Trade Price if limit or stop limit order
+$stop = 31.33; // Stop Price. If stop loss or stop limit order, the price to trigger the stop
+$time_in_force = "Day";
+$units = 3.14; // Trade Units
+$universal_symbol_id = "2bcd7cc3-e922-4976-bce1-9858296801c3";
 
 try {
     $result = $snaptrade->trading->placeForceOrder(
         user_id: $user_id, 
         user_secret: $user_secret, 
-        manual_trade_form: $manual_trade_form
+        account_id: $account_id, 
+        action: $action, 
+        order_type: $order_type, 
+        price: $price, 
+        stop: $stop, 
+        time_in_force: $time_in_force, 
+        units: $units, 
+        universal_symbol_id: $universal_symbol_id
     );
     print_r($result->$getBrokerageOrderId());
     print_r($result->$getStatus());
@@ -614,14 +649,15 @@ $snaptrade = new \SnapTrade\Client(
 
 $user_id = "John.doe@snaptrade.com";
 $user_secret = "USERSECRET123";
-$trading_place_oco_order_request = new \SnapTrade\Model\TradingPlaceOcoOrderRequest([
-    ]);
+$first_trade_id = None; // The ID of first trade object obtained from trade/impact endpoint
+$second_trade_id = None; // The ID of second trade object obtained from trade/impact endpoint
 
 try {
     $result = $snaptrade->trading->placeOCOOrder(
         user_id: $user_id, 
         user_secret: $user_secret, 
-        trading_place_oco_order_request: $trading_place_oco_order_request
+        first_trade_id: $first_trade_id, 
+        second_trade_id: $second_trade_id
     );
     print_r($result->$getBrokerageOrderId());
     print_r($result->$getStatus());

@@ -30,27 +30,27 @@ $snaptrade = new \SnapTrade\Client(
     consumerKey: getenv("SNAPTRADE_CONSUMER_KEY")
 );
 
+$underlying_symbol_id = "2bcd7cc3-e922-4976-bce1-9858296801c3";
+$legs = [
+        [
+            "action" => "BUY_TO_OPEN",
+            "option_symbol_id" => "SPY220819P00200000",
+            "quantity" => 1,
+        ]
+    ];
+$strategy_type = "CUSTOM";
 $user_id = "John.doe@snaptrade.com";
 $user_secret = "USERSECRET123";
 $account_id = "accountId_example"; // The ID of the account get positions.
-$options_get_option_strategy_request = new \SnapTrade\Model\OptionsGetOptionStrategyRequest([
-        "underlying_symbol_id" => "2bcd7cc3-e922-4976-bce1-9858296801c3",
-        "legs" => [
-            [
-                "action" => "BUY_TO_OPEN",
-                "option_symbol_id" => "SPY220819P00200000",
-                "quantity" => 1,
-            ]
-        ],
-        "strategy_type" => "CUSTOM",
-    ]);
 
 try {
     $result = $snaptrade->options->getOptionStrategy(
+        underlying_symbol_id: $underlying_symbol_id, 
+        legs: $legs, 
+        strategy_type: $strategy_type, 
         user_id: $user_id, 
         user_secret: $user_secret, 
-        account_id: $account_id, 
-        options_get_option_strategy_request: $options_get_option_strategy_request
+        account_id: $account_id
     );
     print_r($result->$getStrategy());
     print_r($result->$getOpenPrice());
@@ -303,23 +303,23 @@ $snaptrade = new \SnapTrade\Client(
     consumerKey: getenv("SNAPTRADE_CONSUMER_KEY")
 );
 
+$order_type = "Limit";
+$time_in_force = "DAY";
+$price = 31.33; // Trade Price if limit or stop limit order
 $user_id = "John.doe@snaptrade.com";
 $user_secret = "USERSECRET123";
 $account_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"; // The ID of the account get positions.
 $option_strategy_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"; // Option strategy id obtained from response when creating option strategy object
-$options_place_option_strategy_request = new \SnapTrade\Model\OptionsPlaceOptionStrategyRequest([
-        "order_type" => "Limit",
-        "time_in_force" => "DAY",
-        "price" => 31.33,
-    ]);
 
 try {
     $result = $snaptrade->options->placeOptionStrategy(
+        order_type: $order_type, 
+        time_in_force: $time_in_force, 
+        price: $price, 
         user_id: $user_id, 
         user_secret: $user_secret, 
         account_id: $account_id, 
-        option_strategy_id: $option_strategy_id, 
-        options_place_option_strategy_request: $options_place_option_strategy_request
+        option_strategy_id: $option_strategy_id
     );
     print_r($result->$getStrategy());
     print_r($result->$getStatus());

@@ -28,14 +28,13 @@ $snaptrade = new \SnapTrade\Client(
 
 $user_id = "John.doe@snaptrade.com";
 $user_secret = "USERSECRET123";
-$snap_trade_api_disclaimer_request = new \SnapTrade\Model\SnapTradeApiDisclaimerRequest([
-    ]);
+$accepted = True; // A boolean that indicates whether this user has accepted the disclaimer or not.
 
 try {
     $result = $snaptrade->apiDisclaimer->accept(
         user_id: $user_id, 
         user_secret: $user_secret, 
-        snap_trade_api_disclaimer_request: $snap_trade_api_disclaimer_request
+        accepted: $accepted
     );
     print_r($result->$getAccepted());
     print_r($result->$getTimestamp());

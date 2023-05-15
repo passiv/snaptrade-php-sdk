@@ -22,7 +22,7 @@ To install the bindings via [Composer](https://getcomposer.org/), add the follow
     }
   ],
   "require": {
-    "konfig/snaptrade-php-sdk": "1.1.0"
+    "konfig/snaptrade-php-sdk": "1.2.0"
   }
 }
 ```

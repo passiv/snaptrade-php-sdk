@@ -299,29 +299,6 @@ class Configuration
     }
 
     /**
-     * Sets the tokenUrl for OAuth
-     *
-     * @param string $tokenUrl
-     *
-     * @return $this
-     */
-    public function setTokenUrl($tokenUrl)
-    {
-        $this->tokenUrl = $tokenUrl;
-        return $this;
-    }
-
-    /**
-     * Gets the tokenUrl for OAuth
-     *
-     * @return string $tokenUrl
-     */
-    public function getTokenUrl()
-    {
-        return $this->tokenUrl;
-    }
-
-    /**
      * Sets the host
      *
      * @param string $host Host

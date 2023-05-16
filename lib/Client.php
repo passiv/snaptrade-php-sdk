@@ -24,7 +24,7 @@ class Client
         string $clientId = null,
         string $Signature = null,
         string $timestamp = null,
-        string $host = null,
+        string $host = 'https://api.snaptrade.com/api/v1',
         \SnapTrade\Configuration $config = null
     )
     {

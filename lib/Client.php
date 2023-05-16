@@ -24,6 +24,7 @@ class Client
         string $clientId = null,
         string $Signature = null,
         string $timestamp = null,
+        string $host = null,
         \SnapTrade\Configuration $config = null
     )
     {
@@ -34,6 +35,7 @@ class Client
                 Signature: $Signature,
                 timestamp: $timestamp,
             );
+            $config->setHost($host);
         }
         $this->accountInformation = new \SnapTrade\Api\AccountInformationApi($config);
         $this->apiDisclaimer = new \SnapTrade\Api\ApiDisclaimerApi($config);

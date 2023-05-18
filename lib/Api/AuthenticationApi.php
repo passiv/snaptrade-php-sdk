@@ -145,6 +145,8 @@ class AuthenticationApi extends \SnapTrade\CustomApi
      */
     public function deleteSnapTradeUser(
         $user_id,
+
+
         string $contentType = self::contentTypes['deleteSnapTradeUser'][0]
 
     )
@@ -351,6 +353,8 @@ class AuthenticationApi extends \SnapTrade\CustomApi
      */
     public function deleteSnapTradeUserAsync(
         $user_id,
+
+
         string $contentType = self::contentTypes['deleteSnapTradeUser'][0]
 
     )
@@ -555,6 +559,8 @@ class AuthenticationApi extends \SnapTrade\CustomApi
     public function getUserJWT(
         $user_id,
         $user_secret,
+
+
         string $contentType = self::contentTypes['getUserJWT'][0]
 
     )
@@ -765,6 +771,8 @@ class AuthenticationApi extends \SnapTrade\CustomApi
     public function getUserJWTAsync(
         $user_id,
         $user_secret,
+
+
         string $contentType = self::contentTypes['getUserJWT'][0]
 
     )
@@ -988,6 +996,8 @@ class AuthenticationApi extends \SnapTrade\CustomApi
      * @return string[]|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\Model404FailedRequestResponse
      */
     public function listSnapTradeUsers(
+
+
         string $contentType = self::contentTypes['listSnapTradeUsers'][0]
 
     )
@@ -1167,6 +1177,8 @@ class AuthenticationApi extends \SnapTrade\CustomApi
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function listSnapTradeUsersAsync(
+
+
         string $contentType = self::contentTypes['listSnapTradeUsers'][0]
 
     )
@@ -1354,6 +1366,8 @@ class AuthenticationApi extends \SnapTrade\CustomApi
         $custom_redirect = SENTINEL_VALUE,
         $reconnect = SENTINEL_VALUE,
         $connection_type = SENTINEL_VALUE,
+
+
         string $contentType = self::contentTypes['loginSnapTradeUser'][0]
 
     )
@@ -1579,6 +1593,8 @@ class AuthenticationApi extends \SnapTrade\CustomApi
         $custom_redirect = SENTINEL_VALUE,
         $reconnect = SENTINEL_VALUE,
         $connection_type = SENTINEL_VALUE,
+
+
         string $contentType = self::contentTypes['loginSnapTradeUser'][0]
 
     )
@@ -1827,8 +1843,10 @@ class AuthenticationApi extends \SnapTrade\CustomApi
      * @return \SnapTrade\Model\UserIDandSecret|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\Model404FailedRequestResponse
      */
     public function registerSnapTradeUser(
+
         $user_id = SENTINEL_VALUE,
         $rsa_public_key = SENTINEL_VALUE,
+
         string $contentType = self::contentTypes['registerSnapTradeUser'][0]
 
     )
@@ -2015,8 +2033,10 @@ class AuthenticationApi extends \SnapTrade\CustomApi
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function registerSnapTradeUserAsync(
+
         $user_id = SENTINEL_VALUE,
         $rsa_public_key = SENTINEL_VALUE,
+
         string $contentType = self::contentTypes['registerSnapTradeUser'][0]
 
     )

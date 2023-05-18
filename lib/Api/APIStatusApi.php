@@ -131,6 +131,8 @@ class ApiStatusApi extends \SnapTrade\CustomApi
      * @return \SnapTrade\Model\Status
      */
     public function check(
+
+
         string $contentType = self::contentTypes['check'][0]
 
     )
@@ -264,6 +266,8 @@ class ApiStatusApi extends \SnapTrade\CustomApi
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function checkAsync(
+
+
         string $contentType = self::contentTypes['check'][0]
 
     )

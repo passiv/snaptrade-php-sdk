@@ -163,6 +163,8 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      */
     public function getCurrencyExchangeRatePair(
         $currency_pair,
+
+
         string $contentType = self::contentTypes['getCurrencyExchangeRatePair'][0]
 
     )
@@ -300,6 +302,8 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      */
     public function getCurrencyExchangeRatePairAsync(
         $currency_pair,
+
+
         string $contentType = self::contentTypes['getCurrencyExchangeRatePair'][0]
 
     )
@@ -497,6 +501,8 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * @return \SnapTrade\Model\PartnerData|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\Model401FailedRequestResponse|\SnapTrade\Model\Model404FailedRequestResponse
      */
     public function getPartnerInfo(
+
+
         string $contentType = self::contentTypes['getPartnerInfo'][0]
 
     )
@@ -699,6 +705,8 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function getPartnerInfoAsync(
+
+
         string $contentType = self::contentTypes['getPartnerInfo'][0]
 
     )
@@ -876,6 +884,8 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * @return \SnapTrade\Model\SecurityType[]
      */
     public function getSecurityTypes(
+
+
         string $contentType = self::contentTypes['getSecurityTypes'][0]
 
     )
@@ -1009,6 +1019,8 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function getSecurityTypesAsync(
+
+
         string $contentType = self::contentTypes['getSecurityTypes'][0]
 
     )
@@ -1186,6 +1198,8 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * @return \SnapTrade\Model\Exchange[]
      */
     public function getStockExchanges(
+
+
         string $contentType = self::contentTypes['getStockExchanges'][0]
 
     )
@@ -1319,6 +1333,8 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function getStockExchangesAsync(
+
+
         string $contentType = self::contentTypes['getStockExchanges'][0]
 
     )
@@ -1498,6 +1514,8 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      */
     public function getSymbols(
         $substring = SENTINEL_VALUE,
+
+
         string $contentType = self::contentTypes['getSymbols'][0]
 
     )
@@ -1638,6 +1656,8 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      */
     public function getSymbolsAsync(
         $substring = SENTINEL_VALUE,
+
+
         string $contentType = self::contentTypes['getSymbols'][0]
 
     )
@@ -1839,6 +1859,8 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
     public function getSymbolsByTicker(
         $ticker,
         $symbol_id = SENTINEL_VALUE,
+
+
         string $contentType = self::contentTypes['getSymbolsByTicker'][0]
 
     )
@@ -1980,6 +2002,8 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
     public function getSymbolsByTickerAsync(
         $ticker,
         $symbol_id = SENTINEL_VALUE,
+
+
         string $contentType = self::contentTypes['getSymbolsByTicker'][0]
 
     )
@@ -2196,6 +2220,8 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      */
     public function listAllBrokerageAuthorizationType(
         $brokerage = SENTINEL_VALUE,
+
+
         string $contentType = self::contentTypes['listAllBrokerageAuthorizationType'][0]
 
     )
@@ -2333,6 +2359,8 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      */
     public function listAllBrokerageAuthorizationTypeAsync(
         $brokerage = SENTINEL_VALUE,
+
+
         string $contentType = self::contentTypes['listAllBrokerageAuthorizationType'][0]
 
     )
@@ -2527,6 +2555,8 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * @return \SnapTrade\Model\Brokerage[]
      */
     public function listAllBrokerages(
+
+
         string $contentType = self::contentTypes['listAllBrokerages'][0]
 
     )
@@ -2660,6 +2690,8 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function listAllBrokeragesAsync(
+
+
         string $contentType = self::contentTypes['listAllBrokerages'][0]
 
     )
@@ -2837,6 +2869,8 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * @return \SnapTrade\Model\Currency[]
      */
     public function listAllCurrencies(
+
+
         string $contentType = self::contentTypes['listAllCurrencies'][0]
 
     )
@@ -2970,6 +3004,8 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function listAllCurrenciesAsync(
+
+
         string $contentType = self::contentTypes['listAllCurrencies'][0]
 
     )
@@ -3147,6 +3183,8 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * @return \SnapTrade\Model\ExchangeRatePairs[]
      */
     public function listAllCurrenciesRates(
+
+
         string $contentType = self::contentTypes['listAllCurrenciesRates'][0]
 
     )
@@ -3280,6 +3318,8 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function listAllCurrenciesRatesAsync(
+
+
         string $contentType = self::contentTypes['listAllCurrenciesRates'][0]
 
     )
@@ -3465,6 +3505,8 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
         $user_secret,
         $account_id,
         $substring = SENTINEL_VALUE,
+
+
         string $contentType = self::contentTypes['symbolSearchUserAccount'][0]
 
     )
@@ -3617,6 +3659,8 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
         $user_secret,
         $account_id,
         $substring = SENTINEL_VALUE,
+
+
         string $contentType = self::contentTypes['symbolSearchUserAccount'][0]
 
     )

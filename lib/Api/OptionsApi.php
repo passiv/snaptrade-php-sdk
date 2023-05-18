@@ -147,12 +147,14 @@ class OptionsApi extends \SnapTrade\CustomApi
      * @return \SnapTrade\Model\StrategyQuotes
      */
     public function getOptionStrategy(
+
         $underlying_symbol_id,
         $legs,
         $strategy_type,
         $user_id,
         $user_secret,
         $account_id,
+
         string $contentType = self::contentTypes['getOptionStrategy'][0]
 
     )
@@ -303,12 +305,14 @@ class OptionsApi extends \SnapTrade\CustomApi
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function getOptionStrategyAsync(
+
         $underlying_symbol_id,
         $legs,
         $strategy_type,
         $user_id,
         $user_secret,
         $account_id,
+
         string $contentType = self::contentTypes['getOptionStrategy'][0]
 
     )
@@ -588,6 +592,8 @@ class OptionsApi extends \SnapTrade\CustomApi
         $user_secret,
         $account_id,
         $symbol,
+
+
         string $contentType = self::contentTypes['getOptionsChain'][0]
 
     )
@@ -737,6 +743,8 @@ class OptionsApi extends \SnapTrade\CustomApi
         $user_secret,
         $account_id,
         $symbol,
+
+
         string $contentType = self::contentTypes['getOptionsChain'][0]
 
     )
@@ -1011,6 +1019,8 @@ class OptionsApi extends \SnapTrade\CustomApi
         $user_secret,
         $account_id,
         $option_strategy_id,
+
+
         string $contentType = self::contentTypes['getOptionsStrategyQuote'][0]
 
     )
@@ -1160,6 +1170,8 @@ class OptionsApi extends \SnapTrade\CustomApi
         $user_secret,
         $account_id,
         $option_strategy_id,
+
+
         string $contentType = self::contentTypes['getOptionsStrategyQuote'][0]
 
     )
@@ -1429,6 +1441,8 @@ class OptionsApi extends \SnapTrade\CustomApi
         $user_id,
         $user_secret,
         $account_id,
+
+
         string $contentType = self::contentTypes['listOptionHoldings'][0]
 
     )
@@ -1574,6 +1588,8 @@ class OptionsApi extends \SnapTrade\CustomApi
         $user_id,
         $user_secret,
         $account_id,
+
+
         string $contentType = self::contentTypes['listOptionHoldings'][0]
 
     )
@@ -1822,6 +1838,7 @@ class OptionsApi extends \SnapTrade\CustomApi
      * @return \SnapTrade\Model\StrategyOrderRecord
      */
     public function placeOptionStrategy(
+
         $order_type,
         $time_in_force,
         $price,
@@ -1829,6 +1846,7 @@ class OptionsApi extends \SnapTrade\CustomApi
         $user_secret,
         $account_id,
         $option_strategy_id,
+
         string $contentType = self::contentTypes['placeOptionStrategy'][0]
 
     )
@@ -1982,6 +2000,7 @@ class OptionsApi extends \SnapTrade\CustomApi
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function placeOptionStrategyAsync(
+
         $order_type,
         $time_in_force,
         $price,
@@ -1989,6 +2008,7 @@ class OptionsApi extends \SnapTrade\CustomApi
         $user_secret,
         $account_id,
         $option_strategy_id,
+
         string $contentType = self::contentTypes['placeOptionStrategy'][0]
 
     )

@@ -162,10 +162,12 @@ class TradingApi extends \SnapTrade\CustomApi
      * @return \SnapTrade\Model\AccountOrderRecord|\SnapTrade\Model\Model400FailedRequestResponse
      */
     public function cancelUserAccountOrder(
+
         $user_id,
         $user_secret,
         $account_id,
         $brokerage_order_id = SENTINEL_VALUE,
+
         string $contentType = self::contentTypes['cancelUserAccountOrder'][0]
 
     )
@@ -337,10 +339,12 @@ class TradingApi extends \SnapTrade\CustomApi
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function cancelUserAccountOrderAsync(
+
         $user_id,
         $user_secret,
         $account_id,
         $brokerage_order_id = SENTINEL_VALUE,
+
         string $contentType = self::contentTypes['cancelUserAccountOrder'][0]
 
     )
@@ -616,6 +620,8 @@ class TradingApi extends \SnapTrade\CustomApi
         $portfolio_group_id,
         $calculated_trade_id,
         $trade_id,
+
+
         string $contentType = self::contentTypes['getCalculatedTradeImpactById'][0]
 
     )
@@ -761,6 +767,8 @@ class TradingApi extends \SnapTrade\CustomApi
         $portfolio_group_id,
         $calculated_trade_id,
         $trade_id,
+
+
         string $contentType = self::contentTypes['getCalculatedTradeImpactById'][0]
 
     )
@@ -1002,6 +1010,8 @@ class TradingApi extends \SnapTrade\CustomApi
     public function getCalculatedTradesImpact(
         $portfolio_group_id,
         $calculated_trade_id,
+
+
         string $contentType = self::contentTypes['getCalculatedTradesImpact'][0]
 
     )
@@ -1143,6 +1153,8 @@ class TradingApi extends \SnapTrade\CustomApi
     public function getCalculatedTradesImpactAsync(
         $portfolio_group_id,
         $calculated_trade_id,
+
+
         string $contentType = self::contentTypes['getCalculatedTradesImpact'][0]
 
     )
@@ -1363,6 +1375,7 @@ class TradingApi extends \SnapTrade\CustomApi
      * @return \SnapTrade\Model\ManualTradeAndImpact|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\Model403FailedRequestResponse
      */
     public function getOrderImpact(
+
         $user_id,
         $user_secret,
         $account_id = SENTINEL_VALUE,
@@ -1373,6 +1386,7 @@ class TradingApi extends \SnapTrade\CustomApi
         $time_in_force = SENTINEL_VALUE,
         $units = SENTINEL_VALUE,
         $universal_symbol_id = SENTINEL_VALUE,
+
         string $contentType = self::contentTypes['getOrderImpact'][0]
 
     )
@@ -1571,6 +1585,7 @@ class TradingApi extends \SnapTrade\CustomApi
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function getOrderImpactAsync(
+
         $user_id,
         $user_secret,
         $account_id = SENTINEL_VALUE,
@@ -1581,6 +1596,7 @@ class TradingApi extends \SnapTrade\CustomApi
         $time_in_force = SENTINEL_VALUE,
         $units = SENTINEL_VALUE,
         $universal_symbol_id = SENTINEL_VALUE,
+
         string $contentType = self::contentTypes['getOrderImpact'][0]
 
     )
@@ -1847,6 +1863,8 @@ class TradingApi extends \SnapTrade\CustomApi
         $symbols,
         $account_id,
         $use_ticker = SENTINEL_VALUE,
+
+
         string $contentType = self::contentTypes['getUserAccountQuotes'][0]
 
     )
@@ -2000,6 +2018,8 @@ class TradingApi extends \SnapTrade\CustomApi
         $symbols,
         $account_id,
         $use_ticker = SENTINEL_VALUE,
+
+
         string $contentType = self::contentTypes['getUserAccountQuotes'][0]
 
     )
@@ -2294,6 +2314,8 @@ class TradingApi extends \SnapTrade\CustomApi
         $units = SENTINEL_VALUE,
         $price = SENTINEL_VALUE,
         $sequence = SENTINEL_VALUE,
+
+
         string $contentType = self::contentTypes['modifyCalculatedTradeById'][0]
 
     )
@@ -2460,6 +2482,8 @@ class TradingApi extends \SnapTrade\CustomApi
         $units = SENTINEL_VALUE,
         $price = SENTINEL_VALUE,
         $sequence = SENTINEL_VALUE,
+
+
         string $contentType = self::contentTypes['modifyCalculatedTradeById'][0]
 
     )
@@ -2728,6 +2752,8 @@ class TradingApi extends \SnapTrade\CustomApi
     public function placeCalculatedTrades(
         $portfolio_group_id,
         $calculated_trade_id,
+
+
         string $contentType = self::contentTypes['placeCalculatedTrades'][0]
 
     )
@@ -2869,6 +2895,8 @@ class TradingApi extends \SnapTrade\CustomApi
     public function placeCalculatedTradesAsync(
         $portfolio_group_id,
         $calculated_trade_id,
+
+
         string $contentType = self::contentTypes['placeCalculatedTrades'][0]
 
     )
@@ -3089,6 +3117,7 @@ class TradingApi extends \SnapTrade\CustomApi
      * @return \SnapTrade\Model\AccountOrderRecord|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\Model403FailedRequestResponse
      */
     public function placeForceOrder(
+
         $user_id,
         $user_secret,
         $account_id = SENTINEL_VALUE,
@@ -3099,6 +3128,7 @@ class TradingApi extends \SnapTrade\CustomApi
         $time_in_force = SENTINEL_VALUE,
         $units = SENTINEL_VALUE,
         $universal_symbol_id = SENTINEL_VALUE,
+
         string $contentType = self::contentTypes['placeForceOrder'][0]
 
     )
@@ -3297,6 +3327,7 @@ class TradingApi extends \SnapTrade\CustomApi
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function placeForceOrderAsync(
+
         $user_id,
         $user_secret,
         $account_id = SENTINEL_VALUE,
@@ -3307,6 +3338,7 @@ class TradingApi extends \SnapTrade\CustomApi
         $time_in_force = SENTINEL_VALUE,
         $units = SENTINEL_VALUE,
         $universal_symbol_id = SENTINEL_VALUE,
+
         string $contentType = self::contentTypes['placeForceOrder'][0]
 
     )
@@ -3566,10 +3598,12 @@ class TradingApi extends \SnapTrade\CustomApi
      * @return \SnapTrade\Model\AccountOrderRecord|\SnapTrade\Model\Model400FailedRequestResponse
      */
     public function placeOCOOrder(
+
         $user_id,
         $user_secret,
         $first_trade_id = SENTINEL_VALUE,
         $second_trade_id = SENTINEL_VALUE,
+
         string $contentType = self::contentTypes['placeOCOOrder'][0]
 
     )
@@ -3739,10 +3773,12 @@ class TradingApi extends \SnapTrade\CustomApi
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function placeOCOOrderAsync(
+
         $user_id,
         $user_secret,
         $first_trade_id = SENTINEL_VALUE,
         $second_trade_id = SENTINEL_VALUE,
+
         string $contentType = self::contentTypes['placeOCOOrder'][0]
 
     )
@@ -3999,6 +4035,8 @@ class TradingApi extends \SnapTrade\CustomApi
         $trade_id,
         $user_id,
         $user_secret,
+
+
         string $contentType = self::contentTypes['placeOrder'][0]
 
     )
@@ -4167,6 +4205,8 @@ class TradingApi extends \SnapTrade\CustomApi
         $trade_id,
         $user_id,
         $user_secret,
+
+
         string $contentType = self::contentTypes['placeOrder'][0]
 
     )

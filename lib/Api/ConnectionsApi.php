@@ -146,6 +146,8 @@ class ConnectionsApi extends \SnapTrade\CustomApi
         $authorization_id,
         $user_id,
         $user_secret,
+
+
         string $contentType = self::contentTypes['detailBrokerageAuthorization'][0]
 
     )
@@ -291,6 +293,8 @@ class ConnectionsApi extends \SnapTrade\CustomApi
         $authorization_id,
         $user_id,
         $user_secret,
+
+
         string $contentType = self::contentTypes['detailBrokerageAuthorization'][0]
 
     )
@@ -538,6 +542,8 @@ class ConnectionsApi extends \SnapTrade\CustomApi
     public function listBrokerageAuthorizations(
         $user_id,
         $user_secret,
+
+
         string $contentType = self::contentTypes['listBrokerageAuthorizations'][0]
 
     )
@@ -679,6 +685,8 @@ class ConnectionsApi extends \SnapTrade\CustomApi
     public function listBrokerageAuthorizationsAsync(
         $user_id,
         $user_secret,
+
+
         string $contentType = self::contentTypes['listBrokerageAuthorizations'][0]
 
     )
@@ -908,6 +916,8 @@ class ConnectionsApi extends \SnapTrade\CustomApi
         $authorization_id,
         $user_id,
         $user_secret,
+
+
         string $contentType = self::contentTypes['removeBrokerageAuthorization'][0]
 
     )
@@ -1012,6 +1022,8 @@ class ConnectionsApi extends \SnapTrade\CustomApi
         $authorization_id,
         $user_id,
         $user_secret,
+
+
         string $contentType = self::contentTypes['removeBrokerageAuthorization'][0]
 
     )
@@ -1248,6 +1260,8 @@ class ConnectionsApi extends \SnapTrade\CustomApi
         $partner_client_id,
         $user_id = SENTINEL_VALUE,
         $session_id = SENTINEL_VALUE,
+
+
         string $contentType = self::contentTypes['sessionEvents'][0]
 
     )
@@ -1393,6 +1407,8 @@ class ConnectionsApi extends \SnapTrade\CustomApi
         $partner_client_id,
         $user_id = SENTINEL_VALUE,
         $session_id = SENTINEL_VALUE,
+
+
         string $contentType = self::contentTypes['sessionEvents'][0]
 
     )

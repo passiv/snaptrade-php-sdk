@@ -65,7 +65,7 @@ class ObjectSerializer
             // If we are serializing for a Model, we want to initialize an
             // instance of the Model. This bug was surfaced when we passed "[]"
             // for a Model and expected to serialize "{}"
-            if (class_exists($type)) {
+            if ($type !== null && class_exists($type)) {
                 return self::sanitizeForSerialization(new $type($data), $type);
             }
 

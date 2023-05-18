@@ -158,6 +158,8 @@ class AccountInformationApi extends \SnapTrade\CustomApi
         $user_id,
         $user_secret,
         $brokerage_authorizations = SENTINEL_VALUE,
+
+
         string $contentType = self::contentTypes['getAllUserHoldings'][0]
 
     )
@@ -349,6 +351,8 @@ class AccountInformationApi extends \SnapTrade\CustomApi
         $user_id,
         $user_secret,
         $brokerage_authorizations = SENTINEL_VALUE,
+
+
         string $contentType = self::contentTypes['getAllUserHoldings'][0]
 
     )
@@ -595,6 +599,8 @@ class AccountInformationApi extends \SnapTrade\CustomApi
         $user_id,
         $user_secret,
         $account_id,
+
+
         string $contentType = self::contentTypes['getUserAccountBalance'][0]
 
     )
@@ -740,6 +746,8 @@ class AccountInformationApi extends \SnapTrade\CustomApi
         $user_id,
         $user_secret,
         $account_id,
+
+
         string $contentType = self::contentTypes['getUserAccountBalance'][0]
 
     )
@@ -989,6 +997,8 @@ class AccountInformationApi extends \SnapTrade\CustomApi
         $user_id,
         $user_secret,
         $account_id,
+
+
         string $contentType = self::contentTypes['getUserAccountDetails'][0]
 
     )
@@ -1134,6 +1144,8 @@ class AccountInformationApi extends \SnapTrade\CustomApi
         $user_id,
         $user_secret,
         $account_id,
+
+
         string $contentType = self::contentTypes['getUserAccountDetails'][0]
 
     )
@@ -1385,6 +1397,8 @@ class AccountInformationApi extends \SnapTrade\CustomApi
         $user_secret,
         $account_id,
         $state = SENTINEL_VALUE,
+
+
         string $contentType = self::contentTypes['getUserAccountOrders'][0]
 
     )
@@ -1534,6 +1548,8 @@ class AccountInformationApi extends \SnapTrade\CustomApi
         $user_secret,
         $account_id,
         $state = SENTINEL_VALUE,
+
+
         string $contentType = self::contentTypes['getUserAccountOrders'][0]
 
     )
@@ -1800,6 +1816,8 @@ class AccountInformationApi extends \SnapTrade\CustomApi
         $user_id,
         $user_secret,
         $account_id,
+
+
         string $contentType = self::contentTypes['getUserAccountPositions'][0]
 
     )
@@ -1945,6 +1963,8 @@ class AccountInformationApi extends \SnapTrade\CustomApi
         $user_id,
         $user_secret,
         $account_id,
+
+
         string $contentType = self::contentTypes['getUserAccountPositions'][0]
 
     )
@@ -2194,6 +2214,8 @@ class AccountInformationApi extends \SnapTrade\CustomApi
         $account_id,
         $user_id,
         $user_secret,
+
+
         string $contentType = self::contentTypes['getUserHoldings'][0]
 
     )
@@ -2385,6 +2407,8 @@ class AccountInformationApi extends \SnapTrade\CustomApi
         $account_id,
         $user_id,
         $user_secret,
+
+
         string $contentType = self::contentTypes['getUserHoldings'][0]
 
     )
@@ -2632,6 +2656,8 @@ class AccountInformationApi extends \SnapTrade\CustomApi
     public function listUserAccounts(
         $user_id,
         $user_secret,
+
+
         string $contentType = self::contentTypes['listUserAccounts'][0]
 
     )
@@ -2773,6 +2799,8 @@ class AccountInformationApi extends \SnapTrade\CustomApi
     public function listUserAccountsAsync(
         $user_id,
         $user_secret,
+
+
         string $contentType = self::contentTypes['listUserAccounts'][0]
 
     )
@@ -3002,6 +3030,8 @@ class AccountInformationApi extends \SnapTrade\CustomApi
         $user_id,
         $user_secret,
         $account_id,
+
+
         string $contentType = self::contentTypes['updateUserAccount'][0]
 
     )
@@ -3147,6 +3177,8 @@ class AccountInformationApi extends \SnapTrade\CustomApi
         $user_id,
         $user_secret,
         $account_id,
+
+
         string $contentType = self::contentTypes['updateUserAccount'][0]
 
     )

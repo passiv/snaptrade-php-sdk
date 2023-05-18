@@ -135,6 +135,8 @@ class ErrorLogsApi extends \SnapTrade\CustomApi
     public function listUserErrors(
         $user_id,
         $user_secret,
+
+
         string $contentType = self::contentTypes['listUserErrors'][0]
 
     )
@@ -276,6 +278,8 @@ class ErrorLogsApi extends \SnapTrade\CustomApi
     public function listUserErrorsAsync(
         $user_id,
         $user_secret,
+
+
         string $contentType = self::contentTypes['listUserErrors'][0]
 
     )

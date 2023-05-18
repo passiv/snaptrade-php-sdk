@@ -235,6 +235,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
         $exchange = SENTINEL_VALUE,
         $type = SENTINEL_VALUE,
         $currencies = SENTINEL_VALUE,
+
+
         string $contentType = self::contentTypes['addPortfolioExcludedAsset'][0]
 
     )
@@ -393,6 +395,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
         $exchange = SENTINEL_VALUE,
         $type = SENTINEL_VALUE,
         $currencies = SENTINEL_VALUE,
+
+
         string $contentType = self::contentTypes['addPortfolioExcludedAsset'][0]
 
     )
@@ -621,6 +625,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
     public function all(
         $user_id,
         $user_secret,
+
+
         string $contentType = self::contentTypes['all'][0]
 
     )
@@ -762,6 +768,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
     public function allAsync(
         $user_id,
         $user_secret,
+
+
         string $contentType = self::contentTypes['all'][0]
 
     )
@@ -988,10 +996,12 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @return \SnapTrade\Model\PortfolioGroup[]
      */
     public function create(
+
         $user_id,
         $user_secret,
         $id = SENTINEL_VALUE,
         $name = SENTINEL_VALUE,
+
         string $contentType = self::contentTypes['create'][0]
 
     )
@@ -1138,10 +1148,12 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function createAsync(
+
         $user_id,
         $user_secret,
         $id = SENTINEL_VALUE,
         $name = SENTINEL_VALUE,
+
         string $contentType = self::contentTypes['create'][0]
 
     )
@@ -1384,6 +1396,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @return \SnapTrade\Model\ModelAssetClassDetails
      */
     public function createAssetClass(
+
+
         string $contentType = self::contentTypes['createAssetClass'][0]
 
     )
@@ -1517,6 +1531,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function createAssetClassAsync(
+
+
         string $contentType = self::contentTypes['createAssetClass'][0]
 
     )
@@ -1694,6 +1710,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @return \SnapTrade\Model\ModelPortfolioDetails
      */
     public function createModelPortfolio(
+
+
         string $contentType = self::contentTypes['createModelPortfolio'][0]
 
     )
@@ -1827,6 +1845,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function createModelPortfolioAsync(
+
+
         string $contentType = self::contentTypes['createModelPortfolio'][0]
 
     )
@@ -2006,6 +2026,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function deleteAssetClass(
         $model_asset_class_id,
+
+
         string $contentType = self::contentTypes['deleteAssetClass'][0]
 
     )
@@ -2102,6 +2124,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function deleteAssetClassAsync(
         $model_asset_class_id,
+
+
         string $contentType = self::contentTypes['deleteAssetClass'][0]
 
     )
@@ -2290,6 +2314,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
     public function deleteExcludedAsset(
         $portfolio_group_id,
         $symbol_id,
+
+
         string $contentType = self::contentTypes['deleteExcludedAsset'][0]
 
     )
@@ -2390,6 +2416,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
     public function deleteExcludedAssetAsync(
         $portfolio_group_id,
         $symbol_id,
+
+
         string $contentType = self::contentTypes['deleteExcludedAsset'][0]
 
     )
@@ -2596,6 +2624,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function deleteModelPortfolioById(
         $model_portfolio_id,
+
+
         string $contentType = self::contentTypes['deleteModelPortfolioById'][0]
 
     )
@@ -2692,6 +2722,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function deleteModelPortfolioByIdAsync(
         $model_portfolio_id,
+
+
         string $contentType = self::contentTypes['deleteModelPortfolioById'][0]
 
     )
@@ -2878,6 +2910,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function deletePortfoli(
         $portfolio_group_id,
+
+
         string $contentType = self::contentTypes['deletePortfoli'][0]
 
     )
@@ -3015,6 +3049,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function deletePortfoliAsync(
         $portfolio_group_id,
+
+
         string $contentType = self::contentTypes['deletePortfoli'][0]
 
     )
@@ -3216,6 +3252,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
     public function deletePortfolioTargetById(
         $portfolio_group_id,
         $target_asset_id,
+
+
         string $contentType = self::contentTypes['deletePortfolioTargetById'][0]
 
     )
@@ -3357,6 +3395,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
     public function deletePortfolioTargetByIdAsync(
         $portfolio_group_id,
         $target_asset_id,
+
+
         string $contentType = self::contentTypes['deletePortfolioTargetById'][0]
 
     )
@@ -3576,6 +3616,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function detailAssetClass(
         $model_asset_class_id,
+
+
         string $contentType = self::contentTypes['detailAssetClass'][0]
 
     )
@@ -3713,6 +3755,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function detailAssetClassAsync(
         $model_asset_class_id,
+
+
         string $contentType = self::contentTypes['detailAssetClass'][0]
 
     )
@@ -3916,6 +3960,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
         $portfolio_group_id,
         $calculated_trade_id,
         $trade_id,
+
+
         string $contentType = self::contentTypes['getCalculatedTradeById'][0]
 
     )
@@ -4061,6 +4107,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
         $portfolio_group_id,
         $calculated_trade_id,
         $trade_id,
+
+
         string $contentType = self::contentTypes['getCalculatedTradeById'][0]
 
     )
@@ -4300,6 +4348,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function getModelDetailsById(
         $model_portfolio_id,
+
+
         string $contentType = self::contentTypes['getModelDetailsById'][0]
 
     )
@@ -4437,6 +4487,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function getModelDetailsByIdAsync(
         $model_portfolio_id,
+
+
         string $contentType = self::contentTypes['getModelDetailsById'][0]
 
     )
@@ -4636,6 +4688,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function getPortfolioBalances(
         $portfolio_group_id,
+
+
         string $contentType = self::contentTypes['getPortfolioBalances'][0]
 
     )
@@ -4773,6 +4827,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function getPortfolioBalancesAsync(
         $portfolio_group_id,
+
+
         string $contentType = self::contentTypes['getPortfolioBalances'][0]
 
     )
@@ -4972,6 +5028,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function getPortfolioDetailsById(
         $portfolio_group_id,
+
+
         string $contentType = self::contentTypes['getPortfolioDetailsById'][0]
 
     )
@@ -5109,6 +5167,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function getPortfolioDetailsByIdAsync(
         $portfolio_group_id,
+
+
         string $contentType = self::contentTypes['getPortfolioDetailsById'][0]
 
     )
@@ -5308,6 +5368,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function getPortfolioInfo(
         $portfolio_group_id,
+
+
         string $contentType = self::contentTypes['getPortfolioInfo'][0]
 
     )
@@ -5445,6 +5507,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function getPortfolioInfoAsync(
         $portfolio_group_id,
+
+
         string $contentType = self::contentTypes['getPortfolioInfo'][0]
 
     )
@@ -5644,6 +5708,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function getPortfolioSettings(
         $portfolio_group_id,
+
+
         string $contentType = self::contentTypes['getPortfolioSettings'][0]
 
     )
@@ -5781,6 +5847,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function getPortfolioSettingsAsync(
         $portfolio_group_id,
+
+
         string $contentType = self::contentTypes['getPortfolioSettings'][0]
 
     )
@@ -5982,6 +6050,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
     public function getPortfolioTargetById(
         $portfolio_group_id,
         $target_asset_id,
+
+
         string $contentType = self::contentTypes['getPortfolioTargetById'][0]
 
     )
@@ -6123,6 +6193,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
     public function getPortfolioTargetByIdAsync(
         $portfolio_group_id,
         $target_asset_id,
+
+
         string $contentType = self::contentTypes['getPortfolioTargetById'][0]
 
     )
@@ -6342,6 +6414,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function getPortfolioTargets(
         $portfolio_group_id,
+
+
         string $contentType = self::contentTypes['getPortfolioTargets'][0]
 
     )
@@ -6479,6 +6553,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function getPortfolioTargetsAsync(
         $portfolio_group_id,
+
+
         string $contentType = self::contentTypes['getPortfolioTargets'][0]
 
     )
@@ -6678,6 +6754,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function getPortoflioExcludedAssets(
         $portfolio_group_id,
+
+
         string $contentType = self::contentTypes['getPortoflioExcludedAssets'][0]
 
     )
@@ -6815,6 +6893,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function getPortoflioExcludedAssetsAsync(
         $portfolio_group_id,
+
+
         string $contentType = self::contentTypes['getPortoflioExcludedAssets'][0]
 
     )
@@ -7014,6 +7094,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function importModelPortfolio(
         $portfolio_group_id,
+
+
         string $contentType = self::contentTypes['importModelPortfolio'][0]
 
     )
@@ -7151,6 +7233,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function importModelPortfolioAsync(
         $portfolio_group_id,
+
+
         string $contentType = self::contentTypes['importModelPortfolio'][0]
 
     )
@@ -7348,6 +7432,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @return \SnapTrade\Model\ModelAssetClassDetails[]
      */
     public function listAssetClasses(
+
+
         string $contentType = self::contentTypes['listAssetClasses'][0]
 
     )
@@ -7481,6 +7567,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function listAssetClassesAsync(
+
+
         string $contentType = self::contentTypes['listAssetClasses'][0]
 
     )
@@ -7660,6 +7748,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function listCalculatedTrades(
         $portfolio_group_id,
+
+
         string $contentType = self::contentTypes['listCalculatedTrades'][0]
 
     )
@@ -7797,6 +7887,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function listCalculatedTradesAsync(
         $portfolio_group_id,
+
+
         string $contentType = self::contentTypes['listCalculatedTrades'][0]
 
     )
@@ -7994,6 +8086,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @return \SnapTrade\Model\ModelPortfolioDetails[]
      */
     public function listModelPortfolio(
+
+
         string $contentType = self::contentTypes['listModelPortfolio'][0]
 
     )
@@ -8127,6 +8221,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function listModelPortfolioAsync(
+
+
         string $contentType = self::contentTypes['listModelPortfolio'][0]
 
     )
@@ -8306,6 +8402,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function listPortfolioAccounts(
         $portfolio_group_id,
+
+
         string $contentType = self::contentTypes['listPortfolioAccounts'][0]
 
     )
@@ -8443,6 +8541,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function listPortfolioAccountsAsync(
         $portfolio_group_id,
+
+
         string $contentType = self::contentTypes['listPortfolioAccounts'][0]
 
     )
@@ -8642,10 +8742,12 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @return void
      */
     public function modifyModelPortfolioById(
+
         $model_portfolio_id,
         $model_portfolio = SENTINEL_VALUE,
         $model_portfolio_security = SENTINEL_VALUE,
         $model_portfolio_asset_class = SENTINEL_VALUE,
+
         string $contentType = self::contentTypes['modifyModelPortfolioById'][0]
 
     )
@@ -8749,10 +8851,12 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function modifyModelPortfolioByIdAsync(
+
         $model_portfolio_id,
         $model_portfolio = SENTINEL_VALUE,
         $model_portfolio_security = SENTINEL_VALUE,
         $model_portfolio_asset_class = SENTINEL_VALUE,
+
         string $contentType = self::contentTypes['modifyModelPortfolioById'][0]
 
     )
@@ -8967,9 +9071,11 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @return \SnapTrade\Model\PortfolioGroup
      */
     public function savePortfolio(
+
         $portfolio_group_id,
         $id = SENTINEL_VALUE,
         $name = SENTINEL_VALUE,
+
         string $contentType = self::contentTypes['savePortfolio'][0]
 
     )
@@ -9113,9 +9219,11 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function savePortfolioAsync(
+
         $portfolio_group_id,
         $id = SENTINEL_VALUE,
         $name = SENTINEL_VALUE,
+
         string $contentType = self::contentTypes['savePortfolio'][0]
 
     )
@@ -9336,6 +9444,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
     public function searchPortfolioSymbols(
         $portfolio_group_id,
         $substring = SENTINEL_VALUE,
+
+
         string $contentType = self::contentTypes['searchPortfolioSymbols'][0]
 
     )
@@ -9480,6 +9590,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
     public function searchPortfolioSymbolsAsync(
         $portfolio_group_id,
         $substring = SENTINEL_VALUE,
+
+
         string $contentType = self::contentTypes['searchPortfolioSymbols'][0]
 
     )
@@ -9699,8 +9811,10 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @return \SnapTrade\Model\TargetAsset[]
      */
     public function setPortfolioTargets(
-        $body = SENTINEL_VALUE,
         $portfolio_group_id,
+
+        $body = SENTINEL_VALUE,
+
         string $contentType = self::contentTypes['setPortfolioTargets'][0]
 
     )
@@ -9842,8 +9956,10 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function setPortfolioTargetsAsync(
-        $body = SENTINEL_VALUE,
         $portfolio_group_id,
+
+        $body = SENTINEL_VALUE,
+
         string $contentType = self::contentTypes['setPortfolioTargets'][0]
 
     )
@@ -10054,9 +10170,11 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @return void
      */
     public function updateAssetClass(
+
         $model_asset_class_id,
         $model_asset_class = SENTINEL_VALUE,
         $model_asset_class_target = SENTINEL_VALUE,
+
         string $contentType = self::contentTypes['updateAssetClass'][0]
 
     )
@@ -10159,9 +10277,11 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function updateAssetClassAsync(
+
         $model_asset_class_id,
         $model_asset_class = SENTINEL_VALUE,
         $model_asset_class_target = SENTINEL_VALUE,
+
         string $contentType = self::contentTypes['updateAssetClass'][0]
 
     )
@@ -10375,6 +10495,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function updatePortfolioSettings(
         $portfolio_group_id,
+
+
         string $contentType = self::contentTypes['updatePortfolioSettings'][0]
 
     )
@@ -10512,6 +10634,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function updatePortfolioSettingsAsync(
         $portfolio_group_id,
+
+
         string $contentType = self::contentTypes['updatePortfolioSettings'][0]
 
     )
@@ -10712,6 +10836,7 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @return \SnapTrade\Model\TargetAsset
      */
     public function updatePortfolioTargetById(
+
         $portfolio_group_id,
         $target_asset_id,
         $id = SENTINEL_VALUE,
@@ -10719,6 +10844,7 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
         $percent = SENTINEL_VALUE,
         $is_supported = SENTINEL_VALUE,
         $is_excluded = SENTINEL_VALUE,
+
         string $contentType = self::contentTypes['updatePortfolioTargetById'][0]
 
     )
@@ -10868,6 +10994,7 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function updatePortfolioTargetByIdAsync(
+
         $portfolio_group_id,
         $target_asset_id,
         $id = SENTINEL_VALUE,
@@ -10875,6 +11002,7 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
         $percent = SENTINEL_VALUE,
         $is_supported = SENTINEL_VALUE,
         $is_excluded = SENTINEL_VALUE,
+
         string $contentType = self::contentTypes['updatePortfolioTargetById'][0]
 
     )

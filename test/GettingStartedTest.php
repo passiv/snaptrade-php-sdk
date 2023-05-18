@@ -74,12 +74,6 @@ class GettingStartedTest extends TestCase
         $response = $snaptrade->portfolioManagement->all($userId, $userSecret);
         print_r($response);
 
-        $snaptrade->apiDisclaimer->accept(
-            $userId,
-            $userSecret,
-            accepted: true
-        );
-
         $holdings = $snaptrade->accountInformation->getAllUserHoldings($userId, $userSecret);
         print_r($holdings);
 

@@ -5,7 +5,6 @@ namespace SnapTrade;
 class Client
 {
     public readonly \SnapTrade\Api\AccountInformationApi $accountInformation;
-    public readonly \SnapTrade\Api\ApiDisclaimerApi $apiDisclaimer;
     public readonly \SnapTrade\Api\ApiStatusApi $apiStatus;
     public readonly \SnapTrade\Api\AuthenticationApi $authentication;
     public readonly \SnapTrade\Api\ConnectionsApi $connections;
@@ -35,10 +34,9 @@ class Client
                 Signature: $Signature,
                 timestamp: $timestamp,
             );
-            $config->setHost($host);
+            if ($host !== null) $config->setHost($host);
         }
         $this->accountInformation = new \SnapTrade\Api\AccountInformationApi($config);
-        $this->apiDisclaimer = new \SnapTrade\Api\ApiDisclaimerApi($config);
         $this->apiStatus = new \SnapTrade\Api\ApiStatusApi($config);
         $this->authentication = new \SnapTrade\Api\AuthenticationApi($config);
         $this->connections = new \SnapTrade\Api\ConnectionsApi($config);

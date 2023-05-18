@@ -22,7 +22,7 @@ To install the bindings via [Composer](https://getcomposer.org/), add the follow
     }
   ],
   "require": {
-    "konfig/snaptrade-php-sdk": "1.3.0"
+    "konfig/snaptrade-php-sdk": "1.4.0"
   }
 }
 ```
@@ -84,7 +84,6 @@ Class | Method | HTTP request | Description
 *AccountInformationApi* | [**getUserHoldings**](docs/Api/AccountInformationApi.md#getuserholdings) | **GET** /accounts/{accountId}/holdings | List balances, positions and orders for the specified account.
 *AccountInformationApi* | [**listUserAccounts**](docs/Api/AccountInformationApi.md#listuseraccounts) | **GET** /accounts | List all investment accounts for the user
 *AccountInformationApi* | [**updateUserAccount**](docs/Api/AccountInformationApi.md#updateuseraccount) | **PUT** /accounts/{accountId} | Update details of an investment account
-*ApiDisclaimerApi* | [**accept**](docs/Api/ApiDisclaimerApi.md#accept) | **POST** /snapTrade/acceptDisclaimer | Accept or Reject SnapTrade disclaimer agreement
 *ApiStatusApi* | [**check**](docs/Api/ApiStatusApi.md#check) | **GET** / | Get API Status
 *AuthenticationApi* | [**deleteSnapTradeUser**](docs/Api/AuthenticationApi.md#deletesnaptradeuser) | **DELETE** /snapTrade/deleteUser | Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user
 *AuthenticationApi* | [**getUserJWT**](docs/Api/AuthenticationApi.md#getuserjwt) | **GET** /snapTrade/encryptedJWT | Obtains an encrypted JWT tokens that should be decrypted on a user&#39;s local device
@@ -159,7 +158,6 @@ Class | Method | HTTP request | Description
 
 ## Models
 
-- [APIDisclaimerAcceptRequest](docs/Model/APIDisclaimerAcceptRequest.md)
 - [Account](docs/Model/Account.md)
 - [AccountHoldings](docs/Model/AccountHoldings.md)
 - [AccountHoldingsAccount](docs/Model/AccountHoldingsAccount.md)

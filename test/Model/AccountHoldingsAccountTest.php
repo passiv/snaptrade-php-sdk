@@ -100,6 +100,15 @@ class AccountHoldingsAccountTest extends TestCase
     }
 
     /**
+     * Test attribute "orders"
+     */
+    public function testPropertyOrders()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "total_value"
      */
     public function testPropertyTotalValue()

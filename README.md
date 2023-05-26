@@ -2,6 +2,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
+For more information, please visit [https://snaptrade.com/](https://snaptrade.com/).
 
 ## Installation & Usage
 
@@ -22,7 +23,7 @@ To install the bindings via [Composer](https://getcomposer.org/), add the follow
     }
   ],
   "require": {
-    "konfig/snaptrade-php-sdk": "1.4.0"
+    "konfig/snaptrade-php-sdk": "1.5.0"
   }
 }
 ```

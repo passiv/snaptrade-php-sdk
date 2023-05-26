@@ -384,6 +384,7 @@ try {
     print_r($result->$getAccount());
     print_r($result->$getBalances());
     print_r($result->$getPositions());
+    print_r($result->$getOrders());
     print_r($result->$getTotalValue());
 } catch (\Exception $e) {
     echo 'Exception when calling AccountInformationApi->getUserHoldings: ', $e->getMessage(), PHP_EOL;

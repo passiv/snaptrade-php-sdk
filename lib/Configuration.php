@@ -118,7 +118,7 @@ class Configuration
      */
     protected string $consumerKey = '';
 
-    
+
     /**
      * consumerKey - client state setter from konfig.yaml
      */

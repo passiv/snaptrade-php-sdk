@@ -133,6 +133,7 @@ class TransactionsAndReportingApi extends \SnapTrade\CustomApi
      * @param  \DateTime $end_date end_date (optional)
      * @param  string $accounts Optional comma seperated list of account IDs used to filter the request on specific accounts (optional)
      * @param  string $brokerage_authorizations Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations (optional)
+     * @param  string $type Optional comma seperated list of types to filter activities by. Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getActivities'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
@@ -146,6 +147,7 @@ class TransactionsAndReportingApi extends \SnapTrade\CustomApi
         $end_date = SENTINEL_VALUE,
         $accounts = SENTINEL_VALUE,
         $brokerage_authorizations = SENTINEL_VALUE,
+        $type = SENTINEL_VALUE,
 
 
         string $contentType = self::contentTypes['getActivities'][0]
@@ -153,7 +155,7 @@ class TransactionsAndReportingApi extends \SnapTrade\CustomApi
     )
     {
 
-        list($response) = $this->getActivitiesWithHttpInfo($user_id, $user_secret, $start_date, $end_date, $accounts, $brokerage_authorizations, $contentType);
+        list($response) = $this->getActivitiesWithHttpInfo($user_id, $user_secret, $start_date, $end_date, $accounts, $brokerage_authorizations, $type, $contentType);
         return $response;
     }
 
@@ -168,15 +170,16 @@ class TransactionsAndReportingApi extends \SnapTrade\CustomApi
      * @param  \DateTime $end_date (optional)
      * @param  string $accounts Optional comma seperated list of account IDs used to filter the request on specific accounts (optional)
      * @param  string $brokerage_authorizations Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations (optional)
+     * @param  string $type Optional comma seperated list of types to filter activities by. Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getActivities'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \SnapTrade\Model\UniversalActivity[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function getActivitiesWithHttpInfo($user_id, $user_secret, $start_date = null, $end_date = null, $accounts = null, $brokerage_authorizations = null, string $contentType = self::contentTypes['getActivities'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    public function getActivitiesWithHttpInfo($user_id, $user_secret, $start_date = null, $end_date = null, $accounts = null, $brokerage_authorizations = null, $type = null, string $contentType = self::contentTypes['getActivities'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->getActivitiesRequest($user_id, $user_secret, $start_date, $end_date, $accounts, $brokerage_authorizations, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getActivitiesRequest($user_id, $user_secret, $start_date, $end_date, $accounts, $brokerage_authorizations, $type, $contentType);
 
         // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
@@ -198,6 +201,7 @@ class TransactionsAndReportingApi extends \SnapTrade\CustomApi
                         $end_date,
                         $accounts,
                         $brokerage_authorizations,
+                        $type,
                         $contentType,
                         $requestOptions->setRetryOAuth(false)
                     );
@@ -293,6 +297,7 @@ class TransactionsAndReportingApi extends \SnapTrade\CustomApi
      * @param  \DateTime $end_date (optional)
      * @param  string $accounts Optional comma seperated list of account IDs used to filter the request on specific accounts (optional)
      * @param  string $brokerage_authorizations Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations (optional)
+     * @param  string $type Optional comma seperated list of types to filter activities by. Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getActivities'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -305,6 +310,7 @@ class TransactionsAndReportingApi extends \SnapTrade\CustomApi
         $end_date = SENTINEL_VALUE,
         $accounts = SENTINEL_VALUE,
         $brokerage_authorizations = SENTINEL_VALUE,
+        $type = SENTINEL_VALUE,
 
 
         string $contentType = self::contentTypes['getActivities'][0]
@@ -312,7 +318,7 @@ class TransactionsAndReportingApi extends \SnapTrade\CustomApi
     )
     {
 
-        return $this->getActivitiesAsyncWithHttpInfo($user_id, $user_secret, $start_date, $end_date, $accounts, $brokerage_authorizations, $contentType)
+        return $this->getActivitiesAsyncWithHttpInfo($user_id, $user_secret, $start_date, $end_date, $accounts, $brokerage_authorizations, $type, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -331,15 +337,16 @@ class TransactionsAndReportingApi extends \SnapTrade\CustomApi
      * @param  \DateTime $end_date (optional)
      * @param  string $accounts Optional comma seperated list of account IDs used to filter the request on specific accounts (optional)
      * @param  string $brokerage_authorizations Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations (optional)
+     * @param  string $type Optional comma seperated list of types to filter activities by. Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getActivities'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getActivitiesAsyncWithHttpInfo($user_id, $user_secret, $start_date = null, $end_date = null, $accounts = null, $brokerage_authorizations = null, string $contentType = self::contentTypes['getActivities'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    public function getActivitiesAsyncWithHttpInfo($user_id, $user_secret, $start_date = null, $end_date = null, $accounts = null, $brokerage_authorizations = null, $type = null, string $contentType = self::contentTypes['getActivities'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\UniversalActivity[]';
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->getActivitiesRequest($user_id, $user_secret, $start_date, $end_date, $accounts, $brokerage_authorizations, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getActivitiesRequest($user_id, $user_secret, $start_date, $end_date, $accounts, $brokerage_authorizations, $type, $contentType);
 
         // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
@@ -389,12 +396,13 @@ class TransactionsAndReportingApi extends \SnapTrade\CustomApi
      * @param  \DateTime $end_date (optional)
      * @param  string $accounts Optional comma seperated list of account IDs used to filter the request on specific accounts (optional)
      * @param  string $brokerage_authorizations Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations (optional)
+     * @param  string $type Optional comma seperated list of types to filter activities by. Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getActivities'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getActivitiesRequest($user_id, $user_secret, $start_date = SENTINEL_VALUE, $end_date = SENTINEL_VALUE, $accounts = SENTINEL_VALUE, $brokerage_authorizations = SENTINEL_VALUE, string $contentType = self::contentTypes['getActivities'][0])
+    public function getActivitiesRequest($user_id, $user_secret, $start_date = SENTINEL_VALUE, $end_date = SENTINEL_VALUE, $accounts = SENTINEL_VALUE, $brokerage_authorizations = SENTINEL_VALUE, $type = SENTINEL_VALUE, string $contentType = self::contentTypes['getActivities'][0])
     {
 
         // Check if $user_id is a string
@@ -424,6 +432,10 @@ class TransactionsAndReportingApi extends \SnapTrade\CustomApi
         // Check if $brokerage_authorizations is a string
         if ($brokerage_authorizations !== SENTINEL_VALUE && !is_string($brokerage_authorizations)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($brokerage_authorizations, true), gettype($brokerage_authorizations)));
+        }
+        // Check if $type is a string
+        if ($type !== SENTINEL_VALUE && !is_string($type)) {
+            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($type, true), gettype($type)));
         }
 
 
@@ -472,6 +484,17 @@ class TransactionsAndReportingApi extends \SnapTrade\CustomApi
             $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
                 $brokerage_authorizations,
                 'brokerageAuthorizations', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                false // required
+            ) ?? []);
+        }
+        if ($type !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $type,
+                'type', // param base name
                 'string', // openApiType
                 'form', // style
                 true, // explode

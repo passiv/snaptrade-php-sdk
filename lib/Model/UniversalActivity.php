@@ -61,6 +61,7 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
         'option_type' => 'string',
         'price' => 'float',
         'settlement_date' => 'string',
+        'external_reference_id' => 'string',
         'symbol' => '\SnapTrade\Model\Symbol',
         'option_symbol' => '\SnapTrade\Model\OptionsSymbol',
         'trade_date' => 'string',
@@ -86,6 +87,7 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
         'option_type' => null,
         'price' => null,
         'settlement_date' => null,
+        'external_reference_id' => null,
         'symbol' => null,
         'option_symbol' => null,
         'trade_date' => null,
@@ -109,6 +111,7 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
 		'option_type' => false,
 		'price' => false,
 		'settlement_date' => false,
+		'external_reference_id' => true,
 		'symbol' => false,
 		'option_symbol' => false,
 		'trade_date' => true,
@@ -212,6 +215,7 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
         'option_type' => 'option_type',
         'price' => 'price',
         'settlement_date' => 'settlement_date',
+        'external_reference_id' => 'external_reference_id',
         'symbol' => 'symbol',
         'option_symbol' => 'option_symbol',
         'trade_date' => 'trade_date',
@@ -235,6 +239,7 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
         'option_type' => 'setOptionType',
         'price' => 'setPrice',
         'settlement_date' => 'setSettlementDate',
+        'external_reference_id' => 'setExternalReferenceId',
         'symbol' => 'setSymbol',
         'option_symbol' => 'setOptionSymbol',
         'trade_date' => 'setTradeDate',
@@ -258,6 +263,7 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
         'option_type' => 'getOptionType',
         'price' => 'getPrice',
         'settlement_date' => 'getSettlementDate',
+        'external_reference_id' => 'getExternalReferenceId',
         'symbol' => 'getSymbol',
         'option_symbol' => 'getOptionSymbol',
         'trade_date' => 'getTradeDate',
@@ -332,6 +338,7 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
         $this->setIfExists('option_type', $data ?? [], null);
         $this->setIfExists('price', $data ?? [], null);
         $this->setIfExists('settlement_date', $data ?? [], null);
+        $this->setIfExists('external_reference_id', $data ?? [], null);
         $this->setIfExists('symbol', $data ?? [], null);
         $this->setIfExists('option_symbol', $data ?? [], null);
         $this->setIfExists('trade_date', $data ?? [], null);
@@ -674,6 +681,42 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
         }
 
         $this->container['settlement_date'] = $settlement_date;
+
+        return $this;
+    }
+
+    /**
+     * Gets external_reference_id
+     *
+     * @return string|null
+     */
+    public function getExternalReferenceId()
+    {
+        return $this->container['external_reference_id'];
+    }
+
+    /**
+     * Sets external_reference_id
+     *
+     * @param string|null $external_reference_id Reference ID from brokerage used to identify related transactions. For example if an order comprises of several transactions (buy, fee, fx), they can be grouped if they share the same external_reference_id
+     *
+     * @return self
+     */
+    public function setExternalReferenceId($external_reference_id)
+    {
+
+        if (is_null($external_reference_id)) {
+            array_push($this->openAPINullablesSetToNull, 'external_reference_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('external_reference_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['external_reference_id'] = $external_reference_id;
 
         return $this;
     }

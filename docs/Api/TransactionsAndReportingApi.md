@@ -57,6 +57,7 @@ try {
     print_r($result->$getOptionType());
     print_r($result->$getPrice());
     print_r($result->$getSettlementDate());
+    print_r($result->$getExternalReferenceId());
     print_r($result->$getSymbol());
     print_r($result->$getOptionSymbol());
     print_r($result->$getTradeDate());

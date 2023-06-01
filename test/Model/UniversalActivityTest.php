@@ -163,6 +163,15 @@ class UniversalActivityTest extends TestCase
     }
 
     /**
+     * Test attribute "external_reference_id"
+     */
+    public function testPropertyExternalReferenceId()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "symbol"
      */
     public function testPropertySymbol()

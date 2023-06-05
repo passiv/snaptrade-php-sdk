@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **string** |  | [optional]
-**account** | [**\SnapTrade\Model\Account**](Account.md) |  | [optional]
+**account** | **string** |  | [optional]
 **order_type** | [**\SnapTrade\Model\OrderType**](OrderType.md) |  | [optional]
 **time_in_force** | [**\SnapTrade\Model\TimeInForce**](TimeInForce.md) |  | [optional]
 **symbol** | [**\SnapTrade\Model\ManualTradeSymbol**](ManualTradeSymbol.md) |  | [optional]

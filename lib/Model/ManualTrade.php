@@ -52,7 +52,7 @@ class ManualTrade implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPITypes = [
         'id' => 'string',
-        'account' => '\SnapTrade\Model\Account',
+        'account' => 'string',
         'order_type' => '\SnapTrade\Model\OrderType',
         'time_in_force' => '\SnapTrade\Model\TimeInForce',
         'symbol' => '\SnapTrade\Model\ManualTradeSymbol',
@@ -364,7 +364,7 @@ class ManualTrade implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets account
      *
-     * @return \SnapTrade\Model\Account|null
+     * @return string|null
      */
     public function getAccount()
     {
@@ -374,7 +374,7 @@ class ManualTrade implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets account
      *
-     * @param \SnapTrade\Model\Account|null $account account
+     * @param string|null $account account
      *
      * @return self
      */

@@ -81,9 +81,9 @@ class StrategyQuotes implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static array $openAPINullables = [
         'strategy' => false,
-		'open_price' => false,
-		'bid_price' => false,
-		'ask_price' => false,
+		'open_price' => true,
+		'bid_price' => true,
+		'ask_price' => true,
 		'volatility' => false,
 		'greek' => false
     ];
@@ -367,7 +367,14 @@ class StrategyQuotes implements ModelInterface, ArrayAccess, \JsonSerializable
     {
 
         if (is_null($open_price)) {
-            throw new \InvalidArgumentException('non-nullable open_price cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'open_price');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('open_price', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['open_price'] = $open_price;
@@ -396,7 +403,14 @@ class StrategyQuotes implements ModelInterface, ArrayAccess, \JsonSerializable
     {
 
         if (is_null($bid_price)) {
-            throw new \InvalidArgumentException('non-nullable bid_price cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'bid_price');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('bid_price', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['bid_price'] = $bid_price;
@@ -425,7 +439,14 @@ class StrategyQuotes implements ModelInterface, ArrayAccess, \JsonSerializable
     {
 
         if (is_null($ask_price)) {
-            throw new \InvalidArgumentException('non-nullable ask_price cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'ask_price');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('ask_price', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['ask_price'] = $ask_price;

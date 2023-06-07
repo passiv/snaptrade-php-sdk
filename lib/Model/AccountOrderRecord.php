@@ -115,9 +115,9 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
 		'open_quantity' => false,
 		'canceled_quantity' => false,
 		'filled_quantity' => false,
-		'execution_price' => false,
-		'limit_price' => false,
-		'stop_price' => false,
+		'execution_price' => true,
+		'limit_price' => true,
+		'stop_price' => true,
 		'order_type' => false,
 		'time_in_force' => false,
 		'time_placed' => false,
@@ -713,7 +713,14 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     {
 
         if (is_null($execution_price)) {
-            throw new \InvalidArgumentException('non-nullable execution_price cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'execution_price');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('execution_price', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['execution_price'] = $execution_price;
@@ -742,7 +749,14 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     {
 
         if (is_null($limit_price)) {
-            throw new \InvalidArgumentException('non-nullable limit_price cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'limit_price');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('limit_price', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['limit_price'] = $limit_price;
@@ -771,7 +785,14 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     {
 
         if (is_null($stop_price)) {
-            throw new \InvalidArgumentException('non-nullable stop_price cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'stop_price');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('stop_price', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['stop_price'] = $stop_price;

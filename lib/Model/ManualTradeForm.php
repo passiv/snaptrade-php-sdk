@@ -88,7 +88,7 @@ class ManualTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
         'account_id' => false,
 		'action' => false,
 		'order_type' => false,
-		'price' => false,
+		'price' => true,
 		'stop' => true,
 		'time_in_force' => false,
 		'units' => false,
@@ -440,7 +440,14 @@ class ManualTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
     {
 
         if (is_null($price)) {
-            throw new \InvalidArgumentException('non-nullable price cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'price');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('price', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['price'] = $price;

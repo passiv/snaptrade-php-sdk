@@ -76,7 +76,7 @@ class OptionsPlaceOptionStrategyRequest implements ModelInterface, ArrayAccess, 
     protected static array $openAPINullables = [
         'order_type' => false,
 		'time_in_force' => false,
-		'price' => false
+		'price' => true
     ];
 
     /**
@@ -456,7 +456,14 @@ class OptionsPlaceOptionStrategyRequest implements ModelInterface, ArrayAccess, 
     {
 
         if (is_null($price)) {
-            throw new \InvalidArgumentException('non-nullable price cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'price');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('price', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['price'] = $price;

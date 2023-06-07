@@ -98,8 +98,8 @@ class StrategyOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializa
 		'closed_quantity' => false,
 		'order_type' => false,
 		'time_in_force' => false,
-		'limit_price' => false,
-		'execution_price' => false,
+		'limit_price' => true,
+		'execution_price' => true,
 		'time_placed' => false,
 		'time_updated' => false
     ];
@@ -717,7 +717,14 @@ class StrategyOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializa
     {
 
         if (is_null($limit_price)) {
-            throw new \InvalidArgumentException('non-nullable limit_price cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'limit_price');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('limit_price', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['limit_price'] = $limit_price;
@@ -746,7 +753,14 @@ class StrategyOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializa
     {
 
         if (is_null($execution_price)) {
-            throw new \InvalidArgumentException('non-nullable execution_price cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'execution_price');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('execution_price', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['execution_price'] = $execution_price;

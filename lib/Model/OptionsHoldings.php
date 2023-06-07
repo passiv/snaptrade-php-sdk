@@ -84,7 +84,7 @@ class OptionsHoldings implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => false,
 		'symbol' => false,
 		'option_symbol' => false,
-		'price' => false,
+		'price' => true,
 		'currency' => false,
 		'average_purchase_price' => true
     ];
@@ -426,7 +426,14 @@ class OptionsHoldings implements ModelInterface, ArrayAccess, \JsonSerializable
     {
 
         if (is_null($price)) {
-            throw new \InvalidArgumentException('non-nullable price cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'price');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('price', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['price'] = $price;

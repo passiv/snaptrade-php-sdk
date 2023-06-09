@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Configuration
  * PHP version 7.4
@@ -152,7 +151,8 @@ class Configuration
         string $clientId = null,
         string $Signature = null,
         string $timestamp = null,
-    ) {
+    )
+    {
         $this->tempFolderPath = sys_get_temp_dir();
         $this->setConsumerKey($consumerKey);
         $this->setApiKey("clientId", $clientId);

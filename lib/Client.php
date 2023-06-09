@@ -23,6 +23,7 @@ class Client
         string $clientId = null,
         string $Signature = null,
         string $timestamp = null,
+        bool $verifySsl = null,
         string $host = 'https://api.snaptrade.com/api/v1',
         \SnapTrade\Configuration $config = null
     )
@@ -35,6 +36,7 @@ class Client
                 timestamp: $timestamp,
             );
             if ($host !== null) $config->setHost($host);
+            if ($verifySsl !== null) $config->setVerifySsl($verifySsl);
         }
         $this->accountInformation = new \SnapTrade\Api\AccountInformationApi($config);
         $this->apiStatus = new \SnapTrade\Api\ApiStatusApi($config);

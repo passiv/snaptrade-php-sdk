@@ -82,6 +82,18 @@ class GettingStartedTest extends TestCase
         print_r($deletedResponse);
     }
 
+    public function testSslConfig()
+    {
+        $snaptrade = new \SnapTrade\Client(
+            clientId: getenv("SNAPTRADE_CLIENT_ID"),
+            consumerKey: getenv("SNAPTRADE_CONSUMER_KEY"),
+            host: "https://expired.badssl.com/",
+            verifySsl: false,
+        );
+        $result = $snaptrade->apiStatus->check();
+        print_r($result);
+    }
+
     public function testGetUserAccountBalance()
     {
         $snaptrade = new \SnapTrade\Client(

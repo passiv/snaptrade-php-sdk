@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Configuration
  * PHP version 7.4
@@ -79,6 +80,13 @@ class Configuration
     protected $password = '';
 
     /**
+     * Set to false if you want to skip SSL verification in HTTP request
+     *
+     * @var bool
+     */
+    protected $verifySsl = true;
+
+    /**
      * The host
      *
      * @var string
@@ -144,8 +152,7 @@ class Configuration
         string $clientId = null,
         string $Signature = null,
         string $timestamp = null,
-    )
-    {
+    ) {
         $this->tempFolderPath = sys_get_temp_dir();
         $this->setConsumerKey($consumerKey);
         $this->setApiKey("clientId", $clientId);
@@ -296,6 +303,29 @@ class Configuration
     public function getPassword()
     {
         return $this->password;
+    }
+
+    /**
+     * Set verifySsl
+     *
+     * @param bool $verifySsl
+     *
+     * @return $this
+     */
+    public function setVerifySsl($verifySsl)
+    {
+        $this->verifySsl = $verifySsl;
+        return $this;
+    }
+
+    /**
+     * Gets the verifySsl
+     *
+     * @return bool verifySsl
+     */
+    public function getVerifySsl()
+    {
+        return $this->verifySsl;
     }
 
     /**

@@ -94,6 +94,27 @@ class GettingStartedTest extends TestCase
         print_r($result);
     }
 
+    public function testGetUserAccountQuotes()
+    {
+        $snaptrade = new \SnapTrade\Client(
+            clientId: getenv("SNAPTRADE_CLIENT_ID"),
+            consumerKey: getenv("SNAPTRADE_CONSUMER_KEY"),
+        );
+        $user_id = getenv("SNAPTRADE_TEST_USER_ID");
+        $user_secret = getenv("SNAPTRADE_TEST_USER_SECRET");
+        $holdings = $snaptrade->accountInformation->getAllUserHoldings($user_id, $user_secret);
+        $account_id = $holdings[0]->getAccount()->getId();
+        $result = $snaptrade->trading->getUserAccountQuotes(
+            user_id: $user_id,
+            user_secret: $user_secret,
+            account_id: $account_id,
+            symbols: "AAPL",
+            use_ticker: true
+        );
+        print_r($result);
+        $this->assertTrue($result != null, "Response must not be null");
+    }
+
     public function testGetUserAccountBalance()
     {
         $snaptrade = new \SnapTrade\Client(

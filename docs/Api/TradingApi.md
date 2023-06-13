@@ -303,7 +303,7 @@ try {
 ## `getUserAccountQuotes()`
 
 ```php
-getUserAccountQuotes($user_id, $user_secret, $symbols, $account_id, $use_ticker): \SnapTrade\Model\SymbolsQuotes
+getUserAccountQuotes($user_id, $user_secret, $symbols, $account_id, $use_ticker): \SnapTrade\Model\SymbolsQuotesInner[]
 ```
 
 Get symbol quotes
@@ -333,12 +333,6 @@ try {
         account_id: $account_id, 
         use_ticker: $use_ticker
     );
-    print_r($result->$getSymbol());
-    print_r($result->$getBidPrice());
-    print_r($result->$getAskPrice());
-    print_r($result->$getLastTradePrice());
-    print_r($result->$getBidSize());
-    print_r($result->$getAskSize());
 } catch (\Exception $e) {
     echo 'Exception when calling TradingApi->getUserAccountQuotes: ', $e->getMessage(), PHP_EOL;
 }
@@ -356,7 +350,7 @@ try {
 
 ### Return type
 
-[**\SnapTrade\Model\SymbolsQuotes**](../Model/SymbolsQuotes.md)
+[**\SnapTrade\Model\SymbolsQuotesInner[]**](../Model/SymbolsQuotesInner.md)
 
 ### Authorization
 

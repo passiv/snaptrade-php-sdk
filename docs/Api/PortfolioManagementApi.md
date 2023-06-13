@@ -257,7 +257,7 @@ try {
 ## `createAssetClass()`
 
 ```php
-createAssetClass(): \SnapTrade\Model\ModelAssetClassDetails
+createAssetClass($user_id, $user_secret): \SnapTrade\Model\ModelAssetClassDetails
 ```
 
 Create a new model asset class
@@ -273,9 +273,14 @@ $snaptrade = new \SnapTrade\Client(
     consumerKey: getenv("SNAPTRADE_CONSUMER_KEY")
 );
 
+$user_id = "John.doe@snaptrade.com";
+$user_secret = "USERSECRET123";
 
 try {
-    $result = $snaptrade->portfolioManagement->createAssetClass();
+    $result = $snaptrade->portfolioManagement->createAssetClass(
+        user_id: $user_id, 
+        user_secret: $user_secret
+    );
     print_r($result->$getModelAssetClass());
     print_r($result->$getModelAssetClassTarget());
 } catch (\Exception $e) {
@@ -285,7 +290,10 @@ try {
 
 ### Parameters
 
-This endpoint does not need any parameter.
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **user_id** | **string**|  | |
+| **user_secret** | **string**|  | |
 
 ### Return type
 
@@ -637,7 +645,7 @@ try {
 ## `detailAssetClass()`
 
 ```php
-detailAssetClass($model_asset_class_id): \SnapTrade\Model\ModelAssetClassDetails
+detailAssetClass($model_asset_class_id, $user_id, $user_secret): \SnapTrade\Model\ModelAssetClassDetails
 ```
 
 Get details of a model asset class
@@ -654,10 +662,14 @@ $snaptrade = new \SnapTrade\Client(
 );
 
 $model_asset_class_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"; // The ID of the model asset class to get.
+$user_id = "John.doe@snaptrade.com";
+$user_secret = "USERSECRET123";
 
 try {
     $result = $snaptrade->portfolioManagement->detailAssetClass(
-        model_asset_class_id: $model_asset_class_id
+        model_asset_class_id: $model_asset_class_id, 
+        user_id: $user_id, 
+        user_secret: $user_secret
     );
     print_r($result->$getModelAssetClass());
     print_r($result->$getModelAssetClassTarget());
@@ -671,6 +683,8 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **model_asset_class_id** | **string**| The ID of the model asset class to get. | |
+| **user_id** | **string**|  | |
+| **user_secret** | **string**|  | |
 
 ### Return type
 
@@ -1281,7 +1295,7 @@ try {
 ## `listAssetClasses()`
 
 ```php
-listAssetClasses(): \SnapTrade\Model\ModelAssetClassDetails[]
+listAssetClasses($user_id, $user_secret): \SnapTrade\Model\ModelAssetClassDetails[]
 ```
 
 List of model asset class
@@ -1297,9 +1311,14 @@ $snaptrade = new \SnapTrade\Client(
     consumerKey: getenv("SNAPTRADE_CONSUMER_KEY")
 );
 
+$user_id = "John.doe@snaptrade.com";
+$user_secret = "USERSECRET123";
 
 try {
-    $result = $snaptrade->portfolioManagement->listAssetClasses();
+    $result = $snaptrade->portfolioManagement->listAssetClasses(
+        user_id: $user_id, 
+        user_secret: $user_secret
+    );
     print_r($result->$getModelAssetClass());
     print_r($result->$getModelAssetClassTarget());
 } catch (\Exception $e) {
@@ -1309,7 +1328,10 @@ try {
 
 ### Parameters
 
-This endpoint does not need any parameter.
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **user_id** | **string**|  | |
+| **user_secret** | **string**|  | |
 
 ### Return type
 
@@ -1764,7 +1786,7 @@ try {
 ## `updateAssetClass()`
 
 ```php
-updateAssetClass($model_asset_class_id, $model_asset_class_details)
+updateAssetClass($model_asset_class_id, $user_id, $user_secret, $model_asset_class_details)
 ```
 
 Updates model asset class objects
@@ -1781,6 +1803,8 @@ $snaptrade = new \SnapTrade\Client(
 );
 
 $model_asset_class_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"; // The ID of the model asset class to update.
+$user_id = "John.doe@snaptrade.com";
+$user_secret = "USERSECRET123";
 $model_asset_class = [
         "id" => "2bcd7cc3-e922-4976-bce1-9858296801c3",
         "name" => "Bonds",
@@ -1793,6 +1817,8 @@ $model_asset_class_target = [
 try {
     $snaptrade->portfolioManagement->updateAssetClass(
         model_asset_class_id: $model_asset_class_id, 
+        user_id: $user_id, 
+        user_secret: $user_secret, 
         model_asset_class: $model_asset_class, 
         model_asset_class_target: $model_asset_class_target
     );
@@ -1806,6 +1832,8 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **model_asset_class_id** | **string**| The ID of the model asset class to update. | |
+| **user_id** | **string**|  | |
+| **user_secret** | **string**|  | |
 | **model_asset_class_details** | [**\SnapTrade\Model\ModelAssetClassDetails**](../Model/ModelAssetClassDetails.md)| Use this endpoint change model asset class name and to add or remove a model asset class target. &lt;br /&gt;&lt;br /&gt; * Only the model asset class name is required for the model asset class object. &lt;br /&gt; * Only the symbol id is required for the symbol object in the model asset class target object. &lt;br /&gt; * To remove all model asset class targets, set the model asset class target as an empty array | |
 
 ### Return type

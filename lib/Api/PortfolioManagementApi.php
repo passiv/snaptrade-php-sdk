@@ -1391,6 +1391,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      *
      * Create a new model asset class
      *
+     * @param  string $user_id user_id (required)
+     * @param  string $user_secret user_secret (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createAssetClass'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
@@ -1398,6 +1400,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @return \SnapTrade\Model\ModelAssetClassDetails
      */
     public function createAssetClass(
+        $user_id,
+        $user_secret,
 
 
         string $contentType = self::contentTypes['createAssetClass'][0]
@@ -1405,7 +1409,7 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
     )
     {
 
-        list($response) = $this->createAssetClassWithHttpInfo($contentType);
+        list($response) = $this->createAssetClassWithHttpInfo($user_id, $user_secret, $contentType);
         return $response;
     }
 
@@ -1414,15 +1418,17 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      *
      * Create a new model asset class
      *
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createAssetClass'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \SnapTrade\Model\ModelAssetClassDetails, HTTP status code, HTTP response headers (array of strings)
      */
-    public function createAssetClassWithHttpInfo(string $contentType = self::contentTypes['createAssetClass'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    public function createAssetClassWithHttpInfo($user_id, $user_secret, string $contentType = self::contentTypes['createAssetClass'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->createAssetClassRequest($contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->createAssetClassRequest($user_id, $user_secret, $contentType);
 
         // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
@@ -1438,6 +1444,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
                     $requestOptions->shouldRetryOAuth()
                 ) {
                     return $this->createAssetClassWithHttpInfo(
+                        $user_id,
+                        $user_secret,
                         $contentType,
                         $requestOptions->setRetryOAuth(false)
                     );
@@ -1527,12 +1535,16 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      *
      * Create a new model asset class
      *
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createAssetClass'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function createAssetClassAsync(
+        $user_id,
+        $user_secret,
 
 
         string $contentType = self::contentTypes['createAssetClass'][0]
@@ -1540,7 +1552,7 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
     )
     {
 
-        return $this->createAssetClassAsyncWithHttpInfo($contentType)
+        return $this->createAssetClassAsyncWithHttpInfo($user_id, $user_secret, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1553,15 +1565,17 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      *
      * Create a new model asset class
      *
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createAssetClass'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function createAssetClassAsyncWithHttpInfo(string $contentType = self::contentTypes['createAssetClass'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    public function createAssetClassAsyncWithHttpInfo($user_id, $user_secret, string $contentType = self::contentTypes['createAssetClass'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\ModelAssetClassDetails';
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->createAssetClassRequest($contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->createAssetClassRequest($user_id, $user_secret, $contentType);
 
         // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
@@ -1605,14 +1619,36 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
     /**
      * Create request for operation 'createAssetClass'
      *
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createAssetClass'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function createAssetClassRequest(string $contentType = self::contentTypes['createAssetClass'][0])
+    public function createAssetClassRequest($user_id, $user_secret, string $contentType = self::contentTypes['createAssetClass'][0])
     {
 
+        // Check if $user_id is a string
+        if ($user_id !== SENTINEL_VALUE && !is_string($user_id)) {
+            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_id, true), gettype($user_id)));
+        }
+        // verify the required parameter 'user_id' is set
+        if ($user_id === SENTINEL_VALUE || (is_array($user_id) && count($user_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter user_id when calling createAssetClass'
+            );
+        }
+        // Check if $user_secret is a string
+        if ($user_secret !== SENTINEL_VALUE && !is_string($user_secret)) {
+            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
+        }
+        // verify the required parameter 'user_secret' is set
+        if ($user_secret === SENTINEL_VALUE || (is_array($user_secret) && count($user_secret) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter user_secret when calling createAssetClass'
+            );
+        }
 
 
         $resourcePath = '/modelAssetClass';
@@ -1622,6 +1658,28 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
         $httpBody = '';
         $multipart = false;
 
+        if ($user_id !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_id,
+                'userId', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
+        if ($user_secret !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_secret,
+                'userSecret', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
 
 
 
@@ -3610,6 +3668,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * Get details of a model asset class
      *
      * @param  string $model_asset_class_id The ID of the model asset class to get. (required)
+     * @param  string $user_id user_id (required)
+     * @param  string $user_secret user_secret (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['detailAssetClass'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
@@ -3618,6 +3678,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function detailAssetClass(
         $model_asset_class_id,
+        $user_id,
+        $user_secret,
 
 
         string $contentType = self::contentTypes['detailAssetClass'][0]
@@ -3625,7 +3687,7 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
     )
     {
 
-        list($response) = $this->detailAssetClassWithHttpInfo($model_asset_class_id, $contentType);
+        list($response) = $this->detailAssetClassWithHttpInfo($model_asset_class_id, $user_id, $user_secret, $contentType);
         return $response;
     }
 
@@ -3635,15 +3697,17 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * Get details of a model asset class
      *
      * @param  string $model_asset_class_id The ID of the model asset class to get. (required)
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['detailAssetClass'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \SnapTrade\Model\ModelAssetClassDetails, HTTP status code, HTTP response headers (array of strings)
      */
-    public function detailAssetClassWithHttpInfo($model_asset_class_id, string $contentType = self::contentTypes['detailAssetClass'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    public function detailAssetClassWithHttpInfo($model_asset_class_id, $user_id, $user_secret, string $contentType = self::contentTypes['detailAssetClass'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->detailAssetClassRequest($model_asset_class_id, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->detailAssetClassRequest($model_asset_class_id, $user_id, $user_secret, $contentType);
 
         // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
@@ -3660,6 +3724,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
                 ) {
                     return $this->detailAssetClassWithHttpInfo(
                         $model_asset_class_id,
+                        $user_id,
+                        $user_secret,
                         $contentType,
                         $requestOptions->setRetryOAuth(false)
                     );
@@ -3750,6 +3816,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * Get details of a model asset class
      *
      * @param  string $model_asset_class_id The ID of the model asset class to get. (required)
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['detailAssetClass'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3757,6 +3825,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      */
     public function detailAssetClassAsync(
         $model_asset_class_id,
+        $user_id,
+        $user_secret,
 
 
         string $contentType = self::contentTypes['detailAssetClass'][0]
@@ -3764,7 +3834,7 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
     )
     {
 
-        return $this->detailAssetClassAsyncWithHttpInfo($model_asset_class_id, $contentType)
+        return $this->detailAssetClassAsyncWithHttpInfo($model_asset_class_id, $user_id, $user_secret, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -3778,15 +3848,17 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * Get details of a model asset class
      *
      * @param  string $model_asset_class_id The ID of the model asset class to get. (required)
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['detailAssetClass'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function detailAssetClassAsyncWithHttpInfo($model_asset_class_id, string $contentType = self::contentTypes['detailAssetClass'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    public function detailAssetClassAsyncWithHttpInfo($model_asset_class_id, $user_id, $user_secret, string $contentType = self::contentTypes['detailAssetClass'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\ModelAssetClassDetails';
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->detailAssetClassRequest($model_asset_class_id, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->detailAssetClassRequest($model_asset_class_id, $user_id, $user_secret, $contentType);
 
         // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
@@ -3831,12 +3903,14 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * Create request for operation 'detailAssetClass'
      *
      * @param  string $model_asset_class_id The ID of the model asset class to get. (required)
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['detailAssetClass'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function detailAssetClassRequest($model_asset_class_id, string $contentType = self::contentTypes['detailAssetClass'][0])
+    public function detailAssetClassRequest($model_asset_class_id, $user_id, $user_secret, string $contentType = self::contentTypes['detailAssetClass'][0])
     {
 
         // Check if $model_asset_class_id is a string
@@ -3849,6 +3923,26 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
                 'Missing the required parameter model_asset_class_id when calling detailAssetClass'
             );
         }
+        // Check if $user_id is a string
+        if ($user_id !== SENTINEL_VALUE && !is_string($user_id)) {
+            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_id, true), gettype($user_id)));
+        }
+        // verify the required parameter 'user_id' is set
+        if ($user_id === SENTINEL_VALUE || (is_array($user_id) && count($user_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter user_id when calling detailAssetClass'
+            );
+        }
+        // Check if $user_secret is a string
+        if ($user_secret !== SENTINEL_VALUE && !is_string($user_secret)) {
+            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
+        }
+        // verify the required parameter 'user_secret' is set
+        if ($user_secret === SENTINEL_VALUE || (is_array($user_secret) && count($user_secret) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter user_secret when calling detailAssetClass'
+            );
+        }
 
 
         $resourcePath = '/modelAssetClass/{modelAssetClassId}';
@@ -3858,6 +3952,28 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
         $httpBody = '';
         $multipart = false;
 
+        if ($user_id !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_id,
+                'userId', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
+        if ($user_secret !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_secret,
+                'userSecret', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
 
 
         // path params
@@ -7427,6 +7543,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      *
      * List of model asset class
      *
+     * @param  string $user_id user_id (required)
+     * @param  string $user_secret user_secret (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAssetClasses'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
@@ -7434,6 +7552,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @return \SnapTrade\Model\ModelAssetClassDetails[]
      */
     public function listAssetClasses(
+        $user_id,
+        $user_secret,
 
 
         string $contentType = self::contentTypes['listAssetClasses'][0]
@@ -7441,7 +7561,7 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
     )
     {
 
-        list($response) = $this->listAssetClassesWithHttpInfo($contentType);
+        list($response) = $this->listAssetClassesWithHttpInfo($user_id, $user_secret, $contentType);
         return $response;
     }
 
@@ -7450,15 +7570,17 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      *
      * List of model asset class
      *
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAssetClasses'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \SnapTrade\Model\ModelAssetClassDetails[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function listAssetClassesWithHttpInfo(string $contentType = self::contentTypes['listAssetClasses'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    public function listAssetClassesWithHttpInfo($user_id, $user_secret, string $contentType = self::contentTypes['listAssetClasses'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->listAssetClassesRequest($contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->listAssetClassesRequest($user_id, $user_secret, $contentType);
 
         // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
@@ -7474,6 +7596,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
                     $requestOptions->shouldRetryOAuth()
                 ) {
                     return $this->listAssetClassesWithHttpInfo(
+                        $user_id,
+                        $user_secret,
                         $contentType,
                         $requestOptions->setRetryOAuth(false)
                     );
@@ -7563,12 +7687,16 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      *
      * List of model asset class
      *
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAssetClasses'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function listAssetClassesAsync(
+        $user_id,
+        $user_secret,
 
 
         string $contentType = self::contentTypes['listAssetClasses'][0]
@@ -7576,7 +7704,7 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
     )
     {
 
-        return $this->listAssetClassesAsyncWithHttpInfo($contentType)
+        return $this->listAssetClassesAsyncWithHttpInfo($user_id, $user_secret, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -7589,15 +7717,17 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      *
      * List of model asset class
      *
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAssetClasses'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listAssetClassesAsyncWithHttpInfo(string $contentType = self::contentTypes['listAssetClasses'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    public function listAssetClassesAsyncWithHttpInfo($user_id, $user_secret, string $contentType = self::contentTypes['listAssetClasses'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\ModelAssetClassDetails[]';
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->listAssetClassesRequest($contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->listAssetClassesRequest($user_id, $user_secret, $contentType);
 
         // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
@@ -7641,14 +7771,36 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
     /**
      * Create request for operation 'listAssetClasses'
      *
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAssetClasses'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function listAssetClassesRequest(string $contentType = self::contentTypes['listAssetClasses'][0])
+    public function listAssetClassesRequest($user_id, $user_secret, string $contentType = self::contentTypes['listAssetClasses'][0])
     {
 
+        // Check if $user_id is a string
+        if ($user_id !== SENTINEL_VALUE && !is_string($user_id)) {
+            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_id, true), gettype($user_id)));
+        }
+        // verify the required parameter 'user_id' is set
+        if ($user_id === SENTINEL_VALUE || (is_array($user_id) && count($user_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter user_id when calling listAssetClasses'
+            );
+        }
+        // Check if $user_secret is a string
+        if ($user_secret !== SENTINEL_VALUE && !is_string($user_secret)) {
+            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
+        }
+        // verify the required parameter 'user_secret' is set
+        if ($user_secret === SENTINEL_VALUE || (is_array($user_secret) && count($user_secret) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter user_secret when calling listAssetClasses'
+            );
+        }
 
 
         $resourcePath = '/modelAssetClass';
@@ -7658,6 +7810,28 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
         $httpBody = '';
         $multipart = false;
 
+        if ($user_id !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_id,
+                'userId', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
+        if ($user_secret !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_secret,
+                'userSecret', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
 
 
 
@@ -10164,6 +10338,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * Updates model asset class objects
      *
      * @param  string $model_asset_class_id The ID of the model asset class to update. (required)
+     * @param  string $user_id user_id (required)
+     * @param  string $user_secret user_secret (required)
      * @param  \SnapTrade\Model\ModelAssetClassDetails $model_asset_class_details Use this endpoint change model asset class name and to add or remove a model asset class target. &lt;br /&gt;&lt;br /&gt; * Only the model asset class name is required for the model asset class object. &lt;br /&gt; * Only the symbol id is required for the symbol object in the model asset class target object. &lt;br /&gt; * To remove all model asset class targets, set the model asset class target as an empty array (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateAssetClass'] to see the possible values for this operation
      *
@@ -10174,6 +10350,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
     public function updateAssetClass(
 
         $model_asset_class_id,
+        $user_id,
+        $user_secret,
         $model_asset_class = SENTINEL_VALUE,
         $model_asset_class_target = SENTINEL_VALUE,
 
@@ -10186,7 +10364,7 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
         $this->setRequestBodyProperty($_body, "model_asset_class_target", $model_asset_class_target);
         $model_asset_class_details = $_body;
 
-        $this->updateAssetClassWithHttpInfo($model_asset_class_id, $model_asset_class_details, $contentType);
+        $this->updateAssetClassWithHttpInfo($model_asset_class_id, $user_id, $user_secret, $model_asset_class_details, $contentType);
     }
 
     /**
@@ -10195,6 +10373,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * Updates model asset class objects
      *
      * @param  string $model_asset_class_id The ID of the model asset class to update. (required)
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
      * @param  \SnapTrade\Model\ModelAssetClassDetails $model_asset_class_details Use this endpoint change model asset class name and to add or remove a model asset class target. &lt;br /&gt;&lt;br /&gt; * Only the model asset class name is required for the model asset class object. &lt;br /&gt; * Only the symbol id is required for the symbol object in the model asset class target object. &lt;br /&gt; * To remove all model asset class targets, set the model asset class target as an empty array (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateAssetClass'] to see the possible values for this operation
      *
@@ -10202,9 +10382,9 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
-    public function updateAssetClassWithHttpInfo($model_asset_class_id, $model_asset_class_details, string $contentType = self::contentTypes['updateAssetClass'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    public function updateAssetClassWithHttpInfo($model_asset_class_id, $user_id, $user_secret, $model_asset_class_details, string $contentType = self::contentTypes['updateAssetClass'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->updateAssetClassRequest($model_asset_class_id, $model_asset_class_details, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->updateAssetClassRequest($model_asset_class_id, $user_id, $user_secret, $model_asset_class_details, $contentType);
 
         // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
@@ -10221,6 +10401,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
                 ) {
                     return $this->updateAssetClassWithHttpInfo(
                         $model_asset_class_id,
+                        $user_id,
+                        $user_secret,
                         $model_asset_class_details,
                         $contentType,
                         $requestOptions->setRetryOAuth(false)
@@ -10272,6 +10454,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * Updates model asset class objects
      *
      * @param  string $model_asset_class_id The ID of the model asset class to update. (required)
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
      * @param  \SnapTrade\Model\ModelAssetClassDetails $model_asset_class_details Use this endpoint change model asset class name and to add or remove a model asset class target. &lt;br /&gt;&lt;br /&gt; * Only the model asset class name is required for the model asset class object. &lt;br /&gt; * Only the symbol id is required for the symbol object in the model asset class target object. &lt;br /&gt; * To remove all model asset class targets, set the model asset class target as an empty array (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateAssetClass'] to see the possible values for this operation
      *
@@ -10281,6 +10465,8 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
     public function updateAssetClassAsync(
 
         $model_asset_class_id,
+        $user_id,
+        $user_secret,
         $model_asset_class = SENTINEL_VALUE,
         $model_asset_class_target = SENTINEL_VALUE,
 
@@ -10293,7 +10479,7 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
         $this->setRequestBodyProperty($_body, "model_asset_class_target", $model_asset_class_target);
         $model_asset_class_details = $_body;
 
-        return $this->updateAssetClassAsyncWithHttpInfo($model_asset_class_id, $model_asset_class_details, $contentType)
+        return $this->updateAssetClassAsyncWithHttpInfo($model_asset_class_id, $user_id, $user_secret, $model_asset_class_details, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -10307,16 +10493,18 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * Updates model asset class objects
      *
      * @param  string $model_asset_class_id The ID of the model asset class to update. (required)
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
      * @param  \SnapTrade\Model\ModelAssetClassDetails $model_asset_class_details Use this endpoint change model asset class name and to add or remove a model asset class target. &lt;br /&gt;&lt;br /&gt; * Only the model asset class name is required for the model asset class object. &lt;br /&gt; * Only the symbol id is required for the symbol object in the model asset class target object. &lt;br /&gt; * To remove all model asset class targets, set the model asset class target as an empty array (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateAssetClass'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function updateAssetClassAsyncWithHttpInfo($model_asset_class_id, $model_asset_class_details, string $contentType = self::contentTypes['updateAssetClass'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    public function updateAssetClassAsyncWithHttpInfo($model_asset_class_id, $user_id, $user_secret, $model_asset_class_details, string $contentType = self::contentTypes['updateAssetClass'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '';
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->updateAssetClassRequest($model_asset_class_id, $model_asset_class_details, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->updateAssetClassRequest($model_asset_class_id, $user_id, $user_secret, $model_asset_class_details, $contentType);
 
         // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
@@ -10348,13 +10536,15 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
      * Create request for operation 'updateAssetClass'
      *
      * @param  string $model_asset_class_id The ID of the model asset class to update. (required)
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
      * @param  \SnapTrade\Model\ModelAssetClassDetails $model_asset_class_details Use this endpoint change model asset class name and to add or remove a model asset class target. &lt;br /&gt;&lt;br /&gt; * Only the model asset class name is required for the model asset class object. &lt;br /&gt; * Only the symbol id is required for the symbol object in the model asset class target object. &lt;br /&gt; * To remove all model asset class targets, set the model asset class target as an empty array (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateAssetClass'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function updateAssetClassRequest($model_asset_class_id, $model_asset_class_details, string $contentType = self::contentTypes['updateAssetClass'][0])
+    public function updateAssetClassRequest($model_asset_class_id, $user_id, $user_secret, $model_asset_class_details, string $contentType = self::contentTypes['updateAssetClass'][0])
     {
 
         // Check if $model_asset_class_id is a string
@@ -10365,6 +10555,26 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
         if ($model_asset_class_id === SENTINEL_VALUE || (is_array($model_asset_class_id) && count($model_asset_class_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter model_asset_class_id when calling updateAssetClass'
+            );
+        }
+        // Check if $user_id is a string
+        if ($user_id !== SENTINEL_VALUE && !is_string($user_id)) {
+            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_id, true), gettype($user_id)));
+        }
+        // verify the required parameter 'user_id' is set
+        if ($user_id === SENTINEL_VALUE || (is_array($user_id) && count($user_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter user_id when calling updateAssetClass'
+            );
+        }
+        // Check if $user_secret is a string
+        if ($user_secret !== SENTINEL_VALUE && !is_string($user_secret)) {
+            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
+        }
+        // verify the required parameter 'user_secret' is set
+        if ($user_secret === SENTINEL_VALUE || (is_array($user_secret) && count($user_secret) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter user_secret when calling updateAssetClass'
             );
         }
         if ($model_asset_class_details !== SENTINEL_VALUE) {
@@ -10390,6 +10600,28 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
         $httpBody = '';
         $multipart = false;
 
+        if ($user_id !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_id,
+                'userId', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
+        if ($user_secret !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_secret,
+                'userSecret', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
 
 
         // path params

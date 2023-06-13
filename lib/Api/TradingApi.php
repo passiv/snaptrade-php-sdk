@@ -1857,7 +1857,7 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \SnapTrade\Model\SymbolsQuotes
+     * @return \SnapTrade\Model\SymbolsQuotesInner[]
      */
     public function getUserAccountQuotes(
         $user_id,
@@ -1890,7 +1890,7 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \SnapTrade\Model\SymbolsQuotes, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SnapTrade\Model\SymbolsQuotesInner[], HTTP status code, HTTP response headers (array of strings)
      */
     public function getUserAccountQuotesWithHttpInfo($user_id, $user_secret, $symbols, $account_id, $use_ticker = null, string $contentType = self::contentTypes['getUserAccountQuotes'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
@@ -1952,23 +1952,23 @@ class TradingApi extends \SnapTrade\CustomApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\SnapTrade\Model\SymbolsQuotes' === '\SplFileObject') {
+                    if ('\SnapTrade\Model\SymbolsQuotesInner[]' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\SnapTrade\Model\SymbolsQuotes' !== 'string') {
+                        if ('\SnapTrade\Model\SymbolsQuotesInner[]' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\SymbolsQuotes', []),
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\SymbolsQuotesInner[]', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = '\SnapTrade\Model\SymbolsQuotes';
+            $returnType = '\SnapTrade\Model\SymbolsQuotesInner[]';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -1989,7 +1989,7 @@ class TradingApi extends \SnapTrade\CustomApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\SnapTrade\Model\SymbolsQuotes',
+                        '\SnapTrade\Model\SymbolsQuotesInner[]',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2052,7 +2052,7 @@ class TradingApi extends \SnapTrade\CustomApi
      */
     public function getUserAccountQuotesAsyncWithHttpInfo($user_id, $user_secret, $symbols, $account_id, $use_ticker = null, string $contentType = self::contentTypes['getUserAccountQuotes'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $returnType = '\SnapTrade\Model\SymbolsQuotes';
+        $returnType = '\SnapTrade\Model\SymbolsQuotesInner[]';
         ["request" => $request, "serializedBody" => $serializedBody] = $this->getUserAccountQuotesRequest($user_id, $user_secret, $symbols, $account_id, $use_ticker, $contentType);
 
         // Customization hook

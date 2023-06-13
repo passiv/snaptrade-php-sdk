@@ -1,6 +1,6 @@
 <?php
 /**
- * SymbolsQuotes
+ * SymbolsQuotesInner
  *
  * PHP version 7.4
  *
@@ -27,14 +27,13 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * SymbolsQuotes Class Doc Comment
+ * SymbolsQuotesInner Class Doc Comment
  *
  * @category Class
- * @description Symbols and Tickers Quotes object
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class SymbolsQuotes implements ModelInterface, ArrayAccess, \JsonSerializable
+class SymbolsQuotesInner implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -43,7 +42,7 @@ class SymbolsQuotes implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'SymbolsQuotes';
+    protected static $openAPIModelName = 'SymbolsQuotes_inner';
 
     /**
       * Array of property to type mappings. Used for (de)serialization

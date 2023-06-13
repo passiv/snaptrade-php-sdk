@@ -1,6 +1,6 @@
 <?php
 /**
- * SymbolsQuotesTest
+ * SymbolsQuotesInnerTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * SymbolsQuotesTest Class Doc Comment
+ * SymbolsQuotesInnerTest Class Doc Comment
  *
  * @category    Class
- * @description Symbols and Tickers Quotes object
+ * @description SymbolsQuotesInner
  * @package     SnapTrade
  */
-class SymbolsQuotesTest extends TestCase
+class SymbolsQuotesInnerTest extends TestCase
 {
 
     /**
@@ -64,9 +64,9 @@ class SymbolsQuotesTest extends TestCase
     }
 
     /**
-     * Test "SymbolsQuotes"
+     * Test "SymbolsQuotesInner"
      */
-    public function testSymbolsQuotes()
+    public function testSymbolsQuotesInner()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

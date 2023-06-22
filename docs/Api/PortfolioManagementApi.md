@@ -1942,6 +1942,7 @@ $symbol = [
 $percent = 90;
 $is_supported = True;
 $is_excluded = True;
+$meta = [];
 
 try {
     $result = $snaptrade->portfolioManagement->updatePortfolioTargetById(
@@ -1951,7 +1952,8 @@ try {
         symbol: $symbol, 
         percent: $percent, 
         is_supported: $is_supported, 
-        is_excluded: $is_excluded
+        is_excluded: $is_excluded, 
+        meta: $meta
     );
     print_r($result->$getId());
     print_r($result->$getSymbol());

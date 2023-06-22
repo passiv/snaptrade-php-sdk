@@ -29,6 +29,10 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
+use GuzzleHttp\BodySummarizer;
+use GuzzleHttp\Middleware;
+use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Utils;
 use SnapTrade\ApiException;
 use SnapTrade\Configuration;
 use SnapTrade\HeaderSelector;
@@ -170,6 +174,16 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
     ) {
         $clientOptions = [];
         if (!$config->getVerifySsl()) $clientOptions["verify"] = false;
+
+        // Do not truncate error messages
+        // https://github.com/guzzle/guzzle/issues/2185#issuecomment-800293420
+        $stack = new HandlerStack(Utils::chooseHandler());
+        $stack->push(Middleware::httpErrors(new BodySummarizer(10_000)), 'http_errors');
+        $stack->push(Middleware::redirect(), 'allow_redirects');
+        $stack->push(Middleware::cookies(), 'cookies');
+        $stack->push(Middleware::prepareBody(), 'prepare_body');
+        $clientOptions["handler"] = $stack;
+
         $this->client = $client ?: new Client($clientOptions);
         $this->config = $config ?: new Configuration();
         $this->headerSelector = $selector ?: new HeaderSelector();
@@ -11078,6 +11092,7 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
         $percent = SENTINEL_VALUE,
         $is_supported = SENTINEL_VALUE,
         $is_excluded = SENTINEL_VALUE,
+        $meta = SENTINEL_VALUE,
 
         string $contentType = self::contentTypes['updatePortfolioTargetById'][0]
 
@@ -11089,6 +11104,7 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
         $this->setRequestBodyProperty($_body, "percent", $percent);
         $this->setRequestBodyProperty($_body, "is_supported", $is_supported);
         $this->setRequestBodyProperty($_body, "is_excluded", $is_excluded);
+        $this->setRequestBodyProperty($_body, "meta", $meta);
         $target_asset = $_body;
 
         list($response) = $this->updatePortfolioTargetByIdWithHttpInfo($portfolio_group_id, $target_asset_id, $target_asset, $contentType);
@@ -11236,6 +11252,7 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
         $percent = SENTINEL_VALUE,
         $is_supported = SENTINEL_VALUE,
         $is_excluded = SENTINEL_VALUE,
+        $meta = SENTINEL_VALUE,
 
         string $contentType = self::contentTypes['updatePortfolioTargetById'][0]
 
@@ -11247,6 +11264,7 @@ class PortfolioManagementApi extends \SnapTrade\CustomApi
         $this->setRequestBodyProperty($_body, "percent", $percent);
         $this->setRequestBodyProperty($_body, "is_supported", $is_supported);
         $this->setRequestBodyProperty($_body, "is_excluded", $is_excluded);
+        $this->setRequestBodyProperty($_body, "meta", $meta);
         $target_asset = $_body;
 
         return $this->updatePortfolioTargetByIdAsyncWithHttpInfo($portfolio_group_id, $target_asset_id, $target_asset, $contentType)

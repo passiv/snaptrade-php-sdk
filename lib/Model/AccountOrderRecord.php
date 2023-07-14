@@ -112,9 +112,9 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
 		'option_symbol' => false,
 		'action' => false,
 		'total_quantity' => false,
-		'open_quantity' => false,
-		'canceled_quantity' => false,
-		'filled_quantity' => false,
+		'open_quantity' => true,
+		'canceled_quantity' => true,
+		'filled_quantity' => true,
 		'execution_price' => true,
 		'limit_price' => true,
 		'stop_price' => true,
@@ -626,7 +626,14 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     {
 
         if (is_null($open_quantity)) {
-            throw new \InvalidArgumentException('non-nullable open_quantity cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'open_quantity');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('open_quantity', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['open_quantity'] = $open_quantity;
@@ -655,7 +662,14 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     {
 
         if (is_null($canceled_quantity)) {
-            throw new \InvalidArgumentException('non-nullable canceled_quantity cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'canceled_quantity');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('canceled_quantity', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['canceled_quantity'] = $canceled_quantity;
@@ -684,7 +698,14 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     {
 
         if (is_null($filled_quantity)) {
-            throw new \InvalidArgumentException('non-nullable filled_quantity cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'filled_quantity');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('filled_quantity', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['filled_quantity'] = $filled_quantity;
@@ -777,7 +798,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets stop_price
      *
-     * @param float|null $stop_price Trade Price if limit or stop limit order
+     * @param float|null $stop_price Stop Price. If stop loss or stop limit order, the price to trigger the stop
      *
      * @return self
      */

@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 **filled_quantity** | **float** | Trade Units | [optional]
 **execution_price** | **float** | Trade Price if limit or stop limit order | [optional]
 **limit_price** | **float** | Trade Price if limit or stop limit order | [optional]
-**stop_price** | **float** | Trade Price if limit or stop limit order | [optional]
+**stop_price** | **float** | Stop Price. If stop loss or stop limit order, the price to trigger the stop | [optional]
 **order_type** | [**\SnapTrade\Model\OrderType**](OrderType.md) |  | [optional]
 **time_in_force** | [**\SnapTrade\Model\TimeInForce**](TimeInForce.md) |  | [optional]
 **time_placed** | **string** | Time | [optional]

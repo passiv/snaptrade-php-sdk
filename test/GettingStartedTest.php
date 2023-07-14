@@ -63,21 +63,7 @@ class GettingStartedTest extends TestCase
         $redirectUri = $snaptrade->authentication->loginSnapTradeUser($userId, $userSecret);
         print_r($redirectUri);
 
-        // 5) Create/list portfolio, accept disclaimer, and obtain account holding data
-        $snaptrade->portfolioManagement->create(
-            $userId,
-            $userSecret,
-            id: (string)time(),
-            name: "MyPortfolio"
-        );
-
-        $response = $snaptrade->portfolioManagement->all($userId, $userSecret);
-        print_r($response);
-
-        $holdings = $snaptrade->accountInformation->getAllUserHoldings($userId, $userSecret);
-        print_r($holdings);
-
-        // 6) Delete the user
+        // 5) Delete the user
         $deletedResponse = $snaptrade->authentication->deleteSnapTradeUser($userId);
         print_r($deletedResponse);
     }
@@ -154,24 +140,7 @@ class GettingStartedTest extends TestCase
         $registerResponse = $snaptrade->authentication->registerSnapTradeUser($userId);
         $userSecret = $registerResponse->getUserSecret();
 
-        // 5) Create/list portfolio, accept disclaimer, and obtain account holding data
-        $portfolioId = (string)time();
-        $portfolioGroups = $snaptrade->portfolioManagement->create(
-            $userId,
-            $userSecret,
-            id: $portfolioId,
-            name: "MyPortfolio"
-        );
-
-        $assets = $snaptrade->portfolioManagement->listAssetClasses();
-        print_r($assets);
-
-        // $targetAssets = $snaptrade->portfolioManagement->setPortfolioTargets($portfolioGroups[0]->getId());
-        // print_r($targetAssets);
-        $targetAssets = $snaptrade->portfolioManagement->setPortfolioTargets($portfolioGroups[0]->getId(), [["id" =>  "2bcd7cc3-e922-4976-bce1-9858296801c3"]]);
-        print_r($targetAssets);
-
-        // 6) Delete the user
+        // 4) Delete the user
         $deletedResponse = $snaptrade->authentication->deleteSnapTradeUser($userId);
         print_r($deletedResponse);
     }

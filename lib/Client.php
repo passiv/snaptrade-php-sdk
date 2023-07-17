@@ -10,7 +10,6 @@ class Client
     public readonly \SnapTrade\Api\ConnectionsApi $connections;
     public readonly \SnapTrade\Api\ErrorLogsApi $errorLogs;
     public readonly \SnapTrade\Api\OptionsApi $options;
-    public readonly \SnapTrade\Api\PortfolioManagementApi $portfolioManagement;
     public readonly \SnapTrade\Api\ReferenceDataApi $referenceData;
     public readonly \SnapTrade\Api\TradingApi $trading;
     public readonly \SnapTrade\Api\TransactionsAndReportingApi $transactionsAndReporting;
@@ -44,7 +43,6 @@ class Client
         $this->connections = new \SnapTrade\Api\ConnectionsApi($config);
         $this->errorLogs = new \SnapTrade\Api\ErrorLogsApi($config);
         $this->options = new \SnapTrade\Api\OptionsApi($config);
-        $this->portfolioManagement = new \SnapTrade\Api\PortfolioManagementApi($config);
         $this->referenceData = new \SnapTrade\Api\ReferenceDataApi($config);
         $this->trading = new \SnapTrade\Api\TradingApi($config);
         $this->transactionsAndReporting = new \SnapTrade\Api\TransactionsAndReportingApi($config);

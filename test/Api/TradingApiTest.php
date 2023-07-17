@@ -71,30 +71,6 @@ class TradingApiTest extends TestCase
     }
 
     /**
-     * Test case for getCalculatedTradeImpactById
-     *
-     * Return details of a specific trade before it's placed.
-     *
-     */
-    public function testGetCalculatedTradeImpactById()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for getCalculatedTradesImpact
-     *
-     * Return the impact of placing a series of trades on the portfolio.
-     *
-     */
-    public function testGetCalculatedTradesImpact()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test case for getOrderImpact
      *
      * Check impact of trades on account..
@@ -113,30 +89,6 @@ class TradingApiTest extends TestCase
      *
      */
     public function testGetUserAccountQuotes()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for modifyCalculatedTradeById
-     *
-     * Modify units of a trade before it is placed.
-     *
-     */
-    public function testModifyCalculatedTradeById()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for placeCalculatedTrades
-     *
-     * Place orders for the CalculatedTrades in series.
-     *
-     */
-    public function testPlaceCalculatedTrades()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

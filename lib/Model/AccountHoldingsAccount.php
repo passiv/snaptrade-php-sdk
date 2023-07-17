@@ -80,9 +80,9 @@ class AccountHoldingsAccount implements ModelInterface, ArrayAccess, \JsonSerial
       */
     protected static array $openAPINullables = [
         'account' => false,
-		'balances' => false,
-		'positions' => false,
-		'orders' => false,
+		'balances' => true,
+		'positions' => true,
+		'orders' => true,
 		'total_value' => false
     ];
 
@@ -361,7 +361,14 @@ class AccountHoldingsAccount implements ModelInterface, ArrayAccess, \JsonSerial
     {
 
         if (is_null($balances)) {
-            throw new \InvalidArgumentException('non-nullable balances cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'balances');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('balances', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['balances'] = $balances;
@@ -390,7 +397,14 @@ class AccountHoldingsAccount implements ModelInterface, ArrayAccess, \JsonSerial
     {
 
         if (is_null($positions)) {
-            throw new \InvalidArgumentException('non-nullable positions cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'positions');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('positions', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['positions'] = $positions;
@@ -419,7 +433,14 @@ class AccountHoldingsAccount implements ModelInterface, ArrayAccess, \JsonSerial
     {
 
         if (is_null($orders)) {
-            throw new \InvalidArgumentException('non-nullable orders cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'orders');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('orders', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['orders'] = $orders;

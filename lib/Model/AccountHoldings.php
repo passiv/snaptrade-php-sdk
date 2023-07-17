@@ -78,8 +78,8 @@ class AccountHoldings implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static array $openAPINullables = [
         'account' => false,
-		'balances' => false,
-		'positions' => false,
+		'balances' => true,
+		'positions' => true,
 		'total_value' => false
     ];
 
@@ -354,7 +354,14 @@ class AccountHoldings implements ModelInterface, ArrayAccess, \JsonSerializable
     {
 
         if (is_null($balances)) {
-            throw new \InvalidArgumentException('non-nullable balances cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'balances');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('balances', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['balances'] = $balances;
@@ -383,7 +390,14 @@ class AccountHoldings implements ModelInterface, ArrayAccess, \JsonSerializable
     {
 
         if (is_null($positions)) {
-            throw new \InvalidArgumentException('non-nullable positions cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'positions');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('positions', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['positions'] = $positions;

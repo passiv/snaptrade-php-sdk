@@ -101,38 +101,6 @@ Class | Method | HTTP request | Description
 *OptionsApi* | [**getOptionsStrategyQuote**](docs/Api/OptionsApi.md#getoptionsstrategyquote) | **GET** /accounts/{accountId}/optionStrategy/{optionStrategyId} | Get latest market data of option strategy
 *OptionsApi* | [**listOptionHoldings**](docs/Api/OptionsApi.md#listoptionholdings) | **GET** /accounts/{accountId}/options | Get the options holdings in the account
 *OptionsApi* | [**placeOptionStrategy**](docs/Api/OptionsApi.md#placeoptionstrategy) | **POST** /accounts/{accountId}/optionStrategy/{optionStrategyId}/execute | Place an option strategy order on the brokerage
-*PortfolioManagementApi* | [**addPortfolioExcludedAsset**](docs/Api/PortfolioManagementApi.md#addportfolioexcludedasset) | **POST** /portfolioGroups/{portfolioGroupId}/excludedassets | Adds an asset to exclude to a portfolio group
-*PortfolioManagementApi* | [**all**](docs/Api/PortfolioManagementApi.md#all) | **GET** /portfolioGroups | List all portfolio groups
-*PortfolioManagementApi* | [**create**](docs/Api/PortfolioManagementApi.md#create) | **POST** /portfolioGroups | Create new portfolio group
-*PortfolioManagementApi* | [**createAssetClass**](docs/Api/PortfolioManagementApi.md#createassetclass) | **POST** /modelAssetClass | Create a new model asset class
-*PortfolioManagementApi* | [**createModelPortfolio**](docs/Api/PortfolioManagementApi.md#createmodelportfolio) | **POST** /modelPortfolio | Creates a new model portfolio
-*PortfolioManagementApi* | [**deleteAssetClass**](docs/Api/PortfolioManagementApi.md#deleteassetclass) | **DELETE** /modelAssetClass/{modelAssetClassId} | Deletes a model asset class
-*PortfolioManagementApi* | [**deleteExcludedAsset**](docs/Api/PortfolioManagementApi.md#deleteexcludedasset) | **DELETE** /portfolioGroups/{portfolioGroupId}/excludedassets/{symbolId} | Unexclude an asset from a portfolio group
-*PortfolioManagementApi* | [**deleteModelPortfolioById**](docs/Api/PortfolioManagementApi.md#deletemodelportfoliobyid) | **DELETE** /modelPortfolio/{modelPortfolioId} | Deletes a model portfolio
-*PortfolioManagementApi* | [**deletePortfoli**](docs/Api/PortfolioManagementApi.md#deleteportfoli) | **DELETE** /portfolioGroups/{portfolioGroupId} | Remove a target portfolio.
-*PortfolioManagementApi* | [**deletePortfolioTargetById**](docs/Api/PortfolioManagementApi.md#deleteportfoliotargetbyid) | **DELETE** /portfolioGroups/{portfolioGroupId}/targets/{targetAssetId} | Remove a TargetAsset.
-*PortfolioManagementApi* | [**detailAssetClass**](docs/Api/PortfolioManagementApi.md#detailassetclass) | **GET** /modelAssetClass/{modelAssetClassId} | Get details of a model asset class
-*PortfolioManagementApi* | [**getCalculatedTradeById**](docs/Api/PortfolioManagementApi.md#getcalculatedtradebyid) | **GET** /portfolioGroups/{portfolioGroupId}/calculatedtrades/{calculatedTradeId}/{TradeId} | Return an individual trade
-*PortfolioManagementApi* | [**getModelDetailsById**](docs/Api/PortfolioManagementApi.md#getmodeldetailsbyid) | **GET** /modelPortfolio/{modelPortfolioId} | Get details of a model portfolio
-*PortfolioManagementApi* | [**getPortfolioBalances**](docs/Api/PortfolioManagementApi.md#getportfoliobalances) | **GET** /portfolioGroups/{portfolioGroupId}/balances | Get sum of cash balances in portfolio group
-*PortfolioManagementApi* | [**getPortfolioDetailsById**](docs/Api/PortfolioManagementApi.md#getportfoliodetailsbyid) | **GET** /portfolioGroups/{portfolioGroupId} | Get details of a target portfolio
-*PortfolioManagementApi* | [**getPortfolioInfo**](docs/Api/PortfolioManagementApi.md#getportfolioinfo) | **GET** /portfolioGroups/{portfolioGroupId}/info | Return a whole bunch of relevant information relating to a portfolio group.
-*PortfolioManagementApi* | [**getPortfolioSettings**](docs/Api/PortfolioManagementApi.md#getportfoliosettings) | **GET** /portfolioGroups/{portfolioGroupId}/settings | Get portfolio group settings
-*PortfolioManagementApi* | [**getPortfolioTargetById**](docs/Api/PortfolioManagementApi.md#getportfoliotargetbyid) | **GET** /portfolioGroups/{portfolioGroupId}/targets/{targetAssetId} | Get a specific target from a portfolio group
-*PortfolioManagementApi* | [**getPortfolioTargets**](docs/Api/PortfolioManagementApi.md#getportfoliotargets) | **GET** /portfolioGroups/{portfolioGroupId}/targets | Get all target assets under the specified PortfolioGroup.
-*PortfolioManagementApi* | [**getPortoflioExcludedAssets**](docs/Api/PortfolioManagementApi.md#getportoflioexcludedassets) | **GET** /portfolioGroups/{portfolioGroupId}/excludedassets | Get an array of excluded assets associated with a portfolio group\\
-*PortfolioManagementApi* | [**importModelPortfolio**](docs/Api/PortfolioManagementApi.md#importmodelportfolio) | **POST** /portfolioGroups/{portfolioGroupId}/import | Import target allocation based on portfolio group
-*PortfolioManagementApi* | [**listAssetClasses**](docs/Api/PortfolioManagementApi.md#listassetclasses) | **GET** /modelAssetClass | List of model asset class
-*PortfolioManagementApi* | [**listCalculatedTrades**](docs/Api/PortfolioManagementApi.md#listcalculatedtrades) | **GET** /portfolioGroups/{portfolioGroupId}/calculatedtrades | List of trades to make to rebalance portfolio group
-*PortfolioManagementApi* | [**listModelPortfolio**](docs/Api/PortfolioManagementApi.md#listmodelportfolio) | **GET** /modelPortfolio | List of model portfolio
-*PortfolioManagementApi* | [**listPortfolioAccounts**](docs/Api/PortfolioManagementApi.md#listportfolioaccounts) | **GET** /portfolioGroups/{portfolioGroupId}/accounts | Get all accounts associated with a portfolio group
-*PortfolioManagementApi* | [**modifyModelPortfolioById**](docs/Api/PortfolioManagementApi.md#modifymodelportfoliobyid) | **POST** /modelPortfolio/{modelPortfolioId} | Updates model portfolio object
-*PortfolioManagementApi* | [**savePortfolio**](docs/Api/PortfolioManagementApi.md#saveportfolio) | **PATCH** /portfolioGroups/{portfolioGroupId} | Update an existing target portfolio.
-*PortfolioManagementApi* | [**searchPortfolioSymbols**](docs/Api/PortfolioManagementApi.md#searchportfoliosymbols) | **POST** /portfolioGroups/{portfolioGroupId}/symbols | Search for symbols limited to brokerages under the specified portfolio group
-*PortfolioManagementApi* | [**setPortfolioTargets**](docs/Api/PortfolioManagementApi.md#setportfoliotargets) | **POST** /portfolioGroups/{portfolioGroupId}/targets | Set a new list of target assets under the specified PortfolioGroup. All existing target assets under this portfolio group will be replaced with the new list.
-*PortfolioManagementApi* | [**updateAssetClass**](docs/Api/PortfolioManagementApi.md#updateassetclass) | **POST** /modelAssetClass/{modelAssetClassId} | Updates model asset class objects
-*PortfolioManagementApi* | [**updatePortfolioSettings**](docs/Api/PortfolioManagementApi.md#updateportfoliosettings) | **PATCH** /portfolioGroups/{portfolioGroupId}/settings | Updates portfolio group settings
-*PortfolioManagementApi* | [**updatePortfolioTargetById**](docs/Api/PortfolioManagementApi.md#updateportfoliotargetbyid) | **PATCH** /portfolioGroups/{portfolioGroupId}/targets/{targetAssetId} | Update a TargetAsset under the specified PortfolioGroup.
 *ReferenceDataApi* | [**getCurrencyExchangeRatePair**](docs/Api/ReferenceDataApi.md#getcurrencyexchangeratepair) | **GET** /currencies/rates/{currencyPair} | Return the exchange rate of a currency pair
 *ReferenceDataApi* | [**getPartnerInfo**](docs/Api/ReferenceDataApi.md#getpartnerinfo) | **GET** /snapTrade/partners | Get metadata related to Snaptrade partner
 *ReferenceDataApi* | [**getSecurityTypes**](docs/Api/ReferenceDataApi.md#getsecuritytypes) | **GET** /securityTypes | List of all security types.
@@ -145,12 +113,8 @@ Class | Method | HTTP request | Description
 *ReferenceDataApi* | [**listAllCurrenciesRates**](docs/Api/ReferenceDataApi.md#listallcurrenciesrates) | **GET** /currencies/rates | Return the exchange rates of all supported currencies
 *ReferenceDataApi* | [**symbolSearchUserAccount**](docs/Api/ReferenceDataApi.md#symbolsearchuseraccount) | **POST** /accounts/{accountId}/symbols | Search for symbols that are supported by a brokerage account using a substring
 *TradingApi* | [**cancelUserAccountOrder**](docs/Api/TradingApi.md#canceluseraccountorder) | **POST** /accounts/{accountId}/orders/cancel | Cancel open order in account
-*TradingApi* | [**getCalculatedTradeImpactById**](docs/Api/TradingApi.md#getcalculatedtradeimpactbyid) | **GET** /portfolioGroups/{portfolioGroupId}/calculatedtrades/{calculatedTradeId}/modify/{tradeId} | Return details of a specific trade before it&#39;s placed
-*TradingApi* | [**getCalculatedTradesImpact**](docs/Api/TradingApi.md#getcalculatedtradesimpact) | **GET** /portfolioGroups/{portfolioGroupId}/calculatedtrades/{calculatedTradeId}/impact | Return the impact of placing a series of trades on the portfolio
 *TradingApi* | [**getOrderImpact**](docs/Api/TradingApi.md#getorderimpact) | **POST** /trade/impact | Check impact of trades on account.
 *TradingApi* | [**getUserAccountQuotes**](docs/Api/TradingApi.md#getuseraccountquotes) | **GET** /accounts/{accountId}/quotes | Get symbol quotes
-*TradingApi* | [**modifyCalculatedTradeById**](docs/Api/TradingApi.md#modifycalculatedtradebyid) | **PATCH** /portfolioGroups/{portfolioGroupId}/calculatedtrades/{calculatedTradeId}/modify/{tradeId} | Modify units of a trade before it is placed
-*TradingApi* | [**placeCalculatedTrades**](docs/Api/TradingApi.md#placecalculatedtrades) | **POST** /portfolioGroups/{portfolioGroupId}/calculatedtrades/{calculatedTradeId}/placeOrders | Place orders for the CalculatedTrades in series
 *TradingApi* | [**placeForceOrder**](docs/Api/TradingApi.md#placeforceorder) | **POST** /trade/place | Place a trade with NO validation.
 *TradingApi* | [**placeOCOOrder**](docs/Api/TradingApi.md#placeocoorder) | **POST** /trade/oco | Place a OCO (One Cancels Other) order
 *TradingApi* | [**placeOrder**](docs/Api/TradingApi.md#placeorder) | **POST** /trade/{tradeId} | Place order

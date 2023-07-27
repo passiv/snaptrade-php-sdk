@@ -61,7 +61,6 @@ try {
 } catch (\Exception $e) {
     echo 'Exception when calling OptionsApi->getOptionStrategy: ', $e->getMessage(), PHP_EOL;
 }
-
 ```
 
 ### Parameters
@@ -124,7 +123,6 @@ try {
 } catch (\Exception $e) {
     echo 'Exception when calling OptionsApi->getOptionsChain: ', $e->getMessage(), PHP_EOL;
 }
-
 ```
 
 ### Parameters
@@ -193,7 +191,6 @@ try {
 } catch (\Exception $e) {
     echo 'Exception when calling OptionsApi->getOptionsStrategyQuote: ', $e->getMessage(), PHP_EOL;
 }
-
 ```
 
 ### Parameters
@@ -260,7 +257,6 @@ try {
 } catch (\Exception $e) {
     echo 'Exception when calling OptionsApi->listOptionHoldings: ', $e->getMessage(), PHP_EOL;
 }
-
 ```
 
 ### Parameters
@@ -339,7 +335,6 @@ try {
 } catch (\Exception $e) {
     echo 'Exception when calling OptionsApi->placeOptionStrategy: ', $e->getMessage(), PHP_EOL;
 }
-
 ```
 
 ### Parameters

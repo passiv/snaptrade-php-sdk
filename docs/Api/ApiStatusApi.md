@@ -37,7 +37,6 @@ try {
 } catch (\Exception $e) {
     echo 'Exception when calling ApiStatusApi->check: ', $e->getMessage(), PHP_EOL;
 }
-
 ```
 
 ### Parameters

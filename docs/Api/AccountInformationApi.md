@@ -50,7 +50,6 @@ try {
 } catch (\Exception $e) {
     echo 'Exception when calling AccountInformationApi->getAllUserHoldings: ', $e->getMessage(), PHP_EOL;
 }
-
 ```
 
 ### Parameters
@@ -112,7 +111,6 @@ try {
 } catch (\Exception $e) {
     echo 'Exception when calling AccountInformationApi->getUserAccountBalance: ', $e->getMessage(), PHP_EOL;
 }
-
 ```
 
 ### Parameters
@@ -182,7 +180,6 @@ try {
 } catch (\Exception $e) {
     echo 'Exception when calling AccountInformationApi->getUserAccountDetails: ', $e->getMessage(), PHP_EOL;
 }
-
 ```
 
 ### Parameters
@@ -262,7 +259,6 @@ try {
 } catch (\Exception $e) {
     echo 'Exception when calling AccountInformationApi->getUserAccountOrders: ', $e->getMessage(), PHP_EOL;
 }
-
 ```
 
 ### Parameters
@@ -329,7 +325,6 @@ try {
 } catch (\Exception $e) {
     echo 'Exception when calling AccountInformationApi->getUserAccountPositions: ', $e->getMessage(), PHP_EOL;
 }
-
 ```
 
 ### Parameters
@@ -394,7 +389,6 @@ try {
 } catch (\Exception $e) {
     echo 'Exception when calling AccountInformationApi->getUserHoldings: ', $e->getMessage(), PHP_EOL;
 }
-
 ```
 
 ### Parameters
@@ -462,7 +456,6 @@ try {
 } catch (\Exception $e) {
     echo 'Exception when calling AccountInformationApi->listUserAccounts: ', $e->getMessage(), PHP_EOL;
 }
-
 ```
 
 ### Parameters
@@ -531,7 +524,6 @@ try {
 } catch (\Exception $e) {
     echo 'Exception when calling AccountInformationApi->updateUserAccount: ', $e->getMessage(), PHP_EOL;
 }
-
 ```
 
 ### Parameters

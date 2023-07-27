@@ -69,7 +69,6 @@ try {
 } catch (\Exception $e) {
     echo 'Exception when calling AccountInformationApi->getAllUserHoldings: ', $e->getMessage(), PHP_EOL;
 }
-
 ```
 
 ## API Endpoints

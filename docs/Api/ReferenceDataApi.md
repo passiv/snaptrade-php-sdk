@@ -48,7 +48,6 @@ try {
 } catch (\Exception $e) {
     echo 'Exception when calling ReferenceDataApi->getCurrencyExchangeRatePair: ', $e->getMessage(), PHP_EOL;
 }
-
 ```
 
 ### Parameters
@@ -111,7 +110,6 @@ try {
 } catch (\Exception $e) {
     echo 'Exception when calling ReferenceDataApi->getPartnerInfo: ', $e->getMessage(), PHP_EOL;
 }
-
 ```
 
 ### Parameters
@@ -164,7 +162,6 @@ try {
 } catch (\Exception $e) {
     echo 'Exception when calling ReferenceDataApi->getSecurityTypes: ', $e->getMessage(), PHP_EOL;
 }
-
 ```
 
 ### Parameters
@@ -221,7 +218,6 @@ try {
 } catch (\Exception $e) {
     echo 'Exception when calling ReferenceDataApi->getStockExchanges: ', $e->getMessage(), PHP_EOL;
 }
-
 ```
 
 ### Parameters
@@ -281,7 +277,6 @@ try {
 } catch (\Exception $e) {
     echo 'Exception when calling ReferenceDataApi->getSymbols: ', $e->getMessage(), PHP_EOL;
 }
-
 ```
 
 ### Parameters
@@ -345,7 +340,6 @@ try {
 } catch (\Exception $e) {
     echo 'Exception when calling ReferenceDataApi->getSymbolsByTicker: ', $e->getMessage(), PHP_EOL;
 }
-
 ```
 
 ### Parameters
@@ -404,7 +398,6 @@ try {
 } catch (\Exception $e) {
     echo 'Exception when calling ReferenceDataApi->listAllBrokerageAuthorizationType: ', $e->getMessage(), PHP_EOL;
 }
-
 ```
 
 ### Parameters
@@ -473,7 +466,6 @@ try {
 } catch (\Exception $e) {
     echo 'Exception when calling ReferenceDataApi->listAllBrokerages: ', $e->getMessage(), PHP_EOL;
 }
-
 ```
 
 ### Parameters
@@ -525,7 +517,6 @@ try {
 } catch (\Exception $e) {
     echo 'Exception when calling ReferenceDataApi->listAllCurrencies: ', $e->getMessage(), PHP_EOL;
 }
-
 ```
 
 ### Parameters
@@ -577,7 +568,6 @@ try {
 } catch (\Exception $e) {
     echo 'Exception when calling ReferenceDataApi->listAllCurrenciesRates: ', $e->getMessage(), PHP_EOL;
 }
-
 ```
 
 ### Parameters
@@ -643,7 +633,6 @@ try {
 } catch (\Exception $e) {
     echo 'Exception when calling ReferenceDataApi->symbolSearchUserAccount: ', $e->getMessage(), PHP_EOL;
 }
-
 ```
 
 ### Parameters

@@ -43,7 +43,6 @@ try {
 } catch (\Exception $e) {
     echo 'Exception when calling ErrorLogsApi->listUserErrors: ', $e->getMessage(), PHP_EOL;
 }
-
 ```
 
 ### Parameters

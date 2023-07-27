@@ -64,6 +64,7 @@ try {
 } catch (\Exception $e) {
     echo 'Exception when calling TradingApi->cancelUserAccountOrder: ', $e->getMessage(), PHP_EOL;
 }
+
 ```
 
 ### Parameters
@@ -141,6 +142,7 @@ try {
 } catch (\Exception $e) {
     echo 'Exception when calling TradingApi->getOrderImpact: ', $e->getMessage(), PHP_EOL;
 }
+
 ```
 
 ### Parameters
@@ -204,6 +206,7 @@ try {
 } catch (\Exception $e) {
     echo 'Exception when calling TradingApi->getUserAccountQuotes: ', $e->getMessage(), PHP_EOL;
 }
+
 ```
 
 ### Parameters
@@ -297,6 +300,7 @@ try {
 } catch (\Exception $e) {
     echo 'Exception when calling TradingApi->placeForceOrder: ', $e->getMessage(), PHP_EOL;
 }
+
 ```
 
 ### Parameters
@@ -376,6 +380,7 @@ try {
 } catch (\Exception $e) {
     echo 'Exception when calling TradingApi->placeOCOOrder: ', $e->getMessage(), PHP_EOL;
 }
+
 ```
 
 ### Parameters
@@ -453,6 +458,7 @@ try {
 } catch (\Exception $e) {
     echo 'Exception when calling TradingApi->placeOrder: ', $e->getMessage(), PHP_EOL;
 }
+
 ```
 
 ### Parameters

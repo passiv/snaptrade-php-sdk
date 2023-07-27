@@ -61,6 +61,7 @@ try {
 } catch (\Exception $e) {
     echo 'Exception when calling OptionsApi->getOptionStrategy: ', $e->getMessage(), PHP_EOL;
 }
+
 ```
 
 ### Parameters
@@ -123,6 +124,7 @@ try {
 } catch (\Exception $e) {
     echo 'Exception when calling OptionsApi->getOptionsChain: ', $e->getMessage(), PHP_EOL;
 }
+
 ```
 
 ### Parameters
@@ -191,6 +193,7 @@ try {
 } catch (\Exception $e) {
     echo 'Exception when calling OptionsApi->getOptionsStrategyQuote: ', $e->getMessage(), PHP_EOL;
 }
+
 ```
 
 ### Parameters
@@ -222,7 +225,7 @@ try {
 ## `listOptionHoldings()`
 
 ```php
-listOptionHoldings($user_id, $user_secret, $account_id): \SnapTrade\Model\OptionsHoldings
+listOptionHoldings($user_id, $user_secret, $account_id): \SnapTrade\Model\OptionsHoldings[]
 ```
 
 Get the options holdings in the account
@@ -257,6 +260,7 @@ try {
 } catch (\Exception $e) {
     echo 'Exception when calling OptionsApi->listOptionHoldings: ', $e->getMessage(), PHP_EOL;
 }
+
 ```
 
 ### Parameters
@@ -269,7 +273,7 @@ try {
 
 ### Return type
 
-[**\SnapTrade\Model\OptionsHoldings**](../Model/OptionsHoldings.md)
+[**\SnapTrade\Model\OptionsHoldings[]**](../Model/OptionsHoldings.md)
 
 ### Authorization
 
@@ -335,6 +339,7 @@ try {
 } catch (\Exception $e) {
     echo 'Exception when calling OptionsApi->placeOptionStrategy: ', $e->getMessage(), PHP_EOL;
 }
+
 ```
 
 ### Parameters

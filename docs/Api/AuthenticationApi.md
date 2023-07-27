@@ -41,6 +41,7 @@ try {
 } catch (\Exception $e) {
     echo 'Exception when calling AuthenticationApi->deleteSnapTradeUser: ', $e->getMessage(), PHP_EOL;
 }
+
 ```
 
 ### Parameters
@@ -96,6 +97,7 @@ try {
 } catch (\Exception $e) {
     echo 'Exception when calling AuthenticationApi->getUserJWT: ', $e->getMessage(), PHP_EOL;
 }
+
 ```
 
 ### Parameters
@@ -147,6 +149,7 @@ try {
 } catch (\Exception $e) {
     echo 'Exception when calling AuthenticationApi->listSnapTradeUsers: ', $e->getMessage(), PHP_EOL;
 }
+
 ```
 
 ### Parameters
@@ -210,6 +213,7 @@ try {
 } catch (\Exception $e) {
     echo 'Exception when calling AuthenticationApi->loginSnapTradeUser: ', $e->getMessage(), PHP_EOL;
 }
+
 ```
 
 ### Parameters
@@ -269,6 +273,7 @@ try {
 } catch (\Exception $e) {
     echo 'Exception when calling AuthenticationApi->registerSnapTradeUser: ', $e->getMessage(), PHP_EOL;
 }
+
 ```
 
 ### Parameters

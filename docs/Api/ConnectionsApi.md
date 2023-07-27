@@ -51,6 +51,7 @@ try {
 } catch (\Exception $e) {
     echo 'Exception when calling ConnectionsApi->detailBrokerageAuthorization: ', $e->getMessage(), PHP_EOL;
 }
+
 ```
 
 ### Parameters
@@ -117,6 +118,7 @@ try {
 } catch (\Exception $e) {
     echo 'Exception when calling ConnectionsApi->listBrokerageAuthorizations: ', $e->getMessage(), PHP_EOL;
 }
+
 ```
 
 ### Parameters
@@ -175,6 +177,7 @@ try {
 } catch (\Exception $e) {
     echo 'Exception when calling ConnectionsApi->removeBrokerageAuthorization: ', $e->getMessage(), PHP_EOL;
 }
+
 ```
 
 ### Parameters
@@ -234,6 +237,7 @@ try {
 } catch (\Exception $e) {
     echo 'Exception when calling ConnectionsApi->sessionEvents: ', $e->getMessage(), PHP_EOL;
 }
+
 ```
 
 ### Parameters

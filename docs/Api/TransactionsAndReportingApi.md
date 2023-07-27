@@ -66,6 +66,7 @@ try {
 } catch (\Exception $e) {
     echo 'Exception when calling TransactionsAndReportingApi->getActivities: ', $e->getMessage(), PHP_EOL;
 }
+
 ```
 
 ### Parameters
@@ -158,6 +159,7 @@ try {
 } catch (\Exception $e) {
     echo 'Exception when calling TransactionsAndReportingApi->getReportingCustomRange: ', $e->getMessage(), PHP_EOL;
 }
+
 ```
 
 ### Parameters

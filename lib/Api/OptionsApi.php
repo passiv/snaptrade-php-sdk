@@ -97,7 +97,7 @@ class OptionsApi extends \SnapTrade\CustomApi
         // Do not truncate error messages
         // https://github.com/guzzle/guzzle/issues/2185#issuecomment-800293420
         $stack = new HandlerStack(Utils::chooseHandler());
-        $stack->push(Middleware::httpErrors(new BodySummarizer(10_000)), 'http_errors');
+        $stack->push(Middleware::httpErrors(new BodySummarizer(10000)), 'http_errors');
         $stack->push(Middleware::redirect(), 'allow_redirects');
         $stack->push(Middleware::cookies(), 'cookies');
         $stack->push(Middleware::prepareBody(), 'prepare_body');
@@ -1451,7 +1451,7 @@ class OptionsApi extends \SnapTrade\CustomApi
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \SnapTrade\Model\OptionsHoldings
+     * @return \SnapTrade\Model\OptionsHoldings[]
      */
     public function listOptionHoldings(
         $user_id,
@@ -1480,7 +1480,7 @@ class OptionsApi extends \SnapTrade\CustomApi
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \SnapTrade\Model\OptionsHoldings, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SnapTrade\Model\OptionsHoldings[], HTTP status code, HTTP response headers (array of strings)
      */
     public function listOptionHoldingsWithHttpInfo($user_id, $user_secret, $account_id, string $contentType = self::contentTypes['listOptionHoldings'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
@@ -1540,23 +1540,23 @@ class OptionsApi extends \SnapTrade\CustomApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\SnapTrade\Model\OptionsHoldings' === '\SplFileObject') {
+                    if ('\SnapTrade\Model\OptionsHoldings[]' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\SnapTrade\Model\OptionsHoldings' !== 'string') {
+                        if ('\SnapTrade\Model\OptionsHoldings[]' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\OptionsHoldings', []),
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\OptionsHoldings[]', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = '\SnapTrade\Model\OptionsHoldings';
+            $returnType = '\SnapTrade\Model\OptionsHoldings[]';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -1577,7 +1577,7 @@ class OptionsApi extends \SnapTrade\CustomApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\SnapTrade\Model\OptionsHoldings',
+                        '\SnapTrade\Model\OptionsHoldings[]',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1634,7 +1634,7 @@ class OptionsApi extends \SnapTrade\CustomApi
      */
     public function listOptionHoldingsAsyncWithHttpInfo($user_id, $user_secret, $account_id, string $contentType = self::contentTypes['listOptionHoldings'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $returnType = '\SnapTrade\Model\OptionsHoldings';
+        $returnType = '\SnapTrade\Model\OptionsHoldings[]';
         ["request" => $request, "serializedBody" => $serializedBody] = $this->listOptionHoldingsRequest($user_id, $user_secret, $account_id, $contentType);
 
         // Customization hook

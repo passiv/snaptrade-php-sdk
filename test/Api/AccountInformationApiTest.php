@@ -61,7 +61,7 @@ class AccountInformationApiTest extends TestCase
     /**
      * Test case for getAllUserHoldings
      *
-     * List all accounts for the user, plus balances and positions for each account..
+     * List all accounts for the user, plus balances, positions, and orders for each account..
      *
      */
     public function testGetAllUserHoldings()
@@ -73,7 +73,7 @@ class AccountInformationApiTest extends TestCase
     /**
      * Test case for getUserAccountBalance
      *
-     * Get all cash balances of an investment account.
+     * List account balances.
      *
      */
     public function testGetUserAccountBalance()
@@ -109,7 +109,7 @@ class AccountInformationApiTest extends TestCase
     /**
      * Test case for getUserAccountPositions
      *
-     * Get all positions of an investment account.
+     * List account positions.
      *
      */
     public function testGetUserAccountPositions()
@@ -133,7 +133,7 @@ class AccountInformationApiTest extends TestCase
     /**
      * Test case for listUserAccounts
      *
-     * List all investment accounts for the user.
+     * List accounts.
      *
      */
     public function testListUserAccounts()

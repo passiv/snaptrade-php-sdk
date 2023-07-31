@@ -61,7 +61,7 @@ class AuthenticationApiTest extends TestCase
     /**
      * Test case for deleteSnapTradeUser
      *
-     * Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user.
+     * Delete SnapTrade user.
      *
      */
     public function testDeleteSnapTradeUser()
@@ -73,7 +73,7 @@ class AuthenticationApiTest extends TestCase
     /**
      * Test case for getUserJWT
      *
-     * Obtains an encrypted JWT tokens that should be decrypted on a user's local device.
+     * Generate encrypted JWT token.
      *
      */
     public function testGetUserJWT()
@@ -85,7 +85,7 @@ class AuthenticationApiTest extends TestCase
     /**
      * Test case for listSnapTradeUsers
      *
-     * Get a list of all SnapTrade users you've registered on our platform.
+     * List SnapTrade users.
      *
      */
     public function testListSnapTradeUsers()
@@ -97,7 +97,7 @@ class AuthenticationApiTest extends TestCase
     /**
      * Test case for loginSnapTradeUser
      *
-     * Generate a redirect URI to securely login a user to the SnapTrade Connection Portal.
+     * Login user & generate connection link.
      *
      */
     public function testLoginSnapTradeUser()
@@ -109,7 +109,7 @@ class AuthenticationApiTest extends TestCase
     /**
      * Test case for registerSnapTradeUser
      *
-     * Register user with SnapTrade in order to create secure brokerage authorizations.
+     * Create SnapTrade user.
      *
      */
     public function testRegisterSnapTradeUser()

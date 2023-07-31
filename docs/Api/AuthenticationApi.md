@@ -4,11 +4,11 @@ All URIs are relative to https://api.snaptrade.com/api/v1, except if the operati
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
-| [**deleteSnapTradeUser()**](AuthenticationApi.md#deleteSnapTradeUser) | **DELETE** /snapTrade/deleteUser | Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user |
-| [**getUserJWT()**](AuthenticationApi.md#getUserJWT) | **GET** /snapTrade/encryptedJWT | Obtains an encrypted JWT tokens that should be decrypted on a user&#39;s local device |
-| [**listSnapTradeUsers()**](AuthenticationApi.md#listSnapTradeUsers) | **GET** /snapTrade/listUsers | Get a list of all SnapTrade users you&#39;ve registered on our platform |
-| [**loginSnapTradeUser()**](AuthenticationApi.md#loginSnapTradeUser) | **POST** /snapTrade/login | Generate a redirect URI to securely login a user to the SnapTrade Connection Portal |
-| [**registerSnapTradeUser()**](AuthenticationApi.md#registerSnapTradeUser) | **POST** /snapTrade/registerUser | Register user with SnapTrade in order to create secure brokerage authorizations |
+| [**deleteSnapTradeUser()**](AuthenticationApi.md#deleteSnapTradeUser) | **DELETE** /snapTrade/deleteUser | Delete SnapTrade user |
+| [**getUserJWT()**](AuthenticationApi.md#getUserJWT) | **GET** /snapTrade/encryptedJWT | Generate encrypted JWT token |
+| [**listSnapTradeUsers()**](AuthenticationApi.md#listSnapTradeUsers) | **GET** /snapTrade/listUsers | List SnapTrade users |
+| [**loginSnapTradeUser()**](AuthenticationApi.md#loginSnapTradeUser) | **POST** /snapTrade/login | Login user &amp; generate connection link |
+| [**registerSnapTradeUser()**](AuthenticationApi.md#registerSnapTradeUser) | **POST** /snapTrade/registerUser | Create SnapTrade user |
 
 
 ## `deleteSnapTradeUser()`
@@ -17,7 +17,7 @@ All URIs are relative to https://api.snaptrade.com/api/v1, except if the operati
 deleteSnapTradeUser($user_id): \SnapTrade\Model\DeleteUserResponse
 ```
 
-Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user
+Delete SnapTrade user
 
 ### Example
 
@@ -72,7 +72,7 @@ try {
 getUserJWT($user_id, $user_secret): \SnapTrade\Model\EncryptedResponse
 ```
 
-Obtains an encrypted JWT tokens that should be decrypted on a user's local device
+Generate encrypted JWT token
 
 ### Example
 
@@ -128,7 +128,7 @@ try {
 listSnapTradeUsers(): string[]
 ```
 
-Get a list of all SnapTrade users you've registered on our platform
+List SnapTrade users
 
 ### Example
 
@@ -176,7 +176,7 @@ This endpoint does not need any parameter.
 loginSnapTradeUser($user_id, $user_secret, $snap_trade_login_user_request_body): \SnapTrade\Model\AuthenticationLoginSnapTradeUser200Response
 ```
 
-Generate a redirect URI to securely login a user to the SnapTrade Connection Portal
+Login user & generate connection link
 
 ### Example
 
@@ -243,7 +243,7 @@ try {
 registerSnapTradeUser($snap_trade_register_user_request_body): \SnapTrade\Model\UserIDandSecret
 ```
 
-Register user with SnapTrade in order to create secure brokerage authorizations
+Create SnapTrade user
 
 ### Example
 

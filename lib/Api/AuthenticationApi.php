@@ -150,7 +150,7 @@ class AuthenticationApi extends \SnapTrade\CustomApi
     /**
      * Operation deleteSnapTradeUser
      *
-     * Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user
+     * Delete SnapTrade user
      *
      * @param  string $user_id user_id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteSnapTradeUser'] to see the possible values for this operation
@@ -175,7 +175,7 @@ class AuthenticationApi extends \SnapTrade\CustomApi
     /**
      * Operation deleteSnapTradeUserWithHttpInfo
      *
-     * Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user
+     * Delete SnapTrade user
      *
      * @param  string $user_id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteSnapTradeUser'] to see the possible values for this operation
@@ -359,7 +359,7 @@ class AuthenticationApi extends \SnapTrade\CustomApi
     /**
      * Operation deleteSnapTradeUserAsync
      *
-     * Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user
+     * Delete SnapTrade user
      *
      * @param  string $user_id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteSnapTradeUser'] to see the possible values for this operation
@@ -387,7 +387,7 @@ class AuthenticationApi extends \SnapTrade\CustomApi
     /**
      * Operation deleteSnapTradeUserAsyncWithHttpInfo
      *
-     * Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user
+     * Delete SnapTrade user
      *
      * @param  string $user_id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteSnapTradeUser'] to see the possible values for this operation
@@ -562,7 +562,7 @@ class AuthenticationApi extends \SnapTrade\CustomApi
     /**
      * Operation getUserJWT
      *
-     * Obtains an encrypted JWT tokens that should be decrypted on a user&#39;s local device
+     * Generate encrypted JWT token
      *
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
@@ -589,7 +589,7 @@ class AuthenticationApi extends \SnapTrade\CustomApi
     /**
      * Operation getUserJWTWithHttpInfo
      *
-     * Obtains an encrypted JWT tokens that should be decrypted on a user&#39;s local device
+     * Generate encrypted JWT token
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -775,7 +775,7 @@ class AuthenticationApi extends \SnapTrade\CustomApi
     /**
      * Operation getUserJWTAsync
      *
-     * Obtains an encrypted JWT tokens that should be decrypted on a user&#39;s local device
+     * Generate encrypted JWT token
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -805,7 +805,7 @@ class AuthenticationApi extends \SnapTrade\CustomApi
     /**
      * Operation getUserJWTAsyncWithHttpInfo
      *
-     * Obtains an encrypted JWT tokens that should be decrypted on a user&#39;s local device
+     * Generate encrypted JWT token
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -1003,7 +1003,7 @@ class AuthenticationApi extends \SnapTrade\CustomApi
     /**
      * Operation listSnapTradeUsers
      *
-     * Get a list of all SnapTrade users you&#39;ve registered on our platform
+     * List SnapTrade users
      *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listSnapTradeUsers'] to see the possible values for this operation
      *
@@ -1026,7 +1026,7 @@ class AuthenticationApi extends \SnapTrade\CustomApi
     /**
      * Operation listSnapTradeUsersWithHttpInfo
      *
-     * Get a list of all SnapTrade users you&#39;ve registered on our platform
+     * List SnapTrade users
      *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listSnapTradeUsers'] to see the possible values for this operation
      *
@@ -1185,7 +1185,7 @@ class AuthenticationApi extends \SnapTrade\CustomApi
     /**
      * Operation listSnapTradeUsersAsync
      *
-     * Get a list of all SnapTrade users you&#39;ve registered on our platform
+     * List SnapTrade users
      *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listSnapTradeUsers'] to see the possible values for this operation
      *
@@ -1211,7 +1211,7 @@ class AuthenticationApi extends \SnapTrade\CustomApi
     /**
      * Operation listSnapTradeUsersAsyncWithHttpInfo
      *
-     * Get a list of all SnapTrade users you&#39;ve registered on our platform
+     * List SnapTrade users
      *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listSnapTradeUsers'] to see the possible values for this operation
      *
@@ -1363,7 +1363,7 @@ class AuthenticationApi extends \SnapTrade\CustomApi
     /**
      * Operation loginSnapTradeUser
      *
-     * Generate a redirect URI to securely login a user to the SnapTrade Connection Portal
+     * Login user &amp; generate connection link
      *
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
@@ -1403,7 +1403,7 @@ class AuthenticationApi extends \SnapTrade\CustomApi
     /**
      * Operation loginSnapTradeUserWithHttpInfo
      *
-     * Generate a redirect URI to securely login a user to the SnapTrade Connection Portal
+     * Login user &amp; generate connection link
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -1591,7 +1591,7 @@ class AuthenticationApi extends \SnapTrade\CustomApi
     /**
      * Operation loginSnapTradeUserAsync
      *
-     * Generate a redirect URI to securely login a user to the SnapTrade Connection Portal
+     * Login user &amp; generate connection link
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -1634,7 +1634,7 @@ class AuthenticationApi extends \SnapTrade\CustomApi
     /**
      * Operation loginSnapTradeUserAsyncWithHttpInfo
      *
-     * Generate a redirect URI to securely login a user to the SnapTrade Connection Portal
+     * Login user &amp; generate connection link
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -1849,7 +1849,7 @@ class AuthenticationApi extends \SnapTrade\CustomApi
     /**
      * Operation registerSnapTradeUser
      *
-     * Register user with SnapTrade in order to create secure brokerage authorizations
+     * Create SnapTrade user
      *
      * @param  \SnapTrade\Model\SnapTradeRegisterUserRequestBody $snap_trade_register_user_request_body snap_trade_register_user_request_body (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['registerSnapTradeUser'] to see the possible values for this operation
@@ -1879,7 +1879,7 @@ class AuthenticationApi extends \SnapTrade\CustomApi
     /**
      * Operation registerSnapTradeUserWithHttpInfo
      *
-     * Register user with SnapTrade in order to create secure brokerage authorizations
+     * Create SnapTrade user
      *
      * @param  \SnapTrade\Model\SnapTradeRegisterUserRequestBody $snap_trade_register_user_request_body (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['registerSnapTradeUser'] to see the possible values for this operation
@@ -2040,7 +2040,7 @@ class AuthenticationApi extends \SnapTrade\CustomApi
     /**
      * Operation registerSnapTradeUserAsync
      *
-     * Register user with SnapTrade in order to create secure brokerage authorizations
+     * Create SnapTrade user
      *
      * @param  \SnapTrade\Model\SnapTradeRegisterUserRequestBody $snap_trade_register_user_request_body (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['registerSnapTradeUser'] to see the possible values for this operation
@@ -2073,7 +2073,7 @@ class AuthenticationApi extends \SnapTrade\CustomApi
     /**
      * Operation registerSnapTradeUserAsyncWithHttpInfo
      *
-     * Register user with SnapTrade in order to create secure brokerage authorizations
+     * Create SnapTrade user
      *
      * @param  \SnapTrade\Model\SnapTradeRegisterUserRequestBody $snap_trade_register_user_request_body (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['registerSnapTradeUser'] to see the possible values for this operation

@@ -222,7 +222,7 @@ try {
 ## `listOptionHoldings()`
 
 ```php
-listOptionHoldings($user_id, $user_secret, $account_id): \SnapTrade\Model\OptionsHoldings[]
+listOptionHoldings($user_id, $user_secret, $account_id): \SnapTrade\Model\OptionsPosition[]
 ```
 
 Get the options holdings in the account
@@ -248,10 +248,11 @@ try {
         user_secret: $user_secret, 
         account_id: $account_id
     );
-    print_r($result->$getId());
     print_r($result->$getSymbol());
+    print_r($result->$getDescription());
     print_r($result->$getOptionSymbol());
     print_r($result->$getPrice());
+    print_r($result->$getUnits());
     print_r($result->$getCurrency());
     print_r($result->$getAveragePurchasePrice());
 } catch (\Exception $e) {
@@ -269,7 +270,7 @@ try {
 
 ### Return type
 
-[**\SnapTrade\Model\OptionsHoldings[]**](../Model/OptionsHoldings.md)
+[**\SnapTrade\Model\OptionsPosition[]**](../Model/OptionsPosition.md)
 
 ### Authorization
 

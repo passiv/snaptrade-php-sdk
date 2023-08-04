@@ -4,14 +4,23 @@ namespace SnapTrade;
 
 class Client
 {
+    
     public readonly \SnapTrade\Api\AccountInformationApi $accountInformation;
+    
     public readonly \SnapTrade\Api\ApiStatusApi $apiStatus;
+    
     public readonly \SnapTrade\Api\AuthenticationApi $authentication;
+    
     public readonly \SnapTrade\Api\ConnectionsApi $connections;
+    
     public readonly \SnapTrade\Api\ErrorLogsApi $errorLogs;
+    
     public readonly \SnapTrade\Api\OptionsApi $options;
+    
     public readonly \SnapTrade\Api\ReferenceDataApi $referenceData;
+    
     public readonly \SnapTrade\Api\TradingApi $trading;
+    
     public readonly \SnapTrade\Api\TransactionsAndReportingApi $transactionsAndReporting;
 
     /**

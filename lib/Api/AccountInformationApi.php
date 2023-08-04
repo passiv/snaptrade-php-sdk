@@ -106,7 +106,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
         // Do not truncate error messages
         // https://github.com/guzzle/guzzle/issues/2185#issuecomment-800293420
         $stack = new HandlerStack(Utils::chooseHandler());
-        $stack->push(Middleware::httpErrors(new BodySummarizer(10_000)), 'http_errors');
+        $stack->push(Middleware::httpErrors(new BodySummarizer(10000)), 'http_errors');
         $stack->push(Middleware::redirect(), 'allow_redirects');
         $stack->push(Middleware::cookies(), 'cookies');
         $stack->push(Middleware::prepareBody(), 'prepare_body');
@@ -159,7 +159,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
     /**
      * Operation getAllUserHoldings
      *
-     * List all accounts for the user, plus balances and positions for each account.
+     * List all accounts for the user, plus balances, positions, and orders for each account.
      *
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
@@ -188,7 +188,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
     /**
      * Operation getAllUserHoldingsWithHttpInfo
      *
-     * List all accounts for the user, plus balances and positions for each account.
+     * List all accounts for the user, plus balances, positions, and orders for each account.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -353,7 +353,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
     /**
      * Operation getAllUserHoldingsAsync
      *
-     * List all accounts for the user, plus balances and positions for each account.
+     * List all accounts for the user, plus balances, positions, and orders for each account.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -385,7 +385,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
     /**
      * Operation getAllUserHoldingsAsyncWithHttpInfo
      *
-     * List all accounts for the user, plus balances and positions for each account.
+     * List all accounts for the user, plus balances, positions, and orders for each account.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -600,7 +600,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
     /**
      * Operation getUserAccountBalance
      *
-     * Get all cash balances of an investment account
+     * List account balances
      *
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
@@ -629,7 +629,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
     /**
      * Operation getUserAccountBalanceWithHttpInfo
      *
-     * Get all cash balances of an investment account
+     * List account balances
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -748,7 +748,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
     /**
      * Operation getUserAccountBalanceAsync
      *
-     * Get all cash balances of an investment account
+     * List account balances
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -780,7 +780,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
     /**
      * Operation getUserAccountBalanceAsyncWithHttpInfo
      *
-     * Get all cash balances of an investment account
+     * List account balances
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -1007,7 +1007,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \SnapTrade\Model\Account[]
+     * @return \SnapTrade\Model\Account
      */
     public function getUserAccountDetails(
         $user_id,
@@ -1036,7 +1036,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \SnapTrade\Model\Account[], HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SnapTrade\Model\Account, HTTP status code, HTTP response headers (array of strings)
      */
     public function getUserAccountDetailsWithHttpInfo($user_id, $user_secret, $account_id, string $contentType = self::contentTypes['getUserAccountDetails'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
@@ -1096,23 +1096,23 @@ class AccountInformationApi extends \SnapTrade\CustomApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\SnapTrade\Model\Account[]' === '\SplFileObject') {
+                    if ('\SnapTrade\Model\Account' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\SnapTrade\Model\Account[]' !== 'string') {
+                        if ('\SnapTrade\Model\Account' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\Account[]', []),
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\Account', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = '\SnapTrade\Model\Account[]';
+            $returnType = '\SnapTrade\Model\Account';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -1133,7 +1133,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\SnapTrade\Model\Account[]',
+                        '\SnapTrade\Model\Account',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1190,7 +1190,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      */
     public function getUserAccountDetailsAsyncWithHttpInfo($user_id, $user_secret, $account_id, string $contentType = self::contentTypes['getUserAccountDetails'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $returnType = '\SnapTrade\Model\Account[]';
+        $returnType = '\SnapTrade\Model\Account';
         ["request" => $request, "serializedBody" => $serializedBody] = $this->getUserAccountDetailsRequest($user_id, $user_secret, $account_id, $contentType);
 
         // Customization hook
@@ -1817,7 +1817,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
     /**
      * Operation getUserAccountPositions
      *
-     * Get all positions of an investment account
+     * List account positions
      *
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
@@ -1846,7 +1846,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
     /**
      * Operation getUserAccountPositionsWithHttpInfo
      *
-     * Get all positions of an investment account
+     * List account positions
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -1965,7 +1965,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
     /**
      * Operation getUserAccountPositionsAsync
      *
-     * Get all positions of an investment account
+     * List account positions
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -1997,7 +1997,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
     /**
      * Operation getUserAccountPositionsAsyncWithHttpInfo
      *
-     * Get all positions of an investment account
+     * List account positions
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -2659,7 +2659,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
     /**
      * Operation listUserAccounts
      *
-     * List all investment accounts for the user
+     * List accounts
      *
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
@@ -2686,7 +2686,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
     /**
      * Operation listUserAccountsWithHttpInfo
      *
-     * List all investment accounts for the user
+     * List accounts
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -2803,7 +2803,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
     /**
      * Operation listUserAccountsAsync
      *
-     * List all investment accounts for the user
+     * List accounts
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -2833,7 +2833,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
     /**
      * Operation listUserAccountsAsyncWithHttpInfo
      *
-     * List all investment accounts for the user
+     * List accounts
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)

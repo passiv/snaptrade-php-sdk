@@ -97,7 +97,7 @@ class ReferenceDataApiTest extends TestCase
     /**
      * Test case for getStockExchanges
      *
-     * Return list of stock exchanges on Passiv and their suffixes.
+     * List exchanges.
      *
      */
     public function testGetStockExchanges()
@@ -145,7 +145,7 @@ class ReferenceDataApiTest extends TestCase
     /**
      * Test case for listAllBrokerages
      *
-     * List of all brokerages..
+     * List brokerages.
      *
      */
     public function testListAllBrokerages()
@@ -157,7 +157,7 @@ class ReferenceDataApiTest extends TestCase
     /**
      * Test case for listAllCurrencies
      *
-     * List of all supported currencies.
+     * List currencies.
      *
      */
     public function testListAllCurrencies()
@@ -169,7 +169,7 @@ class ReferenceDataApiTest extends TestCase
     /**
      * Test case for listAllCurrenciesRates
      *
-     * Return the exchange rates of all supported currencies.
+     * List currency exchange rates.
      *
      */
     public function testListAllCurrenciesRates()
@@ -181,7 +181,7 @@ class ReferenceDataApiTest extends TestCase
     /**
      * Test case for symbolSearchUserAccount
      *
-     * Search for symbols that are supported by a brokerage account using a substring.
+     * Search for symbols available in an account.
      *
      */
     public function testSymbolSearchUserAccount()

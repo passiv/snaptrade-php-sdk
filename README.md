@@ -23,7 +23,7 @@ To install the bindings via [Composer](https://getcomposer.org/), add the follow
     }
   ],
   "require": {
-    "konfig/snaptrade-php-sdk": "1.15.0"
+    "konfig/snaptrade-php-sdk": "1.20.0"
   }
 }
 ```
@@ -77,20 +77,20 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*AccountInformationApi* | [**getAllUserHoldings**](docs/Api/AccountInformationApi.md#getalluserholdings) | **GET** /holdings | List all accounts for the user, plus balances and positions for each account.
-*AccountInformationApi* | [**getUserAccountBalance**](docs/Api/AccountInformationApi.md#getuseraccountbalance) | **GET** /accounts/{accountId}/balances | Get all cash balances of an investment account
+*AccountInformationApi* | [**getAllUserHoldings**](docs/Api/AccountInformationApi.md#getalluserholdings) | **GET** /holdings | List all accounts for the user, plus balances, positions, and orders for each account.
+*AccountInformationApi* | [**getUserAccountBalance**](docs/Api/AccountInformationApi.md#getuseraccountbalance) | **GET** /accounts/{accountId}/balances | List account balances
 *AccountInformationApi* | [**getUserAccountDetails**](docs/Api/AccountInformationApi.md#getuseraccountdetails) | **GET** /accounts/{accountId} | Return details of a specific investment account
 *AccountInformationApi* | [**getUserAccountOrders**](docs/Api/AccountInformationApi.md#getuseraccountorders) | **GET** /accounts/{accountId}/orders | Get all history of orders placed in account
-*AccountInformationApi* | [**getUserAccountPositions**](docs/Api/AccountInformationApi.md#getuseraccountpositions) | **GET** /accounts/{accountId}/positions | Get all positions of an investment account
+*AccountInformationApi* | [**getUserAccountPositions**](docs/Api/AccountInformationApi.md#getuseraccountpositions) | **GET** /accounts/{accountId}/positions | List account positions
 *AccountInformationApi* | [**getUserHoldings**](docs/Api/AccountInformationApi.md#getuserholdings) | **GET** /accounts/{accountId}/holdings | List balances, positions and orders for the specified account.
-*AccountInformationApi* | [**listUserAccounts**](docs/Api/AccountInformationApi.md#listuseraccounts) | **GET** /accounts | List all investment accounts for the user
+*AccountInformationApi* | [**listUserAccounts**](docs/Api/AccountInformationApi.md#listuseraccounts) | **GET** /accounts | List accounts
 *AccountInformationApi* | [**updateUserAccount**](docs/Api/AccountInformationApi.md#updateuseraccount) | **PUT** /accounts/{accountId} | Update details of an investment account
 *ApiStatusApi* | [**check**](docs/Api/ApiStatusApi.md#check) | **GET** / | Get API Status
-*AuthenticationApi* | [**deleteSnapTradeUser**](docs/Api/AuthenticationApi.md#deletesnaptradeuser) | **DELETE** /snapTrade/deleteUser | Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user
-*AuthenticationApi* | [**getUserJWT**](docs/Api/AuthenticationApi.md#getuserjwt) | **GET** /snapTrade/encryptedJWT | Obtains an encrypted JWT tokens that should be decrypted on a user&#39;s local device
-*AuthenticationApi* | [**listSnapTradeUsers**](docs/Api/AuthenticationApi.md#listsnaptradeusers) | **GET** /snapTrade/listUsers | Get a list of all SnapTrade users you&#39;ve registered on our platform
-*AuthenticationApi* | [**loginSnapTradeUser**](docs/Api/AuthenticationApi.md#loginsnaptradeuser) | **POST** /snapTrade/login | Generate a redirect URI to securely login a user to the SnapTrade Connection Portal
-*AuthenticationApi* | [**registerSnapTradeUser**](docs/Api/AuthenticationApi.md#registersnaptradeuser) | **POST** /snapTrade/registerUser | Register user with SnapTrade in order to create secure brokerage authorizations
+*AuthenticationApi* | [**deleteSnapTradeUser**](docs/Api/AuthenticationApi.md#deletesnaptradeuser) | **DELETE** /snapTrade/deleteUser | Delete SnapTrade user
+*AuthenticationApi* | [**getUserJWT**](docs/Api/AuthenticationApi.md#getuserjwt) | **GET** /snapTrade/encryptedJWT | Generate encrypted JWT token
+*AuthenticationApi* | [**listSnapTradeUsers**](docs/Api/AuthenticationApi.md#listsnaptradeusers) | **GET** /snapTrade/listUsers | List SnapTrade users
+*AuthenticationApi* | [**loginSnapTradeUser**](docs/Api/AuthenticationApi.md#loginsnaptradeuser) | **POST** /snapTrade/login | Login user &amp; generate connection link
+*AuthenticationApi* | [**registerSnapTradeUser**](docs/Api/AuthenticationApi.md#registersnaptradeuser) | **POST** /snapTrade/registerUser | Create SnapTrade user
 *ConnectionsApi* | [**detailBrokerageAuthorization**](docs/Api/ConnectionsApi.md#detailbrokerageauthorization) | **GET** /authorizations/{authorizationId} | Get detail of a specific brokerage authorizations for the user
 *ConnectionsApi* | [**listBrokerageAuthorizations**](docs/Api/ConnectionsApi.md#listbrokerageauthorizations) | **GET** /authorizations | List all brokerage authorizations for the user
 *ConnectionsApi* | [**removeBrokerageAuthorization**](docs/Api/ConnectionsApi.md#removebrokerageauthorization) | **DELETE** /authorizations/{authorizationId} | Remove a brokerage authorization.
@@ -104,14 +104,14 @@ Class | Method | HTTP request | Description
 *ReferenceDataApi* | [**getCurrencyExchangeRatePair**](docs/Api/ReferenceDataApi.md#getcurrencyexchangeratepair) | **GET** /currencies/rates/{currencyPair} | Return the exchange rate of a currency pair
 *ReferenceDataApi* | [**getPartnerInfo**](docs/Api/ReferenceDataApi.md#getpartnerinfo) | **GET** /snapTrade/partners | Get metadata related to Snaptrade partner
 *ReferenceDataApi* | [**getSecurityTypes**](docs/Api/ReferenceDataApi.md#getsecuritytypes) | **GET** /securityTypes | List of all security types.
-*ReferenceDataApi* | [**getStockExchanges**](docs/Api/ReferenceDataApi.md#getstockexchanges) | **GET** /exchanges | Return list of stock exchanges on Passiv and their suffixes
+*ReferenceDataApi* | [**getStockExchanges**](docs/Api/ReferenceDataApi.md#getstockexchanges) | **GET** /exchanges | List exchanges
 *ReferenceDataApi* | [**getSymbols**](docs/Api/ReferenceDataApi.md#getsymbols) | **POST** /symbols | Search for symbols
 *ReferenceDataApi* | [**getSymbolsByTicker**](docs/Api/ReferenceDataApi.md#getsymbolsbyticker) | **GET** /symbols/{ticker} | Get details of a symbol by the ticker
 *ReferenceDataApi* | [**listAllBrokerageAuthorizationType**](docs/Api/ReferenceDataApi.md#listallbrokerageauthorizationtype) | **GET** /brokerageAuthorizationTypes | List of all brokerage authorization types
-*ReferenceDataApi* | [**listAllBrokerages**](docs/Api/ReferenceDataApi.md#listallbrokerages) | **GET** /brokerages | List of all brokerages.
-*ReferenceDataApi* | [**listAllCurrencies**](docs/Api/ReferenceDataApi.md#listallcurrencies) | **GET** /currencies | List of all supported currencies
-*ReferenceDataApi* | [**listAllCurrenciesRates**](docs/Api/ReferenceDataApi.md#listallcurrenciesrates) | **GET** /currencies/rates | Return the exchange rates of all supported currencies
-*ReferenceDataApi* | [**symbolSearchUserAccount**](docs/Api/ReferenceDataApi.md#symbolsearchuseraccount) | **POST** /accounts/{accountId}/symbols | Search for symbols that are supported by a brokerage account using a substring
+*ReferenceDataApi* | [**listAllBrokerages**](docs/Api/ReferenceDataApi.md#listallbrokerages) | **GET** /brokerages | List brokerages
+*ReferenceDataApi* | [**listAllCurrencies**](docs/Api/ReferenceDataApi.md#listallcurrencies) | **GET** /currencies | List currencies
+*ReferenceDataApi* | [**listAllCurrenciesRates**](docs/Api/ReferenceDataApi.md#listallcurrenciesrates) | **GET** /currencies/rates | List currency exchange rates
+*ReferenceDataApi* | [**symbolSearchUserAccount**](docs/Api/ReferenceDataApi.md#symbolsearchuseraccount) | **POST** /accounts/{accountId}/symbols | Search for symbols available in an account
 *TradingApi* | [**cancelUserAccountOrder**](docs/Api/TradingApi.md#canceluseraccountorder) | **POST** /accounts/{accountId}/orders/cancel | Cancel open order in account
 *TradingApi* | [**getOrderImpact**](docs/Api/TradingApi.md#getorderimpact) | **POST** /trade/impact | Check impact of trades on account.
 *TradingApi* | [**getUserAccountQuotes**](docs/Api/TradingApi.md#getuseraccountquotes) | **GET** /accounts/{accountId}/quotes | Get symbol quotes

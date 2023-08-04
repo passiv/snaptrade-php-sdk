@@ -115,7 +115,7 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
         // Do not truncate error messages
         // https://github.com/guzzle/guzzle/issues/2185#issuecomment-800293420
         $stack = new HandlerStack(Utils::chooseHandler());
-        $stack->push(Middleware::httpErrors(new BodySummarizer(10_000)), 'http_errors');
+        $stack->push(Middleware::httpErrors(new BodySummarizer(10000)), 'http_errors');
         $stack->push(Middleware::redirect(), 'allow_redirects');
         $stack->push(Middleware::cookies(), 'cookies');
         $stack->push(Middleware::prepareBody(), 'prepare_body');
@@ -1205,7 +1205,7 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
     /**
      * Operation getStockExchanges
      *
-     * Return list of stock exchanges on Passiv and their suffixes
+     * List exchanges
      *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getStockExchanges'] to see the possible values for this operation
      *
@@ -1228,7 +1228,7 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
     /**
      * Operation getStockExchangesWithHttpInfo
      *
-     * Return list of stock exchanges on Passiv and their suffixes
+     * List exchanges
      *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getStockExchanges'] to see the possible values for this operation
      *
@@ -1341,7 +1341,7 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
     /**
      * Operation getStockExchangesAsync
      *
-     * Return list of stock exchanges on Passiv and their suffixes
+     * List exchanges
      *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getStockExchanges'] to see the possible values for this operation
      *
@@ -1367,7 +1367,7 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
     /**
      * Operation getStockExchangesAsyncWithHttpInfo
      *
-     * Return list of stock exchanges on Passiv and their suffixes
+     * List exchanges
      *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getStockExchanges'] to see the possible values for this operation
      *
@@ -2562,7 +2562,7 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
     /**
      * Operation listAllBrokerages
      *
-     * List of all brokerages.
+     * List brokerages
      *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAllBrokerages'] to see the possible values for this operation
      *
@@ -2585,7 +2585,7 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
     /**
      * Operation listAllBrokeragesWithHttpInfo
      *
-     * List of all brokerages.
+     * List brokerages
      *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAllBrokerages'] to see the possible values for this operation
      *
@@ -2698,7 +2698,7 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
     /**
      * Operation listAllBrokeragesAsync
      *
-     * List of all brokerages.
+     * List brokerages
      *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAllBrokerages'] to see the possible values for this operation
      *
@@ -2724,7 +2724,7 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
     /**
      * Operation listAllBrokeragesAsyncWithHttpInfo
      *
-     * List of all brokerages.
+     * List brokerages
      *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAllBrokerages'] to see the possible values for this operation
      *
@@ -2876,7 +2876,7 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
     /**
      * Operation listAllCurrencies
      *
-     * List of all supported currencies
+     * List currencies
      *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAllCurrencies'] to see the possible values for this operation
      *
@@ -2899,7 +2899,7 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
     /**
      * Operation listAllCurrenciesWithHttpInfo
      *
-     * List of all supported currencies
+     * List currencies
      *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAllCurrencies'] to see the possible values for this operation
      *
@@ -3012,7 +3012,7 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
     /**
      * Operation listAllCurrenciesAsync
      *
-     * List of all supported currencies
+     * List currencies
      *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAllCurrencies'] to see the possible values for this operation
      *
@@ -3038,7 +3038,7 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
     /**
      * Operation listAllCurrenciesAsyncWithHttpInfo
      *
-     * List of all supported currencies
+     * List currencies
      *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAllCurrencies'] to see the possible values for this operation
      *
@@ -3190,7 +3190,7 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
     /**
      * Operation listAllCurrenciesRates
      *
-     * Return the exchange rates of all supported currencies
+     * List currency exchange rates
      *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAllCurrenciesRates'] to see the possible values for this operation
      *
@@ -3213,7 +3213,7 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
     /**
      * Operation listAllCurrenciesRatesWithHttpInfo
      *
-     * Return the exchange rates of all supported currencies
+     * List currency exchange rates
      *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAllCurrenciesRates'] to see the possible values for this operation
      *
@@ -3326,7 +3326,7 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
     /**
      * Operation listAllCurrenciesRatesAsync
      *
-     * Return the exchange rates of all supported currencies
+     * List currency exchange rates
      *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAllCurrenciesRates'] to see the possible values for this operation
      *
@@ -3352,7 +3352,7 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
     /**
      * Operation listAllCurrenciesRatesAsyncWithHttpInfo
      *
-     * Return the exchange rates of all supported currencies
+     * List currency exchange rates
      *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAllCurrenciesRates'] to see the possible values for this operation
      *
@@ -3504,7 +3504,7 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
     /**
      * Operation symbolSearchUserAccount
      *
-     * Search for symbols that are supported by a brokerage account using a substring
+     * Search for symbols available in an account
      *
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
@@ -3538,7 +3538,7 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
     /**
      * Operation symbolSearchUserAccountWithHttpInfo
      *
-     * Search for symbols that are supported by a brokerage account using a substring
+     * Search for symbols available in an account
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -3659,7 +3659,7 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
     /**
      * Operation symbolSearchUserAccountAsync
      *
-     * Search for symbols that are supported by a brokerage account using a substring
+     * Search for symbols available in an account
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -3696,7 +3696,7 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
     /**
      * Operation symbolSearchUserAccountAsyncWithHttpInfo
      *
-     * Search for symbols that are supported by a brokerage account using a substring
+     * Search for symbols available in an account
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)

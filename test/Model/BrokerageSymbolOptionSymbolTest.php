@@ -1,6 +1,6 @@
 <?php
 /**
- * BrokerageSymbolTest
+ * BrokerageSymbolOptionSymbolTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * BrokerageSymbolTest Class Doc Comment
+ * BrokerageSymbolOptionSymbolTest Class Doc Comment
  *
  * @category    Class
- * @description Brokerage symbol
+ * @description BrokerageSymbolOptionSymbol
  * @package     SnapTrade
  */
-class BrokerageSymbolTest extends TestCase
+class BrokerageSymbolOptionSymbolTest extends TestCase
 {
 
     /**
@@ -64,9 +64,9 @@ class BrokerageSymbolTest extends TestCase
     }
 
     /**
-     * Test "BrokerageSymbol"
+     * Test "BrokerageSymbolOptionSymbol"
      */
-    public function testBrokerageSymbol()
+    public function testBrokerageSymbolOptionSymbol()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
@@ -82,45 +82,90 @@ class BrokerageSymbolTest extends TestCase
     }
 
     /**
-     * Test attribute "symbol"
+     * Test attribute "ticker"
      */
-    public function testPropertySymbol()
+    public function testPropertyTicker()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "brokerage_authorization"
+     * Test attribute "strike_price"
      */
-    public function testPropertyBrokerageAuthorization()
+    public function testPropertyStrikePrice()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "description"
+     * Test attribute "expiration_date"
      */
-    public function testPropertyDescription()
+    public function testPropertyExpirationDate()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "allows_fractional_units"
+     * Test attribute "is_mini_option"
      */
-    public function testPropertyAllowsFractionalUnits()
+    public function testPropertyIsMiniOption()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "option_symbol"
+     * Test attribute "underlying_symbol"
      */
-    public function testPropertyOptionSymbol()
+    public function testPropertyUnderlyingSymbol()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "local_id"
+     */
+    public function testPropertyLocalId()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "security_type"
+     */
+    public function testPropertySecurityType()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "listing_exchange"
+     */
+    public function testPropertyListingExchange()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "is_quotable"
+     */
+    public function testPropertyIsQuotable()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "is_tradable"
+     */
+    public function testPropertyIsTradable()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

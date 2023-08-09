@@ -139,6 +139,8 @@ Class | Method | HTTP request | Description
 - [BrokerageAuthorizationTypeReadOnly](docs/Model/BrokerageAuthorizationTypeReadOnly.md)
 - [BrokerageAuthorizationTypeReadOnlyBrokerage](docs/Model/BrokerageAuthorizationTypeReadOnlyBrokerage.md)
 - [BrokerageSymbol](docs/Model/BrokerageSymbol.md)
+- [BrokerageSymbolOptionSymbol](docs/Model/BrokerageSymbolOptionSymbol.md)
+- [BrokerageSymbolSymbol](docs/Model/BrokerageSymbolSymbol.md)
 - [BrokerageType](docs/Model/BrokerageType.md)
 - [CalculatedTrade](docs/Model/CalculatedTrade.md)
 - [CashRestriction](docs/Model/CashRestriction.md)

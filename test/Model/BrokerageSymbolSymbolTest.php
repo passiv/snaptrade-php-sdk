@@ -1,6 +1,6 @@
 <?php
 /**
- * BrokerageSymbolTest
+ * BrokerageSymbolSymbolTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * BrokerageSymbolTest Class Doc Comment
+ * BrokerageSymbolSymbolTest Class Doc Comment
  *
  * @category    Class
- * @description Brokerage symbol
+ * @description BrokerageSymbolSymbol
  * @package     SnapTrade
  */
-class BrokerageSymbolTest extends TestCase
+class BrokerageSymbolSymbolTest extends TestCase
 {
 
     /**
@@ -64,9 +64,9 @@ class BrokerageSymbolTest extends TestCase
     }
 
     /**
-     * Test "BrokerageSymbol"
+     * Test "BrokerageSymbolSymbol"
      */
-    public function testBrokerageSymbol()
+    public function testBrokerageSymbolSymbol()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
@@ -91,9 +91,9 @@ class BrokerageSymbolTest extends TestCase
     }
 
     /**
-     * Test attribute "brokerage_authorization"
+     * Test attribute "raw_symbol"
      */
-    public function testPropertyBrokerageAuthorization()
+    public function testPropertyRawSymbol()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
@@ -109,18 +109,36 @@ class BrokerageSymbolTest extends TestCase
     }
 
     /**
-     * Test attribute "allows_fractional_units"
+     * Test attribute "currency"
      */
-    public function testPropertyAllowsFractionalUnits()
+    public function testPropertyCurrency()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "option_symbol"
+     * Test attribute "exchange"
      */
-    public function testPropertyOptionSymbol()
+    public function testPropertyExchange()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "type"
+     */
+    public function testPropertyType()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "currencies"
+     */
+    public function testPropertyCurrencies()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

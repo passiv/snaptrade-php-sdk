@@ -1,6 +1,6 @@
 <?php
 /**
- * BrokerageSymbol
+ * BrokerageSymbolOptionSymbol
  *
  * PHP version 7.4
  *
@@ -27,14 +27,13 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * BrokerageSymbol Class Doc Comment
+ * BrokerageSymbolOptionSymbol Class Doc Comment
  *
  * @category Class
- * @description Brokerage symbol
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class BrokerageSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
+class BrokerageSymbolOptionSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -43,7 +42,7 @@ class BrokerageSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'BrokerageSymbol';
+    protected static $openAPIModelName = 'BrokerageSymbol_option_symbol';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -52,11 +51,16 @@ class BrokerageSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPITypes = [
         'id' => 'string',
-        'symbol' => '\SnapTrade\Model\BrokerageSymbolSymbol',
-        'brokerage_authorization' => '\SnapTrade\Model\BrokerageAuthorization',
-        'description' => 'string',
-        'allows_fractional_units' => 'bool',
-        'option_symbol' => '\SnapTrade\Model\BrokerageSymbolOptionSymbol'
+        'ticker' => 'string',
+        'strike_price' => 'float',
+        'expiration_date' => 'string',
+        'is_mini_option' => 'bool',
+        'underlying_symbol' => '\SnapTrade\Model\UnderlyingSymbol',
+        'local_id' => 'string',
+        'security_type' => 'mixed',
+        'listing_exchange' => 'mixed',
+        'is_quotable' => 'bool',
+        'is_tradable' => 'bool'
     ];
 
     /**
@@ -68,11 +72,16 @@ class BrokerageSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPIFormats = [
         'id' => 'uuid',
-        'symbol' => null,
-        'brokerage_authorization' => null,
-        'description' => null,
-        'allows_fractional_units' => null,
-        'option_symbol' => null
+        'ticker' => null,
+        'strike_price' => null,
+        'expiration_date' => null,
+        'is_mini_option' => null,
+        'underlying_symbol' => null,
+        'local_id' => null,
+        'security_type' => null,
+        'listing_exchange' => null,
+        'is_quotable' => null,
+        'is_tradable' => null
     ];
 
     /**
@@ -82,11 +91,16 @@ class BrokerageSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static array $openAPINullables = [
         'id' => false,
-		'symbol' => true,
-		'brokerage_authorization' => false,
-		'description' => false,
-		'allows_fractional_units' => true,
-		'option_symbol' => true
+		'ticker' => false,
+		'strike_price' => false,
+		'expiration_date' => false,
+		'is_mini_option' => false,
+		'underlying_symbol' => false,
+		'local_id' => false,
+		'security_type' => true,
+		'listing_exchange' => true,
+		'is_quotable' => false,
+		'is_tradable' => false
     ];
 
     /**
@@ -176,11 +190,16 @@ class BrokerageSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $attributeMap = [
         'id' => 'id',
-        'symbol' => 'symbol',
-        'brokerage_authorization' => 'brokerage_authorization',
-        'description' => 'description',
-        'allows_fractional_units' => 'allows_fractional_units',
-        'option_symbol' => 'option_symbol'
+        'ticker' => 'ticker',
+        'strike_price' => 'strike_price',
+        'expiration_date' => 'expiration_date',
+        'is_mini_option' => 'is_mini_option',
+        'underlying_symbol' => 'underlying_symbol',
+        'local_id' => 'local_id',
+        'security_type' => 'security_type',
+        'listing_exchange' => 'listing_exchange',
+        'is_quotable' => 'is_quotable',
+        'is_tradable' => 'is_tradable'
     ];
 
     /**
@@ -190,11 +209,16 @@ class BrokerageSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $setters = [
         'id' => 'setId',
-        'symbol' => 'setSymbol',
-        'brokerage_authorization' => 'setBrokerageAuthorization',
-        'description' => 'setDescription',
-        'allows_fractional_units' => 'setAllowsFractionalUnits',
-        'option_symbol' => 'setOptionSymbol'
+        'ticker' => 'setTicker',
+        'strike_price' => 'setStrikePrice',
+        'expiration_date' => 'setExpirationDate',
+        'is_mini_option' => 'setIsMiniOption',
+        'underlying_symbol' => 'setUnderlyingSymbol',
+        'local_id' => 'setLocalId',
+        'security_type' => 'setSecurityType',
+        'listing_exchange' => 'setListingExchange',
+        'is_quotable' => 'setIsQuotable',
+        'is_tradable' => 'setIsTradable'
     ];
 
     /**
@@ -204,11 +228,16 @@ class BrokerageSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $getters = [
         'id' => 'getId',
-        'symbol' => 'getSymbol',
-        'brokerage_authorization' => 'getBrokerageAuthorization',
-        'description' => 'getDescription',
-        'allows_fractional_units' => 'getAllowsFractionalUnits',
-        'option_symbol' => 'getOptionSymbol'
+        'ticker' => 'getTicker',
+        'strike_price' => 'getStrikePrice',
+        'expiration_date' => 'getExpirationDate',
+        'is_mini_option' => 'getIsMiniOption',
+        'underlying_symbol' => 'getUnderlyingSymbol',
+        'local_id' => 'getLocalId',
+        'security_type' => 'getSecurityType',
+        'listing_exchange' => 'getListingExchange',
+        'is_quotable' => 'getIsQuotable',
+        'is_tradable' => 'getIsTradable'
     ];
 
     /**
@@ -269,11 +298,16 @@ class BrokerageSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     public function __construct(array $data = null)
     {
         $this->setIfExists('id', $data ?? [], null);
-        $this->setIfExists('symbol', $data ?? [], null);
-        $this->setIfExists('brokerage_authorization', $data ?? [], null);
-        $this->setIfExists('description', $data ?? [], null);
-        $this->setIfExists('allows_fractional_units', $data ?? [], null);
-        $this->setIfExists('option_symbol', $data ?? [], null);
+        $this->setIfExists('ticker', $data ?? [], null);
+        $this->setIfExists('strike_price', $data ?? [], null);
+        $this->setIfExists('expiration_date', $data ?? [], null);
+        $this->setIfExists('is_mini_option', $data ?? [], null);
+        $this->setIfExists('underlying_symbol', $data ?? [], null);
+        $this->setIfExists('local_id', $data ?? [], null);
+        $this->setIfExists('security_type', $data ?? [], null);
+        $this->setIfExists('listing_exchange', $data ?? [], null);
+        $this->setIfExists('is_quotable', $data ?? [], null);
+        $this->setIfExists('is_tradable', $data ?? [], null);
     }
 
     /**
@@ -348,167 +382,305 @@ class BrokerageSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets symbol
-     *
-     * @return \SnapTrade\Model\BrokerageSymbolSymbol|null
-     */
-    public function getSymbol()
-    {
-        return $this->container['symbol'];
-    }
-
-    /**
-     * Sets symbol
-     *
-     * @param \SnapTrade\Model\BrokerageSymbolSymbol|null $symbol symbol
-     *
-     * @return self
-     */
-    public function setSymbol($symbol)
-    {
-
-        if (is_null($symbol)) {
-            array_push($this->openAPINullablesSetToNull, 'symbol');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('symbol', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['symbol'] = $symbol;
-
-        return $this;
-    }
-
-    /**
-     * Gets brokerage_authorization
-     *
-     * @return \SnapTrade\Model\BrokerageAuthorization|null
-     */
-    public function getBrokerageAuthorization()
-    {
-        return $this->container['brokerage_authorization'];
-    }
-
-    /**
-     * Sets brokerage_authorization
-     *
-     * @param \SnapTrade\Model\BrokerageAuthorization|null $brokerage_authorization brokerage_authorization
-     *
-     * @return self
-     */
-    public function setBrokerageAuthorization($brokerage_authorization)
-    {
-
-        if (is_null($brokerage_authorization)) {
-            throw new \InvalidArgumentException('non-nullable brokerage_authorization cannot be null');
-        }
-
-        $this->container['brokerage_authorization'] = $brokerage_authorization;
-
-        return $this;
-    }
-
-    /**
-     * Gets description
+     * Gets ticker
      *
      * @return string|null
      */
-    public function getDescription()
+    public function getTicker()
     {
-        return $this->container['description'];
+        return $this->container['ticker'];
     }
 
     /**
-     * Sets description
+     * Sets ticker
      *
-     * @param string|null $description description
+     * @param string|null $ticker ticker
      *
      * @return self
      */
-    public function setDescription($description)
+    public function setTicker($ticker)
     {
 
-        if (is_null($description)) {
-            throw new \InvalidArgumentException('non-nullable description cannot be null');
+        if (is_null($ticker)) {
+            throw new \InvalidArgumentException('non-nullable ticker cannot be null');
         }
 
-        $this->container['description'] = $description;
+        $this->container['ticker'] = $ticker;
 
         return $this;
     }
 
     /**
-     * Gets allows_fractional_units
+     * Gets strike_price
+     *
+     * @return float|null
+     */
+    public function getStrikePrice()
+    {
+        return $this->container['strike_price'];
+    }
+
+    /**
+     * Sets strike_price
+     *
+     * @param float|null $strike_price strike_price
+     *
+     * @return self
+     */
+    public function setStrikePrice($strike_price)
+    {
+
+        if (is_null($strike_price)) {
+            throw new \InvalidArgumentException('non-nullable strike_price cannot be null');
+        }
+
+        $this->container['strike_price'] = $strike_price;
+
+        return $this;
+    }
+
+    /**
+     * Gets expiration_date
+     *
+     * @return string|null
+     */
+    public function getExpirationDate()
+    {
+        return $this->container['expiration_date'];
+    }
+
+    /**
+     * Sets expiration_date
+     *
+     * @param string|null $expiration_date expiration_date
+     *
+     * @return self
+     */
+    public function setExpirationDate($expiration_date)
+    {
+
+        if (is_null($expiration_date)) {
+            throw new \InvalidArgumentException('non-nullable expiration_date cannot be null');
+        }
+
+        $this->container['expiration_date'] = $expiration_date;
+
+        return $this;
+    }
+
+    /**
+     * Gets is_mini_option
      *
      * @return bool|null
      */
-    public function getAllowsFractionalUnits()
+    public function getIsMiniOption()
     {
-        return $this->container['allows_fractional_units'];
+        return $this->container['is_mini_option'];
     }
 
     /**
-     * Sets allows_fractional_units
+     * Sets is_mini_option
      *
-     * @param bool|null $allows_fractional_units allows_fractional_units
+     * @param bool|null $is_mini_option is_mini_option
      *
      * @return self
      */
-    public function setAllowsFractionalUnits($allows_fractional_units)
+    public function setIsMiniOption($is_mini_option)
     {
 
-        if (is_null($allows_fractional_units)) {
-            array_push($this->openAPINullablesSetToNull, 'allows_fractional_units');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('allows_fractional_units', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if (is_null($is_mini_option)) {
+            throw new \InvalidArgumentException('non-nullable is_mini_option cannot be null');
         }
 
-        $this->container['allows_fractional_units'] = $allows_fractional_units;
+        $this->container['is_mini_option'] = $is_mini_option;
 
         return $this;
     }
 
     /**
-     * Gets option_symbol
+     * Gets underlying_symbol
      *
-     * @return \SnapTrade\Model\BrokerageSymbolOptionSymbol|null
+     * @return \SnapTrade\Model\UnderlyingSymbol|null
      */
-    public function getOptionSymbol()
+    public function getUnderlyingSymbol()
     {
-        return $this->container['option_symbol'];
+        return $this->container['underlying_symbol'];
     }
 
     /**
-     * Sets option_symbol
+     * Sets underlying_symbol
      *
-     * @param \SnapTrade\Model\BrokerageSymbolOptionSymbol|null $option_symbol option_symbol
+     * @param \SnapTrade\Model\UnderlyingSymbol|null $underlying_symbol underlying_symbol
      *
      * @return self
      */
-    public function setOptionSymbol($option_symbol)
+    public function setUnderlyingSymbol($underlying_symbol)
     {
 
-        if (is_null($option_symbol)) {
-            array_push($this->openAPINullablesSetToNull, 'option_symbol');
+        if (is_null($underlying_symbol)) {
+            throw new \InvalidArgumentException('non-nullable underlying_symbol cannot be null');
+        }
+
+        $this->container['underlying_symbol'] = $underlying_symbol;
+
+        return $this;
+    }
+
+    /**
+     * Gets local_id
+     *
+     * @return string|null
+     */
+    public function getLocalId()
+    {
+        return $this->container['local_id'];
+    }
+
+    /**
+     * Sets local_id
+     *
+     * @param string|null $local_id local_id
+     *
+     * @return self
+     */
+    public function setLocalId($local_id)
+    {
+
+        if (is_null($local_id)) {
+            throw new \InvalidArgumentException('non-nullable local_id cannot be null');
+        }
+
+        $this->container['local_id'] = $local_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets security_type
+     *
+     * @return mixed|null
+     */
+    public function getSecurityType()
+    {
+        return $this->container['security_type'];
+    }
+
+    /**
+     * Sets security_type
+     *
+     * @param mixed|null $security_type security_type
+     *
+     * @return self
+     */
+    public function setSecurityType($security_type)
+    {
+
+        if (is_null($security_type)) {
+            array_push($this->openAPINullablesSetToNull, 'security_type');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('option_symbol', $nullablesSetToNull);
+            $index = array_search('security_type', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
 
-        $this->container['option_symbol'] = $option_symbol;
+        $this->container['security_type'] = $security_type;
+
+        return $this;
+    }
+
+    /**
+     * Gets listing_exchange
+     *
+     * @return mixed|null
+     */
+    public function getListingExchange()
+    {
+        return $this->container['listing_exchange'];
+    }
+
+    /**
+     * Sets listing_exchange
+     *
+     * @param mixed|null $listing_exchange listing_exchange
+     *
+     * @return self
+     */
+    public function setListingExchange($listing_exchange)
+    {
+
+        if (is_null($listing_exchange)) {
+            array_push($this->openAPINullablesSetToNull, 'listing_exchange');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('listing_exchange', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['listing_exchange'] = $listing_exchange;
+
+        return $this;
+    }
+
+    /**
+     * Gets is_quotable
+     *
+     * @return bool|null
+     */
+    public function getIsQuotable()
+    {
+        return $this->container['is_quotable'];
+    }
+
+    /**
+     * Sets is_quotable
+     *
+     * @param bool|null $is_quotable is_quotable
+     *
+     * @return self
+     */
+    public function setIsQuotable($is_quotable)
+    {
+
+        if (is_null($is_quotable)) {
+            throw new \InvalidArgumentException('non-nullable is_quotable cannot be null');
+        }
+
+        $this->container['is_quotable'] = $is_quotable;
+
+        return $this;
+    }
+
+    /**
+     * Gets is_tradable
+     *
+     * @return bool|null
+     */
+    public function getIsTradable()
+    {
+        return $this->container['is_tradable'];
+    }
+
+    /**
+     * Sets is_tradable
+     *
+     * @param bool|null $is_tradable is_tradable
+     *
+     * @return self
+     */
+    public function setIsTradable($is_tradable)
+    {
+
+        if (is_null($is_tradable)) {
+            throw new \InvalidArgumentException('non-nullable is_tradable cannot be null');
+        }
+
+        $this->container['is_tradable'] = $is_tradable;
 
         return $this;
     }

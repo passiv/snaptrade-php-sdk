@@ -23,7 +23,7 @@ To install the bindings via [Composer](https://getcomposer.org/), add the follow
     }
   ],
   "require": {
-    "konfig/snaptrade-php-sdk": "1.20.0"
+    "konfig/snaptrade-php-sdk": "1.21.0"
   }
 }
 ```
@@ -139,6 +139,8 @@ Class | Method | HTTP request | Description
 - [BrokerageAuthorizationTypeReadOnly](docs/Model/BrokerageAuthorizationTypeReadOnly.md)
 - [BrokerageAuthorizationTypeReadOnlyBrokerage](docs/Model/BrokerageAuthorizationTypeReadOnlyBrokerage.md)
 - [BrokerageSymbol](docs/Model/BrokerageSymbol.md)
+- [BrokerageSymbolOptionSymbol](docs/Model/BrokerageSymbolOptionSymbol.md)
+- [BrokerageSymbolSymbol](docs/Model/BrokerageSymbolSymbol.md)
 - [BrokerageType](docs/Model/BrokerageType.md)
 - [CalculatedTrade](docs/Model/CalculatedTrade.md)
 - [CashRestriction](docs/Model/CashRestriction.md)

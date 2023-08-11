@@ -151,8 +151,10 @@ class Configuration
         string $clientId = null,
         string $Signature = null,
         string $timestamp = null,
+        string $host = 'https://api.snaptrade.com/api/v1'
     )
     {
+        $this->host = $host;
         $this->tempFolderPath = sys_get_temp_dir();
         $this->setConsumerKey($consumerKey);
         $this->setApiKey("clientId", $clientId);

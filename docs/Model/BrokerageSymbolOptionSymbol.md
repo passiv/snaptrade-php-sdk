@@ -11,9 +11,6 @@ Name | Type | Description | Notes
 **is_mini_option** | **bool** |  | [optional]
 **underlying_symbol** | [**\SnapTrade\Model\UnderlyingSymbol**](UnderlyingSymbol.md) |  | [optional]
 **local_id** | **string** |  | [optional]
-**security_type** | **mixed** |  | [optional]
-**listing_exchange** | **mixed** |  | [optional]
-**is_quotable** | **bool** |  | [optional]
-**is_tradable** | **bool** |  | [optional]
+**exchange_id** | **string** |  | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

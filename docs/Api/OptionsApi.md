@@ -249,12 +249,13 @@ try {
         account_id: $account_id
     );
     print_r($result->$getSymbol());
-    print_r($result->$getDescription());
-    print_r($result->$getOptionSymbol());
     print_r($result->$getPrice());
     print_r($result->$getUnits());
     print_r($result->$getCurrency());
     print_r($result->$getAveragePurchasePrice());
+    print_r($result->$getOpenPnl());
+    print_r($result->$getFractionalUnits());
+    print_r($result->$getBookPrice());
 } catch (\Exception $e) {
     echo 'Exception when calling OptionsApi->listOptionHoldings: ', $e->getMessage(), PHP_EOL;
 }

@@ -51,13 +51,14 @@ class OptionsPosition implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'symbol' => 'string',
-        'description' => 'string',
-        'option_symbol' => '\SnapTrade\Model\OptionsSymbol',
+        'symbol' => '\SnapTrade\Model\BrokerageSymbol',
         'price' => 'float',
         'units' => 'float',
-        'currency' => '\SnapTrade\Model\Currency',
-        'average_purchase_price' => 'float'
+        'currency' => '\SnapTrade\Model\OptionsPositionCurrency',
+        'average_purchase_price' => 'float',
+        'open_pnl' => 'float',
+        'fractional_units' => 'float',
+        'book_price' => 'float'
     ];
 
     /**
@@ -68,13 +69,14 @@ class OptionsPosition implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'symbol' => 'uuid',
-        'description' => null,
-        'option_symbol' => null,
+        'symbol' => null,
         'price' => null,
         'units' => null,
         'currency' => null,
-        'average_purchase_price' => null
+        'average_purchase_price' => null,
+        'open_pnl' => null,
+        'fractional_units' => null,
+        'book_price' => null
     ];
 
     /**
@@ -84,12 +86,13 @@ class OptionsPosition implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static array $openAPINullables = [
         'symbol' => false,
-		'description' => false,
-		'option_symbol' => false,
 		'price' => true,
 		'units' => false,
-		'currency' => false,
-		'average_purchase_price' => true
+		'currency' => true,
+		'average_purchase_price' => true,
+		'open_pnl' => true,
+		'fractional_units' => true,
+		'book_price' => true
     ];
 
     /**
@@ -179,12 +182,13 @@ class OptionsPosition implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $attributeMap = [
         'symbol' => 'symbol',
-        'description' => 'description',
-        'option_symbol' => 'option_symbol',
         'price' => 'price',
         'units' => 'units',
         'currency' => 'currency',
-        'average_purchase_price' => 'average_purchase_price'
+        'average_purchase_price' => 'average_purchase_price',
+        'open_pnl' => 'open_pnl',
+        'fractional_units' => 'fractional_units',
+        'book_price' => 'book_price'
     ];
 
     /**
@@ -194,12 +198,13 @@ class OptionsPosition implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $setters = [
         'symbol' => 'setSymbol',
-        'description' => 'setDescription',
-        'option_symbol' => 'setOptionSymbol',
         'price' => 'setPrice',
         'units' => 'setUnits',
         'currency' => 'setCurrency',
-        'average_purchase_price' => 'setAveragePurchasePrice'
+        'average_purchase_price' => 'setAveragePurchasePrice',
+        'open_pnl' => 'setOpenPnl',
+        'fractional_units' => 'setFractionalUnits',
+        'book_price' => 'setBookPrice'
     ];
 
     /**
@@ -209,12 +214,13 @@ class OptionsPosition implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $getters = [
         'symbol' => 'getSymbol',
-        'description' => 'getDescription',
-        'option_symbol' => 'getOptionSymbol',
         'price' => 'getPrice',
         'units' => 'getUnits',
         'currency' => 'getCurrency',
-        'average_purchase_price' => 'getAveragePurchasePrice'
+        'average_purchase_price' => 'getAveragePurchasePrice',
+        'open_pnl' => 'getOpenPnl',
+        'fractional_units' => 'getFractionalUnits',
+        'book_price' => 'getBookPrice'
     ];
 
     /**
@@ -275,12 +281,13 @@ class OptionsPosition implements ModelInterface, ArrayAccess, \JsonSerializable
     public function __construct(array $data = null)
     {
         $this->setIfExists('symbol', $data ?? [], null);
-        $this->setIfExists('description', $data ?? [], null);
-        $this->setIfExists('option_symbol', $data ?? [], null);
         $this->setIfExists('price', $data ?? [], null);
         $this->setIfExists('units', $data ?? [], null);
         $this->setIfExists('currency', $data ?? [], null);
         $this->setIfExists('average_purchase_price', $data ?? [], null);
+        $this->setIfExists('open_pnl', $data ?? [], null);
+        $this->setIfExists('fractional_units', $data ?? [], null);
+        $this->setIfExists('book_price', $data ?? [], null);
     }
 
     /**
@@ -328,7 +335,7 @@ class OptionsPosition implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets symbol
      *
-     * @return string|null
+     * @return \SnapTrade\Model\BrokerageSymbol|null
      */
     public function getSymbol()
     {
@@ -338,7 +345,7 @@ class OptionsPosition implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets symbol
      *
-     * @param string|null $symbol symbol
+     * @param \SnapTrade\Model\BrokerageSymbol|null $symbol symbol
      *
      * @return self
      */
@@ -350,64 +357,6 @@ class OptionsPosition implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['symbol'] = $symbol;
-
-        return $this;
-    }
-
-    /**
-     * Gets description
-     *
-     * @return string|null
-     */
-    public function getDescription()
-    {
-        return $this->container['description'];
-    }
-
-    /**
-     * Sets description
-     *
-     * @param string|null $description description
-     *
-     * @return self
-     */
-    public function setDescription($description)
-    {
-
-        if (is_null($description)) {
-            throw new \InvalidArgumentException('non-nullable description cannot be null');
-        }
-
-        $this->container['description'] = $description;
-
-        return $this;
-    }
-
-    /**
-     * Gets option_symbol
-     *
-     * @return \SnapTrade\Model\OptionsSymbol|null
-     */
-    public function getOptionSymbol()
-    {
-        return $this->container['option_symbol'];
-    }
-
-    /**
-     * Sets option_symbol
-     *
-     * @param \SnapTrade\Model\OptionsSymbol|null $option_symbol option_symbol
-     *
-     * @return self
-     */
-    public function setOptionSymbol($option_symbol)
-    {
-
-        if (is_null($option_symbol)) {
-            throw new \InvalidArgumentException('non-nullable option_symbol cannot be null');
-        }
-
-        $this->container['option_symbol'] = $option_symbol;
 
         return $this;
     }
@@ -480,7 +429,7 @@ class OptionsPosition implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets currency
      *
-     * @return \SnapTrade\Model\Currency|null
+     * @return \SnapTrade\Model\OptionsPositionCurrency|null
      */
     public function getCurrency()
     {
@@ -490,7 +439,7 @@ class OptionsPosition implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets currency
      *
-     * @param \SnapTrade\Model\Currency|null $currency currency
+     * @param \SnapTrade\Model\OptionsPositionCurrency|null $currency currency
      *
      * @return self
      */
@@ -498,7 +447,14 @@ class OptionsPosition implements ModelInterface, ArrayAccess, \JsonSerializable
     {
 
         if (is_null($currency)) {
-            throw new \InvalidArgumentException('non-nullable currency cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'currency');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('currency', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['currency'] = $currency;
@@ -538,6 +494,114 @@ class OptionsPosition implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['average_purchase_price'] = $average_purchase_price;
+
+        return $this;
+    }
+
+    /**
+     * Gets open_pnl
+     *
+     * @return float|null
+     */
+    public function getOpenPnl()
+    {
+        return $this->container['open_pnl'];
+    }
+
+    /**
+     * Sets open_pnl
+     *
+     * @param float|null $open_pnl open_pnl
+     *
+     * @return self
+     */
+    public function setOpenPnl($open_pnl)
+    {
+
+        if (is_null($open_pnl)) {
+            array_push($this->openAPINullablesSetToNull, 'open_pnl');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('open_pnl', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['open_pnl'] = $open_pnl;
+
+        return $this;
+    }
+
+    /**
+     * Gets fractional_units
+     *
+     * @return float|null
+     */
+    public function getFractionalUnits()
+    {
+        return $this->container['fractional_units'];
+    }
+
+    /**
+     * Sets fractional_units
+     *
+     * @param float|null $fractional_units Deprecated, use the units field for both fractional and integer units going forward
+     *
+     * @return self
+     */
+    public function setFractionalUnits($fractional_units)
+    {
+
+        if (is_null($fractional_units)) {
+            array_push($this->openAPINullablesSetToNull, 'fractional_units');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('fractional_units', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['fractional_units'] = $fractional_units;
+
+        return $this;
+    }
+
+    /**
+     * Gets book_price
+     *
+     * @return float|null
+     */
+    public function getBookPrice()
+    {
+        return $this->container['book_price'];
+    }
+
+    /**
+     * Sets book_price
+     *
+     * @param float|null $book_price The book price of the asset
+     *
+     * @return self
+     */
+    public function setBookPrice($book_price)
+    {
+
+        if (is_null($book_price)) {
+            array_push($this->openAPINullablesSetToNull, 'book_price');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('book_price', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['book_price'] = $book_price;
 
         return $this;
     }

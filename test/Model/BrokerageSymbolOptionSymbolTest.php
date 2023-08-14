@@ -136,36 +136,9 @@ class BrokerageSymbolOptionSymbolTest extends TestCase
     }
 
     /**
-     * Test attribute "security_type"
+     * Test attribute "exchange_id"
      */
-    public function testPropertySecurityType()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "listing_exchange"
-     */
-    public function testPropertyListingExchange()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "is_quotable"
-     */
-    public function testPropertyIsQuotable()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "is_tradable"
-     */
-    public function testPropertyIsTradable()
+    public function testPropertyExchangeId()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

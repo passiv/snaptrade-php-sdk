@@ -82,24 +82,6 @@ class OptionsPositionTest extends TestCase
     }
 
     /**
-     * Test attribute "description"
-     */
-    public function testPropertyDescription()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "option_symbol"
-     */
-    public function testPropertyOptionSymbol()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test attribute "price"
      */
     public function testPropertyPrice()
@@ -130,6 +112,33 @@ class OptionsPositionTest extends TestCase
      * Test attribute "average_purchase_price"
      */
     public function testPropertyAveragePurchasePrice()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "open_pnl"
+     */
+    public function testPropertyOpenPnl()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "fractional_units"
+     */
+    public function testPropertyFractionalUnits()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "book_price"
+     */
+    public function testPropertyBookPrice()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

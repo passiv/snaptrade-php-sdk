@@ -184,6 +184,7 @@ Class | Method | HTTP request | Description
 - [OptionsHoldings](docs/Model/OptionsHoldings.md)
 - [OptionsPlaceOptionStrategyRequest](docs/Model/OptionsPlaceOptionStrategyRequest.md)
 - [OptionsPosition](docs/Model/OptionsPosition.md)
+- [OptionsPositionCurrency](docs/Model/OptionsPositionCurrency.md)
 - [OptionsSymbol](docs/Model/OptionsSymbol.md)
 - [OrderType](docs/Model/OrderType.md)
 - [PartnerData](docs/Model/PartnerData.md)

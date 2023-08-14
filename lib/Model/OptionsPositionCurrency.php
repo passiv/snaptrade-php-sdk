@@ -1,6 +1,6 @@
 <?php
 /**
- * BrokerageSymbolOptionSymbol
+ * OptionsPositionCurrency
  *
  * PHP version 7.4
  *
@@ -27,13 +27,13 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * BrokerageSymbolOptionSymbol Class Doc Comment
+ * OptionsPositionCurrency Class Doc Comment
  *
  * @category Class
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class BrokerageSymbolOptionSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
+class OptionsPositionCurrency implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -42,7 +42,7 @@ class BrokerageSymbolOptionSymbol implements ModelInterface, ArrayAccess, \JsonS
       *
       * @var string
       */
-    protected static $openAPIModelName = 'BrokerageSymbol_option_symbol';
+    protected static $openAPIModelName = 'OptionsPosition_currency';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -51,13 +51,8 @@ class BrokerageSymbolOptionSymbol implements ModelInterface, ArrayAccess, \JsonS
       */
     protected static $openAPITypes = [
         'id' => 'string',
-        'ticker' => 'string',
-        'strike_price' => 'float',
-        'expiration_date' => 'string',
-        'is_mini_option' => 'bool',
-        'underlying_symbol' => '\SnapTrade\Model\UnderlyingSymbol',
-        'local_id' => 'string',
-        'exchange_id' => 'string'
+        'code' => 'string',
+        'name' => 'string'
     ];
 
     /**
@@ -69,13 +64,8 @@ class BrokerageSymbolOptionSymbol implements ModelInterface, ArrayAccess, \JsonS
       */
     protected static $openAPIFormats = [
         'id' => 'uuid',
-        'ticker' => null,
-        'strike_price' => null,
-        'expiration_date' => 'datetime',
-        'is_mini_option' => null,
-        'underlying_symbol' => null,
-        'local_id' => null,
-        'exchange_id' => 'uuid'
+        'code' => null,
+        'name' => null
     ];
 
     /**
@@ -85,13 +75,8 @@ class BrokerageSymbolOptionSymbol implements ModelInterface, ArrayAccess, \JsonS
       */
     protected static array $openAPINullables = [
         'id' => false,
-		'ticker' => false,
-		'strike_price' => false,
-		'expiration_date' => false,
-		'is_mini_option' => false,
-		'underlying_symbol' => false,
-		'local_id' => false,
-		'exchange_id' => false
+		'code' => false,
+		'name' => false
     ];
 
     /**
@@ -181,13 +166,8 @@ class BrokerageSymbolOptionSymbol implements ModelInterface, ArrayAccess, \JsonS
      */
     protected static $attributeMap = [
         'id' => 'id',
-        'ticker' => 'ticker',
-        'strike_price' => 'strike_price',
-        'expiration_date' => 'expiration_date',
-        'is_mini_option' => 'is_mini_option',
-        'underlying_symbol' => 'underlying_symbol',
-        'local_id' => 'local_id',
-        'exchange_id' => 'exchange_id'
+        'code' => 'code',
+        'name' => 'name'
     ];
 
     /**
@@ -197,13 +177,8 @@ class BrokerageSymbolOptionSymbol implements ModelInterface, ArrayAccess, \JsonS
      */
     protected static $setters = [
         'id' => 'setId',
-        'ticker' => 'setTicker',
-        'strike_price' => 'setStrikePrice',
-        'expiration_date' => 'setExpirationDate',
-        'is_mini_option' => 'setIsMiniOption',
-        'underlying_symbol' => 'setUnderlyingSymbol',
-        'local_id' => 'setLocalId',
-        'exchange_id' => 'setExchangeId'
+        'code' => 'setCode',
+        'name' => 'setName'
     ];
 
     /**
@@ -213,13 +188,8 @@ class BrokerageSymbolOptionSymbol implements ModelInterface, ArrayAccess, \JsonS
      */
     protected static $getters = [
         'id' => 'getId',
-        'ticker' => 'getTicker',
-        'strike_price' => 'getStrikePrice',
-        'expiration_date' => 'getExpirationDate',
-        'is_mini_option' => 'getIsMiniOption',
-        'underlying_symbol' => 'getUnderlyingSymbol',
-        'local_id' => 'getLocalId',
-        'exchange_id' => 'getExchangeId'
+        'code' => 'getCode',
+        'name' => 'getName'
     ];
 
     /**
@@ -280,13 +250,8 @@ class BrokerageSymbolOptionSymbol implements ModelInterface, ArrayAccess, \JsonS
     public function __construct(array $data = null)
     {
         $this->setIfExists('id', $data ?? [], null);
-        $this->setIfExists('ticker', $data ?? [], null);
-        $this->setIfExists('strike_price', $data ?? [], null);
-        $this->setIfExists('expiration_date', $data ?? [], null);
-        $this->setIfExists('is_mini_option', $data ?? [], null);
-        $this->setIfExists('underlying_symbol', $data ?? [], null);
-        $this->setIfExists('local_id', $data ?? [], null);
-        $this->setIfExists('exchange_id', $data ?? [], null);
+        $this->setIfExists('code', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
     }
 
     /**
@@ -361,204 +326,59 @@ class BrokerageSymbolOptionSymbol implements ModelInterface, ArrayAccess, \JsonS
     }
 
     /**
-     * Gets ticker
+     * Gets code
      *
      * @return string|null
      */
-    public function getTicker()
+    public function getCode()
     {
-        return $this->container['ticker'];
+        return $this->container['code'];
     }
 
     /**
-     * Sets ticker
+     * Sets code
      *
-     * @param string|null $ticker ticker
+     * @param string|null $code code
      *
      * @return self
      */
-    public function setTicker($ticker)
+    public function setCode($code)
     {
 
-        if (is_null($ticker)) {
-            throw new \InvalidArgumentException('non-nullable ticker cannot be null');
+        if (is_null($code)) {
+            throw new \InvalidArgumentException('non-nullable code cannot be null');
         }
 
-        $this->container['ticker'] = $ticker;
+        $this->container['code'] = $code;
 
         return $this;
     }
 
     /**
-     * Gets strike_price
-     *
-     * @return float|null
-     */
-    public function getStrikePrice()
-    {
-        return $this->container['strike_price'];
-    }
-
-    /**
-     * Sets strike_price
-     *
-     * @param float|null $strike_price strike_price
-     *
-     * @return self
-     */
-    public function setStrikePrice($strike_price)
-    {
-
-        if (is_null($strike_price)) {
-            throw new \InvalidArgumentException('non-nullable strike_price cannot be null');
-        }
-
-        $this->container['strike_price'] = $strike_price;
-
-        return $this;
-    }
-
-    /**
-     * Gets expiration_date
+     * Gets name
      *
      * @return string|null
      */
-    public function getExpirationDate()
+    public function getName()
     {
-        return $this->container['expiration_date'];
+        return $this->container['name'];
     }
 
     /**
-     * Sets expiration_date
+     * Sets name
      *
-     * @param string|null $expiration_date expiration_date
+     * @param string|null $name name
      *
      * @return self
      */
-    public function setExpirationDate($expiration_date)
+    public function setName($name)
     {
 
-        if (is_null($expiration_date)) {
-            throw new \InvalidArgumentException('non-nullable expiration_date cannot be null');
+        if (is_null($name)) {
+            throw new \InvalidArgumentException('non-nullable name cannot be null');
         }
 
-        $this->container['expiration_date'] = $expiration_date;
-
-        return $this;
-    }
-
-    /**
-     * Gets is_mini_option
-     *
-     * @return bool|null
-     */
-    public function getIsMiniOption()
-    {
-        return $this->container['is_mini_option'];
-    }
-
-    /**
-     * Sets is_mini_option
-     *
-     * @param bool|null $is_mini_option is_mini_option
-     *
-     * @return self
-     */
-    public function setIsMiniOption($is_mini_option)
-    {
-
-        if (is_null($is_mini_option)) {
-            throw new \InvalidArgumentException('non-nullable is_mini_option cannot be null');
-        }
-
-        $this->container['is_mini_option'] = $is_mini_option;
-
-        return $this;
-    }
-
-    /**
-     * Gets underlying_symbol
-     *
-     * @return \SnapTrade\Model\UnderlyingSymbol|null
-     */
-    public function getUnderlyingSymbol()
-    {
-        return $this->container['underlying_symbol'];
-    }
-
-    /**
-     * Sets underlying_symbol
-     *
-     * @param \SnapTrade\Model\UnderlyingSymbol|null $underlying_symbol underlying_symbol
-     *
-     * @return self
-     */
-    public function setUnderlyingSymbol($underlying_symbol)
-    {
-
-        if (is_null($underlying_symbol)) {
-            throw new \InvalidArgumentException('non-nullable underlying_symbol cannot be null');
-        }
-
-        $this->container['underlying_symbol'] = $underlying_symbol;
-
-        return $this;
-    }
-
-    /**
-     * Gets local_id
-     *
-     * @return string|null
-     */
-    public function getLocalId()
-    {
-        return $this->container['local_id'];
-    }
-
-    /**
-     * Sets local_id
-     *
-     * @param string|null $local_id local_id
-     *
-     * @return self
-     */
-    public function setLocalId($local_id)
-    {
-
-        if (is_null($local_id)) {
-            throw new \InvalidArgumentException('non-nullable local_id cannot be null');
-        }
-
-        $this->container['local_id'] = $local_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets exchange_id
-     *
-     * @return string|null
-     */
-    public function getExchangeId()
-    {
-        return $this->container['exchange_id'];
-    }
-
-    /**
-     * Sets exchange_id
-     *
-     * @param string|null $exchange_id exchange_id
-     *
-     * @return self
-     */
-    public function setExchangeId($exchange_id)
-    {
-
-        if (is_null($exchange_id)) {
-            throw new \InvalidArgumentException('non-nullable exchange_id cannot be null');
-        }
-
-        $this->container['exchange_id'] = $exchange_id;
+        $this->container['name'] = $name;
 
         return $this;
     }

@@ -1,6 +1,6 @@
 <?php
 /**
- * OptionsSymbolTest
+ * OptionsPositionCurrencyTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * OptionsSymbolTest Class Doc Comment
+ * OptionsPositionCurrencyTest Class Doc Comment
  *
  * @category    Class
- * @description Options Symbol
+ * @description OptionsPositionCurrency
  * @package     SnapTrade
  */
-class OptionsSymbolTest extends TestCase
+class OptionsPositionCurrencyTest extends TestCase
 {
 
     /**
@@ -64,9 +64,9 @@ class OptionsSymbolTest extends TestCase
     }
 
     /**
-     * Test "OptionsSymbol"
+     * Test "OptionsPositionCurrency"
      */
-    public function testOptionsSymbol()
+    public function testOptionsPositionCurrency()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
@@ -82,63 +82,18 @@ class OptionsSymbolTest extends TestCase
     }
 
     /**
-     * Test attribute "ticker"
+     * Test attribute "code"
      */
-    public function testPropertyTicker()
+    public function testPropertyCode()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "strike_price"
+     * Test attribute "name"
      */
-    public function testPropertyStrikePrice()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "expiration_date"
-     */
-    public function testPropertyExpirationDate()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "is_mini_option"
-     */
-    public function testPropertyIsMiniOption()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "underlying_symbol"
-     */
-    public function testPropertyUnderlyingSymbol()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "local_id"
-     */
-    public function testPropertyLocalId()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "exchange_id"
-     */
-    public function testPropertyExchangeId()
+    public function testPropertyName()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

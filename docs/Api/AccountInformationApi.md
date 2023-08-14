@@ -322,6 +322,7 @@ try {
     print_r($result->$getOpenPnl());
     print_r($result->$getFractionalUnits());
     print_r($result->$getAveragePurchasePrice());
+    print_r($result->$getBookPrice());
 } catch (\Exception $e) {
     echo 'Exception when calling AccountInformationApi->getUserAccountPositions: ', $e->getMessage(), PHP_EOL;
 }

@@ -58,10 +58,7 @@ class OptionsSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
         'is_mini_option' => 'bool',
         'underlying_symbol' => '\SnapTrade\Model\UnderlyingSymbol',
         'local_id' => 'string',
-        'security_type' => 'mixed',
-        'listing_exchange' => 'mixed',
-        'is_quotable' => 'bool',
-        'is_tradable' => 'bool'
+        'exchange_id' => 'string'
     ];
 
     /**
@@ -75,14 +72,11 @@ class OptionsSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'uuid',
         'ticker' => null,
         'strike_price' => null,
-        'expiration_date' => null,
+        'expiration_date' => 'datetime',
         'is_mini_option' => null,
         'underlying_symbol' => null,
         'local_id' => null,
-        'security_type' => null,
-        'listing_exchange' => null,
-        'is_quotable' => null,
-        'is_tradable' => null
+        'exchange_id' => 'uuid'
     ];
 
     /**
@@ -98,10 +92,7 @@ class OptionsSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
 		'is_mini_option' => false,
 		'underlying_symbol' => false,
 		'local_id' => false,
-		'security_type' => true,
-		'listing_exchange' => true,
-		'is_quotable' => false,
-		'is_tradable' => false
+		'exchange_id' => false
     ];
 
     /**
@@ -197,10 +188,7 @@ class OptionsSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
         'is_mini_option' => 'is_mini_option',
         'underlying_symbol' => 'underlying_symbol',
         'local_id' => 'local_id',
-        'security_type' => 'security_type',
-        'listing_exchange' => 'listing_exchange',
-        'is_quotable' => 'is_quotable',
-        'is_tradable' => 'is_tradable'
+        'exchange_id' => 'exchange_id'
     ];
 
     /**
@@ -216,10 +204,7 @@ class OptionsSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
         'is_mini_option' => 'setIsMiniOption',
         'underlying_symbol' => 'setUnderlyingSymbol',
         'local_id' => 'setLocalId',
-        'security_type' => 'setSecurityType',
-        'listing_exchange' => 'setListingExchange',
-        'is_quotable' => 'setIsQuotable',
-        'is_tradable' => 'setIsTradable'
+        'exchange_id' => 'setExchangeId'
     ];
 
     /**
@@ -235,10 +220,7 @@ class OptionsSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
         'is_mini_option' => 'getIsMiniOption',
         'underlying_symbol' => 'getUnderlyingSymbol',
         'local_id' => 'getLocalId',
-        'security_type' => 'getSecurityType',
-        'listing_exchange' => 'getListingExchange',
-        'is_quotable' => 'getIsQuotable',
-        'is_tradable' => 'getIsTradable'
+        'exchange_id' => 'getExchangeId'
     ];
 
     /**
@@ -305,10 +287,7 @@ class OptionsSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('is_mini_option', $data ?? [], null);
         $this->setIfExists('underlying_symbol', $data ?? [], null);
         $this->setIfExists('local_id', $data ?? [], null);
-        $this->setIfExists('security_type', $data ?? [], null);
-        $this->setIfExists('listing_exchange', $data ?? [], null);
-        $this->setIfExists('is_quotable', $data ?? [], null);
-        $this->setIfExists('is_tradable', $data ?? [], null);
+        $this->setIfExists('exchange_id', $data ?? [], null);
     }
 
     /**
@@ -557,131 +536,30 @@ class OptionsSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets security_type
+     * Gets exchange_id
      *
-     * @return mixed|null
+     * @return string|null
      */
-    public function getSecurityType()
+    public function getExchangeId()
     {
-        return $this->container['security_type'];
+        return $this->container['exchange_id'];
     }
 
     /**
-     * Sets security_type
+     * Sets exchange_id
      *
-     * @param mixed|null $security_type security_type
+     * @param string|null $exchange_id exchange_id
      *
      * @return self
      */
-    public function setSecurityType($security_type)
+    public function setExchangeId($exchange_id)
     {
 
-        if (is_null($security_type)) {
-            array_push($this->openAPINullablesSetToNull, 'security_type');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('security_type', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if (is_null($exchange_id)) {
+            throw new \InvalidArgumentException('non-nullable exchange_id cannot be null');
         }
 
-        $this->container['security_type'] = $security_type;
-
-        return $this;
-    }
-
-    /**
-     * Gets listing_exchange
-     *
-     * @return mixed|null
-     */
-    public function getListingExchange()
-    {
-        return $this->container['listing_exchange'];
-    }
-
-    /**
-     * Sets listing_exchange
-     *
-     * @param mixed|null $listing_exchange listing_exchange
-     *
-     * @return self
-     */
-    public function setListingExchange($listing_exchange)
-    {
-
-        if (is_null($listing_exchange)) {
-            array_push($this->openAPINullablesSetToNull, 'listing_exchange');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('listing_exchange', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['listing_exchange'] = $listing_exchange;
-
-        return $this;
-    }
-
-    /**
-     * Gets is_quotable
-     *
-     * @return bool|null
-     */
-    public function getIsQuotable()
-    {
-        return $this->container['is_quotable'];
-    }
-
-    /**
-     * Sets is_quotable
-     *
-     * @param bool|null $is_quotable is_quotable
-     *
-     * @return self
-     */
-    public function setIsQuotable($is_quotable)
-    {
-
-        if (is_null($is_quotable)) {
-            throw new \InvalidArgumentException('non-nullable is_quotable cannot be null');
-        }
-
-        $this->container['is_quotable'] = $is_quotable;
-
-        return $this;
-    }
-
-    /**
-     * Gets is_tradable
-     *
-     * @return bool|null
-     */
-    public function getIsTradable()
-    {
-        return $this->container['is_tradable'];
-    }
-
-    /**
-     * Sets is_tradable
-     *
-     * @param bool|null $is_tradable is_tradable
-     *
-     * @return self
-     */
-    public function setIsTradable($is_tradable)
-    {
-
-        if (is_null($is_tradable)) {
-            throw new \InvalidArgumentException('non-nullable is_tradable cannot be null');
-        }
-
-        $this->container['is_tradable'] = $is_tradable;
+        $this->container['exchange_id'] = $exchange_id;
 
         return $this;
     }

@@ -147,7 +147,7 @@ class ConnectionsApi extends \SnapTrade\CustomApi
     /**
      * Operation detailBrokerageAuthorization
      *
-     * Get detail of a specific brokerage authorizations for the user
+     * Get brokerage authorization details
      *
      * @param  string $authorization_id The ID of a brokerage authorization object. (required)
      * @param  string $user_id user_id (required)
@@ -176,7 +176,7 @@ class ConnectionsApi extends \SnapTrade\CustomApi
     /**
      * Operation detailBrokerageAuthorizationWithHttpInfo
      *
-     * Get detail of a specific brokerage authorizations for the user
+     * Get brokerage authorization details
      *
      * @param  string $authorization_id The ID of a brokerage authorization object. (required)
      * @param  string $user_id (required)
@@ -295,7 +295,7 @@ class ConnectionsApi extends \SnapTrade\CustomApi
     /**
      * Operation detailBrokerageAuthorizationAsync
      *
-     * Get detail of a specific brokerage authorizations for the user
+     * Get brokerage authorization details
      *
      * @param  string $authorization_id The ID of a brokerage authorization object. (required)
      * @param  string $user_id (required)
@@ -327,7 +327,7 @@ class ConnectionsApi extends \SnapTrade\CustomApi
     /**
      * Operation detailBrokerageAuthorizationAsyncWithHttpInfo
      *
-     * Get detail of a specific brokerage authorizations for the user
+     * Get brokerage authorization details
      *
      * @param  string $authorization_id The ID of a brokerage authorization object. (required)
      * @param  string $user_id (required)
@@ -917,7 +917,7 @@ class ConnectionsApi extends \SnapTrade\CustomApi
     /**
      * Operation removeBrokerageAuthorization
      *
-     * Remove a brokerage authorization.
+     * Delete brokerage authorization
      *
      * @param  string $authorization_id The ID of the Authorization to delete. (required)
      * @param  string $user_id user_id (required)
@@ -945,7 +945,7 @@ class ConnectionsApi extends \SnapTrade\CustomApi
     /**
      * Operation removeBrokerageAuthorizationWithHttpInfo
      *
-     * Remove a brokerage authorization.
+     * Delete brokerage authorization
      *
      * @param  string $authorization_id The ID of the Authorization to delete. (required)
      * @param  string $user_id (required)
@@ -1024,7 +1024,7 @@ class ConnectionsApi extends \SnapTrade\CustomApi
     /**
      * Operation removeBrokerageAuthorizationAsync
      *
-     * Remove a brokerage authorization.
+     * Delete brokerage authorization
      *
      * @param  string $authorization_id The ID of the Authorization to delete. (required)
      * @param  string $user_id (required)
@@ -1056,7 +1056,7 @@ class ConnectionsApi extends \SnapTrade\CustomApi
     /**
      * Operation removeBrokerageAuthorizationAsyncWithHttpInfo
      *
-     * Remove a brokerage authorization.
+     * Delete brokerage authorization
      *
      * @param  string $authorization_id The ID of the Authorization to delete. (required)
      * @param  string $user_id (required)

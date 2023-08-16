@@ -125,13 +125,4 @@ class PositionTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
-
-    /**
-     * Test attribute "book_price"
-     */
-    public function testPropertyBookPrice()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
 }

@@ -56,8 +56,7 @@ class Position implements ModelInterface, ArrayAccess, \JsonSerializable
         'price' => 'float',
         'open_pnl' => 'float',
         'fractional_units' => 'float',
-        'average_purchase_price' => 'float',
-        'book_price' => 'float'
+        'average_purchase_price' => 'float'
     ];
 
     /**
@@ -73,8 +72,7 @@ class Position implements ModelInterface, ArrayAccess, \JsonSerializable
         'price' => null,
         'open_pnl' => null,
         'fractional_units' => null,
-        'average_purchase_price' => null,
-        'book_price' => null
+        'average_purchase_price' => null
     ];
 
     /**
@@ -88,8 +86,7 @@ class Position implements ModelInterface, ArrayAccess, \JsonSerializable
 		'price' => true,
 		'open_pnl' => true,
 		'fractional_units' => true,
-		'average_purchase_price' => true,
-		'book_price' => true
+		'average_purchase_price' => true
     ];
 
     /**
@@ -183,8 +180,7 @@ class Position implements ModelInterface, ArrayAccess, \JsonSerializable
         'price' => 'price',
         'open_pnl' => 'open_pnl',
         'fractional_units' => 'fractional_units',
-        'average_purchase_price' => 'average_purchase_price',
-        'book_price' => 'book_price'
+        'average_purchase_price' => 'average_purchase_price'
     ];
 
     /**
@@ -198,8 +194,7 @@ class Position implements ModelInterface, ArrayAccess, \JsonSerializable
         'price' => 'setPrice',
         'open_pnl' => 'setOpenPnl',
         'fractional_units' => 'setFractionalUnits',
-        'average_purchase_price' => 'setAveragePurchasePrice',
-        'book_price' => 'setBookPrice'
+        'average_purchase_price' => 'setAveragePurchasePrice'
     ];
 
     /**
@@ -213,8 +208,7 @@ class Position implements ModelInterface, ArrayAccess, \JsonSerializable
         'price' => 'getPrice',
         'open_pnl' => 'getOpenPnl',
         'fractional_units' => 'getFractionalUnits',
-        'average_purchase_price' => 'getAveragePurchasePrice',
-        'book_price' => 'getBookPrice'
+        'average_purchase_price' => 'getAveragePurchasePrice'
     ];
 
     /**
@@ -280,7 +274,6 @@ class Position implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('open_pnl', $data ?? [], null);
         $this->setIfExists('fractional_units', $data ?? [], null);
         $this->setIfExists('average_purchase_price', $data ?? [], null);
-        $this->setIfExists('book_price', $data ?? [], null);
     }
 
     /**
@@ -530,42 +523,6 @@ class Position implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['average_purchase_price'] = $average_purchase_price;
-
-        return $this;
-    }
-
-    /**
-     * Gets book_price
-     *
-     * @return float|null
-     */
-    public function getBookPrice()
-    {
-        return $this->container['book_price'];
-    }
-
-    /**
-     * Sets book_price
-     *
-     * @param float|null $book_price The book price of the asset
-     *
-     * @return self
-     */
-    public function setBookPrice($book_price)
-    {
-
-        if (is_null($book_price)) {
-            array_push($this->openAPINullablesSetToNull, 'book_price');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('book_price', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['book_price'] = $book_price;
 
         return $this;
     }

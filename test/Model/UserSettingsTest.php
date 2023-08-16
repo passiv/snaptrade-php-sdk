@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * UserSettingsTest Class Doc Comment
  *
  * @category    Class
- * @description Passiv user account settings
+ * @description User account settings
  * @package     SnapTrade
  */
 class UserSettingsTest extends TestCase

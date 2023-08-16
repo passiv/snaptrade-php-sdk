@@ -30,7 +30,7 @@ use \SnapTrade\ObjectSerializer;
  * UserSettings Class Doc Comment
  *
  * @category Class
- * @description Passiv user account settings
+ * @description User account settings
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */

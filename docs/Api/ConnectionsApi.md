@@ -4,9 +4,9 @@ All URIs are relative to https://api.snaptrade.com/api/v1, except if the operati
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
-| [**detailBrokerageAuthorization()**](ConnectionsApi.md#detailBrokerageAuthorization) | **GET** /authorizations/{authorizationId} | Get detail of a specific brokerage authorizations for the user |
+| [**detailBrokerageAuthorization()**](ConnectionsApi.md#detailBrokerageAuthorization) | **GET** /authorizations/{authorizationId} | Get brokerage authorization details |
 | [**listBrokerageAuthorizations()**](ConnectionsApi.md#listBrokerageAuthorizations) | **GET** /authorizations | List all brokerage authorizations for the user |
-| [**removeBrokerageAuthorization()**](ConnectionsApi.md#removeBrokerageAuthorization) | **DELETE** /authorizations/{authorizationId} | Remove a brokerage authorization. |
+| [**removeBrokerageAuthorization()**](ConnectionsApi.md#removeBrokerageAuthorization) | **DELETE** /authorizations/{authorizationId} | Delete brokerage authorization |
 | [**sessionEvents()**](ConnectionsApi.md#sessionEvents) | **GET** /sessionEvents | List all session events for the partner |
 
 
@@ -16,7 +16,7 @@ All URIs are relative to https://api.snaptrade.com/api/v1, except if the operati
 detailBrokerageAuthorization($authorization_id, $user_id, $user_secret): \SnapTrade\Model\BrokerageAuthorization
 ```
 
-Get detail of a specific brokerage authorizations for the user
+Get brokerage authorization details
 
 ### Example
 
@@ -149,7 +149,7 @@ try {
 removeBrokerageAuthorization($authorization_id, $user_id, $user_secret)
 ```
 
-Remove a brokerage authorization.
+Delete brokerage authorization
 
 ### Example
 
@@ -221,7 +221,7 @@ $snaptrade = new \SnapTrade\Client(
     consumerKey: getenv("SNAPTRADE_CONSUMER_KEY")
 );
 
-$partner_client_id = "PASSIVTEST";
+$partner_client_id = "SNAPTRADETEST";
 $user_id = "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2"; // Optional comma seperated list of user IDs used to filter the request on specific users
 $session_id = "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2"; // Optional comma seperated list of session IDs used to filter the request on specific users
 

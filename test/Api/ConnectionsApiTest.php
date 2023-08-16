@@ -61,7 +61,7 @@ class ConnectionsApiTest extends TestCase
     /**
      * Test case for detailBrokerageAuthorization
      *
-     * Get detail of a specific brokerage authorizations for the user.
+     * Get brokerage authorization details.
      *
      */
     public function testDetailBrokerageAuthorization()
@@ -85,7 +85,7 @@ class ConnectionsApiTest extends TestCase
     /**
      * Test case for removeBrokerageAuthorization
      *
-     * Remove a brokerage authorization..
+     * Delete brokerage authorization.
      *
      */
     public function testRemoveBrokerageAuthorization()

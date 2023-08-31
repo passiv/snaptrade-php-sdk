@@ -1401,7 +1401,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
     /**
      * Operation getUserAccountOrders
      *
-     * Get all history of orders placed in account
+     * Get history of orders placed in account
      *
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
@@ -1432,7 +1432,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
     /**
      * Operation getUserAccountOrdersWithHttpInfo
      *
-     * Get all history of orders placed in account
+     * Get history of orders placed in account
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -1553,7 +1553,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
     /**
      * Operation getUserAccountOrdersAsync
      *
-     * Get all history of orders placed in account
+     * Get history of orders placed in account
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -1587,7 +1587,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
     /**
      * Operation getUserAccountOrdersAsyncWithHttpInfo
      *
-     * Get all history of orders placed in account
+     * Get history of orders placed in account
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)

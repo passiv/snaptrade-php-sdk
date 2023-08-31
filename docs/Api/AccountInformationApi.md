@@ -7,7 +7,7 @@ All URIs are relative to https://api.snaptrade.com/api/v1, except if the operati
 | [**getAllUserHoldings()**](AccountInformationApi.md#getAllUserHoldings) | **GET** /holdings | List all accounts for the user, plus balances, positions, and orders for each account. |
 | [**getUserAccountBalance()**](AccountInformationApi.md#getUserAccountBalance) | **GET** /accounts/{accountId}/balances | List account balances |
 | [**getUserAccountDetails()**](AccountInformationApi.md#getUserAccountDetails) | **GET** /accounts/{accountId} | Return details of a specific investment account |
-| [**getUserAccountOrders()**](AccountInformationApi.md#getUserAccountOrders) | **GET** /accounts/{accountId}/orders | Get all history of orders placed in account |
+| [**getUserAccountOrders()**](AccountInformationApi.md#getUserAccountOrders) | **GET** /accounts/{accountId}/orders | Get history of orders placed in account |
 | [**getUserAccountPositions()**](AccountInformationApi.md#getUserAccountPositions) | **GET** /accounts/{accountId}/positions | List account positions |
 | [**getUserHoldings()**](AccountInformationApi.md#getUserHoldings) | **GET** /accounts/{accountId}/holdings | List balances, positions and orders for the specified account. |
 | [**listUserAccounts()**](AccountInformationApi.md#listUserAccounts) | **GET** /accounts | List accounts |
@@ -213,7 +213,7 @@ try {
 getUserAccountOrders($user_id, $user_secret, $account_id, $state): \SnapTrade\Model\AccountOrderRecord[]
 ```
 
-Get all history of orders placed in account
+Get history of orders placed in account
 
 ### Example
 

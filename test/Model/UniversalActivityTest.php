@@ -127,6 +127,15 @@ class UniversalActivityTest extends TestCase
     }
 
     /**
+     * Test attribute "fx_rate"
+     */
+    public function testPropertyFxRate()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "institution"
      */
     public function testPropertyInstitution()

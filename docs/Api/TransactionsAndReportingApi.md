@@ -53,6 +53,7 @@ try {
     print_r($result->$getCurrency());
     print_r($result->$getDescription());
     print_r($result->$getFee());
+    print_r($result->$getFxRate());
     print_r($result->$getInstitution());
     print_r($result->$getOptionType());
     print_r($result->$getPrice());

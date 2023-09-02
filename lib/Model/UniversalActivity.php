@@ -57,6 +57,7 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
         'currency' => '\SnapTrade\Model\Currency',
         'description' => 'string',
         'fee' => 'float',
+        'fx_rate' => 'float',
         'institution' => 'string',
         'option_type' => 'string',
         'price' => 'float',
@@ -83,6 +84,7 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
         'currency' => null,
         'description' => null,
         'fee' => null,
+        'fx_rate' => null,
         'institution' => null,
         'option_type' => null,
         'price' => null,
@@ -107,6 +109,7 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
 		'currency' => false,
 		'description' => false,
 		'fee' => false,
+		'fx_rate' => true,
 		'institution' => false,
 		'option_type' => false,
 		'price' => false,
@@ -211,6 +214,7 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
         'currency' => 'currency',
         'description' => 'description',
         'fee' => 'fee',
+        'fx_rate' => 'fx_rate',
         'institution' => 'institution',
         'option_type' => 'option_type',
         'price' => 'price',
@@ -235,6 +239,7 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
         'currency' => 'setCurrency',
         'description' => 'setDescription',
         'fee' => 'setFee',
+        'fx_rate' => 'setFxRate',
         'institution' => 'setInstitution',
         'option_type' => 'setOptionType',
         'price' => 'setPrice',
@@ -259,6 +264,7 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
         'currency' => 'getCurrency',
         'description' => 'getDescription',
         'fee' => 'getFee',
+        'fx_rate' => 'getFxRate',
         'institution' => 'getInstitution',
         'option_type' => 'getOptionType',
         'price' => 'getPrice',
@@ -334,6 +340,7 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
         $this->setIfExists('currency', $data ?? [], null);
         $this->setIfExists('description', $data ?? [], null);
         $this->setIfExists('fee', $data ?? [], null);
+        $this->setIfExists('fx_rate', $data ?? [], null);
         $this->setIfExists('institution', $data ?? [], null);
         $this->setIfExists('option_type', $data ?? [], null);
         $this->setIfExists('price', $data ?? [], null);
@@ -565,6 +572,42 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
         }
 
         $this->container['fee'] = $fee;
+
+        return $this;
+    }
+
+    /**
+     * Gets fx_rate
+     *
+     * @return float|null
+     */
+    public function getFxRate()
+    {
+        return $this->container['fx_rate'];
+    }
+
+    /**
+     * Sets fx_rate
+     *
+     * @param float|null $fx_rate The forex conversion rate involved in the transaction if provided by the brokerage
+     *
+     * @return self
+     */
+    public function setFxRate($fx_rate)
+    {
+
+        if (is_null($fx_rate)) {
+            array_push($this->openAPINullablesSetToNull, 'fx_rate');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('fx_rate', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['fx_rate'] = $fx_rate;
 
         return $this;
     }

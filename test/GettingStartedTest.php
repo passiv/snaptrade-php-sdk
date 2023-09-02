@@ -55,6 +55,7 @@ class GettingStartedTest extends TestCase
 
         // 3) Create a new user on SnapTrade
         $userId = (string)time();
+        $userId .= "-php-sdk";
         $registerResponse = $snaptrade->authentication->registerSnapTradeUser($userId);
         $userSecret = $registerResponse->getUserSecret();
 

@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * SnapTradeHoldingsTotalValueTest Class Doc Comment
  *
  * @category    Class
- * @description Total Value of the account
+ * @description Summed value of account positions and cash balances
  * @package     SnapTrade
  */
 class SnapTradeHoldingsTotalValueTest extends TestCase

@@ -53,6 +53,7 @@ class OptionsSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPITypes = [
         'id' => 'string',
         'ticker' => 'string',
+        'option_type' => 'string',
         'strike_price' => 'float',
         'expiration_date' => 'string',
         'is_mini_option' => 'bool',
@@ -71,6 +72,7 @@ class OptionsSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPIFormats = [
         'id' => 'uuid',
         'ticker' => null,
+        'option_type' => null,
         'strike_price' => null,
         'expiration_date' => 'datetime',
         'is_mini_option' => null,
@@ -87,6 +89,7 @@ class OptionsSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static array $openAPINullables = [
         'id' => false,
 		'ticker' => false,
+		'option_type' => false,
 		'strike_price' => false,
 		'expiration_date' => false,
 		'is_mini_option' => false,
@@ -183,6 +186,7 @@ class OptionsSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $attributeMap = [
         'id' => 'id',
         'ticker' => 'ticker',
+        'option_type' => 'option_type',
         'strike_price' => 'strike_price',
         'expiration_date' => 'expiration_date',
         'is_mini_option' => 'is_mini_option',
@@ -199,6 +203,7 @@ class OptionsSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $setters = [
         'id' => 'setId',
         'ticker' => 'setTicker',
+        'option_type' => 'setOptionType',
         'strike_price' => 'setStrikePrice',
         'expiration_date' => 'setExpirationDate',
         'is_mini_option' => 'setIsMiniOption',
@@ -215,6 +220,7 @@ class OptionsSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $getters = [
         'id' => 'getId',
         'ticker' => 'getTicker',
+        'option_type' => 'getOptionType',
         'strike_price' => 'getStrikePrice',
         'expiration_date' => 'getExpirationDate',
         'is_mini_option' => 'getIsMiniOption',
@@ -264,6 +270,21 @@ class OptionsSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
+    public const OPTION_TYPE_CALL = 'CALL';
+    public const OPTION_TYPE_PUT = 'PUT';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getOptionTypeAllowableValues()
+    {
+        return [
+            self::OPTION_TYPE_CALL,
+            self::OPTION_TYPE_PUT,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -282,6 +303,7 @@ class OptionsSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('ticker', $data ?? [], null);
+        $this->setIfExists('option_type', $data ?? [], null);
         $this->setIfExists('strike_price', $data ?? [], null);
         $this->setIfExists('expiration_date', $data ?? [], null);
         $this->setIfExists('is_mini_option', $data ?? [], null);
@@ -317,6 +339,33 @@ class OptionsSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
+        if ($this->container['id'] === null) {
+            $invalidProperties[] = "'id' can't be null";
+        }
+        if ($this->container['ticker'] === null) {
+            $invalidProperties[] = "'ticker' can't be null";
+        }
+        if ($this->container['option_type'] === null) {
+            $invalidProperties[] = "'option_type' can't be null";
+        }
+        $allowedValues = $this->getOptionTypeAllowableValues();
+        if (!is_null($this->container['option_type']) && !in_array($this->container['option_type'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'option_type', must be one of '%s'",
+                $this->container['option_type'],
+                implode("', '", $allowedValues)
+            );
+        }
+
+        if ($this->container['strike_price'] === null) {
+            $invalidProperties[] = "'strike_price' can't be null";
+        }
+        if ($this->container['expiration_date'] === null) {
+            $invalidProperties[] = "'expiration_date' can't be null";
+        }
+        if ($this->container['underlying_symbol'] === null) {
+            $invalidProperties[] = "'underlying_symbol' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -335,7 +384,7 @@ class OptionsSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets id
      *
-     * @return string|null
+     * @return string
      */
     public function getId()
     {
@@ -345,7 +394,7 @@ class OptionsSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets id
      *
-     * @param string|null $id id
+     * @param string $id id
      *
      * @return self
      */
@@ -364,7 +413,7 @@ class OptionsSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets ticker
      *
-     * @return string|null
+     * @return string
      */
     public function getTicker()
     {
@@ -374,7 +423,7 @@ class OptionsSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets ticker
      *
-     * @param string|null $ticker ticker
+     * @param string $ticker ticker
      *
      * @return self
      */
@@ -391,9 +440,48 @@ class OptionsSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
+     * Gets option_type
+     *
+     * @return string
+     */
+    public function getOptionType()
+    {
+        return $this->container['option_type'];
+    }
+
+    /**
+     * Sets option_type
+     *
+     * @param string $option_type option_type
+     *
+     * @return self
+     */
+    public function setOptionType($option_type)
+    {
+        $allowedValues = $this->getOptionTypeAllowableValues();
+        if (!in_array($option_type, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'option_type', must be one of '%s'",
+                    $option_type,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+
+        if (is_null($option_type)) {
+            throw new \InvalidArgumentException('non-nullable option_type cannot be null');
+        }
+
+        $this->container['option_type'] = $option_type;
+
+        return $this;
+    }
+
+    /**
      * Gets strike_price
      *
-     * @return float|null
+     * @return float
      */
     public function getStrikePrice()
     {
@@ -403,7 +491,7 @@ class OptionsSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets strike_price
      *
-     * @param float|null $strike_price strike_price
+     * @param float $strike_price strike_price
      *
      * @return self
      */
@@ -422,7 +510,7 @@ class OptionsSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets expiration_date
      *
-     * @return string|null
+     * @return string
      */
     public function getExpirationDate()
     {
@@ -432,7 +520,7 @@ class OptionsSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets expiration_date
      *
-     * @param string|null $expiration_date expiration_date
+     * @param string $expiration_date expiration_date
      *
      * @return self
      */
@@ -480,7 +568,7 @@ class OptionsSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets underlying_symbol
      *
-     * @return \SnapTrade\Model\UnderlyingSymbol|null
+     * @return \SnapTrade\Model\UnderlyingSymbol
      */
     public function getUnderlyingSymbol()
     {
@@ -490,7 +578,7 @@ class OptionsSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets underlying_symbol
      *
-     * @param \SnapTrade\Model\UnderlyingSymbol|null $underlying_symbol underlying_symbol
+     * @param \SnapTrade\Model\UnderlyingSymbol $underlying_symbol underlying_symbol
      *
      * @return self
      */

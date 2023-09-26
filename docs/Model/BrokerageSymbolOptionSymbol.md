@@ -4,12 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **string** |  | [optional]
-**ticker** | **string** |  | [optional]
-**strike_price** | **float** |  | [optional]
-**expiration_date** | **string** |  | [optional]
+**id** | **string** |  |
+**ticker** | **string** |  |
+**option_type** | **string** |  |
+**strike_price** | **float** |  |
+**expiration_date** | **string** |  |
 **is_mini_option** | **bool** |  | [optional]
-**underlying_symbol** | [**\SnapTrade\Model\UnderlyingSymbol**](UnderlyingSymbol.md) |  | [optional]
+**underlying_symbol** | [**\SnapTrade\Model\UnderlyingSymbol**](UnderlyingSymbol.md) |  |
 **local_id** | **string** |  | [optional]
 **exchange_id** | **string** |  | [optional]
 

@@ -91,6 +91,15 @@ class BrokerageSymbolOptionSymbolTest extends TestCase
     }
 
     /**
+     * Test attribute "option_type"
+     */
+    public function testPropertyOptionType()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "strike_price"
      */
     public function testPropertyStrikePrice()

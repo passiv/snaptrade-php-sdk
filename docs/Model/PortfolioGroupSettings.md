@@ -8,6 +8,6 @@ Name | Type | Description | Notes
 **cash_optimizer** | **bool** |  | [optional]
 **notify_frequency** | **string** |  | [optional]
 **drift_threshold** | **float** |  | [optional]
-**preferred_currency** | [**\SnapTrade\Model\Currency**](Currency.md) |  | [optional]
+**preferred_currency** | **\SnapTrade\Model\Currency** |  | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **id** | **string** |  | [optional]
 **created_date** | **string** | Time | [optional]
 **updated_date** | **string** | Time | [optional]
-**brokerage** | [**\SnapTrade\Model\Brokerage**](Brokerage.md) |  | [optional]
+**brokerage** | **\SnapTrade\Model\Brokerage** |  | [optional]
 **name** | **string** | Connection Name | [optional]
 **type** | **string** |  | [optional]
 **disabled** | **bool** |  | [optional]

@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **string** |  | [optional]
-**underlying_symbol_id** | [**\SnapTrade\Model\UniversalSymbol**](UniversalSymbol.md) |  | [optional]
+**underlying_symbol_id** | **\SnapTrade\Model\UniversalSymbol** |  | [optional]
 **strategy_type** | **string** |  | [optional]
 **number_of_legs** | **float** |  | [optional]
 **legs** | [**\SnapTrade\Model\OptionStrategyLegsInner[]**](OptionStrategyLegsInner.md) |  | [optional]

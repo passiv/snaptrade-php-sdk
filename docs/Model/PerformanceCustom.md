@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **total_equity_timeframe** | [**\SnapTrade\Model\PastValue[]**](PastValue.md) |  | [optional]
-**contributions** | [**\SnapTrade\Model\NetContributions**](NetContributions.md) |  | [optional]
+**contributions** | **\SnapTrade\Model\NetContributions** |  | [optional]
 **contribution_timeframe** | [**\SnapTrade\Model\PastValue[]**](PastValue.md) |  | [optional]
 **contribution_timeframe_cumulative** | [**\SnapTrade\Model\PastValue[]**](PastValue.md) |  | [optional]
 **withdrawal_timeframe** | [**\SnapTrade\Model\PastValue[]**](PastValue.md) |  | [optional]

@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**strategy** | [**\SnapTrade\Model\OptionStrategy**](OptionStrategy.md) |  | [optional]
+**strategy** | **\SnapTrade\Model\OptionStrategy** |  | [optional]
 **status** | **string** |  | [optional]
 **filled_quantity** | **float** |  | [optional]
 **open_quantity** | **float** |  | [optional]

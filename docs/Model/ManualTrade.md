@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **account** | **string** |  | [optional]
 **order_type** | [**\SnapTrade\Model\OrderType**](OrderType.md) |  | [optional]
 **time_in_force** | [**\SnapTrade\Model\TimeInForce**](TimeInForce.md) |  | [optional]
-**symbol** | [**\SnapTrade\Model\ManualTradeSymbol**](ManualTradeSymbol.md) |  | [optional]
+**symbol** | **\SnapTrade\Model\ManualTradeSymbol** |  | [optional]
 **action** | [**\SnapTrade\Model\Action**](Action.md) |  | [optional]
 **units** | **float** | Trade Units | [optional]
 **price** | **float** | Trade Price if limit or stop limit order | [optional]

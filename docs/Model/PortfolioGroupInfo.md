@@ -14,6 +14,6 @@ Name | Type | Description | Notes
 **calculated_trades** | [**\SnapTrade\Model\CalculatedTrade[]**](CalculatedTrade.md) |  | [optional]
 **brokerage_authorizations** | [**\SnapTrade\Model\BrokerageAuthorization[]**](BrokerageAuthorization.md) |  | [optional]
 **accuracy** | **float** |  | [optional]
-**settings** | [**\SnapTrade\Model\PortfolioGroupSettings**](PortfolioGroupSettings.md) |  | [optional]
+**settings** | **\SnapTrade\Model\PortfolioGroupSettings** |  | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

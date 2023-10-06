@@ -5,9 +5,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **string** |  | [optional]
-**account** | [**\SnapTrade\Model\Account**](Account.md) |  | [optional]
-**symbol** | [**\SnapTrade\Model\BrokerageSymbol**](BrokerageSymbol.md) |  | [optional]
-**universal_symbol** | [**\SnapTrade\Model\UniversalSymbol**](UniversalSymbol.md) |  | [optional]
+**account** | **\SnapTrade\Model\Account** |  | [optional]
+**symbol** | **\SnapTrade\Model\BrokerageSymbol** |  | [optional]
+**universal_symbol** | **\SnapTrade\Model\UniversalSymbol** |  | [optional]
 **action** | **string** |  | [optional]
 **units** | **int** |  | [optional]
 **price** | **float** |  | [optional]

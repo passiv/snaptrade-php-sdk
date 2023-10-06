@@ -5,9 +5,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **string** |  | [optional]
-**account** | [**\SnapTrade\Model\AccountSimple**](AccountSimple.md) |  | [optional]
+**account** | **\SnapTrade\Model\AccountSimple** |  | [optional]
 **amount** | **float** |  | [optional]
-**currency** | [**\SnapTrade\Model\Currency**](Currency.md) |  | [optional]
+**currency** | **\SnapTrade\Model\Currency** |  | [optional]
 **description** | **string** |  | [optional]
 **fee** | **float** |  | [optional]
 **fx_rate** | **float** | The forex conversion rate involved in the transaction if provided by the brokerage | [optional]
@@ -16,8 +16,8 @@ Name | Type | Description | Notes
 **price** | **float** |  | [optional]
 **settlement_date** | **string** |  | [optional]
 **external_reference_id** | **string** | Reference ID from brokerage used to identify related transactions. For example if an order comprises of several transactions (buy, fee, fx), they can be grouped if they share the same external_reference_id | [optional]
-**symbol** | [**\SnapTrade\Model\Symbol**](Symbol.md) |  | [optional]
-**option_symbol** | [**\SnapTrade\Model\OptionsSymbol**](OptionsSymbol.md) |  | [optional]
+**symbol** | **\SnapTrade\Model\Symbol** |  | [optional]
+**option_symbol** | **\SnapTrade\Model\OptionsSymbol** |  | [optional]
 **trade_date** | **string** |  | [optional]
 **type** | **string** | Potential values include (but are not limited to) - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT | [optional]
 **units** | **float** | Usually but not necessarily an integer | [optional]

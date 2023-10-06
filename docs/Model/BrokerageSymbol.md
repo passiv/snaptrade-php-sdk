@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **string** |  | [optional]
 **symbol** | [**\SnapTrade\Model\BrokerageSymbolSymbol**](BrokerageSymbolSymbol.md) |  | [optional]
-**brokerage_authorization** | [**\SnapTrade\Model\BrokerageAuthorization**](BrokerageAuthorization.md) |  | [optional]
+**brokerage_authorization** | **\SnapTrade\Model\BrokerageAuthorization** |  | [optional]
 **description** | **string** |  | [optional]
 **allows_fractional_units** | **bool** |  | [optional]
 **option_symbol** | [**\SnapTrade\Model\BrokerageSymbolOptionSymbol**](BrokerageSymbolOptionSymbol.md) |  | [optional]

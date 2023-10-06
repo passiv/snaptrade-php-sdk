@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**symbol** | [**\SnapTrade\Model\UniversalSymbol**](UniversalSymbol.md) |  | [optional]
+**symbol** | **\SnapTrade\Model\UniversalSymbol** |  | [optional]
 **bid_price** | **float** |  | [optional]
 **ask_price** | **float** |  | [optional]
 **last_trade_price** | **float** |  | [optional]

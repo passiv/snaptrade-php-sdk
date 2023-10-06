@@ -150,7 +150,6 @@ class ApiStatusApi extends \SnapTrade\CustomApi
 
 
         string $contentType = self::contentTypes['check'][0]
-
     )
     {
 
@@ -285,7 +284,6 @@ class ApiStatusApi extends \SnapTrade\CustomApi
 
 
         string $contentType = self::contentTypes['check'][0]
-
     )
     {
 

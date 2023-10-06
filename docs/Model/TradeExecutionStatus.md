@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**symbol** | [**\SnapTrade\Model\BrokerageSymbol**](BrokerageSymbol.md) |  | [optional]
-**universal_symbol** | [**\SnapTrade\Model\UniversalSymbol**](UniversalSymbol.md) |  | [optional]
-**trade** | [**\SnapTrade\Model\Trade**](Trade.md) |  | [optional]
+**symbol** | **\SnapTrade\Model\BrokerageSymbol** |  | [optional]
+**universal_symbol** | **\SnapTrade\Model\UniversalSymbol** |  | [optional]
+**trade** | **\SnapTrade\Model\Trade** |  | [optional]
 **state** | **string** | Execution state of a trade | [optional]
 **filled_units** | **int** | Number of filled units | [optional]
 **action** | **string** | Action of executed trade | [optional]

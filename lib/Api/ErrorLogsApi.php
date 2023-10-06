@@ -152,9 +152,7 @@ class ErrorLogsApi extends \SnapTrade\CustomApi
         $user_id,
         $user_secret,
 
-
         string $contentType = self::contentTypes['listUserErrors'][0]
-
     )
     {
 
@@ -295,9 +293,7 @@ class ErrorLogsApi extends \SnapTrade\CustomApi
         $user_id,
         $user_secret,
 
-
         string $contentType = self::contentTypes['listUserErrors'][0]
-
     )
     {
 

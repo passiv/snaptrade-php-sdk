@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **strike_price** | **float** |  |
 **expiration_date** | **string** |  |
 **is_mini_option** | **bool** |  | [optional]
-**underlying_symbol** | [**\SnapTrade\Model\UnderlyingSymbol**](UnderlyingSymbol.md) |  |
+**underlying_symbol** | **\SnapTrade\Model\UnderlyingSymbol** |  |
 **local_id** | **string** |  | [optional]
 **exchange_id** | **string** |  | [optional]
 

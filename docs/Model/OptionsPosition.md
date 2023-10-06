@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**symbol** | [**\SnapTrade\Model\BrokerageSymbol**](BrokerageSymbol.md) |  | [optional]
+**symbol** | **\SnapTrade\Model\BrokerageSymbol** |  | [optional]
 **price** | **float** | Trade Price if limit or stop limit order | [optional]
 **units** | **float** |  | [optional]
 **currency** | [**\SnapTrade\Model\OptionsPositionCurrency**](OptionsPositionCurrency.md) |  | [optional]

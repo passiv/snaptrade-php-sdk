@@ -170,9 +170,7 @@ class OptionsApi extends \SnapTrade\CustomApi
         $user_id,
         $user_secret,
         $account_id,
-
         string $contentType = self::contentTypes['getOptionStrategy'][0]
-
     )
     {
         $_body = [];
@@ -328,9 +326,7 @@ class OptionsApi extends \SnapTrade\CustomApi
         $user_id,
         $user_secret,
         $account_id,
-
         string $contentType = self::contentTypes['getOptionStrategy'][0]
-
     )
     {
         $_body = [];
@@ -609,9 +605,7 @@ class OptionsApi extends \SnapTrade\CustomApi
         $account_id,
         $symbol,
 
-
         string $contentType = self::contentTypes['getOptionsChain'][0]
-
     )
     {
 
@@ -760,9 +754,7 @@ class OptionsApi extends \SnapTrade\CustomApi
         $account_id,
         $symbol,
 
-
         string $contentType = self::contentTypes['getOptionsChain'][0]
-
     )
     {
 
@@ -1036,9 +1028,7 @@ class OptionsApi extends \SnapTrade\CustomApi
         $account_id,
         $option_strategy_id,
 
-
         string $contentType = self::contentTypes['getOptionsStrategyQuote'][0]
-
     )
     {
 
@@ -1187,9 +1177,7 @@ class OptionsApi extends \SnapTrade\CustomApi
         $account_id,
         $option_strategy_id,
 
-
         string $contentType = self::contentTypes['getOptionsStrategyQuote'][0]
-
     )
     {
 
@@ -1458,9 +1446,7 @@ class OptionsApi extends \SnapTrade\CustomApi
         $user_secret,
         $account_id,
 
-
         string $contentType = self::contentTypes['listOptionHoldings'][0]
-
     )
     {
 
@@ -1605,9 +1591,7 @@ class OptionsApi extends \SnapTrade\CustomApi
         $user_secret,
         $account_id,
 
-
         string $contentType = self::contentTypes['listOptionHoldings'][0]
-
     )
     {
 
@@ -1862,9 +1846,7 @@ class OptionsApi extends \SnapTrade\CustomApi
         $user_secret,
         $account_id,
         $option_strategy_id,
-
         string $contentType = self::contentTypes['placeOptionStrategy'][0]
-
     )
     {
         $_body = [];
@@ -2024,9 +2006,7 @@ class OptionsApi extends \SnapTrade\CustomApi
         $user_secret,
         $account_id,
         $option_strategy_id,
-
         string $contentType = self::contentTypes['placeOptionStrategy'][0]
-
     )
     {
         $_body = [];

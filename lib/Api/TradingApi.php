@@ -171,9 +171,7 @@ class TradingApi extends \SnapTrade\CustomApi
         $user_secret,
         $account_id,
         $brokerage_order_id = SENTINEL_VALUE,
-
         string $contentType = self::contentTypes['cancelUserAccountOrder'][0]
-
     )
     {
         $_body = [];
@@ -348,9 +346,7 @@ class TradingApi extends \SnapTrade\CustomApi
         $user_secret,
         $account_id,
         $brokerage_order_id = SENTINEL_VALUE,
-
         string $contentType = self::contentTypes['cancelUserAccountOrder'][0]
-
     )
     {
         $_body = [];
@@ -632,9 +628,7 @@ class TradingApi extends \SnapTrade\CustomApi
         $time_in_force = SENTINEL_VALUE,
         $units = SENTINEL_VALUE,
         $universal_symbol_id = SENTINEL_VALUE,
-
         string $contentType = self::contentTypes['getOrderImpact'][0]
-
     )
     {
         $_body = [];
@@ -842,9 +836,7 @@ class TradingApi extends \SnapTrade\CustomApi
         $time_in_force = SENTINEL_VALUE,
         $units = SENTINEL_VALUE,
         $universal_symbol_id = SENTINEL_VALUE,
-
         string $contentType = self::contentTypes['getOrderImpact'][0]
-
     )
     {
         $_body = [];
@@ -1110,9 +1102,7 @@ class TradingApi extends \SnapTrade\CustomApi
         $account_id,
         $use_ticker = SENTINEL_VALUE,
 
-
         string $contentType = self::contentTypes['getUserAccountQuotes'][0]
-
     )
     {
 
@@ -1265,9 +1255,7 @@ class TradingApi extends \SnapTrade\CustomApi
         $account_id,
         $use_ticker = SENTINEL_VALUE,
 
-
         string $contentType = self::contentTypes['getUserAccountQuotes'][0]
-
     )
     {
 
@@ -1559,9 +1547,7 @@ class TradingApi extends \SnapTrade\CustomApi
         $time_in_force = SENTINEL_VALUE,
         $units = SENTINEL_VALUE,
         $universal_symbol_id = SENTINEL_VALUE,
-
         string $contentType = self::contentTypes['placeForceOrder'][0]
-
     )
     {
         $_body = [];
@@ -1769,9 +1755,7 @@ class TradingApi extends \SnapTrade\CustomApi
         $time_in_force = SENTINEL_VALUE,
         $units = SENTINEL_VALUE,
         $universal_symbol_id = SENTINEL_VALUE,
-
         string $contentType = self::contentTypes['placeForceOrder'][0]
-
     )
     {
         $_body = [];
@@ -2034,9 +2018,7 @@ class TradingApi extends \SnapTrade\CustomApi
         $user_secret,
         $first_trade_id = SENTINEL_VALUE,
         $second_trade_id = SENTINEL_VALUE,
-
         string $contentType = self::contentTypes['placeOCOOrder'][0]
-
     )
     {
         $_body = [];
@@ -2209,9 +2191,7 @@ class TradingApi extends \SnapTrade\CustomApi
         $user_secret,
         $first_trade_id = SENTINEL_VALUE,
         $second_trade_id = SENTINEL_VALUE,
-
         string $contentType = self::contentTypes['placeOCOOrder'][0]
-
     )
     {
         $_body = [];
@@ -2467,9 +2447,7 @@ class TradingApi extends \SnapTrade\CustomApi
         $user_id,
         $user_secret,
 
-
         string $contentType = self::contentTypes['placeOrder'][0]
-
     )
     {
 
@@ -2637,9 +2615,7 @@ class TradingApi extends \SnapTrade\CustomApi
         $user_id,
         $user_secret,
 
-
         string $contentType = self::contentTypes['placeOrder'][0]
-
     )
     {
 

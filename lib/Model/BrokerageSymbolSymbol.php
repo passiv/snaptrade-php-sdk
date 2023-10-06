@@ -316,6 +316,24 @@ class BrokerageSymbolSymbol implements ModelInterface, ArrayAccess, \JsonSeriali
     {
         $invalidProperties = [];
 
+        if ($this->container['id'] === null) {
+            $invalidProperties[] = "'id' can't be null";
+        }
+        if ($this->container['symbol'] === null) {
+            $invalidProperties[] = "'symbol' can't be null";
+        }
+        if ($this->container['raw_symbol'] === null) {
+            $invalidProperties[] = "'raw_symbol' can't be null";
+        }
+        if ($this->container['currency'] === null) {
+            $invalidProperties[] = "'currency' can't be null";
+        }
+        if ($this->container['type'] === null) {
+            $invalidProperties[] = "'type' can't be null";
+        }
+        if ($this->container['currencies'] === null) {
+            $invalidProperties[] = "'currencies' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -334,7 +352,7 @@ class BrokerageSymbolSymbol implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Gets id
      *
-     * @return string|null
+     * @return string
      */
     public function getId()
     {
@@ -344,7 +362,7 @@ class BrokerageSymbolSymbol implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets id
      *
-     * @param string|null $id id
+     * @param string $id id
      *
      * @return self
      */
@@ -363,7 +381,7 @@ class BrokerageSymbolSymbol implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Gets symbol
      *
-     * @return string|null
+     * @return string
      */
     public function getSymbol()
     {
@@ -373,7 +391,7 @@ class BrokerageSymbolSymbol implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets symbol
      *
-     * @param string|null $symbol symbol
+     * @param string $symbol symbol
      *
      * @return self
      */
@@ -392,7 +410,7 @@ class BrokerageSymbolSymbol implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Gets raw_symbol
      *
-     * @return string|null
+     * @return string
      */
     public function getRawSymbol()
     {
@@ -402,7 +420,7 @@ class BrokerageSymbolSymbol implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets raw_symbol
      *
-     * @param string|null $raw_symbol raw_symbol
+     * @param string $raw_symbol raw_symbol
      *
      * @return self
      */
@@ -457,7 +475,7 @@ class BrokerageSymbolSymbol implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Gets currency
      *
-     * @return \SnapTrade\Model\Currency|null
+     * @return \SnapTrade\Model\Currency
      */
     public function getCurrency()
     {
@@ -467,7 +485,7 @@ class BrokerageSymbolSymbol implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets currency
      *
-     * @param \SnapTrade\Model\Currency|null $currency currency
+     * @param \SnapTrade\Model\Currency $currency currency
      *
      * @return self
      */
@@ -515,7 +533,7 @@ class BrokerageSymbolSymbol implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Gets type
      *
-     * @return \SnapTrade\Model\SecurityType|null
+     * @return \SnapTrade\Model\SecurityType
      */
     public function getType()
     {
@@ -525,7 +543,7 @@ class BrokerageSymbolSymbol implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets type
      *
-     * @param \SnapTrade\Model\SecurityType|null $type type
+     * @param \SnapTrade\Model\SecurityType $type type
      *
      * @return self
      */
@@ -544,7 +562,7 @@ class BrokerageSymbolSymbol implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Gets currencies
      *
-     * @return \SnapTrade\Model\Currency[]|null
+     * @return \SnapTrade\Model\Currency[]
      */
     public function getCurrencies()
     {
@@ -554,7 +572,7 @@ class BrokerageSymbolSymbol implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets currencies
      *
-     * @param \SnapTrade\Model\Currency[]|null $currencies currencies
+     * @param \SnapTrade\Model\Currency[] $currencies currencies
      *
      * @return self
      */

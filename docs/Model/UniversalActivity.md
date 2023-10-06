@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **currency** | **\SnapTrade\Model\Currency** |  | [optional]
 **description** | **string** |  | [optional]
 **fee** | **float** |  | [optional]
-**fx_rate** | **float** | The forex conversion rate involved in the transaction if provided by the brokerage | [optional]
+**fx_rate** | **float** | The forex conversion rate involved in the transaction if provided by the brokerage. Used in cases where securities of one currency are purchased in a different currency, and the forex conversion is automatic. In those cases, price, amount and fee will be in the top level currency (activity -&gt; currency) | [optional]
 **institution** | **string** |  | [optional]
 **option_type** | **string** | If an option transaction, then it&#39;s type (BUY_TO_OPEN, SELL_TO_CLOSE, etc), otherwise empty string | [optional]
 **price** | **float** |  | [optional]

@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **string** |  | [optional]
-**symbol** | **string** |  | [optional]
-**raw_symbol** | **string** |  | [optional]
+**id** | **string** |  |
+**symbol** | **string** |  |
+**raw_symbol** | **string** |  |
 **description** | **string** |  | [optional]
-**currency** | **\SnapTrade\Model\Currency** |  | [optional]
+**currency** | **\SnapTrade\Model\Currency** |  |
 **exchange** | **\SnapTrade\Model\Exchange** |  | [optional]
-**type** | **\SnapTrade\Model\SecurityType** |  | [optional]
-**currencies** | [**\SnapTrade\Model\Currency[]**](Currency.md) |  | [optional]
+**type** | **\SnapTrade\Model\SecurityType** |  |
+**currencies** | [**\SnapTrade\Model\Currency[]**](Currency.md) |  |
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

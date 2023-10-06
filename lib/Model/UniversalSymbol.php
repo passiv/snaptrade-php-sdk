@@ -317,6 +317,24 @@ class UniversalSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
+        if ($this->container['id'] === null) {
+            $invalidProperties[] = "'id' can't be null";
+        }
+        if ($this->container['symbol'] === null) {
+            $invalidProperties[] = "'symbol' can't be null";
+        }
+        if ($this->container['raw_symbol'] === null) {
+            $invalidProperties[] = "'raw_symbol' can't be null";
+        }
+        if ($this->container['currency'] === null) {
+            $invalidProperties[] = "'currency' can't be null";
+        }
+        if ($this->container['type'] === null) {
+            $invalidProperties[] = "'type' can't be null";
+        }
+        if ($this->container['currencies'] === null) {
+            $invalidProperties[] = "'currencies' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -335,7 +353,7 @@ class UniversalSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets id
      *
-     * @return string|null
+     * @return string
      */
     public function getId()
     {
@@ -345,7 +363,7 @@ class UniversalSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets id
      *
-     * @param string|null $id id
+     * @param string $id id
      *
      * @return self
      */
@@ -364,7 +382,7 @@ class UniversalSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets symbol
      *
-     * @return string|null
+     * @return string
      */
     public function getSymbol()
     {
@@ -374,7 +392,7 @@ class UniversalSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets symbol
      *
-     * @param string|null $symbol symbol
+     * @param string $symbol symbol
      *
      * @return self
      */
@@ -393,7 +411,7 @@ class UniversalSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets raw_symbol
      *
-     * @return string|null
+     * @return string
      */
     public function getRawSymbol()
     {
@@ -403,7 +421,7 @@ class UniversalSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets raw_symbol
      *
-     * @param string|null $raw_symbol raw_symbol
+     * @param string $raw_symbol raw_symbol
      *
      * @return self
      */
@@ -458,7 +476,7 @@ class UniversalSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets currency
      *
-     * @return \SnapTrade\Model\Currency|null
+     * @return \SnapTrade\Model\Currency
      */
     public function getCurrency()
     {
@@ -468,7 +486,7 @@ class UniversalSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets currency
      *
-     * @param \SnapTrade\Model\Currency|null $currency currency
+     * @param \SnapTrade\Model\Currency $currency currency
      *
      * @return self
      */
@@ -516,7 +534,7 @@ class UniversalSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets type
      *
-     * @return \SnapTrade\Model\SecurityType|null
+     * @return \SnapTrade\Model\SecurityType
      */
     public function getType()
     {
@@ -526,7 +544,7 @@ class UniversalSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets type
      *
-     * @param \SnapTrade\Model\SecurityType|null $type type
+     * @param \SnapTrade\Model\SecurityType $type type
      *
      * @return self
      */
@@ -545,7 +563,7 @@ class UniversalSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets currencies
      *
-     * @return \SnapTrade\Model\Currency[]|null
+     * @return \SnapTrade\Model\Currency[]
      */
     public function getCurrencies()
     {
@@ -555,7 +573,7 @@ class UniversalSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets currencies
      *
-     * @param \SnapTrade\Model\Currency[]|null $currencies currencies
+     * @param \SnapTrade\Model\Currency[] $currencies currencies
      *
      * @return self
      */

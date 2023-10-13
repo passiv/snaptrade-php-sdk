@@ -157,7 +157,7 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
-     * @param  string $account_id The ID of the account get positions. (required)
+     * @param  string $account_id The ID of the account to cancel the order in. (required)
      * @param  \SnapTrade\Model\TradingCancelUserAccountOrderRequest $trading_cancel_user_account_order_request The Order ID to be canceled (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['cancelUserAccountOrder'] to see the possible values for this operation
      *
@@ -189,7 +189,7 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $account_id The ID of the account get positions. (required)
+     * @param  string $account_id The ID of the account to cancel the order in. (required)
      * @param  \SnapTrade\Model\TradingCancelUserAccountOrderRequest $trading_cancel_user_account_order_request The Order ID to be canceled (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['cancelUserAccountOrder'] to see the possible values for this operation
      *
@@ -333,7 +333,7 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $account_id The ID of the account get positions. (required)
+     * @param  string $account_id The ID of the account to cancel the order in. (required)
      * @param  \SnapTrade\Model\TradingCancelUserAccountOrderRequest $trading_cancel_user_account_order_request The Order ID to be canceled (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['cancelUserAccountOrder'] to see the possible values for this operation
      *
@@ -368,7 +368,7 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $account_id The ID of the account get positions. (required)
+     * @param  string $account_id The ID of the account to cancel the order in. (required)
      * @param  \SnapTrade\Model\TradingCancelUserAccountOrderRequest $trading_cancel_user_account_order_request The Order ID to be canceled (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['cancelUserAccountOrder'] to see the possible values for this operation
      *
@@ -424,7 +424,7 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $account_id The ID of the account get positions. (required)
+     * @param  string $account_id The ID of the account to cancel the order in. (required)
      * @param  \SnapTrade\Model\TradingCancelUserAccountOrderRequest $trading_cancel_user_account_order_request The Order ID to be canceled (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['cancelUserAccountOrder'] to see the possible values for this operation
      *

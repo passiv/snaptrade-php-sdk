@@ -41,7 +41,7 @@ $legs = [
 $strategy_type = "CUSTOM";
 $user_id = "John.doe@snaptrade.com";
 $user_secret = "USERSECRET123";
-$account_id = "accountId_example"; // The ID of the account get positions.
+$account_id = "accountId_example"; // The ID of the account to create the option strategy object in.
 
 try {
     $result = $snaptrade->options->getOptionStrategy(
@@ -69,7 +69,7 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **user_id** | **string**|  | |
 | **user_secret** | **string**|  | |
-| **account_id** | **string**| The ID of the account get positions. | |
+| **account_id** | **string**| The ID of the account to create the option strategy object in. | |
 | **options_get_option_strategy_request** | [**\SnapTrade\Model\OptionsGetOptionStrategyRequest**](../Model/OptionsGetOptionStrategyRequest.md)|  | |
 
 ### Return type
@@ -110,7 +110,7 @@ $snaptrade = new \SnapTrade\Client(
 
 $user_id = "John.doe@snaptrade.com";
 $user_secret = "USERSECRET123";
-$account_id = "accountId_example"; // The ID of the account get positions.
+$account_id = "accountId_example"; // The ID of the account to get the options chain from.
 $symbol = "symbol_example"; // Universal symbol ID if symbol
 
 try {
@@ -131,7 +131,7 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **user_id** | **string**|  | |
 | **user_secret** | **string**|  | |
-| **account_id** | **string**| The ID of the account get positions. | |
+| **account_id** | **string**| The ID of the account to get the options chain from. | |
 | **symbol** | **string**| Universal symbol ID if symbol | |
 
 ### Return type
@@ -172,7 +172,7 @@ $snaptrade = new \SnapTrade\Client(
 
 $user_id = "John.doe@snaptrade.com";
 $user_secret = "USERSECRET123";
-$account_id = "accountId_example"; // The ID of the account get positions.
+$account_id = "accountId_example"; // The ID of the account the strategy will be placed in.
 $option_strategy_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"; // Option strategy id obtained from response when creating option strategy object
 
 try {
@@ -199,7 +199,7 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **user_id** | **string**|  | |
 | **user_secret** | **string**|  | |
-| **account_id** | **string**| The ID of the account get positions. | |
+| **account_id** | **string**| The ID of the account the strategy will be placed in. | |
 | **option_strategy_id** | **string**| Option strategy id obtained from response when creating option strategy object | |
 
 ### Return type
@@ -240,7 +240,7 @@ $snaptrade = new \SnapTrade\Client(
 
 $user_id = "John.doe@snaptrade.com";
 $user_secret = "USERSECRET123";
-$account_id = "accountId_example"; // The ID of the account get positions.
+$account_id = "accountId_example"; // The ID of the account to fetch options holdings for.
 
 try {
     $result = $snaptrade->options->listOptionHoldings(
@@ -253,8 +253,6 @@ try {
     print_r($result->$getUnits());
     print_r($result->$getCurrency());
     print_r($result->$getAveragePurchasePrice());
-    print_r($result->$getOpenPnl());
-    print_r($result->$getFractionalUnits());
 } catch (\Exception $e) {
     echo 'Exception when calling OptionsApi->listOptionHoldings: ', $e->getMessage(), PHP_EOL;
 }
@@ -266,7 +264,7 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **user_id** | **string**|  | |
 | **user_secret** | **string**|  | |
-| **account_id** | **string**| The ID of the account get positions. | |
+| **account_id** | **string**| The ID of the account to fetch options holdings for. | |
 
 ### Return type
 
@@ -309,7 +307,7 @@ $time_in_force = "DAY";
 $price = 31.33; // Trade Price if limit or stop limit order
 $user_id = "John.doe@snaptrade.com";
 $user_secret = "USERSECRET123";
-$account_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"; // The ID of the account get positions.
+$account_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"; // The ID of the account to execute the strategy in.
 $option_strategy_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"; // Option strategy id obtained from response when creating option strategy object
 
 try {
@@ -344,7 +342,7 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **user_id** | **string**|  | |
 | **user_secret** | **string**|  | |
-| **account_id** | **string**| The ID of the account get positions. | |
+| **account_id** | **string**| The ID of the account to execute the strategy in. | |
 | **option_strategy_id** | **string**| Option strategy id obtained from response when creating option strategy object | |
 | **options_place_option_strategy_request** | [**\SnapTrade\Model\OptionsPlaceOptionStrategyRequest**](../Model/OptionsPlaceOptionStrategyRequest.md)|  | |
 

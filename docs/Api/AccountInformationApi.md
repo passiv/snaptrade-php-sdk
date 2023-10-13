@@ -98,7 +98,7 @@ $snaptrade = new \SnapTrade\Client(
 
 $user_id = "John.doe@snaptrade.com";
 $user_secret = "USERSECRET123";
-$account_id = "accountId_example"; // The ID of the account get positions.
+$account_id = "accountId_example"; // The ID of the account to get balances.
 
 try {
     $result = $snaptrade->accountInformation->getUserAccountBalance(
@@ -119,7 +119,7 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **user_id** | **string**|  | |
 | **user_secret** | **string**|  | |
-| **account_id** | **string**| The ID of the account get positions. | |
+| **account_id** | **string**| The ID of the account to get balances. | |
 
 ### Return type
 
@@ -228,7 +228,7 @@ $snaptrade = new \SnapTrade\Client(
 
 $user_id = "John.doe@snaptrade.com";
 $user_secret = "USERSECRET123";
-$account_id = "accountId_example"; // The ID of the account get positions.
+$account_id = "accountId_example"; // The ID of the account to get orders.
 $state = "all"; // defaults value is set to \"all\"
 
 try {
@@ -267,7 +267,7 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **user_id** | **string**|  | |
 | **user_secret** | **string**|  | |
-| **account_id** | **string**| The ID of the account get positions. | |
+| **account_id** | **string**| The ID of the account to get orders. | |
 | **state** | **string**| defaults value is set to \&quot;all\&quot; | [optional] |
 
 ### Return type
@@ -308,7 +308,7 @@ $snaptrade = new \SnapTrade\Client(
 
 $user_id = "John.doe@snaptrade.com";
 $user_secret = "USERSECRET123";
-$account_id = "accountId_example"; // The ID of the account get positions.
+$account_id = "accountId_example"; // The ID of the account to get positions.
 
 try {
     $result = $snaptrade->accountInformation->getUserAccountPositions(
@@ -333,7 +333,7 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **user_id** | **string**|  | |
 | **user_secret** | **string**|  | |
-| **account_id** | **string**| The ID of the account get positions. | |
+| **account_id** | **string**| The ID of the account to get positions. | |
 
 ### Return type
 

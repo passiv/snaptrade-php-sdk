@@ -154,7 +154,7 @@ class OptionsApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
-     * @param  string $account_id The ID of the account get positions. (required)
+     * @param  string $account_id The ID of the account to create the option strategy object in. (required)
      * @param  \SnapTrade\Model\OptionsGetOptionStrategyRequest $options_get_option_strategy_request options_get_option_strategy_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOptionStrategy'] to see the possible values for this operation
      *
@@ -190,7 +190,7 @@ class OptionsApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $account_id The ID of the account get positions. (required)
+     * @param  string $account_id The ID of the account to create the option strategy object in. (required)
      * @param  \SnapTrade\Model\OptionsGetOptionStrategyRequest $options_get_option_strategy_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOptionStrategy'] to see the possible values for this operation
      *
@@ -311,7 +311,7 @@ class OptionsApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $account_id The ID of the account get positions. (required)
+     * @param  string $account_id The ID of the account to create the option strategy object in. (required)
      * @param  \SnapTrade\Model\OptionsGetOptionStrategyRequest $options_get_option_strategy_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOptionStrategy'] to see the possible values for this operation
      *
@@ -350,7 +350,7 @@ class OptionsApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $account_id The ID of the account get positions. (required)
+     * @param  string $account_id The ID of the account to create the option strategy object in. (required)
      * @param  \SnapTrade\Model\OptionsGetOptionStrategyRequest $options_get_option_strategy_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOptionStrategy'] to see the possible values for this operation
      *
@@ -406,7 +406,7 @@ class OptionsApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $account_id The ID of the account get positions. (required)
+     * @param  string $account_id The ID of the account to create the option strategy object in. (required)
      * @param  \SnapTrade\Model\OptionsGetOptionStrategyRequest $options_get_option_strategy_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOptionStrategy'] to see the possible values for this operation
      *
@@ -591,7 +591,7 @@ class OptionsApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
-     * @param  string $account_id The ID of the account get positions. (required)
+     * @param  string $account_id The ID of the account to get the options chain from. (required)
      * @param  string $symbol Universal symbol ID if symbol (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOptionsChain'] to see the possible values for this operation
      *
@@ -620,7 +620,7 @@ class OptionsApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $account_id The ID of the account get positions. (required)
+     * @param  string $account_id The ID of the account to get the options chain from. (required)
      * @param  string $symbol Universal symbol ID if symbol (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOptionsChain'] to see the possible values for this operation
      *
@@ -741,7 +741,7 @@ class OptionsApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $account_id The ID of the account get positions. (required)
+     * @param  string $account_id The ID of the account to get the options chain from. (required)
      * @param  string $symbol Universal symbol ID if symbol (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOptionsChain'] to see the possible values for this operation
      *
@@ -773,7 +773,7 @@ class OptionsApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $account_id The ID of the account get positions. (required)
+     * @param  string $account_id The ID of the account to get the options chain from. (required)
      * @param  string $symbol Universal symbol ID if symbol (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOptionsChain'] to see the possible values for this operation
      *
@@ -829,7 +829,7 @@ class OptionsApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $account_id The ID of the account get positions. (required)
+     * @param  string $account_id The ID of the account to get the options chain from. (required)
      * @param  string $symbol Universal symbol ID if symbol (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOptionsChain'] to see the possible values for this operation
      *
@@ -1014,7 +1014,7 @@ class OptionsApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
-     * @param  string $account_id The ID of the account get positions. (required)
+     * @param  string $account_id The ID of the account the strategy will be placed in. (required)
      * @param  string $option_strategy_id Option strategy id obtained from response when creating option strategy object (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOptionsStrategyQuote'] to see the possible values for this operation
      *
@@ -1043,7 +1043,7 @@ class OptionsApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $account_id The ID of the account get positions. (required)
+     * @param  string $account_id The ID of the account the strategy will be placed in. (required)
      * @param  string $option_strategy_id Option strategy id obtained from response when creating option strategy object (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOptionsStrategyQuote'] to see the possible values for this operation
      *
@@ -1164,7 +1164,7 @@ class OptionsApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $account_id The ID of the account get positions. (required)
+     * @param  string $account_id The ID of the account the strategy will be placed in. (required)
      * @param  string $option_strategy_id Option strategy id obtained from response when creating option strategy object (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOptionsStrategyQuote'] to see the possible values for this operation
      *
@@ -1196,7 +1196,7 @@ class OptionsApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $account_id The ID of the account get positions. (required)
+     * @param  string $account_id The ID of the account the strategy will be placed in. (required)
      * @param  string $option_strategy_id Option strategy id obtained from response when creating option strategy object (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOptionsStrategyQuote'] to see the possible values for this operation
      *
@@ -1252,7 +1252,7 @@ class OptionsApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $account_id The ID of the account get positions. (required)
+     * @param  string $account_id The ID of the account the strategy will be placed in. (required)
      * @param  string $option_strategy_id Option strategy id obtained from response when creating option strategy object (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOptionsStrategyQuote'] to see the possible values for this operation
      *
@@ -1434,7 +1434,7 @@ class OptionsApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
-     * @param  string $account_id The ID of the account get positions. (required)
+     * @param  string $account_id The ID of the account to fetch options holdings for. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listOptionHoldings'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
@@ -1461,7 +1461,7 @@ class OptionsApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $account_id The ID of the account get positions. (required)
+     * @param  string $account_id The ID of the account to fetch options holdings for. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listOptionHoldings'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
@@ -1580,7 +1580,7 @@ class OptionsApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $account_id The ID of the account get positions. (required)
+     * @param  string $account_id The ID of the account to fetch options holdings for. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listOptionHoldings'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1610,7 +1610,7 @@ class OptionsApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $account_id The ID of the account get positions. (required)
+     * @param  string $account_id The ID of the account to fetch options holdings for. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listOptionHoldings'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1665,7 +1665,7 @@ class OptionsApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $account_id The ID of the account get positions. (required)
+     * @param  string $account_id The ID of the account to fetch options holdings for. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listOptionHoldings'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1828,7 +1828,7 @@ class OptionsApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
-     * @param  string $account_id The ID of the account get positions. (required)
+     * @param  string $account_id The ID of the account to execute the strategy in. (required)
      * @param  string $option_strategy_id Option strategy id obtained from response when creating option strategy object (required)
      * @param  \SnapTrade\Model\OptionsPlaceOptionStrategyRequest $options_place_option_strategy_request options_place_option_strategy_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['placeOptionStrategy'] to see the possible values for this operation
@@ -1866,7 +1866,7 @@ class OptionsApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $account_id The ID of the account get positions. (required)
+     * @param  string $account_id The ID of the account to execute the strategy in. (required)
      * @param  string $option_strategy_id Option strategy id obtained from response when creating option strategy object (required)
      * @param  \SnapTrade\Model\OptionsPlaceOptionStrategyRequest $options_place_option_strategy_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['placeOptionStrategy'] to see the possible values for this operation
@@ -1989,7 +1989,7 @@ class OptionsApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $account_id The ID of the account get positions. (required)
+     * @param  string $account_id The ID of the account to execute the strategy in. (required)
      * @param  string $option_strategy_id Option strategy id obtained from response when creating option strategy object (required)
      * @param  \SnapTrade\Model\OptionsPlaceOptionStrategyRequest $options_place_option_strategy_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['placeOptionStrategy'] to see the possible values for this operation
@@ -2030,7 +2030,7 @@ class OptionsApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $account_id The ID of the account get positions. (required)
+     * @param  string $account_id The ID of the account to execute the strategy in. (required)
      * @param  string $option_strategy_id Option strategy id obtained from response when creating option strategy object (required)
      * @param  \SnapTrade\Model\OptionsPlaceOptionStrategyRequest $options_place_option_strategy_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['placeOptionStrategy'] to see the possible values for this operation
@@ -2087,7 +2087,7 @@ class OptionsApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $account_id The ID of the account get positions. (required)
+     * @param  string $account_id The ID of the account to execute the strategy in. (required)
      * @param  string $option_strategy_id Option strategy id obtained from response when creating option strategy object (required)
      * @param  \SnapTrade\Model\OptionsPlaceOptionStrategyRequest $options_place_option_strategy_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['placeOptionStrategy'] to see the possible values for this operation

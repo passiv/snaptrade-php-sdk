@@ -116,22 +116,4 @@ class OptionsPositionTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
-
-    /**
-     * Test attribute "open_pnl"
-     */
-    public function testPropertyOpenPnl()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "fractional_units"
-     */
-    public function testPropertyFractionalUnits()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
 }

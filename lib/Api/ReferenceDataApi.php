@@ -3480,7 +3480,7 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
-     * @param  string $account_id The ID of the account get positions. (required)
+     * @param  string $account_id The ID of the account to search for symbols within. (required)
      * @param  \SnapTrade\Model\SymbolQuery $symbol_query symbol_query (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['symbolSearchUserAccount'] to see the possible values for this operation
      *
@@ -3512,7 +3512,7 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $account_id The ID of the account get positions. (required)
+     * @param  string $account_id The ID of the account to search for symbols within. (required)
      * @param  \SnapTrade\Model\SymbolQuery $symbol_query (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['symbolSearchUserAccount'] to see the possible values for this operation
      *
@@ -3633,7 +3633,7 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $account_id The ID of the account get positions. (required)
+     * @param  string $account_id The ID of the account to search for symbols within. (required)
      * @param  \SnapTrade\Model\SymbolQuery $symbol_query (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['symbolSearchUserAccount'] to see the possible values for this operation
      *
@@ -3668,7 +3668,7 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $account_id The ID of the account get positions. (required)
+     * @param  string $account_id The ID of the account to search for symbols within. (required)
      * @param  \SnapTrade\Model\SymbolQuery $symbol_query (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['symbolSearchUserAccount'] to see the possible values for this operation
      *
@@ -3724,7 +3724,7 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $account_id The ID of the account get positions. (required)
+     * @param  string $account_id The ID of the account to search for symbols within. (required)
      * @param  \SnapTrade\Model\SymbolQuery $symbol_query (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['symbolSearchUserAccount'] to see the possible values for this operation
      *

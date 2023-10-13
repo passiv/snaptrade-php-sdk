@@ -33,7 +33,7 @@ $snaptrade = new \SnapTrade\Client(
 
 $user_id = "John.doe@snaptrade.com";
 $user_secret = "USERSECRET123";
-$account_id = "accountId_example"; // The ID of the account get positions.
+$account_id = "accountId_example"; // The ID of the account to cancel the order in.
 $brokerage_order_id = "2bcd7cc3-e922-4976-bce1-9858296801c3";
 
 try {
@@ -72,7 +72,7 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **user_id** | **string**|  | |
 | **user_secret** | **string**|  | |
-| **account_id** | **string**| The ID of the account get positions. | |
+| **account_id** | **string**| The ID of the account to cancel the order in. | |
 | **trading_cancel_user_account_order_request** | [**\SnapTrade\Model\TradingCancelUserAccountOrderRequest**](../Model/TradingCancelUserAccountOrderRequest.md)| The Order ID to be canceled | |
 
 ### Return type

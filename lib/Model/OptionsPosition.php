@@ -55,9 +55,7 @@ class OptionsPosition implements ModelInterface, ArrayAccess, \JsonSerializable
         'price' => 'float',
         'units' => 'float',
         'currency' => '\SnapTrade\Model\OptionsPositionCurrency',
-        'average_purchase_price' => 'float',
-        'open_pnl' => 'float',
-        'fractional_units' => 'float'
+        'average_purchase_price' => 'float'
     ];
 
     /**
@@ -72,9 +70,7 @@ class OptionsPosition implements ModelInterface, ArrayAccess, \JsonSerializable
         'price' => null,
         'units' => null,
         'currency' => null,
-        'average_purchase_price' => null,
-        'open_pnl' => null,
-        'fractional_units' => null
+        'average_purchase_price' => null
     ];
 
     /**
@@ -87,9 +83,7 @@ class OptionsPosition implements ModelInterface, ArrayAccess, \JsonSerializable
 		'price' => true,
 		'units' => false,
 		'currency' => true,
-		'average_purchase_price' => true,
-		'open_pnl' => true,
-		'fractional_units' => true
+		'average_purchase_price' => true
     ];
 
     /**
@@ -182,9 +176,7 @@ class OptionsPosition implements ModelInterface, ArrayAccess, \JsonSerializable
         'price' => 'price',
         'units' => 'units',
         'currency' => 'currency',
-        'average_purchase_price' => 'average_purchase_price',
-        'open_pnl' => 'open_pnl',
-        'fractional_units' => 'fractional_units'
+        'average_purchase_price' => 'average_purchase_price'
     ];
 
     /**
@@ -197,9 +189,7 @@ class OptionsPosition implements ModelInterface, ArrayAccess, \JsonSerializable
         'price' => 'setPrice',
         'units' => 'setUnits',
         'currency' => 'setCurrency',
-        'average_purchase_price' => 'setAveragePurchasePrice',
-        'open_pnl' => 'setOpenPnl',
-        'fractional_units' => 'setFractionalUnits'
+        'average_purchase_price' => 'setAveragePurchasePrice'
     ];
 
     /**
@@ -212,9 +202,7 @@ class OptionsPosition implements ModelInterface, ArrayAccess, \JsonSerializable
         'price' => 'getPrice',
         'units' => 'getUnits',
         'currency' => 'getCurrency',
-        'average_purchase_price' => 'getAveragePurchasePrice',
-        'open_pnl' => 'getOpenPnl',
-        'fractional_units' => 'getFractionalUnits'
+        'average_purchase_price' => 'getAveragePurchasePrice'
     ];
 
     /**
@@ -279,8 +267,6 @@ class OptionsPosition implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('units', $data ?? [], null);
         $this->setIfExists('currency', $data ?? [], null);
         $this->setIfExists('average_purchase_price', $data ?? [], null);
-        $this->setIfExists('open_pnl', $data ?? [], null);
-        $this->setIfExists('fractional_units', $data ?? [], null);
     }
 
     /**
@@ -487,78 +473,6 @@ class OptionsPosition implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['average_purchase_price'] = $average_purchase_price;
-
-        return $this;
-    }
-
-    /**
-     * Gets open_pnl
-     *
-     * @return float|null
-     */
-    public function getOpenPnl()
-    {
-        return $this->container['open_pnl'];
-    }
-
-    /**
-     * Sets open_pnl
-     *
-     * @param float|null $open_pnl open_pnl
-     *
-     * @return self
-     */
-    public function setOpenPnl($open_pnl)
-    {
-
-        if (is_null($open_pnl)) {
-            array_push($this->openAPINullablesSetToNull, 'open_pnl');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('open_pnl', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['open_pnl'] = $open_pnl;
-
-        return $this;
-    }
-
-    /**
-     * Gets fractional_units
-     *
-     * @return float|null
-     */
-    public function getFractionalUnits()
-    {
-        return $this->container['fractional_units'];
-    }
-
-    /**
-     * Sets fractional_units
-     *
-     * @param float|null $fractional_units Deprecated, use the units field for both fractional and integer units going forward
-     *
-     * @return self
-     */
-    public function setFractionalUnits($fractional_units)
-    {
-
-        if (is_null($fractional_units)) {
-            array_push($this->openAPINullablesSetToNull, 'fractional_units');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('fractional_units', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['fractional_units'] = $fractional_units;
 
         return $this;
     }

@@ -612,7 +612,7 @@ $snaptrade = new \SnapTrade\Client(
 
 $user_id = "John.doe@snaptrade.com";
 $user_secret = "USERSECRET123";
-$account_id = "accountId_example"; // The ID of the account get positions.
+$account_id = "accountId_example"; // The ID of the account to search for symbols within.
 $substring = "apple";
 
 try {
@@ -641,7 +641,7 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **user_id** | **string**|  | |
 | **user_secret** | **string**|  | |
-| **account_id** | **string**| The ID of the account get positions. | |
+| **account_id** | **string**| The ID of the account to search for symbols within. | |
 | **symbol_query** | [**\SnapTrade\Model\SymbolQuery**](../Model/SymbolQuery.md)|  | [optional] |
 
 ### Return type

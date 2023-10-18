@@ -16,7 +16,7 @@ getActivities($user_id, $user_secret, $start_date, $end_date, $accounts, $broker
 
 Get transaction history for a user
 
-Returns activities (transactions) for a user. Specifing start and end date is highly recommended for automatic calls for better performance
+Returns activities (transactions) for a user. Specifing start and end date is highly recommended for better performance
 
 ### Example
 

@@ -121,7 +121,7 @@ class AccountInformationApiTest extends TestCase
     /**
      * Test case for getUserHoldings
      *
-     * List balances, positions and orders for the specified account..
+     * List balances, positions and orders for the specified account.
      *
      */
     public function testGetUserHoldings()

@@ -9,7 +9,7 @@ All URIs are relative to https://api.snaptrade.com/api/v1, except if the operati
 | [**getUserAccountDetails()**](AccountInformationApi.md#getUserAccountDetails) | **GET** /accounts/{accountId} | Return details of a specific investment account |
 | [**getUserAccountOrders()**](AccountInformationApi.md#getUserAccountOrders) | **GET** /accounts/{accountId}/orders | Get history of orders placed in account |
 | [**getUserAccountPositions()**](AccountInformationApi.md#getUserAccountPositions) | **GET** /accounts/{accountId}/positions | List account positions |
-| [**getUserHoldings()**](AccountInformationApi.md#getUserHoldings) | **GET** /accounts/{accountId}/holdings | List balances, positions and orders for the specified account. |
+| [**getUserHoldings()**](AccountInformationApi.md#getUserHoldings) | **GET** /accounts/{accountId}/holdings | List balances, positions and orders for the specified account |
 | [**listUserAccounts()**](AccountInformationApi.md#listUserAccounts) | **GET** /accounts | List accounts |
 | [**updateUserAccount()**](AccountInformationApi.md#updateUserAccount) | **PUT** /accounts/{accountId} | Update details of an investment account |
 
@@ -84,6 +84,8 @@ getUserAccountBalance($user_id, $user_secret, $account_id): \SnapTrade\Model\Bal
 ```
 
 List account balances
+
+A list of account balances for the specified account (one per currency that the account holds).
 
 ### Example
 
@@ -214,6 +216,8 @@ getUserAccountOrders($user_id, $user_secret, $account_id, $state): \SnapTrade\Mo
 ```
 
 Get history of orders placed in account
+
+Fetch all recent orders from a user's account.
 
 ### Example
 
@@ -358,7 +362,7 @@ try {
 getUserHoldings($account_id, $user_id, $user_secret): \SnapTrade\Model\AccountHoldingsAccount
 ```
 
-List balances, positions and orders for the specified account.
+List balances, positions and orders for the specified account
 
 ### Example
 

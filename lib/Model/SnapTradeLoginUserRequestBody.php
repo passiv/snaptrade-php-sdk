@@ -348,7 +348,7 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
     /**
      * Sets broker
      *
-     * @param string|null $broker broker
+     * @param string|null $broker Slug of the brokerage to connect the user to
      *
      * @return self
      */
@@ -377,7 +377,7 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
     /**
      * Sets immediate_redirect
      *
-     * @param bool|null $immediate_redirect immediate_redirect
+     * @param bool|null $immediate_redirect When set to True, user will be redirected back to the partner's site instead of the connection portal
      *
      * @return self
      */
@@ -406,7 +406,7 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
     /**
      * Sets custom_redirect
      *
-     * @param string|null $custom_redirect custom_redirect
+     * @param string|null $custom_redirect URL to redirect the user to after the user connects their brokerage account
      *
      * @return self
      */
@@ -435,7 +435,7 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
     /**
      * Sets reconnect
      *
-     * @param string|null $reconnect reconnect
+     * @param string|null $reconnect The UUID of the brokerage connection to be reconnected
      *
      * @return self
      */
@@ -464,7 +464,7 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
     /**
      * Sets connection_type
      *
-     * @param string|null $connection_type connection_type
+     * @param string|null $connection_type Sets whether the connection should be read or trade
      *
      * @return self
      */

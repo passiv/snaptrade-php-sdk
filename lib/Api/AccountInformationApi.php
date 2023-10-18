@@ -1399,7 +1399,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \SnapTrade\Model\AccountOrderRecord[]
+     * @return \SnapTrade\Model\AccountOrderRecord[]|\SnapTrade\Model\Model500UnexpectedExceptionResponse
      */
     public function getUserAccountOrders(
         $user_id,
@@ -1428,7 +1428,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \SnapTrade\Model\AccountOrderRecord[], HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SnapTrade\Model\AccountOrderRecord[]|\SnapTrade\Model\Model500UnexpectedExceptionResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function getUserAccountOrdersWithHttpInfo($user_id, $user_secret, $account_id, $state = null, string $contentType = self::contentTypes['getUserAccountOrders'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
@@ -1503,6 +1503,21 @@ class AccountInformationApi extends \SnapTrade\CustomApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
+                case 500:
+                    if ('\SnapTrade\Model\Model500UnexpectedExceptionResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\SnapTrade\Model\Model500UnexpectedExceptionResponse' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\Model500UnexpectedExceptionResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
             }
 
             $returnType = '\SnapTrade\Model\AccountOrderRecord[]';
@@ -1527,6 +1542,14 @@ class AccountInformationApi extends \SnapTrade\CustomApi
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\SnapTrade\Model\AccountOrderRecord[]',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 500:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SnapTrade\Model\Model500UnexpectedExceptionResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2200,7 +2223,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
     /**
      * Operation getUserHoldings
      *
-     * List balances, positions and orders for the specified account.
+     * List balances, positions and orders for the specified account
      *
      * @param  string $account_id The ID of the account to fetch holdings for. (required)
      * @param  string $user_id user_id (required)
@@ -2227,7 +2250,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
     /**
      * Operation getUserHoldingsWithHttpInfo
      *
-     * List balances, positions and orders for the specified account.
+     * List balances, positions and orders for the specified account
      *
      * @param  string $account_id The ID of the account to fetch holdings for. (required)
      * @param  string $user_id (required)
@@ -2392,7 +2415,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
     /**
      * Operation getUserHoldingsAsync
      *
-     * List balances, positions and orders for the specified account.
+     * List balances, positions and orders for the specified account
      *
      * @param  string $account_id The ID of the account to fetch holdings for. (required)
      * @param  string $user_id (required)
@@ -2422,7 +2445,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
     /**
      * Operation getUserHoldingsAsyncWithHttpInfo
      *
-     * List balances, positions and orders for the specified account.
+     * List balances, positions and orders for the specified account
      *
      * @param  string $account_id The ID of the account to fetch holdings for. (required)
      * @param  string $user_id (required)

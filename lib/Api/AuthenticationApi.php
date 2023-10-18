@@ -1001,7 +1001,7 @@ class AuthenticationApi extends \SnapTrade\CustomApi
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return string[]|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\Model404FailedRequestResponse
+     * @return string[]|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\Model404FailedRequestResponse|\SnapTrade\Model\Model500UnexpectedExceptionResponse
      */
     public function listSnapTradeUsers(
 
@@ -1023,7 +1023,7 @@ class AuthenticationApi extends \SnapTrade\CustomApi
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of string[]|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\Model404FailedRequestResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of string[]|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\Model404FailedRequestResponse|\SnapTrade\Model\Model500UnexpectedExceptionResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function listSnapTradeUsersWithHttpInfo(string $contentType = self::contentTypes['listSnapTradeUsers'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
@@ -1124,6 +1124,21 @@ class AuthenticationApi extends \SnapTrade\CustomApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
+                case 500:
+                    if ('\SnapTrade\Model\Model500UnexpectedExceptionResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\SnapTrade\Model\Model500UnexpectedExceptionResponse' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\Model500UnexpectedExceptionResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
             }
 
             $returnType = 'string[]';
@@ -1164,6 +1179,14 @@ class AuthenticationApi extends \SnapTrade\CustomApi
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\SnapTrade\Model\Model404FailedRequestResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 500:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SnapTrade\Model\Model500UnexpectedExceptionResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1842,18 +1865,16 @@ class AuthenticationApi extends \SnapTrade\CustomApi
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \SnapTrade\Model\UserIDandSecret|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\Model404FailedRequestResponse
+     * @return \SnapTrade\Model\UserIDandSecret|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\Model404FailedRequestResponse|\SnapTrade\Model\Model500UnexpectedExceptionResponse
      */
     public function registerSnapTradeUser(
 
         $user_id = SENTINEL_VALUE,
-        $rsa_public_key = SENTINEL_VALUE,
         string $contentType = self::contentTypes['registerSnapTradeUser'][0]
     )
     {
         $_body = [];
         $this->setRequestBodyProperty($_body, "user_id", $user_id);
-        $this->setRequestBodyProperty($_body, "rsa_public_key", $rsa_public_key);
         $snap_trade_register_user_request_body = $_body;
 
         list($response) = $this->registerSnapTradeUserWithHttpInfo($snap_trade_register_user_request_body, $contentType);
@@ -1870,7 +1891,7 @@ class AuthenticationApi extends \SnapTrade\CustomApi
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \SnapTrade\Model\UserIDandSecret|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\Model404FailedRequestResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SnapTrade\Model\UserIDandSecret|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\Model404FailedRequestResponse|\SnapTrade\Model\Model500UnexpectedExceptionResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function registerSnapTradeUserWithHttpInfo($snap_trade_register_user_request_body, string $contentType = self::contentTypes['registerSnapTradeUser'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
@@ -1972,6 +1993,21 @@ class AuthenticationApi extends \SnapTrade\CustomApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
+                case 500:
+                    if ('\SnapTrade\Model\Model500UnexpectedExceptionResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\SnapTrade\Model\Model500UnexpectedExceptionResponse' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\Model500UnexpectedExceptionResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
             }
 
             $returnType = '\SnapTrade\Model\UserIDandSecret';
@@ -2016,6 +2052,14 @@ class AuthenticationApi extends \SnapTrade\CustomApi
                     );
                     $e->setResponseObject($data);
                     break;
+                case 500:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SnapTrade\Model\Model500UnexpectedExceptionResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
             }
             throw $e;
         }
@@ -2035,13 +2079,11 @@ class AuthenticationApi extends \SnapTrade\CustomApi
     public function registerSnapTradeUserAsync(
 
         $user_id = SENTINEL_VALUE,
-        $rsa_public_key = SENTINEL_VALUE,
         string $contentType = self::contentTypes['registerSnapTradeUser'][0]
     )
     {
         $_body = [];
         $this->setRequestBodyProperty($_body, "user_id", $user_id);
-        $this->setRequestBodyProperty($_body, "rsa_public_key", $rsa_public_key);
         $snap_trade_register_user_request_body = $_body;
 
         return $this->registerSnapTradeUserAsyncWithHttpInfo($snap_trade_register_user_request_body, $contentType)

@@ -1,9 +1,11 @@
-# # SnapTradeRegisterUserRequestBody
+# # Model500UnexpectedExceptionResponse
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**user_id** | **string** | SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as it&#39;s unique to a user | [optional]
+**detail** | **mixed** |  | [optional]
+**status_code** | **mixed** |  | [optional]
+**code** | **mixed** |  | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

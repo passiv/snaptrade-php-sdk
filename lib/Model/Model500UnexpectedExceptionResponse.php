@@ -1,6 +1,6 @@
 <?php
 /**
- * SnapTradeRegisterUserRequestBody
+ * Model500UnexpectedExceptionResponse
  *
  * PHP version 7.4
  *
@@ -27,14 +27,14 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * SnapTradeRegisterUserRequestBody Class Doc Comment
+ * Model500UnexpectedExceptionResponse Class Doc Comment
  *
  * @category Class
- * @description Data required to register a user via SnapTrade Partner
+ * @description Example for a response that failed for unexpected reasons
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class SnapTradeRegisterUserRequestBody implements ModelInterface, ArrayAccess, \JsonSerializable
+class Model500UnexpectedExceptionResponse implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -43,7 +43,7 @@ class SnapTradeRegisterUserRequestBody implements ModelInterface, ArrayAccess, \
       *
       * @var string
       */
-    protected static $openAPIModelName = 'SnapTradeRegisterUserRequestBody';
+    protected static $openAPIModelName = '500UnexpectedExceptionResponse';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -51,7 +51,9 @@ class SnapTradeRegisterUserRequestBody implements ModelInterface, ArrayAccess, \
       * @var string[]
       */
     protected static $openAPITypes = [
-        'user_id' => 'string'
+        'detail' => 'mixed',
+        'status_code' => 'mixed',
+        'code' => 'mixed'
     ];
 
     /**
@@ -62,7 +64,9 @@ class SnapTradeRegisterUserRequestBody implements ModelInterface, ArrayAccess, \
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'user_id' => null
+        'detail' => null,
+        'status_code' => null,
+        'code' => null
     ];
 
     /**
@@ -71,7 +75,9 @@ class SnapTradeRegisterUserRequestBody implements ModelInterface, ArrayAccess, \
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'user_id' => false
+        'detail' => true,
+		'status_code' => true,
+		'code' => true
     ];
 
     /**
@@ -160,7 +166,9 @@ class SnapTradeRegisterUserRequestBody implements ModelInterface, ArrayAccess, \
      * @var string[]
      */
     protected static $attributeMap = [
-        'user_id' => 'userId'
+        'detail' => 'detail',
+        'status_code' => 'status_code',
+        'code' => 'code'
     ];
 
     /**
@@ -169,7 +177,9 @@ class SnapTradeRegisterUserRequestBody implements ModelInterface, ArrayAccess, \
      * @var string[]
      */
     protected static $setters = [
-        'user_id' => 'setUserId'
+        'detail' => 'setDetail',
+        'status_code' => 'setStatusCode',
+        'code' => 'setCode'
     ];
 
     /**
@@ -178,7 +188,9 @@ class SnapTradeRegisterUserRequestBody implements ModelInterface, ArrayAccess, \
      * @var string[]
      */
     protected static $getters = [
-        'user_id' => 'getUserId'
+        'detail' => 'getDetail',
+        'status_code' => 'getStatusCode',
+        'code' => 'getCode'
     ];
 
     /**
@@ -238,7 +250,9 @@ class SnapTradeRegisterUserRequestBody implements ModelInterface, ArrayAccess, \
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('user_id', $data ?? [], null);
+        $this->setIfExists('detail', $data ?? [], null);
+        $this->setIfExists('status_code', $data ?? [], null);
+        $this->setIfExists('code', $data ?? [], null);
     }
 
     /**
@@ -284,30 +298,109 @@ class SnapTradeRegisterUserRequestBody implements ModelInterface, ArrayAccess, \
 
 
     /**
-     * Gets user_id
+     * Gets detail
      *
-     * @return string|null
+     * @return mixed|null
      */
-    public function getUserId()
+    public function getDetail()
     {
-        return $this->container['user_id'];
+        return $this->container['detail'];
     }
 
     /**
-     * Sets user_id
+     * Sets detail
      *
-     * @param string|null $user_id SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as it's unique to a user
+     * @param mixed|null $detail detail
      *
      * @return self
      */
-    public function setUserId($user_id)
+    public function setDetail($detail)
     {
 
-        if (is_null($user_id)) {
-            throw new \InvalidArgumentException('non-nullable user_id cannot be null');
+        if (is_null($detail)) {
+            array_push($this->openAPINullablesSetToNull, 'detail');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('detail', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
-        $this->container['user_id'] = $user_id;
+        $this->container['detail'] = $detail;
+
+        return $this;
+    }
+
+    /**
+     * Gets status_code
+     *
+     * @return mixed|null
+     */
+    public function getStatusCode()
+    {
+        return $this->container['status_code'];
+    }
+
+    /**
+     * Sets status_code
+     *
+     * @param mixed|null $status_code status_code
+     *
+     * @return self
+     */
+    public function setStatusCode($status_code)
+    {
+
+        if (is_null($status_code)) {
+            array_push($this->openAPINullablesSetToNull, 'status_code');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('status_code', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['status_code'] = $status_code;
+
+        return $this;
+    }
+
+    /**
+     * Gets code
+     *
+     * @return mixed|null
+     */
+    public function getCode()
+    {
+        return $this->container['code'];
+    }
+
+    /**
+     * Sets code
+     *
+     * @param mixed|null $code code
+     *
+     * @return self
+     */
+    public function setCode($code)
+    {
+
+        if (is_null($code)) {
+            array_push($this->openAPINullablesSetToNull, 'code');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('code', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['code'] = $code;
 
         return $this;
     }

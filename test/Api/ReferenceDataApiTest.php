@@ -85,7 +85,7 @@ class ReferenceDataApiTest extends TestCase
     /**
      * Test case for getSecurityTypes
      *
-     * List of all security types..
+     * List of all security types.
      *
      */
     public function testGetSecurityTypes()

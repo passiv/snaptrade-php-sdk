@@ -19,6 +19,8 @@ deleteSnapTradeUser($user_id): \SnapTrade\Model\DeleteUserResponse
 
 Delete SnapTrade user
 
+Deletes a user you've registered over the SnapTrade API, and any data associated with them or their investment accounts.
+
 ### Example
 
 ```php
@@ -130,6 +132,8 @@ listSnapTradeUsers(): string[]
 
 List SnapTrade users
 
+Returns a list of users you've registered over the SnapTrade API.
+
 ### Example
 
 ```php
@@ -178,6 +182,8 @@ loginSnapTradeUser($user_id, $user_secret, $snap_trade_login_user_request_body):
 
 Login user & generate connection link
 
+Logs in a SnapTrade user and returns an authenticated connection portal URL for them to use to connect a brokerage account.
+
 ### Example
 
 ```php
@@ -191,11 +197,11 @@ $snaptrade = new \SnapTrade\Client(
 
 $user_id = "John.doe@snaptrade.com";
 $user_secret = "USERSECRET123";
-$broker = "ALPACA";
-$immediate_redirect = True;
-$custom_redirect = "https://snaptrade.com";
-$reconnect = "8b5f262d-4bb9-365d-888a-202bd3b15fa1";
-$connection_type = "read";
+$broker = "ALPACA"; // Slug of the brokerage to connect the user to
+$immediate_redirect = True; // When set to True, user will be redirected back to the partner's site instead of the connection portal
+$custom_redirect = "https://snaptrade.com"; // URL to redirect the user to after the user connects their brokerage account
+$reconnect = "8b5f262d-4bb9-365d-888a-202bd3b15fa1"; // The UUID of the brokerage connection to be reconnected
+$connection_type = "read"; // Sets whether the connection should be read or trade
 
 try {
     $result = $snaptrade->authentication->loginSnapTradeUser(
@@ -257,12 +263,10 @@ $snaptrade = new \SnapTrade\Client(
 );
 
 $user_id = "snaptrade-user-123"; // SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as it's unique to a user
-$rsa_public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQC7vbqajDw4o6gJy8UtmIbkcpnkO3Kwc4qsEnSZp/TR+fQi62F79RHWmwKOtFmwteURgLbj7D/WGuNLGOfa/2vse3G2eHnHl5CB8ruRX9fBl/KgwCVr2JaEuUm66bBQeP5XeBotdR4cvX38uPYivCDdPjJ1QWPdspTBKcxeFbccDw=="; // Open SSH RSA public key
 
 try {
     $result = $snaptrade->authentication->registerSnapTradeUser(
-        user_id: $user_id, 
-        rsa_public_key: $rsa_public_key
+        user_id: $user_id
     );
     print_r($result->$getUserId());
     print_r($result->$getUserSecret());

@@ -1,6 +1,6 @@
 <?php
 /**
- * SnapTradeRegisterUserRequestBodyTest
+ * Model500UnexpectedExceptionResponseTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * SnapTradeRegisterUserRequestBodyTest Class Doc Comment
+ * Model500UnexpectedExceptionResponseTest Class Doc Comment
  *
  * @category    Class
- * @description Data required to register a user via SnapTrade Partner
+ * @description Example for a response that failed for unexpected reasons
  * @package     SnapTrade
  */
-class SnapTradeRegisterUserRequestBodyTest extends TestCase
+class Model500UnexpectedExceptionResponseTest extends TestCase
 {
 
     /**
@@ -64,18 +64,36 @@ class SnapTradeRegisterUserRequestBodyTest extends TestCase
     }
 
     /**
-     * Test "SnapTradeRegisterUserRequestBody"
+     * Test "Model500UnexpectedExceptionResponse"
      */
-    public function testSnapTradeRegisterUserRequestBody()
+    public function testModel500UnexpectedExceptionResponse()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "user_id"
+     * Test attribute "detail"
      */
-    public function testPropertyUserId()
+    public function testPropertyDetail()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "status_code"
+     */
+    public function testPropertyStatusCode()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "code"
+     */
+    public function testPropertyCode()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

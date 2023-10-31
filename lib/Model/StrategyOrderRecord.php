@@ -56,8 +56,8 @@ class StrategyOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializa
         'filled_quantity' => 'float',
         'open_quantity' => 'float',
         'closed_quantity' => 'float',
-        'order_type' => 'string',
-        'time_in_force' => 'string',
+        'order_type' => '\SnapTrade\Model\OrderType',
+        'time_in_force' => '\SnapTrade\Model\TimeInForce',
         'limit_price' => 'float',
         'execution_price' => 'float',
         'time_placed' => 'string',
@@ -301,12 +301,6 @@ class StrategyOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializa
     public const STATUS_ACTIVATED = 'ACTIVATED';
     public const STATUS_PENDING_RISK_REVIEW = 'PENDING_RISK_REVIEW';
     public const STATUS_CONTINGENT_ORDER = 'CONTINGENT_ORDER';
-    public const ORDER_TYPE_LIMIT = 'Limit';
-    public const ORDER_TYPE_MARKET = 'Market';
-    public const ORDER_TYPE_NET_DEBIT = 'NetDebit';
-    public const ORDER_TYPE_NET_CREDIT = 'NetCredit';
-    public const TIME_IN_FORCE_DAY = 'DAY';
-    public const TIME_IN_FORCE_GTC = 'GTC';
 
     /**
      * Gets allowable values of the enum
@@ -335,34 +329,6 @@ class StrategyOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializa
             self::STATUS_ACTIVATED,
             self::STATUS_PENDING_RISK_REVIEW,
             self::STATUS_CONTINGENT_ORDER,
-        ];
-    }
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getOrderTypeAllowableValues()
-    {
-        return [
-            self::ORDER_TYPE_LIMIT,
-            self::ORDER_TYPE_MARKET,
-            self::ORDER_TYPE_NET_DEBIT,
-            self::ORDER_TYPE_NET_CREDIT,
-        ];
-    }
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getTimeInForceAllowableValues()
-    {
-        return [
-            self::TIME_IN_FORCE_DAY,
-            self::TIME_IN_FORCE_GTC,
         ];
     }
 
@@ -426,24 +392,6 @@ class StrategyOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializa
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'status', must be one of '%s'",
                 $this->container['status'],
-                implode("', '", $allowedValues)
-            );
-        }
-
-        $allowedValues = $this->getOrderTypeAllowableValues();
-        if (!is_null($this->container['order_type']) && !in_array($this->container['order_type'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'order_type', must be one of '%s'",
-                $this->container['order_type'],
-                implode("', '", $allowedValues)
-            );
-        }
-
-        $allowedValues = $this->getTimeInForceAllowableValues();
-        if (!is_null($this->container['time_in_force']) && !in_array($this->container['time_in_force'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'time_in_force', must be one of '%s'",
-                $this->container['time_in_force'],
                 implode("', '", $allowedValues)
             );
         }
@@ -621,7 +569,7 @@ class StrategyOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Gets order_type
      *
-     * @return string|null
+     * @return \SnapTrade\Model\OrderType|null
      */
     public function getOrderType()
     {
@@ -631,22 +579,12 @@ class StrategyOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Sets order_type
      *
-     * @param string|null $order_type order_type
+     * @param \SnapTrade\Model\OrderType|null $order_type order_type
      *
      * @return self
      */
     public function setOrderType($order_type)
     {
-        $allowedValues = $this->getOrderTypeAllowableValues();
-        if (!is_null($order_type) && !in_array($order_type, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'order_type', must be one of '%s'",
-                    $order_type,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
 
         if (is_null($order_type)) {
             throw new \InvalidArgumentException('non-nullable order_type cannot be null');
@@ -660,7 +598,7 @@ class StrategyOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Gets time_in_force
      *
-     * @return string|null
+     * @return \SnapTrade\Model\TimeInForce|null
      */
     public function getTimeInForce()
     {
@@ -670,22 +608,12 @@ class StrategyOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Sets time_in_force
      *
-     * @param string|null $time_in_force time_in_force
+     * @param \SnapTrade\Model\TimeInForce|null $time_in_force time_in_force
      *
      * @return self
      */
     public function setTimeInForce($time_in_force)
     {
-        $allowedValues = $this->getTimeInForceAllowableValues();
-        if (!is_null($time_in_force) && !in_array($time_in_force, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'time_in_force', must be one of '%s'",
-                    $time_in_force,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
 
         if (is_null($time_in_force)) {
             throw new \InvalidArgumentException('non-nullable time_in_force cannot be null');

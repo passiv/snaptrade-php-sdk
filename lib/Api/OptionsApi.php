@@ -1933,11 +1933,11 @@ class OptionsApi extends \SnapTrade\CustomApi
 
         $order_type,
         $time_in_force,
-        $price,
         $user_id,
         $user_secret,
         $account_id,
         $option_strategy_id,
+        $price = SENTINEL_VALUE,
         string $contentType = self::contentTypes['placeOptionStrategy'][0]
     )
     {
@@ -2116,11 +2116,11 @@ class OptionsApi extends \SnapTrade\CustomApi
 
         $order_type,
         $time_in_force,
-        $price,
         $user_id,
         $user_secret,
         $account_id,
         $option_strategy_id,
+        $price = SENTINEL_VALUE,
         string $contentType = self::contentTypes['placeOptionStrategy'][0]
     )
     {

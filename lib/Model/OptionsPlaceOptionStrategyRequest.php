@@ -50,8 +50,8 @@ class OptionsPlaceOptionStrategyRequest implements ModelInterface, ArrayAccess, 
       * @var string[]
       */
     protected static $openAPITypes = [
-        'order_type' => 'string',
-        'time_in_force' => 'string',
+        'order_type' => '\SnapTrade\Model\OrderType',
+        'time_in_force' => '\SnapTrade\Model\TimeInForce',
         'price' => 'float'
     ];
 
@@ -233,40 +233,6 @@ class OptionsPlaceOptionStrategyRequest implements ModelInterface, ArrayAccess, 
         return self::$openAPIModelName;
     }
 
-    public const ORDER_TYPE_LIMIT = 'Limit';
-    public const ORDER_TYPE_MARKET = 'Market';
-    public const ORDER_TYPE_NET_DEBIT = 'NetDebit';
-    public const ORDER_TYPE_NET_CREDIT = 'NetCredit';
-    public const TIME_IN_FORCE_DAY = 'DAY';
-    public const TIME_IN_FORCE_GTC = 'GTC';
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getOrderTypeAllowableValues()
-    {
-        return [
-            self::ORDER_TYPE_LIMIT,
-            self::ORDER_TYPE_MARKET,
-            self::ORDER_TYPE_NET_DEBIT,
-            self::ORDER_TYPE_NET_CREDIT,
-        ];
-    }
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getTimeInForceAllowableValues()
-    {
-        return [
-            self::TIME_IN_FORCE_DAY,
-            self::TIME_IN_FORCE_GTC,
-        ];
-    }
 
     /**
      * Associative array for storing property values
@@ -318,29 +284,8 @@ class OptionsPlaceOptionStrategyRequest implements ModelInterface, ArrayAccess, 
         if ($this->container['order_type'] === null) {
             $invalidProperties[] = "'order_type' can't be null";
         }
-        $allowedValues = $this->getOrderTypeAllowableValues();
-        if (!is_null($this->container['order_type']) && !in_array($this->container['order_type'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'order_type', must be one of '%s'",
-                $this->container['order_type'],
-                implode("', '", $allowedValues)
-            );
-        }
-
         if ($this->container['time_in_force'] === null) {
             $invalidProperties[] = "'time_in_force' can't be null";
-        }
-        $allowedValues = $this->getTimeInForceAllowableValues();
-        if (!is_null($this->container['time_in_force']) && !in_array($this->container['time_in_force'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'time_in_force', must be one of '%s'",
-                $this->container['time_in_force'],
-                implode("', '", $allowedValues)
-            );
-        }
-
-        if ($this->container['price'] === null) {
-            $invalidProperties[] = "'price' can't be null";
         }
         return $invalidProperties;
     }
@@ -360,7 +305,7 @@ class OptionsPlaceOptionStrategyRequest implements ModelInterface, ArrayAccess, 
     /**
      * Gets order_type
      *
-     * @return string
+     * @return \SnapTrade\Model\OrderType
      */
     public function getOrderType()
     {
@@ -370,22 +315,12 @@ class OptionsPlaceOptionStrategyRequest implements ModelInterface, ArrayAccess, 
     /**
      * Sets order_type
      *
-     * @param string $order_type order_type
+     * @param \SnapTrade\Model\OrderType $order_type order_type
      *
      * @return self
      */
     public function setOrderType($order_type)
     {
-        $allowedValues = $this->getOrderTypeAllowableValues();
-        if (!in_array($order_type, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'order_type', must be one of '%s'",
-                    $order_type,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
 
         if (is_null($order_type)) {
             throw new \InvalidArgumentException('non-nullable order_type cannot be null');
@@ -399,7 +334,7 @@ class OptionsPlaceOptionStrategyRequest implements ModelInterface, ArrayAccess, 
     /**
      * Gets time_in_force
      *
-     * @return string
+     * @return \SnapTrade\Model\TimeInForce
      */
     public function getTimeInForce()
     {
@@ -409,22 +344,12 @@ class OptionsPlaceOptionStrategyRequest implements ModelInterface, ArrayAccess, 
     /**
      * Sets time_in_force
      *
-     * @param string $time_in_force time_in_force
+     * @param \SnapTrade\Model\TimeInForce $time_in_force time_in_force
      *
      * @return self
      */
     public function setTimeInForce($time_in_force)
     {
-        $allowedValues = $this->getTimeInForceAllowableValues();
-        if (!in_array($time_in_force, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'time_in_force', must be one of '%s'",
-                    $time_in_force,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
 
         if (is_null($time_in_force)) {
             throw new \InvalidArgumentException('non-nullable time_in_force cannot be null');
@@ -438,7 +363,7 @@ class OptionsPlaceOptionStrategyRequest implements ModelInterface, ArrayAccess, 
     /**
      * Gets price
      *
-     * @return float
+     * @return float|null
      */
     public function getPrice()
     {
@@ -448,7 +373,7 @@ class OptionsPlaceOptionStrategyRequest implements ModelInterface, ArrayAccess, 
     /**
      * Sets price
      *
-     * @param float $price Trade Price if limit or stop limit order
+     * @param float|null $price Trade Price if limit or stop limit order
      *
      * @return self
      */

@@ -303,22 +303,22 @@ $snaptrade = new \SnapTrade\Client(
 );
 
 $order_type = "Limit";
-$time_in_force = "DAY";
-$price = 31.33; // Trade Price if limit or stop limit order
+$time_in_force = "Day";
 $user_id = "John.doe@snaptrade.com";
 $user_secret = "USERSECRET123";
 $account_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"; // The ID of the account to execute the strategy in.
 $option_strategy_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"; // Option strategy id obtained from response when creating option strategy object
+$price = 31.33; // Trade Price if limit or stop limit order
 
 try {
     $result = $snaptrade->options->placeOptionStrategy(
         order_type: $order_type, 
         time_in_force: $time_in_force, 
-        price: $price, 
         user_id: $user_id, 
         user_secret: $user_secret, 
         account_id: $account_id, 
-        option_strategy_id: $option_strategy_id
+        option_strategy_id: $option_strategy_id, 
+        price: $price
     );
     print_r($result->$getStrategy());
     print_r($result->$getStatus());

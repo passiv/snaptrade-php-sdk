@@ -60,7 +60,8 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
         'created_date' => 'string',
         'meta' => 'array<string,mixed>',
         'cash_restrictions' => '\SnapTrade\Model\CashRestriction[]',
-        'sync_status' => '\SnapTrade\Model\AccountSyncStatus'
+        'sync_status' => '\SnapTrade\Model\AccountSyncStatus',
+        'balance' => '\SnapTrade\Model\AccountBalance'
     ];
 
     /**
@@ -80,7 +81,8 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
         'created_date' => null,
         'meta' => null,
         'cash_restrictions' => null,
-        'sync_status' => null
+        'sync_status' => null,
+        'balance' => null
     ];
 
     /**
@@ -98,7 +100,8 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
 		'created_date' => false,
 		'meta' => false,
 		'cash_restrictions' => false,
-		'sync_status' => false
+		'sync_status' => false,
+		'balance' => false
     ];
 
     /**
@@ -196,7 +199,8 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
         'created_date' => 'created_date',
         'meta' => 'meta',
         'cash_restrictions' => 'cash_restrictions',
-        'sync_status' => 'sync_status'
+        'sync_status' => 'sync_status',
+        'balance' => 'balance'
     ];
 
     /**
@@ -214,7 +218,8 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
         'created_date' => 'setCreatedDate',
         'meta' => 'setMeta',
         'cash_restrictions' => 'setCashRestrictions',
-        'sync_status' => 'setSyncStatus'
+        'sync_status' => 'setSyncStatus',
+        'balance' => 'setBalance'
     ];
 
     /**
@@ -232,7 +237,8 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
         'created_date' => 'getCreatedDate',
         'meta' => 'getMeta',
         'cash_restrictions' => 'getCashRestrictions',
-        'sync_status' => 'getSyncStatus'
+        'sync_status' => 'getSyncStatus',
+        'balance' => 'getBalance'
     ];
 
     /**
@@ -302,6 +308,7 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('meta', $data ?? [], null);
         $this->setIfExists('cash_restrictions', $data ?? [], null);
         $this->setIfExists('sync_status', $data ?? [], null);
+        $this->setIfExists('balance', $data ?? [], null);
     }
 
     /**
@@ -632,6 +639,35 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['sync_status'] = $sync_status;
+
+        return $this;
+    }
+
+    /**
+     * Gets balance
+     *
+     * @return \SnapTrade\Model\AccountBalance|null
+     */
+    public function getBalance()
+    {
+        return $this->container['balance'];
+    }
+
+    /**
+     * Sets balance
+     *
+     * @param \SnapTrade\Model\AccountBalance|null $balance balance
+     *
+     * @return self
+     */
+    public function setBalance($balance)
+    {
+
+        if (is_null($balance)) {
+            throw new \InvalidArgumentException('non-nullable balance cannot be null');
+        }
+
+        $this->container['balance'] = $balance;
 
         return $this;
     }

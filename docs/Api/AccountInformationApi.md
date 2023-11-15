@@ -179,6 +179,7 @@ try {
     print_r($result->$getMeta());
     print_r($result->$getCashRestrictions());
     print_r($result->$getSyncStatus());
+    print_r($result->$getBalance());
 } catch (\Exception $e) {
     echo 'Exception when calling AccountInformationApi->getUserAccountDetails: ', $e->getMessage(), PHP_EOL;
 }
@@ -460,6 +461,7 @@ try {
     print_r($result->$getMeta());
     print_r($result->$getCashRestrictions());
     print_r($result->$getSyncStatus());
+    print_r($result->$getBalance());
 } catch (\Exception $e) {
     echo 'Exception when calling AccountInformationApi->listUserAccounts: ', $e->getMessage(), PHP_EOL;
 }
@@ -528,6 +530,7 @@ try {
     print_r($result->$getMeta());
     print_r($result->$getCashRestrictions());
     print_r($result->$getSyncStatus());
+    print_r($result->$getBalance());
 } catch (\Exception $e) {
     echo 'Exception when calling AccountInformationApi->updateUserAccount: ', $e->getMessage(), PHP_EOL;
 }

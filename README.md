@@ -124,6 +124,8 @@ Class | Method | HTTP request | Description
 ## Models
 
 - [Account](docs/Model/Account.md)
+- [AccountBalance](docs/Model/AccountBalance.md)
+- [AccountBalanceTotal](docs/Model/AccountBalanceTotal.md)
 - [AccountHoldings](docs/Model/AccountHoldings.md)
 - [AccountHoldingsAccount](docs/Model/AccountHoldingsAccount.md)
 - [AccountOrderRecord](docs/Model/AccountOrderRecord.md)
@@ -131,6 +133,7 @@ Class | Method | HTTP request | Description
 - [AccountSimple](docs/Model/AccountSimple.md)
 - [AccountSyncStatus](docs/Model/AccountSyncStatus.md)
 - [Action](docs/Model/Action.md)
+- [Amount](docs/Model/Amount.md)
 - [AuthenticationLoginSnapTradeUser200Response](docs/Model/AuthenticationLoginSnapTradeUser200Response.md)
 - [Balance](docs/Model/Balance.md)
 - [Brokerage](docs/Model/Brokerage.md)

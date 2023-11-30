@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **string** |  | [optional]
-**brokerage_authorization** | **\SnapTrade\Model\BrokerageAuthorization** |  | [optional]
+**brokerage_authorization** | [**\SnapTrade\Model\BrokerageAuthorization**](BrokerageAuthorization.md) |  | [optional]
 **portfolio_group** | **string** |  | [optional]
 **name** | **string** |  | [optional]
 **number** | **string** |  | [optional]

@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**symbol** | **\SnapTrade\Model\PositionSymbol** |  | [optional]
+**symbol** | [**\SnapTrade\Model\PositionSymbol**](PositionSymbol.md) |  | [optional]
 **units** | **float** |  | [optional]
 **price** | **float** | Last known market price for the symbol | [optional]
 **open_pnl** | **float** |  | [optional]

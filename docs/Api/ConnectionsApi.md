@@ -231,6 +231,13 @@ try {
         user_id: $user_id, 
         session_id: $session_id
     );
+    print_r($result->$getId());
+    print_r($result->$getSessionEventType());
+    print_r($result->$getSessionId());
+    print_r($result->$getUserId());
+    print_r($result->$getCreatedDate());
+    print_r($result->$getBrokerageStatusCode());
+    print_r($result->$getBrokerageAuthorizationId());
 } catch (\Exception $e) {
     echo 'Exception when calling ConnectionsApi->sessionEvents: ', $e->getMessage(), PHP_EOL;
 }

@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**account** | **\SnapTrade\Model\Account** |  | [optional]
-**currency** | **\SnapTrade\Model\Currency** |  | [optional]
+**account** | [**\SnapTrade\Model\Account**](Account.md) |  | [optional]
+**currency** | [**\SnapTrade\Model\Currency**](Currency.md) |  | [optional]
 **remaining_cash** | **float** | Remaining balance after executing all trades | [optional]
 **estimated_commissions** | **float** | Total estimated commissions across all trades to make | [optional]
 **forex_fees** | **float** | Estimated forex fees to pay to excute trades | [optional]

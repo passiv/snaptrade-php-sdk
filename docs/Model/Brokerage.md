@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 **allows_trading_through_snaptrade_api** | **bool** |  | [optional]
 **is_scraping_integration** | **bool** |  | [optional]
 **default_currency** | **string** |  | [optional]
-**brokerage_type** | **\SnapTrade\Model\BrokerageType** |  | [optional]
+**brokerage_type** | [**\SnapTrade\Model\BrokerageType**](BrokerageType.md) |  | [optional]
 **exchanges** | **mixed[]** | List of exchange ID supported by brokerage | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

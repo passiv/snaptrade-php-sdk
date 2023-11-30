@@ -95,6 +95,8 @@ try {
         user_id: $user_id, 
         user_secret: $user_secret
     );
+    print_r($result->$getEncryptedSharedKey());
+    print_r($result->$getEncryptedMessageData());
 } catch (\Exception $e) {
     echo 'Exception when calling AuthenticationApi->getUserJWT: ', $e->getMessage(), PHP_EOL;
 }
@@ -200,8 +202,9 @@ $user_secret = "USERSECRET123";
 $broker = "ALPACA"; // Slug of the brokerage to connect the user to
 $immediate_redirect = True; // When set to True, user will be redirected back to the partner's site instead of the connection portal
 $custom_redirect = "https://snaptrade.com"; // URL to redirect the user to after the user connects their brokerage account
-$reconnect = "8b5f262d-4bb9-365d-888a-202bd3b15fa1"; // The UUID of the brokerage connection to be reconnected
+$reconnect = "8b5f262d-4bb9-365d-888a-202bd3b15fa1"; // The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See ‘Reconnecting Accounts’ for more information.
 $connection_type = "read"; // Sets whether the connection should be read or trade
+$connection_portal_version = "v2"; // Sets the version of the connection portal to render, with a default to 'v2'
 
 try {
     $result = $snaptrade->authentication->loginSnapTradeUser(
@@ -211,8 +214,13 @@ try {
         immediate_redirect: $immediate_redirect, 
         custom_redirect: $custom_redirect, 
         reconnect: $reconnect, 
-        connection_type: $connection_type
+        connection_type: $connection_type, 
+        connection_portal_version: $connection_portal_version
     );
+    print_r($result->$getRedirectUri());
+    print_r($result->$getSessionId());
+    print_r($result->$getEncryptedSharedKey());
+    print_r($result->$getEncryptedMessageData());
 } catch (\Exception $e) {
     echo 'Exception when calling AuthenticationApi->loginSnapTradeUser: ', $e->getMessage(), PHP_EOL;
 }

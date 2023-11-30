@@ -120,6 +120,11 @@ try {
         account_id: $account_id, 
         symbol: $symbol
     );
+    print_r($result->$getExpiryDate());
+    print_r($result->$getDescription());
+    print_r($result->$getListingExchange());
+    print_r($result->$getOptionExerciseType());
+    print_r($result->$getChainPerRoot());
 } catch (\Exception $e) {
     echo 'Exception when calling OptionsApi->getOptionsChain: ', $e->getMessage(), PHP_EOL;
 }

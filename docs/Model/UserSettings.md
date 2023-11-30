@@ -13,6 +13,6 @@ Name | Type | Description | Notes
 **demo** | **bool** |  | [optional]
 **api_enabled** | **bool** |  | [optional]
 **drift_threshold** | **float** |  | [optional]
-**preferred_currency** | **\SnapTrade\Model\Currency** |  | [optional]
+**preferred_currency** | [**\SnapTrade\Model\Currency**](Currency.md) |  | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

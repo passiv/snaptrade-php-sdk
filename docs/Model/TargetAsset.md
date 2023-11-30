@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **string** |  | [optional]
-**symbol** | **\SnapTrade\Model\UniversalSymbol** |  | [optional]
+**symbol** | [**\SnapTrade\Model\UniversalSymbol**](UniversalSymbol.md) |  | [optional]
 **percent** | **float** |  | [optional]
 **is_supported** | **bool** |  | [optional]
 **is_excluded** | **bool** |  | [optional]

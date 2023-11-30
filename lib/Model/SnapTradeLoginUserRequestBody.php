@@ -55,7 +55,8 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
         'immediate_redirect' => 'bool',
         'custom_redirect' => 'string',
         'reconnect' => 'string',
-        'connection_type' => 'string'
+        'connection_type' => 'string',
+        'connection_portal_version' => 'string'
     ];
 
     /**
@@ -70,7 +71,8 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
         'immediate_redirect' => null,
         'custom_redirect' => null,
         'reconnect' => null,
-        'connection_type' => null
+        'connection_type' => null,
+        'connection_portal_version' => null
     ];
 
     /**
@@ -83,7 +85,8 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
 		'immediate_redirect' => false,
 		'custom_redirect' => false,
 		'reconnect' => false,
-		'connection_type' => false
+		'connection_type' => false,
+		'connection_portal_version' => false
     ];
 
     /**
@@ -176,7 +179,8 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
         'immediate_redirect' => 'immediateRedirect',
         'custom_redirect' => 'customRedirect',
         'reconnect' => 'reconnect',
-        'connection_type' => 'connectionType'
+        'connection_type' => 'connectionType',
+        'connection_portal_version' => 'connectionPortalVersion'
     ];
 
     /**
@@ -189,7 +193,8 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
         'immediate_redirect' => 'setImmediateRedirect',
         'custom_redirect' => 'setCustomRedirect',
         'reconnect' => 'setReconnect',
-        'connection_type' => 'setConnectionType'
+        'connection_type' => 'setConnectionType',
+        'connection_portal_version' => 'setConnectionPortalVersion'
     ];
 
     /**
@@ -202,7 +207,8 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
         'immediate_redirect' => 'getImmediateRedirect',
         'custom_redirect' => 'getCustomRedirect',
         'reconnect' => 'getReconnect',
-        'connection_type' => 'getConnectionType'
+        'connection_type' => 'getConnectionType',
+        'connection_portal_version' => 'getConnectionPortalVersion'
     ];
 
     /**
@@ -248,6 +254,8 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
 
     public const CONNECTION_TYPE_READ = 'read';
     public const CONNECTION_TYPE_TRADE = 'trade';
+    public const CONNECTION_PORTAL_VERSION_V2 = 'v2';
+    public const CONNECTION_PORTAL_VERSION_V3 = 'v3';
 
     /**
      * Gets allowable values of the enum
@@ -259,6 +267,19 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
         return [
             self::CONNECTION_TYPE_READ,
             self::CONNECTION_TYPE_TRADE,
+        ];
+    }
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getConnectionPortalVersionAllowableValues()
+    {
+        return [
+            self::CONNECTION_PORTAL_VERSION_V2,
+            self::CONNECTION_PORTAL_VERSION_V3,
         ];
     }
 
@@ -282,6 +303,7 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
         $this->setIfExists('custom_redirect', $data ?? [], null);
         $this->setIfExists('reconnect', $data ?? [], null);
         $this->setIfExists('connection_type', $data ?? [], null);
+        $this->setIfExists('connection_portal_version', $data ?? [], null);
     }
 
     /**
@@ -316,6 +338,15 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'connection_type', must be one of '%s'",
                 $this->container['connection_type'],
+                implode("', '", $allowedValues)
+            );
+        }
+
+        $allowedValues = $this->getConnectionPortalVersionAllowableValues();
+        if (!is_null($this->container['connection_portal_version']) && !in_array($this->container['connection_portal_version'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'connection_portal_version', must be one of '%s'",
+                $this->container['connection_portal_version'],
                 implode("', '", $allowedValues)
             );
         }
@@ -435,7 +466,7 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
     /**
      * Sets reconnect
      *
-     * @param string|null $reconnect The UUID of the brokerage connection to be reconnected
+     * @param string|null $reconnect The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See ‘Reconnecting Accounts’ for more information.
      *
      * @return self
      */
@@ -486,6 +517,45 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
         }
 
         $this->container['connection_type'] = $connection_type;
+
+        return $this;
+    }
+
+    /**
+     * Gets connection_portal_version
+     *
+     * @return string|null
+     */
+    public function getConnectionPortalVersion()
+    {
+        return $this->container['connection_portal_version'];
+    }
+
+    /**
+     * Sets connection_portal_version
+     *
+     * @param string|null $connection_portal_version Sets the version of the connection portal to render, with a default to 'v2'
+     *
+     * @return self
+     */
+    public function setConnectionPortalVersion($connection_portal_version)
+    {
+        $allowedValues = $this->getConnectionPortalVersionAllowableValues();
+        if (!is_null($connection_portal_version) && !in_array($connection_portal_version, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'connection_portal_version', must be one of '%s'",
+                    $connection_portal_version,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+
+        if (is_null($connection_portal_version)) {
+            throw new \InvalidArgumentException('non-nullable connection_portal_version cannot be null');
+        }
+
+        $this->container['connection_portal_version'] = $connection_portal_version;
 
         return $this;
     }

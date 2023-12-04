@@ -73,8 +73,8 @@ class SnapTradeHoldingsTotalValue implements ModelInterface, ArrayAccess, \JsonS
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'value' => false,
-		'currency' => false
+        'value' => true,
+		'currency' => true
     ];
 
     /**
@@ -311,7 +311,14 @@ class SnapTradeHoldingsTotalValue implements ModelInterface, ArrayAccess, \JsonS
     {
 
         if (is_null($value)) {
-            throw new \InvalidArgumentException('non-nullable value cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'value');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('value', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['value'] = $value;
@@ -340,7 +347,14 @@ class SnapTradeHoldingsTotalValue implements ModelInterface, ArrayAccess, \JsonS
     {
 
         if (is_null($currency)) {
-            throw new \InvalidArgumentException('non-nullable currency cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'currency');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('currency', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['currency'] = $currency;

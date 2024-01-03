@@ -519,7 +519,7 @@ class ManualTrade implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets units
      *
-     * @param float|null $units Trade Units
+     * @param float|null $units Trade Units. Cannot work with notional value.
      *
      * @return self
      */

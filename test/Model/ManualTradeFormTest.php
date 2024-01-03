@@ -143,4 +143,13 @@ class ManualTradeFormTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "notional_value"
+     */
+    public function testPropertyNotionalValue()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

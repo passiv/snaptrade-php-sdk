@@ -589,7 +589,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets total_quantity
      *
-     * @param float|null $total_quantity Trade Units
+     * @param float|null $total_quantity Trade Units. Cannot work with notional value.
      *
      * @return self
      */

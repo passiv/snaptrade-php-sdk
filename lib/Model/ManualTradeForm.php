@@ -58,7 +58,8 @@ class ManualTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
         'stop' => 'float',
         'time_in_force' => '\SnapTrade\Model\TimeInForce',
         'units' => 'float',
-        'universal_symbol_id' => 'string'
+        'universal_symbol_id' => 'string',
+        'notional_value' => 'float'
     ];
 
     /**
@@ -76,7 +77,8 @@ class ManualTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
         'stop' => null,
         'time_in_force' => null,
         'units' => null,
-        'universal_symbol_id' => 'uuid'
+        'universal_symbol_id' => 'uuid',
+        'notional_value' => null
     ];
 
     /**
@@ -92,7 +94,8 @@ class ManualTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
 		'stop' => true,
 		'time_in_force' => false,
 		'units' => false,
-		'universal_symbol_id' => false
+		'universal_symbol_id' => false,
+		'notional_value' => true
     ];
 
     /**
@@ -188,7 +191,8 @@ class ManualTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
         'stop' => 'stop',
         'time_in_force' => 'time_in_force',
         'units' => 'units',
-        'universal_symbol_id' => 'universal_symbol_id'
+        'universal_symbol_id' => 'universal_symbol_id',
+        'notional_value' => 'notional_value'
     ];
 
     /**
@@ -204,7 +208,8 @@ class ManualTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
         'stop' => 'setStop',
         'time_in_force' => 'setTimeInForce',
         'units' => 'setUnits',
-        'universal_symbol_id' => 'setUniversalSymbolId'
+        'universal_symbol_id' => 'setUniversalSymbolId',
+        'notional_value' => 'setNotionalValue'
     ];
 
     /**
@@ -220,7 +225,8 @@ class ManualTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
         'stop' => 'getStop',
         'time_in_force' => 'getTimeInForce',
         'units' => 'getUnits',
-        'universal_symbol_id' => 'getUniversalSymbolId'
+        'universal_symbol_id' => 'getUniversalSymbolId',
+        'notional_value' => 'getNotionalValue'
     ];
 
     /**
@@ -288,6 +294,7 @@ class ManualTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('time_in_force', $data ?? [], null);
         $this->setIfExists('units', $data ?? [], null);
         $this->setIfExists('universal_symbol_id', $data ?? [], null);
+        $this->setIfExists('notional_value', $data ?? [], null);
     }
 
     /**
@@ -533,7 +540,7 @@ class ManualTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets units
      *
-     * @param float|null $units Trade Units
+     * @param float|null $units Trade Units. Cannot work with notional value.
      *
      * @return self
      */
@@ -574,6 +581,42 @@ class ManualTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['universal_symbol_id'] = $universal_symbol_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets notional_value
+     *
+     * @return float|null
+     */
+    public function getNotionalValue()
+    {
+        return $this->container['notional_value'];
+    }
+
+    /**
+     * Sets notional_value
+     *
+     * @param float|null $notional_value Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force.
+     *
+     * @return self
+     */
+    public function setNotionalValue($notional_value)
+    {
+
+        if (is_null($notional_value)) {
+            array_push($this->openAPINullablesSetToNull, 'notional_value');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('notional_value', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['notional_value'] = $notional_value;
 
         return $this;
     }

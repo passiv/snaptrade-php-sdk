@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **universal_symbol** | [**\SnapTrade\Model\UniversalSymbol**](UniversalSymbol.md) |  | [optional]
 **option_symbol** | [**\SnapTrade\Model\OptionsSymbol**](OptionsSymbol.md) |  | [optional]
 **action** | [**\SnapTrade\Model\Action**](Action.md) |  | [optional]
-**total_quantity** | **float** | Trade Units | [optional]
+**total_quantity** | **float** | Trade Units. Cannot work with notional value. | [optional]
 **open_quantity** | **float** | Trade Units | [optional]
 **canceled_quantity** | **float** | Trade Units | [optional]
 **filled_quantity** | **float** | Trade Units | [optional]

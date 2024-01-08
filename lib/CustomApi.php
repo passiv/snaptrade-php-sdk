@@ -21,8 +21,10 @@ class CustomApi
         \SnapTrade\Configuration $configuration,
         $body = null
     ) {
+        $content = empty($body) || $body == "{}" ? null : json_decode($body);
+        $contentArr = json_decode(json_encode($content), true);
         $sig_object = [
-            "content" => empty($body) || $body == "{}" ? null : json_decode($body),
+            "content" => $contentArr,
             "path" => $request->getUri()->getPath(),
             "query" => $request->getUri()->GetQuery()
         ];

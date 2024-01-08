@@ -61,7 +61,8 @@ class GettingStartedTest extends TestCase
 
         // 4) Get a redirect URI. Users will need this to connect
         // their brokerage to the SnapTrade server.
-        $redirectUri = $snaptrade->authentication->loginSnapTradeUser($userId, $userSecret);
+        // {'broker': 'ALPACA', 'immediateRedirect': True, 'connectionPortalVersion': 'v2'}
+        $redirectUri = $snaptrade->authentication->loginSnapTradeUser($userId, $userSecret, 'ALPACA', true, SENTINEL_VALUE, SENTINEL_VALUE, SENTINEL_VALUE, 'v2');
         print_r($redirectUri);
 
         // 5) Delete the user

@@ -12,6 +12,6 @@ Name | Type | Description | Notes
 **time_in_force** | [**\SnapTrade\Model\TimeInForce**](TimeInForce.md) |  | [optional]
 **units** | **float** | Trade Units. Cannot work with notional value. | [optional]
 **universal_symbol_id** | **string** |  | [optional]
-**notional_value** | **float** | Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. | [optional]
+**notional_value** | **float** | Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. **Only available for Alpaca and Alpaca Paper. Please contact support to get access to place notional trades** | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

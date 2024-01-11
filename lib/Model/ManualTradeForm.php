@@ -598,7 +598,7 @@ class ManualTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets notional_value
      *
-     * @param float|null $notional_value Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force.
+     * @param float|null $notional_value Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. **Only available for Alpaca and Alpaca Paper. Please contact support to get access to place notional trades**
      *
      * @return self
      */

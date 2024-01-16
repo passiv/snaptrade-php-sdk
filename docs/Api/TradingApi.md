@@ -119,9 +119,9 @@ $order_type = "Limit";
 $price = 31.33; // Trade Price if limit or stop limit order
 $stop = 31.33; // Stop Price. If stop loss or stop limit order, the price to trigger the stop
 $time_in_force = "Day";
-$units = 3.14; // Trade Units. Cannot work with notional value.
+$units = 3.14;
 $universal_symbol_id = "2bcd7cc3-e922-4976-bce1-9858296801c3";
-$notional_value = 100; // Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. **Only available for Alpaca and Alpaca Paper. Please contact support to get access to place notional trades**
+$notional_value = 3.14;
 
 try {
     $result = $snaptrade->trading->getOrderImpact(
@@ -268,9 +268,9 @@ $order_type = "Limit";
 $price = 31.33; // Trade Price if limit or stop limit order
 $stop = 31.33; // Stop Price. If stop loss or stop limit order, the price to trigger the stop
 $time_in_force = "Day";
-$units = 3.14; // Trade Units. Cannot work with notional value.
+$units = 3.14;
 $universal_symbol_id = "2bcd7cc3-e922-4976-bce1-9858296801c3";
-$notional_value = 100; // Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. **Only available for Alpaca and Alpaca Paper. Please contact support to get access to place notional trades**
+$notional_value = 3.14;
 
 try {
     $result = $snaptrade->trading->placeForceOrder(

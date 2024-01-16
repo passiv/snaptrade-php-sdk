@@ -93,7 +93,7 @@ class ManualTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
 		'price' => true,
 		'stop' => true,
 		'time_in_force' => false,
-		'units' => false,
+		'units' => true,
 		'universal_symbol_id' => false,
 		'notional_value' => true
     ];
@@ -540,7 +540,7 @@ class ManualTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets units
      *
-     * @param float|null $units Trade Units. Cannot work with notional value.
+     * @param float|null $units units
      *
      * @return self
      */
@@ -548,7 +548,14 @@ class ManualTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
     {
 
         if (is_null($units)) {
-            throw new \InvalidArgumentException('non-nullable units cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'units');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('units', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['units'] = $units;
@@ -598,7 +605,7 @@ class ManualTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets notional_value
      *
-     * @param float|null $notional_value Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. **Only available for Alpaca and Alpaca Paper. Please contact support to get access to place notional trades**
+     * @param float|null $notional_value notional_value
      *
      * @return self
      */

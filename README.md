@@ -234,7 +234,6 @@ Class | Method | HTTP request | Description
 - [UnderlyingSymbol](docs/Model/UnderlyingSymbol.md)
 - [UniversalActivity](docs/Model/UniversalActivity.md)
 - [UniversalSymbol](docs/Model/UniversalSymbol.md)
-- [UniversalSymbolTicker](docs/Model/UniversalSymbolTicker.md)
 - [UserErrorLog](docs/Model/UserErrorLog.md)
 - [UserIDandSecret](docs/Model/UserIDandSecret.md)
 - [UserSettings](docs/Model/UserSettings.md)

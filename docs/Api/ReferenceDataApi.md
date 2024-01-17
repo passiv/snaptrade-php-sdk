@@ -276,6 +276,7 @@ try {
     print_r($result->$getExchange());
     print_r($result->$getType());
     print_r($result->$getCurrencies());
+    print_r($result->$getFigiCode());
 } catch (\Exception $e) {
     echo 'Exception when calling ReferenceDataApi->getSymbols: ', $e->getMessage(), PHP_EOL;
 }
@@ -339,6 +340,7 @@ try {
     print_r($result->$getExchange());
     print_r($result->$getType());
     print_r($result->$getCurrencies());
+    print_r($result->$getFigiCode());
 } catch (\Exception $e) {
     echo 'Exception when calling ReferenceDataApi->getSymbolsByTicker: ', $e->getMessage(), PHP_EOL;
 }
@@ -632,6 +634,7 @@ try {
     print_r($result->$getExchange());
     print_r($result->$getType());
     print_r($result->$getCurrencies());
+    print_r($result->$getFigiCode());
 } catch (\Exception $e) {
     echo 'Exception when calling ReferenceDataApi->symbolSearchUserAccount: ', $e->getMessage(), PHP_EOL;
 }

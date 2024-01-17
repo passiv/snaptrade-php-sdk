@@ -143,4 +143,13 @@ class BrokerageSymbolSymbolTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "figi_code"
+     */
+    public function testPropertyFigiCode()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

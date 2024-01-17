@@ -57,7 +57,8 @@ class UnderlyingSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
         'currency' => '\SnapTrade\Model\Currency',
         'exchange' => '\SnapTrade\Model\USExchange',
         'type' => '\SnapTrade\Model\SecurityType',
-        'currencies' => '\SnapTrade\Model\Currency[]'
+        'currencies' => '\SnapTrade\Model\Currency[]',
+        'figi_code' => 'string'
     ];
 
     /**
@@ -74,7 +75,8 @@ class UnderlyingSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
         'currency' => null,
         'exchange' => null,
         'type' => null,
-        'currencies' => null
+        'currencies' => null,
+        'figi_code' => null
     ];
 
     /**
@@ -89,7 +91,8 @@ class UnderlyingSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
 		'currency' => false,
 		'exchange' => false,
 		'type' => false,
-		'currencies' => false
+		'currencies' => false,
+		'figi_code' => true
     ];
 
     /**
@@ -184,7 +187,8 @@ class UnderlyingSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
         'currency' => 'currency',
         'exchange' => 'exchange',
         'type' => 'type',
-        'currencies' => 'currencies'
+        'currencies' => 'currencies',
+        'figi_code' => 'figi_code'
     ];
 
     /**
@@ -199,7 +203,8 @@ class UnderlyingSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
         'currency' => 'setCurrency',
         'exchange' => 'setExchange',
         'type' => 'setType',
-        'currencies' => 'setCurrencies'
+        'currencies' => 'setCurrencies',
+        'figi_code' => 'setFigiCode'
     ];
 
     /**
@@ -214,7 +219,8 @@ class UnderlyingSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
         'currency' => 'getCurrency',
         'exchange' => 'getExchange',
         'type' => 'getType',
-        'currencies' => 'getCurrencies'
+        'currencies' => 'getCurrencies',
+        'figi_code' => 'getFigiCode'
     ];
 
     /**
@@ -281,6 +287,7 @@ class UnderlyingSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('exchange', $data ?? [], null);
         $this->setIfExists('type', $data ?? [], null);
         $this->setIfExists('currencies', $data ?? [], null);
+        $this->setIfExists('figi_code', $data ?? [], null);
     }
 
     /**
@@ -531,6 +538,42 @@ class UnderlyingSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['currencies'] = $currencies;
+
+        return $this;
+    }
+
+    /**
+     * Gets figi_code
+     *
+     * @return string|null
+     */
+    public function getFigiCode()
+    {
+        return $this->container['figi_code'];
+    }
+
+    /**
+     * Sets figi_code
+     *
+     * @param string|null $figi_code figi_code
+     *
+     * @return self
+     */
+    public function setFigiCode($figi_code)
+    {
+
+        if (is_null($figi_code)) {
+            array_push($this->openAPINullablesSetToNull, 'figi_code');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('figi_code', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['figi_code'] = $figi_code;
 
         return $this;
     }

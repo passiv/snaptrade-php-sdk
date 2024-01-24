@@ -106,7 +106,7 @@ Class | Method | HTTP request | Description
 *ReferenceDataApi* | [**getSecurityTypes**](docs/Api/ReferenceDataApi.md#getsecuritytypes) | **GET** /securityTypes | List of all security types
 *ReferenceDataApi* | [**getStockExchanges**](docs/Api/ReferenceDataApi.md#getstockexchanges) | **GET** /exchanges | List exchanges
 *ReferenceDataApi* | [**getSymbols**](docs/Api/ReferenceDataApi.md#getsymbols) | **POST** /symbols | Search for symbols
-*ReferenceDataApi* | [**getSymbolsByTicker**](docs/Api/ReferenceDataApi.md#getsymbolsbyticker) | **GET** /symbols/{ticker} | Get details of a symbol by the ticker
+*ReferenceDataApi* | [**getSymbolsByTicker**](docs/Api/ReferenceDataApi.md#getsymbolsbyticker) | **GET** /symbols/{query} | Get details of a symbol by the ticker or the universal_symbol_id
 *ReferenceDataApi* | [**listAllBrokerageAuthorizationType**](docs/Api/ReferenceDataApi.md#listallbrokerageauthorizationtype) | **GET** /brokerageAuthorizationTypes | List of all brokerage authorization types
 *ReferenceDataApi* | [**listAllBrokerages**](docs/Api/ReferenceDataApi.md#listallbrokerages) | **GET** /brokerages | List brokerages
 *ReferenceDataApi* | [**listAllCurrencies**](docs/Api/ReferenceDataApi.md#listallcurrencies) | **GET** /currencies | List currencies

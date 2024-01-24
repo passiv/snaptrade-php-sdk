@@ -9,7 +9,7 @@ All URIs are relative to https://api.snaptrade.com/api/v1, except if the operati
 | [**getSecurityTypes()**](ReferenceDataApi.md#getSecurityTypes) | **GET** /securityTypes | List of all security types |
 | [**getStockExchanges()**](ReferenceDataApi.md#getStockExchanges) | **GET** /exchanges | List exchanges |
 | [**getSymbols()**](ReferenceDataApi.md#getSymbols) | **POST** /symbols | Search for symbols |
-| [**getSymbolsByTicker()**](ReferenceDataApi.md#getSymbolsByTicker) | **GET** /symbols/{ticker} | Get details of a symbol by the ticker |
+| [**getSymbolsByTicker()**](ReferenceDataApi.md#getSymbolsByTicker) | **GET** /symbols/{query} | Get details of a symbol by the ticker or the universal_symbol_id |
 | [**listAllBrokerageAuthorizationType()**](ReferenceDataApi.md#listAllBrokerageAuthorizationType) | **GET** /brokerageAuthorizationTypes | List of all brokerage authorization types |
 | [**listAllBrokerages()**](ReferenceDataApi.md#listAllBrokerages) | **GET** /brokerages | List brokerages |
 | [**listAllCurrencies()**](ReferenceDataApi.md#listAllCurrencies) | **GET** /currencies | List currencies |
@@ -308,10 +308,10 @@ try {
 ## `getSymbolsByTicker()`
 
 ```php
-getSymbolsByTicker($ticker, $symbol_id): \SnapTrade\Model\UniversalSymbol
+getSymbolsByTicker($query): \SnapTrade\Model\UniversalSymbol
 ```
 
-Get details of a symbol by the ticker
+Get details of a symbol by the ticker or the universal_symbol_id
 
 ### Example
 
@@ -324,13 +324,11 @@ $snaptrade = new \SnapTrade\Client(
     consumerKey: getenv("SNAPTRADE_CONSUMER_KEY")
 );
 
-$ticker = "ticker_example"; // The ticker of the UniversalSymbol to get.
-$symbol_id = "046b6c7f-0b8a-43b9-b35d-6489e6daee91"; // OPTIONAL IN PATH Can be used instead of the ticker ; The ID of the UniversalSymbol to get.
+$query = "query_example"; // The ticker or universal_symbol_id of the UniversalSymbol to get.
 
 try {
     $result = $snaptrade->referenceData->getSymbolsByTicker(
-        ticker: $ticker, 
-        symbol_id: $symbol_id
+        query: $query
     );
     print_r($result->$getId());
     print_r($result->$getSymbol());
@@ -350,8 +348,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **ticker** | **string**| The ticker of the UniversalSymbol to get. | |
-| **symbol_id** | **string**| OPTIONAL IN PATH Can be used instead of the ticker ; The ID of the UniversalSymbol to get. | [optional] |
+| **query** | **string**| The ticker or universal_symbol_id of the UniversalSymbol to get. | |
 
 ### Return type
 

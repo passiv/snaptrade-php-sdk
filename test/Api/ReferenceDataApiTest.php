@@ -121,7 +121,7 @@ class ReferenceDataApiTest extends TestCase
     /**
      * Test case for getSymbolsByTicker
      *
-     * Get details of a symbol by the ticker.
+     * Get details of a symbol by the ticker or the universal_symbol_id.
      *
      */
     public function testGetSymbolsByTicker()

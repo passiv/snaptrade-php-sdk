@@ -56,7 +56,7 @@ class ManualTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
         'order_type' => '\SnapTrade\Model\OrderType',
         'price' => 'float',
         'stop' => 'float',
-        'time_in_force' => '\SnapTrade\Model\TimeInForce',
+        'time_in_force' => '\SnapTrade\Model\TimeInForceStrict',
         'units' => 'float',
         'universal_symbol_id' => 'string',
         'notional_value' => 'float'
@@ -501,7 +501,7 @@ class ManualTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets time_in_force
      *
-     * @return \SnapTrade\Model\TimeInForce|null
+     * @return \SnapTrade\Model\TimeInForceStrict|null
      */
     public function getTimeInForce()
     {
@@ -511,7 +511,7 @@ class ManualTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets time_in_force
      *
-     * @param \SnapTrade\Model\TimeInForce|null $time_in_force time_in_force
+     * @param \SnapTrade\Model\TimeInForceStrict|null $time_in_force time_in_force
      *
      * @return self
      */

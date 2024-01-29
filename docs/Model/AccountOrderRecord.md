@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 **limit_price** | **float** | Trade Price if limit or stop limit order | [optional]
 **stop_price** | **float** | Stop Price. If stop loss or stop limit order, the price to trigger the stop | [optional]
 **order_type** | [**\SnapTrade\Model\OrderType**](OrderType.md) |  | [optional]
-**time_in_force** | [**\SnapTrade\Model\TimeInForce**](TimeInForce.md) |  | [optional]
+**time_in_force** | **string** | Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled   * GTD - Good Til Date | [optional]
 **time_placed** | **string** | Time | [optional]
 **time_updated** | **string** | Time | [optional]
 **expiry_date** | **string** | Time | [optional]

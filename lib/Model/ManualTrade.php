@@ -54,7 +54,7 @@ class ManualTrade implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'string',
         'account' => 'string',
         'order_type' => '\SnapTrade\Model\OrderType',
-        'time_in_force' => '\SnapTrade\Model\TimeInForce',
+        'time_in_force' => 'string',
         'symbol' => '\SnapTrade\Model\ManualTradeSymbol',
         'action' => '\SnapTrade\Model\Action',
         'units' => 'float',
@@ -422,7 +422,7 @@ class ManualTrade implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets time_in_force
      *
-     * @return \SnapTrade\Model\TimeInForce|null
+     * @return string|null
      */
     public function getTimeInForce()
     {
@@ -432,7 +432,7 @@ class ManualTrade implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets time_in_force
      *
-     * @param \SnapTrade\Model\TimeInForce|null $time_in_force time_in_force
+     * @param string|null $time_in_force Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled   * GTD - Good Til Date
      *
      * @return self
      */

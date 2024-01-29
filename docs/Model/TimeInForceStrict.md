@@ -1,4 +1,4 @@
-# # TimeInForce
+# # TimeInForceStrict
 
 ## Properties
 

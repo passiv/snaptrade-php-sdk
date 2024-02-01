@@ -91,6 +91,7 @@ Class | Method | HTTP request | Description
 *AuthenticationApi* | [**listSnapTradeUsers**](docs/Api/AuthenticationApi.md#listsnaptradeusers) | **GET** /snapTrade/listUsers | List SnapTrade users
 *AuthenticationApi* | [**loginSnapTradeUser**](docs/Api/AuthenticationApi.md#loginsnaptradeuser) | **POST** /snapTrade/login | Login user &amp; generate connection link
 *AuthenticationApi* | [**registerSnapTradeUser**](docs/Api/AuthenticationApi.md#registersnaptradeuser) | **POST** /snapTrade/registerUser | Create SnapTrade user
+*AuthenticationApi* | [**resetSnapTradeUserSecret**](docs/Api/AuthenticationApi.md#resetsnaptradeusersecret) | **POST** /snapTrade/resetUserSecret | Obtain a new user secret for a user
 *ConnectionsApi* | [**detailBrokerageAuthorization**](docs/Api/ConnectionsApi.md#detailbrokerageauthorization) | **GET** /authorizations/{authorizationId} | Get brokerage authorization details
 *ConnectionsApi* | [**listBrokerageAuthorizations**](docs/Api/ConnectionsApi.md#listbrokerageauthorizations) | **GET** /authorizations | List all brokerage authorizations for the user
 *ConnectionsApi* | [**removeBrokerageAuthorization**](docs/Api/ConnectionsApi.md#removebrokerageauthorization) | **DELETE** /authorizations/{authorizationId} | Delete brokerage authorization

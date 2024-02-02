@@ -2065,6 +2065,7 @@ class TradingApi extends \SnapTrade\CustomApi
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\AccountOrderRecord|\SnapTrade\Model\Model400FailedRequestResponse
+     * @deprecated
      */
     public function placeOCOOrder(
 
@@ -2097,6 +2098,7 @@ class TradingApi extends \SnapTrade\CustomApi
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \SnapTrade\Model\AccountOrderRecord|\SnapTrade\Model\Model400FailedRequestResponse, HTTP status code, HTTP response headers (array of strings)
+     * @deprecated
      */
     public function placeOCOOrderWithHttpInfo($user_id, $user_secret, $trading_place_oco_order_request, string $contentType = self::contentTypes['placeOCOOrder'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
@@ -2238,6 +2240,7 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @deprecated
      */
     public function placeOCOOrderAsync(
 
@@ -2273,6 +2276,7 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @deprecated
      */
     public function placeOCOOrderAsyncWithHttpInfo($user_id, $user_secret, $trading_place_oco_order_request, string $contentType = self::contentTypes['placeOCOOrder'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
@@ -2328,6 +2332,7 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
+     * @deprecated
      */
     public function placeOCOOrderRequest($user_id, $user_secret, $trading_place_oco_order_request, string $contentType = self::contentTypes['placeOCOOrder'][0])
     {

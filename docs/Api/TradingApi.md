@@ -416,7 +416,7 @@ try {
 ## `placeOrder()`
 
 ```php
-placeOrder($trade_id, $user_id, $user_secret): \SnapTrade\Model\AccountOrderRecord
+placeOrder($trade_id, $user_id, $user_secret, $validated_trade_body): \SnapTrade\Model\AccountOrderRecord
 ```
 
 Place order
@@ -435,12 +435,14 @@ $snaptrade = new \SnapTrade\Client(
 $trade_id = "tradeId_example"; // The ID of trade object obtained from trade/impact endpoint
 $user_id = "John.doe@snaptrade.com";
 $user_secret = "USERSECRET123";
+$wait_to_confirm = True; // Optional, defaults to true. Determines if a wait is performed to check on order status. If false, latency will be reduced but orders returned will be more likely to be of status PENDING as we will not wait to check on the status before responding to the request
 
 try {
     $result = $snaptrade->trading->placeOrder(
         trade_id: $trade_id, 
         user_id: $user_id, 
-        user_secret: $user_secret
+        user_secret: $user_secret, 
+        wait_to_confirm: $wait_to_confirm
     );
     print_r($result->$getBrokerageOrderId());
     print_r($result->$getStatus());
@@ -472,6 +474,7 @@ try {
 | **trade_id** | **string**| The ID of trade object obtained from trade/impact endpoint | |
 | **user_id** | **string**|  | |
 | **user_secret** | **string**|  | |
+| **validated_trade_body** | [**\SnapTrade\Model\ValidatedTradeBody**](../Model/ValidatedTradeBody.md)|  | [optional] |
 
 ### Return type
 
@@ -483,7 +486,7 @@ try {
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: `application/json`
 - **Accept**: `application/json`
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)

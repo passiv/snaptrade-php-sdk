@@ -238,6 +238,7 @@ Class | Method | HTTP request | Description
 - [UserErrorLog](docs/Model/UserErrorLog.md)
 - [UserIDandSecret](docs/Model/UserIDandSecret.md)
 - [UserSettings](docs/Model/UserSettings.md)
+- [ValidatedTradeBody](docs/Model/ValidatedTradeBody.md)
 
 ## Author
 

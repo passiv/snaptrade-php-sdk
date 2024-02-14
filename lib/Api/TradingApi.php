@@ -2495,6 +2495,7 @@ class TradingApi extends \SnapTrade\CustomApi
      * @param  string $trade_id The ID of trade object obtained from trade/impact endpoint (required)
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
+     * @param  \SnapTrade\Model\ValidatedTradeBody $validated_trade_body validated_trade_body (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['placeOrder'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
@@ -2505,12 +2506,16 @@ class TradingApi extends \SnapTrade\CustomApi
         $trade_id,
         $user_id,
         $user_secret,
+        $wait_to_confirm = SENTINEL_VALUE,
 
         string $contentType = self::contentTypes['placeOrder'][0]
     )
     {
+        $_body = null;
+        $this->setRequestBodyProperty($_body, "wait_to_confirm", $wait_to_confirm);
+        $validated_trade_body = $_body;
 
-        list($response) = $this->placeOrderWithHttpInfo($trade_id, $user_id, $user_secret, $contentType);
+        list($response) = $this->placeOrderWithHttpInfo($trade_id, $user_id, $user_secret, $validated_trade_body, $contentType);
         return $response;
     }
 
@@ -2522,18 +2527,19 @@ class TradingApi extends \SnapTrade\CustomApi
      * @param  string $trade_id The ID of trade object obtained from trade/impact endpoint (required)
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
+     * @param  \SnapTrade\Model\ValidatedTradeBody $validated_trade_body (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['placeOrder'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \SnapTrade\Model\AccountOrderRecord|\SnapTrade\Model\Model400FailedRequestResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function placeOrderWithHttpInfo($trade_id, $user_id, $user_secret, string $contentType = self::contentTypes['placeOrder'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    public function placeOrderWithHttpInfo($trade_id, $user_id, $user_secret, $validated_trade_body = null, string $contentType = self::contentTypes['placeOrder'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->placeOrderRequest($trade_id, $user_id, $user_secret, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->placeOrderRequest($trade_id, $user_id, $user_secret, $validated_trade_body, $contentType);
 
         // Customization hook
-        $this->beforeSendHook($request, $requestOptions, $this->config);
+        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
 
         try {
             $options = $this->createHttpClientOption();
@@ -2549,6 +2555,7 @@ class TradingApi extends \SnapTrade\CustomApi
                         $trade_id,
                         $user_id,
                         $user_secret,
+                        $validated_trade_body,
                         $contentType,
                         $requestOptions->setRetryOAuth(false)
                     );
@@ -2664,6 +2671,7 @@ class TradingApi extends \SnapTrade\CustomApi
      * @param  string $trade_id The ID of trade object obtained from trade/impact endpoint (required)
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
+     * @param  \SnapTrade\Model\ValidatedTradeBody $validated_trade_body (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['placeOrder'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2673,12 +2681,16 @@ class TradingApi extends \SnapTrade\CustomApi
         $trade_id,
         $user_id,
         $user_secret,
+        $wait_to_confirm = SENTINEL_VALUE,
 
         string $contentType = self::contentTypes['placeOrder'][0]
     )
     {
+        $_body = null;
+        $this->setRequestBodyProperty($_body, "wait_to_confirm", $wait_to_confirm);
+        $validated_trade_body = $_body;
 
-        return $this->placeOrderAsyncWithHttpInfo($trade_id, $user_id, $user_secret, $contentType)
+        return $this->placeOrderAsyncWithHttpInfo($trade_id, $user_id, $user_secret, $validated_trade_body, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -2694,18 +2706,19 @@ class TradingApi extends \SnapTrade\CustomApi
      * @param  string $trade_id The ID of trade object obtained from trade/impact endpoint (required)
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
+     * @param  \SnapTrade\Model\ValidatedTradeBody $validated_trade_body (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['placeOrder'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function placeOrderAsyncWithHttpInfo($trade_id, $user_id, $user_secret, string $contentType = self::contentTypes['placeOrder'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    public function placeOrderAsyncWithHttpInfo($trade_id, $user_id, $user_secret, $validated_trade_body = null, string $contentType = self::contentTypes['placeOrder'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\AccountOrderRecord';
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->placeOrderRequest($trade_id, $user_id, $user_secret, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->placeOrderRequest($trade_id, $user_id, $user_secret, $validated_trade_body, $contentType);
 
         // Customization hook
-        $this->beforeSendHook($request, $requestOptions, $this->config);
+        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2749,12 +2762,13 @@ class TradingApi extends \SnapTrade\CustomApi
      * @param  string $trade_id The ID of trade object obtained from trade/impact endpoint (required)
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
+     * @param  \SnapTrade\Model\ValidatedTradeBody $validated_trade_body (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['placeOrder'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function placeOrderRequest($trade_id, $user_id, $user_secret, string $contentType = self::contentTypes['placeOrder'][0])
+    public function placeOrderRequest($trade_id, $user_id, $user_secret, $validated_trade_body = SENTINEL_VALUE, string $contentType = self::contentTypes['placeOrder'][0])
     {
 
         // Check if $trade_id is a string
@@ -2786,6 +2800,14 @@ class TradingApi extends \SnapTrade\CustomApi
             throw new \InvalidArgumentException(
                 'Missing the required parameter user_secret when calling placeOrder'
             );
+        }
+        if ($validated_trade_body !== SENTINEL_VALUE) {
+            if (!($validated_trade_body instanceof \SnapTrade\Model\ValidatedTradeBody)) {
+                if (!is_array($validated_trade_body))
+                    throw new \InvalidArgumentException('"validated_trade_body" must be associative array or an instance of \SnapTrade\Model\ValidatedTradeBody TradingApi.placeOrder.');
+                else
+                    $validated_trade_body = new \SnapTrade\Model\ValidatedTradeBody($validated_trade_body);
+            }
         }
 
 
@@ -2837,7 +2859,14 @@ class TradingApi extends \SnapTrade\CustomApi
         );
 
         // for model (json/xml)
-        if (count($formParams) > 0) {
+        if (isset($validated_trade_body)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($validated_trade_body));
+            } else {
+                $httpBody = $validated_trade_body;
+            }
+        } elseif (count($formParams) > 0) {
             if ($multipart) {
                 $multipartContents = [];
                 foreach ($formParams as $formParamName => $formParamValue) {

@@ -451,6 +451,8 @@ try {
     print_r($result->$getDisplayName());
     print_r($result->$getDescription());
     print_r($result->$getAwsS3LogoUrl());
+    print_r($result->$getAwsS3SquareLogoUrl());
+    print_r($result->$getOpenUrl());
     print_r($result->$getSlug());
     print_r($result->$getUrl());
     print_r($result->$getEnabled());

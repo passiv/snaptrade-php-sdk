@@ -89,4 +89,13 @@ class BalanceTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "buying_power"
+     */
+    public function testPropertyBuyingPower()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

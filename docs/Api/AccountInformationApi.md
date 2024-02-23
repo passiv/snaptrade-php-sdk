@@ -110,6 +110,7 @@ try {
     );
     print_r($result->$getCurrency());
     print_r($result->$getCash());
+    print_r($result->$getBuyingPower());
 } catch (\Exception $e) {
     echo 'Exception when calling AccountInformationApi->getUserAccountBalance: ', $e->getMessage(), PHP_EOL;
 }

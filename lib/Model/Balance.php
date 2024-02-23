@@ -52,7 +52,8 @@ class Balance implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPITypes = [
         'currency' => '\SnapTrade\Model\Currency',
-        'cash' => 'float'
+        'cash' => 'float',
+        'buying_power' => 'float'
     ];
 
     /**
@@ -64,7 +65,8 @@ class Balance implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPIFormats = [
         'currency' => null,
-        'cash' => null
+        'cash' => null,
+        'buying_power' => null
     ];
 
     /**
@@ -74,7 +76,8 @@ class Balance implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static array $openAPINullables = [
         'currency' => false,
-		'cash' => true
+		'cash' => true,
+		'buying_power' => true
     ];
 
     /**
@@ -164,7 +167,8 @@ class Balance implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $attributeMap = [
         'currency' => 'currency',
-        'cash' => 'cash'
+        'cash' => 'cash',
+        'buying_power' => 'buying_power'
     ];
 
     /**
@@ -174,7 +178,8 @@ class Balance implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $setters = [
         'currency' => 'setCurrency',
-        'cash' => 'setCash'
+        'cash' => 'setCash',
+        'buying_power' => 'setBuyingPower'
     ];
 
     /**
@@ -184,7 +189,8 @@ class Balance implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $getters = [
         'currency' => 'getCurrency',
-        'cash' => 'getCash'
+        'cash' => 'getCash',
+        'buying_power' => 'getBuyingPower'
     ];
 
     /**
@@ -246,6 +252,7 @@ class Balance implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $this->setIfExists('currency', $data ?? [], null);
         $this->setIfExists('cash', $data ?? [], null);
+        $this->setIfExists('buying_power', $data ?? [], null);
     }
 
     /**
@@ -351,6 +358,42 @@ class Balance implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['cash'] = $cash;
+
+        return $this;
+    }
+
+    /**
+     * Gets buying_power
+     *
+     * @return float|null
+     */
+    public function getBuyingPower()
+    {
+        return $this->container['buying_power'];
+    }
+
+    /**
+     * Sets buying_power
+     *
+     * @param float|null $buying_power buying_power
+     *
+     * @return self
+     */
+    public function setBuyingPower($buying_power)
+    {
+
+        if (is_null($buying_power)) {
+            array_push($this->openAPINullablesSetToNull, 'buying_power');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('buying_power', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['buying_power'] = $buying_power;
 
         return $this;
     }

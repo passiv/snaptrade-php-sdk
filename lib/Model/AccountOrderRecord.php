@@ -111,7 +111,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
 		'universal_symbol' => false,
 		'option_symbol' => false,
 		'action' => false,
-		'total_quantity' => false,
+		'total_quantity' => true,
 		'open_quantity' => true,
 		'canceled_quantity' => true,
 		'filled_quantity' => true,
@@ -589,7 +589,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets total_quantity
      *
-     * @param float|null $total_quantity Trade Units. Cannot work with notional value.
+     * @param float|null $total_quantity total_quantity
      *
      * @return self
      */
@@ -597,7 +597,14 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     {
 
         if (is_null($total_quantity)) {
-            throw new \InvalidArgumentException('non-nullable total_quantity cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'total_quantity');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('total_quantity', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['total_quantity'] = $total_quantity;

@@ -91,7 +91,7 @@ class ManualTrade implements ModelInterface, ArrayAccess, \JsonSerializable
 		'time_in_force' => false,
 		'symbol' => false,
 		'action' => false,
-		'units' => false,
+		'units' => true,
 		'price' => true
     ];
 
@@ -519,7 +519,7 @@ class ManualTrade implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets units
      *
-     * @param float|null $units Trade Units. Cannot work with notional value.
+     * @param float|null $units units
      *
      * @return self
      */
@@ -527,7 +527,14 @@ class ManualTrade implements ModelInterface, ArrayAccess, \JsonSerializable
     {
 
         if (is_null($units)) {
-            throw new \InvalidArgumentException('non-nullable units cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'units');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('units', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['units'] = $units;

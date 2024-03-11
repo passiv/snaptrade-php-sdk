@@ -57,7 +57,6 @@ class BrokerageSymbolOptionSymbol implements ModelInterface, ArrayAccess, \JsonS
         'expiration_date' => 'string',
         'is_mini_option' => 'bool',
         'underlying_symbol' => '\SnapTrade\Model\UnderlyingSymbol',
-        'local_id' => 'string',
         'exchange_id' => 'string'
     ];
 
@@ -76,7 +75,6 @@ class BrokerageSymbolOptionSymbol implements ModelInterface, ArrayAccess, \JsonS
         'expiration_date' => 'datetime',
         'is_mini_option' => null,
         'underlying_symbol' => null,
-        'local_id' => null,
         'exchange_id' => 'uuid'
     ];
 
@@ -93,7 +91,6 @@ class BrokerageSymbolOptionSymbol implements ModelInterface, ArrayAccess, \JsonS
 		'expiration_date' => false,
 		'is_mini_option' => false,
 		'underlying_symbol' => false,
-		'local_id' => false,
 		'exchange_id' => false
     ];
 
@@ -190,7 +187,6 @@ class BrokerageSymbolOptionSymbol implements ModelInterface, ArrayAccess, \JsonS
         'expiration_date' => 'expiration_date',
         'is_mini_option' => 'is_mini_option',
         'underlying_symbol' => 'underlying_symbol',
-        'local_id' => 'local_id',
         'exchange_id' => 'exchange_id'
     ];
 
@@ -207,7 +203,6 @@ class BrokerageSymbolOptionSymbol implements ModelInterface, ArrayAccess, \JsonS
         'expiration_date' => 'setExpirationDate',
         'is_mini_option' => 'setIsMiniOption',
         'underlying_symbol' => 'setUnderlyingSymbol',
-        'local_id' => 'setLocalId',
         'exchange_id' => 'setExchangeId'
     ];
 
@@ -224,7 +219,6 @@ class BrokerageSymbolOptionSymbol implements ModelInterface, ArrayAccess, \JsonS
         'expiration_date' => 'getExpirationDate',
         'is_mini_option' => 'getIsMiniOption',
         'underlying_symbol' => 'getUnderlyingSymbol',
-        'local_id' => 'getLocalId',
         'exchange_id' => 'getExchangeId'
     ];
 
@@ -307,7 +301,6 @@ class BrokerageSymbolOptionSymbol implements ModelInterface, ArrayAccess, \JsonS
         $this->setIfExists('expiration_date', $data ?? [], null);
         $this->setIfExists('is_mini_option', $data ?? [], null);
         $this->setIfExists('underlying_symbol', $data ?? [], null);
-        $this->setIfExists('local_id', $data ?? [], null);
         $this->setIfExists('exchange_id', $data ?? [], null);
     }
 
@@ -589,35 +582,6 @@ class BrokerageSymbolOptionSymbol implements ModelInterface, ArrayAccess, \JsonS
         }
 
         $this->container['underlying_symbol'] = $underlying_symbol;
-
-        return $this;
-    }
-
-    /**
-     * Gets local_id
-     *
-     * @return string|null
-     */
-    public function getLocalId()
-    {
-        return $this->container['local_id'];
-    }
-
-    /**
-     * Sets local_id
-     *
-     * @param string|null $local_id local_id
-     *
-     * @return self
-     */
-    public function setLocalId($local_id)
-    {
-
-        if (is_null($local_id)) {
-            throw new \InvalidArgumentException('non-nullable local_id cannot be null');
-        }
-
-        $this->container['local_id'] = $local_id;
 
         return $this;
     }

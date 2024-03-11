@@ -54,7 +54,6 @@ class PositionSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'string',
         'description' => 'string',
         'symbol' => '\SnapTrade\Model\UniversalSymbol',
-        'local_id' => 'string',
         'is_quotable' => 'bool',
         'is_tradable' => 'bool'
     ];
@@ -70,7 +69,6 @@ class PositionSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'uuid',
         'description' => null,
         'symbol' => null,
-        'local_id' => null,
         'is_quotable' => null,
         'is_tradable' => null
     ];
@@ -84,7 +82,6 @@ class PositionSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => false,
 		'description' => false,
 		'symbol' => false,
-		'local_id' => true,
 		'is_quotable' => false,
 		'is_tradable' => false
     ];
@@ -178,7 +175,6 @@ class PositionSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'id',
         'description' => 'description',
         'symbol' => 'symbol',
-        'local_id' => 'local_id',
         'is_quotable' => 'is_quotable',
         'is_tradable' => 'is_tradable'
     ];
@@ -192,7 +188,6 @@ class PositionSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'setId',
         'description' => 'setDescription',
         'symbol' => 'setSymbol',
-        'local_id' => 'setLocalId',
         'is_quotable' => 'setIsQuotable',
         'is_tradable' => 'setIsTradable'
     ];
@@ -206,7 +201,6 @@ class PositionSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'getId',
         'description' => 'getDescription',
         'symbol' => 'getSymbol',
-        'local_id' => 'getLocalId',
         'is_quotable' => 'getIsQuotable',
         'is_tradable' => 'getIsTradable'
     ];
@@ -271,7 +265,6 @@ class PositionSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('description', $data ?? [], null);
         $this->setIfExists('symbol', $data ?? [], null);
-        $this->setIfExists('local_id', $data ?? [], null);
         $this->setIfExists('is_quotable', $data ?? [], null);
         $this->setIfExists('is_tradable', $data ?? [], null);
     }
@@ -401,42 +394,6 @@ class PositionSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['symbol'] = $symbol;
-
-        return $this;
-    }
-
-    /**
-     * Gets local_id
-     *
-     * @return string|null
-     */
-    public function getLocalId()
-    {
-        return $this->container['local_id'];
-    }
-
-    /**
-     * Sets local_id
-     *
-     * @param string|null $local_id local_id
-     *
-     * @return self
-     */
-    public function setLocalId($local_id)
-    {
-
-        if (is_null($local_id)) {
-            array_push($this->openAPINullablesSetToNull, 'local_id');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('local_id', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['local_id'] = $local_id;
 
         return $this;
     }

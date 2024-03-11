@@ -136,15 +136,6 @@ class BrokerageSymbolOptionSymbolTest extends TestCase
     }
 
     /**
-     * Test attribute "local_id"
-     */
-    public function testPropertyLocalId()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test attribute "exchange_id"
      */
     public function testPropertyExchangeId()

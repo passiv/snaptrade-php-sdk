@@ -54,7 +54,6 @@ class ManualTradeSymbol implements ModelInterface, ArrayAccess, \JsonSerializabl
         'brokerage_symbol_id' => 'string',
         'universal_symbol_id' => 'string',
         'currency' => '\SnapTrade\Model\Currency',
-        'local_id' => 'string',
         'description' => 'string',
         'symbol' => 'string'
     ];
@@ -70,7 +69,6 @@ class ManualTradeSymbol implements ModelInterface, ArrayAccess, \JsonSerializabl
         'brokerage_symbol_id' => 'uuid',
         'universal_symbol_id' => 'uuid',
         'currency' => null,
-        'local_id' => null,
         'description' => null,
         'symbol' => null
     ];
@@ -84,7 +82,6 @@ class ManualTradeSymbol implements ModelInterface, ArrayAccess, \JsonSerializabl
         'brokerage_symbol_id' => false,
 		'universal_symbol_id' => false,
 		'currency' => false,
-		'local_id' => false,
 		'description' => true,
 		'symbol' => false
     ];
@@ -178,7 +175,6 @@ class ManualTradeSymbol implements ModelInterface, ArrayAccess, \JsonSerializabl
         'brokerage_symbol_id' => 'brokerage_symbol_id',
         'universal_symbol_id' => 'universal_symbol_id',
         'currency' => 'currency',
-        'local_id' => 'local_id',
         'description' => 'description',
         'symbol' => 'symbol'
     ];
@@ -192,7 +188,6 @@ class ManualTradeSymbol implements ModelInterface, ArrayAccess, \JsonSerializabl
         'brokerage_symbol_id' => 'setBrokerageSymbolId',
         'universal_symbol_id' => 'setUniversalSymbolId',
         'currency' => 'setCurrency',
-        'local_id' => 'setLocalId',
         'description' => 'setDescription',
         'symbol' => 'setSymbol'
     ];
@@ -206,7 +201,6 @@ class ManualTradeSymbol implements ModelInterface, ArrayAccess, \JsonSerializabl
         'brokerage_symbol_id' => 'getBrokerageSymbolId',
         'universal_symbol_id' => 'getUniversalSymbolId',
         'currency' => 'getCurrency',
-        'local_id' => 'getLocalId',
         'description' => 'getDescription',
         'symbol' => 'getSymbol'
     ];
@@ -271,7 +265,6 @@ class ManualTradeSymbol implements ModelInterface, ArrayAccess, \JsonSerializabl
         $this->setIfExists('brokerage_symbol_id', $data ?? [], null);
         $this->setIfExists('universal_symbol_id', $data ?? [], null);
         $this->setIfExists('currency', $data ?? [], null);
-        $this->setIfExists('local_id', $data ?? [], null);
         $this->setIfExists('description', $data ?? [], null);
         $this->setIfExists('symbol', $data ?? [], null);
     }
@@ -401,35 +394,6 @@ class ManualTradeSymbol implements ModelInterface, ArrayAccess, \JsonSerializabl
         }
 
         $this->container['currency'] = $currency;
-
-        return $this;
-    }
-
-    /**
-     * Gets local_id
-     *
-     * @return string|null
-     */
-    public function getLocalId()
-    {
-        return $this->container['local_id'];
-    }
-
-    /**
-     * Sets local_id
-     *
-     * @param string|null $local_id local_id
-     *
-     * @return self
-     */
-    public function setLocalId($local_id)
-    {
-
-        if (is_null($local_id)) {
-            throw new \InvalidArgumentException('non-nullable local_id cannot be null');
-        }
-
-        $this->container['local_id'] = $local_id;
 
         return $this;
     }

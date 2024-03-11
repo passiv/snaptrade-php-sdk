@@ -100,6 +100,15 @@ class PositionSymbolTest extends TestCase
     }
 
     /**
+     * Test attribute "local_id"
+     */
+    public function testPropertyLocalId()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "is_quotable"
      */
     public function testPropertyIsQuotable()

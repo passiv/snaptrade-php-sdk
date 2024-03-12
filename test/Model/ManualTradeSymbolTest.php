@@ -100,6 +100,15 @@ class ManualTradeSymbolTest extends TestCase
     }
 
     /**
+     * Test attribute "local_id"
+     */
+    public function testPropertyLocalId()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "description"
      */
     public function testPropertyDescription()

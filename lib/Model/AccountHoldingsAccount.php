@@ -54,6 +54,7 @@ class AccountHoldingsAccount implements ModelInterface, ArrayAccess, \JsonSerial
         'account' => '\SnapTrade\Model\SnapTradeHoldingsAccountAccountId',
         'balances' => '\SnapTrade\Model\Balance[]',
         'positions' => '\SnapTrade\Model\Position[]',
+        'option_postions' => '\SnapTrade\Model\OptionsPosition[]',
         'orders' => '\SnapTrade\Model\AccountOrderRecord[]',
         'total_value' => '\SnapTrade\Model\SnapTradeHoldingsTotalValue'
     ];
@@ -69,6 +70,7 @@ class AccountHoldingsAccount implements ModelInterface, ArrayAccess, \JsonSerial
         'account' => null,
         'balances' => null,
         'positions' => null,
+        'option_postions' => null,
         'orders' => null,
         'total_value' => null
     ];
@@ -82,6 +84,7 @@ class AccountHoldingsAccount implements ModelInterface, ArrayAccess, \JsonSerial
         'account' => false,
 		'balances' => true,
 		'positions' => true,
+		'option_postions' => true,
 		'orders' => true,
 		'total_value' => false
     ];
@@ -175,6 +178,7 @@ class AccountHoldingsAccount implements ModelInterface, ArrayAccess, \JsonSerial
         'account' => 'account',
         'balances' => 'balances',
         'positions' => 'positions',
+        'option_postions' => 'option_postions',
         'orders' => 'orders',
         'total_value' => 'total_value'
     ];
@@ -188,6 +192,7 @@ class AccountHoldingsAccount implements ModelInterface, ArrayAccess, \JsonSerial
         'account' => 'setAccount',
         'balances' => 'setBalances',
         'positions' => 'setPositions',
+        'option_postions' => 'setOptionPostions',
         'orders' => 'setOrders',
         'total_value' => 'setTotalValue'
     ];
@@ -201,6 +206,7 @@ class AccountHoldingsAccount implements ModelInterface, ArrayAccess, \JsonSerial
         'account' => 'getAccount',
         'balances' => 'getBalances',
         'positions' => 'getPositions',
+        'option_postions' => 'getOptionPostions',
         'orders' => 'getOrders',
         'total_value' => 'getTotalValue'
     ];
@@ -265,6 +271,7 @@ class AccountHoldingsAccount implements ModelInterface, ArrayAccess, \JsonSerial
         $this->setIfExists('account', $data ?? [], null);
         $this->setIfExists('balances', $data ?? [], null);
         $this->setIfExists('positions', $data ?? [], null);
+        $this->setIfExists('option_postions', $data ?? [], null);
         $this->setIfExists('orders', $data ?? [], null);
         $this->setIfExists('total_value', $data ?? [], null);
     }
@@ -408,6 +415,42 @@ class AccountHoldingsAccount implements ModelInterface, ArrayAccess, \JsonSerial
         }
 
         $this->container['positions'] = $positions;
+
+        return $this;
+    }
+
+    /**
+     * Gets option_postions
+     *
+     * @return \SnapTrade\Model\OptionsPosition[]|null
+     */
+    public function getOptionPostions()
+    {
+        return $this->container['option_postions'];
+    }
+
+    /**
+     * Sets option_postions
+     *
+     * @param \SnapTrade\Model\OptionsPosition[]|null $option_postions option_postions
+     *
+     * @return self
+     */
+    public function setOptionPostions($option_postions)
+    {
+
+        if (is_null($option_postions)) {
+            array_push($this->openAPINullablesSetToNull, 'option_postions');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('option_postions', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['option_postions'] = $option_postions;
 
         return $this;
     }

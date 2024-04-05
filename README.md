@@ -40,7 +40,6 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.connections.listBrokerageAuthorizations`](#snaptradeconnectionslistbrokerageauthorizations)
   * [`snaptrade.connections.removeBrokerageAuthorization`](#snaptradeconnectionsremovebrokerageauthorization)
   * [`snaptrade.connections.sessionEvents`](#snaptradeconnectionssessionevents)
-  * [`snaptrade.errorLogs.listUserErrors`](#snaptradeerrorlogslistusererrors)
   * [`snaptrade.options.getOptionStrategy`](#snaptradeoptionsgetoptionstrategy)
   * [`snaptrade.options.getOptionsChain`](#snaptradeoptionsgetoptionschain)
   * [`snaptrade.options.getOptionsStrategyQuote`](#snaptradeoptionsgetoptionsstrategyquote)
@@ -275,7 +274,7 @@ defaults value is set to \"all\"
 
 ##### days: `int`<a id="days-int"></a>
 
-Number of days in the past to fetch the most recent orders. Defaults to the last 90 days if no value is passed in.
+Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in.
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -839,40 +838,6 @@ Optional comma seperated list of session IDs used to filter the request on speci
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/sessionEvents` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.errorLogs.listUserErrors`<a id="snaptradeerrorlogslistusererrors"></a>
-
-Retrieve error logs on behalf of your SnapTrade users
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```php
-$result = $snaptrade->errorLogs->listUserErrors(
-    user_id: "John.doe@snaptrade.com", 
-    user_secret: "USERSECRET123"
-);
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### user_id: `string`<a id="user_id-string"></a>
-
-##### user_secret: `string`<a id="user_secret-string"></a>
-
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[**UserErrorLog**](./lib/Model/UserErrorLog.php)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/snapTrade/listUserErrors` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

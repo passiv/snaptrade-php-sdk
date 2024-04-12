@@ -54,7 +54,7 @@ class AccountHoldingsAccount implements ModelInterface, ArrayAccess, \JsonSerial
         'account' => '\SnapTrade\Model\SnapTradeHoldingsAccountAccountId',
         'balances' => '\SnapTrade\Model\Balance[]',
         'positions' => '\SnapTrade\Model\Position[]',
-        'option_postions' => '\SnapTrade\Model\OptionsPosition[]',
+        'option_positions' => '\SnapTrade\Model\OptionsPosition[]',
         'orders' => '\SnapTrade\Model\AccountOrderRecord[]',
         'total_value' => '\SnapTrade\Model\SnapTradeHoldingsTotalValue'
     ];
@@ -70,7 +70,7 @@ class AccountHoldingsAccount implements ModelInterface, ArrayAccess, \JsonSerial
         'account' => null,
         'balances' => null,
         'positions' => null,
-        'option_postions' => null,
+        'option_positions' => null,
         'orders' => null,
         'total_value' => null
     ];
@@ -84,7 +84,7 @@ class AccountHoldingsAccount implements ModelInterface, ArrayAccess, \JsonSerial
         'account' => false,
 		'balances' => true,
 		'positions' => true,
-		'option_postions' => true,
+		'option_positions' => true,
 		'orders' => true,
 		'total_value' => false
     ];
@@ -178,7 +178,7 @@ class AccountHoldingsAccount implements ModelInterface, ArrayAccess, \JsonSerial
         'account' => 'account',
         'balances' => 'balances',
         'positions' => 'positions',
-        'option_postions' => 'option_postions',
+        'option_positions' => 'option_positions',
         'orders' => 'orders',
         'total_value' => 'total_value'
     ];
@@ -192,7 +192,7 @@ class AccountHoldingsAccount implements ModelInterface, ArrayAccess, \JsonSerial
         'account' => 'setAccount',
         'balances' => 'setBalances',
         'positions' => 'setPositions',
-        'option_postions' => 'setOptionPostions',
+        'option_positions' => 'setOptionPositions',
         'orders' => 'setOrders',
         'total_value' => 'setTotalValue'
     ];
@@ -206,7 +206,7 @@ class AccountHoldingsAccount implements ModelInterface, ArrayAccess, \JsonSerial
         'account' => 'getAccount',
         'balances' => 'getBalances',
         'positions' => 'getPositions',
-        'option_postions' => 'getOptionPostions',
+        'option_positions' => 'getOptionPositions',
         'orders' => 'getOrders',
         'total_value' => 'getTotalValue'
     ];
@@ -271,7 +271,7 @@ class AccountHoldingsAccount implements ModelInterface, ArrayAccess, \JsonSerial
         $this->setIfExists('account', $data ?? [], null);
         $this->setIfExists('balances', $data ?? [], null);
         $this->setIfExists('positions', $data ?? [], null);
-        $this->setIfExists('option_postions', $data ?? [], null);
+        $this->setIfExists('option_positions', $data ?? [], null);
         $this->setIfExists('orders', $data ?? [], null);
         $this->setIfExists('total_value', $data ?? [], null);
     }
@@ -420,37 +420,37 @@ class AccountHoldingsAccount implements ModelInterface, ArrayAccess, \JsonSerial
     }
 
     /**
-     * Gets option_postions
+     * Gets option_positions
      *
      * @return \SnapTrade\Model\OptionsPosition[]|null
      */
-    public function getOptionPostions()
+    public function getOptionPositions()
     {
-        return $this->container['option_postions'];
+        return $this->container['option_positions'];
     }
 
     /**
-     * Sets option_postions
+     * Sets option_positions
      *
-     * @param \SnapTrade\Model\OptionsPosition[]|null $option_postions option_postions
+     * @param \SnapTrade\Model\OptionsPosition[]|null $option_positions option_positions
      *
      * @return self
      */
-    public function setOptionPostions($option_postions)
+    public function setOptionPositions($option_positions)
     {
 
-        if (is_null($option_postions)) {
-            array_push($this->openAPINullablesSetToNull, 'option_postions');
+        if (is_null($option_positions)) {
+            array_push($this->openAPINullablesSetToNull, 'option_positions');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('option_postions', $nullablesSetToNull);
+            $index = array_search('option_positions', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
 
-        $this->container['option_postions'] = $option_postions;
+        $this->container['option_positions'] = $option_positions;
 
         return $this;
     }

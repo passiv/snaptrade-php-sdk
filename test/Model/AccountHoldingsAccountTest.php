@@ -100,9 +100,9 @@ class AccountHoldingsAccountTest extends TestCase
     }
 
     /**
-     * Test attribute "option_postions"
+     * Test attribute "option_positions"
      */
-    public function testPropertyOptionPostions()
+    public function testPropertyOptionPositions()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

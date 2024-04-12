@@ -121,7 +121,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
 		'order_type' => false,
 		'time_in_force' => false,
 		'time_placed' => false,
-		'time_updated' => false,
+		'time_updated' => true,
 		'expiry_date' => false
     ];
 
@@ -928,7 +928,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets time_updated
      *
-     * @param string|null $time_updated Time
+     * @param string|null $time_updated time_updated
      *
      * @return self
      */
@@ -936,7 +936,14 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     {
 
         if (is_null($time_updated)) {
-            throw new \InvalidArgumentException('non-nullable time_updated cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'time_updated');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('time_updated', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['time_updated'] = $time_updated;

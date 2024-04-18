@@ -152,4 +152,13 @@ class UniversalSymbolTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "figi_instrument"
+     */
+    public function testPropertyFigiInstrument()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

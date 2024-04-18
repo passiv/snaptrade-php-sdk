@@ -1,6 +1,6 @@
 <?php
 /**
- * UniversalSymbol
+ * SymbolFigiInstrument
  *
  * PHP version 7.4
  *
@@ -27,14 +27,13 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * UniversalSymbol Class Doc Comment
+ * SymbolFigiInstrument Class Doc Comment
  *
  * @category Class
- * @description Universal symbol
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class UniversalSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
+class SymbolFigiInstrument implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -43,7 +42,7 @@ class UniversalSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'UniversalSymbol';
+    protected static $openAPIModelName = 'Symbol_figi_instrument';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -51,16 +50,8 @@ class UniversalSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'id' => 'string',
-        'symbol' => 'string',
-        'raw_symbol' => 'string',
-        'description' => 'string',
-        'currency' => '\SnapTrade\Model\Currency',
-        'exchange' => '\SnapTrade\Model\Exchange',
-        'type' => '\SnapTrade\Model\SecurityType',
-        'currencies' => '\SnapTrade\Model\Currency[]',
         'figi_code' => 'string',
-        'figi_instrument' => '\SnapTrade\Model\SymbolFigiInstrument'
+        'figi_share_class' => 'string'
     ];
 
     /**
@@ -71,16 +62,8 @@ class UniversalSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'id' => 'uuid',
-        'symbol' => null,
-        'raw_symbol' => null,
-        'description' => null,
-        'currency' => null,
-        'exchange' => null,
-        'type' => null,
-        'currencies' => null,
         'figi_code' => null,
-        'figi_instrument' => null
+        'figi_share_class' => null
     ];
 
     /**
@@ -89,16 +72,8 @@ class UniversalSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'id' => false,
-		'symbol' => false,
-		'raw_symbol' => false,
-		'description' => true,
-		'currency' => false,
-		'exchange' => false,
-		'type' => false,
-		'currencies' => false,
-		'figi_code' => true,
-		'figi_instrument' => true
+        'figi_code' => true,
+		'figi_share_class' => true
     ];
 
     /**
@@ -187,16 +162,8 @@ class UniversalSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'id' => 'id',
-        'symbol' => 'symbol',
-        'raw_symbol' => 'raw_symbol',
-        'description' => 'description',
-        'currency' => 'currency',
-        'exchange' => 'exchange',
-        'type' => 'type',
-        'currencies' => 'currencies',
         'figi_code' => 'figi_code',
-        'figi_instrument' => 'figi_instrument'
+        'figi_share_class' => 'figi_share_class'
     ];
 
     /**
@@ -205,16 +172,8 @@ class UniversalSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'id' => 'setId',
-        'symbol' => 'setSymbol',
-        'raw_symbol' => 'setRawSymbol',
-        'description' => 'setDescription',
-        'currency' => 'setCurrency',
-        'exchange' => 'setExchange',
-        'type' => 'setType',
-        'currencies' => 'setCurrencies',
         'figi_code' => 'setFigiCode',
-        'figi_instrument' => 'setFigiInstrument'
+        'figi_share_class' => 'setFigiShareClass'
     ];
 
     /**
@@ -223,16 +182,8 @@ class UniversalSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'id' => 'getId',
-        'symbol' => 'getSymbol',
-        'raw_symbol' => 'getRawSymbol',
-        'description' => 'getDescription',
-        'currency' => 'getCurrency',
-        'exchange' => 'getExchange',
-        'type' => 'getType',
-        'currencies' => 'getCurrencies',
         'figi_code' => 'getFigiCode',
-        'figi_instrument' => 'getFigiInstrument'
+        'figi_share_class' => 'getFigiShareClass'
     ];
 
     /**
@@ -292,16 +243,8 @@ class UniversalSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('id', $data ?? [], null);
-        $this->setIfExists('symbol', $data ?? [], null);
-        $this->setIfExists('raw_symbol', $data ?? [], null);
-        $this->setIfExists('description', $data ?? [], null);
-        $this->setIfExists('currency', $data ?? [], null);
-        $this->setIfExists('exchange', $data ?? [], null);
-        $this->setIfExists('type', $data ?? [], null);
-        $this->setIfExists('currencies', $data ?? [], null);
         $this->setIfExists('figi_code', $data ?? [], null);
-        $this->setIfExists('figi_instrument', $data ?? [], null);
+        $this->setIfExists('figi_share_class', $data ?? [], null);
     }
 
     /**
@@ -331,24 +274,6 @@ class UniversalSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['id'] === null) {
-            $invalidProperties[] = "'id' can't be null";
-        }
-        if ($this->container['symbol'] === null) {
-            $invalidProperties[] = "'symbol' can't be null";
-        }
-        if ($this->container['raw_symbol'] === null) {
-            $invalidProperties[] = "'raw_symbol' can't be null";
-        }
-        if ($this->container['currency'] === null) {
-            $invalidProperties[] = "'currency' can't be null";
-        }
-        if ($this->container['type'] === null) {
-            $invalidProperties[] = "'type' can't be null";
-        }
-        if ($this->container['currencies'] === null) {
-            $invalidProperties[] = "'currencies' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -363,245 +288,6 @@ class UniversalSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
         return count($this->listInvalidProperties()) === 0;
     }
 
-
-    /**
-     * Gets id
-     *
-     * @return string
-     */
-    public function getId()
-    {
-        return $this->container['id'];
-    }
-
-    /**
-     * Sets id
-     *
-     * @param string $id id
-     *
-     * @return self
-     */
-    public function setId($id)
-    {
-
-        if (is_null($id)) {
-            throw new \InvalidArgumentException('non-nullable id cannot be null');
-        }
-
-        $this->container['id'] = $id;
-
-        return $this;
-    }
-
-    /**
-     * Gets symbol
-     *
-     * @return string
-     */
-    public function getSymbol()
-    {
-        return $this->container['symbol'];
-    }
-
-    /**
-     * Sets symbol
-     *
-     * @param string $symbol symbol
-     *
-     * @return self
-     */
-    public function setSymbol($symbol)
-    {
-
-        if (is_null($symbol)) {
-            throw new \InvalidArgumentException('non-nullable symbol cannot be null');
-        }
-
-        $this->container['symbol'] = $symbol;
-
-        return $this;
-    }
-
-    /**
-     * Gets raw_symbol
-     *
-     * @return string
-     */
-    public function getRawSymbol()
-    {
-        return $this->container['raw_symbol'];
-    }
-
-    /**
-     * Sets raw_symbol
-     *
-     * @param string $raw_symbol raw_symbol
-     *
-     * @return self
-     */
-    public function setRawSymbol($raw_symbol)
-    {
-
-        if (is_null($raw_symbol)) {
-            throw new \InvalidArgumentException('non-nullable raw_symbol cannot be null');
-        }
-
-        $this->container['raw_symbol'] = $raw_symbol;
-
-        return $this;
-    }
-
-    /**
-     * Gets description
-     *
-     * @return string|null
-     */
-    public function getDescription()
-    {
-        return $this->container['description'];
-    }
-
-    /**
-     * Sets description
-     *
-     * @param string|null $description description
-     *
-     * @return self
-     */
-    public function setDescription($description)
-    {
-
-        if (is_null($description)) {
-            array_push($this->openAPINullablesSetToNull, 'description');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('description', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['description'] = $description;
-
-        return $this;
-    }
-
-    /**
-     * Gets currency
-     *
-     * @return \SnapTrade\Model\Currency
-     */
-    public function getCurrency()
-    {
-        return $this->container['currency'];
-    }
-
-    /**
-     * Sets currency
-     *
-     * @param \SnapTrade\Model\Currency $currency currency
-     *
-     * @return self
-     */
-    public function setCurrency($currency)
-    {
-
-        if (is_null($currency)) {
-            throw new \InvalidArgumentException('non-nullable currency cannot be null');
-        }
-
-        $this->container['currency'] = $currency;
-
-        return $this;
-    }
-
-    /**
-     * Gets exchange
-     *
-     * @return \SnapTrade\Model\Exchange|null
-     */
-    public function getExchange()
-    {
-        return $this->container['exchange'];
-    }
-
-    /**
-     * Sets exchange
-     *
-     * @param \SnapTrade\Model\Exchange|null $exchange exchange
-     *
-     * @return self
-     */
-    public function setExchange($exchange)
-    {
-
-        if (is_null($exchange)) {
-            throw new \InvalidArgumentException('non-nullable exchange cannot be null');
-        }
-
-        $this->container['exchange'] = $exchange;
-
-        return $this;
-    }
-
-    /**
-     * Gets type
-     *
-     * @return \SnapTrade\Model\SecurityType
-     */
-    public function getType()
-    {
-        return $this->container['type'];
-    }
-
-    /**
-     * Sets type
-     *
-     * @param \SnapTrade\Model\SecurityType $type type
-     *
-     * @return self
-     */
-    public function setType($type)
-    {
-
-        if (is_null($type)) {
-            throw new \InvalidArgumentException('non-nullable type cannot be null');
-        }
-
-        $this->container['type'] = $type;
-
-        return $this;
-    }
-
-    /**
-     * Gets currencies
-     *
-     * @return \SnapTrade\Model\Currency[]
-     */
-    public function getCurrencies()
-    {
-        return $this->container['currencies'];
-    }
-
-    /**
-     * Sets currencies
-     *
-     * @param \SnapTrade\Model\Currency[] $currencies currencies
-     *
-     * @return self
-     */
-    public function setCurrencies($currencies)
-    {
-
-        if (is_null($currencies)) {
-            throw new \InvalidArgumentException('non-nullable currencies cannot be null');
-        }
-
-        $this->container['currencies'] = $currencies;
-
-        return $this;
-    }
 
     /**
      * Gets figi_code
@@ -640,37 +326,37 @@ class UniversalSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets figi_instrument
+     * Gets figi_share_class
      *
-     * @return \SnapTrade\Model\SymbolFigiInstrument|null
+     * @return string|null
      */
-    public function getFigiInstrument()
+    public function getFigiShareClass()
     {
-        return $this->container['figi_instrument'];
+        return $this->container['figi_share_class'];
     }
 
     /**
-     * Sets figi_instrument
+     * Sets figi_share_class
      *
-     * @param \SnapTrade\Model\SymbolFigiInstrument|null $figi_instrument figi_instrument
+     * @param string|null $figi_share_class figi_share_class
      *
      * @return self
      */
-    public function setFigiInstrument($figi_instrument)
+    public function setFigiShareClass($figi_share_class)
     {
 
-        if (is_null($figi_instrument)) {
-            array_push($this->openAPINullablesSetToNull, 'figi_instrument');
+        if (is_null($figi_share_class)) {
+            array_push($this->openAPINullablesSetToNull, 'figi_share_class');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('figi_instrument', $nullablesSetToNull);
+            $index = array_search('figi_share_class', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
 
-        $this->container['figi_instrument'] = $figi_instrument;
+        $this->container['figi_share_class'] = $figi_share_class;
 
         return $this;
     }

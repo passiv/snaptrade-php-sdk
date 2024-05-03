@@ -107,18 +107,6 @@ class TradingApiTest extends TestCase
     }
 
     /**
-     * Test case for placeOCOOrder
-     *
-     * Place a OCO (One Cancels Other) order.
-     *
-     */
-    public function testPlaceOCOOrder()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test case for placeOrder
      *
      * Place order.

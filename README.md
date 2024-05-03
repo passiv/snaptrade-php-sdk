@@ -60,7 +60,6 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.trading.getOrderImpact`](#snaptradetradinggetorderimpact)
   * [`snaptrade.trading.getUserAccountQuotes`](#snaptradetradinggetuseraccountquotes)
   * [`snaptrade.trading.placeForceOrder`](#snaptradetradingplaceforceorder)
-  * [`snaptrade.trading.placeOCOOrder`](#snaptradetradingplaceocoorder)
   * [`snaptrade.trading.placeOrder`](#snaptradetradingplaceorder)
   * [`snaptrade.transactionsAndReporting.getActivities`](#snaptradetransactionsandreportinggetactivities)
   * [`snaptrade.transactionsAndReporting.getReportingCustomRange`](#snaptradetransactionsandreportinggetreportingcustomrange)
@@ -126,7 +125,9 @@ $result = $snaptrade->accountInformation->getAllUserHoldings(
 
 ### `snaptrade.accountInformation.getAllUserHoldings`<a id="snaptradeaccountinformationgetalluserholdings"></a>
 
-List all accounts for the user, plus balances, positions, and orders for each account.
+Lists balances, positions and orders for the specified account. The data returned is similar to
+the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints.
+
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -204,7 +205,9 @@ The ID of the account to get balances.
 
 ### `snaptrade.accountInformation.getUserAccountDetails`<a id="snaptradeaccountinformationgetuseraccountdetails"></a>
 
-Return details of a specific investment account
+Returns an account object with details for the specified account,
+including the total account market value.
+
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -292,7 +295,7 @@ Number of days in the past to fetch the most recent orders. Defaults to the last
 
 ### `snaptrade.accountInformation.getUserAccountPositions`<a id="snaptradeaccountinformationgetuseraccountpositions"></a>
 
-List account positions
+Returns a list of positions in the the specified account.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -331,7 +334,10 @@ The ID of the account to get positions.
 
 ### `snaptrade.accountInformation.getUserHoldings`<a id="snaptradeaccountinformationgetuserholdings"></a>
 
-List balances, positions and orders for the specified account
+Lists balances, positions and orders for the specified account as well as
+option_positions and account metadata. The data returned is similar to the
+data returned over the more fine-grained **positions**, **orders** and **balances** endpoints.
+
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -370,7 +376,7 @@ The ID of the account to fetch holdings for.
 
 ### `snaptrade.accountInformation.listUserAccounts`<a id="snaptradeaccountinformationlistuseraccounts"></a>
 
-List accounts
+Get a list of all Account objects for the authenticated SnapTrade user.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -404,7 +410,7 @@ $result = $snaptrade->accountInformation->listUserAccounts(
 
 ### `snaptrade.accountInformation.updateUserAccount`<a id="snaptradeaccountinformationupdateuseraccount"></a>
 
-Update details of an investment account
+Updates various properties of a specified account.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -499,7 +505,9 @@ $result = $snaptrade->authentication->deleteSnapTradeUser(
 
 ### `snaptrade.authentication.getUserJWT`<a id="snaptradeauthenticationgetuserjwt"></a>
 
-Generate encrypted JWT token
+This API is available to ClientIDs which have opted to use encrypted
+JWTs (JSON Web Tokens) instead of standard SnapTrade signature verification.
+
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -622,7 +630,9 @@ Sets the version of the connection portal to render, with a default to 'v2'
 
 ### `snaptrade.authentication.registerSnapTradeUser`<a id="snaptradeauthenticationregistersnaptradeuser"></a>
 
-Create SnapTrade user
+Registers a new SnapTrade user under your ClientID.
+Most SnapTrade operations require a user to be passed as a parameter.
+
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -655,7 +665,9 @@ SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as 
 
 ### `snaptrade.authentication.resetSnapTradeUserSecret`<a id="snaptradeauthenticationresetsnaptradeusersecret"></a>
 
-Obtain a new user secret for a user
+This API is used to generate a new secret for a SnapTrade user. You might use this if a userSecret
+is comprimised or lost among other reasons.
+
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -1115,7 +1127,7 @@ A currency pair based on currency code for example, {CAD-USD}
 
 ### `snaptrade.referenceData.getPartnerInfo`<a id="snaptradereferencedatagetpartnerinfo"></a>
 
-Get metadata related to Snaptrade partner
+Returns useful data related to the specified ClientID, including allowed brokerages and data access.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -1362,7 +1374,10 @@ $result = $snaptrade->referenceData->listAllCurrenciesRates();
 
 ### `snaptrade.referenceData.symbolSearchUserAccount`<a id="snaptradereferencedatasymbolsearchuseraccount"></a>
 
-Search for symbols available in an account
+Returns a list of universal symbols that are supported by
+the specificied account. Returned symbols are based on the
+provided search string, matching on ticker and name.
+
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -1404,7 +1419,9 @@ The ID of the account to search for symbols within.
 
 ### `snaptrade.trading.cancelUserAccountOrder`<a id="snaptradetradingcanceluseraccountorder"></a>
 
-Cancel open order in account
+Sends a signal to the brokerage to cancel the specified order.
+This will only work if the order has not yet been executed.
+
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -1511,7 +1528,7 @@ Stop Price. If stop loss or stop limit order, the price to trigger the stop
 
 ### `snaptrade.trading.getUserAccountQuotes`<a id="snaptradetradinggetuseraccountquotes"></a>
 
-Get symbol quotes
+Returns live quote(s) from the brokerage for the specified symbol(s).
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -1617,50 +1634,6 @@ Stop Price. If stop loss or stop limit order, the price to trigger the stop
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/trade/place` `POST`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.trading.placeOCOOrder`<a id="snaptradetradingplaceocoorder"></a>
-
-Place a OCO (One Cancels Other) order
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```php
-$result = $snaptrade->trading->placeOCOOrder(
-    user_id: "John.doe@snaptrade.com", 
-    user_secret: "USERSECRET123", 
-    first_trade_id: None, 
-    second_trade_id: None
-);
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### user_id: `string`<a id="user_id-string"></a>
-
-##### user_secret: `string`<a id="user_secret-string"></a>
-
-##### first_trade_id:<a id="first_trade_id"></a>
-
-The ID of first trade object obtained from trade/impact endpoint
-
-##### second_trade_id:<a id="second_trade_id"></a>
-
-The ID of second trade object obtained from trade/impact endpoint
-
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[**AccountOrderRecord**](./lib/Model/AccountOrderRecord.php)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/trade/oco` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

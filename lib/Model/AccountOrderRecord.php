@@ -68,6 +68,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
         'time_in_force' => 'string',
         'time_placed' => 'string',
         'time_updated' => 'string',
+        'time_executed' => 'string',
         'expiry_date' => 'string'
     ];
 
@@ -96,6 +97,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
         'time_in_force' => null,
         'time_placed' => null,
         'time_updated' => null,
+        'time_executed' => null,
         'expiry_date' => null
     ];
 
@@ -122,6 +124,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
 		'time_in_force' => false,
 		'time_placed' => false,
 		'time_updated' => true,
+		'time_executed' => true,
 		'expiry_date' => false
     ];
 
@@ -228,6 +231,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
         'time_in_force' => 'time_in_force',
         'time_placed' => 'time_placed',
         'time_updated' => 'time_updated',
+        'time_executed' => 'time_executed',
         'expiry_date' => 'expiry_date'
     ];
 
@@ -254,6 +258,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
         'time_in_force' => 'setTimeInForce',
         'time_placed' => 'setTimePlaced',
         'time_updated' => 'setTimeUpdated',
+        'time_executed' => 'setTimeExecuted',
         'expiry_date' => 'setExpiryDate'
     ];
 
@@ -280,6 +285,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
         'time_in_force' => 'getTimeInForce',
         'time_placed' => 'getTimePlaced',
         'time_updated' => 'getTimeUpdated',
+        'time_executed' => 'getTimeExecuted',
         'expiry_date' => 'getExpiryDate'
     ];
 
@@ -357,6 +363,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
         $this->setIfExists('time_in_force', $data ?? [], null);
         $this->setIfExists('time_placed', $data ?? [], null);
         $this->setIfExists('time_updated', $data ?? [], null);
+        $this->setIfExists('time_executed', $data ?? [], null);
         $this->setIfExists('expiry_date', $data ?? [], null);
     }
 
@@ -947,6 +954,42 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
         }
 
         $this->container['time_updated'] = $time_updated;
+
+        return $this;
+    }
+
+    /**
+     * Gets time_executed
+     *
+     * @return string|null
+     */
+    public function getTimeExecuted()
+    {
+        return $this->container['time_executed'];
+    }
+
+    /**
+     * Sets time_executed
+     *
+     * @param string|null $time_executed time_executed
+     *
+     * @return self
+     */
+    public function setTimeExecuted($time_executed)
+    {
+
+        if (is_null($time_executed)) {
+            array_push($this->openAPINullablesSetToNull, 'time_executed');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('time_executed', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['time_executed'] = $time_executed;
 
         return $this;
     }

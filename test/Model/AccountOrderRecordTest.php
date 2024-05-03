@@ -226,6 +226,15 @@ class AccountOrderRecordTest extends TestCase
     }
 
     /**
+     * Test attribute "time_executed"
+     */
+    public function testPropertyTimeExecuted()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "expiry_date"
      */
     public function testPropertyExpiryDate()

@@ -73,7 +73,7 @@ class ConnectionsApiTest extends TestCase
     /**
      * Test case for listBrokerageAuthorizations
      *
-     * List all brokerage authorizations for the user.
+     * List all brokerage authorizations for the User.
      *
      */
     public function testListBrokerageAuthorizations()
@@ -97,7 +97,7 @@ class ConnectionsApiTest extends TestCase
     /**
      * Test case for sessionEvents
      *
-     * List all session events for the partner.
+     * Get all session events for a user.
      *
      */
     public function testSessionEvents()

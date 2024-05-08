@@ -61,7 +61,7 @@ class OptionsApiTest extends TestCase
     /**
      * Test case for getOptionStrategy
      *
-     * Creates an option strategy object that will be used to place an option strategy order.
+     * Create options strategy.
      *
      */
     public function testGetOptionStrategy()
@@ -73,7 +73,7 @@ class OptionsApiTest extends TestCase
     /**
      * Test case for getOptionsChain
      *
-     * Get the options chain.
+     * Get the options chain for a symbol.
      *
      */
     public function testGetOptionsChain()
@@ -85,7 +85,7 @@ class OptionsApiTest extends TestCase
     /**
      * Test case for getOptionsStrategyQuote
      *
-     * Get latest market data of option strategy.
+     * Get options strategy quotes.
      *
      */
     public function testGetOptionsStrategyQuote()
@@ -97,7 +97,7 @@ class OptionsApiTest extends TestCase
     /**
      * Test case for listOptionHoldings
      *
-     * Get the options holdings in the account.
+     * Get account option holdings.
      *
      */
     public function testListOptionHoldings()
@@ -109,7 +109,7 @@ class OptionsApiTest extends TestCase
     /**
      * Test case for placeOptionStrategy
      *
-     * Place an option strategy order on the brokerage.
+     * Place an option strategy order.
      *
      */
     public function testPlaceOptionStrategy()

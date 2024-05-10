@@ -744,7 +744,7 @@ The ID of a brokerage authorization object.
 
 ### `snaptrade.connections.listBrokerageAuthorizations`<a id="snaptradeconnectionslistbrokerageauthorizations"></a>
 
-Returns a list of Brokerage Autherization objects for the specified userId.
+Returns a list of Brokerage Authorization objects for the user
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -1097,7 +1097,7 @@ Trade Price if limit or stop limit order
 
 ### `snaptrade.referenceData.getCurrencyExchangeRatePair`<a id="snaptradereferencedatagetcurrencyexchangeratepair"></a>
 
-Return the exchange rate of a currency pair
+Returns an Exchange Rate Pair object for the specified Currency Pair.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -1180,7 +1180,7 @@ $result = $snaptrade->referenceData->getSecurityTypes();
 
 ### `snaptrade.referenceData.getStockExchanges`<a id="snaptradereferencedatagetstockexchanges"></a>
 
-List exchanges
+Returns a list of all supported Exchanges.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -1205,7 +1205,10 @@ $result = $snaptrade->referenceData->getStockExchanges();
 
 ### `snaptrade.referenceData.getSymbols`<a id="snaptradereferencedatagetsymbols"></a>
 
-Search for symbols
+Returns a list of Universal Symbol objects that match a defined string.
+
+Matches on ticker or name.
+
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -1236,7 +1239,7 @@ $result = $snaptrade->referenceData->getSymbols(
 
 ### `snaptrade.referenceData.getSymbolsByTicker`<a id="snaptradereferencedatagetsymbolsbyticker"></a>
 
-Get details of a symbol by the ticker or the universal_symbol_id
+Returns the Universal Symbol object specified by the ticker or the universal_symbol_id.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -1269,7 +1272,7 @@ The ticker or universal_symbol_id of the UniversalSymbol to get.
 
 ### `snaptrade.referenceData.listAllBrokerageAuthorizationType`<a id="snaptradereferencedatalistallbrokerageauthorizationtype"></a>
 
-List of all brokerage authorization types
+Returns a list of all defined Brokerage authorization Type objects.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -1302,7 +1305,7 @@ Comma separated value of brokerage slugs
 
 ### `snaptrade.referenceData.listAllBrokerages`<a id="snaptradereferencedatalistallbrokerages"></a>
 
-List brokerages
+Returns a list of all defined Brokerage objects.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -1327,7 +1330,7 @@ $result = $snaptrade->referenceData->listAllBrokerages();
 
 ### `snaptrade.referenceData.listAllCurrencies`<a id="snaptradereferencedatalistallcurrencies"></a>
 
-List currencies
+Returns a list of all defined Currency objects.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -1352,7 +1355,7 @@ $result = $snaptrade->referenceData->listAllCurrencies();
 
 ### `snaptrade.referenceData.listAllCurrenciesRates`<a id="snaptradereferencedatalistallcurrenciesrates"></a>
 
-List currency exchange rates
+Returns a list of all Exchange Rate Pairs for all supported Currencies.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -1466,7 +1469,7 @@ The ID of the account to cancel the order in.
 
 ### `snaptrade.trading.getOrderImpact`<a id="snaptradetradinggetorderimpact"></a>
 
-Check impact of trades on account.
+Return the trade object and it's impact on the account for the specified order.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -1580,7 +1583,7 @@ Should be set to True if providing tickers.
 
 ### `snaptrade.trading.placeForceOrder`<a id="snaptradetradingplaceforceorder"></a>
 
-Place a trade with NO validation.
+Places a specified trade in the specified account.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -1645,7 +1648,9 @@ Stop Price. If stop loss or stop limit order, the price to trigger the stop
 
 ### `snaptrade.trading.placeOrder`<a id="snaptradetradingplaceorder"></a>
 
-Place order
+Places the specified trade object. This places the order in the account and
+returns the status of the order from the brokerage.
+
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>

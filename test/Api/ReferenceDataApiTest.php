@@ -61,7 +61,7 @@ class ReferenceDataApiTest extends TestCase
     /**
      * Test case for getCurrencyExchangeRatePair
      *
-     * Return the exchange rate of a currency pair.
+     * Get exchange rate of a currency pair.
      *
      */
     public function testGetCurrencyExchangeRatePair()
@@ -97,7 +97,7 @@ class ReferenceDataApiTest extends TestCase
     /**
      * Test case for getStockExchanges
      *
-     * List exchanges.
+     * Get exchanges.
      *
      */
     public function testGetStockExchanges()
@@ -121,7 +121,7 @@ class ReferenceDataApiTest extends TestCase
     /**
      * Test case for getSymbolsByTicker
      *
-     * Get details of a symbol by the ticker or the universal_symbol_id.
+     * Get details of a symbol.
      *
      */
     public function testGetSymbolsByTicker()
@@ -133,7 +133,7 @@ class ReferenceDataApiTest extends TestCase
     /**
      * Test case for listAllBrokerageAuthorizationType
      *
-     * List of all brokerage authorization types.
+     * Get all brokerage authorization types.
      *
      */
     public function testListAllBrokerageAuthorizationType()
@@ -145,7 +145,7 @@ class ReferenceDataApiTest extends TestCase
     /**
      * Test case for listAllBrokerages
      *
-     * List brokerages.
+     * Get brokerages.
      *
      */
     public function testListAllBrokerages()
@@ -157,7 +157,7 @@ class ReferenceDataApiTest extends TestCase
     /**
      * Test case for listAllCurrencies
      *
-     * List currencies.
+     * Get currencies.
      *
      */
     public function testListAllCurrencies()
@@ -169,7 +169,7 @@ class ReferenceDataApiTest extends TestCase
     /**
      * Test case for listAllCurrenciesRates
      *
-     * List currency exchange rates.
+     * Get currency exchange rates.
      *
      */
     public function testListAllCurrenciesRates()

@@ -73,7 +73,7 @@ class TradingApiTest extends TestCase
     /**
      * Test case for getOrderImpact
      *
-     * Check impact of trades on account..
+     * Check the impact of a trade on an account.
      *
      */
     public function testGetOrderImpact()

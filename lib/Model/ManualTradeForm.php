@@ -53,7 +53,7 @@ class ManualTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPITypes = [
         'account_id' => 'string',
         'action' => '\SnapTrade\Model\Action',
-        'order_type' => '\SnapTrade\Model\OrderType',
+        'order_type' => '\SnapTrade\Model\OrderTypeStrict',
         'price' => 'float',
         'stop' => 'float',
         'time_in_force' => '\SnapTrade\Model\TimeInForceStrict',
@@ -400,7 +400,7 @@ class ManualTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets order_type
      *
-     * @return \SnapTrade\Model\OrderType|null
+     * @return \SnapTrade\Model\OrderTypeStrict|null
      */
     public function getOrderType()
     {
@@ -410,7 +410,7 @@ class ManualTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets order_type
      *
-     * @param \SnapTrade\Model\OrderType|null $order_type order_type
+     * @param \SnapTrade\Model\OrderTypeStrict|null $order_type order_type
      *
      * @return self
      */

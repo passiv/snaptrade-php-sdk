@@ -50,7 +50,7 @@ class OptionsPlaceOptionStrategyRequest implements ModelInterface, ArrayAccess, 
       * @var string[]
       */
     protected static $openAPITypes = [
-        'order_type' => '\SnapTrade\Model\OrderType',
+        'order_type' => '\SnapTrade\Model\OrderTypeStrict',
         'time_in_force' => '\SnapTrade\Model\TimeInForceStrict',
         'price' => 'float'
     ];
@@ -305,7 +305,7 @@ class OptionsPlaceOptionStrategyRequest implements ModelInterface, ArrayAccess, 
     /**
      * Gets order_type
      *
-     * @return \SnapTrade\Model\OrderType
+     * @return \SnapTrade\Model\OrderTypeStrict
      */
     public function getOrderType()
     {
@@ -315,7 +315,7 @@ class OptionsPlaceOptionStrategyRequest implements ModelInterface, ArrayAccess, 
     /**
      * Sets order_type
      *
-     * @param \SnapTrade\Model\OrderType $order_type order_type
+     * @param \SnapTrade\Model\OrderTypeStrict $order_type order_type
      *
      * @return self
      */

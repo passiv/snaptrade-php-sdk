@@ -1,6 +1,6 @@
 <?php
 /**
- * OrderType
+ * OrderTypeStrict
  *
  * PHP version 7.4
  *
@@ -25,13 +25,13 @@ namespace SnapTrade\Model;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * OrderType Class Doc Comment
+ * OrderTypeStrict Class Doc Comment
  *
  * @category Class
  * @description Order Type
  * @package  SnapTrade
  */
-class OrderType
+class OrderTypeStrict
 {
     /**
      * Possible values of this enum

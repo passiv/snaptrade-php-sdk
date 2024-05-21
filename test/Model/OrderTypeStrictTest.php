@@ -1,6 +1,6 @@
 <?php
 /**
- * OrderTypeTest
+ * OrderTypeStrictTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * OrderTypeTest Class Doc Comment
+ * OrderTypeStrictTest Class Doc Comment
  *
  * @category    Class
  * @description Order Type
  * @package     SnapTrade
  */
-class OrderTypeTest extends TestCase
+class OrderTypeStrictTest extends TestCase
 {
 
     /**
@@ -64,9 +64,9 @@ class OrderTypeTest extends TestCase
     }
 
     /**
-     * Test "OrderType"
+     * Test "OrderTypeStrict"
      */
-    public function testOrderType()
+    public function testOrderTypeStrict()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

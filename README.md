@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![Packagist](https://img.shields.io/badge/Packagist-v2.0.17-blue)](https://packagist.org/packages/konfig/snaptrade-php-sdk)
+[![Packagist](https://img.shields.io/badge/Packagist-v2.0.18-blue)](https://packagist.org/packages/konfig/snaptrade-php-sdk)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -85,7 +85,7 @@ To install the bindings via [Composer](https://getcomposer.org/), add the follow
     }
   ],
   "require": {
-    "konfig/snaptrade-php-sdk": "2.0.17"
+    "konfig/snaptrade-php-sdk": "2.0.18"
   }
 }
 ```
@@ -124,6 +124,7 @@ $result = $snaptrade->accountInformation->getAllUserHoldings(
 
 
 ### `snaptrade.accountInformation.getAllUserHoldings`<a id="snaptradeaccountinformationgetalluserholdings"></a>
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
 Lists balances, positions and orders for the specified account. The data returned is similar to
 the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints.
@@ -1748,6 +1749,7 @@ Optional comma seperated list of types to filter activities by. This is not an e
 
 
 ### `snaptrade.transactionsAndReporting.getReportingCustomRange`<a id="snaptradetransactionsandreportinggetreportingcustomrange"></a>
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
 Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Please note that Total Equity Timeframe and Rate of Returns are experimental features. Please contact support@snaptrade.com if you notice any inconsistencies.
 

@@ -56,7 +56,7 @@ class StrategyOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializa
         'filled_quantity' => 'float',
         'open_quantity' => 'float',
         'closed_quantity' => 'float',
-        'order_type' => '\SnapTrade\Model\OrderType',
+        'order_type' => 'string',
         'time_in_force' => 'string',
         'limit_price' => 'float',
         'execution_price' => 'float',
@@ -96,7 +96,7 @@ class StrategyOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializa
 		'filled_quantity' => false,
 		'open_quantity' => false,
 		'closed_quantity' => false,
-		'order_type' => false,
+		'order_type' => true,
 		'time_in_force' => false,
 		'limit_price' => true,
 		'execution_price' => true,
@@ -569,7 +569,7 @@ class StrategyOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Gets order_type
      *
-     * @return \SnapTrade\Model\OrderType|null
+     * @return string|null
      */
     public function getOrderType()
     {
@@ -579,7 +579,7 @@ class StrategyOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Sets order_type
      *
-     * @param \SnapTrade\Model\OrderType|null $order_type order_type
+     * @param string|null $order_type Order Type potential values include (but are not limited to) - Limit - Market - StopLimit - StopLoss
      *
      * @return self
      */
@@ -587,7 +587,14 @@ class StrategyOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializa
     {
 
         if (is_null($order_type)) {
-            throw new \InvalidArgumentException('non-nullable order_type cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'order_type');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('order_type', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['order_type'] = $order_type;

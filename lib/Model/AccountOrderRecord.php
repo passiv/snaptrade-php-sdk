@@ -56,7 +56,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
         'symbol' => 'string',
         'universal_symbol' => '\SnapTrade\Model\UniversalSymbol',
         'option_symbol' => '\SnapTrade\Model\OptionsSymbol',
-        'action' => '\SnapTrade\Model\Action',
+        'action' => 'string',
         'total_quantity' => 'float',
         'open_quantity' => 'float',
         'canceled_quantity' => 'float',
@@ -557,7 +557,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Gets action
      *
-     * @return \SnapTrade\Model\Action|null
+     * @return string|null
      */
     public function getAction()
     {
@@ -567,7 +567,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets action
      *
-     * @param \SnapTrade\Model\Action|null $action action
+     * @param string|null $action Trade Action potential values include (but are not limited to) - BUY - SELL - BUY_COVER - SELL_SHORT - BUY_OPEN - BUY_CLOSE - SELL_OPEN - SELL_CLOSE
      *
      * @return self
      */

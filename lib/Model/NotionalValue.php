@@ -1,6 +1,6 @@
 <?php
 /**
- * ManualTrade
+ * NotionalValue
  *
  * PHP version 7.4
  *
@@ -27,14 +27,14 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * ManualTrade Class Doc Comment
+ * NotionalValue Class Doc Comment
  *
  * @category Class
- * @description A manual trade object
+ * @description Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. **Only available for Alpaca, Alpaca Paper, and Robinhood.**
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class ManualTrade implements ModelInterface, ArrayAccess, \JsonSerializable
+class NotionalValue implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -43,7 +43,7 @@ class ManualTrade implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ManualTrade';
+    protected static $openAPIModelName = 'NotionalValue';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -51,14 +51,7 @@ class ManualTrade implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'id' => 'string',
-        'account' => 'string',
-        'order_type' => '\SnapTrade\Model\OrderTypeStrict',
-        'time_in_force' => 'string',
-        'symbol' => '\SnapTrade\Model\ManualTradeSymbol',
-        'action' => '\SnapTrade\Model\ActionStrict',
-        'units' => 'float',
-        'price' => 'float'
+        
     ];
 
     /**
@@ -69,14 +62,7 @@ class ManualTrade implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'id' => 'uuid',
-        'account' => null,
-        'order_type' => null,
-        'time_in_force' => null,
-        'symbol' => null,
-        'action' => null,
-        'units' => null,
-        'price' => null
+        
     ];
 
     /**
@@ -85,14 +71,7 @@ class ManualTrade implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'id' => false,
-		'account' => false,
-		'order_type' => false,
-		'time_in_force' => false,
-		'symbol' => false,
-		'action' => false,
-		'units' => true,
-		'price' => true
+        
     ];
 
     /**
@@ -181,14 +160,7 @@ class ManualTrade implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'id' => 'id',
-        'account' => 'account',
-        'order_type' => 'order_type',
-        'time_in_force' => 'time_in_force',
-        'symbol' => 'symbol',
-        'action' => 'action',
-        'units' => 'units',
-        'price' => 'price'
+        
     ];
 
     /**
@@ -197,14 +169,7 @@ class ManualTrade implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'id' => 'setId',
-        'account' => 'setAccount',
-        'order_type' => 'setOrderType',
-        'time_in_force' => 'setTimeInForce',
-        'symbol' => 'setSymbol',
-        'action' => 'setAction',
-        'units' => 'setUnits',
-        'price' => 'setPrice'
+        
     ];
 
     /**
@@ -213,14 +178,7 @@ class ManualTrade implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'id' => 'getId',
-        'account' => 'getAccount',
-        'order_type' => 'getOrderType',
-        'time_in_force' => 'getTimeInForce',
-        'symbol' => 'getSymbol',
-        'action' => 'getAction',
-        'units' => 'getUnits',
-        'price' => 'getPrice'
+        
     ];
 
     /**
@@ -280,14 +238,6 @@ class ManualTrade implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('id', $data ?? [], null);
-        $this->setIfExists('account', $data ?? [], null);
-        $this->setIfExists('order_type', $data ?? [], null);
-        $this->setIfExists('time_in_force', $data ?? [], null);
-        $this->setIfExists('symbol', $data ?? [], null);
-        $this->setIfExists('action', $data ?? [], null);
-        $this->setIfExists('units', $data ?? [], null);
-        $this->setIfExists('price', $data ?? [], null);
     }
 
     /**
@@ -331,252 +281,6 @@ class ManualTrade implements ModelInterface, ArrayAccess, \JsonSerializable
         return count($this->listInvalidProperties()) === 0;
     }
 
-
-    /**
-     * Gets id
-     *
-     * @return string|null
-     */
-    public function getId()
-    {
-        return $this->container['id'];
-    }
-
-    /**
-     * Sets id
-     *
-     * @param string|null $id id
-     *
-     * @return self
-     */
-    public function setId($id)
-    {
-
-        if (is_null($id)) {
-            throw new \InvalidArgumentException('non-nullable id cannot be null');
-        }
-
-        $this->container['id'] = $id;
-
-        return $this;
-    }
-
-    /**
-     * Gets account
-     *
-     * @return string|null
-     */
-    public function getAccount()
-    {
-        return $this->container['account'];
-    }
-
-    /**
-     * Sets account
-     *
-     * @param string|null $account account
-     *
-     * @return self
-     */
-    public function setAccount($account)
-    {
-
-        if (is_null($account)) {
-            throw new \InvalidArgumentException('non-nullable account cannot be null');
-        }
-
-        $this->container['account'] = $account;
-
-        return $this;
-    }
-
-    /**
-     * Gets order_type
-     *
-     * @return \SnapTrade\Model\OrderTypeStrict|null
-     */
-    public function getOrderType()
-    {
-        return $this->container['order_type'];
-    }
-
-    /**
-     * Sets order_type
-     *
-     * @param \SnapTrade\Model\OrderTypeStrict|null $order_type order_type
-     *
-     * @return self
-     */
-    public function setOrderType($order_type)
-    {
-
-        if (is_null($order_type)) {
-            throw new \InvalidArgumentException('non-nullable order_type cannot be null');
-        }
-
-        $this->container['order_type'] = $order_type;
-
-        return $this;
-    }
-
-    /**
-     * Gets time_in_force
-     *
-     * @return string|null
-     */
-    public function getTimeInForce()
-    {
-        return $this->container['time_in_force'];
-    }
-
-    /**
-     * Sets time_in_force
-     *
-     * @param string|null $time_in_force Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled   * GTD - Good Til Date
-     *
-     * @return self
-     */
-    public function setTimeInForce($time_in_force)
-    {
-
-        if (is_null($time_in_force)) {
-            throw new \InvalidArgumentException('non-nullable time_in_force cannot be null');
-        }
-
-        $this->container['time_in_force'] = $time_in_force;
-
-        return $this;
-    }
-
-    /**
-     * Gets symbol
-     *
-     * @return \SnapTrade\Model\ManualTradeSymbol|null
-     */
-    public function getSymbol()
-    {
-        return $this->container['symbol'];
-    }
-
-    /**
-     * Sets symbol
-     *
-     * @param \SnapTrade\Model\ManualTradeSymbol|null $symbol symbol
-     *
-     * @return self
-     */
-    public function setSymbol($symbol)
-    {
-
-        if (is_null($symbol)) {
-            throw new \InvalidArgumentException('non-nullable symbol cannot be null');
-        }
-
-        $this->container['symbol'] = $symbol;
-
-        return $this;
-    }
-
-    /**
-     * Gets action
-     *
-     * @return \SnapTrade\Model\ActionStrict|null
-     */
-    public function getAction()
-    {
-        return $this->container['action'];
-    }
-
-    /**
-     * Sets action
-     *
-     * @param \SnapTrade\Model\ActionStrict|null $action action
-     *
-     * @return self
-     */
-    public function setAction($action)
-    {
-
-        if (is_null($action)) {
-            throw new \InvalidArgumentException('non-nullable action cannot be null');
-        }
-
-        $this->container['action'] = $action;
-
-        return $this;
-    }
-
-    /**
-     * Gets units
-     *
-     * @return float|null
-     */
-    public function getUnits()
-    {
-        return $this->container['units'];
-    }
-
-    /**
-     * Sets units
-     *
-     * @param float|null $units units
-     *
-     * @return self
-     */
-    public function setUnits($units)
-    {
-
-        if (is_null($units)) {
-            array_push($this->openAPINullablesSetToNull, 'units');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('units', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['units'] = $units;
-
-        return $this;
-    }
-
-    /**
-     * Gets price
-     *
-     * @return float|null
-     */
-    public function getPrice()
-    {
-        return $this->container['price'];
-    }
-
-    /**
-     * Sets price
-     *
-     * @param float|null $price Trade Price if limit or stop limit order
-     *
-     * @return self
-     */
-    public function setPrice($price)
-    {
-
-        if (is_null($price)) {
-            array_push($this->openAPINullablesSetToNull, 'price');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('price', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['price'] = $price;
-
-        return $this;
-    }
     /**
      * Returns true if offset exists. False otherwise.
      *

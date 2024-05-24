@@ -52,14 +52,14 @@ class ManualTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPITypes = [
         'account_id' => 'string',
-        'action' => '\SnapTrade\Model\Action',
+        'action' => '\SnapTrade\Model\ActionStrict',
         'order_type' => '\SnapTrade\Model\OrderTypeStrict',
         'price' => 'float',
         'stop' => 'float',
         'time_in_force' => '\SnapTrade\Model\TimeInForceStrict',
         'units' => 'float',
         'universal_symbol_id' => 'string',
-        'notional_value' => 'float'
+        'notional_value' => '\SnapTrade\Model\ManualTradeFormNotionalValue'
     ];
 
     /**
@@ -371,7 +371,7 @@ class ManualTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets action
      *
-     * @return \SnapTrade\Model\Action|null
+     * @return \SnapTrade\Model\ActionStrict|null
      */
     public function getAction()
     {
@@ -381,7 +381,7 @@ class ManualTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets action
      *
-     * @param \SnapTrade\Model\Action|null $action action
+     * @param \SnapTrade\Model\ActionStrict|null $action action
      *
      * @return self
      */
@@ -595,7 +595,7 @@ class ManualTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets notional_value
      *
-     * @return float|null
+     * @return \SnapTrade\Model\ManualTradeFormNotionalValue|null
      */
     public function getNotionalValue()
     {
@@ -605,7 +605,7 @@ class ManualTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets notional_value
      *
-     * @param float|null $notional_value notional_value
+     * @param \SnapTrade\Model\ManualTradeFormNotionalValue|null $notional_value notional_value
      *
      * @return self
      */

@@ -1,6 +1,6 @@
 <?php
 /**
- * Action
+ * ActionStrict
  *
  * PHP version 7.4
  *
@@ -25,13 +25,13 @@ namespace SnapTrade\Model;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * Action Class Doc Comment
+ * ActionStrict Class Doc Comment
  *
  * @category Class
  * @description Trade Action
  * @package  SnapTrade
  */
-class Action
+class ActionStrict
 {
     /**
      * Possible values of this enum

@@ -1,6 +1,6 @@
 <?php
 /**
- * ActionTest
+ * NotionalValueTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * ActionTest Class Doc Comment
+ * NotionalValueTest Class Doc Comment
  *
  * @category    Class
- * @description Trade Action
+ * @description Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. **Only available for Alpaca, Alpaca Paper, and Robinhood.**
  * @package     SnapTrade
  */
-class ActionTest extends TestCase
+class NotionalValueTest extends TestCase
 {
 
     /**
@@ -64,9 +64,9 @@ class ActionTest extends TestCase
     }
 
     /**
-     * Test "Action"
+     * Test "NotionalValue"
      */
-    public function testAction()
+    public function testNotionalValue()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

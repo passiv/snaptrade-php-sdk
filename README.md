@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![Packagist](https://img.shields.io/badge/Packagist-v2.0.19-blue)](https://packagist.org/packages/konfig/snaptrade-php-sdk)
+[![Packagist](https://img.shields.io/badge/Packagist-v2.0.20-blue)](https://packagist.org/packages/konfig/snaptrade-php-sdk)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -85,7 +85,7 @@ To install the bindings via [Composer](https://getcomposer.org/), add the follow
     }
   ],
   "require": {
-    "konfig/snaptrade-php-sdk": "2.0.19"
+    "konfig/snaptrade-php-sdk": "2.0.20"
   }
 }
 ```
@@ -115,7 +115,7 @@ $snaptrade = new \SnapTrade\Client(
 );
 
 $result = $snaptrade->accountInformation->getAllUserHoldings(
-    user_id: "John.doe@snaptrade.com", 
+    user_id: "snaptrade-user-123", 
     user_secret: "USERSECRET123", 
     brokerage_authorizations: "917c8734-8470-4a3e-a18f-57c3f2ee6631"
 );
@@ -135,7 +135,7 @@ the data returned over the more fine-grained **positions**, **orders** and **bal
 
 ```php
 $result = $snaptrade->accountInformation->getAllUserHoldings(
-    user_id: "John.doe@snaptrade.com", 
+    user_id: "snaptrade-user-123", 
     user_secret: "USERSECRET123", 
     brokerage_authorizations: "917c8734-8470-4a3e-a18f-57c3f2ee6631"
 );
@@ -174,7 +174,7 @@ A list of account balances for the specified account (one per currency that the 
 
 ```php
 $result = $snaptrade->accountInformation->getUserAccountBalance(
-    user_id: "John.doe@snaptrade.com", 
+    user_id: "snaptrade-user-123", 
     user_secret: "USERSECRET123", 
     account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631"
 );
@@ -215,7 +215,7 @@ including the total account market value.
 
 ```php
 $result = $snaptrade->accountInformation->getUserAccountDetails(
-    user_id: "John.doe@snaptrade.com", 
+    user_id: "snaptrade-user-123", 
     user_secret: "USERSECRET123", 
     account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631"
 );
@@ -254,7 +254,7 @@ Fetch all recent orders from a user's account.
 
 ```php
 $result = $snaptrade->accountInformation->getUserAccountOrders(
-    user_id: "John.doe@snaptrade.com", 
+    user_id: "snaptrade-user-123", 
     user_secret: "USERSECRET123", 
     account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631", 
     state: "all", 
@@ -303,7 +303,7 @@ Returns a list of positions in the specified account.
 
 ```php
 $result = $snaptrade->accountInformation->getUserAccountPositions(
-    user_id: "John.doe@snaptrade.com", 
+    user_id: "snaptrade-user-123", 
     user_secret: "USERSECRET123", 
     account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631"
 );
@@ -346,7 +346,7 @@ data returned over the more fine-grained **positions**, **orders** and **balance
 ```php
 $result = $snaptrade->accountInformation->getUserHoldings(
     account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631", 
-    user_id: "John.doe@snaptrade.com", 
+    user_id: "snaptrade-user-123", 
     user_secret: "USERSECRET123"
 );
 ```
@@ -384,7 +384,7 @@ Get a list of all Account objects for the authenticated SnapTrade user.
 
 ```php
 $result = $snaptrade->accountInformation->listUserAccounts(
-    user_id: "John.doe@snaptrade.com", 
+    user_id: "snaptrade-user-123", 
     user_secret: "USERSECRET123"
 );
 ```
@@ -418,7 +418,7 @@ Updates various properties of a specified account.
 
 ```php
 $result = $snaptrade->accountInformation->updateUserAccount(
-    user_id: "John.doe@snaptrade.com", 
+    user_id: "snaptrade-user-123", 
     user_secret: "USERSECRET123", 
     account_id: "accountId_example"
 );
@@ -482,7 +482,7 @@ Deletes a user you've registered over the SnapTrade API, and any data associated
 
 ```php
 $result = $snaptrade->authentication->deleteSnapTradeUser(
-    user_id: "John.doe@snaptrade.com"
+    user_id: "snaptrade-user-123"
 );
 ```
 
@@ -515,7 +515,7 @@ JWTs (JSON Web Tokens) instead of standard SnapTrade signature verification.
 
 ```php
 $result = $snaptrade->authentication->getUserJWT(
-    user_id: "John.doe@snaptrade.com", 
+    user_id: "snaptrade-user-123", 
     user_secret: "USERSECRET123"
 );
 ```
@@ -574,7 +574,7 @@ Logs in a SnapTrade user and returns an authenticated connection portal URL for 
 
 ```php
 $result = $snaptrade->authentication->loginSnapTradeUser(
-    user_id: "John.doe@snaptrade.com", 
+    user_id: "snaptrade-user-123", 
     user_secret: "USERSECRET123", 
     broker: "ALPACA", 
     immediate_redirect: True, 
@@ -648,7 +648,7 @@ $result = $snaptrade->authentication->registerSnapTradeUser(
 
 ##### userId: `string`<a id="userid-string"></a>
 
-SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as it's unique to a user
+SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -684,7 +684,7 @@ $result = $snaptrade->authentication->resetSnapTradeUserSecret(
 
 ##### userId: `string`<a id="userid-string"></a>
 
-SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as it's unique to a user
+SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
 
 ##### userSecret: `string`<a id="usersecret-string"></a>
 
@@ -714,7 +714,7 @@ Returns a single brokerage authorization object for the specified ID.
 ```php
 $result = $snaptrade->connections->detailBrokerageAuthorization(
     authorization_id: "2bcd7cc3-e922-4976-bce1-9858296801c3", 
-    user_id: "John.doe@snaptrade.com", 
+    user_id: "snaptrade-user-123", 
     user_secret: "USERSECRET123"
 );
 ```
@@ -752,7 +752,7 @@ Returns a list of Brokerage Authorization objects for the user
 
 ```php
 $result = $snaptrade->connections->listBrokerageAuthorizations(
-    user_id: "John.doe@snaptrade.com", 
+    user_id: "snaptrade-user-123", 
     user_secret: "USERSECRET123"
 );
 ```
@@ -787,7 +787,7 @@ Deletes a specified brokerage authorization given by the ID.
 ```php
 $snaptrade->connections->removeBrokerageAuthorization(
     authorization_id: "2bcd7cc3-e922-4976-bce1-9858296801c3", 
-    user_id: "John.doe@snaptrade.com", 
+    user_id: "snaptrade-user-123", 
     user_secret: "USERSECRET123"
 );
 ```
@@ -876,7 +876,7 @@ $result = $snaptrade->options->getOptionStrategy(
         ]
     ], 
     strategy_type: "CUSTOM", 
-    user_id: "John.doe@snaptrade.com", 
+    user_id: "snaptrade-user-123", 
     user_secret: "USERSECRET123", 
     account_id: "accountId_example"
 );
@@ -921,7 +921,7 @@ Returns the option chain for the specified symbol in the specified account.
 
 ```php
 $result = $snaptrade->options->getOptionsChain(
-    user_id: "John.doe@snaptrade.com", 
+    user_id: "snaptrade-user-123", 
     user_secret: "USERSECRET123", 
     account_id: "accountId_example", 
     symbol: "symbol_example"
@@ -966,7 +966,7 @@ Returns a Strategy Quotes object which has latest market data of the specified o
 
 ```php
 $result = $snaptrade->options->getOptionsStrategyQuote(
-    user_id: "John.doe@snaptrade.com", 
+    user_id: "snaptrade-user-123", 
     user_secret: "USERSECRET123", 
     account_id: "accountId_example", 
     option_strategy_id: "2bcd7cc3-e922-4976-bce1-9858296801c3"
@@ -1011,7 +1011,7 @@ Returns a list of Options Positions.
 
 ```php
 $result = $snaptrade->options->listOptionHoldings(
-    user_id: "John.doe@snaptrade.com", 
+    user_id: "snaptrade-user-123", 
     user_secret: "USERSECRET123", 
     account_id: "accountId_example"
 );
@@ -1052,7 +1052,7 @@ Places the option strategy order and returns the order record received from the 
 $result = $snaptrade->options->placeOptionStrategy(
     order_type: "Limit", 
     time_in_force: "FOK", 
-    user_id: "John.doe@snaptrade.com", 
+    user_id: "snaptrade-user-123", 
     user_secret: "USERSECRET123", 
     account_id: "2bcd7cc3-e922-4976-bce1-9858296801c3", 
     option_strategy_id: "2bcd7cc3-e922-4976-bce1-9858296801c3", 
@@ -1391,7 +1391,7 @@ provided search string, matching on ticker and name.
 
 ```php
 $result = $snaptrade->referenceData->symbolSearchUserAccount(
-    user_id: "John.doe@snaptrade.com", 
+    user_id: "snaptrade-user-123", 
     user_secret: "USERSECRET123", 
     account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631", 
     substring: "apple"
@@ -1435,7 +1435,7 @@ This will only work if the order has not yet been executed.
 
 ```php
 $result = $snaptrade->trading->cancelUserAccountOrder(
-    user_id: "John.doe@snaptrade.com", 
+    user_id: "snaptrade-user-123", 
     user_secret: "USERSECRET123", 
     account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631", 
     brokerage_order_id: "2bcd7cc3-e922-4976-bce1-9858296801c3"
@@ -1477,7 +1477,7 @@ Return the trade object and it's impact on the account for the specified order.
 
 ```php
 $result = $snaptrade->trading->getOrderImpact(
-    user_id: "John.doe@snaptrade.com", 
+    user_id: "snaptrade-user-123", 
     user_secret: "USERSECRET123", 
     account_id: "2bcd7cc3-e922-4976-bce1-9858296801c3", 
     action: "BUY", 
@@ -1542,7 +1542,7 @@ Returns live quote(s) from the brokerage for the specified symbol(s).
 
 ```php
 $result = $snaptrade->trading->getUserAccountQuotes(
-    user_id: "John.doe@snaptrade.com", 
+    user_id: "snaptrade-user-123", 
     user_secret: "USERSECRET123", 
     symbols: "symbols_example", 
     account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631", 
@@ -1591,7 +1591,7 @@ Places a specified trade in the specified account.
 
 ```php
 $result = $snaptrade->trading->placeForceOrder(
-    user_id: "John.doe@snaptrade.com", 
+    user_id: "snaptrade-user-123", 
     user_secret: "USERSECRET123", 
     account_id: "2bcd7cc3-e922-4976-bce1-9858296801c3", 
     action: "BUY", 
@@ -1659,7 +1659,7 @@ returns the status of the order from the brokerage.
 ```php
 $result = $snaptrade->trading->placeOrder(
     trade_id: "tradeId_example", 
-    user_id: "John.doe@snaptrade.com", 
+    user_id: "snaptrade-user-123", 
     user_secret: "USERSECRET123", 
     wait_to_confirm: True
 );
@@ -1702,7 +1702,7 @@ Returns activities (transactions) for a user. Specifying start and end date is h
 
 ```php
 $result = $snaptrade->transactionsAndReporting->getActivities(
-    user_id: "John.doe@snaptrade.com", 
+    user_id: "snaptrade-user-123", 
     user_secret: "USERSECRET123", 
     start_date: "2022-01-24", 
     end_date: "2022-01-24", 
@@ -1760,7 +1760,7 @@ Returns performance information (contributions, dividends, rate of return, etc) 
 $result = $snaptrade->transactionsAndReporting->getReportingCustomRange(
     start_date: "2022-01-24", 
     end_date: "2022-01-24", 
-    user_id: "John.doe@snaptrade.com", 
+    user_id: "snaptrade-user-123", 
     user_secret: "USERSECRET123", 
     accounts: "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2", 
     detailed: True, 

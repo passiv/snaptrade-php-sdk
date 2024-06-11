@@ -57,6 +57,7 @@ class SnapTradeHoldingsAccountAccountId implements ModelInterface, ArrayAccess, 
         'name' => 'string',
         'number' => 'string',
         'institution_name' => 'string',
+        'balance' => '\SnapTrade\Model\SnapTradeHoldingsAccountAccountIdBalance',
         'meta' => 'array<string,mixed>',
         'cash_restrictions' => '\SnapTrade\Model\CashRestriction[]',
         'created_date' => 'string'
@@ -76,6 +77,7 @@ class SnapTradeHoldingsAccountAccountId implements ModelInterface, ArrayAccess, 
         'name' => null,
         'number' => null,
         'institution_name' => null,
+        'balance' => null,
         'meta' => null,
         'cash_restrictions' => null,
         'created_date' => null
@@ -93,6 +95,7 @@ class SnapTradeHoldingsAccountAccountId implements ModelInterface, ArrayAccess, 
 		'name' => true,
 		'number' => false,
 		'institution_name' => false,
+		'balance' => true,
 		'meta' => false,
 		'cash_restrictions' => false,
 		'created_date' => false
@@ -190,6 +193,7 @@ class SnapTradeHoldingsAccountAccountId implements ModelInterface, ArrayAccess, 
         'name' => 'name',
         'number' => 'number',
         'institution_name' => 'institution_name',
+        'balance' => 'balance',
         'meta' => 'meta',
         'cash_restrictions' => 'cash_restrictions',
         'created_date' => 'created_date'
@@ -207,6 +211,7 @@ class SnapTradeHoldingsAccountAccountId implements ModelInterface, ArrayAccess, 
         'name' => 'setName',
         'number' => 'setNumber',
         'institution_name' => 'setInstitutionName',
+        'balance' => 'setBalance',
         'meta' => 'setMeta',
         'cash_restrictions' => 'setCashRestrictions',
         'created_date' => 'setCreatedDate'
@@ -224,6 +229,7 @@ class SnapTradeHoldingsAccountAccountId implements ModelInterface, ArrayAccess, 
         'name' => 'getName',
         'number' => 'getNumber',
         'institution_name' => 'getInstitutionName',
+        'balance' => 'getBalance',
         'meta' => 'getMeta',
         'cash_restrictions' => 'getCashRestrictions',
         'created_date' => 'getCreatedDate'
@@ -292,6 +298,7 @@ class SnapTradeHoldingsAccountAccountId implements ModelInterface, ArrayAccess, 
         $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('number', $data ?? [], null);
         $this->setIfExists('institution_name', $data ?? [], null);
+        $this->setIfExists('balance', $data ?? [], null);
         $this->setIfExists('meta', $data ?? [], null);
         $this->setIfExists('cash_restrictions', $data ?? [], null);
         $this->setIfExists('created_date', $data ?? [], null);
@@ -516,6 +523,42 @@ class SnapTradeHoldingsAccountAccountId implements ModelInterface, ArrayAccess, 
         }
 
         $this->container['institution_name'] = $institution_name;
+
+        return $this;
+    }
+
+    /**
+     * Gets balance
+     *
+     * @return \SnapTrade\Model\SnapTradeHoldingsAccountAccountIdBalance|null
+     */
+    public function getBalance()
+    {
+        return $this->container['balance'];
+    }
+
+    /**
+     * Sets balance
+     *
+     * @param \SnapTrade\Model\SnapTradeHoldingsAccountAccountIdBalance|null $balance balance
+     *
+     * @return self
+     */
+    public function setBalance($balance)
+    {
+
+        if (is_null($balance)) {
+            array_push($this->openAPINullablesSetToNull, 'balance');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('balance', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['balance'] = $balance;
 
         return $this;
     }

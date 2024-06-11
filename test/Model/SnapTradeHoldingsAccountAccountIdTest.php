@@ -127,6 +127,15 @@ class SnapTradeHoldingsAccountAccountIdTest extends TestCase
     }
 
     /**
+     * Test attribute "balance"
+     */
+    public function testPropertyBalance()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "meta"
      */
     public function testPropertyMeta()

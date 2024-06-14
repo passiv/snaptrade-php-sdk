@@ -83,6 +83,18 @@ class ConnectionsApiTest extends TestCase
     }
 
     /**
+     * Test case for refreshBrokerageAuthorization
+     *
+     * Refresh holdings for a connection.
+     *
+     */
+    public function testRefreshBrokerageAuthorization()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for removeBrokerageAuthorization
      *
      * Delete brokerage authorization.

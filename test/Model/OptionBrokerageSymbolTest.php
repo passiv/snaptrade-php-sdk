@@ -1,6 +1,6 @@
 <?php
 /**
- * SnapTradeHoldingsTotalValueTest
+ * OptionBrokerageSymbolTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * SnapTradeHoldingsTotalValueTest Class Doc Comment
+ * OptionBrokerageSymbolTest Class Doc Comment
  *
  * @category    Class
- * @description Calculated based on the sum of the values of account positions and cash balances
+ * @description Option Brokerage symbol
  * @package     SnapTrade
  */
-class SnapTradeHoldingsTotalValueTest extends TestCase
+class OptionBrokerageSymbolTest extends TestCase
 {
 
     /**
@@ -64,27 +64,36 @@ class SnapTradeHoldingsTotalValueTest extends TestCase
     }
 
     /**
-     * Test "SnapTradeHoldingsTotalValue"
+     * Test "OptionBrokerageSymbol"
      */
-    public function testSnapTradeHoldingsTotalValue()
+    public function testOptionBrokerageSymbol()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "value"
+     * Test attribute "id"
      */
-    public function testPropertyValue()
+    public function testPropertyId()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "currency"
+     * Test attribute "description"
      */
-    public function testPropertyCurrency()
+    public function testPropertyDescription()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "option_symbol"
+     */
+    public function testPropertyOptionSymbol()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

@@ -1,6 +1,6 @@
 <?php
 /**
- * Amount
+ * OptionBrokerageSymbol
  *
  * PHP version 7.4
  *
@@ -27,14 +27,14 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * Amount Class Doc Comment
+ * OptionBrokerageSymbol Class Doc Comment
  *
  * @category Class
- * @description Total value of the account, as reported by the brokerage
+ * @description Option Brokerage symbol
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class Amount implements ModelInterface, ArrayAccess, \JsonSerializable
+class OptionBrokerageSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -43,7 +43,7 @@ class Amount implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'Amount';
+    protected static $openAPIModelName = 'OptionBrokerageSymbol';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -51,8 +51,9 @@ class Amount implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'amount' => 'float',
-        'currency' => 'string'
+        'id' => 'string',
+        'description' => 'string',
+        'option_symbol' => '\SnapTrade\Model\OptionsSymbol'
     ];
 
     /**
@@ -63,8 +64,9 @@ class Amount implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'amount' => null,
-        'currency' => null
+        'id' => 'uuid',
+        'description' => null,
+        'option_symbol' => null
     ];
 
     /**
@@ -73,8 +75,9 @@ class Amount implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'amount' => false,
-		'currency' => false
+        'id' => false,
+		'description' => false,
+		'option_symbol' => false
     ];
 
     /**
@@ -163,8 +166,9 @@ class Amount implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'amount' => 'amount',
-        'currency' => 'currency'
+        'id' => 'id',
+        'description' => 'description',
+        'option_symbol' => 'option_symbol'
     ];
 
     /**
@@ -173,8 +177,9 @@ class Amount implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'amount' => 'setAmount',
-        'currency' => 'setCurrency'
+        'id' => 'setId',
+        'description' => 'setDescription',
+        'option_symbol' => 'setOptionSymbol'
     ];
 
     /**
@@ -183,8 +188,9 @@ class Amount implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'amount' => 'getAmount',
-        'currency' => 'getCurrency'
+        'id' => 'getId',
+        'description' => 'getDescription',
+        'option_symbol' => 'getOptionSymbol'
     ];
 
     /**
@@ -244,8 +250,9 @@ class Amount implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('amount', $data ?? [], null);
-        $this->setIfExists('currency', $data ?? [], null);
+        $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('description', $data ?? [], null);
+        $this->setIfExists('option_symbol', $data ?? [], null);
     }
 
     /**
@@ -291,59 +298,88 @@ class Amount implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets amount
+     * Gets id
      *
-     * @return float|null
+     * @return string|null
      */
-    public function getAmount()
+    public function getId()
     {
-        return $this->container['amount'];
+        return $this->container['id'];
     }
 
     /**
-     * Sets amount
+     * Sets id
      *
-     * @param float|null $amount amount
+     * @param string|null $id id
      *
      * @return self
      */
-    public function setAmount($amount)
+    public function setId($id)
     {
 
-        if (is_null($amount)) {
-            throw new \InvalidArgumentException('non-nullable amount cannot be null');
+        if (is_null($id)) {
+            throw new \InvalidArgumentException('non-nullable id cannot be null');
         }
 
-        $this->container['amount'] = $amount;
+        $this->container['id'] = $id;
 
         return $this;
     }
 
     /**
-     * Gets currency
+     * Gets description
      *
      * @return string|null
      */
-    public function getCurrency()
+    public function getDescription()
     {
-        return $this->container['currency'];
+        return $this->container['description'];
     }
 
     /**
-     * Sets currency
+     * Sets description
      *
-     * @param string|null $currency currency
+     * @param string|null $description description
      *
      * @return self
      */
-    public function setCurrency($currency)
+    public function setDescription($description)
     {
 
-        if (is_null($currency)) {
-            throw new \InvalidArgumentException('non-nullable currency cannot be null');
+        if (is_null($description)) {
+            throw new \InvalidArgumentException('non-nullable description cannot be null');
         }
 
-        $this->container['currency'] = $currency;
+        $this->container['description'] = $description;
+
+        return $this;
+    }
+
+    /**
+     * Gets option_symbol
+     *
+     * @return \SnapTrade\Model\OptionsSymbol|null
+     */
+    public function getOptionSymbol()
+    {
+        return $this->container['option_symbol'];
+    }
+
+    /**
+     * Sets option_symbol
+     *
+     * @param \SnapTrade\Model\OptionsSymbol|null $option_symbol option_symbol
+     *
+     * @return self
+     */
+    public function setOptionSymbol($option_symbol)
+    {
+
+        if (is_null($option_symbol)) {
+            throw new \InvalidArgumentException('non-nullable option_symbol cannot be null');
+        }
+
+        $this->container['option_symbol'] = $option_symbol;
 
         return $this;
     }

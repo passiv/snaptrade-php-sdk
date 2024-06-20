@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * AmountTest Class Doc Comment
  *
  * @category    Class
- * @description Total Value of the account
+ * @description Total value of the account, as reported by the brokerage
  * @package     SnapTrade
  */
 class AmountTest extends TestCase

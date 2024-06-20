@@ -30,7 +30,7 @@ use \SnapTrade\ObjectSerializer;
  * SnapTradeHoldingsTotalValue Class Doc Comment
  *
  * @category Class
- * @description Summed value of account positions and cash balances
+ * @description Calculated based on the sum of the values of account positions and cash balances
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */

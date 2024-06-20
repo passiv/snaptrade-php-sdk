@@ -51,7 +51,7 @@ class OptionsPosition implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'symbol' => '\SnapTrade\Model\BrokerageSymbol',
+        'symbol' => '\SnapTrade\Model\OptionBrokerageSymbol',
         'price' => 'float',
         'units' => 'float',
         'currency' => '\SnapTrade\Model\OptionsPositionCurrency',
@@ -314,7 +314,7 @@ class OptionsPosition implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets symbol
      *
-     * @return \SnapTrade\Model\BrokerageSymbol|null
+     * @return \SnapTrade\Model\OptionBrokerageSymbol|null
      */
     public function getSymbol()
     {
@@ -324,7 +324,7 @@ class OptionsPosition implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets symbol
      *
-     * @param \SnapTrade\Model\BrokerageSymbol|null $symbol symbol
+     * @param \SnapTrade\Model\OptionBrokerageSymbol|null $symbol symbol
      *
      * @return self
      */

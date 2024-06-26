@@ -71,6 +71,18 @@ class ConnectionsApiTest extends TestCase
     }
 
     /**
+     * Test case for disableBrokerageAuthorization
+     *
+     * Manually disable a connection for testing.
+     *
+     */
+    public function testDisableBrokerageAuthorization()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for listBrokerageAuthorizations
      *
      * List all brokerage authorizations for the User.

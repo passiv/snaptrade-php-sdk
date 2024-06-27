@@ -457,7 +457,7 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets name
      *
-     * @param string|null $name name
+     * @param string|null $name Full name of the brokerage.
      *
      * @return self
      */
@@ -486,7 +486,7 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets display_name
      *
-     * @param string|null $display_name display_name
+     * @param string|null $display_name A display-friendly name of the brokerage.
      *
      * @return self
      */
@@ -645,7 +645,7 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets slug
      *
-     * @param string|null $slug slug
+     * @param string|null $slug A unique identifier for that brokerage. It is usually the name of the brokerage in capital letters and will never change.
      *
      * @return self
      */

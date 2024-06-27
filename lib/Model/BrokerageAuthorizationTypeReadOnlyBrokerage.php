@@ -338,7 +338,7 @@ class BrokerageAuthorizationTypeReadOnlyBrokerage implements ModelInterface, Arr
     /**
      * Sets name
      *
-     * @param string|null $name Name of Brokerage
+     * @param string|null $name Full name of the brokerage.
      *
      * @return self
      */
@@ -367,7 +367,7 @@ class BrokerageAuthorizationTypeReadOnlyBrokerage implements ModelInterface, Arr
     /**
      * Sets slug
      *
-     * @param string|null $slug Slug of Brokerage. It is usually the name of the brokerage in capital letters
+     * @param string|null $slug A unique identifier for that brokerage. It is usually the name of the brokerage in capital letters and will never change.
      *
      * @return self
      */

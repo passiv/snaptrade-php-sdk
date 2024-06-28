@@ -89,4 +89,13 @@ class TransactionsStatusTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "first_transaction_date"
+     */
+    public function testPropertyFirstTransactionDate()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

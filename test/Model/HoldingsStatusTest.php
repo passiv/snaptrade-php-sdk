@@ -1,6 +1,6 @@
 <?php
 /**
- * AccountSyncStatusTest
+ * HoldingsStatusTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * AccountSyncStatusTest Class Doc Comment
+ * HoldingsStatusTest Class Doc Comment
  *
  * @category    Class
- * @description Status of account
+ * @description Status of account holdings sync
  * @package     SnapTrade
  */
-class AccountSyncStatusTest extends TestCase
+class HoldingsStatusTest extends TestCase
 {
 
     /**
@@ -64,27 +64,27 @@ class AccountSyncStatusTest extends TestCase
     }
 
     /**
-     * Test "AccountSyncStatus"
+     * Test "HoldingsStatus"
      */
-    public function testAccountSyncStatus()
+    public function testHoldingsStatus()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "transactions"
+     * Test attribute "initial_sync_completed"
      */
-    public function testPropertyTransactions()
+    public function testPropertyInitialSyncCompleted()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "holdings"
+     * Test attribute "last_successful_sync"
      */
-    public function testPropertyHoldings()
+    public function testPropertyLastSuccessfulSync()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

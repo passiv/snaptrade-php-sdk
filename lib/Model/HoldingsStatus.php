@@ -1,6 +1,6 @@
 <?php
 /**
- * AccountSyncStatus
+ * HoldingsStatus
  *
  * PHP version 7.4
  *
@@ -27,14 +27,14 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * AccountSyncStatus Class Doc Comment
+ * HoldingsStatus Class Doc Comment
  *
  * @category Class
- * @description Status of account
+ * @description Status of account holdings sync
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class AccountSyncStatus implements ModelInterface, ArrayAccess, \JsonSerializable
+class HoldingsStatus implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -43,7 +43,7 @@ class AccountSyncStatus implements ModelInterface, ArrayAccess, \JsonSerializabl
       *
       * @var string
       */
-    protected static $openAPIModelName = 'AccountSyncStatus';
+    protected static $openAPIModelName = 'HoldingsStatus';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -51,8 +51,8 @@ class AccountSyncStatus implements ModelInterface, ArrayAccess, \JsonSerializabl
       * @var string[]
       */
     protected static $openAPITypes = [
-        'transactions' => '\SnapTrade\Model\TransactionsStatus',
-        'holdings' => '\SnapTrade\Model\HoldingsStatus'
+        'initial_sync_completed' => 'bool',
+        'last_successful_sync' => 'string'
     ];
 
     /**
@@ -63,8 +63,8 @@ class AccountSyncStatus implements ModelInterface, ArrayAccess, \JsonSerializabl
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'transactions' => null,
-        'holdings' => null
+        'initial_sync_completed' => null,
+        'last_successful_sync' => 'datetime'
     ];
 
     /**
@@ -73,8 +73,8 @@ class AccountSyncStatus implements ModelInterface, ArrayAccess, \JsonSerializabl
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'transactions' => false,
-		'holdings' => false
+        'initial_sync_completed' => false,
+		'last_successful_sync' => true
     ];
 
     /**
@@ -163,8 +163,8 @@ class AccountSyncStatus implements ModelInterface, ArrayAccess, \JsonSerializabl
      * @var string[]
      */
     protected static $attributeMap = [
-        'transactions' => 'transactions',
-        'holdings' => 'holdings'
+        'initial_sync_completed' => 'initial_sync_completed',
+        'last_successful_sync' => 'last_successful_sync'
     ];
 
     /**
@@ -173,8 +173,8 @@ class AccountSyncStatus implements ModelInterface, ArrayAccess, \JsonSerializabl
      * @var string[]
      */
     protected static $setters = [
-        'transactions' => 'setTransactions',
-        'holdings' => 'setHoldings'
+        'initial_sync_completed' => 'setInitialSyncCompleted',
+        'last_successful_sync' => 'setLastSuccessfulSync'
     ];
 
     /**
@@ -183,8 +183,8 @@ class AccountSyncStatus implements ModelInterface, ArrayAccess, \JsonSerializabl
      * @var string[]
      */
     protected static $getters = [
-        'transactions' => 'getTransactions',
-        'holdings' => 'getHoldings'
+        'initial_sync_completed' => 'getInitialSyncCompleted',
+        'last_successful_sync' => 'getLastSuccessfulSync'
     ];
 
     /**
@@ -244,8 +244,8 @@ class AccountSyncStatus implements ModelInterface, ArrayAccess, \JsonSerializabl
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('transactions', $data ?? [], null);
-        $this->setIfExists('holdings', $data ?? [], null);
+        $this->setIfExists('initial_sync_completed', $data ?? [], null);
+        $this->setIfExists('last_successful_sync', $data ?? [], null);
     }
 
     /**
@@ -291,59 +291,66 @@ class AccountSyncStatus implements ModelInterface, ArrayAccess, \JsonSerializabl
 
 
     /**
-     * Gets transactions
+     * Gets initial_sync_completed
      *
-     * @return \SnapTrade\Model\TransactionsStatus|null
+     * @return bool|null
      */
-    public function getTransactions()
+    public function getInitialSyncCompleted()
     {
-        return $this->container['transactions'];
+        return $this->container['initial_sync_completed'];
     }
 
     /**
-     * Sets transactions
+     * Sets initial_sync_completed
      *
-     * @param \SnapTrade\Model\TransactionsStatus|null $transactions transactions
+     * @param bool|null $initial_sync_completed initial_sync_completed
      *
      * @return self
      */
-    public function setTransactions($transactions)
+    public function setInitialSyncCompleted($initial_sync_completed)
     {
 
-        if (is_null($transactions)) {
-            throw new \InvalidArgumentException('non-nullable transactions cannot be null');
+        if (is_null($initial_sync_completed)) {
+            throw new \InvalidArgumentException('non-nullable initial_sync_completed cannot be null');
         }
 
-        $this->container['transactions'] = $transactions;
+        $this->container['initial_sync_completed'] = $initial_sync_completed;
 
         return $this;
     }
 
     /**
-     * Gets holdings
+     * Gets last_successful_sync
      *
-     * @return \SnapTrade\Model\HoldingsStatus|null
+     * @return string|null
      */
-    public function getHoldings()
+    public function getLastSuccessfulSync()
     {
-        return $this->container['holdings'];
+        return $this->container['last_successful_sync'];
     }
 
     /**
-     * Sets holdings
+     * Sets last_successful_sync
      *
-     * @param \SnapTrade\Model\HoldingsStatus|null $holdings holdings
+     * @param string|null $last_successful_sync Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ)
      *
      * @return self
      */
-    public function setHoldings($holdings)
+    public function setLastSuccessfulSync($last_successful_sync)
     {
 
-        if (is_null($holdings)) {
-            throw new \InvalidArgumentException('non-nullable holdings cannot be null');
+        if (is_null($last_successful_sync)) {
+            array_push($this->openAPINullablesSetToNull, 'last_successful_sync');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('last_successful_sync', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
-        $this->container['holdings'] = $holdings;
+        $this->container['last_successful_sync'] = $last_successful_sync;
 
         return $this;
     }

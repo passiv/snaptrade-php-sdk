@@ -71,18 +71,6 @@ class AuthenticationApiTest extends TestCase
     }
 
     /**
-     * Test case for getUserJWT
-     *
-     * Generate encrypted JWT token.
-     *
-     */
-    public function testGetUserJWT()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test case for listSnapTradeUsers
      *
      * List SnapTrade users.

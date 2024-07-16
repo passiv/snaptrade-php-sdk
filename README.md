@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![Packagist](https://img.shields.io/badge/Packagist-v2.0.27-blue)](https://packagist.org/packages/konfig/snaptrade-php-sdk)
+[![Packagist](https://img.shields.io/badge/Packagist-v2.0.28-blue)](https://packagist.org/packages/konfig/snaptrade-php-sdk)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -31,7 +31,6 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.accountInformation.updateUserAccount`](#snaptradeaccountinformationupdateuseraccount)
   * [`snaptrade.apiStatus.check`](#snaptradeapistatuscheck)
   * [`snaptrade.authentication.deleteSnapTradeUser`](#snaptradeauthenticationdeletesnaptradeuser)
-  * [`snaptrade.authentication.getUserJWT`](#snaptradeauthenticationgetuserjwt)
   * [`snaptrade.authentication.listSnapTradeUsers`](#snaptradeauthenticationlistsnaptradeusers)
   * [`snaptrade.authentication.loginSnapTradeUser`](#snaptradeauthenticationloginsnaptradeuser)
   * [`snaptrade.authentication.registerSnapTradeUser`](#snaptradeauthenticationregistersnaptradeuser)
@@ -87,7 +86,7 @@ To install the bindings via [Composer](https://getcomposer.org/), add the follow
     }
   ],
   "require": {
-    "konfig/snaptrade-php-sdk": "2.0.27"
+    "konfig/snaptrade-php-sdk": "2.0.28"
   }
 }
 ```
@@ -500,42 +499,6 @@ $result = $snaptrade->authentication->deleteSnapTradeUser(
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/snapTrade/deleteUser` `DELETE`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.authentication.getUserJWT`<a id="snaptradeauthenticationgetuserjwt"></a>
-
-This API is available to ClientIDs which have opted to use encrypted
-JWTs (JSON Web Tokens) instead of standard SnapTrade signature verification.
-
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```php
-$result = $snaptrade->authentication->getUserJWT(
-    user_id: "snaptrade-user-123", 
-    user_secret: "USERSECRET123"
-);
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### user_id: `string`<a id="user_id-string"></a>
-
-##### user_secret: `string`<a id="user_secret-string"></a>
-
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[**EncryptedResponse**](./lib/Model/EncryptedResponse.php)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/snapTrade/encryptedJWT` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

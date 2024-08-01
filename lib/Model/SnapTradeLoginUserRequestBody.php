@@ -379,7 +379,7 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
     /**
      * Sets broker
      *
-     * @param string|null $broker Slug of the brokerage to connect the user to
+     * @param string|null $broker Slug of the brokerage to connect the user to. See [this document](https://snaptrade.notion.site/SnapTrade-Brokerage-Integrations-f83946a714a84c3caf599f6a945f0ead) for a list of supported brokerages and their slugs.
      *
      * @return self
      */
@@ -534,7 +534,7 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
     /**
      * Sets connection_portal_version
      *
-     * @param string|null $connection_portal_version Sets the version of the connection portal to render, with a default to 'v2'
+     * @param string|null $connection_portal_version Sets the version of the connection portal to render, with a default to 'v3'
      *
      * @return self
      */

@@ -30,7 +30,7 @@ use \SnapTrade\ObjectSerializer;
  * SnapTradeHoldingsTotalValue Class Doc Comment
  *
  * @category Class
- * @description Calculated based on the sum of the values of account positions and cash balances
+ * @description The total market value of the account. Note that this field is calculated based on the sum of the values of account positions and cash balances known to SnapTrade. It may not be accurate if the brokerage account has holdings that SnapTrade is not aware of. For example, if the brokerage account holds assets that SnapTrade does not support, the total value may be underreported. To get the brokerage reported total market value of the account, refer to &#x60;account.balance.total&#x60;.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
@@ -303,7 +303,7 @@ class SnapTradeHoldingsTotalValue implements ModelInterface, ArrayAccess, \JsonS
     /**
      * Sets value
      *
-     * @param float|null $value value
+     * @param float|null $value Total value denominated in the currency of the `currency` field.
      *
      * @return self
      */
@@ -339,7 +339,7 @@ class SnapTradeHoldingsTotalValue implements ModelInterface, ArrayAccess, \JsonS
     /**
      * Sets currency
      *
-     * @param string|null $currency currency
+     * @param string|null $currency The ISO-4217 currency code for the amount.
      *
      * @return self
      */

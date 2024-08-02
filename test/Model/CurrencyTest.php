@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * CurrencyTest Class Doc Comment
  *
  * @category    Class
- * @description Currency
+ * @description Describes a currency object.
  * @package     SnapTrade
  */
 class CurrencyTest extends TestCase

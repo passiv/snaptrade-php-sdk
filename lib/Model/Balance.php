@@ -30,7 +30,7 @@ use \SnapTrade\ObjectSerializer;
  * Balance Class Doc Comment
  *
  * @category Class
- * @description Account Balance
+ * @description Holds balance information for a single currency in an account.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
@@ -339,7 +339,7 @@ class Balance implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets cash
      *
-     * @param float|null $cash cash
+     * @param float|null $cash The amount of available cash in the account denominated in the currency of the `currency` field.
      *
      * @return self
      */
@@ -375,7 +375,7 @@ class Balance implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets buying_power
      *
-     * @param float|null $buying_power buying_power
+     * @param float|null $buying_power Buying power only applies to margin accounts. For non-margin accounts, buying power should be the same as cash. Please note that this field is not always available for all brokerages.
      *
      * @return self
      */

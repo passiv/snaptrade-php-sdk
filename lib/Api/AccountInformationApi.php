@@ -2245,9 +2245,9 @@ class AccountInformationApi extends \SnapTrade\CustomApi
     /**
      * Operation getUserHoldings
      *
-     * List balances, positions and orders for the specified account
+     * List account holdings
      *
-     * @param  string $account_id The ID of the account to fetch holdings for. (required)
+     * @param  string $account_id account_id (required)
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserHoldings'] to see the possible values for this operation
@@ -2272,9 +2272,9 @@ class AccountInformationApi extends \SnapTrade\CustomApi
     /**
      * Operation getUserHoldingsWithHttpInfo
      *
-     * List balances, positions and orders for the specified account
+     * List account holdings
      *
-     * @param  string $account_id The ID of the account to fetch holdings for. (required)
+     * @param  string $account_id (required)
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserHoldings'] to see the possible values for this operation
@@ -2437,9 +2437,9 @@ class AccountInformationApi extends \SnapTrade\CustomApi
     /**
      * Operation getUserHoldingsAsync
      *
-     * List balances, positions and orders for the specified account
+     * List account holdings
      *
-     * @param  string $account_id The ID of the account to fetch holdings for. (required)
+     * @param  string $account_id (required)
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserHoldings'] to see the possible values for this operation
@@ -2467,9 +2467,9 @@ class AccountInformationApi extends \SnapTrade\CustomApi
     /**
      * Operation getUserHoldingsAsyncWithHttpInfo
      *
-     * List balances, positions and orders for the specified account
+     * List account holdings
      *
-     * @param  string $account_id The ID of the account to fetch holdings for. (required)
+     * @param  string $account_id (required)
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserHoldings'] to see the possible values for this operation
@@ -2524,7 +2524,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
     /**
      * Create request for operation 'getUserHoldings'
      *
-     * @param  string $account_id The ID of the account to fetch holdings for. (required)
+     * @param  string $account_id (required)
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserHoldings'] to see the possible values for this operation

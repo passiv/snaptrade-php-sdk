@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * PositionTest Class Doc Comment
  *
  * @category    Class
- * @description Account Position
+ * @description Describes a single stock/ETF/crypto/mutual fund position in an account.
  * @package     SnapTrade
  */
 class PositionTest extends TestCase

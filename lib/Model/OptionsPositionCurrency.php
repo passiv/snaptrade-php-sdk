@@ -309,7 +309,7 @@ class OptionsPositionCurrency implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Sets id
      *
-     * @param string|null $id id
+     * @param string|null $id Unique identifier for the currency. This is the UUID used to reference the currency in SnapTrade.
      *
      * @return self
      */
@@ -338,7 +338,7 @@ class OptionsPositionCurrency implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Sets code
      *
-     * @param string|null $code code
+     * @param string|null $code The ISO-4217 currency code for the currency.
      *
      * @return self
      */
@@ -367,7 +367,7 @@ class OptionsPositionCurrency implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Sets name
      *
-     * @param string|null $name name
+     * @param string|null $name A human-friendly name of the currency.
      *
      * @return self
      */

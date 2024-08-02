@@ -30,7 +30,7 @@ use \SnapTrade\ObjectSerializer;
  * OptionsPosition Class Doc Comment
  *
  * @category Class
- * @description Option Holdings
+ * @description Describes a single option position in an account.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
@@ -353,7 +353,7 @@ class OptionsPosition implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets price
      *
-     * @param float|null $price Trade Price if limit or stop limit order
+     * @param float|null $price Last known market price for the option contract. The freshness of this price depends on the brokerage. Some brokerages provide real-time prices, while others provide delayed prices. It is recommended that you rely on your own third-party market data provider for most up to date prices.
      *
      * @return self
      */
@@ -389,7 +389,7 @@ class OptionsPosition implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets units
      *
-     * @param float|null $units units
+     * @param float|null $units The number of contracts for this option position.
      *
      * @return self
      */
@@ -454,7 +454,7 @@ class OptionsPosition implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets average_purchase_price
      *
-     * @param float|null $average_purchase_price Average purchase price for this position
+     * @param float|null $average_purchase_price Cost basis _per contract_ of this option position. To get the cost basis _per share_, divide this value by the number of shares per contract (usually 100).
      *
      * @return self
      */

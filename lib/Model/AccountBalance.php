@@ -30,7 +30,7 @@ use \SnapTrade\ObjectSerializer;
  * AccountBalance Class Doc Comment
  *
  * @category Class
- * @description Balance of the account
+ * @description Contains balance related information for the account.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */

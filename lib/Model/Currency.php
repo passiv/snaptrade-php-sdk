@@ -30,7 +30,7 @@ use \SnapTrade\ObjectSerializer;
  * Currency Class Doc Comment
  *
  * @category Class
- * @description Currency
+ * @description Describes a currency object.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
@@ -310,7 +310,7 @@ class Currency implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets id
      *
-     * @param string|null $id id
+     * @param string|null $id Unique identifier for the currency. This is the UUID used to reference the currency in SnapTrade.
      *
      * @return self
      */
@@ -339,7 +339,7 @@ class Currency implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets code
      *
-     * @param string|null $code code
+     * @param string|null $code The ISO-4217 currency code for the currency.
      *
      * @return self
      */
@@ -368,7 +368,7 @@ class Currency implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets name
      *
-     * @param string|null $name name
+     * @param string|null $name A human-friendly name of the currency.
      *
      * @return self
      */

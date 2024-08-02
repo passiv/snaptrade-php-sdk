@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * AccountHoldingsAccountTest Class Doc Comment
  *
  * @category    Class
- * @description Account Holdings with Account ID
+ * @description A wrapper object containing holdings information for a single account
  * @package     SnapTrade
  */
 class AccountHoldingsAccountTest extends TestCase

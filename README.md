@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![Packagist](https://img.shields.io/badge/Packagist-v2.0.29-blue)](https://packagist.org/packages/konfig/snaptrade-php-sdk)
+[![Packagist](https://img.shields.io/badge/Packagist-v2.0.30-blue)](https://packagist.org/packages/konfig/snaptrade-php-sdk)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -86,7 +86,7 @@ To install the bindings via [Composer](https://getcomposer.org/), add the follow
     }
   ],
   "require": {
-    "konfig/snaptrade-php-sdk": "2.0.29"
+    "konfig/snaptrade-php-sdk": "2.0.30"
   }
 }
 ```
@@ -338,9 +338,7 @@ The ID of the account to get positions.
 
 ### `snaptrade.accountInformation.getUserHoldings`<a id="snaptradeaccountinformationgetuserholdings"></a>
 
-Lists balances, positions and orders for the specified account as well as
-option_positions and account metadata. The data returned is similar to the
-data returned over the more fine-grained **positions**, **orders** and **balances** endpoints.
+Lists balances, positions, option positions, and recent orders for the specified account. The data returned is similar to the data returned over the more fine-grained [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getUserAccountPositions) and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders) endpoints. __The finer-grained APIs are preferred. They are easier to work with, faster, and have better error handling than this coarse-grained API.__
 
 
 
@@ -357,8 +355,6 @@ $result = $snaptrade->accountInformation->getUserHoldings(
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
 ##### account_id: `string`<a id="account_id-string"></a>
-
-The ID of the account to fetch holdings for.
 
 ##### user_id: `string`<a id="user_id-string"></a>
 

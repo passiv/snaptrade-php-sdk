@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * BalanceTest Class Doc Comment
  *
  * @category    Class
- * @description Account Balance
+ * @description Holds balance information for a single currency in an account.
  * @package     SnapTrade
  */
 class BalanceTest extends TestCase

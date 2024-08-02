@@ -30,7 +30,7 @@ use \SnapTrade\ObjectSerializer;
  * AccountHoldingsAccount Class Doc Comment
  *
  * @category Class
- * @description Account Holdings with Account ID
+ * @description A wrapper object containing holdings information for a single account
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
@@ -360,7 +360,7 @@ class AccountHoldingsAccount implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets balances
      *
-     * @param \SnapTrade\Model\Balance[]|null $balances balances
+     * @param \SnapTrade\Model\Balance[]|null $balances List of balances for the account. Each element of the list has a distinct currency. Some brokerages like Questrade [allows holding multiple currencies in the same account](https://www.questrade.com/learning/questrade-basics/balances-and-reports/understanding-your-account-balances).
      *
      * @return self
      */
@@ -396,7 +396,7 @@ class AccountHoldingsAccount implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets positions
      *
-     * @param \SnapTrade\Model\Position[]|null $positions positions
+     * @param \SnapTrade\Model\Position[]|null $positions List of stock/ETF/crypto/mutual fund positions in the account.
      *
      * @return self
      */
@@ -432,7 +432,7 @@ class AccountHoldingsAccount implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets option_positions
      *
-     * @param \SnapTrade\Model\OptionsPosition[]|null $option_positions option_positions
+     * @param \SnapTrade\Model\OptionsPosition[]|null $option_positions List of option positions in the account.
      *
      * @return self
      */
@@ -468,7 +468,7 @@ class AccountHoldingsAccount implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets orders
      *
-     * @param \SnapTrade\Model\AccountOrderRecord[]|null $orders orders
+     * @param \SnapTrade\Model\AccountOrderRecord[]|null $orders List of recent orders in the account, including both pending and executed orders.
      *
      * @return self
      */

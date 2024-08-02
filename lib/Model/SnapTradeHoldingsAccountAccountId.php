@@ -30,7 +30,7 @@ use \SnapTrade\ObjectSerializer;
  * SnapTradeHoldingsAccountAccountId Class Doc Comment
  *
  * @category Class
- * @description Holdings with account ID
+ * @description A single brokerage account at a financial institution.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
@@ -60,7 +60,7 @@ class SnapTradeHoldingsAccountAccountId implements ModelInterface, ArrayAccess, 
         'balance' => '\SnapTrade\Model\SnapTradeHoldingsAccountAccountIdBalance',
         'meta' => 'array<string,mixed>',
         'cash_restrictions' => '\SnapTrade\Model\CashRestriction[]',
-        'created_date' => 'string'
+        'created_date' => '\DateTime'
     ];
 
     /**
@@ -80,7 +80,7 @@ class SnapTradeHoldingsAccountAccountId implements ModelInterface, ArrayAccess, 
         'balance' => null,
         'meta' => null,
         'cash_restrictions' => null,
-        'created_date' => null
+        'created_date' => 'date-time'
     ];
 
     /**
@@ -359,7 +359,7 @@ class SnapTradeHoldingsAccountAccountId implements ModelInterface, ArrayAccess, 
     /**
      * Sets id
      *
-     * @param string|null $id id
+     * @param string|null $id Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
      *
      * @return self
      */
@@ -388,7 +388,7 @@ class SnapTradeHoldingsAccountAccountId implements ModelInterface, ArrayAccess, 
     /**
      * Sets brokerage_authorization
      *
-     * @param string|null $brokerage_authorization brokerage_authorization
+     * @param string|null $brokerage_authorization Unique identifier for the connection (brokerage authorization). This is the UUID used to reference the connection in SnapTrade.
      *
      * @return self
      */
@@ -408,6 +408,7 @@ class SnapTradeHoldingsAccountAccountId implements ModelInterface, ArrayAccess, 
      * Gets portfolio_group
      *
      * @return string|null
+     * @deprecated
      */
     public function getPortfolioGroup()
     {
@@ -417,9 +418,10 @@ class SnapTradeHoldingsAccountAccountId implements ModelInterface, ArrayAccess, 
     /**
      * Sets portfolio_group
      *
-     * @param string|null $portfolio_group portfolio_group
+     * @param string|null $portfolio_group Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a usecase for it.
      *
      * @return self
+     * @deprecated
      */
     public function setPortfolioGroup($portfolio_group)
     {
@@ -446,7 +448,7 @@ class SnapTradeHoldingsAccountAccountId implements ModelInterface, ArrayAccess, 
     /**
      * Sets name
      *
-     * @param string|null $name name
+     * @param string|null $name A display name for the account. Either assigned by the user or by the financial institution itself. For certain institutions, SnapTrade appends the institution name to the account name for clarity.
      *
      * @return self
      */
@@ -482,7 +484,7 @@ class SnapTradeHoldingsAccountAccountId implements ModelInterface, ArrayAccess, 
     /**
      * Sets number
      *
-     * @param string|null $number number
+     * @param string|null $number The account number assigned by the financial institution.
      *
      * @return self
      */
@@ -511,7 +513,7 @@ class SnapTradeHoldingsAccountAccountId implements ModelInterface, ArrayAccess, 
     /**
      * Sets institution_name
      *
-     * @param string|null $institution_name institution_name
+     * @param string|null $institution_name The name of the financial institution that holds the account.
      *
      * @return self
      */
@@ -567,6 +569,7 @@ class SnapTradeHoldingsAccountAccountId implements ModelInterface, ArrayAccess, 
      * Gets meta
      *
      * @return array<string,mixed>|null
+     * @deprecated
      */
     public function getMeta()
     {
@@ -576,9 +579,10 @@ class SnapTradeHoldingsAccountAccountId implements ModelInterface, ArrayAccess, 
     /**
      * Sets meta
      *
-     * @param array<string,mixed>|null $meta meta
+     * @param array<string,mixed>|null $meta Additional information about the account, such as account type, status, etc. This information is specific to the financial institution and there's no standard format for this data. Please use at your own risk.
      *
      * @return self
+     * @deprecated
      */
     public function setMeta($meta)
     {
@@ -596,6 +600,7 @@ class SnapTradeHoldingsAccountAccountId implements ModelInterface, ArrayAccess, 
      * Gets cash_restrictions
      *
      * @return \SnapTrade\Model\CashRestriction[]|null
+     * @deprecated
      */
     public function getCashRestrictions()
     {
@@ -605,9 +610,10 @@ class SnapTradeHoldingsAccountAccountId implements ModelInterface, ArrayAccess, 
     /**
      * Sets cash_restrictions
      *
-     * @param \SnapTrade\Model\CashRestriction[]|null $cash_restrictions cash_restrictions
+     * @param \SnapTrade\Model\CashRestriction[]|null $cash_restrictions This field is deprecated.
      *
      * @return self
+     * @deprecated
      */
     public function setCashRestrictions($cash_restrictions)
     {
@@ -624,7 +630,7 @@ class SnapTradeHoldingsAccountAccountId implements ModelInterface, ArrayAccess, 
     /**
      * Gets created_date
      *
-     * @return string|null
+     * @return \DateTime|null
      */
     public function getCreatedDate()
     {
@@ -634,7 +640,7 @@ class SnapTradeHoldingsAccountAccountId implements ModelInterface, ArrayAccess, 
     /**
      * Sets created_date
      *
-     * @param string|null $created_date Time
+     * @param \DateTime|null $created_date Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the financial institution.
      *
      * @return self
      */

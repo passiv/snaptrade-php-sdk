@@ -303,7 +303,7 @@ class AccountBalanceTotal implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Sets amount
      *
-     * @param float|null $amount amount
+     * @param float|null $amount Total value denominated in the currency of the `currency` field.
      *
      * @return self
      */
@@ -332,7 +332,7 @@ class AccountBalanceTotal implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Sets currency
      *
-     * @param string|null $currency currency
+     * @param string|null $currency The ISO-4217 currency code for the amount.
      *
      * @return self
      */

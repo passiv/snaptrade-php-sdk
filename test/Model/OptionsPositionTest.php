@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * OptionsPositionTest Class Doc Comment
  *
  * @category    Class
- * @description Option Holdings
+ * @description Describes a single option position in an account.
  * @package     SnapTrade
  */
 class OptionsPositionTest extends TestCase

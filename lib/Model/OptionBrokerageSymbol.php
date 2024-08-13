@@ -30,7 +30,7 @@ use \SnapTrade\ObjectSerializer;
  * OptionBrokerageSymbol Class Doc Comment
  *
  * @category Class
- * @description Option Brokerage symbol
+ * @description Uniquely describes a security for the option position within an account. The distinction between this and the &#x60;option_symbol&#x60; child property is that this object is specific to a position within an account, while the &#x60;option_symbol&#x60; child property is universal across all brokerage accounts. The caller should rely on the &#x60;option_symbol&#x60; child property for most use cases.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
@@ -301,6 +301,7 @@ class OptionBrokerageSymbol implements ModelInterface, ArrayAccess, \JsonSeriali
      * Gets id
      *
      * @return string|null
+     * @deprecated
      */
     public function getId()
     {
@@ -310,9 +311,10 @@ class OptionBrokerageSymbol implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets id
      *
-     * @param string|null $id id
+     * @param string|null $id A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.
      *
      * @return self
+     * @deprecated
      */
     public function setId($id)
     {
@@ -330,6 +332,7 @@ class OptionBrokerageSymbol implements ModelInterface, ArrayAccess, \JsonSeriali
      * Gets description
      *
      * @return string|null
+     * @deprecated
      */
     public function getDescription()
     {
@@ -339,9 +342,10 @@ class OptionBrokerageSymbol implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets description
      *
-     * @param string|null $description description
+     * @param string|null $description This field is deprecated and the caller should use the `option_symbol` child property's `description` instead.
      *
      * @return self
+     * @deprecated
      */
     public function setDescription($description)
     {

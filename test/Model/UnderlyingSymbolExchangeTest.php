@@ -1,6 +1,6 @@
 <?php
 /**
- * UserSettingsTest
+ * UnderlyingSymbolExchangeTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * UserSettingsTest Class Doc Comment
+ * UnderlyingSymbolExchangeTest Class Doc Comment
  *
  * @category    Class
- * @description User account settings
+ * @description The exchange on which the security is listed and traded.
  * @package     SnapTrade
  */
-class UserSettingsTest extends TestCase
+class UnderlyingSymbolExchangeTest extends TestCase
 {
 
     /**
@@ -64,18 +64,36 @@ class UserSettingsTest extends TestCase
     }
 
     /**
-     * Test "UserSettings"
+     * Test "UnderlyingSymbolExchange"
      */
-    public function testUserSettings()
+    public function testUnderlyingSymbolExchange()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "email"
+     * Test attribute "id"
      */
-    public function testPropertyEmail()
+    public function testPropertyId()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "code"
+     */
+    public function testPropertyCode()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "mic_code"
+     */
+    public function testPropertyMicCode()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
@@ -91,72 +109,45 @@ class UserSettingsTest extends TestCase
     }
 
     /**
-     * Test attribute "receive_cash_notification"
+     * Test attribute "timezone"
      */
-    public function testPropertyReceiveCashNotification()
+    public function testPropertyTimezone()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "receive_drift_notification"
+     * Test attribute "start_time"
      */
-    public function testPropertyReceiveDriftNotification()
+    public function testPropertyStartTime()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "user_trial_activated"
+     * Test attribute "close_time"
      */
-    public function testPropertyUserTrialActivated()
+    public function testPropertyCloseTime()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "activated_trial_date"
+     * Test attribute "suffix"
      */
-    public function testPropertyActivatedTrialDate()
+    public function testPropertySuffix()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "demo"
+     * Test attribute "allows_cryptocurrency_symbols"
      */
-    public function testPropertyDemo()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "api_enabled"
-     */
-    public function testPropertyApiEnabled()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "drift_threshold"
-     */
-    public function testPropertyDriftThreshold()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "preferred_currency"
-     */
-    public function testPropertyPreferredCurrency()
+    public function testPropertyAllowsCryptocurrencySymbols()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

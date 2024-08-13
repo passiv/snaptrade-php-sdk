@@ -1,6 +1,6 @@
 <?php
 /**
- * ExcludedAssetTest
+ * UnderlyingSymbolTypeTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * ExcludedAssetTest Class Doc Comment
+ * UnderlyingSymbolTypeTest Class Doc Comment
  *
  * @category    Class
- * @description An excluded asset in a portfolio group
+ * @description The type of security. For example, \&quot;Common Stock\&quot; or \&quot;ETF\&quot;.
  * @package     SnapTrade
  */
-class ExcludedAssetTest extends TestCase
+class UnderlyingSymbolTypeTest extends TestCase
 {
 
     /**
@@ -64,18 +64,45 @@ class ExcludedAssetTest extends TestCase
     }
 
     /**
-     * Test "ExcludedAsset"
+     * Test "UnderlyingSymbolType"
      */
-    public function testExcludedAsset()
+    public function testUnderlyingSymbolType()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "symbol"
+     * Test attribute "id"
      */
-    public function testPropertySymbol()
+    public function testPropertyId()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "code"
+     */
+    public function testPropertyCode()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "description"
+     */
+    public function testPropertyDescription()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "is_supported"
+     */
+    public function testPropertyIsSupported()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

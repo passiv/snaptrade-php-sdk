@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * AccountOrderRecordTest Class Doc Comment
  *
  * @category    Class
- * @description Record of order in brokerageaccount
+ * @description Describes a single recent order in an account.
  * @package     SnapTrade
  */
 class AccountOrderRecordTest extends TestCase

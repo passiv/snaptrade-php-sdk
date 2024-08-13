@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * PositionSymbolTest Class Doc Comment
  *
  * @category    Class
- * @description Symbol returned in position object
+ * @description Uniquely describes a security for the position within an account. The distinction between this and the &#x60;symbol&#x60; child property is that this object is specific to a position within an account, while the &#x60;symbol&#x60; child property is universal across all brokerage accounts. The caller should rely on the &#x60;symbol&#x60; child property for most use cases.
  * @package     SnapTrade
  */
 class PositionSymbolTest extends TestCase

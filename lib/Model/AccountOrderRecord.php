@@ -30,7 +30,7 @@ use \SnapTrade\ObjectSerializer;
  * AccountOrderRecord Class Doc Comment
  *
  * @category Class
- * @description Record of order in brokerageaccount
+ * @description Describes a single recent order in an account.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
@@ -422,7 +422,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets brokerage_order_id
      *
-     * @param string|null $brokerage_order_id Order id returned by brokerage
+     * @param string|null $brokerage_order_id Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
      *
      * @return self
      */
@@ -471,6 +471,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
      * Gets symbol
      *
      * @return string|null
+     * @deprecated
      */
     public function getSymbol()
     {
@@ -480,9 +481,10 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets symbol
      *
-     * @param string|null $symbol symbol
+     * @param string|null $symbol A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.
      *
      * @return self
+     * @deprecated
      */
     public function setSymbol($symbol)
     {

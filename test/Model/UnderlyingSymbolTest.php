@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * UnderlyingSymbolTest Class Doc Comment
  *
  * @category    Class
- * @description Underlying Symbol
+ * @description Symbol object for the underlying security of an option.
  * @package     SnapTrade
  */
 class UnderlyingSymbolTest extends TestCase
@@ -85,6 +85,15 @@ class UnderlyingSymbolTest extends TestCase
      * Test attribute "symbol"
      */
     public function testPropertySymbol()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "raw_symbol"
+     */
+    public function testPropertyRawSymbol()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

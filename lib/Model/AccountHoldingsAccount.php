@@ -30,7 +30,7 @@ use \SnapTrade\ObjectSerializer;
  * AccountHoldingsAccount Class Doc Comment
  *
  * @category Class
- * @description A wrapper object containing holdings information for a single account
+ * @description A wrapper object containing holdings information for a single account.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */

@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * OptionsPositionCurrencyTest Class Doc Comment
  *
  * @category    Class
- * @description OptionsPositionCurrency
+ * @description The currency of the price. This field is deprecated and will be removed in a future version. The currency of the price is determined by the currency of the underlying security.
  * @package     SnapTrade
  */
 class OptionsPositionCurrencyTest extends TestCase

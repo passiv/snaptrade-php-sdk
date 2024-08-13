@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * SecurityTypeTest Class Doc Comment
  *
  * @category    Class
- * @description Security Type
+ * @description The type of security. For example, \&quot;Common Stock\&quot; or \&quot;ETF\&quot;.
  * @package     SnapTrade
  */
 class SecurityTypeTest extends TestCase

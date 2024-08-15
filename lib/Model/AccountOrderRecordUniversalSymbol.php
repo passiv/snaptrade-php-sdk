@@ -1,6 +1,6 @@
 <?php
 /**
- * BrokerageSymbolSymbol
+ * AccountOrderRecordUniversalSymbol
  *
  * PHP version 7.4
  *
@@ -27,13 +27,14 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * BrokerageSymbolSymbol Class Doc Comment
+ * AccountOrderRecordUniversalSymbol Class Doc Comment
  *
  * @category Class
+ * @description Contains information about the security that the order is for. This field is only present for stock/ETF/crypto/mutual fund orders. For option orders, this field will be null and the &#x60;option_symbol&#x60; field will be populated.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class BrokerageSymbolSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
+class AccountOrderRecordUniversalSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -42,7 +43,7 @@ class BrokerageSymbolSymbol implements ModelInterface, ArrayAccess, \JsonSeriali
       *
       * @var string
       */
-    protected static $openAPIModelName = 'BrokerageSymbol_symbol';
+    protected static $openAPIModelName = 'AccountOrderRecord_universal_symbol';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -54,8 +55,8 @@ class BrokerageSymbolSymbol implements ModelInterface, ArrayAccess, \JsonSeriali
         'symbol' => 'string',
         'raw_symbol' => 'string',
         'description' => 'string',
-        'currency' => '\SnapTrade\Model\Currency',
-        'exchange' => '\SnapTrade\Model\Exchange',
+        'currency' => '\SnapTrade\Model\UniversalSymbolCurrency',
+        'exchange' => '\SnapTrade\Model\UniversalSymbolExchange',
         'type' => '\SnapTrade\Model\SecurityType',
         'currencies' => '\SnapTrade\Model\Currency[]',
         'figi_code' => 'string',
@@ -376,7 +377,7 @@ class BrokerageSymbolSymbol implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets id
      *
-     * @param string $id id
+     * @param string $id Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
      *
      * @return self
      */
@@ -405,7 +406,7 @@ class BrokerageSymbolSymbol implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets symbol
      *
-     * @param string $symbol symbol
+     * @param string $symbol The security's trading ticker symbol. For example \"AAPL\" for Apple Inc. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on \"Yahoo Finance Market Coverage and Data Delays\"). For example, for securities traded on the Toronto Stock Exchange, the symbol has a '.TO' suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix.
      *
      * @return self
      */
@@ -434,7 +435,7 @@ class BrokerageSymbolSymbol implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets raw_symbol
      *
-     * @param string $raw_symbol raw_symbol
+     * @param string $raw_symbol The raw symbol is `symbol` with the exchange suffix removed. For example, if `symbol` is \"VAB.TO\", then `raw_symbol` is \"VAB\".
      *
      * @return self
      */
@@ -463,7 +464,7 @@ class BrokerageSymbolSymbol implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets description
      *
-     * @param string|null $description description
+     * @param string|null $description A human-readable description of the security. This is usually the company name or ETF name.
      *
      * @return self
      */
@@ -489,7 +490,7 @@ class BrokerageSymbolSymbol implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Gets currency
      *
-     * @return \SnapTrade\Model\Currency
+     * @return \SnapTrade\Model\UniversalSymbolCurrency
      */
     public function getCurrency()
     {
@@ -499,7 +500,7 @@ class BrokerageSymbolSymbol implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets currency
      *
-     * @param \SnapTrade\Model\Currency $currency currency
+     * @param \SnapTrade\Model\UniversalSymbolCurrency $currency currency
      *
      * @return self
      */
@@ -518,7 +519,7 @@ class BrokerageSymbolSymbol implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Gets exchange
      *
-     * @return \SnapTrade\Model\Exchange|null
+     * @return \SnapTrade\Model\UniversalSymbolExchange|null
      */
     public function getExchange()
     {
@@ -528,7 +529,7 @@ class BrokerageSymbolSymbol implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets exchange
      *
-     * @param \SnapTrade\Model\Exchange|null $exchange exchange
+     * @param \SnapTrade\Model\UniversalSymbolExchange|null $exchange exchange
      *
      * @return self
      */
@@ -577,6 +578,7 @@ class BrokerageSymbolSymbol implements ModelInterface, ArrayAccess, \JsonSeriali
      * Gets currencies
      *
      * @return \SnapTrade\Model\Currency[]
+     * @deprecated
      */
     public function getCurrencies()
     {
@@ -586,9 +588,10 @@ class BrokerageSymbolSymbol implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets currencies
      *
-     * @param \SnapTrade\Model\Currency[] $currencies currencies
+     * @param \SnapTrade\Model\Currency[] $currencies This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
      *
      * @return self
+     * @deprecated
      */
     public function setCurrencies($currencies)
     {
@@ -615,7 +618,7 @@ class BrokerageSymbolSymbol implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets figi_code
      *
-     * @param string|null $figi_code figi_code
+     * @param string|null $figi_code This identifier is unique per security per trading venue. See section 1.4.1 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf) for more information. This value should be the same as the `figi_code` in the `figi_instrument` child property.
      *
      * @return self
      */

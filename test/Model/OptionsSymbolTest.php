@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * OptionsSymbolTest Class Doc Comment
  *
  * @category    Class
- * @description Options Symbol
+ * @description Uniquely describes an option security + exchange combination across all brokerages.
  * @package     SnapTrade
  */
 class OptionsSymbolTest extends TestCase
@@ -130,24 +130,6 @@ class OptionsSymbolTest extends TestCase
      * Test attribute "underlying_symbol"
      */
     public function testPropertyUnderlyingSymbol()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "local_id"
-     */
-    public function testPropertyLocalId()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "exchange_id"
-     */
-    public function testPropertyExchangeId()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

@@ -59,7 +59,7 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
         'institution_name' => 'string',
         'created_date' => 'string',
         'meta' => 'array<string,mixed>',
-        'cash_restrictions' => '\SnapTrade\Model\CashRestriction[]',
+        'cash_restrictions' => 'string[]',
         'sync_status' => '\SnapTrade\Model\AccountSyncStatus',
         'balance' => '\SnapTrade\Model\AccountBalance'
     ];
@@ -588,7 +588,8 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets cash_restrictions
      *
-     * @return \SnapTrade\Model\CashRestriction[]|null
+     * @return string[]|null
+     * @deprecated
      */
     public function getCashRestrictions()
     {
@@ -598,9 +599,10 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets cash_restrictions
      *
-     * @param \SnapTrade\Model\CashRestriction[]|null $cash_restrictions cash_restrictions
+     * @param string[]|null $cash_restrictions This field is deprecated.
      *
      * @return self
+     * @deprecated
      */
     public function setCashRestrictions($cash_restrictions)
     {

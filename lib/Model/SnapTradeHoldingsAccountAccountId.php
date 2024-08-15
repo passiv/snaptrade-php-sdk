@@ -59,7 +59,7 @@ class SnapTradeHoldingsAccountAccountId implements ModelInterface, ArrayAccess, 
         'institution_name' => 'string',
         'balance' => '\SnapTrade\Model\SnapTradeHoldingsAccountAccountIdBalance',
         'meta' => 'array<string,mixed>',
-        'cash_restrictions' => '\SnapTrade\Model\CashRestriction[]',
+        'cash_restrictions' => 'string[]',
         'created_date' => '\DateTime'
     ];
 
@@ -599,7 +599,7 @@ class SnapTradeHoldingsAccountAccountId implements ModelInterface, ArrayAccess, 
     /**
      * Gets cash_restrictions
      *
-     * @return \SnapTrade\Model\CashRestriction[]|null
+     * @return string[]|null
      * @deprecated
      */
     public function getCashRestrictions()
@@ -610,7 +610,7 @@ class SnapTradeHoldingsAccountAccountId implements ModelInterface, ArrayAccess, 
     /**
      * Sets cash_restrictions
      *
-     * @param \SnapTrade\Model\CashRestriction[]|null $cash_restrictions This field is deprecated.
+     * @param string[]|null $cash_restrictions This field is deprecated.
      *
      * @return self
      * @deprecated

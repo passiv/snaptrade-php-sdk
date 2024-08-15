@@ -389,7 +389,7 @@ class OptionsPosition implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets units
      *
-     * @param float|null $units The number of contracts for this option position.
+     * @param float|null $units The number of contracts for this option position. A positive number indicates a long position, while a negative number indicates a short position.
      *
      * @return self
      */
@@ -409,6 +409,7 @@ class OptionsPosition implements ModelInterface, ArrayAccess, \JsonSerializable
      * Gets currency
      *
      * @return \SnapTrade\Model\OptionsPositionCurrency|null
+     * @deprecated
      */
     public function getCurrency()
     {
@@ -421,6 +422,7 @@ class OptionsPosition implements ModelInterface, ArrayAccess, \JsonSerializable
      * @param \SnapTrade\Model\OptionsPositionCurrency|null $currency currency
      *
      * @return self
+     * @deprecated
      */
     public function setCurrency($currency)
     {

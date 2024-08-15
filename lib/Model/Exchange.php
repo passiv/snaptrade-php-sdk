@@ -30,7 +30,7 @@ use \SnapTrade\ObjectSerializer;
  * Exchange Class Doc Comment
  *
  * @category Class
- * @description Stock Exchange
+ * @description Describes a single stock or crypto exchange.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
@@ -345,7 +345,7 @@ class Exchange implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets id
      *
-     * @param string|null $id id
+     * @param string|null $id Unique ID for the exchange in SnapTrade.
      *
      * @return self
      */
@@ -374,7 +374,7 @@ class Exchange implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets code
      *
-     * @param string|null $code code
+     * @param string|null $code A short name for the exchange. For standardized exchange code, please us the `mic_code` field.
      *
      * @return self
      */
@@ -403,7 +403,7 @@ class Exchange implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets mic_code
      *
-     * @param string|null $mic_code mic_code
+     * @param string|null $mic_code The [Market Identifier Code](https://en.wikipedia.org/wiki/Market_Identifier_Code) (MIC) for the exchange.
      *
      * @return self
      */
@@ -432,7 +432,7 @@ class Exchange implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets name
      *
-     * @param string|null $name name
+     * @param string|null $name The full name of the exchange.
      *
      * @return self
      */
@@ -461,7 +461,7 @@ class Exchange implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets timezone
      *
-     * @param string|null $timezone timezone
+     * @param string|null $timezone The timezone for the trading hours (`start_time` and `close_time`) of the exchange.
      *
      * @return self
      */
@@ -490,7 +490,7 @@ class Exchange implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets start_time
      *
-     * @param string|null $start_time start_time
+     * @param string|null $start_time The time when the exchange opens for trading.
      *
      * @return self
      */
@@ -519,7 +519,7 @@ class Exchange implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets close_time
      *
-     * @param string|null $close_time close_time
+     * @param string|null $close_time The time when the exchange closes for trading.
      *
      * @return self
      */
@@ -548,7 +548,7 @@ class Exchange implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets suffix
      *
-     * @param string|null $suffix suffix
+     * @param string|null $suffix The suffix to be appended to the symbol when trading on this exchange. For example, the suffix for the Toronto Stock Exchange is `.TO`. See `UniversalSymbol->symbol` and `UniversalSymbol->raw_symbol` for more detail.
      *
      * @return self
      */

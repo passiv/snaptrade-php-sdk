@@ -1,6 +1,6 @@
 <?php
 /**
- * RedirectTokenandPin
+ * UniversalSymbolCurrency
  *
  * PHP version 7.4
  *
@@ -27,14 +27,14 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * RedirectTokenandPin Class Doc Comment
+ * UniversalSymbolCurrency Class Doc Comment
  *
  * @category Class
- * @description Response when register user is successful
+ * @description The currency in which the security is traded.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class RedirectTokenandPin implements ModelInterface, ArrayAccess, \JsonSerializable
+class UniversalSymbolCurrency implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -43,7 +43,7 @@ class RedirectTokenandPin implements ModelInterface, ArrayAccess, \JsonSerializa
       *
       * @var string
       */
-    protected static $openAPIModelName = 'RedirectTokenandPin';
+    protected static $openAPIModelName = 'UniversalSymbol_currency';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -51,8 +51,9 @@ class RedirectTokenandPin implements ModelInterface, ArrayAccess, \JsonSerializa
       * @var string[]
       */
     protected static $openAPITypes = [
-        'token' => 'string',
-        'pin' => 'string'
+        'id' => 'string',
+        'code' => 'string',
+        'name' => 'string'
     ];
 
     /**
@@ -63,8 +64,9 @@ class RedirectTokenandPin implements ModelInterface, ArrayAccess, \JsonSerializa
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'token' => null,
-        'pin' => null
+        'id' => 'uuid',
+        'code' => null,
+        'name' => null
     ];
 
     /**
@@ -73,8 +75,9 @@ class RedirectTokenandPin implements ModelInterface, ArrayAccess, \JsonSerializa
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'token' => false,
-		'pin' => false
+        'id' => false,
+		'code' => false,
+		'name' => false
     ];
 
     /**
@@ -163,8 +166,9 @@ class RedirectTokenandPin implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $attributeMap = [
-        'token' => 'token',
-        'pin' => 'pin'
+        'id' => 'id',
+        'code' => 'code',
+        'name' => 'name'
     ];
 
     /**
@@ -173,8 +177,9 @@ class RedirectTokenandPin implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $setters = [
-        'token' => 'setToken',
-        'pin' => 'setPin'
+        'id' => 'setId',
+        'code' => 'setCode',
+        'name' => 'setName'
     ];
 
     /**
@@ -183,8 +188,9 @@ class RedirectTokenandPin implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $getters = [
-        'token' => 'getToken',
-        'pin' => 'getPin'
+        'id' => 'getId',
+        'code' => 'getCode',
+        'name' => 'getName'
     ];
 
     /**
@@ -244,8 +250,9 @@ class RedirectTokenandPin implements ModelInterface, ArrayAccess, \JsonSerializa
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('token', $data ?? [], null);
-        $this->setIfExists('pin', $data ?? [], null);
+        $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('code', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
     }
 
     /**
@@ -291,59 +298,88 @@ class RedirectTokenandPin implements ModelInterface, ArrayAccess, \JsonSerializa
 
 
     /**
-     * Gets token
+     * Gets id
      *
      * @return string|null
      */
-    public function getToken()
+    public function getId()
     {
-        return $this->container['token'];
+        return $this->container['id'];
     }
 
     /**
-     * Sets token
+     * Sets id
      *
-     * @param string|null $token token
+     * @param string|null $id Unique identifier for the currency. This is the UUID used to reference the currency in SnapTrade.
      *
      * @return self
      */
-    public function setToken($token)
+    public function setId($id)
     {
 
-        if (is_null($token)) {
-            throw new \InvalidArgumentException('non-nullable token cannot be null');
+        if (is_null($id)) {
+            throw new \InvalidArgumentException('non-nullable id cannot be null');
         }
 
-        $this->container['token'] = $token;
+        $this->container['id'] = $id;
 
         return $this;
     }
 
     /**
-     * Gets pin
+     * Gets code
      *
      * @return string|null
      */
-    public function getPin()
+    public function getCode()
     {
-        return $this->container['pin'];
+        return $this->container['code'];
     }
 
     /**
-     * Sets pin
+     * Sets code
      *
-     * @param string|null $pin pin
+     * @param string|null $code The ISO-4217 currency code for the currency.
      *
      * @return self
      */
-    public function setPin($pin)
+    public function setCode($code)
     {
 
-        if (is_null($pin)) {
-            throw new \InvalidArgumentException('non-nullable pin cannot be null');
+        if (is_null($code)) {
+            throw new \InvalidArgumentException('non-nullable code cannot be null');
         }
 
-        $this->container['pin'] = $pin;
+        $this->container['code'] = $code;
+
+        return $this;
+    }
+
+    /**
+     * Gets name
+     *
+     * @return string|null
+     */
+    public function getName()
+    {
+        return $this->container['name'];
+    }
+
+    /**
+     * Sets name
+     *
+     * @param string|null $name A human-friendly name of the currency.
+     *
+     * @return self
+     */
+    public function setName($name)
+    {
+
+        if (is_null($name)) {
+            throw new \InvalidArgumentException('non-nullable name cannot be null');
+        }
+
+        $this->container['name'] = $name;
 
         return $this;
     }

@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * AccountOrderRecordStatusTest Class Doc Comment
  *
  * @category    Class
- * @description AccountOrderRecordStatus
+ * @description Indicates the status of an order. SnapTrade does a best effort to map brokerage statuses to statuses in this enum.
  * @package     SnapTrade
  */
 class AccountOrderRecordStatusTest extends TestCase

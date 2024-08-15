@@ -30,7 +30,7 @@ use \SnapTrade\ObjectSerializer;
  * SecurityType Class Doc Comment
  *
  * @category Class
- * @description Security Type
+ * @description The type of security. For example, \&quot;Common Stock\&quot; or \&quot;ETF\&quot;.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
@@ -317,7 +317,7 @@ class SecurityType implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets id
      *
-     * @param string|null $id id
+     * @param string|null $id Unique identifier for the security type within SnapTrade. This is the ID used to reference the security type in SnapTrade API calls.
      *
      * @return self
      */
@@ -346,7 +346,7 @@ class SecurityType implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets code
      *
-     * @param string|null $code code
+     * @param string|null $code A short code representing the security type. For example, \"cs\" for Common Stock. Here are some common values:   ad - ADR   bnd - Bond   cs - Common Stock   cef - Closed End Fund   et - ETF   oef - Open Ended Fund   ps - Preferred Stock   rt - Right   struct - Structured Product   ut - Unit   wi - When Issued   wt - Warrant
      *
      * @return self
      */
@@ -375,7 +375,7 @@ class SecurityType implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets description
      *
-     * @param string|null $description description
+     * @param string|null $description A human-readable description of the security type. For example, \"Common Stock\" or \"ETF\".
      *
      * @return self
      */
@@ -395,6 +395,7 @@ class SecurityType implements ModelInterface, ArrayAccess, \JsonSerializable
      * Gets is_supported
      *
      * @return bool|null
+     * @deprecated
      */
     public function getIsSupported()
     {
@@ -404,9 +405,10 @@ class SecurityType implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets is_supported
      *
-     * @param bool|null $is_supported is_supported
+     * @param bool|null $is_supported This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
      *
      * @return self
+     * @deprecated
      */
     public function setIsSupported($is_supported)
     {

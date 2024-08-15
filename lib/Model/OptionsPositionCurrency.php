@@ -30,6 +30,7 @@ use \SnapTrade\ObjectSerializer;
  * OptionsPositionCurrency Class Doc Comment
  *
  * @category Class
+ * @description The currency of the price. This field is deprecated and will be removed in a future version. The currency of the price is determined by the currency of the underlying security.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */

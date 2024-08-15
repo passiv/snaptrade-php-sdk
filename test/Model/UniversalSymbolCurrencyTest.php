@@ -1,6 +1,6 @@
 <?php
 /**
- * SnapTradeAPIDisclaimerAcceptStatusTest
+ * UniversalSymbolCurrencyTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * SnapTradeAPIDisclaimerAcceptStatusTest Class Doc Comment
+ * UniversalSymbolCurrencyTest Class Doc Comment
  *
  * @category    Class
- * @description Status of user acceptance of SnapTrade API disclaimer
+ * @description The currency in which the security is traded.
  * @package     SnapTrade
  */
-class SnapTradeAPIDisclaimerAcceptStatusTest extends TestCase
+class UniversalSymbolCurrencyTest extends TestCase
 {
 
     /**
@@ -64,27 +64,36 @@ class SnapTradeAPIDisclaimerAcceptStatusTest extends TestCase
     }
 
     /**
-     * Test "SnapTradeAPIDisclaimerAcceptStatus"
+     * Test "UniversalSymbolCurrency"
      */
-    public function testSnapTradeAPIDisclaimerAcceptStatus()
+    public function testUniversalSymbolCurrency()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "accepted"
+     * Test attribute "id"
      */
-    public function testPropertyAccepted()
+    public function testPropertyId()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "timestamp"
+     * Test attribute "code"
      */
-    public function testPropertyTimestamp()
+    public function testPropertyCode()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "name"
+     */
+    public function testPropertyName()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

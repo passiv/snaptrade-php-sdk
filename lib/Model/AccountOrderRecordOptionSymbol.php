@@ -1,6 +1,6 @@
 <?php
 /**
- * TradeExecutionStatus
+ * AccountOrderRecordOptionSymbol
  *
  * PHP version 7.4
  *
@@ -27,14 +27,14 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * TradeExecutionStatus Class Doc Comment
+ * AccountOrderRecordOptionSymbol Class Doc Comment
  *
  * @category Class
- * @description Execution status of a trade
+ * @description Contains information about the option contract that the order is for. This field is only present for option orders. For stock/ETF/crypto/mutual fund orders, this field will be null and the &#x60;universal_symbol&#x60; field will be populated.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class TradeExecutionStatus implements ModelInterface, ArrayAccess, \JsonSerializable
+class AccountOrderRecordOptionSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -43,7 +43,7 @@ class TradeExecutionStatus implements ModelInterface, ArrayAccess, \JsonSerializ
       *
       * @var string
       */
-    protected static $openAPIModelName = 'TradeExecutionStatus';
+    protected static $openAPIModelName = 'AccountOrderRecord_option_symbol';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -51,15 +51,13 @@ class TradeExecutionStatus implements ModelInterface, ArrayAccess, \JsonSerializ
       * @var string[]
       */
     protected static $openAPITypes = [
-        'symbol' => '\SnapTrade\Model\BrokerageSymbol',
-        'universal_symbol' => '\SnapTrade\Model\UniversalSymbol',
-        'trade' => '\SnapTrade\Model\Trade',
-        'state' => 'string',
-        'filled_units' => 'int',
-        'action' => 'string',
-        'price' => 'float',
-        'commissions' => 'float',
-        'meta' => 'array<string,mixed>'
+        'id' => 'string',
+        'ticker' => 'string',
+        'option_type' => 'string',
+        'strike_price' => 'float',
+        'expiration_date' => '\DateTime',
+        'is_mini_option' => 'bool',
+        'underlying_symbol' => '\SnapTrade\Model\UnderlyingSymbol'
     ];
 
     /**
@@ -70,15 +68,13 @@ class TradeExecutionStatus implements ModelInterface, ArrayAccess, \JsonSerializ
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'symbol' => null,
-        'universal_symbol' => null,
-        'trade' => null,
-        'state' => null,
-        'filled_units' => null,
-        'action' => null,
-        'price' => null,
-        'commissions' => null,
-        'meta' => null
+        'id' => 'uuid',
+        'ticker' => null,
+        'option_type' => null,
+        'strike_price' => null,
+        'expiration_date' => 'date',
+        'is_mini_option' => null,
+        'underlying_symbol' => null
     ];
 
     /**
@@ -87,15 +83,13 @@ class TradeExecutionStatus implements ModelInterface, ArrayAccess, \JsonSerializ
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'symbol' => false,
-		'universal_symbol' => false,
-		'trade' => false,
-		'state' => false,
-		'filled_units' => false,
-		'action' => false,
-		'price' => false,
-		'commissions' => false,
-		'meta' => false
+        'id' => false,
+		'ticker' => false,
+		'option_type' => false,
+		'strike_price' => false,
+		'expiration_date' => false,
+		'is_mini_option' => false,
+		'underlying_symbol' => false
     ];
 
     /**
@@ -184,15 +178,13 @@ class TradeExecutionStatus implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $attributeMap = [
-        'symbol' => 'symbol',
-        'universal_symbol' => 'universal_symbol',
-        'trade' => 'trade',
-        'state' => 'state',
-        'filled_units' => 'filled_units',
-        'action' => 'action',
-        'price' => 'price',
-        'commissions' => 'commissions',
-        'meta' => 'meta'
+        'id' => 'id',
+        'ticker' => 'ticker',
+        'option_type' => 'option_type',
+        'strike_price' => 'strike_price',
+        'expiration_date' => 'expiration_date',
+        'is_mini_option' => 'is_mini_option',
+        'underlying_symbol' => 'underlying_symbol'
     ];
 
     /**
@@ -201,15 +193,13 @@ class TradeExecutionStatus implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $setters = [
-        'symbol' => 'setSymbol',
-        'universal_symbol' => 'setUniversalSymbol',
-        'trade' => 'setTrade',
-        'state' => 'setState',
-        'filled_units' => 'setFilledUnits',
-        'action' => 'setAction',
-        'price' => 'setPrice',
-        'commissions' => 'setCommissions',
-        'meta' => 'setMeta'
+        'id' => 'setId',
+        'ticker' => 'setTicker',
+        'option_type' => 'setOptionType',
+        'strike_price' => 'setStrikePrice',
+        'expiration_date' => 'setExpirationDate',
+        'is_mini_option' => 'setIsMiniOption',
+        'underlying_symbol' => 'setUnderlyingSymbol'
     ];
 
     /**
@@ -218,15 +208,13 @@ class TradeExecutionStatus implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $getters = [
-        'symbol' => 'getSymbol',
-        'universal_symbol' => 'getUniversalSymbol',
-        'trade' => 'getTrade',
-        'state' => 'getState',
-        'filled_units' => 'getFilledUnits',
-        'action' => 'getAction',
-        'price' => 'getPrice',
-        'commissions' => 'getCommissions',
-        'meta' => 'getMeta'
+        'id' => 'getId',
+        'ticker' => 'getTicker',
+        'option_type' => 'getOptionType',
+        'strike_price' => 'getStrikePrice',
+        'expiration_date' => 'getExpirationDate',
+        'is_mini_option' => 'getIsMiniOption',
+        'underlying_symbol' => 'getUnderlyingSymbol'
     ];
 
     /**
@@ -270,40 +258,19 @@ class TradeExecutionStatus implements ModelInterface, ArrayAccess, \JsonSerializ
         return self::$openAPIModelName;
     }
 
-    public const STATE_EXECUTED = 'Executed';
-    public const STATE_CANCELED = 'Canceled';
-    public const STATE_REJECTED = 'Rejected';
-    public const STATE_FAILED = 'Failed';
-    public const STATE_NOT_EXECUTED = 'Not Executed';
-    public const ACTION_BUY = 'BUY';
-    public const ACTION_SELL = 'SELL';
+    public const OPTION_TYPE_CALL = 'CALL';
+    public const OPTION_TYPE_PUT = 'PUT';
 
     /**
      * Gets allowable values of the enum
      *
      * @return string[]
      */
-    public function getStateAllowableValues()
+    public function getOptionTypeAllowableValues()
     {
         return [
-            self::STATE_EXECUTED,
-            self::STATE_CANCELED,
-            self::STATE_REJECTED,
-            self::STATE_FAILED,
-            self::STATE_NOT_EXECUTED,
-        ];
-    }
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getActionAllowableValues()
-    {
-        return [
-            self::ACTION_BUY,
-            self::ACTION_SELL,
+            self::OPTION_TYPE_CALL,
+            self::OPTION_TYPE_PUT,
         ];
     }
 
@@ -322,15 +289,13 @@ class TradeExecutionStatus implements ModelInterface, ArrayAccess, \JsonSerializ
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('symbol', $data ?? [], null);
-        $this->setIfExists('universal_symbol', $data ?? [], null);
-        $this->setIfExists('trade', $data ?? [], null);
-        $this->setIfExists('state', $data ?? [], null);
-        $this->setIfExists('filled_units', $data ?? [], null);
-        $this->setIfExists('action', $data ?? [], null);
-        $this->setIfExists('price', $data ?? [], null);
-        $this->setIfExists('commissions', $data ?? [], null);
-        $this->setIfExists('meta', $data ?? [], null);
+        $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('ticker', $data ?? [], null);
+        $this->setIfExists('option_type', $data ?? [], null);
+        $this->setIfExists('strike_price', $data ?? [], null);
+        $this->setIfExists('expiration_date', $data ?? [], null);
+        $this->setIfExists('is_mini_option', $data ?? [], null);
+        $this->setIfExists('underlying_symbol', $data ?? [], null);
     }
 
     /**
@@ -360,24 +325,33 @@ class TradeExecutionStatus implements ModelInterface, ArrayAccess, \JsonSerializ
     {
         $invalidProperties = [];
 
-        $allowedValues = $this->getStateAllowableValues();
-        if (!is_null($this->container['state']) && !in_array($this->container['state'], $allowedValues, true)) {
+        if ($this->container['id'] === null) {
+            $invalidProperties[] = "'id' can't be null";
+        }
+        if ($this->container['ticker'] === null) {
+            $invalidProperties[] = "'ticker' can't be null";
+        }
+        if ($this->container['option_type'] === null) {
+            $invalidProperties[] = "'option_type' can't be null";
+        }
+        $allowedValues = $this->getOptionTypeAllowableValues();
+        if (!is_null($this->container['option_type']) && !in_array($this->container['option_type'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'state', must be one of '%s'",
-                $this->container['state'],
+                "invalid value '%s' for 'option_type', must be one of '%s'",
+                $this->container['option_type'],
                 implode("', '", $allowedValues)
             );
         }
 
-        $allowedValues = $this->getActionAllowableValues();
-        if (!is_null($this->container['action']) && !in_array($this->container['action'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'action', must be one of '%s'",
-                $this->container['action'],
-                implode("', '", $allowedValues)
-            );
+        if ($this->container['strike_price'] === null) {
+            $invalidProperties[] = "'strike_price' can't be null";
         }
-
+        if ($this->container['expiration_date'] === null) {
+            $invalidProperties[] = "'expiration_date' can't be null";
+        }
+        if ($this->container['underlying_symbol'] === null) {
+            $invalidProperties[] = "'underlying_symbol' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -394,282 +368,214 @@ class TradeExecutionStatus implements ModelInterface, ArrayAccess, \JsonSerializ
 
 
     /**
-     * Gets symbol
+     * Gets id
      *
-     * @return \SnapTrade\Model\BrokerageSymbol|null
+     * @return string
      */
-    public function getSymbol()
+    public function getId()
     {
-        return $this->container['symbol'];
+        return $this->container['id'];
     }
 
     /**
-     * Sets symbol
+     * Sets id
      *
-     * @param \SnapTrade\Model\BrokerageSymbol|null $symbol symbol
+     * @param string $id Unique identifier for the option symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
      *
      * @return self
      */
-    public function setSymbol($symbol)
+    public function setId($id)
     {
 
-        if (is_null($symbol)) {
-            throw new \InvalidArgumentException('non-nullable symbol cannot be null');
+        if (is_null($id)) {
+            throw new \InvalidArgumentException('non-nullable id cannot be null');
         }
 
-        $this->container['symbol'] = $symbol;
+        $this->container['id'] = $id;
 
         return $this;
     }
 
     /**
-     * Gets universal_symbol
+     * Gets ticker
      *
-     * @return \SnapTrade\Model\UniversalSymbol|null
+     * @return string
      */
-    public function getUniversalSymbol()
+    public function getTicker()
     {
-        return $this->container['universal_symbol'];
+        return $this->container['ticker'];
     }
 
     /**
-     * Sets universal_symbol
+     * Sets ticker
      *
-     * @param \SnapTrade\Model\UniversalSymbol|null $universal_symbol universal_symbol
+     * @param string $ticker The [OCC symbol](https://en.wikipedia.org/wiki/Option_symbol) for the option.
      *
      * @return self
      */
-    public function setUniversalSymbol($universal_symbol)
+    public function setTicker($ticker)
     {
 
-        if (is_null($universal_symbol)) {
-            throw new \InvalidArgumentException('non-nullable universal_symbol cannot be null');
+        if (is_null($ticker)) {
+            throw new \InvalidArgumentException('non-nullable ticker cannot be null');
         }
 
-        $this->container['universal_symbol'] = $universal_symbol;
+        $this->container['ticker'] = $ticker;
 
         return $this;
     }
 
     /**
-     * Gets trade
+     * Gets option_type
      *
-     * @return \SnapTrade\Model\Trade|null
+     * @return string
      */
-    public function getTrade()
+    public function getOptionType()
     {
-        return $this->container['trade'];
+        return $this->container['option_type'];
     }
 
     /**
-     * Sets trade
+     * Sets option_type
      *
-     * @param \SnapTrade\Model\Trade|null $trade trade
+     * @param string $option_type The type of option. Either \"CALL\" or \"PUT\".
      *
      * @return self
      */
-    public function setTrade($trade)
+    public function setOptionType($option_type)
     {
-
-        if (is_null($trade)) {
-            throw new \InvalidArgumentException('non-nullable trade cannot be null');
-        }
-
-        $this->container['trade'] = $trade;
-
-        return $this;
-    }
-
-    /**
-     * Gets state
-     *
-     * @return string|null
-     */
-    public function getState()
-    {
-        return $this->container['state'];
-    }
-
-    /**
-     * Sets state
-     *
-     * @param string|null $state Execution state of a trade
-     *
-     * @return self
-     */
-    public function setState($state)
-    {
-        $allowedValues = $this->getStateAllowableValues();
-        if (!is_null($state) && !in_array($state, $allowedValues, true)) {
+        $allowedValues = $this->getOptionTypeAllowableValues();
+        if (!in_array($option_type, $allowedValues, true)) {
             throw new \InvalidArgumentException(
                 sprintf(
-                    "Invalid value '%s' for 'state', must be one of '%s'",
-                    $state,
+                    "Invalid value '%s' for 'option_type', must be one of '%s'",
+                    $option_type,
                     implode("', '", $allowedValues)
                 )
             );
         }
 
-        if (is_null($state)) {
-            throw new \InvalidArgumentException('non-nullable state cannot be null');
+        if (is_null($option_type)) {
+            throw new \InvalidArgumentException('non-nullable option_type cannot be null');
         }
 
-        $this->container['state'] = $state;
+        $this->container['option_type'] = $option_type;
 
         return $this;
     }
 
     /**
-     * Gets filled_units
+     * Gets strike_price
      *
-     * @return int|null
+     * @return float
      */
-    public function getFilledUnits()
+    public function getStrikePrice()
     {
-        return $this->container['filled_units'];
+        return $this->container['strike_price'];
     }
 
     /**
-     * Sets filled_units
+     * Sets strike_price
      *
-     * @param int|null $filled_units Number of filled units
+     * @param float $strike_price The option strike price.
      *
      * @return self
      */
-    public function setFilledUnits($filled_units)
+    public function setStrikePrice($strike_price)
     {
 
-        if (is_null($filled_units)) {
-            throw new \InvalidArgumentException('non-nullable filled_units cannot be null');
+        if (is_null($strike_price)) {
+            throw new \InvalidArgumentException('non-nullable strike_price cannot be null');
         }
 
-        $this->container['filled_units'] = $filled_units;
+        $this->container['strike_price'] = $strike_price;
 
         return $this;
     }
 
     /**
-     * Gets action
+     * Gets expiration_date
      *
-     * @return string|null
+     * @return \DateTime
      */
-    public function getAction()
+    public function getExpirationDate()
     {
-        return $this->container['action'];
+        return $this->container['expiration_date'];
     }
 
     /**
-     * Sets action
+     * Sets expiration_date
      *
-     * @param string|null $action Action of executed trade
+     * @param \DateTime $expiration_date The option expiration date.
      *
      * @return self
      */
-    public function setAction($action)
+    public function setExpirationDate($expiration_date)
     {
-        $allowedValues = $this->getActionAllowableValues();
-        if (!is_null($action) && !in_array($action, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'action', must be one of '%s'",
-                    $action,
-                    implode("', '", $allowedValues)
-                )
-            );
+
+        if (is_null($expiration_date)) {
+            throw new \InvalidArgumentException('non-nullable expiration_date cannot be null');
         }
 
-        if (is_null($action)) {
-            throw new \InvalidArgumentException('non-nullable action cannot be null');
-        }
-
-        $this->container['action'] = $action;
+        $this->container['expiration_date'] = $expiration_date;
 
         return $this;
     }
 
     /**
-     * Gets price
+     * Gets is_mini_option
      *
-     * @return float|null
+     * @return bool|null
      */
-    public function getPrice()
+    public function getIsMiniOption()
     {
-        return $this->container['price'];
+        return $this->container['is_mini_option'];
     }
 
     /**
-     * Sets price
+     * Sets is_mini_option
      *
-     * @param float|null $price Price of execution
+     * @param bool|null $is_mini_option Whether the option is a mini option. Mini options have 10 underlying shares per contract instead of the standard 100.
      *
      * @return self
      */
-    public function setPrice($price)
+    public function setIsMiniOption($is_mini_option)
     {
 
-        if (is_null($price)) {
-            throw new \InvalidArgumentException('non-nullable price cannot be null');
+        if (is_null($is_mini_option)) {
+            throw new \InvalidArgumentException('non-nullable is_mini_option cannot be null');
         }
 
-        $this->container['price'] = $price;
+        $this->container['is_mini_option'] = $is_mini_option;
 
         return $this;
     }
 
     /**
-     * Gets commissions
+     * Gets underlying_symbol
      *
-     * @return float|null
+     * @return \SnapTrade\Model\UnderlyingSymbol
      */
-    public function getCommissions()
+    public function getUnderlyingSymbol()
     {
-        return $this->container['commissions'];
+        return $this->container['underlying_symbol'];
     }
 
     /**
-     * Sets commissions
+     * Sets underlying_symbol
      *
-     * @param float|null $commissions Fees paid from executing trade
+     * @param \SnapTrade\Model\UnderlyingSymbol $underlying_symbol underlying_symbol
      *
      * @return self
      */
-    public function setCommissions($commissions)
+    public function setUnderlyingSymbol($underlying_symbol)
     {
 
-        if (is_null($commissions)) {
-            throw new \InvalidArgumentException('non-nullable commissions cannot be null');
+        if (is_null($underlying_symbol)) {
+            throw new \InvalidArgumentException('non-nullable underlying_symbol cannot be null');
         }
 
-        $this->container['commissions'] = $commissions;
-
-        return $this;
-    }
-
-    /**
-     * Gets meta
-     *
-     * @return array<string,mixed>|null
-     */
-    public function getMeta()
-    {
-        return $this->container['meta'];
-    }
-
-    /**
-     * Sets meta
-     *
-     * @param array<string,mixed>|null $meta Other misc. data
-     *
-     * @return self
-     */
-    public function setMeta($meta)
-    {
-
-        if (is_null($meta)) {
-            throw new \InvalidArgumentException('non-nullable meta cannot be null');
-        }
-
-        $this->container['meta'] = $meta;
+        $this->container['underlying_symbol'] = $underlying_symbol;
 
         return $this;
     }

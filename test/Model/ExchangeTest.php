@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * ExchangeTest Class Doc Comment
  *
  * @category    Class
- * @description Stock Exchange
+ * @description Describes a single stock or crypto exchange.
  * @package     SnapTrade
  */
 class ExchangeTest extends TestCase

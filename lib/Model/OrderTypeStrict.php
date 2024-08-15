@@ -42,7 +42,7 @@ class OrderTypeStrict
 
     public const STOP_LIMIT = 'StopLimit';
 
-    public const STOP_LOSS = 'StopLoss';
+    public const STOP = 'Stop';
 
     /**
      * Gets allowable values of the enum
@@ -54,7 +54,7 @@ class OrderTypeStrict
             self::LIMIT,
             self::MARKET,
             self::STOP_LIMIT,
-            self::STOP_LOSS
+            self::STOP
         ];
     }
 }

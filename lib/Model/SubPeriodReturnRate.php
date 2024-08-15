@@ -309,7 +309,7 @@ class SubPeriodReturnRate implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Sets period_start
      *
-     * @param \DateTime|null $period_start Date used to specify timeframe for a reporting call (in YYYY-MM-DD format)
+     * @param \DateTime|null $period_start Date used to specify timeframe for a reporting call (in YYYY-MM-DD format). These dates are inclusive.
      *
      * @return self
      */
@@ -338,7 +338,7 @@ class SubPeriodReturnRate implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Sets period_end
      *
-     * @param \DateTime|null $period_end Date used to specify timeframe for a reporting call (in YYYY-MM-DD format)
+     * @param \DateTime|null $period_end Date used to specify timeframe for a reporting call (in YYYY-MM-DD format). These dates are inclusive.
      *
      * @return self
      */

@@ -30,7 +30,7 @@ use \SnapTrade\ObjectSerializer;
  * OptionsSymbol Class Doc Comment
  *
  * @category Class
- * @description Options Symbol
+ * @description Uniquely describes an option security + exchange combination across all brokerages.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
@@ -55,11 +55,9 @@ class OptionsSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
         'ticker' => 'string',
         'option_type' => 'string',
         'strike_price' => 'float',
-        'expiration_date' => 'string',
+        'expiration_date' => '\DateTime',
         'is_mini_option' => 'bool',
-        'underlying_symbol' => '\SnapTrade\Model\UnderlyingSymbol',
-        'local_id' => 'string',
-        'exchange_id' => 'string'
+        'underlying_symbol' => '\SnapTrade\Model\UnderlyingSymbol'
     ];
 
     /**
@@ -74,11 +72,9 @@ class OptionsSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
         'ticker' => null,
         'option_type' => null,
         'strike_price' => null,
-        'expiration_date' => 'datetime',
+        'expiration_date' => 'date',
         'is_mini_option' => null,
-        'underlying_symbol' => null,
-        'local_id' => null,
-        'exchange_id' => 'uuid'
+        'underlying_symbol' => null
     ];
 
     /**
@@ -93,9 +89,7 @@ class OptionsSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
 		'strike_price' => false,
 		'expiration_date' => false,
 		'is_mini_option' => false,
-		'underlying_symbol' => false,
-		'local_id' => false,
-		'exchange_id' => false
+		'underlying_symbol' => false
     ];
 
     /**
@@ -190,9 +184,7 @@ class OptionsSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
         'strike_price' => 'strike_price',
         'expiration_date' => 'expiration_date',
         'is_mini_option' => 'is_mini_option',
-        'underlying_symbol' => 'underlying_symbol',
-        'local_id' => 'local_id',
-        'exchange_id' => 'exchange_id'
+        'underlying_symbol' => 'underlying_symbol'
     ];
 
     /**
@@ -207,9 +199,7 @@ class OptionsSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
         'strike_price' => 'setStrikePrice',
         'expiration_date' => 'setExpirationDate',
         'is_mini_option' => 'setIsMiniOption',
-        'underlying_symbol' => 'setUnderlyingSymbol',
-        'local_id' => 'setLocalId',
-        'exchange_id' => 'setExchangeId'
+        'underlying_symbol' => 'setUnderlyingSymbol'
     ];
 
     /**
@@ -224,9 +214,7 @@ class OptionsSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
         'strike_price' => 'getStrikePrice',
         'expiration_date' => 'getExpirationDate',
         'is_mini_option' => 'getIsMiniOption',
-        'underlying_symbol' => 'getUnderlyingSymbol',
-        'local_id' => 'getLocalId',
-        'exchange_id' => 'getExchangeId'
+        'underlying_symbol' => 'getUnderlyingSymbol'
     ];
 
     /**
@@ -308,8 +296,6 @@ class OptionsSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('expiration_date', $data ?? [], null);
         $this->setIfExists('is_mini_option', $data ?? [], null);
         $this->setIfExists('underlying_symbol', $data ?? [], null);
-        $this->setIfExists('local_id', $data ?? [], null);
-        $this->setIfExists('exchange_id', $data ?? [], null);
     }
 
     /**
@@ -394,7 +380,7 @@ class OptionsSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets id
      *
-     * @param string $id id
+     * @param string $id Unique identifier for the option symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
      *
      * @return self
      */
@@ -423,7 +409,7 @@ class OptionsSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets ticker
      *
-     * @param string $ticker ticker
+     * @param string $ticker The [OCC symbol](https://en.wikipedia.org/wiki/Option_symbol) for the option.
      *
      * @return self
      */
@@ -452,7 +438,7 @@ class OptionsSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets option_type
      *
-     * @param string $option_type option_type
+     * @param string $option_type The type of option. Either \"CALL\" or \"PUT\".
      *
      * @return self
      */
@@ -491,7 +477,7 @@ class OptionsSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets strike_price
      *
-     * @param float $strike_price strike_price
+     * @param float $strike_price The option strike price.
      *
      * @return self
      */
@@ -510,7 +496,7 @@ class OptionsSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets expiration_date
      *
-     * @return string
+     * @return \DateTime
      */
     public function getExpirationDate()
     {
@@ -520,7 +506,7 @@ class OptionsSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets expiration_date
      *
-     * @param string $expiration_date expiration_date
+     * @param \DateTime $expiration_date The option expiration date.
      *
      * @return self
      */
@@ -549,7 +535,7 @@ class OptionsSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets is_mini_option
      *
-     * @param bool|null $is_mini_option is_mini_option
+     * @param bool|null $is_mini_option Whether the option is a mini option. Mini options have 10 underlying shares per contract instead of the standard 100.
      *
      * @return self
      */
@@ -590,64 +576,6 @@ class OptionsSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['underlying_symbol'] = $underlying_symbol;
-
-        return $this;
-    }
-
-    /**
-     * Gets local_id
-     *
-     * @return string|null
-     */
-    public function getLocalId()
-    {
-        return $this->container['local_id'];
-    }
-
-    /**
-     * Sets local_id
-     *
-     * @param string|null $local_id local_id
-     *
-     * @return self
-     */
-    public function setLocalId($local_id)
-    {
-
-        if (is_null($local_id)) {
-            throw new \InvalidArgumentException('non-nullable local_id cannot be null');
-        }
-
-        $this->container['local_id'] = $local_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets exchange_id
-     *
-     * @return string|null
-     */
-    public function getExchangeId()
-    {
-        return $this->container['exchange_id'];
-    }
-
-    /**
-     * Sets exchange_id
-     *
-     * @param string|null $exchange_id exchange_id
-     *
-     * @return self
-     */
-    public function setExchangeId($exchange_id)
-    {
-
-        if (is_null($exchange_id)) {
-            throw new \InvalidArgumentException('non-nullable exchange_id cannot be null');
-        }
-
-        $this->container['exchange_id'] = $exchange_id;
 
         return $this;
     }

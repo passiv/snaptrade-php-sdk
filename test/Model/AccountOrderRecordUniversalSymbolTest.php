@@ -1,6 +1,6 @@
 <?php
 /**
- * TradeTest
+ * AccountOrderRecordUniversalSymbolTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * TradeTest Class Doc Comment
+ * AccountOrderRecordUniversalSymbolTest Class Doc Comment
  *
  * @category    Class
- * @description A trade object
+ * @description Contains information about the security that the order is for. This field is only present for stock/ETF/crypto/mutual fund orders. For option orders, this field will be null and the &#x60;option_symbol&#x60; field will be populated.
  * @package     SnapTrade
  */
-class TradeTest extends TestCase
+class AccountOrderRecordUniversalSymbolTest extends TestCase
 {
 
     /**
@@ -64,9 +64,9 @@ class TradeTest extends TestCase
     }
 
     /**
-     * Test "Trade"
+     * Test "AccountOrderRecordUniversalSymbol"
      */
-    public function testTrade()
+    public function testAccountOrderRecordUniversalSymbol()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
@@ -82,15 +82,6 @@ class TradeTest extends TestCase
     }
 
     /**
-     * Test attribute "account"
-     */
-    public function testPropertyAccount()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test attribute "symbol"
      */
     public function testPropertySymbol()
@@ -100,45 +91,72 @@ class TradeTest extends TestCase
     }
 
     /**
-     * Test attribute "universal_symbol"
+     * Test attribute "raw_symbol"
      */
-    public function testPropertyUniversalSymbol()
+    public function testPropertyRawSymbol()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "action"
+     * Test attribute "description"
      */
-    public function testPropertyAction()
+    public function testPropertyDescription()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "units"
+     * Test attribute "currency"
      */
-    public function testPropertyUnits()
+    public function testPropertyCurrency()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "price"
+     * Test attribute "exchange"
      */
-    public function testPropertyPrice()
+    public function testPropertyExchange()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "sequence"
+     * Test attribute "type"
      */
-    public function testPropertySequence()
+    public function testPropertyType()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "currencies"
+     */
+    public function testPropertyCurrencies()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "figi_code"
+     */
+    public function testPropertyFigiCode()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "figi_instrument"
+     */
+    public function testPropertyFigiInstrument()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

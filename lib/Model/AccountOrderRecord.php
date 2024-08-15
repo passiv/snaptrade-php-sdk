@@ -30,7 +30,7 @@ use \SnapTrade\ObjectSerializer;
  * AccountOrderRecord Class Doc Comment
  *
  * @category Class
- * @description Record of order in brokerageaccount
+ * @description Describes a single recent order in an account. Each record here represents a single order leg. For multi-leg orders, there will be multiple records.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
@@ -54,8 +54,8 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
         'brokerage_order_id' => 'string',
         'status' => '\SnapTrade\Model\AccountOrderRecordStatus',
         'symbol' => 'string',
-        'universal_symbol' => '\SnapTrade\Model\UniversalSymbol',
-        'option_symbol' => '\SnapTrade\Model\OptionsSymbol',
+        'universal_symbol' => '\SnapTrade\Model\AccountOrderRecordUniversalSymbol',
+        'option_symbol' => '\SnapTrade\Model\AccountOrderRecordOptionSymbol',
         'action' => 'string',
         'total_quantity' => 'float',
         'open_quantity' => 'float',
@@ -66,10 +66,10 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
         'stop_price' => 'float',
         'order_type' => 'string',
         'time_in_force' => 'string',
-        'time_placed' => 'string',
-        'time_updated' => 'string',
-        'time_executed' => 'string',
-        'expiry_date' => 'string'
+        'time_placed' => '\DateTime',
+        'time_updated' => '\DateTime',
+        'time_executed' => '\DateTime',
+        'expiry_date' => '\DateTime'
     ];
 
     /**
@@ -95,10 +95,10 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
         'stop_price' => null,
         'order_type' => null,
         'time_in_force' => null,
-        'time_placed' => null,
-        'time_updated' => null,
-        'time_executed' => null,
-        'expiry_date' => null
+        'time_placed' => 'date-time',
+        'time_updated' => 'date-time',
+        'time_executed' => 'date-time',
+        'expiry_date' => 'date-time'
     ];
 
     /**
@@ -125,7 +125,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
 		'time_placed' => false,
 		'time_updated' => true,
 		'time_executed' => true,
-		'expiry_date' => false
+		'expiry_date' => true
     ];
 
     /**
@@ -422,7 +422,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets brokerage_order_id
      *
-     * @param string|null $brokerage_order_id Order id returned by brokerage
+     * @param string|null $brokerage_order_id Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
      *
      * @return self
      */
@@ -471,6 +471,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
      * Gets symbol
      *
      * @return string|null
+     * @deprecated
      */
     public function getSymbol()
     {
@@ -480,9 +481,10 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets symbol
      *
-     * @param string|null $symbol symbol
+     * @param string|null $symbol A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.
      *
      * @return self
+     * @deprecated
      */
     public function setSymbol($symbol)
     {
@@ -499,7 +501,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Gets universal_symbol
      *
-     * @return \SnapTrade\Model\UniversalSymbol|null
+     * @return \SnapTrade\Model\AccountOrderRecordUniversalSymbol|null
      */
     public function getUniversalSymbol()
     {
@@ -509,7 +511,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets universal_symbol
      *
-     * @param \SnapTrade\Model\UniversalSymbol|null $universal_symbol universal_symbol
+     * @param \SnapTrade\Model\AccountOrderRecordUniversalSymbol|null $universal_symbol universal_symbol
      *
      * @return self
      */
@@ -528,7 +530,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Gets option_symbol
      *
-     * @return \SnapTrade\Model\OptionsSymbol|null
+     * @return \SnapTrade\Model\AccountOrderRecordOptionSymbol|null
      */
     public function getOptionSymbol()
     {
@@ -538,7 +540,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets option_symbol
      *
-     * @param \SnapTrade\Model\OptionsSymbol|null $option_symbol option_symbol
+     * @param \SnapTrade\Model\AccountOrderRecordOptionSymbol|null $option_symbol option_symbol
      *
      * @return self
      */
@@ -567,7 +569,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets action
      *
-     * @param string|null $action Trade Action potential values include (but are not limited to) - BUY - SELL - BUY_COVER - SELL_SHORT - BUY_OPEN - BUY_CLOSE - SELL_OPEN - SELL_CLOSE
+     * @param string|null $action The action describes the intent or side of a trade. This is usually `BUY` or `SELL` but can include other potential values like the following depending on the specific brokerage.   - BUY   - SELL   - BUY_COVER   - SELL_SHORT   - BUY_OPEN   - BUY_CLOSE   - SELL_OPEN   - SELL_CLOSE
      *
      * @return self
      */
@@ -596,7 +598,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets total_quantity
      *
-     * @param float|null $total_quantity total_quantity
+     * @param float|null $total_quantity The total number of shares or contracts of the order. This should be the sum of the filled, canceled, and open quantities. Can be a decimal number for fractional shares.
      *
      * @return self
      */
@@ -632,7 +634,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets open_quantity
      *
-     * @param float|null $open_quantity Trade Units
+     * @param float|null $open_quantity The number of shares or contracts that are still open (waiting for execution). Can be a decimal number for fractional shares.
      *
      * @return self
      */
@@ -668,7 +670,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets canceled_quantity
      *
-     * @param float|null $canceled_quantity Trade Units
+     * @param float|null $canceled_quantity The number of shares or contracts that have been canceled. Can be a decimal number for fractional shares.
      *
      * @return self
      */
@@ -704,7 +706,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets filled_quantity
      *
-     * @param float|null $filled_quantity Trade Units
+     * @param float|null $filled_quantity The number of shares or contracts that have been filled. Can be a decimal number for fractional shares.
      *
      * @return self
      */
@@ -740,7 +742,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets execution_price
      *
-     * @param float|null $execution_price Trade Price if limit or stop limit order
+     * @param float|null $execution_price The price at which the order was executed.
      *
      * @return self
      */
@@ -776,7 +778,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets limit_price
      *
-     * @param float|null $limit_price Trade Price if limit or stop limit order
+     * @param float|null $limit_price The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to `Limit` and `StopLimit` orders.
      *
      * @return self
      */
@@ -812,7 +814,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets stop_price
      *
-     * @param float|null $stop_price Stop Price. If stop loss or stop limit order, the price to trigger the stop
+     * @param float|null $stop_price The stop price is the price at which a stop order is triggered. Should only apply to `Stop` and `StopLimit` orders.
      *
      * @return self
      */
@@ -848,7 +850,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets order_type
      *
-     * @param string|null $order_type Order Type potential values include (but are not limited to) - Limit - Market - StopLimit - StopLoss
+     * @param string|null $order_type The type of order placed. The most common values are `Market`, `Limit`, `Stop`, and `StopLimit`. We try our best to map brokerage order types to these values. When mapping fails, we will return the brokerage's order type value.
      *
      * @return self
      */
@@ -884,7 +886,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets time_in_force
      *
-     * @param string|null $time_in_force Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled   * GTD - Good Til Date
+     * @param string|null $time_in_force The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. We try our best to map brokerage time in force values to the following. When mapping fails, we will return the brokerage's time in force value.   - `Day` - Day. The order is valid only for the trading day on which it is placed.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - `GTD` - Good Til Date. The order is valid until the specified date.
      *
      * @return self
      */
@@ -903,7 +905,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Gets time_placed
      *
-     * @return string|null
+     * @return \DateTime|null
      */
     public function getTimePlaced()
     {
@@ -913,7 +915,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets time_placed
      *
-     * @param string|null $time_placed Time
+     * @param \DateTime|null $time_placed The time the order was placed. This is the time the order was submitted to the brokerage.
      *
      * @return self
      */
@@ -932,7 +934,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Gets time_updated
      *
-     * @return string|null
+     * @return \DateTime|null
      */
     public function getTimeUpdated()
     {
@@ -942,7 +944,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets time_updated
      *
-     * @param string|null $time_updated time_updated
+     * @param \DateTime|null $time_updated The time the order was last updated in the brokerage system. This value is not always available from the brokerage.
      *
      * @return self
      */
@@ -968,7 +970,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Gets time_executed
      *
-     * @return string|null
+     * @return \DateTime|null
      */
     public function getTimeExecuted()
     {
@@ -978,7 +980,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets time_executed
      *
-     * @param string|null $time_executed time_executed
+     * @param \DateTime|null $time_executed The time the order was executed in the brokerage system. This value is not always available from the brokerage.
      *
      * @return self
      */
@@ -1004,7 +1006,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Gets expiry_date
      *
-     * @return string|null
+     * @return \DateTime|null
      */
     public function getExpiryDate()
     {
@@ -1014,7 +1016,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets expiry_date
      *
-     * @param string|null $expiry_date Time
+     * @param \DateTime|null $expiry_date The time the order expires. This value is not always available from the brokerage.
      *
      * @return self
      */
@@ -1022,7 +1024,14 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     {
 
         if (is_null($expiry_date)) {
-            throw new \InvalidArgumentException('non-nullable expiry_date cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'expiry_date');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('expiry_date', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['expiry_date'] = $expiry_date;

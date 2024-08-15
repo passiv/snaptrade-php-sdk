@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * UniversalSymbolTest Class Doc Comment
  *
  * @category    Class
- * @description Universal symbol
+ * @description Uniquely describes a single security + exchange combination across all brokerages.
  * @package     SnapTrade
  */
 class UniversalSymbolTest extends TestCase

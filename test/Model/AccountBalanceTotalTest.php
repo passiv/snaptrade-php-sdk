@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * AccountBalanceTotalTest Class Doc Comment
  *
  * @category    Class
- * @description Total value of this account (includes cash, equity, fixed income, etc)
+ * @description Total market value of this account (includes cash, equity, fixed income, etc). This value is directly obtained from the brokerage and should reflect the most accurate value of the account.
  * @package     SnapTrade
  */
 class AccountBalanceTotalTest extends TestCase

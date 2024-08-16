@@ -1,6 +1,6 @@
 <?php
 /**
- * ModelAssetClassDetails
+ * BalanceCurrency
  *
  * PHP version 7.4
  *
@@ -27,13 +27,14 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * ModelAssetClassDetails Class Doc Comment
+ * BalanceCurrency Class Doc Comment
  *
  * @category Class
+ * @description The currency of the balance. This applies to both &#x60;cash&#x60; and &#x60;buying_power&#x60;.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class ModelAssetClassDetails implements ModelInterface, ArrayAccess, \JsonSerializable
+class BalanceCurrency implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -42,7 +43,7 @@ class ModelAssetClassDetails implements ModelInterface, ArrayAccess, \JsonSerial
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ModelAssetClassDetails';
+    protected static $openAPIModelName = 'Balance_currency';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -50,8 +51,9 @@ class ModelAssetClassDetails implements ModelInterface, ArrayAccess, \JsonSerial
       * @var string[]
       */
     protected static $openAPITypes = [
-        'model_asset_class' => '\SnapTrade\Model\ModelAssetClass',
-        'model_asset_class_target' => '\SnapTrade\Model\ModelAssetClassTarget[]'
+        'id' => 'string',
+        'code' => 'string',
+        'name' => 'string'
     ];
 
     /**
@@ -62,8 +64,9 @@ class ModelAssetClassDetails implements ModelInterface, ArrayAccess, \JsonSerial
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'model_asset_class' => null,
-        'model_asset_class_target' => null
+        'id' => 'uuid',
+        'code' => null,
+        'name' => null
     ];
 
     /**
@@ -72,8 +75,9 @@ class ModelAssetClassDetails implements ModelInterface, ArrayAccess, \JsonSerial
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'model_asset_class' => false,
-		'model_asset_class_target' => false
+        'id' => false,
+		'code' => false,
+		'name' => false
     ];
 
     /**
@@ -162,8 +166,9 @@ class ModelAssetClassDetails implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $attributeMap = [
-        'model_asset_class' => 'model_asset_class',
-        'model_asset_class_target' => 'model_asset_class_target'
+        'id' => 'id',
+        'code' => 'code',
+        'name' => 'name'
     ];
 
     /**
@@ -172,8 +177,9 @@ class ModelAssetClassDetails implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $setters = [
-        'model_asset_class' => 'setModelAssetClass',
-        'model_asset_class_target' => 'setModelAssetClassTarget'
+        'id' => 'setId',
+        'code' => 'setCode',
+        'name' => 'setName'
     ];
 
     /**
@@ -182,8 +188,9 @@ class ModelAssetClassDetails implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $getters = [
-        'model_asset_class' => 'getModelAssetClass',
-        'model_asset_class_target' => 'getModelAssetClassTarget'
+        'id' => 'getId',
+        'code' => 'getCode',
+        'name' => 'getName'
     ];
 
     /**
@@ -243,8 +250,9 @@ class ModelAssetClassDetails implements ModelInterface, ArrayAccess, \JsonSerial
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('model_asset_class', $data ?? [], null);
-        $this->setIfExists('model_asset_class_target', $data ?? [], null);
+        $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('code', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
     }
 
     /**
@@ -290,59 +298,88 @@ class ModelAssetClassDetails implements ModelInterface, ArrayAccess, \JsonSerial
 
 
     /**
-     * Gets model_asset_class
+     * Gets id
      *
-     * @return \SnapTrade\Model\ModelAssetClass|null
+     * @return string|null
      */
-    public function getModelAssetClass()
+    public function getId()
     {
-        return $this->container['model_asset_class'];
+        return $this->container['id'];
     }
 
     /**
-     * Sets model_asset_class
+     * Sets id
      *
-     * @param \SnapTrade\Model\ModelAssetClass|null $model_asset_class model_asset_class
+     * @param string|null $id Unique identifier for the currency. This is the UUID used to reference the currency in SnapTrade.
      *
      * @return self
      */
-    public function setModelAssetClass($model_asset_class)
+    public function setId($id)
     {
 
-        if (is_null($model_asset_class)) {
-            throw new \InvalidArgumentException('non-nullable model_asset_class cannot be null');
+        if (is_null($id)) {
+            throw new \InvalidArgumentException('non-nullable id cannot be null');
         }
 
-        $this->container['model_asset_class'] = $model_asset_class;
+        $this->container['id'] = $id;
 
         return $this;
     }
 
     /**
-     * Gets model_asset_class_target
+     * Gets code
      *
-     * @return \SnapTrade\Model\ModelAssetClassTarget[]|null
+     * @return string|null
      */
-    public function getModelAssetClassTarget()
+    public function getCode()
     {
-        return $this->container['model_asset_class_target'];
+        return $this->container['code'];
     }
 
     /**
-     * Sets model_asset_class_target
+     * Sets code
      *
-     * @param \SnapTrade\Model\ModelAssetClassTarget[]|null $model_asset_class_target model_asset_class_target
+     * @param string|null $code The ISO-4217 currency code for the currency.
      *
      * @return self
      */
-    public function setModelAssetClassTarget($model_asset_class_target)
+    public function setCode($code)
     {
 
-        if (is_null($model_asset_class_target)) {
-            throw new \InvalidArgumentException('non-nullable model_asset_class_target cannot be null');
+        if (is_null($code)) {
+            throw new \InvalidArgumentException('non-nullable code cannot be null');
         }
 
-        $this->container['model_asset_class_target'] = $model_asset_class_target;
+        $this->container['code'] = $code;
+
+        return $this;
+    }
+
+    /**
+     * Gets name
+     *
+     * @return string|null
+     */
+    public function getName()
+    {
+        return $this->container['name'];
+    }
+
+    /**
+     * Sets name
+     *
+     * @param string|null $name A human-friendly name of the currency.
+     *
+     * @return self
+     */
+    public function setName($name)
+    {
+
+        if (is_null($name)) {
+            throw new \InvalidArgumentException('non-nullable name cannot be null');
+        }
+
+        $this->container['name'] = $name;
 
         return $this;
     }

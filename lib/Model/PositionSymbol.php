@@ -30,7 +30,7 @@ use \SnapTrade\ObjectSerializer;
  * PositionSymbol Class Doc Comment
  *
  * @category Class
- * @description Symbol returned in position object
+ * @description Uniquely describes a security for the position within an account. The distinction between this and the &#x60;symbol&#x60; child property is that this object is specific to a position within an account, while the &#x60;symbol&#x60; child property is universal across all brokerage accounts. The caller should rely on the &#x60;symbol&#x60; child property for most use cases.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
@@ -322,6 +322,7 @@ class PositionSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
      * Gets id
      *
      * @return string|null
+     * @deprecated
      */
     public function getId()
     {
@@ -331,9 +332,10 @@ class PositionSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets id
      *
-     * @param string|null $id id
+     * @param string|null $id A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.
      *
      * @return self
+     * @deprecated
      */
     public function setId($id)
     {
@@ -351,6 +353,7 @@ class PositionSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
      * Gets description
      *
      * @return string|null
+     * @deprecated
      */
     public function getDescription()
     {
@@ -360,9 +363,10 @@ class PositionSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets description
      *
-     * @param string|null $description description
+     * @param string|null $description This field is deprecated and the caller should use the `symbol` child property's `description` instead.
      *
      * @return self
+     * @deprecated
      */
     public function setDescription($description)
     {
@@ -409,6 +413,7 @@ class PositionSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
      * Gets local_id
      *
      * @return string|null
+     * @deprecated
      */
     public function getLocalId()
     {
@@ -418,9 +423,10 @@ class PositionSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets local_id
      *
-     * @param string|null $local_id local_id
+     * @param string|null $local_id This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
      *
      * @return self
+     * @deprecated
      */
     public function setLocalId($local_id)
     {
@@ -445,6 +451,7 @@ class PositionSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
      * Gets is_quotable
      *
      * @return bool|null
+     * @deprecated
      */
     public function getIsQuotable()
     {
@@ -454,9 +461,10 @@ class PositionSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets is_quotable
      *
-     * @param bool|null $is_quotable is_quotable
+     * @param bool|null $is_quotable This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
      *
      * @return self
+     * @deprecated
      */
     public function setIsQuotable($is_quotable)
     {
@@ -474,6 +482,7 @@ class PositionSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
      * Gets is_tradable
      *
      * @return bool|null
+     * @deprecated
      */
     public function getIsTradable()
     {
@@ -483,9 +492,10 @@ class PositionSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets is_tradable
      *
-     * @param bool|null $is_tradable is_tradable
+     * @param bool|null $is_tradable This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
      *
      * @return self
+     * @deprecated
      */
     public function setIsTradable($is_tradable)
     {

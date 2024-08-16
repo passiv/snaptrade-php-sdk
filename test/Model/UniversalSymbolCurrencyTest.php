@@ -1,6 +1,6 @@
 <?php
 /**
- * AmountTest
+ * UniversalSymbolCurrencyTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * AmountTest Class Doc Comment
+ * UniversalSymbolCurrencyTest Class Doc Comment
  *
  * @category    Class
- * @description Total value of the account, as reported by the brokerage
+ * @description The currency in which the security is traded.
  * @package     SnapTrade
  */
-class AmountTest extends TestCase
+class UniversalSymbolCurrencyTest extends TestCase
 {
 
     /**
@@ -64,27 +64,36 @@ class AmountTest extends TestCase
     }
 
     /**
-     * Test "Amount"
+     * Test "UniversalSymbolCurrency"
      */
-    public function testAmount()
+    public function testUniversalSymbolCurrency()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "amount"
+     * Test attribute "id"
      */
-    public function testPropertyAmount()
+    public function testPropertyId()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "currency"
+     * Test attribute "code"
      */
-    public function testPropertyCurrency()
+    public function testPropertyCode()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "name"
+     */
+    public function testPropertyName()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

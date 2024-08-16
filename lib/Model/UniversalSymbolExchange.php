@@ -1,6 +1,6 @@
 <?php
 /**
- * UserSettings
+ * UniversalSymbolExchange
  *
  * PHP version 7.4
  *
@@ -27,14 +27,14 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * UserSettings Class Doc Comment
+ * UniversalSymbolExchange Class Doc Comment
  *
  * @category Class
- * @description User account settings
+ * @description The exchange on which the security is listed and traded.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class UserSettings implements ModelInterface, ArrayAccess, \JsonSerializable
+class UniversalSymbolExchange implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -43,7 +43,7 @@ class UserSettings implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'UserSettings';
+    protected static $openAPIModelName = 'UniversalSymbol_exchange';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -51,16 +51,14 @@ class UserSettings implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'email' => 'string',
+        'id' => 'string',
+        'code' => 'string',
+        'mic_code' => 'string',
         'name' => 'string',
-        'receive_cash_notification' => 'bool',
-        'receive_drift_notification' => 'bool',
-        'user_trial_activated' => 'bool',
-        'activated_trial_date' => 'string',
-        'demo' => 'bool',
-        'api_enabled' => 'bool',
-        'drift_threshold' => 'float',
-        'preferred_currency' => '\SnapTrade\Model\Currency'
+        'timezone' => 'string',
+        'start_time' => 'string',
+        'close_time' => 'string',
+        'suffix' => 'string'
     ];
 
     /**
@@ -71,16 +69,14 @@ class UserSettings implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'email' => 'email',
+        'id' => 'uuid',
+        'code' => null,
+        'mic_code' => null,
         'name' => null,
-        'receive_cash_notification' => null,
-        'receive_drift_notification' => null,
-        'user_trial_activated' => null,
-        'activated_trial_date' => 'dateTime',
-        'demo' => null,
-        'api_enabled' => null,
-        'drift_threshold' => null,
-        'preferred_currency' => null
+        'timezone' => null,
+        'start_time' => null,
+        'close_time' => null,
+        'suffix' => null
     ];
 
     /**
@@ -89,16 +85,14 @@ class UserSettings implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'email' => false,
+        'id' => false,
+		'code' => false,
+		'mic_code' => false,
 		'name' => false,
-		'receive_cash_notification' => false,
-		'receive_drift_notification' => false,
-		'user_trial_activated' => false,
-		'activated_trial_date' => false,
-		'demo' => false,
-		'api_enabled' => false,
-		'drift_threshold' => false,
-		'preferred_currency' => false
+		'timezone' => false,
+		'start_time' => false,
+		'close_time' => false,
+		'suffix' => true
     ];
 
     /**
@@ -187,16 +181,14 @@ class UserSettings implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'email' => 'email',
+        'id' => 'id',
+        'code' => 'code',
+        'mic_code' => 'mic_code',
         'name' => 'name',
-        'receive_cash_notification' => 'receive_cash_notification',
-        'receive_drift_notification' => 'receive_drift_notification',
-        'user_trial_activated' => 'user_trial_activated',
-        'activated_trial_date' => 'activated_trial_date',
-        'demo' => 'demo',
-        'api_enabled' => 'api_enabled',
-        'drift_threshold' => 'drift_threshold',
-        'preferred_currency' => 'preferred_currency'
+        'timezone' => 'timezone',
+        'start_time' => 'start_time',
+        'close_time' => 'close_time',
+        'suffix' => 'suffix'
     ];
 
     /**
@@ -205,16 +197,14 @@ class UserSettings implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'email' => 'setEmail',
+        'id' => 'setId',
+        'code' => 'setCode',
+        'mic_code' => 'setMicCode',
         'name' => 'setName',
-        'receive_cash_notification' => 'setReceiveCashNotification',
-        'receive_drift_notification' => 'setReceiveDriftNotification',
-        'user_trial_activated' => 'setUserTrialActivated',
-        'activated_trial_date' => 'setActivatedTrialDate',
-        'demo' => 'setDemo',
-        'api_enabled' => 'setApiEnabled',
-        'drift_threshold' => 'setDriftThreshold',
-        'preferred_currency' => 'setPreferredCurrency'
+        'timezone' => 'setTimezone',
+        'start_time' => 'setStartTime',
+        'close_time' => 'setCloseTime',
+        'suffix' => 'setSuffix'
     ];
 
     /**
@@ -223,16 +213,14 @@ class UserSettings implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'email' => 'getEmail',
+        'id' => 'getId',
+        'code' => 'getCode',
+        'mic_code' => 'getMicCode',
         'name' => 'getName',
-        'receive_cash_notification' => 'getReceiveCashNotification',
-        'receive_drift_notification' => 'getReceiveDriftNotification',
-        'user_trial_activated' => 'getUserTrialActivated',
-        'activated_trial_date' => 'getActivatedTrialDate',
-        'demo' => 'getDemo',
-        'api_enabled' => 'getApiEnabled',
-        'drift_threshold' => 'getDriftThreshold',
-        'preferred_currency' => 'getPreferredCurrency'
+        'timezone' => 'getTimezone',
+        'start_time' => 'getStartTime',
+        'close_time' => 'getCloseTime',
+        'suffix' => 'getSuffix'
     ];
 
     /**
@@ -292,16 +280,14 @@ class UserSettings implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('email', $data ?? [], null);
+        $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('code', $data ?? [], null);
+        $this->setIfExists('mic_code', $data ?? [], null);
         $this->setIfExists('name', $data ?? [], null);
-        $this->setIfExists('receive_cash_notification', $data ?? [], null);
-        $this->setIfExists('receive_drift_notification', $data ?? [], null);
-        $this->setIfExists('user_trial_activated', $data ?? [], null);
-        $this->setIfExists('activated_trial_date', $data ?? [], null);
-        $this->setIfExists('demo', $data ?? [], null);
-        $this->setIfExists('api_enabled', $data ?? [], null);
-        $this->setIfExists('drift_threshold', $data ?? [], null);
-        $this->setIfExists('preferred_currency', $data ?? [], null);
+        $this->setIfExists('timezone', $data ?? [], null);
+        $this->setIfExists('start_time', $data ?? [], null);
+        $this->setIfExists('close_time', $data ?? [], null);
+        $this->setIfExists('suffix', $data ?? [], null);
     }
 
     /**
@@ -347,30 +333,88 @@ class UserSettings implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets email
+     * Gets id
      *
      * @return string|null
      */
-    public function getEmail()
+    public function getId()
     {
-        return $this->container['email'];
+        return $this->container['id'];
     }
 
     /**
-     * Sets email
+     * Sets id
      *
-     * @param string|null $email email
+     * @param string|null $id Unique ID for the exchange in SnapTrade.
      *
      * @return self
      */
-    public function setEmail($email)
+    public function setId($id)
     {
 
-        if (is_null($email)) {
-            throw new \InvalidArgumentException('non-nullable email cannot be null');
+        if (is_null($id)) {
+            throw new \InvalidArgumentException('non-nullable id cannot be null');
         }
 
-        $this->container['email'] = $email;
+        $this->container['id'] = $id;
+
+        return $this;
+    }
+
+    /**
+     * Gets code
+     *
+     * @return string|null
+     */
+    public function getCode()
+    {
+        return $this->container['code'];
+    }
+
+    /**
+     * Sets code
+     *
+     * @param string|null $code A short name for the exchange. For standardized exchange code, please us the `mic_code` field.
+     *
+     * @return self
+     */
+    public function setCode($code)
+    {
+
+        if (is_null($code)) {
+            throw new \InvalidArgumentException('non-nullable code cannot be null');
+        }
+
+        $this->container['code'] = $code;
+
+        return $this;
+    }
+
+    /**
+     * Gets mic_code
+     *
+     * @return string|null
+     */
+    public function getMicCode()
+    {
+        return $this->container['mic_code'];
+    }
+
+    /**
+     * Sets mic_code
+     *
+     * @param string|null $mic_code The [Market Identifier Code](https://en.wikipedia.org/wiki/Market_Identifier_Code) (MIC) for the exchange.
+     *
+     * @return self
+     */
+    public function setMicCode($mic_code)
+    {
+
+        if (is_null($mic_code)) {
+            throw new \InvalidArgumentException('non-nullable mic_code cannot be null');
+        }
+
+        $this->container['mic_code'] = $mic_code;
 
         return $this;
     }
@@ -388,7 +432,7 @@ class UserSettings implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets name
      *
-     * @param string|null $name name
+     * @param string|null $name The full name of the exchange.
      *
      * @return self
      */
@@ -405,233 +449,124 @@ class UserSettings implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets receive_cash_notification
-     *
-     * @return bool|null
-     */
-    public function getReceiveCashNotification()
-    {
-        return $this->container['receive_cash_notification'];
-    }
-
-    /**
-     * Sets receive_cash_notification
-     *
-     * @param bool|null $receive_cash_notification receive_cash_notification
-     *
-     * @return self
-     */
-    public function setReceiveCashNotification($receive_cash_notification)
-    {
-
-        if (is_null($receive_cash_notification)) {
-            throw new \InvalidArgumentException('non-nullable receive_cash_notification cannot be null');
-        }
-
-        $this->container['receive_cash_notification'] = $receive_cash_notification;
-
-        return $this;
-    }
-
-    /**
-     * Gets receive_drift_notification
-     *
-     * @return bool|null
-     */
-    public function getReceiveDriftNotification()
-    {
-        return $this->container['receive_drift_notification'];
-    }
-
-    /**
-     * Sets receive_drift_notification
-     *
-     * @param bool|null $receive_drift_notification receive_drift_notification
-     *
-     * @return self
-     */
-    public function setReceiveDriftNotification($receive_drift_notification)
-    {
-
-        if (is_null($receive_drift_notification)) {
-            throw new \InvalidArgumentException('non-nullable receive_drift_notification cannot be null');
-        }
-
-        $this->container['receive_drift_notification'] = $receive_drift_notification;
-
-        return $this;
-    }
-
-    /**
-     * Gets user_trial_activated
-     *
-     * @return bool|null
-     */
-    public function getUserTrialActivated()
-    {
-        return $this->container['user_trial_activated'];
-    }
-
-    /**
-     * Sets user_trial_activated
-     *
-     * @param bool|null $user_trial_activated user_trial_activated
-     *
-     * @return self
-     */
-    public function setUserTrialActivated($user_trial_activated)
-    {
-
-        if (is_null($user_trial_activated)) {
-            throw new \InvalidArgumentException('non-nullable user_trial_activated cannot be null');
-        }
-
-        $this->container['user_trial_activated'] = $user_trial_activated;
-
-        return $this;
-    }
-
-    /**
-     * Gets activated_trial_date
+     * Gets timezone
      *
      * @return string|null
      */
-    public function getActivatedTrialDate()
+    public function getTimezone()
     {
-        return $this->container['activated_trial_date'];
+        return $this->container['timezone'];
     }
 
     /**
-     * Sets activated_trial_date
+     * Sets timezone
      *
-     * @param string|null $activated_trial_date activated_trial_date
+     * @param string|null $timezone The timezone for the trading hours (`start_time` and `close_time`) of the exchange.
      *
      * @return self
      */
-    public function setActivatedTrialDate($activated_trial_date)
+    public function setTimezone($timezone)
     {
 
-        if (is_null($activated_trial_date)) {
-            throw new \InvalidArgumentException('non-nullable activated_trial_date cannot be null');
+        if (is_null($timezone)) {
+            throw new \InvalidArgumentException('non-nullable timezone cannot be null');
         }
 
-        $this->container['activated_trial_date'] = $activated_trial_date;
+        $this->container['timezone'] = $timezone;
 
         return $this;
     }
 
     /**
-     * Gets demo
+     * Gets start_time
      *
-     * @return bool|null
+     * @return string|null
      */
-    public function getDemo()
+    public function getStartTime()
     {
-        return $this->container['demo'];
+        return $this->container['start_time'];
     }
 
     /**
-     * Sets demo
+     * Sets start_time
      *
-     * @param bool|null $demo demo
+     * @param string|null $start_time The time when the exchange opens for trading.
      *
      * @return self
      */
-    public function setDemo($demo)
+    public function setStartTime($start_time)
     {
 
-        if (is_null($demo)) {
-            throw new \InvalidArgumentException('non-nullable demo cannot be null');
+        if (is_null($start_time)) {
+            throw new \InvalidArgumentException('non-nullable start_time cannot be null');
         }
 
-        $this->container['demo'] = $demo;
+        $this->container['start_time'] = $start_time;
 
         return $this;
     }
 
     /**
-     * Gets api_enabled
+     * Gets close_time
      *
-     * @return bool|null
+     * @return string|null
      */
-    public function getApiEnabled()
+    public function getCloseTime()
     {
-        return $this->container['api_enabled'];
+        return $this->container['close_time'];
     }
 
     /**
-     * Sets api_enabled
+     * Sets close_time
      *
-     * @param bool|null $api_enabled api_enabled
+     * @param string|null $close_time The time when the exchange closes for trading.
      *
      * @return self
      */
-    public function setApiEnabled($api_enabled)
+    public function setCloseTime($close_time)
     {
 
-        if (is_null($api_enabled)) {
-            throw new \InvalidArgumentException('non-nullable api_enabled cannot be null');
+        if (is_null($close_time)) {
+            throw new \InvalidArgumentException('non-nullable close_time cannot be null');
         }
 
-        $this->container['api_enabled'] = $api_enabled;
+        $this->container['close_time'] = $close_time;
 
         return $this;
     }
 
     /**
-     * Gets drift_threshold
+     * Gets suffix
      *
-     * @return float|null
+     * @return string|null
      */
-    public function getDriftThreshold()
+    public function getSuffix()
     {
-        return $this->container['drift_threshold'];
+        return $this->container['suffix'];
     }
 
     /**
-     * Sets drift_threshold
+     * Sets suffix
      *
-     * @param float|null $drift_threshold drift_threshold
+     * @param string|null $suffix The suffix to be appended to the symbol when trading on this exchange. For example, the suffix for the Toronto Stock Exchange is `.TO`. See `UniversalSymbol->symbol` and `UniversalSymbol->raw_symbol` for more detail.
      *
      * @return self
      */
-    public function setDriftThreshold($drift_threshold)
+    public function setSuffix($suffix)
     {
 
-        if (is_null($drift_threshold)) {
-            throw new \InvalidArgumentException('non-nullable drift_threshold cannot be null');
+        if (is_null($suffix)) {
+            array_push($this->openAPINullablesSetToNull, 'suffix');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('suffix', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
-        $this->container['drift_threshold'] = $drift_threshold;
-
-        return $this;
-    }
-
-    /**
-     * Gets preferred_currency
-     *
-     * @return \SnapTrade\Model\Currency|null
-     */
-    public function getPreferredCurrency()
-    {
-        return $this->container['preferred_currency'];
-    }
-
-    /**
-     * Sets preferred_currency
-     *
-     * @param \SnapTrade\Model\Currency|null $preferred_currency preferred_currency
-     *
-     * @return self
-     */
-    public function setPreferredCurrency($preferred_currency)
-    {
-
-        if (is_null($preferred_currency)) {
-            throw new \InvalidArgumentException('non-nullable preferred_currency cannot be null');
-        }
-
-        $this->container['preferred_currency'] = $preferred_currency;
+        $this->container['suffix'] = $suffix;
 
         return $this;
     }

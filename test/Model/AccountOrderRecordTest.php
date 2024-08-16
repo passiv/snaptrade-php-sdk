@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * AccountOrderRecordTest Class Doc Comment
  *
  * @category    Class
- * @description Record of order in brokerageaccount
+ * @description Describes a single recent order in an account. Each record here represents a single order leg. For multi-leg orders, there will be multiple records.
  * @package     SnapTrade
  */
 class AccountOrderRecordTest extends TestCase

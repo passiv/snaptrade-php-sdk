@@ -1,6 +1,6 @@
 <?php
 /**
- * UserSettingsTest
+ * AccountOrderRecordOptionSymbolTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * UserSettingsTest Class Doc Comment
+ * AccountOrderRecordOptionSymbolTest Class Doc Comment
  *
  * @category    Class
- * @description User account settings
+ * @description Contains information about the option contract that the order is for. This field is only present for option orders. For stock/ETF/crypto/mutual fund orders, this field will be null and the &#x60;universal_symbol&#x60; field will be populated.
  * @package     SnapTrade
  */
-class UserSettingsTest extends TestCase
+class AccountOrderRecordOptionSymbolTest extends TestCase
 {
 
     /**
@@ -64,99 +64,72 @@ class UserSettingsTest extends TestCase
     }
 
     /**
-     * Test "UserSettings"
+     * Test "AccountOrderRecordOptionSymbol"
      */
-    public function testUserSettings()
+    public function testAccountOrderRecordOptionSymbol()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "email"
+     * Test attribute "id"
      */
-    public function testPropertyEmail()
+    public function testPropertyId()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "name"
+     * Test attribute "ticker"
      */
-    public function testPropertyName()
+    public function testPropertyTicker()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "receive_cash_notification"
+     * Test attribute "option_type"
      */
-    public function testPropertyReceiveCashNotification()
+    public function testPropertyOptionType()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "receive_drift_notification"
+     * Test attribute "strike_price"
      */
-    public function testPropertyReceiveDriftNotification()
+    public function testPropertyStrikePrice()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "user_trial_activated"
+     * Test attribute "expiration_date"
      */
-    public function testPropertyUserTrialActivated()
+    public function testPropertyExpirationDate()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "activated_trial_date"
+     * Test attribute "is_mini_option"
      */
-    public function testPropertyActivatedTrialDate()
+    public function testPropertyIsMiniOption()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "demo"
+     * Test attribute "underlying_symbol"
      */
-    public function testPropertyDemo()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "api_enabled"
-     */
-    public function testPropertyApiEnabled()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "drift_threshold"
-     */
-    public function testPropertyDriftThreshold()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "preferred_currency"
-     */
-    public function testPropertyPreferredCurrency()
+    public function testPropertyUnderlyingSymbol()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

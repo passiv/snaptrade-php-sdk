@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * AccountSyncStatusTest Class Doc Comment
  *
  * @category    Class
- * @description Status of account
+ * @description Contains status update for the account sync process between SnapTrade and the brokerage.
  * @package     SnapTrade
  */
 class AccountSyncStatusTest extends TestCase

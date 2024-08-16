@@ -1,6 +1,6 @@
 <?php
 /**
- * JWT
+ * UnderlyingSymbolType
  *
  * PHP version 7.4
  *
@@ -27,14 +27,14 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * JWT Class Doc Comment
+ * UnderlyingSymbolType Class Doc Comment
  *
  * @category Class
- * @description JWT Token. Used to acess resources in private endpoints available only through the Passiv app
+ * @description The type of security. For example, \&quot;Common Stock\&quot; or \&quot;ETF\&quot;.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class JWT implements ModelInterface, ArrayAccess, \JsonSerializable
+class UnderlyingSymbolType implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -43,7 +43,7 @@ class JWT implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'JWT';
+    protected static $openAPIModelName = 'UnderlyingSymbol_type';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -51,7 +51,10 @@ class JWT implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'token' => 'string'
+        'id' => 'string',
+        'code' => 'string',
+        'description' => 'string',
+        'is_supported' => 'bool'
     ];
 
     /**
@@ -62,7 +65,10 @@ class JWT implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'token' => 'jwt'
+        'id' => 'uuid',
+        'code' => null,
+        'description' => null,
+        'is_supported' => null
     ];
 
     /**
@@ -71,7 +77,10 @@ class JWT implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'token' => false
+        'id' => false,
+		'code' => false,
+		'description' => false,
+		'is_supported' => false
     ];
 
     /**
@@ -160,7 +169,10 @@ class JWT implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'token' => 'token'
+        'id' => 'id',
+        'code' => 'code',
+        'description' => 'description',
+        'is_supported' => 'is_supported'
     ];
 
     /**
@@ -169,7 +181,10 @@ class JWT implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'token' => 'setToken'
+        'id' => 'setId',
+        'code' => 'setCode',
+        'description' => 'setDescription',
+        'is_supported' => 'setIsSupported'
     ];
 
     /**
@@ -178,7 +193,10 @@ class JWT implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'token' => 'getToken'
+        'id' => 'getId',
+        'code' => 'getCode',
+        'description' => 'getDescription',
+        'is_supported' => 'getIsSupported'
     ];
 
     /**
@@ -238,7 +256,10 @@ class JWT implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('token', $data ?? [], null);
+        $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('code', $data ?? [], null);
+        $this->setIfExists('description', $data ?? [], null);
+        $this->setIfExists('is_supported', $data ?? [], null);
     }
 
     /**
@@ -284,30 +305,119 @@ class JWT implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets token
+     * Gets id
      *
      * @return string|null
      */
-    public function getToken()
+    public function getId()
     {
-        return $this->container['token'];
+        return $this->container['id'];
     }
 
     /**
-     * Sets token
+     * Sets id
      *
-     * @param string|null $token token
+     * @param string|null $id Unique identifier for the security type within SnapTrade. This is the ID used to reference the security type in SnapTrade API calls.
      *
      * @return self
      */
-    public function setToken($token)
+    public function setId($id)
     {
 
-        if (is_null($token)) {
-            throw new \InvalidArgumentException('non-nullable token cannot be null');
+        if (is_null($id)) {
+            throw new \InvalidArgumentException('non-nullable id cannot be null');
         }
 
-        $this->container['token'] = $token;
+        $this->container['id'] = $id;
+
+        return $this;
+    }
+
+    /**
+     * Gets code
+     *
+     * @return string|null
+     */
+    public function getCode()
+    {
+        return $this->container['code'];
+    }
+
+    /**
+     * Sets code
+     *
+     * @param string|null $code A short code representing the security type. For example, \"cs\" for Common Stock. Here are some common values:   ad - ADR   bnd - Bond   cs - Common Stock   cef - Closed End Fund   et - ETF   oef - Open Ended Fund   ps - Preferred Stock   rt - Right   struct - Structured Product   ut - Unit   wi - When Issued   wt - Warrant
+     *
+     * @return self
+     */
+    public function setCode($code)
+    {
+
+        if (is_null($code)) {
+            throw new \InvalidArgumentException('non-nullable code cannot be null');
+        }
+
+        $this->container['code'] = $code;
+
+        return $this;
+    }
+
+    /**
+     * Gets description
+     *
+     * @return string|null
+     */
+    public function getDescription()
+    {
+        return $this->container['description'];
+    }
+
+    /**
+     * Sets description
+     *
+     * @param string|null $description A human-readable description of the security type. For example, \"Common Stock\" or \"ETF\".
+     *
+     * @return self
+     */
+    public function setDescription($description)
+    {
+
+        if (is_null($description)) {
+            throw new \InvalidArgumentException('non-nullable description cannot be null');
+        }
+
+        $this->container['description'] = $description;
+
+        return $this;
+    }
+
+    /**
+     * Gets is_supported
+     *
+     * @return bool|null
+     * @deprecated
+     */
+    public function getIsSupported()
+    {
+        return $this->container['is_supported'];
+    }
+
+    /**
+     * Sets is_supported
+     *
+     * @param bool|null $is_supported This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
+     *
+     * @return self
+     * @deprecated
+     */
+    public function setIsSupported($is_supported)
+    {
+
+        if (is_null($is_supported)) {
+            throw new \InvalidArgumentException('non-nullable is_supported cannot be null');
+        }
+
+        $this->container['is_supported'] = $is_supported;
 
         return $this;
     }

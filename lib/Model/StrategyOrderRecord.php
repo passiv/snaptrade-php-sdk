@@ -579,7 +579,7 @@ class StrategyOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Sets order_type
      *
-     * @param string|null $order_type Order Type potential values include (but are not limited to) - Limit - Market - StopLimit - StopLoss
+     * @param string|null $order_type Order Type potential values include (but are not limited to) - Limit - Market - StopLimit - Stop
      *
      * @return self
      */

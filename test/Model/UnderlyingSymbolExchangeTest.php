@@ -1,6 +1,6 @@
 <?php
 /**
- * TargetAssetTest
+ * UnderlyingSymbolExchangeTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * TargetAssetTest Class Doc Comment
+ * UnderlyingSymbolExchangeTest Class Doc Comment
  *
  * @category    Class
- * @description Target percentage of a certain asset
+ * @description The exchange on which the security is listed and traded.
  * @package     SnapTrade
  */
-class TargetAssetTest extends TestCase
+class UnderlyingSymbolExchangeTest extends TestCase
 {
 
     /**
@@ -64,9 +64,9 @@ class TargetAssetTest extends TestCase
     }
 
     /**
-     * Test "TargetAsset"
+     * Test "UnderlyingSymbolExchange"
      */
-    public function testTargetAsset()
+    public function testUnderlyingSymbolExchange()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
@@ -82,45 +82,72 @@ class TargetAssetTest extends TestCase
     }
 
     /**
-     * Test attribute "symbol"
+     * Test attribute "code"
      */
-    public function testPropertySymbol()
+    public function testPropertyCode()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "percent"
+     * Test attribute "mic_code"
      */
-    public function testPropertyPercent()
+    public function testPropertyMicCode()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "is_supported"
+     * Test attribute "name"
      */
-    public function testPropertyIsSupported()
+    public function testPropertyName()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "is_excluded"
+     * Test attribute "timezone"
      */
-    public function testPropertyIsExcluded()
+    public function testPropertyTimezone()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "meta"
+     * Test attribute "start_time"
      */
-    public function testPropertyMeta()
+    public function testPropertyStartTime()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "close_time"
+     */
+    public function testPropertyCloseTime()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "suffix"
+     */
+    public function testPropertySuffix()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "allows_cryptocurrency_symbols"
+     */
+    public function testPropertyAllowsCryptocurrencySymbols()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

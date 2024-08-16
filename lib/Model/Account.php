@@ -30,7 +30,7 @@ use \SnapTrade\ObjectSerializer;
  * Account Class Doc Comment
  *
  * @category Class
- * @description SnapTradeUser Investment Account
+ * @description A single brokerage account at a financial institution.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
@@ -57,9 +57,9 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => 'string',
         'number' => 'string',
         'institution_name' => 'string',
-        'created_date' => 'string',
+        'created_date' => '\DateTime',
         'meta' => 'array<string,mixed>',
-        'cash_restrictions' => '\SnapTrade\Model\CashRestriction[]',
+        'cash_restrictions' => 'string[]',
         'sync_status' => '\SnapTrade\Model\AccountSyncStatus',
         'balance' => '\SnapTrade\Model\AccountBalance'
     ];
@@ -72,13 +72,13 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'id' => 'uuid',
+        'id' => null,
         'brokerage_authorization' => 'uuid',
         'portfolio_group' => 'uuid',
         'name' => null,
         'number' => null,
         'institution_name' => null,
-        'created_date' => null,
+        'created_date' => 'date-time',
         'meta' => null,
         'cash_restrictions' => null,
         'sync_status' => null,
@@ -94,7 +94,7 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => false,
 		'brokerage_authorization' => false,
 		'portfolio_group' => false,
-		'name' => false,
+		'name' => true,
 		'number' => false,
 		'institution_name' => false,
 		'created_date' => false,
@@ -366,7 +366,7 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets id
      *
-     * @param string|null $id id
+     * @param string|null $id Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. This ID should not change for as long as the connection stays active. If the connection is deleted and re-added, a new account ID will be generated. If you want a stable identifier for the account, use the `number` field.
      *
      * @return self
      */
@@ -395,7 +395,7 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets brokerage_authorization
      *
-     * @param string|null $brokerage_authorization brokerage_authorization
+     * @param string|null $brokerage_authorization Unique identifier for the connection (brokerage authorization). This is the UUID used to reference the connection in SnapTrade.
      *
      * @return self
      */
@@ -415,6 +415,7 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
      * Gets portfolio_group
      *
      * @return string|null
+     * @deprecated
      */
     public function getPortfolioGroup()
     {
@@ -424,9 +425,10 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets portfolio_group
      *
-     * @param string|null $portfolio_group portfolio_group
+     * @param string|null $portfolio_group Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a usecase for it.
      *
      * @return self
+     * @deprecated
      */
     public function setPortfolioGroup($portfolio_group)
     {
@@ -453,7 +455,7 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets name
      *
-     * @param string|null $name name
+     * @param string|null $name A display name for the account. Either assigned by the user or by the financial institution itself. For certain institutions, SnapTrade appends the institution name to the account name for clarity.
      *
      * @return self
      */
@@ -461,7 +463,14 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
     {
 
         if (is_null($name)) {
-            throw new \InvalidArgumentException('non-nullable name cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'name');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('name', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['name'] = $name;
@@ -482,7 +491,7 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets number
      *
-     * @param string|null $number number
+     * @param string|null $number The account number assigned by the financial institution.
      *
      * @return self
      */
@@ -511,7 +520,7 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets institution_name
      *
-     * @param string|null $institution_name institution_name
+     * @param string|null $institution_name The name of the financial institution that holds the account.
      *
      * @return self
      */
@@ -530,7 +539,7 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets created_date
      *
-     * @return string|null
+     * @return \DateTime|null
      */
     public function getCreatedDate()
     {
@@ -540,7 +549,7 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets created_date
      *
-     * @param string|null $created_date created_date
+     * @param \DateTime|null $created_date Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the financial institution.
      *
      * @return self
      */
@@ -560,6 +569,7 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
      * Gets meta
      *
      * @return array<string,mixed>|null
+     * @deprecated
      */
     public function getMeta()
     {
@@ -569,9 +579,10 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets meta
      *
-     * @param array<string,mixed>|null $meta meta
+     * @param array<string,mixed>|null $meta Additional information about the account, such as account type, status, etc. This information is specific to the financial institution and there's no standard format for this data. Please use at your own risk.
      *
      * @return self
+     * @deprecated
      */
     public function setMeta($meta)
     {
@@ -588,7 +599,8 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets cash_restrictions
      *
-     * @return \SnapTrade\Model\CashRestriction[]|null
+     * @return string[]|null
+     * @deprecated
      */
     public function getCashRestrictions()
     {
@@ -598,9 +610,10 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets cash_restrictions
      *
-     * @param \SnapTrade\Model\CashRestriction[]|null $cash_restrictions cash_restrictions
+     * @param string[]|null $cash_restrictions This field is deprecated.
      *
      * @return self
+     * @deprecated
      */
     public function setCashRestrictions($cash_restrictions)
     {

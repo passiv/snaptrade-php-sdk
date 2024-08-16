@@ -97,7 +97,7 @@ class OptionsApiTest extends TestCase
     /**
      * Test case for listOptionHoldings
      *
-     * Get account option holdings.
+     * List account option positions.
      *
      */
     public function testListOptionHoldings()

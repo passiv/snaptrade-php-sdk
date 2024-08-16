@@ -28,6 +28,7 @@ use \SnapTrade\ObjectSerializer;
  * AccountOrderRecordStatus Class Doc Comment
  *
  * @category Class
+ * @description Indicates the status of an order. SnapTrade does a best effort to map brokerage statuses to statuses in this enum.
  * @package  SnapTrade
  */
 class AccountOrderRecordStatus

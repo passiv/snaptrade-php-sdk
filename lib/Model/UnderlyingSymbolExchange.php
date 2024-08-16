@@ -1,6 +1,6 @@
 <?php
 /**
- * BrokerageAuthorizationType
+ * UnderlyingSymbolExchange
  *
  * PHP version 7.4
  *
@@ -27,13 +27,14 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * BrokerageAuthorizationType Class Doc Comment
+ * UnderlyingSymbolExchange Class Doc Comment
  *
  * @category Class
+ * @description The exchange on which the security is listed and traded.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class BrokerageAuthorizationType implements ModelInterface, ArrayAccess, \JsonSerializable
+class UnderlyingSymbolExchange implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -42,7 +43,7 @@ class BrokerageAuthorizationType implements ModelInterface, ArrayAccess, \JsonSe
       *
       * @var string
       */
-    protected static $openAPIModelName = 'BrokerageAuthorizationType';
+    protected static $openAPIModelName = 'UnderlyingSymbol_exchange';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -50,7 +51,15 @@ class BrokerageAuthorizationType implements ModelInterface, ArrayAccess, \JsonSe
       * @var string[]
       */
     protected static $openAPITypes = [
-        'type' => 'string'
+        'id' => 'string',
+        'code' => 'string',
+        'mic_code' => 'string',
+        'name' => 'string',
+        'timezone' => 'string',
+        'start_time' => 'string',
+        'close_time' => 'string',
+        'suffix' => 'string',
+        'allows_cryptocurrency_symbols' => 'bool'
     ];
 
     /**
@@ -61,7 +70,15 @@ class BrokerageAuthorizationType implements ModelInterface, ArrayAccess, \JsonSe
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'type' => null
+        'id' => 'uuid',
+        'code' => null,
+        'mic_code' => null,
+        'name' => null,
+        'timezone' => null,
+        'start_time' => null,
+        'close_time' => null,
+        'suffix' => null,
+        'allows_cryptocurrency_symbols' => null
     ];
 
     /**
@@ -70,7 +87,15 @@ class BrokerageAuthorizationType implements ModelInterface, ArrayAccess, \JsonSe
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'type' => false
+        'id' => false,
+		'code' => false,
+		'mic_code' => false,
+		'name' => false,
+		'timezone' => false,
+		'start_time' => false,
+		'close_time' => false,
+		'suffix' => true,
+		'allows_cryptocurrency_symbols' => false
     ];
 
     /**
@@ -159,7 +184,15 @@ class BrokerageAuthorizationType implements ModelInterface, ArrayAccess, \JsonSe
      * @var string[]
      */
     protected static $attributeMap = [
-        'type' => 'type'
+        'id' => 'id',
+        'code' => 'code',
+        'mic_code' => 'mic_code',
+        'name' => 'name',
+        'timezone' => 'timezone',
+        'start_time' => 'start_time',
+        'close_time' => 'close_time',
+        'suffix' => 'suffix',
+        'allows_cryptocurrency_symbols' => 'allows_cryptocurrency_symbols'
     ];
 
     /**
@@ -168,7 +201,15 @@ class BrokerageAuthorizationType implements ModelInterface, ArrayAccess, \JsonSe
      * @var string[]
      */
     protected static $setters = [
-        'type' => 'setType'
+        'id' => 'setId',
+        'code' => 'setCode',
+        'mic_code' => 'setMicCode',
+        'name' => 'setName',
+        'timezone' => 'setTimezone',
+        'start_time' => 'setStartTime',
+        'close_time' => 'setCloseTime',
+        'suffix' => 'setSuffix',
+        'allows_cryptocurrency_symbols' => 'setAllowsCryptocurrencySymbols'
     ];
 
     /**
@@ -177,7 +218,15 @@ class BrokerageAuthorizationType implements ModelInterface, ArrayAccess, \JsonSe
      * @var string[]
      */
     protected static $getters = [
-        'type' => 'getType'
+        'id' => 'getId',
+        'code' => 'getCode',
+        'mic_code' => 'getMicCode',
+        'name' => 'getName',
+        'timezone' => 'getTimezone',
+        'start_time' => 'getStartTime',
+        'close_time' => 'getCloseTime',
+        'suffix' => 'getSuffix',
+        'allows_cryptocurrency_symbols' => 'getAllowsCryptocurrencySymbols'
     ];
 
     /**
@@ -221,21 +270,6 @@ class BrokerageAuthorizationType implements ModelInterface, ArrayAccess, \JsonSe
         return self::$openAPIModelName;
     }
 
-    public const TYPE_READ = 'read';
-    public const TYPE_TRADE = 'trade';
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getTypeAllowableValues()
-    {
-        return [
-            self::TYPE_READ,
-            self::TYPE_TRADE,
-        ];
-    }
 
     /**
      * Associative array for storing property values
@@ -252,7 +286,15 @@ class BrokerageAuthorizationType implements ModelInterface, ArrayAccess, \JsonSe
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('type', $data ?? [], null);
+        $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('code', $data ?? [], null);
+        $this->setIfExists('mic_code', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
+        $this->setIfExists('timezone', $data ?? [], null);
+        $this->setIfExists('start_time', $data ?? [], null);
+        $this->setIfExists('close_time', $data ?? [], null);
+        $this->setIfExists('suffix', $data ?? [], null);
+        $this->setIfExists('allows_cryptocurrency_symbols', $data ?? [], null);
     }
 
     /**
@@ -282,15 +324,6 @@ class BrokerageAuthorizationType implements ModelInterface, ArrayAccess, \JsonSe
     {
         $invalidProperties = [];
 
-        $allowedValues = $this->getTypeAllowableValues();
-        if (!is_null($this->container['type']) && !in_array($this->container['type'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'type', must be one of '%s'",
-                $this->container['type'],
-                implode("', '", $allowedValues)
-            );
-        }
-
         return $invalidProperties;
     }
 
@@ -307,40 +340,269 @@ class BrokerageAuthorizationType implements ModelInterface, ArrayAccess, \JsonSe
 
 
     /**
-     * Gets type
+     * Gets id
      *
      * @return string|null
      */
-    public function getType()
+    public function getId()
     {
-        return $this->container['type'];
+        return $this->container['id'];
     }
 
     /**
-     * Sets type
+     * Sets id
      *
-     * @param string|null $type type
+     * @param string|null $id id
      *
      * @return self
      */
-    public function setType($type)
+    public function setId($id)
     {
-        $allowedValues = $this->getTypeAllowableValues();
-        if (!is_null($type) && !in_array($type, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'type', must be one of '%s'",
-                    $type,
-                    implode("', '", $allowedValues)
-                )
-            );
+
+        if (is_null($id)) {
+            throw new \InvalidArgumentException('non-nullable id cannot be null');
         }
 
-        if (is_null($type)) {
-            throw new \InvalidArgumentException('non-nullable type cannot be null');
+        $this->container['id'] = $id;
+
+        return $this;
+    }
+
+    /**
+     * Gets code
+     *
+     * @return string|null
+     */
+    public function getCode()
+    {
+        return $this->container['code'];
+    }
+
+    /**
+     * Sets code
+     *
+     * @param string|null $code code
+     *
+     * @return self
+     */
+    public function setCode($code)
+    {
+
+        if (is_null($code)) {
+            throw new \InvalidArgumentException('non-nullable code cannot be null');
         }
 
-        $this->container['type'] = $type;
+        $this->container['code'] = $code;
+
+        return $this;
+    }
+
+    /**
+     * Gets mic_code
+     *
+     * @return string|null
+     */
+    public function getMicCode()
+    {
+        return $this->container['mic_code'];
+    }
+
+    /**
+     * Sets mic_code
+     *
+     * @param string|null $mic_code mic_code
+     *
+     * @return self
+     */
+    public function setMicCode($mic_code)
+    {
+
+        if (is_null($mic_code)) {
+            throw new \InvalidArgumentException('non-nullable mic_code cannot be null');
+        }
+
+        $this->container['mic_code'] = $mic_code;
+
+        return $this;
+    }
+
+    /**
+     * Gets name
+     *
+     * @return string|null
+     */
+    public function getName()
+    {
+        return $this->container['name'];
+    }
+
+    /**
+     * Sets name
+     *
+     * @param string|null $name name
+     *
+     * @return self
+     */
+    public function setName($name)
+    {
+
+        if (is_null($name)) {
+            throw new \InvalidArgumentException('non-nullable name cannot be null');
+        }
+
+        $this->container['name'] = $name;
+
+        return $this;
+    }
+
+    /**
+     * Gets timezone
+     *
+     * @return string|null
+     */
+    public function getTimezone()
+    {
+        return $this->container['timezone'];
+    }
+
+    /**
+     * Sets timezone
+     *
+     * @param string|null $timezone timezone
+     *
+     * @return self
+     */
+    public function setTimezone($timezone)
+    {
+
+        if (is_null($timezone)) {
+            throw new \InvalidArgumentException('non-nullable timezone cannot be null');
+        }
+
+        $this->container['timezone'] = $timezone;
+
+        return $this;
+    }
+
+    /**
+     * Gets start_time
+     *
+     * @return string|null
+     */
+    public function getStartTime()
+    {
+        return $this->container['start_time'];
+    }
+
+    /**
+     * Sets start_time
+     *
+     * @param string|null $start_time start_time
+     *
+     * @return self
+     */
+    public function setStartTime($start_time)
+    {
+
+        if (is_null($start_time)) {
+            throw new \InvalidArgumentException('non-nullable start_time cannot be null');
+        }
+
+        $this->container['start_time'] = $start_time;
+
+        return $this;
+    }
+
+    /**
+     * Gets close_time
+     *
+     * @return string|null
+     */
+    public function getCloseTime()
+    {
+        return $this->container['close_time'];
+    }
+
+    /**
+     * Sets close_time
+     *
+     * @param string|null $close_time close_time
+     *
+     * @return self
+     */
+    public function setCloseTime($close_time)
+    {
+
+        if (is_null($close_time)) {
+            throw new \InvalidArgumentException('non-nullable close_time cannot be null');
+        }
+
+        $this->container['close_time'] = $close_time;
+
+        return $this;
+    }
+
+    /**
+     * Gets suffix
+     *
+     * @return string|null
+     */
+    public function getSuffix()
+    {
+        return $this->container['suffix'];
+    }
+
+    /**
+     * Sets suffix
+     *
+     * @param string|null $suffix suffix
+     *
+     * @return self
+     */
+    public function setSuffix($suffix)
+    {
+
+        if (is_null($suffix)) {
+            array_push($this->openAPINullablesSetToNull, 'suffix');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('suffix', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['suffix'] = $suffix;
+
+        return $this;
+    }
+
+    /**
+     * Gets allows_cryptocurrency_symbols
+     *
+     * @return bool|null
+     */
+    public function getAllowsCryptocurrencySymbols()
+    {
+        return $this->container['allows_cryptocurrency_symbols'];
+    }
+
+    /**
+     * Sets allows_cryptocurrency_symbols
+     *
+     * @param bool|null $allows_cryptocurrency_symbols allows_cryptocurrency_symbols
+     *
+     * @return self
+     */
+    public function setAllowsCryptocurrencySymbols($allows_cryptocurrency_symbols)
+    {
+
+        if (is_null($allows_cryptocurrency_symbols)) {
+            throw new \InvalidArgumentException('non-nullable allows_cryptocurrency_symbols cannot be null');
+        }
+
+        $this->container['allows_cryptocurrency_symbols'] = $allows_cryptocurrency_symbols;
 
         return $this;
     }

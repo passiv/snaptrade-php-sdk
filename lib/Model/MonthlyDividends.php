@@ -302,7 +302,7 @@ class MonthlyDividends implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets date
      *
-     * @param \DateTime|null $date Date used to specify timeframe for a reporting call (in YYYY-MM-DD format)
+     * @param \DateTime|null $date Date used to specify timeframe for a reporting call (in YYYY-MM-DD format). These dates are inclusive.
      *
      * @return self
      */

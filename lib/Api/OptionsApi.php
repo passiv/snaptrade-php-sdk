@@ -1499,11 +1499,11 @@ class OptionsApi extends \SnapTrade\CustomApi
     /**
      * Operation listOptionHoldings
      *
-     * Get account option holdings
+     * List account option positions
      *
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
-     * @param  string $account_id The ID of the account to fetch options holdings for. (required)
+     * @param  string $account_id account_id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listOptionHoldings'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
@@ -1526,11 +1526,11 @@ class OptionsApi extends \SnapTrade\CustomApi
     /**
      * Operation listOptionHoldingsWithHttpInfo
      *
-     * Get account option holdings
+     * List account option positions
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $account_id The ID of the account to fetch options holdings for. (required)
+     * @param  string $account_id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listOptionHoldings'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
@@ -1668,11 +1668,11 @@ class OptionsApi extends \SnapTrade\CustomApi
     /**
      * Operation listOptionHoldingsAsync
      *
-     * Get account option holdings
+     * List account option positions
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $account_id The ID of the account to fetch options holdings for. (required)
+     * @param  string $account_id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listOptionHoldings'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1698,11 +1698,11 @@ class OptionsApi extends \SnapTrade\CustomApi
     /**
      * Operation listOptionHoldingsAsyncWithHttpInfo
      *
-     * Get account option holdings
+     * List account option positions
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $account_id The ID of the account to fetch options holdings for. (required)
+     * @param  string $account_id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listOptionHoldings'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1757,7 +1757,7 @@ class OptionsApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $account_id The ID of the account to fetch options holdings for. (required)
+     * @param  string $account_id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listOptionHoldings'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException

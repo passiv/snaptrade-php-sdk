@@ -1,6 +1,6 @@
 <?php
 /**
- * ExcludedAssetTest
+ * BalanceCurrencyTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * ExcludedAssetTest Class Doc Comment
+ * BalanceCurrencyTest Class Doc Comment
  *
  * @category    Class
- * @description An excluded asset in a portfolio group
+ * @description The currency of the balance. This applies to both &#x60;cash&#x60; and &#x60;buying_power&#x60;.
  * @package     SnapTrade
  */
-class ExcludedAssetTest extends TestCase
+class BalanceCurrencyTest extends TestCase
 {
 
     /**
@@ -64,18 +64,36 @@ class ExcludedAssetTest extends TestCase
     }
 
     /**
-     * Test "ExcludedAsset"
+     * Test "BalanceCurrency"
      */
-    public function testExcludedAsset()
+    public function testBalanceCurrency()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "symbol"
+     * Test attribute "id"
      */
-    public function testPropertySymbol()
+    public function testPropertyId()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "code"
+     */
+    public function testPropertyCode()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "name"
+     */
+    public function testPropertyName()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

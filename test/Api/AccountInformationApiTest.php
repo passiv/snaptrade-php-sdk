@@ -85,7 +85,7 @@ class AccountInformationApiTest extends TestCase
     /**
      * Test case for getUserAccountDetails
      *
-     * Return details of a specific investment account.
+     * Get account detail.
      *
      */
     public function testGetUserAccountDetails()
@@ -97,7 +97,7 @@ class AccountInformationApiTest extends TestCase
     /**
      * Test case for getUserAccountOrders
      *
-     * List account orders.
+     * List account recent orders.
      *
      */
     public function testGetUserAccountOrders()

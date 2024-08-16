@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * FigiInstrumentTest Class Doc Comment
  *
  * @category    Class
- * @description Open FIGI Identifiers
+ * @description Financial Instrument Global Identifier (FIGI) information for the security. See [OpenFIGI](https://www.openfigi.com/) for more information.
  * @package     SnapTrade
  */
 class FigiInstrumentTest extends TestCase

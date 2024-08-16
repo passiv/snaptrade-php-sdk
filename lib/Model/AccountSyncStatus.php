@@ -30,7 +30,7 @@ use \SnapTrade\ObjectSerializer;
  * AccountSyncStatus Class Doc Comment
  *
  * @category Class
- * @description Status of account
+ * @description Contains status update for the account sync process between SnapTrade and the brokerage.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */

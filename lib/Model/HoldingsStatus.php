@@ -30,7 +30,7 @@ use \SnapTrade\ObjectSerializer;
  * HoldingsStatus Class Doc Comment
  *
  * @category Class
- * @description Status of account holdings sync
+ * @description Status of account holdings sync. SnapTrade syncs holdings from the brokerage under the following conditions: 1. Initial connection - SnapTrade syncs all holdings (positions, balances, recent orders, and transactions) immediately after the connection is established. 2. Daily sync - Once a day SnapTrade refreshes all holdings from the brokerage. 3. Manual sync - You can trigger a refresh of holdings with the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
@@ -52,7 +52,7 @@ class HoldingsStatus implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPITypes = [
         'initial_sync_completed' => 'bool',
-        'last_successful_sync' => 'string'
+        'last_successful_sync' => '\DateTime'
     ];
 
     /**
@@ -64,7 +64,7 @@ class HoldingsStatus implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPIFormats = [
         'initial_sync_completed' => null,
-        'last_successful_sync' => 'datetime'
+        'last_successful_sync' => null
     ];
 
     /**
@@ -74,7 +74,7 @@ class HoldingsStatus implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static array $openAPINullables = [
         'initial_sync_completed' => false,
-		'last_successful_sync' => true
+		'last_successful_sync' => false
     ];
 
     /**
@@ -303,7 +303,7 @@ class HoldingsStatus implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets initial_sync_completed
      *
-     * @param bool|null $initial_sync_completed initial_sync_completed
+     * @param bool|null $initial_sync_completed Indicates if the initial sync of holdings has been completed. For accounts with a large number of positions/orders/transactions, the initial sync may take a while to complete.
      *
      * @return self
      */
@@ -322,7 +322,7 @@ class HoldingsStatus implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets last_successful_sync
      *
-     * @return string|null
+     * @return \DateTime|null
      */
     public function getLastSuccessfulSync()
     {
@@ -332,7 +332,7 @@ class HoldingsStatus implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets last_successful_sync
      *
-     * @param string|null $last_successful_sync Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ)
+     * @param \DateTime|null $last_successful_sync The last time holdings were successfully synced by SnapTrade.
      *
      * @return self
      */
@@ -340,14 +340,7 @@ class HoldingsStatus implements ModelInterface, ArrayAccess, \JsonSerializable
     {
 
         if (is_null($last_successful_sync)) {
-            array_push($this->openAPINullablesSetToNull, 'last_successful_sync');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('last_successful_sync', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable last_successful_sync cannot be null');
         }
 
         $this->container['last_successful_sync'] = $last_successful_sync;

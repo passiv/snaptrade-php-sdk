@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * HoldingsStatusTest Class Doc Comment
  *
  * @category    Class
- * @description Status of account holdings sync
+ * @description Status of account holdings sync. SnapTrade syncs holdings from the brokerage under the following conditions: 1. Initial connection - SnapTrade syncs all holdings (positions, balances, recent orders, and transactions) immediately after the connection is established. 2. Daily sync - Once a day SnapTrade refreshes all holdings from the brokerage. 3. Manual sync - You can trigger a refresh of holdings with the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
  * @package     SnapTrade
  */
 class HoldingsStatusTest extends TestCase

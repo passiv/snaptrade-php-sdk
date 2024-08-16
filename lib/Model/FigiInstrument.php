@@ -30,7 +30,7 @@ use \SnapTrade\ObjectSerializer;
  * FigiInstrument Class Doc Comment
  *
  * @category Class
- * @description Open FIGI Identifiers
+ * @description Financial Instrument Global Identifier (FIGI) information for the security. See [OpenFIGI](https://www.openfigi.com/) for more information.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
@@ -303,7 +303,7 @@ class FigiInstrument implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets figi_code
      *
-     * @param string|null $figi_code figi_code
+     * @param string|null $figi_code This identifier is unique per security per trading venue. See section 1.4.1 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf) for more information.
      *
      * @return self
      */
@@ -339,7 +339,7 @@ class FigiInstrument implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets figi_share_class
      *
-     * @param string|null $figi_share_class figi_share_class
+     * @param string|null $figi_share_class This enables users to link multiple FIGIs for the same security in order to obtain an aggregated view across all countries and all exchanges. For example, `AAPL` has a different FIGI for each exchange/trading venue it is traded on. The `figi_share_class` is the same for all of these FIGIs. See section 1.4.3 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf) for more information.
      *
      * @return self
      */

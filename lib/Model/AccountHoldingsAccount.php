@@ -30,7 +30,7 @@ use \SnapTrade\ObjectSerializer;
  * AccountHoldingsAccount Class Doc Comment
  *
  * @category Class
- * @description A wrapper object containing holdings information for a single account
+ * @description A wrapper object containing holdings information for a single account.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
@@ -51,7 +51,7 @@ class AccountHoldingsAccount implements ModelInterface, ArrayAccess, \JsonSerial
       * @var string[]
       */
     protected static $openAPITypes = [
-        'account' => '\SnapTrade\Model\SnapTradeHoldingsAccountAccountId',
+        'account' => '\SnapTrade\Model\Account',
         'balances' => '\SnapTrade\Model\Balance[]',
         'positions' => '\SnapTrade\Model\Position[]',
         'option_positions' => '\SnapTrade\Model\OptionsPosition[]',
@@ -321,7 +321,7 @@ class AccountHoldingsAccount implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Gets account
      *
-     * @return \SnapTrade\Model\SnapTradeHoldingsAccountAccountId|null
+     * @return \SnapTrade\Model\Account|null
      */
     public function getAccount()
     {
@@ -331,7 +331,7 @@ class AccountHoldingsAccount implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets account
      *
-     * @param \SnapTrade\Model\SnapTradeHoldingsAccountAccountId|null $account account
+     * @param \SnapTrade\Model\Account|null $account account
      *
      * @return self
      */
@@ -468,7 +468,7 @@ class AccountHoldingsAccount implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets orders
      *
-     * @param \SnapTrade\Model\AccountOrderRecord[]|null $orders List of recent orders in the account, including both pending and executed orders.
+     * @param \SnapTrade\Model\AccountOrderRecord[]|null $orders List of recent orders in the account, including both pending and executed orders. Note that option orders are included in this list. Option orders will have a null `universal_symbol` field and a non-null `option_symbol` field.
      *
      * @return self
      */

@@ -1,6 +1,6 @@
 <?php
 /**
- * SnapTradeAPIDisclaimerAcceptStatusTest
+ * UnderlyingSymbolTypeTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * SnapTradeAPIDisclaimerAcceptStatusTest Class Doc Comment
+ * UnderlyingSymbolTypeTest Class Doc Comment
  *
  * @category    Class
- * @description Status of user acceptance of SnapTrade API disclaimer
+ * @description The type of security. For example, \&quot;Common Stock\&quot; or \&quot;ETF\&quot;.
  * @package     SnapTrade
  */
-class SnapTradeAPIDisclaimerAcceptStatusTest extends TestCase
+class UnderlyingSymbolTypeTest extends TestCase
 {
 
     /**
@@ -64,27 +64,45 @@ class SnapTradeAPIDisclaimerAcceptStatusTest extends TestCase
     }
 
     /**
-     * Test "SnapTradeAPIDisclaimerAcceptStatus"
+     * Test "UnderlyingSymbolType"
      */
-    public function testSnapTradeAPIDisclaimerAcceptStatus()
+    public function testUnderlyingSymbolType()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "accepted"
+     * Test attribute "id"
      */
-    public function testPropertyAccepted()
+    public function testPropertyId()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "timestamp"
+     * Test attribute "code"
      */
-    public function testPropertyTimestamp()
+    public function testPropertyCode()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "description"
+     */
+    public function testPropertyDescription()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "is_supported"
+     */
+    public function testPropertyIsSupported()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

@@ -51,7 +51,7 @@ class Balance implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'currency' => '\SnapTrade\Model\Currency',
+        'currency' => '\SnapTrade\Model\BalanceCurrency',
         'cash' => 'float',
         'buying_power' => 'float'
     ];
@@ -300,7 +300,7 @@ class Balance implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets currency
      *
-     * @return \SnapTrade\Model\Currency|null
+     * @return \SnapTrade\Model\BalanceCurrency|null
      */
     public function getCurrency()
     {
@@ -310,7 +310,7 @@ class Balance implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets currency
      *
-     * @param \SnapTrade\Model\Currency|null $currency currency
+     * @param \SnapTrade\Model\BalanceCurrency|null $currency currency
      *
      * @return self
      */

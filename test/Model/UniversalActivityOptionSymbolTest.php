@@ -1,6 +1,6 @@
 <?php
 /**
- * AccountSimpleTest
+ * UniversalActivityOptionSymbolTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * AccountSimpleTest Class Doc Comment
+ * UniversalActivityOptionSymbolTest Class Doc Comment
  *
  * @category    Class
- * @description A single brokerage account at a financial institution.
+ * @description The option security for the transaction. The field is &#x60;null&#x60; if the transaction is not related to an option security (like a deposit, withdrawal, fee, etc). SnapTrade does a best effort to map the brokerage&#39;s option symbol. In cases where the brokerage option symbol is not recognized, the field will be set to &#x60;null&#x60;.
  * @package     SnapTrade
  */
-class AccountSimpleTest extends TestCase
+class UniversalActivityOptionSymbolTest extends TestCase
 {
 
     /**
@@ -64,9 +64,9 @@ class AccountSimpleTest extends TestCase
     }
 
     /**
-     * Test "AccountSimple"
+     * Test "UniversalActivityOptionSymbol"
      */
-    public function testAccountSimple()
+    public function testUniversalActivityOptionSymbol()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
@@ -82,27 +82,54 @@ class AccountSimpleTest extends TestCase
     }
 
     /**
-     * Test attribute "name"
+     * Test attribute "ticker"
      */
-    public function testPropertyName()
+    public function testPropertyTicker()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "number"
+     * Test attribute "option_type"
      */
-    public function testPropertyNumber()
+    public function testPropertyOptionType()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "sync_status"
+     * Test attribute "strike_price"
      */
-    public function testPropertySyncStatus()
+    public function testPropertyStrikePrice()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "expiration_date"
+     */
+    public function testPropertyExpirationDate()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "is_mini_option"
+     */
+    public function testPropertyIsMiniOption()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "underlying_symbol"
+     */
+    public function testPropertyUnderlyingSymbol()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

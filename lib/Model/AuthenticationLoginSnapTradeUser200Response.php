@@ -50,7 +50,7 @@ class AuthenticationLoginSnapTradeUser200Response implements ModelInterface, Arr
       * @var string[]
       */
     protected static $openAPITypes = [
-        'redirect_uri' => 'mixed',
+        'redirect_uri' => 'string',
         'session_id' => 'string',
         'encrypted_shared_key' => 'string',
         'encrypted_message_data' => '\SnapTrade\Model\EncryptedResponseEncryptedMessageData'
@@ -76,7 +76,7 @@ class AuthenticationLoginSnapTradeUser200Response implements ModelInterface, Arr
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'redirect_uri' => true,
+        'redirect_uri' => false,
 		'session_id' => false,
 		'encrypted_shared_key' => false,
 		'encrypted_message_data' => false
@@ -306,7 +306,7 @@ class AuthenticationLoginSnapTradeUser200Response implements ModelInterface, Arr
     /**
      * Gets redirect_uri
      *
-     * @return mixed|null
+     * @return string|null
      */
     public function getRedirectUri()
     {
@@ -316,7 +316,7 @@ class AuthenticationLoginSnapTradeUser200Response implements ModelInterface, Arr
     /**
      * Sets redirect_uri
      *
-     * @param mixed|null $redirect_uri redirect_uri
+     * @param string|null $redirect_uri Connection Portal link to redirect user to connect a brokerage account.
      *
      * @return self
      */
@@ -324,14 +324,7 @@ class AuthenticationLoginSnapTradeUser200Response implements ModelInterface, Arr
     {
 
         if (is_null($redirect_uri)) {
-            array_push($this->openAPINullablesSetToNull, 'redirect_uri');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('redirect_uri', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable redirect_uri cannot be null');
         }
 
         $this->container['redirect_uri'] = $redirect_uri;
@@ -352,7 +345,7 @@ class AuthenticationLoginSnapTradeUser200Response implements ModelInterface, Arr
     /**
      * Sets session_id
      *
-     * @param string|null $session_id session_id
+     * @param string|null $session_id ID to identify the connection portal session.
      *
      * @return self
      */

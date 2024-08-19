@@ -30,7 +30,7 @@ use \SnapTrade\ObjectSerializer;
  * Symbol Class Doc Comment
  *
  * @category Class
- * @description Symbol
+ * @description Uniquely describes a single security + exchange combination across all brokerages.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
@@ -54,9 +54,9 @@ class Symbol implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'string',
         'symbol' => 'string',
         'raw_symbol' => 'string',
-        'name' => 'string',
-        'currency' => '\SnapTrade\Model\Currency',
-        'exchange' => '\SnapTrade\Model\Exchange',
+        'description' => 'string',
+        'currency' => '\SnapTrade\Model\SymbolCurrency',
+        'exchange' => '\SnapTrade\Model\SymbolExchange',
         'type' => '\SnapTrade\Model\SecurityType',
         'figi_code' => 'string',
         'figi_instrument' => '\SnapTrade\Model\SymbolFigiInstrument'
@@ -73,7 +73,7 @@ class Symbol implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'uuid',
         'symbol' => null,
         'raw_symbol' => null,
-        'name' => null,
+        'description' => null,
         'currency' => null,
         'exchange' => null,
         'type' => null,
@@ -90,7 +90,7 @@ class Symbol implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => false,
 		'symbol' => false,
 		'raw_symbol' => false,
-		'name' => false,
+		'description' => true,
 		'currency' => false,
 		'exchange' => false,
 		'type' => false,
@@ -187,7 +187,7 @@ class Symbol implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'id',
         'symbol' => 'symbol',
         'raw_symbol' => 'raw_symbol',
-        'name' => 'name',
+        'description' => 'description',
         'currency' => 'currency',
         'exchange' => 'exchange',
         'type' => 'type',
@@ -204,7 +204,7 @@ class Symbol implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'setId',
         'symbol' => 'setSymbol',
         'raw_symbol' => 'setRawSymbol',
-        'name' => 'setName',
+        'description' => 'setDescription',
         'currency' => 'setCurrency',
         'exchange' => 'setExchange',
         'type' => 'setType',
@@ -221,7 +221,7 @@ class Symbol implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'getId',
         'symbol' => 'getSymbol',
         'raw_symbol' => 'getRawSymbol',
-        'name' => 'getName',
+        'description' => 'getDescription',
         'currency' => 'getCurrency',
         'exchange' => 'getExchange',
         'type' => 'getType',
@@ -289,7 +289,7 @@ class Symbol implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('symbol', $data ?? [], null);
         $this->setIfExists('raw_symbol', $data ?? [], null);
-        $this->setIfExists('name', $data ?? [], null);
+        $this->setIfExists('description', $data ?? [], null);
         $this->setIfExists('currency', $data ?? [], null);
         $this->setIfExists('exchange', $data ?? [], null);
         $this->setIfExists('type', $data ?? [], null);
@@ -352,7 +352,7 @@ class Symbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets id
      *
-     * @param string|null $id id
+     * @param string|null $id Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
      *
      * @return self
      */
@@ -381,7 +381,7 @@ class Symbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets symbol
      *
-     * @param string|null $symbol symbol
+     * @param string|null $symbol The security's trading ticker symbol. For example \"AAPL\" for Apple Inc. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on \"Yahoo Finance Market Coverage and Data Delays\"). For example, for securities traded on the Toronto Stock Exchange, the symbol has a '.TO' suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix.
      *
      * @return self
      */
@@ -410,7 +410,7 @@ class Symbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets raw_symbol
      *
-     * @param string|null $raw_symbol raw_symbol
+     * @param string|null $raw_symbol The raw symbol is `symbol` with the exchange suffix removed. For example, if `symbol` is \"VAB.TO\", then `raw_symbol` is \"VAB\".
      *
      * @return self
      */
@@ -427,30 +427,37 @@ class Symbol implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets name
+     * Gets description
      *
      * @return string|null
      */
-    public function getName()
+    public function getDescription()
     {
-        return $this->container['name'];
+        return $this->container['description'];
     }
 
     /**
-     * Sets name
+     * Sets description
      *
-     * @param string|null $name name
+     * @param string|null $description A human-readable description of the security. This is usually the company name or ETF name.
      *
      * @return self
      */
-    public function setName($name)
+    public function setDescription($description)
     {
 
-        if (is_null($name)) {
-            throw new \InvalidArgumentException('non-nullable name cannot be null');
+        if (is_null($description)) {
+            array_push($this->openAPINullablesSetToNull, 'description');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('description', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
-        $this->container['name'] = $name;
+        $this->container['description'] = $description;
 
         return $this;
     }
@@ -458,7 +465,7 @@ class Symbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets currency
      *
-     * @return \SnapTrade\Model\Currency|null
+     * @return \SnapTrade\Model\SymbolCurrency|null
      */
     public function getCurrency()
     {
@@ -468,7 +475,7 @@ class Symbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets currency
      *
-     * @param \SnapTrade\Model\Currency|null $currency currency
+     * @param \SnapTrade\Model\SymbolCurrency|null $currency currency
      *
      * @return self
      */
@@ -487,7 +494,7 @@ class Symbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets exchange
      *
-     * @return \SnapTrade\Model\Exchange|null
+     * @return \SnapTrade\Model\SymbolExchange|null
      */
     public function getExchange()
     {
@@ -497,7 +504,7 @@ class Symbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets exchange
      *
-     * @param \SnapTrade\Model\Exchange|null $exchange exchange
+     * @param \SnapTrade\Model\SymbolExchange|null $exchange exchange
      *
      * @return self
      */
@@ -555,7 +562,7 @@ class Symbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets figi_code
      *
-     * @param string|null $figi_code figi_code
+     * @param string|null $figi_code This identifier is unique per security per trading venue. See section 1.4.1 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf) for more information. This value should be the same as the `figi_code` in the `figi_instrument` child property.
      *
      * @return self
      */

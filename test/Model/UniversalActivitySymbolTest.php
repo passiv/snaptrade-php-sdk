@@ -1,6 +1,6 @@
 <?php
 /**
- * UniversalActivityTest
+ * UniversalActivitySymbolTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * UniversalActivityTest Class Doc Comment
+ * UniversalActivitySymbolTest Class Doc Comment
  *
  * @category    Class
- * @description A transaction or activity from an institution
+ * @description The security for the transaction. The field is &#x60;null&#x60; if the transaction is not related to a security (like a deposit, withdrawal, fee, etc). SnapTrade does a best effort to map the brokerage&#39;s symbol. In cases where the brokerage symbol is not recognized, the field will be set to &#x60;null&#x60;.
  * @package     SnapTrade
  */
-class UniversalActivityTest extends TestCase
+class UniversalActivitySymbolTest extends TestCase
 {
 
     /**
@@ -64,9 +64,9 @@ class UniversalActivityTest extends TestCase
     }
 
     /**
-     * Test "UniversalActivity"
+     * Test "UniversalActivitySymbol"
      */
-    public function testUniversalActivity()
+    public function testUniversalActivitySymbol()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
@@ -82,15 +82,6 @@ class UniversalActivityTest extends TestCase
     }
 
     /**
-     * Test attribute "account"
-     */
-    public function testPropertyAccount()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test attribute "symbol"
      */
     public function testPropertySymbol()
@@ -100,63 +91,9 @@ class UniversalActivityTest extends TestCase
     }
 
     /**
-     * Test attribute "option_symbol"
+     * Test attribute "raw_symbol"
      */
-    public function testPropertyOptionSymbol()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "price"
-     */
-    public function testPropertyPrice()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "units"
-     */
-    public function testPropertyUnits()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "amount"
-     */
-    public function testPropertyAmount()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "currency"
-     */
-    public function testPropertyCurrency()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "type"
-     */
-    public function testPropertyType()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "option_type"
-     */
-    public function testPropertyOptionType()
+    public function testPropertyRawSymbol()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
@@ -172,54 +109,45 @@ class UniversalActivityTest extends TestCase
     }
 
     /**
-     * Test attribute "trade_date"
+     * Test attribute "currency"
      */
-    public function testPropertyTradeDate()
+    public function testPropertyCurrency()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "settlement_date"
+     * Test attribute "exchange"
      */
-    public function testPropertySettlementDate()
+    public function testPropertyExchange()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "fee"
+     * Test attribute "type"
      */
-    public function testPropertyFee()
+    public function testPropertyType()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "fx_rate"
+     * Test attribute "figi_code"
      */
-    public function testPropertyFxRate()
+    public function testPropertyFigiCode()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "institution"
+     * Test attribute "figi_instrument"
      */
-    public function testPropertyInstitution()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "external_reference_id"
-     */
-    public function testPropertyExternalReferenceId()
+    public function testPropertyFigiInstrument()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

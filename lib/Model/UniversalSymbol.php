@@ -55,8 +55,8 @@ class UniversalSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
         'symbol' => 'string',
         'raw_symbol' => 'string',
         'description' => 'string',
-        'currency' => '\SnapTrade\Model\UniversalSymbolCurrency',
-        'exchange' => '\SnapTrade\Model\UniversalSymbolExchange',
+        'currency' => '\SnapTrade\Model\SymbolCurrency',
+        'exchange' => '\SnapTrade\Model\SymbolExchange',
         'type' => '\SnapTrade\Model\SecurityType',
         'currencies' => '\SnapTrade\Model\Currency[]',
         'figi_code' => 'string',
@@ -490,7 +490,7 @@ class UniversalSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets currency
      *
-     * @return \SnapTrade\Model\UniversalSymbolCurrency
+     * @return \SnapTrade\Model\SymbolCurrency
      */
     public function getCurrency()
     {
@@ -500,7 +500,7 @@ class UniversalSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets currency
      *
-     * @param \SnapTrade\Model\UniversalSymbolCurrency $currency currency
+     * @param \SnapTrade\Model\SymbolCurrency $currency currency
      *
      * @return self
      */
@@ -519,7 +519,7 @@ class UniversalSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets exchange
      *
-     * @return \SnapTrade\Model\UniversalSymbolExchange|null
+     * @return \SnapTrade\Model\SymbolExchange|null
      */
     public function getExchange()
     {
@@ -529,7 +529,7 @@ class UniversalSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets exchange
      *
-     * @param \SnapTrade\Model\UniversalSymbolExchange|null $exchange exchange
+     * @param \SnapTrade\Model\SymbolExchange|null $exchange exchange
      *
      * @return self
      */

@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * DeleteUserResponseTest Class Doc Comment
  *
  * @category    Class
- * @description Response when delete user is successful
+ * @description DeleteUserResponse
  * @package     SnapTrade
  */
 class DeleteUserResponseTest extends TestCase
@@ -76,6 +76,15 @@ class DeleteUserResponseTest extends TestCase
      * Test attribute "status"
      */
     public function testPropertyStatus()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "detail"
+     */
+    public function testPropertyDetail()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

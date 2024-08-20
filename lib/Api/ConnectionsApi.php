@@ -2230,8 +2230,8 @@ class ConnectionsApi extends \SnapTrade\CustomApi
      * Get all session events for a user
      *
      * @param  string $partner_client_id partner_client_id (required)
-     * @param  string $user_id Optional comma seperated list of user IDs used to filter the request on specific users (optional)
-     * @param  string $session_id Optional comma seperated list of session IDs used to filter the request on specific users (optional)
+     * @param  string $user_id Optional comma separated list of user IDs used to filter the request on specific users (optional)
+     * @param  string $session_id Optional comma separated list of session IDs used to filter the request on specific users (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['sessionEvents'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
@@ -2257,8 +2257,8 @@ class ConnectionsApi extends \SnapTrade\CustomApi
      * Get all session events for a user
      *
      * @param  string $partner_client_id (required)
-     * @param  string $user_id Optional comma seperated list of user IDs used to filter the request on specific users (optional)
-     * @param  string $session_id Optional comma seperated list of session IDs used to filter the request on specific users (optional)
+     * @param  string $user_id Optional comma separated list of user IDs used to filter the request on specific users (optional)
+     * @param  string $session_id Optional comma separated list of session IDs used to filter the request on specific users (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['sessionEvents'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
@@ -2376,8 +2376,8 @@ class ConnectionsApi extends \SnapTrade\CustomApi
      * Get all session events for a user
      *
      * @param  string $partner_client_id (required)
-     * @param  string $user_id Optional comma seperated list of user IDs used to filter the request on specific users (optional)
-     * @param  string $session_id Optional comma seperated list of session IDs used to filter the request on specific users (optional)
+     * @param  string $user_id Optional comma separated list of user IDs used to filter the request on specific users (optional)
+     * @param  string $session_id Optional comma separated list of session IDs used to filter the request on specific users (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['sessionEvents'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2406,8 +2406,8 @@ class ConnectionsApi extends \SnapTrade\CustomApi
      * Get all session events for a user
      *
      * @param  string $partner_client_id (required)
-     * @param  string $user_id Optional comma seperated list of user IDs used to filter the request on specific users (optional)
-     * @param  string $session_id Optional comma seperated list of session IDs used to filter the request on specific users (optional)
+     * @param  string $user_id Optional comma separated list of user IDs used to filter the request on specific users (optional)
+     * @param  string $session_id Optional comma separated list of session IDs used to filter the request on specific users (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['sessionEvents'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2461,8 +2461,8 @@ class ConnectionsApi extends \SnapTrade\CustomApi
      * Create request for operation 'sessionEvents'
      *
      * @param  string $partner_client_id (required)
-     * @param  string $user_id Optional comma seperated list of user IDs used to filter the request on specific users (optional)
-     * @param  string $session_id Optional comma seperated list of session IDs used to filter the request on specific users (optional)
+     * @param  string $user_id Optional comma separated list of user IDs used to filter the request on specific users (optional)
+     * @param  string $session_id Optional comma separated list of session IDs used to filter the request on specific users (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['sessionEvents'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException

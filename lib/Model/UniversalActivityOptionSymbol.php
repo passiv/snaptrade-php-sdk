@@ -1,6 +1,6 @@
 <?php
 /**
- * SnapTradeLoginUserRequestBody
+ * UniversalActivityOptionSymbol
  *
  * PHP version 7.4
  *
@@ -27,14 +27,14 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * SnapTradeLoginUserRequestBody Class Doc Comment
+ * UniversalActivityOptionSymbol Class Doc Comment
  *
  * @category Class
- * @description Data to login a user via SnapTrade Partner
+ * @description The option security for the transaction. The field is &#x60;null&#x60; if the transaction is not related to an option security (like a deposit, withdrawal, fee, etc). SnapTrade does a best effort to map the brokerage&#39;s option symbol. In cases where the brokerage option symbol is not recognized, the field will be set to &#x60;null&#x60;.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \JsonSerializable
+class UniversalActivityOptionSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -43,7 +43,7 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
       *
       * @var string
       */
-    protected static $openAPIModelName = 'SnapTradeLoginUserRequestBody';
+    protected static $openAPIModelName = 'UniversalActivity_option_symbol';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -51,12 +51,13 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
       * @var string[]
       */
     protected static $openAPITypes = [
-        'broker' => 'string',
-        'immediate_redirect' => 'bool',
-        'custom_redirect' => 'string',
-        'reconnect' => 'string',
-        'connection_type' => 'string',
-        'connection_portal_version' => 'string'
+        'id' => 'string',
+        'ticker' => 'string',
+        'option_type' => 'string',
+        'strike_price' => 'float',
+        'expiration_date' => '\DateTime',
+        'is_mini_option' => 'bool',
+        'underlying_symbol' => '\SnapTrade\Model\UnderlyingSymbol'
     ];
 
     /**
@@ -67,12 +68,13 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'broker' => null,
-        'immediate_redirect' => null,
-        'custom_redirect' => null,
-        'reconnect' => null,
-        'connection_type' => null,
-        'connection_portal_version' => null
+        'id' => 'uuid',
+        'ticker' => null,
+        'option_type' => null,
+        'strike_price' => null,
+        'expiration_date' => 'date',
+        'is_mini_option' => null,
+        'underlying_symbol' => null
     ];
 
     /**
@@ -81,12 +83,13 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'broker' => false,
-		'immediate_redirect' => false,
-		'custom_redirect' => false,
-		'reconnect' => false,
-		'connection_type' => false,
-		'connection_portal_version' => false
+        'id' => false,
+		'ticker' => false,
+		'option_type' => false,
+		'strike_price' => false,
+		'expiration_date' => false,
+		'is_mini_option' => false,
+		'underlying_symbol' => false
     ];
 
     /**
@@ -175,12 +178,13 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
      * @var string[]
      */
     protected static $attributeMap = [
-        'broker' => 'broker',
-        'immediate_redirect' => 'immediateRedirect',
-        'custom_redirect' => 'customRedirect',
-        'reconnect' => 'reconnect',
-        'connection_type' => 'connectionType',
-        'connection_portal_version' => 'connectionPortalVersion'
+        'id' => 'id',
+        'ticker' => 'ticker',
+        'option_type' => 'option_type',
+        'strike_price' => 'strike_price',
+        'expiration_date' => 'expiration_date',
+        'is_mini_option' => 'is_mini_option',
+        'underlying_symbol' => 'underlying_symbol'
     ];
 
     /**
@@ -189,12 +193,13 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
      * @var string[]
      */
     protected static $setters = [
-        'broker' => 'setBroker',
-        'immediate_redirect' => 'setImmediateRedirect',
-        'custom_redirect' => 'setCustomRedirect',
-        'reconnect' => 'setReconnect',
-        'connection_type' => 'setConnectionType',
-        'connection_portal_version' => 'setConnectionPortalVersion'
+        'id' => 'setId',
+        'ticker' => 'setTicker',
+        'option_type' => 'setOptionType',
+        'strike_price' => 'setStrikePrice',
+        'expiration_date' => 'setExpirationDate',
+        'is_mini_option' => 'setIsMiniOption',
+        'underlying_symbol' => 'setUnderlyingSymbol'
     ];
 
     /**
@@ -203,12 +208,13 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
      * @var string[]
      */
     protected static $getters = [
-        'broker' => 'getBroker',
-        'immediate_redirect' => 'getImmediateRedirect',
-        'custom_redirect' => 'getCustomRedirect',
-        'reconnect' => 'getReconnect',
-        'connection_type' => 'getConnectionType',
-        'connection_portal_version' => 'getConnectionPortalVersion'
+        'id' => 'getId',
+        'ticker' => 'getTicker',
+        'option_type' => 'getOptionType',
+        'strike_price' => 'getStrikePrice',
+        'expiration_date' => 'getExpirationDate',
+        'is_mini_option' => 'getIsMiniOption',
+        'underlying_symbol' => 'getUnderlyingSymbol'
     ];
 
     /**
@@ -252,34 +258,19 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
         return self::$openAPIModelName;
     }
 
-    public const CONNECTION_TYPE_READ = 'read';
-    public const CONNECTION_TYPE_TRADE = 'trade';
-    public const CONNECTION_PORTAL_VERSION_V2 = 'v2';
-    public const CONNECTION_PORTAL_VERSION_V3 = 'v3';
+    public const OPTION_TYPE_CALL = 'CALL';
+    public const OPTION_TYPE_PUT = 'PUT';
 
     /**
      * Gets allowable values of the enum
      *
      * @return string[]
      */
-    public function getConnectionTypeAllowableValues()
+    public function getOptionTypeAllowableValues()
     {
         return [
-            self::CONNECTION_TYPE_READ,
-            self::CONNECTION_TYPE_TRADE,
-        ];
-    }
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getConnectionPortalVersionAllowableValues()
-    {
-        return [
-            self::CONNECTION_PORTAL_VERSION_V2,
-            self::CONNECTION_PORTAL_VERSION_V3,
+            self::OPTION_TYPE_CALL,
+            self::OPTION_TYPE_PUT,
         ];
     }
 
@@ -298,12 +289,13 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('broker', $data ?? [], null);
-        $this->setIfExists('immediate_redirect', $data ?? [], null);
-        $this->setIfExists('custom_redirect', $data ?? [], null);
-        $this->setIfExists('reconnect', $data ?? [], null);
-        $this->setIfExists('connection_type', $data ?? [], 'read');
-        $this->setIfExists('connection_portal_version', $data ?? [], 'v3');
+        $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('ticker', $data ?? [], null);
+        $this->setIfExists('option_type', $data ?? [], null);
+        $this->setIfExists('strike_price', $data ?? [], null);
+        $this->setIfExists('expiration_date', $data ?? [], null);
+        $this->setIfExists('is_mini_option', $data ?? [], null);
+        $this->setIfExists('underlying_symbol', $data ?? [], null);
     }
 
     /**
@@ -333,24 +325,33 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
     {
         $invalidProperties = [];
 
-        $allowedValues = $this->getConnectionTypeAllowableValues();
-        if (!is_null($this->container['connection_type']) && !in_array($this->container['connection_type'], $allowedValues, true)) {
+        if ($this->container['id'] === null) {
+            $invalidProperties[] = "'id' can't be null";
+        }
+        if ($this->container['ticker'] === null) {
+            $invalidProperties[] = "'ticker' can't be null";
+        }
+        if ($this->container['option_type'] === null) {
+            $invalidProperties[] = "'option_type' can't be null";
+        }
+        $allowedValues = $this->getOptionTypeAllowableValues();
+        if (!is_null($this->container['option_type']) && !in_array($this->container['option_type'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'connection_type', must be one of '%s'",
-                $this->container['connection_type'],
+                "invalid value '%s' for 'option_type', must be one of '%s'",
+                $this->container['option_type'],
                 implode("', '", $allowedValues)
             );
         }
 
-        $allowedValues = $this->getConnectionPortalVersionAllowableValues();
-        if (!is_null($this->container['connection_portal_version']) && !in_array($this->container['connection_portal_version'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'connection_portal_version', must be one of '%s'",
-                $this->container['connection_portal_version'],
-                implode("', '", $allowedValues)
-            );
+        if ($this->container['strike_price'] === null) {
+            $invalidProperties[] = "'strike_price' can't be null";
         }
-
+        if ($this->container['expiration_date'] === null) {
+            $invalidProperties[] = "'expiration_date' can't be null";
+        }
+        if ($this->container['underlying_symbol'] === null) {
+            $invalidProperties[] = "'underlying_symbol' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -367,195 +368,214 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
 
 
     /**
-     * Gets broker
+     * Gets id
      *
-     * @return string|null
+     * @return string
      */
-    public function getBroker()
+    public function getId()
     {
-        return $this->container['broker'];
+        return $this->container['id'];
     }
 
     /**
-     * Sets broker
+     * Sets id
      *
-     * @param string|null $broker Slug of the brokerage to connect the user to. See [the integrations page](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=3cfea70ef4254afc89704e47275a7a9a&pvs=4) for a list of supported brokerages and their slugs.
+     * @param string $id Unique identifier for the option symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
      *
      * @return self
      */
-    public function setBroker($broker)
+    public function setId($id)
     {
 
-        if (is_null($broker)) {
-            throw new \InvalidArgumentException('non-nullable broker cannot be null');
+        if (is_null($id)) {
+            throw new \InvalidArgumentException('non-nullable id cannot be null');
         }
 
-        $this->container['broker'] = $broker;
+        $this->container['id'] = $id;
 
         return $this;
     }
 
     /**
-     * Gets immediate_redirect
+     * Gets ticker
+     *
+     * @return string
+     */
+    public function getTicker()
+    {
+        return $this->container['ticker'];
+    }
+
+    /**
+     * Sets ticker
+     *
+     * @param string $ticker The [OCC symbol](https://en.wikipedia.org/wiki/Option_symbol) for the option.
+     *
+     * @return self
+     */
+    public function setTicker($ticker)
+    {
+
+        if (is_null($ticker)) {
+            throw new \InvalidArgumentException('non-nullable ticker cannot be null');
+        }
+
+        $this->container['ticker'] = $ticker;
+
+        return $this;
+    }
+
+    /**
+     * Gets option_type
+     *
+     * @return string
+     */
+    public function getOptionType()
+    {
+        return $this->container['option_type'];
+    }
+
+    /**
+     * Sets option_type
+     *
+     * @param string $option_type The type of option. Either \"CALL\" or \"PUT\".
+     *
+     * @return self
+     */
+    public function setOptionType($option_type)
+    {
+        $allowedValues = $this->getOptionTypeAllowableValues();
+        if (!in_array($option_type, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'option_type', must be one of '%s'",
+                    $option_type,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+
+        if (is_null($option_type)) {
+            throw new \InvalidArgumentException('non-nullable option_type cannot be null');
+        }
+
+        $this->container['option_type'] = $option_type;
+
+        return $this;
+    }
+
+    /**
+     * Gets strike_price
+     *
+     * @return float
+     */
+    public function getStrikePrice()
+    {
+        return $this->container['strike_price'];
+    }
+
+    /**
+     * Sets strike_price
+     *
+     * @param float $strike_price The option strike price.
+     *
+     * @return self
+     */
+    public function setStrikePrice($strike_price)
+    {
+
+        if (is_null($strike_price)) {
+            throw new \InvalidArgumentException('non-nullable strike_price cannot be null');
+        }
+
+        $this->container['strike_price'] = $strike_price;
+
+        return $this;
+    }
+
+    /**
+     * Gets expiration_date
+     *
+     * @return \DateTime
+     */
+    public function getExpirationDate()
+    {
+        return $this->container['expiration_date'];
+    }
+
+    /**
+     * Sets expiration_date
+     *
+     * @param \DateTime $expiration_date The option expiration date.
+     *
+     * @return self
+     */
+    public function setExpirationDate($expiration_date)
+    {
+
+        if (is_null($expiration_date)) {
+            throw new \InvalidArgumentException('non-nullable expiration_date cannot be null');
+        }
+
+        $this->container['expiration_date'] = $expiration_date;
+
+        return $this;
+    }
+
+    /**
+     * Gets is_mini_option
      *
      * @return bool|null
      */
-    public function getImmediateRedirect()
+    public function getIsMiniOption()
     {
-        return $this->container['immediate_redirect'];
+        return $this->container['is_mini_option'];
     }
 
     /**
-     * Sets immediate_redirect
+     * Sets is_mini_option
      *
-     * @param bool|null $immediate_redirect When set to `true`, user will be redirected back to the partner's site instead of the connection portal. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](https://docs.snaptrade.com/docs/implement-connection-portal) for more information.
+     * @param bool|null $is_mini_option Whether the option is a mini option. Mini options have 10 underlying shares per contract instead of the standard 100.
      *
      * @return self
      */
-    public function setImmediateRedirect($immediate_redirect)
+    public function setIsMiniOption($is_mini_option)
     {
 
-        if (is_null($immediate_redirect)) {
-            throw new \InvalidArgumentException('non-nullable immediate_redirect cannot be null');
+        if (is_null($is_mini_option)) {
+            throw new \InvalidArgumentException('non-nullable is_mini_option cannot be null');
         }
 
-        $this->container['immediate_redirect'] = $immediate_redirect;
+        $this->container['is_mini_option'] = $is_mini_option;
 
         return $this;
     }
 
     /**
-     * Gets custom_redirect
+     * Gets underlying_symbol
      *
-     * @return string|null
+     * @return \SnapTrade\Model\UnderlyingSymbol
      */
-    public function getCustomRedirect()
+    public function getUnderlyingSymbol()
     {
-        return $this->container['custom_redirect'];
+        return $this->container['underlying_symbol'];
     }
 
     /**
-     * Sets custom_redirect
+     * Sets underlying_symbol
      *
-     * @param string|null $custom_redirect URL to redirect the user to after the user connects their brokerage account. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](https://docs.snaptrade.com/docs/implement-connection-portal) for more information.
+     * @param \SnapTrade\Model\UnderlyingSymbol $underlying_symbol underlying_symbol
      *
      * @return self
      */
-    public function setCustomRedirect($custom_redirect)
+    public function setUnderlyingSymbol($underlying_symbol)
     {
 
-        if (is_null($custom_redirect)) {
-            throw new \InvalidArgumentException('non-nullable custom_redirect cannot be null');
+        if (is_null($underlying_symbol)) {
+            throw new \InvalidArgumentException('non-nullable underlying_symbol cannot be null');
         }
 
-        $this->container['custom_redirect'] = $custom_redirect;
-
-        return $this;
-    }
-
-    /**
-     * Gets reconnect
-     *
-     * @return string|null
-     */
-    public function getReconnect()
-    {
-        return $this->container['reconnect'];
-    }
-
-    /**
-     * Sets reconnect
-     *
-     * @param string|null $reconnect The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See the [guide on fixing broken connections](https://docs.snaptrade.com/docs/fix-broken-connections) for more information.
-     *
-     * @return self
-     */
-    public function setReconnect($reconnect)
-    {
-
-        if (is_null($reconnect)) {
-            throw new \InvalidArgumentException('non-nullable reconnect cannot be null');
-        }
-
-        $this->container['reconnect'] = $reconnect;
-
-        return $this;
-    }
-
-    /**
-     * Gets connection_type
-     *
-     * @return string|null
-     */
-    public function getConnectionType()
-    {
-        return $this->container['connection_type'];
-    }
-
-    /**
-     * Sets connection_type
-     *
-     * @param string|null $connection_type Sets whether the connection should be read-only or trade-enabled.
-     *
-     * @return self
-     */
-    public function setConnectionType($connection_type)
-    {
-        $allowedValues = $this->getConnectionTypeAllowableValues();
-        if (!is_null($connection_type) && !in_array($connection_type, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'connection_type', must be one of '%s'",
-                    $connection_type,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-
-        if (is_null($connection_type)) {
-            throw new \InvalidArgumentException('non-nullable connection_type cannot be null');
-        }
-
-        $this->container['connection_type'] = $connection_type;
-
-        return $this;
-    }
-
-    /**
-     * Gets connection_portal_version
-     *
-     * @return string|null
-     */
-    public function getConnectionPortalVersion()
-    {
-        return $this->container['connection_portal_version'];
-    }
-
-    /**
-     * Sets connection_portal_version
-     *
-     * @param string|null $connection_portal_version Sets the version of the connection portal to render.
-     *
-     * @return self
-     */
-    public function setConnectionPortalVersion($connection_portal_version)
-    {
-        $allowedValues = $this->getConnectionPortalVersionAllowableValues();
-        if (!is_null($connection_portal_version) && !in_array($connection_portal_version, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'connection_portal_version', must be one of '%s'",
-                    $connection_portal_version,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-
-        if (is_null($connection_portal_version)) {
-            throw new \InvalidArgumentException('non-nullable connection_portal_version cannot be null');
-        }
-
-        $this->container['connection_portal_version'] = $connection_portal_version;
+        $this->container['underlying_symbol'] = $underlying_symbol;
 
         return $this;
     }

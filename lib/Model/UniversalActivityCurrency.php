@@ -1,6 +1,6 @@
 <?php
 /**
- * DeleteUserResponse
+ * UniversalActivityCurrency
  *
  * PHP version 7.4
  *
@@ -27,13 +27,14 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * DeleteUserResponse Class Doc Comment
+ * UniversalActivityCurrency Class Doc Comment
  *
  * @category Class
+ * @description The currency in which the transaction &#x60;price&#x60; and &#x60;amount&#x60; is denominated.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class DeleteUserResponse implements ModelInterface, ArrayAccess, \JsonSerializable
+class UniversalActivityCurrency implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -42,7 +43,7 @@ class DeleteUserResponse implements ModelInterface, ArrayAccess, \JsonSerializab
       *
       * @var string
       */
-    protected static $openAPIModelName = 'DeleteUserResponse';
+    protected static $openAPIModelName = 'UniversalActivity_currency';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -50,9 +51,9 @@ class DeleteUserResponse implements ModelInterface, ArrayAccess, \JsonSerializab
       * @var string[]
       */
     protected static $openAPITypes = [
-        'status' => 'string',
-        'detail' => 'string',
-        'user_id' => 'string'
+        'id' => 'string',
+        'code' => 'string',
+        'name' => 'string'
     ];
 
     /**
@@ -63,9 +64,9 @@ class DeleteUserResponse implements ModelInterface, ArrayAccess, \JsonSerializab
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'status' => null,
-        'detail' => null,
-        'user_id' => null
+        'id' => 'uuid',
+        'code' => null,
+        'name' => null
     ];
 
     /**
@@ -74,9 +75,9 @@ class DeleteUserResponse implements ModelInterface, ArrayAccess, \JsonSerializab
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'status' => false,
-		'detail' => false,
-		'user_id' => false
+        'id' => false,
+		'code' => false,
+		'name' => false
     ];
 
     /**
@@ -165,9 +166,9 @@ class DeleteUserResponse implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $attributeMap = [
-        'status' => 'status',
-        'detail' => 'detail',
-        'user_id' => 'userId'
+        'id' => 'id',
+        'code' => 'code',
+        'name' => 'name'
     ];
 
     /**
@@ -176,9 +177,9 @@ class DeleteUserResponse implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $setters = [
-        'status' => 'setStatus',
-        'detail' => 'setDetail',
-        'user_id' => 'setUserId'
+        'id' => 'setId',
+        'code' => 'setCode',
+        'name' => 'setName'
     ];
 
     /**
@@ -187,9 +188,9 @@ class DeleteUserResponse implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $getters = [
-        'status' => 'getStatus',
-        'detail' => 'getDetail',
-        'user_id' => 'getUserId'
+        'id' => 'getId',
+        'code' => 'getCode',
+        'name' => 'getName'
     ];
 
     /**
@@ -249,9 +250,9 @@ class DeleteUserResponse implements ModelInterface, ArrayAccess, \JsonSerializab
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('status', $data ?? [], null);
-        $this->setIfExists('detail', $data ?? [], null);
-        $this->setIfExists('user_id', $data ?? [], null);
+        $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('code', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
     }
 
     /**
@@ -297,88 +298,88 @@ class DeleteUserResponse implements ModelInterface, ArrayAccess, \JsonSerializab
 
 
     /**
-     * Gets status
+     * Gets id
      *
      * @return string|null
      */
-    public function getStatus()
+    public function getId()
     {
-        return $this->container['status'];
+        return $this->container['id'];
     }
 
     /**
-     * Sets status
+     * Sets id
      *
-     * @param string|null $status This is always `deleted` when a user is queued for deletion.
+     * @param string|null $id Unique identifier for the currency. This is the UUID used to reference the currency in SnapTrade.
      *
      * @return self
      */
-    public function setStatus($status)
+    public function setId($id)
     {
 
-        if (is_null($status)) {
-            throw new \InvalidArgumentException('non-nullable status cannot be null');
+        if (is_null($id)) {
+            throw new \InvalidArgumentException('non-nullable id cannot be null');
         }
 
-        $this->container['status'] = $status;
+        $this->container['id'] = $id;
 
         return $this;
     }
 
     /**
-     * Gets detail
+     * Gets code
      *
      * @return string|null
      */
-    public function getDetail()
+    public function getCode()
     {
-        return $this->container['detail'];
+        return $this->container['code'];
     }
 
     /**
-     * Sets detail
+     * Sets code
      *
-     * @param string|null $detail Human friendly message about the deletion status.
+     * @param string|null $code The ISO-4217 currency code for the currency.
      *
      * @return self
      */
-    public function setDetail($detail)
+    public function setCode($code)
     {
 
-        if (is_null($detail)) {
-            throw new \InvalidArgumentException('non-nullable detail cannot be null');
+        if (is_null($code)) {
+            throw new \InvalidArgumentException('non-nullable code cannot be null');
         }
 
-        $this->container['detail'] = $detail;
+        $this->container['code'] = $code;
 
         return $this;
     }
 
     /**
-     * Gets user_id
+     * Gets name
      *
      * @return string|null
      */
-    public function getUserId()
+    public function getName()
     {
-        return $this->container['user_id'];
+        return $this->container['name'];
     }
 
     /**
-     * Sets user_id
+     * Sets name
      *
-     * @param string|null $user_id SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
+     * @param string|null $name A human-friendly name of the currency.
      *
      * @return self
      */
-    public function setUserId($user_id)
+    public function setName($name)
     {
 
-        if (is_null($user_id)) {
-            throw new \InvalidArgumentException('non-nullable user_id cannot be null');
+        if (is_null($name)) {
+            throw new \InvalidArgumentException('non-nullable name cannot be null');
         }
 
-        $this->container['user_id'] = $user_id;
+        $this->container['name'] = $name;
 
         return $this;
     }

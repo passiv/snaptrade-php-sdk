@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![Packagist](https://img.shields.io/badge/Packagist-v2.0.32-blue)](https://packagist.org/packages/konfig/snaptrade-php-sdk)
+[![Packagist](https://img.shields.io/badge/Packagist-v2.0.34-blue)](https://packagist.org/packages/konfig/snaptrade-php-sdk)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -86,7 +86,7 @@ To install the bindings via [Composer](https://getcomposer.org/), add the follow
     }
   ],
   "require": {
-    "konfig/snaptrade-php-sdk": "2.0.32"
+    "konfig/snaptrade-php-sdk": "2.0.34"
   }
 }
 ```
@@ -152,7 +152,7 @@ $result = $snaptrade->accountInformation->getAllUserHoldings(
 
 ##### brokerage_authorizations: `string`<a id="brokerage_authorizations-string"></a>
 
-Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations).
+Optional. Comma separated list of authorization IDs (only use if filtering is needed on one or more authorizations).
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -481,7 +481,7 @@ $result = $snaptrade->apiStatus->check();
 
 ### `snaptrade.authentication.deleteSnapTradeUser`<a id="snaptradeauthenticationdeletesnaptradeuser"></a>
 
-Deletes a user you've registered over the SnapTrade API, and any data associated with them or their investment accounts.
+Deletes a registered user and all associated data. This action is irreversible. This API is asynchronous and will return a 200 status code if the request is accepted. The user and all associated data will be queued for deletion. Once deleted, a `USER_DELETED` webhook will be sent.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -512,7 +512,7 @@ $result = $snaptrade->authentication->deleteSnapTradeUser(
 
 ### `snaptrade.authentication.listSnapTradeUsers`<a id="snaptradeauthenticationlistsnaptradeusers"></a>
 
-Returns a list of users you've registered over the SnapTrade API.
+Returns a list of all registered user IDs.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -551,7 +551,7 @@ $result = $snaptrade->authentication->loginSnapTradeUser(
     custom_redirect: "https://snaptrade.com", 
     reconnect: "8b5f262d-4bb9-365d-888a-202bd3b15fa1", 
     connection_type: "read", 
-    connection_portal_version: "v2"
+    connection_portal_version: "v3"
 );
 ```
 
@@ -563,27 +563,27 @@ $result = $snaptrade->authentication->loginSnapTradeUser(
 
 ##### broker: `string`<a id="broker-string"></a>
 
-Slug of the brokerage to connect the user to. See [this document](https://snaptrade.notion.site/SnapTrade-Brokerage-Integrations-f83946a714a84c3caf599f6a945f0ead) for a list of supported brokerages and their slugs.
+Slug of the brokerage to connect the user to. See [the integrations page](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=3cfea70ef4254afc89704e47275a7a9a&pvs=4) for a list of supported brokerages and their slugs.
 
 ##### immediateRedirect: `bool`<a id="immediateredirect-bool"></a>
 
-When set to True, user will be redirected back to the partner's site instead of the connection portal
+When set to `true`, user will be redirected back to the partner's site instead of the connection portal. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](https://docs.snaptrade.com/docs/implement-connection-portal) for more information.
 
 ##### customRedirect: `string`<a id="customredirect-string"></a>
 
-URL to redirect the user to after the user connects their brokerage account
+URL to redirect the user to after the user connects their brokerage account. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](https://docs.snaptrade.com/docs/implement-connection-portal) for more information.
 
 ##### reconnect: `string`<a id="reconnect-string"></a>
 
-The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See ‘Reconnecting Accounts’ for more information.
+The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See the [guide on fixing broken connections](https://docs.snaptrade.com/docs/fix-broken-connections) for more information.
 
 ##### connectionType: `string`<a id="connectiontype-string"></a>
 
-Sets whether the connection should be read or trade
+Sets whether the connection should be read-only or trade-enabled.
 
 ##### connectionPortalVersion: `string`<a id="connectionportalversion-string"></a>
 
-Sets the version of the connection portal to render, with a default to 'v3'
+Sets the version of the connection portal to render.
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -636,8 +636,7 @@ SnapTrade User ID. This is chosen by the API partner and can be any string that 
 
 ### `snaptrade.authentication.resetSnapTradeUserSecret`<a id="snaptradeauthenticationresetsnaptradeusersecret"></a>
 
-This API is used to rotate the secret for a SnapTrade user. You might use this if a userSecret
-is compromised. Please note that if you call this endpoint and fail to save the new secret, you'll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect.
+Rotates the secret for a SnapTrade user. You might use this if `userSecret` is compromised. Please note that if you call this endpoint and fail to save the new secret, you'll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect.
 
 
 
@@ -658,7 +657,7 @@ SnapTrade User ID. This is chosen by the API partner and can be any string that 
 
 ##### userSecret: `string`<a id="usersecret-string"></a>
 
-SnapTrade User Secret randomly generated by SnapTrade. This is privileged information and if compromised, should be rotated via the SnapTrade API.
+SnapTrade User Secret randomly generated by SnapTrade. This is privileged information and if compromised, should be rotated via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret)
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -885,11 +884,11 @@ $result = $snaptrade->connections->sessionEvents(
 
 ##### user_id: `string`<a id="user_id-string"></a>
 
-Optional comma seperated list of user IDs used to filter the request on specific users
+Optional comma separated list of user IDs used to filter the request on specific users
 
 ##### session_id: `string`<a id="session_id-string"></a>
 
-Optional comma seperated list of session IDs used to filter the request on specific users
+Optional comma separated list of session IDs used to filter the request on specific users
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -1743,7 +1742,12 @@ Optional, defaults to true. Determines if a wait is performed to check on order 
 
 ### `snaptrade.transactionsAndReporting.getActivities`<a id="snaptradetransactionsandreportinggetactivities"></a>
 
-Returns activities (transactions) for a user. Specifying start and end date is highly recommended for better performance
+Returns all historical transactions for the specified user and filtering criteria. It's recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There's a max number of 10000 transactions returned per request.
+
+There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.
+
+The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
+
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -1756,7 +1760,7 @@ $result = $snaptrade->transactionsAndReporting->getActivities(
     end_date: "2022-01-24", 
     accounts: "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2", 
     brokerage_authorizations: "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2", 
-    type: "DIVIDEND"
+    type: "BUY,SELL,DIVIDEND"
 );
 ```
 
@@ -1768,19 +1772,23 @@ $result = $snaptrade->transactionsAndReporting->getActivities(
 
 ##### start_date: `\DateTime`<a id="start_date-datetime"></a>
 
+The start date (inclusive) of the transaction history to retrieve. If not provided, the default is the first transaction known to SnapTrade based on `trade_date`.
+
 ##### end_date: `\DateTime`<a id="end_date-datetime"></a>
+
+The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on `trade_date`.
 
 ##### accounts: `string`<a id="accounts-string"></a>
 
-Optional comma seperated list of account IDs used to filter the request on specific accounts
+Optional comma separated list of SnapTrade Account IDs used to filter the request to specific accounts. If not provided, the default is all known brokerage accounts for the user. The `brokerageAuthorizations` parameter takes precedence over this parameter.
 
 ##### brokerage_authorizations: `string`<a id="brokerage_authorizations-string"></a>
 
-Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations
+Optional comma separated list of SnapTrade Connection (Brokerage Authorization) IDs used to filter the request to only accounts that belong to those connections. If not provided, the default is all connections for the user. This parameter takes precedence over the `accounts` parameter.
 
 ##### type: `string`<a id="type-string"></a>
 
-Optional comma seperated list of types to filter activities by. This is not an exhaustive list, if we fail to match to these types, we will return the raw description from the brokerage. Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT
+Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - BUY   - SELL   - DIVIDEND   - CONTRIBUTION   - WITHDRAWAL   - REI   - INTEREST   - FEE
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -1828,7 +1836,7 @@ $result = $snaptrade->transactionsAndReporting->getReportingCustomRange(
 
 ##### accounts: `string`<a id="accounts-string"></a>
 
-Optional comma seperated list of account IDs used to filter the request on specific accounts
+Optional comma separated list of account IDs used to filter the request on specific accounts
 
 ##### detailed: `bool`<a id="detailed-bool"></a>
 

@@ -145,11 +145,11 @@ class TransactionsAndReportingApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
-     * @param  \DateTime $start_date start_date (optional)
-     * @param  \DateTime $end_date end_date (optional)
-     * @param  string $accounts Optional comma seperated list of account IDs used to filter the request on specific accounts (optional)
-     * @param  string $brokerage_authorizations Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations (optional)
-     * @param  string $type Optional comma seperated list of types to filter activities by. This is not an exhaustive list, if we fail to match to these types, we will return the raw description from the brokerage. Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT (optional)
+     * @param  \DateTime $start_date The start date (inclusive) of the transaction history to retrieve. If not provided, the default is the first transaction known to SnapTrade based on &#x60;trade_date&#x60;. (optional)
+     * @param  \DateTime $end_date The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on &#x60;trade_date&#x60;. (optional)
+     * @param  string $accounts Optional comma separated list of SnapTrade Account IDs used to filter the request to specific accounts. If not provided, the default is all known brokerage accounts for the user. The &#x60;brokerageAuthorizations&#x60; parameter takes precedence over this parameter. (optional)
+     * @param  string $brokerage_authorizations Optional comma separated list of SnapTrade Connection (Brokerage Authorization) IDs used to filter the request to only accounts that belong to those connections. If not provided, the default is all connections for the user. This parameter takes precedence over the &#x60;accounts&#x60; parameter. (optional)
+     * @param  string $type Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - BUY   - SELL   - DIVIDEND   - CONTRIBUTION   - WITHDRAWAL   - REI   - INTEREST   - FEE (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getActivities'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
@@ -180,11 +180,11 @@ class TransactionsAndReportingApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  \DateTime $start_date (optional)
-     * @param  \DateTime $end_date (optional)
-     * @param  string $accounts Optional comma seperated list of account IDs used to filter the request on specific accounts (optional)
-     * @param  string $brokerage_authorizations Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations (optional)
-     * @param  string $type Optional comma seperated list of types to filter activities by. This is not an exhaustive list, if we fail to match to these types, we will return the raw description from the brokerage. Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT (optional)
+     * @param  \DateTime $start_date The start date (inclusive) of the transaction history to retrieve. If not provided, the default is the first transaction known to SnapTrade based on &#x60;trade_date&#x60;. (optional)
+     * @param  \DateTime $end_date The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on &#x60;trade_date&#x60;. (optional)
+     * @param  string $accounts Optional comma separated list of SnapTrade Account IDs used to filter the request to specific accounts. If not provided, the default is all known brokerage accounts for the user. The &#x60;brokerageAuthorizations&#x60; parameter takes precedence over this parameter. (optional)
+     * @param  string $brokerage_authorizations Optional comma separated list of SnapTrade Connection (Brokerage Authorization) IDs used to filter the request to only accounts that belong to those connections. If not provided, the default is all connections for the user. This parameter takes precedence over the &#x60;accounts&#x60; parameter. (optional)
+     * @param  string $type Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - BUY   - SELL   - DIVIDEND   - CONTRIBUTION   - WITHDRAWAL   - REI   - INTEREST   - FEE (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getActivities'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
@@ -307,11 +307,11 @@ class TransactionsAndReportingApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  \DateTime $start_date (optional)
-     * @param  \DateTime $end_date (optional)
-     * @param  string $accounts Optional comma seperated list of account IDs used to filter the request on specific accounts (optional)
-     * @param  string $brokerage_authorizations Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations (optional)
-     * @param  string $type Optional comma seperated list of types to filter activities by. This is not an exhaustive list, if we fail to match to these types, we will return the raw description from the brokerage. Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT (optional)
+     * @param  \DateTime $start_date The start date (inclusive) of the transaction history to retrieve. If not provided, the default is the first transaction known to SnapTrade based on &#x60;trade_date&#x60;. (optional)
+     * @param  \DateTime $end_date The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on &#x60;trade_date&#x60;. (optional)
+     * @param  string $accounts Optional comma separated list of SnapTrade Account IDs used to filter the request to specific accounts. If not provided, the default is all known brokerage accounts for the user. The &#x60;brokerageAuthorizations&#x60; parameter takes precedence over this parameter. (optional)
+     * @param  string $brokerage_authorizations Optional comma separated list of SnapTrade Connection (Brokerage Authorization) IDs used to filter the request to only accounts that belong to those connections. If not provided, the default is all connections for the user. This parameter takes precedence over the &#x60;accounts&#x60; parameter. (optional)
+     * @param  string $type Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - BUY   - SELL   - DIVIDEND   - CONTRIBUTION   - WITHDRAWAL   - REI   - INTEREST   - FEE (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getActivities'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -345,11 +345,11 @@ class TransactionsAndReportingApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  \DateTime $start_date (optional)
-     * @param  \DateTime $end_date (optional)
-     * @param  string $accounts Optional comma seperated list of account IDs used to filter the request on specific accounts (optional)
-     * @param  string $brokerage_authorizations Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations (optional)
-     * @param  string $type Optional comma seperated list of types to filter activities by. This is not an exhaustive list, if we fail to match to these types, we will return the raw description from the brokerage. Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT (optional)
+     * @param  \DateTime $start_date The start date (inclusive) of the transaction history to retrieve. If not provided, the default is the first transaction known to SnapTrade based on &#x60;trade_date&#x60;. (optional)
+     * @param  \DateTime $end_date The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on &#x60;trade_date&#x60;. (optional)
+     * @param  string $accounts Optional comma separated list of SnapTrade Account IDs used to filter the request to specific accounts. If not provided, the default is all known brokerage accounts for the user. The &#x60;brokerageAuthorizations&#x60; parameter takes precedence over this parameter. (optional)
+     * @param  string $brokerage_authorizations Optional comma separated list of SnapTrade Connection (Brokerage Authorization) IDs used to filter the request to only accounts that belong to those connections. If not provided, the default is all connections for the user. This parameter takes precedence over the &#x60;accounts&#x60; parameter. (optional)
+     * @param  string $type Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - BUY   - SELL   - DIVIDEND   - CONTRIBUTION   - WITHDRAWAL   - REI   - INTEREST   - FEE (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getActivities'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -404,11 +404,11 @@ class TransactionsAndReportingApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  \DateTime $start_date (optional)
-     * @param  \DateTime $end_date (optional)
-     * @param  string $accounts Optional comma seperated list of account IDs used to filter the request on specific accounts (optional)
-     * @param  string $brokerage_authorizations Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations (optional)
-     * @param  string $type Optional comma seperated list of types to filter activities by. This is not an exhaustive list, if we fail to match to these types, we will return the raw description from the brokerage. Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT (optional)
+     * @param  \DateTime $start_date The start date (inclusive) of the transaction history to retrieve. If not provided, the default is the first transaction known to SnapTrade based on &#x60;trade_date&#x60;. (optional)
+     * @param  \DateTime $end_date The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on &#x60;trade_date&#x60;. (optional)
+     * @param  string $accounts Optional comma separated list of SnapTrade Account IDs used to filter the request to specific accounts. If not provided, the default is all known brokerage accounts for the user. The &#x60;brokerageAuthorizations&#x60; parameter takes precedence over this parameter. (optional)
+     * @param  string $brokerage_authorizations Optional comma separated list of SnapTrade Connection (Brokerage Authorization) IDs used to filter the request to only accounts that belong to those connections. If not provided, the default is all connections for the user. This parameter takes precedence over the &#x60;accounts&#x60; parameter. (optional)
+     * @param  string $type Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - BUY   - SELL   - DIVIDEND   - CONTRIBUTION   - WITHDRAWAL   - REI   - INTEREST   - FEE (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getActivities'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -622,7 +622,7 @@ class TransactionsAndReportingApi extends \SnapTrade\CustomApi
      * @param  \DateTime $end_date end_date (required)
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
-     * @param  string $accounts Optional comma seperated list of account IDs used to filter the request on specific accounts (optional)
+     * @param  string $accounts Optional comma separated list of account IDs used to filter the request on specific accounts (optional)
      * @param  bool $detailed Optional, increases frequency of data points for the total value and contribution charts if set to true (optional)
      * @param  string $frequency Optional frequency for the rate of return chart (defaults to monthly). Possible values are daily, weekly, monthly, quarterly, yearly. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getReportingCustomRange'] to see the possible values for this operation
@@ -658,7 +658,7 @@ class TransactionsAndReportingApi extends \SnapTrade\CustomApi
      * @param  \DateTime $end_date (required)
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $accounts Optional comma seperated list of account IDs used to filter the request on specific accounts (optional)
+     * @param  string $accounts Optional comma separated list of account IDs used to filter the request on specific accounts (optional)
      * @param  bool $detailed Optional, increases frequency of data points for the total value and contribution charts if set to true (optional)
      * @param  string $frequency Optional frequency for the rate of return chart (defaults to monthly). Possible values are daily, weekly, monthly, quarterly, yearly. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getReportingCustomRange'] to see the possible values for this operation
@@ -786,7 +786,7 @@ class TransactionsAndReportingApi extends \SnapTrade\CustomApi
      * @param  \DateTime $end_date (required)
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $accounts Optional comma seperated list of account IDs used to filter the request on specific accounts (optional)
+     * @param  string $accounts Optional comma separated list of account IDs used to filter the request on specific accounts (optional)
      * @param  bool $detailed Optional, increases frequency of data points for the total value and contribution charts if set to true (optional)
      * @param  string $frequency Optional frequency for the rate of return chart (defaults to monthly). Possible values are daily, weekly, monthly, quarterly, yearly. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getReportingCustomRange'] to see the possible values for this operation
@@ -825,7 +825,7 @@ class TransactionsAndReportingApi extends \SnapTrade\CustomApi
      * @param  \DateTime $end_date (required)
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $accounts Optional comma seperated list of account IDs used to filter the request on specific accounts (optional)
+     * @param  string $accounts Optional comma separated list of account IDs used to filter the request on specific accounts (optional)
      * @param  bool $detailed Optional, increases frequency of data points for the total value and contribution charts if set to true (optional)
      * @param  string $frequency Optional frequency for the rate of return chart (defaults to monthly). Possible values are daily, weekly, monthly, quarterly, yearly. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getReportingCustomRange'] to see the possible values for this operation
@@ -885,7 +885,7 @@ class TransactionsAndReportingApi extends \SnapTrade\CustomApi
      * @param  \DateTime $end_date (required)
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $accounts Optional comma seperated list of account IDs used to filter the request on specific accounts (optional)
+     * @param  string $accounts Optional comma separated list of account IDs used to filter the request on specific accounts (optional)
      * @param  bool $detailed Optional, increases frequency of data points for the total value and contribution charts if set to true (optional)
      * @param  string $frequency Optional frequency for the rate of return chart (defaults to monthly). Possible values are daily, weekly, monthly, quarterly, yearly. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getReportingCustomRange'] to see the possible values for this operation

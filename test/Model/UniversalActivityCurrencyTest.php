@@ -1,6 +1,6 @@
 <?php
 /**
- * UniversalSymbolExchangeTest
+ * UniversalActivityCurrencyTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * UniversalSymbolExchangeTest Class Doc Comment
+ * UniversalActivityCurrencyTest Class Doc Comment
  *
  * @category    Class
- * @description The exchange on which the security is listed and traded.
+ * @description The currency in which the transaction &#x60;price&#x60; and &#x60;amount&#x60; is denominated.
  * @package     SnapTrade
  */
-class UniversalSymbolExchangeTest extends TestCase
+class UniversalActivityCurrencyTest extends TestCase
 {
 
     /**
@@ -64,9 +64,9 @@ class UniversalSymbolExchangeTest extends TestCase
     }
 
     /**
-     * Test "UniversalSymbolExchange"
+     * Test "UniversalActivityCurrency"
      */
-    public function testUniversalSymbolExchange()
+    public function testUniversalActivityCurrency()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
@@ -91,54 +91,9 @@ class UniversalSymbolExchangeTest extends TestCase
     }
 
     /**
-     * Test attribute "mic_code"
-     */
-    public function testPropertyMicCode()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test attribute "name"
      */
     public function testPropertyName()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "timezone"
-     */
-    public function testPropertyTimezone()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "start_time"
-     */
-    public function testPropertyStartTime()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "close_time"
-     */
-    public function testPropertyCloseTime()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "suffix"
-     */
-    public function testPropertySuffix()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

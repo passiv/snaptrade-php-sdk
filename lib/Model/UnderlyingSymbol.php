@@ -55,7 +55,7 @@ class UnderlyingSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
         'symbol' => 'string',
         'raw_symbol' => 'string',
         'description' => 'string',
-        'currency' => '\SnapTrade\Model\UniversalSymbolCurrency',
+        'currency' => '\SnapTrade\Model\SymbolCurrency',
         'exchange' => '\SnapTrade\Model\UnderlyingSymbolExchange',
         'type' => '\SnapTrade\Model\UnderlyingSymbolType',
         'currencies' => '\SnapTrade\Model\Currency[]',
@@ -472,7 +472,7 @@ class UnderlyingSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets currency
      *
-     * @return \SnapTrade\Model\UniversalSymbolCurrency|null
+     * @return \SnapTrade\Model\SymbolCurrency|null
      */
     public function getCurrency()
     {
@@ -482,7 +482,7 @@ class UnderlyingSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets currency
      *
-     * @param \SnapTrade\Model\UniversalSymbolCurrency|null $currency currency
+     * @param \SnapTrade\Model\SymbolCurrency|null $currency currency
      *
      * @return self
      */

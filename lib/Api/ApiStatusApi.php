@@ -140,6 +140,8 @@ class ApiStatusApi extends \SnapTrade\CustomApi
      *
      * Get API Status
      *
+     * Check whether the API is operational and verify timestamps.
+     *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['check'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
@@ -161,6 +163,8 @@ class ApiStatusApi extends \SnapTrade\CustomApi
      * Operation checkWithHttpInfo
      *
      * Get API Status
+     *
+     * Check whether the API is operational and verify timestamps.
      *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['check'] to see the possible values for this operation
      *
@@ -275,6 +279,8 @@ class ApiStatusApi extends \SnapTrade\CustomApi
      *
      * Get API Status
      *
+     * Check whether the API is operational and verify timestamps.
+     *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['check'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -299,6 +305,8 @@ class ApiStatusApi extends \SnapTrade\CustomApi
      * Operation checkAsyncWithHttpInfo
      *
      * Get API Status
+     *
+     * Check whether the API is operational and verify timestamps.
      *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['check'] to see the possible values for this operation
      *

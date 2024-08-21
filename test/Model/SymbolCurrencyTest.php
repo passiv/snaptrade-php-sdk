@@ -1,6 +1,7 @@
 <?php
 /**
- * AuthenticationApiTest
+ * SymbolCurrencyTest
+ *
  * PHP version 7.4
  *
  * @category Class
@@ -20,18 +21,22 @@
  */
 
 
-namespace SnapTrade\Test\Api;
+namespace SnapTrade\Test\Model;
 
-use \SnapTrade\Configuration;
-use \SnapTrade\ApiException;
-use \SnapTrade\ObjectSerializer;
 use PHPUnit\Framework\TestCase;
 
-class AuthenticationApiTest extends TestCase
+/**
+ * SymbolCurrencyTest Class Doc Comment
+ *
+ * @category    Class
+ * @description The currency in which the security is traded.
+ * @package     SnapTrade
+ */
+class SymbolCurrencyTest extends TestCase
 {
 
     /**
-     * Setup before running any test cases
+     * Setup before running any test case
      */
     public static function setUpBeforeClass(): void
     {
@@ -59,60 +64,36 @@ class AuthenticationApiTest extends TestCase
     }
 
     /**
-     * Test case for deleteSnapTradeUser
-     *
-     * Delete user.
-     *
+     * Test "SymbolCurrency"
      */
-    public function testDeleteSnapTradeUser()
+    public function testSymbolCurrency()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for listSnapTradeUsers
-     *
-     * List all users.
-     *
+     * Test attribute "id"
      */
-    public function testListSnapTradeUsers()
+    public function testPropertyId()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for loginSnapTradeUser
-     *
-     * Login user & generate connection link.
-     *
+     * Test attribute "code"
      */
-    public function testLoginSnapTradeUser()
+    public function testPropertyCode()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for registerSnapTradeUser
-     *
-     * Register user.
-     *
+     * Test attribute "name"
      */
-    public function testRegisterSnapTradeUser()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for resetSnapTradeUserSecret
-     *
-     * Rotate user secret.
-     *
-     */
-    public function testResetSnapTradeUserSecret()
+    public function testPropertyName()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

@@ -30,6 +30,7 @@ use \SnapTrade\ObjectSerializer;
  * BrokerageAuthorization Class Doc Comment
  *
  * @category Class
+ * @description A single connection with a brokerage. Note that &#x60;Connection&#x60; and &#x60;Brokerage Authorization&#x60; are interchangeable, but the term &#x60;Connection&#x60; is preferred and used in the doc for consistency.  A connection is usually tied to a single login at a brokerage. A single connection can contain multiple brokerage accounts.  SnapTrade performs de-duping on connections for a given user. If the user has an existing connection with the brokerage, when connecting the brokerage with the same credentials, SnapTrade will return the existing connection instead of creating a new one.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
@@ -51,13 +52,13 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
       */
     protected static $openAPITypes = [
         'id' => 'string',
-        'created_date' => 'string',
-        'updated_date' => 'string',
+        'created_date' => '\DateTime',
+        'updated_date' => '\DateTime',
         'brokerage' => '\SnapTrade\Model\Brokerage',
         'name' => 'string',
         'type' => 'string',
         'disabled' => 'bool',
-        'disabled_date' => 'string',
+        'disabled_date' => '\DateTime',
         'meta' => 'array<string,mixed>'
     ];
 
@@ -70,13 +71,13 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
       */
     protected static $openAPIFormats = [
         'id' => 'uuid',
-        'created_date' => null,
-        'updated_date' => null,
+        'created_date' => 'date-time',
+        'updated_date' => 'date-time',
         'brokerage' => null,
         'name' => null,
         'type' => null,
         'disabled' => null,
-        'disabled_date' => null,
+        'disabled_date' => 'date-time',
         'meta' => null
     ];
 
@@ -351,7 +352,7 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets id
      *
-     * @param string|null $id id
+     * @param string|null $id Unique identifier for the connection. This is the UUID used to reference the connection in SnapTrade.
      *
      * @return self
      */
@@ -370,7 +371,7 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Gets created_date
      *
-     * @return string|null
+     * @return \DateTime|null
      */
     public function getCreatedDate()
     {
@@ -380,7 +381,7 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets created_date
      *
-     * @param string|null $created_date Time
+     * @param \DateTime|null $created_date Timestamp of when the connection was established in SnapTrade.
      *
      * @return self
      */
@@ -399,7 +400,8 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Gets updated_date
      *
-     * @return string|null
+     * @return \DateTime|null
+     * @deprecated
      */
     public function getUpdatedDate()
     {
@@ -409,9 +411,10 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets updated_date
      *
-     * @param string|null $updated_date Time
+     * @param \DateTime|null $updated_date Timestamp of when the connection was last updated in SnapTrade. This field is deprecated. Please let us know if you have a valid use case for this field.
      *
      * @return self
+     * @deprecated
      */
     public function setUpdatedDate($updated_date)
     {
@@ -467,7 +470,7 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets name
      *
-     * @param string|null $name Connection Name
+     * @param string|null $name A short, human-readable name for the connection.
      *
      * @return self
      */
@@ -496,7 +499,7 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets type
      *
-     * @param string|null $type type
+     * @param string|null $type Whether the connection is read-only or trade-enabled. A read-only connection can only be used to fetch data, while a trade-enabled connection can be used to place trades. Valid values are `read` and `trade`.
      *
      * @return self
      */
@@ -525,7 +528,7 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets disabled
      *
-     * @param bool|null $disabled disabled
+     * @param bool|null $disabled Whether the connection is disabled. A disabled connection can no longer access the latest data from the brokerage, but will continue to return the last cached state. A connection can become disabled for many reasons and differs by brokerage. Here are some common scenarios:  - The user has changed their username or password at the brokerage. - The user has explicitly removed the access grant at the brokerage. - The session has expired at the brokerage and now requires explicit user re-authentication.  Please see [this guide](https://docs.snaptrade.com/docs/fix-broken-connections) on how to fix a disabled connection.
      *
      * @return self
      */
@@ -544,7 +547,7 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Gets disabled_date
      *
-     * @return string|null
+     * @return \DateTime|null
      */
     public function getDisabledDate()
     {
@@ -554,7 +557,7 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets disabled_date
      *
-     * @param string|null $disabled_date Disabled date
+     * @param \DateTime|null $disabled_date Timestamp of when the connection was disabled in SnapTrade.
      *
      * @return self
      */
@@ -581,6 +584,7 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
      * Gets meta
      *
      * @return array<string,mixed>|null
+     * @deprecated
      */
     public function getMeta()
     {
@@ -590,9 +594,10 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets meta
      *
-     * @param array<string,mixed>|null $meta Additional data about brokerage authorization
+     * @param array<string,mixed>|null $meta Additional data about the connection. This information is specific to the brokerage and there's no standard format for this data. This field is deprecated and subject to removal in a future version.
      *
      * @return self
+     * @deprecated
      */
     public function setMeta($meta)
     {

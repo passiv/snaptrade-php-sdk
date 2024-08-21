@@ -152,6 +152,8 @@ class OptionsApi extends \SnapTrade\CustomApi
      *
      * Create options strategy
      *
+     * Creates an option strategy object that will be used to place an option strategy order.
+     *
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
      * @param  string $account_id The ID of the account to create the option strategy object in. (required)
@@ -187,6 +189,8 @@ class OptionsApi extends \SnapTrade\CustomApi
      * Operation getOptionStrategyWithHttpInfo
      *
      * Create options strategy
+     *
+     * Creates an option strategy object that will be used to place an option strategy order.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -332,6 +336,8 @@ class OptionsApi extends \SnapTrade\CustomApi
      *
      * Create options strategy
      *
+     * Creates an option strategy object that will be used to place an option strategy order.
+     *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
      * @param  string $account_id The ID of the account to create the option strategy object in. (required)
@@ -370,6 +376,8 @@ class OptionsApi extends \SnapTrade\CustomApi
      * Operation getOptionStrategyAsyncWithHttpInfo
      *
      * Create options strategy
+     *
+     * Creates an option strategy object that will be used to place an option strategy order.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -612,6 +620,8 @@ class OptionsApi extends \SnapTrade\CustomApi
      *
      * Get the options chain for a symbol
      *
+     * Returns the option chain for the specified symbol in the specified account.
+     *
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
      * @param  string $account_id The ID of the account to get the options chain from. (required)
@@ -640,6 +650,8 @@ class OptionsApi extends \SnapTrade\CustomApi
      * Operation getOptionsChainWithHttpInfo
      *
      * Get the options chain for a symbol
+     *
+     * Returns the option chain for the specified symbol in the specified account.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -785,6 +797,8 @@ class OptionsApi extends \SnapTrade\CustomApi
      *
      * Get the options chain for a symbol
      *
+     * Returns the option chain for the specified symbol in the specified account.
+     *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
      * @param  string $account_id The ID of the account to get the options chain from. (required)
@@ -816,6 +830,8 @@ class OptionsApi extends \SnapTrade\CustomApi
      * Operation getOptionsChainAsyncWithHttpInfo
      *
      * Get the options chain for a symbol
+     *
+     * Returns the option chain for the specified symbol in the specified account.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -1058,6 +1074,8 @@ class OptionsApi extends \SnapTrade\CustomApi
      *
      * Get options strategy quotes
      *
+     * Returns a Strategy Quotes object which has latest market data of the specified option strategy.
+     *
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
      * @param  string $account_id The ID of the account the strategy will be placed in. (required)
@@ -1086,6 +1104,8 @@ class OptionsApi extends \SnapTrade\CustomApi
      * Operation getOptionsStrategyQuoteWithHttpInfo
      *
      * Get options strategy quotes
+     *
+     * Returns a Strategy Quotes object which has latest market data of the specified option strategy.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -1231,6 +1251,8 @@ class OptionsApi extends \SnapTrade\CustomApi
      *
      * Get options strategy quotes
      *
+     * Returns a Strategy Quotes object which has latest market data of the specified option strategy.
+     *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
      * @param  string $account_id The ID of the account the strategy will be placed in. (required)
@@ -1262,6 +1284,8 @@ class OptionsApi extends \SnapTrade\CustomApi
      * Operation getOptionsStrategyQuoteAsyncWithHttpInfo
      *
      * Get options strategy quotes
+     *
+     * Returns a Strategy Quotes object which has latest market data of the specified option strategy.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -1501,6 +1525,8 @@ class OptionsApi extends \SnapTrade\CustomApi
      *
      * List account option positions
      *
+     * Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
+     *
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
      * @param  string $account_id account_id (required)
@@ -1527,6 +1553,8 @@ class OptionsApi extends \SnapTrade\CustomApi
      * Operation listOptionHoldingsWithHttpInfo
      *
      * List account option positions
+     *
+     * Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -1670,6 +1698,8 @@ class OptionsApi extends \SnapTrade\CustomApi
      *
      * List account option positions
      *
+     * Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
+     *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
      * @param  string $account_id (required)
@@ -1699,6 +1729,8 @@ class OptionsApi extends \SnapTrade\CustomApi
      * Operation listOptionHoldingsAsyncWithHttpInfo
      *
      * List account option positions
+     *
+     * Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -1918,6 +1950,8 @@ class OptionsApi extends \SnapTrade\CustomApi
      *
      * Place an option strategy order
      *
+     * Places the option strategy order and returns the order record received from the brokerage.
+     *
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
      * @param  string $account_id The ID of the account to execute the strategy in. (required)
@@ -1955,6 +1989,8 @@ class OptionsApi extends \SnapTrade\CustomApi
      * Operation placeOptionStrategyWithHttpInfo
      *
      * Place an option strategy order
+     *
+     * Places the option strategy order and returns the order record received from the brokerage.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -2102,6 +2138,8 @@ class OptionsApi extends \SnapTrade\CustomApi
      *
      * Place an option strategy order
      *
+     * Places the option strategy order and returns the order record received from the brokerage.
+     *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
      * @param  string $account_id The ID of the account to execute the strategy in. (required)
@@ -2142,6 +2180,8 @@ class OptionsApi extends \SnapTrade\CustomApi
      * Operation placeOptionStrategyAsyncWithHttpInfo
      *
      * Place an option strategy order
+     *
+     * Places the option strategy order and returns the order record received from the brokerage.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)

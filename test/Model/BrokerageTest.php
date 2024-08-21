@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * BrokerageTest Class Doc Comment
  *
  * @category    Class
- * @description Brokerage
+ * @description Describes a brokerage that SnapTrade supports.
  * @package     SnapTrade
  */
 class BrokerageTest extends TestCase
@@ -76,6 +76,15 @@ class BrokerageTest extends TestCase
      * Test attribute "id"
      */
     public function testPropertyId()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "slug"
+     */
+    public function testPropertySlug()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
@@ -130,15 +139,6 @@ class BrokerageTest extends TestCase
      * Test attribute "open_url"
      */
     public function testPropertyOpenUrl()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "slug"
-     */
-    public function testPropertySlug()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
@@ -202,33 +202,6 @@ class BrokerageTest extends TestCase
      * Test attribute "is_real_time_connection"
      */
     public function testPropertyIsRealTimeConnection()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "allows_trading_through_snaptrade_api"
-     */
-    public function testPropertyAllowsTradingThroughSnaptradeApi()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "is_scraping_integration"
-     */
-    public function testPropertyIsScrapingIntegration()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "default_currency"
-     */
-    public function testPropertyDefaultCurrency()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

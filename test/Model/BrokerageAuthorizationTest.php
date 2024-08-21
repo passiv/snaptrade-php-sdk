@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * BrokerageAuthorizationTest Class Doc Comment
  *
  * @category    Class
- * @description BrokerageAuthorization
+ * @description A single connection with a brokerage. Note that &#x60;Connection&#x60; and &#x60;Brokerage Authorization&#x60; are interchangeable, but the term &#x60;Connection&#x60; is preferred and used in the doc for consistency.  A connection is usually tied to a single login at a brokerage. A single connection can contain multiple brokerage accounts.  SnapTrade performs de-duping on connections for a given user. If the user has an existing connection with the brokerage, when connecting the brokerage with the same credentials, SnapTrade will return the existing connection instead of creating a new one.
  * @package     SnapTrade
  */
 class BrokerageAuthorizationTest extends TestCase

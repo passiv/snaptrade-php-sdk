@@ -1,6 +1,6 @@
 <?php
 /**
- * BrokerageType
+ * UniversalActivityCurrency
  *
  * PHP version 7.4
  *
@@ -27,14 +27,14 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * BrokerageType Class Doc Comment
+ * UniversalActivityCurrency Class Doc Comment
  *
  * @category Class
- * @description Type of brokerage. Currently supports traditional brokerages and crypto exchanges.
+ * @description The currency in which the transaction &#x60;price&#x60; and &#x60;amount&#x60; is denominated.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class BrokerageType implements ModelInterface, ArrayAccess, \JsonSerializable
+class UniversalActivityCurrency implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -43,7 +43,7 @@ class BrokerageType implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'BrokerageType';
+    protected static $openAPIModelName = 'UniversalActivity_currency';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -52,6 +52,7 @@ class BrokerageType implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPITypes = [
         'id' => 'string',
+        'code' => 'string',
         'name' => 'string'
     ];
 
@@ -64,6 +65,7 @@ class BrokerageType implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPIFormats = [
         'id' => 'uuid',
+        'code' => null,
         'name' => null
     ];
 
@@ -74,6 +76,7 @@ class BrokerageType implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static array $openAPINullables = [
         'id' => false,
+		'code' => false,
 		'name' => false
     ];
 
@@ -164,6 +167,7 @@ class BrokerageType implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $attributeMap = [
         'id' => 'id',
+        'code' => 'code',
         'name' => 'name'
     ];
 
@@ -174,6 +178,7 @@ class BrokerageType implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $setters = [
         'id' => 'setId',
+        'code' => 'setCode',
         'name' => 'setName'
     ];
 
@@ -184,6 +189,7 @@ class BrokerageType implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $getters = [
         'id' => 'getId',
+        'code' => 'getCode',
         'name' => 'getName'
     ];
 
@@ -245,6 +251,7 @@ class BrokerageType implements ModelInterface, ArrayAccess, \JsonSerializable
     public function __construct(array $data = null)
     {
         $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('code', $data ?? [], null);
         $this->setIfExists('name', $data ?? [], null);
     }
 
@@ -303,7 +310,7 @@ class BrokerageType implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets id
      *
-     * @param string|null $id id
+     * @param string|null $id Unique identifier for the currency. This is the UUID used to reference the currency in SnapTrade.
      *
      * @return self
      */
@@ -315,6 +322,35 @@ class BrokerageType implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['id'] = $id;
+
+        return $this;
+    }
+
+    /**
+     * Gets code
+     *
+     * @return string|null
+     */
+    public function getCode()
+    {
+        return $this->container['code'];
+    }
+
+    /**
+     * Sets code
+     *
+     * @param string|null $code The ISO-4217 currency code for the currency.
+     *
+     * @return self
+     */
+    public function setCode($code)
+    {
+
+        if (is_null($code)) {
+            throw new \InvalidArgumentException('non-nullable code cannot be null');
+        }
+
+        $this->container['code'] = $code;
 
         return $this;
     }
@@ -332,7 +368,7 @@ class BrokerageType implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets name
      *
-     * @param string|null $name name
+     * @param string|null $name A human-friendly name of the currency.
      *
      * @return self
      */

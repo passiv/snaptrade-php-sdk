@@ -30,6 +30,7 @@ use \SnapTrade\ObjectSerializer;
  * BrokerageAuthorizationRefreshConfirmation Class Doc Comment
  *
  * @category Class
+ * @description Confirmation that the syncs have been scheduled.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */

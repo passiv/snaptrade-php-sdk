@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * BrokerageAuthorizationDisabledConfirmationTest Class Doc Comment
  *
  * @category    Class
- * @description BrokerageAuthorizationDisabledConfirmation
+ * @description Confirmation that the connection has been disabled.
  * @package     SnapTrade
  */
 class BrokerageAuthorizationDisabledConfirmationTest extends TestCase

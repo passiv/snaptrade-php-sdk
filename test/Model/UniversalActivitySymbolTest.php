@@ -1,6 +1,6 @@
 <?php
 /**
- * AccountTest
+ * UniversalActivitySymbolTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * AccountTest Class Doc Comment
+ * UniversalActivitySymbolTest Class Doc Comment
  *
  * @category    Class
- * @description A single account at a brokerage.
+ * @description The security for the transaction. The field is &#x60;null&#x60; if the transaction is not related to a security (like a deposit, withdrawal, fee, etc). SnapTrade does a best effort to map the brokerage&#39;s symbol. In cases where the brokerage symbol is not recognized, the field will be set to &#x60;null&#x60;.
  * @package     SnapTrade
  */
-class AccountTest extends TestCase
+class UniversalActivitySymbolTest extends TestCase
 {
 
     /**
@@ -64,9 +64,9 @@ class AccountTest extends TestCase
     }
 
     /**
-     * Test "Account"
+     * Test "UniversalActivitySymbol"
      */
-    public function testAccount()
+    public function testUniversalActivitySymbol()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
@@ -82,90 +82,72 @@ class AccountTest extends TestCase
     }
 
     /**
-     * Test attribute "brokerage_authorization"
+     * Test attribute "symbol"
      */
-    public function testPropertyBrokerageAuthorization()
+    public function testPropertySymbol()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "portfolio_group"
+     * Test attribute "raw_symbol"
      */
-    public function testPropertyPortfolioGroup()
+    public function testPropertyRawSymbol()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "name"
+     * Test attribute "description"
      */
-    public function testPropertyName()
+    public function testPropertyDescription()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "number"
+     * Test attribute "currency"
      */
-    public function testPropertyNumber()
+    public function testPropertyCurrency()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "institution_name"
+     * Test attribute "exchange"
      */
-    public function testPropertyInstitutionName()
+    public function testPropertyExchange()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "created_date"
+     * Test attribute "type"
      */
-    public function testPropertyCreatedDate()
+    public function testPropertyType()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "meta"
+     * Test attribute "figi_code"
      */
-    public function testPropertyMeta()
+    public function testPropertyFigiCode()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "cash_restrictions"
+     * Test attribute "figi_instrument"
      */
-    public function testPropertyCashRestrictions()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "sync_status"
-     */
-    public function testPropertySyncStatus()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "balance"
-     */
-    public function testPropertyBalance()
+    public function testPropertyFigiInstrument()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

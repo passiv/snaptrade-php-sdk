@@ -30,7 +30,7 @@ use \SnapTrade\ObjectSerializer;
  * Account Class Doc Comment
  *
  * @category Class
- * @description A single brokerage account at a financial institution.
+ * @description A single account at a brokerage.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
@@ -366,7 +366,7 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets id
      *
-     * @param string|null $id Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. This ID should not change for as long as the connection stays active. If the connection is deleted and re-added, a new account ID will be generated. If you want a stable identifier for the account, use the `number` field.
+     * @param string|null $id Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. This ID should not change for as long as the connection stays active. If the connection is deleted and re-added, a new account ID will be generated.
      *
      * @return self
      */
@@ -455,7 +455,7 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets name
      *
-     * @param string|null $name A display name for the account. Either assigned by the user or by the financial institution itself. For certain institutions, SnapTrade appends the institution name to the account name for clarity.
+     * @param string|null $name A display name for the account. Either assigned by the user or by the brokerage itself. For certain brokerages, SnapTrade appends the brokerage name to the account name for clarity.
      *
      * @return self
      */
@@ -491,7 +491,7 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets number
      *
-     * @param string|null $number The account number assigned by the financial institution.
+     * @param string|null $number The account number assigned by the brokerage. For some brokerages, this field may be masked for security reasons.
      *
      * @return self
      */
@@ -520,7 +520,7 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets institution_name
      *
-     * @param string|null $institution_name The name of the financial institution that holds the account.
+     * @param string|null $institution_name The name of the brokerage that holds the account.
      *
      * @return self
      */
@@ -549,7 +549,7 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets created_date
      *
-     * @param \DateTime|null $created_date Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the financial institution.
+     * @param \DateTime|null $created_date Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the brokerage.
      *
      * @return self
      */
@@ -579,7 +579,7 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets meta
      *
-     * @param array<string,mixed>|null $meta Additional information about the account, such as account type, status, etc. This information is specific to the financial institution and there's no standard format for this data. Please use at your own risk.
+     * @param array<string,mixed>|null $meta Additional information about the account, such as account type, status, etc. This information is specific to the brokerage and there's no standard format for this data. Please use at your own risk.
      *
      * @return self
      * @deprecated

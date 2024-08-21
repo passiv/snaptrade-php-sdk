@@ -152,6 +152,8 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * Cancel open order in account
      *
+     * Sends a signal to the brokerage to cancel the specified order. This will only work if the order has not yet been executed.
+     *
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
      * @param  string $account_id The ID of the account to cancel the order in. (required)
@@ -183,6 +185,8 @@ class TradingApi extends \SnapTrade\CustomApi
      * Operation cancelUserAccountOrderWithHttpInfo
      *
      * Cancel open order in account
+     *
+     * Sends a signal to the brokerage to cancel the specified order. This will only work if the order has not yet been executed.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -351,6 +355,8 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * Cancel open order in account
      *
+     * Sends a signal to the brokerage to cancel the specified order. This will only work if the order has not yet been executed.
+     *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
      * @param  string $account_id The ID of the account to cancel the order in. (required)
@@ -385,6 +391,8 @@ class TradingApi extends \SnapTrade\CustomApi
      * Operation cancelUserAccountOrderAsyncWithHttpInfo
      *
      * Cancel open order in account
+     *
+     * Sends a signal to the brokerage to cancel the specified order. This will only work if the order has not yet been executed.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -627,6 +635,8 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * Check the impact of a trade on an account
      *
+     * Return the trade object and it&#39;s impact on the account for the specified order.
+     *
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
      * @param  \SnapTrade\Model\ManualTradeForm $manual_trade_form manual_trade_form (required)
@@ -672,6 +682,8 @@ class TradingApi extends \SnapTrade\CustomApi
      * Operation getOrderImpactWithHttpInfo
      *
      * Check the impact of a trade on an account
+     *
+     * Return the trade object and it&#39;s impact on the account for the specified order.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -838,6 +850,8 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * Check the impact of a trade on an account
      *
+     * Return the trade object and it&#39;s impact on the account for the specified order.
+     *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
      * @param  \SnapTrade\Model\ManualTradeForm $manual_trade_form (required)
@@ -886,6 +900,8 @@ class TradingApi extends \SnapTrade\CustomApi
      * Operation getOrderImpactAsyncWithHttpInfo
      *
      * Check the impact of a trade on an account
+     *
+     * Return the trade object and it&#39;s impact on the account for the specified order.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -1108,6 +1124,8 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * Get symbol quotes
      *
+     * Returns quote(s) from the brokerage for the specified symbol(s).
+     *
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
      * @param  string $symbols List of universal_symbol_id or tickers to get quotes for. (required)
@@ -1138,6 +1156,8 @@ class TradingApi extends \SnapTrade\CustomApi
      * Operation getUserAccountQuotesWithHttpInfo
      *
      * Get symbol quotes
+     *
+     * Returns quote(s) from the brokerage for the specified symbol(s).
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -1285,6 +1305,8 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * Get symbol quotes
      *
+     * Returns quote(s) from the brokerage for the specified symbol(s).
+     *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
      * @param  string $symbols List of universal_symbol_id or tickers to get quotes for. (required)
@@ -1318,6 +1340,8 @@ class TradingApi extends \SnapTrade\CustomApi
      * Operation getUserAccountQuotesAsyncWithHttpInfo
      *
      * Get symbol quotes
+     *
+     * Returns quote(s) from the brokerage for the specified symbol(s).
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -1573,6 +1597,8 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * Place a trade with NO validation.
      *
+     * Places a specified trade in the specified account.
+     *
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
      * @param  \SnapTrade\Model\ManualTradeForm $manual_trade_form manual_trade_form (required)
@@ -1618,6 +1644,8 @@ class TradingApi extends \SnapTrade\CustomApi
      * Operation placeForceOrderWithHttpInfo
      *
      * Place a trade with NO validation.
+     *
+     * Places a specified trade in the specified account.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -1784,6 +1812,8 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * Place a trade with NO validation.
      *
+     * Places a specified trade in the specified account.
+     *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
      * @param  \SnapTrade\Model\ManualTradeForm $manual_trade_form (required)
@@ -1832,6 +1862,8 @@ class TradingApi extends \SnapTrade\CustomApi
      * Operation placeForceOrderAsyncWithHttpInfo
      *
      * Place a trade with NO validation.
+     *
+     * Places a specified trade in the specified account.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -2054,6 +2086,8 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * Place order
      *
+     * Places the specified trade object. This places the order in the account and returns the status of the order from the brokerage.
+     *
      * @param  string $trade_id The ID of trade object obtained from trade/impact endpoint (required)
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
@@ -2085,6 +2119,8 @@ class TradingApi extends \SnapTrade\CustomApi
      * Operation placeOrderWithHttpInfo
      *
      * Place order
+     *
+     * Places the specified trade object. This places the order in the account and returns the status of the order from the brokerage.
      *
      * @param  string $trade_id The ID of trade object obtained from trade/impact endpoint (required)
      * @param  string $user_id (required)
@@ -2230,6 +2266,8 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * Place order
      *
+     * Places the specified trade object. This places the order in the account and returns the status of the order from the brokerage.
+     *
      * @param  string $trade_id The ID of trade object obtained from trade/impact endpoint (required)
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -2264,6 +2302,8 @@ class TradingApi extends \SnapTrade\CustomApi
      * Operation placeOrderAsyncWithHttpInfo
      *
      * Place order
+     *
+     * Places the specified trade object. This places the order in the account and returns the status of the order from the brokerage.
      *
      * @param  string $trade_id The ID of trade object obtained from trade/impact endpoint (required)
      * @param  string $user_id (required)

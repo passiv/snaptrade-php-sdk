@@ -61,7 +61,7 @@ class TradingApiTest extends TestCase
     /**
      * Test case for cancelUserAccountOrder
      *
-     * Cancel open order in account.
+     * Cancel order.
      *
      */
     public function testCancelUserAccountOrder()
@@ -73,7 +73,7 @@ class TradingApiTest extends TestCase
     /**
      * Test case for getOrderImpact
      *
-     * Check the impact of a trade on an account.
+     * Check order impact.
      *
      */
     public function testGetOrderImpact()
@@ -97,7 +97,7 @@ class TradingApiTest extends TestCase
     /**
      * Test case for placeForceOrder
      *
-     * Place a trade with NO validation..
+     * Place order.
      *
      */
     public function testPlaceForceOrder()
@@ -109,7 +109,7 @@ class TradingApiTest extends TestCase
     /**
      * Test case for placeOrder
      *
-     * Place order.
+     * Place checked order.
      *
      */
     public function testPlaceOrder()

@@ -1,6 +1,6 @@
 <?php
 /**
- * ManualTradeAndImpact
+ * ManualTradeImpact
  *
  * PHP version 7.4
  *
@@ -27,13 +27,13 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * ManualTradeAndImpact Class Doc Comment
+ * ManualTradeImpact Class Doc Comment
  *
  * @category Class
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class ManualTradeAndImpact implements ModelInterface, ArrayAccess, \JsonSerializable
+class ManualTradeImpact implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -42,7 +42,7 @@ class ManualTradeAndImpact implements ModelInterface, ArrayAccess, \JsonSerializ
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ManualTradeAndImpact';
+    protected static $openAPIModelName = 'ManualTradeImpact';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -50,9 +50,11 @@ class ManualTradeAndImpact implements ModelInterface, ArrayAccess, \JsonSerializ
       * @var string[]
       */
     protected static $openAPITypes = [
-        'trade' => '\SnapTrade\Model\ManualTrade',
-        'trade_impacts' => '\SnapTrade\Model\ManualTradeImpact[]',
-        'combined_remaining_balance' => '\SnapTrade\Model\ManualTradeBalance'
+        'account' => 'string',
+        'currency' => 'string',
+        'remaining_cash' => 'float',
+        'estimated_commission' => 'float',
+        'forex_fees' => 'float'
     ];
 
     /**
@@ -63,9 +65,11 @@ class ManualTradeAndImpact implements ModelInterface, ArrayAccess, \JsonSerializ
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'trade' => null,
-        'trade_impacts' => null,
-        'combined_remaining_balance' => null
+        'account' => 'uuid',
+        'currency' => 'uuid',
+        'remaining_cash' => null,
+        'estimated_commission' => null,
+        'forex_fees' => null
     ];
 
     /**
@@ -74,9 +78,11 @@ class ManualTradeAndImpact implements ModelInterface, ArrayAccess, \JsonSerializ
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'trade' => false,
-		'trade_impacts' => false,
-		'combined_remaining_balance' => false
+        'account' => false,
+		'currency' => false,
+		'remaining_cash' => true,
+		'estimated_commission' => true,
+		'forex_fees' => true
     ];
 
     /**
@@ -165,9 +171,11 @@ class ManualTradeAndImpact implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $attributeMap = [
-        'trade' => 'trade',
-        'trade_impacts' => 'trade_impacts',
-        'combined_remaining_balance' => 'combined_remaining_balance'
+        'account' => 'account',
+        'currency' => 'currency',
+        'remaining_cash' => 'remaining_cash',
+        'estimated_commission' => 'estimated_commission',
+        'forex_fees' => 'forex_fees'
     ];
 
     /**
@@ -176,9 +184,11 @@ class ManualTradeAndImpact implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $setters = [
-        'trade' => 'setTrade',
-        'trade_impacts' => 'setTradeImpacts',
-        'combined_remaining_balance' => 'setCombinedRemainingBalance'
+        'account' => 'setAccount',
+        'currency' => 'setCurrency',
+        'remaining_cash' => 'setRemainingCash',
+        'estimated_commission' => 'setEstimatedCommission',
+        'forex_fees' => 'setForexFees'
     ];
 
     /**
@@ -187,9 +197,11 @@ class ManualTradeAndImpact implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $getters = [
-        'trade' => 'getTrade',
-        'trade_impacts' => 'getTradeImpacts',
-        'combined_remaining_balance' => 'getCombinedRemainingBalance'
+        'account' => 'getAccount',
+        'currency' => 'getCurrency',
+        'remaining_cash' => 'getRemainingCash',
+        'estimated_commission' => 'getEstimatedCommission',
+        'forex_fees' => 'getForexFees'
     ];
 
     /**
@@ -249,9 +261,11 @@ class ManualTradeAndImpact implements ModelInterface, ArrayAccess, \JsonSerializ
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('trade', $data ?? [], null);
-        $this->setIfExists('trade_impacts', $data ?? [], null);
-        $this->setIfExists('combined_remaining_balance', $data ?? [], null);
+        $this->setIfExists('account', $data ?? [], null);
+        $this->setIfExists('currency', $data ?? [], null);
+        $this->setIfExists('remaining_cash', $data ?? [], null);
+        $this->setIfExists('estimated_commission', $data ?? [], null);
+        $this->setIfExists('forex_fees', $data ?? [], null);
     }
 
     /**
@@ -297,88 +311,167 @@ class ManualTradeAndImpact implements ModelInterface, ArrayAccess, \JsonSerializ
 
 
     /**
-     * Gets trade
+     * Gets account
      *
-     * @return \SnapTrade\Model\ManualTrade|null
+     * @return string|null
      */
-    public function getTrade()
+    public function getAccount()
     {
-        return $this->container['trade'];
+        return $this->container['account'];
     }
 
     /**
-     * Sets trade
+     * Sets account
      *
-     * @param \SnapTrade\Model\ManualTrade|null $trade trade
+     * @param string|null $account Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
      *
      * @return self
      */
-    public function setTrade($trade)
+    public function setAccount($account)
     {
 
-        if (is_null($trade)) {
-            throw new \InvalidArgumentException('non-nullable trade cannot be null');
+        if (is_null($account)) {
+            throw new \InvalidArgumentException('non-nullable account cannot be null');
         }
 
-        $this->container['trade'] = $trade;
+        $this->container['account'] = $account;
 
         return $this;
     }
 
     /**
-     * Gets trade_impacts
+     * Gets currency
      *
-     * @return \SnapTrade\Model\ManualTradeImpact[]|null
+     * @return string|null
      */
-    public function getTradeImpacts()
+    public function getCurrency()
     {
-        return $this->container['trade_impacts'];
+        return $this->container['currency'];
     }
 
     /**
-     * Sets trade_impacts
+     * Sets currency
      *
-     * @param \SnapTrade\Model\ManualTradeImpact[]|null $trade_impacts List of impacts of the trade on the account. The list always contains one value at the moment.
+     * @param string|null $currency Unique identifier for the currency. This is the UUID used to reference the currency in SnapTrade.
      *
      * @return self
      */
-    public function setTradeImpacts($trade_impacts)
+    public function setCurrency($currency)
     {
 
-        if (is_null($trade_impacts)) {
-            throw new \InvalidArgumentException('non-nullable trade_impacts cannot be null');
+        if (is_null($currency)) {
+            throw new \InvalidArgumentException('non-nullable currency cannot be null');
         }
 
-        $this->container['trade_impacts'] = $trade_impacts;
+        $this->container['currency'] = $currency;
 
         return $this;
     }
 
     /**
-     * Gets combined_remaining_balance
+     * Gets remaining_cash
      *
-     * @return \SnapTrade\Model\ManualTradeBalance|null
+     * @return float|null
      */
-    public function getCombinedRemainingBalance()
+    public function getRemainingCash()
     {
-        return $this->container['combined_remaining_balance'];
+        return $this->container['remaining_cash'];
     }
 
     /**
-     * Sets combined_remaining_balance
+     * Sets remaining_cash
      *
-     * @param \SnapTrade\Model\ManualTradeBalance|null $combined_remaining_balance combined_remaining_balance
+     * @param float|null $remaining_cash Estimated amount of cash remaining in the account after the trade.
      *
      * @return self
      */
-    public function setCombinedRemainingBalance($combined_remaining_balance)
+    public function setRemainingCash($remaining_cash)
     {
 
-        if (is_null($combined_remaining_balance)) {
-            throw new \InvalidArgumentException('non-nullable combined_remaining_balance cannot be null');
+        if (is_null($remaining_cash)) {
+            array_push($this->openAPINullablesSetToNull, 'remaining_cash');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('remaining_cash', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
-        $this->container['combined_remaining_balance'] = $combined_remaining_balance;
+        $this->container['remaining_cash'] = $remaining_cash;
+
+        return $this;
+    }
+
+    /**
+     * Gets estimated_commission
+     *
+     * @return float|null
+     */
+    public function getEstimatedCommission()
+    {
+        return $this->container['estimated_commission'];
+    }
+
+    /**
+     * Sets estimated_commission
+     *
+     * @param float|null $estimated_commission Estimated commission for the trade.
+     *
+     * @return self
+     */
+    public function setEstimatedCommission($estimated_commission)
+    {
+
+        if (is_null($estimated_commission)) {
+            array_push($this->openAPINullablesSetToNull, 'estimated_commission');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('estimated_commission', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['estimated_commission'] = $estimated_commission;
+
+        return $this;
+    }
+
+    /**
+     * Gets forex_fees
+     *
+     * @return float|null
+     */
+    public function getForexFees()
+    {
+        return $this->container['forex_fees'];
+    }
+
+    /**
+     * Sets forex_fees
+     *
+     * @param float|null $forex_fees Estimated foreign transaction fees for the trade.
+     *
+     * @return self
+     */
+    public function setForexFees($forex_fees)
+    {
+
+        if (is_null($forex_fees)) {
+            array_push($this->openAPINullablesSetToNull, 'forex_fees');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('forex_fees', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['forex_fees'] = $forex_fees;
 
         return $this;
     }

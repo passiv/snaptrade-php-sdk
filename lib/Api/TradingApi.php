@@ -150,14 +150,14 @@ class TradingApi extends \SnapTrade\CustomApi
     /**
      * Operation cancelUserAccountOrder
      *
-     * Cancel open order in account
+     * Cancel order
      *
-     * Sends a signal to the brokerage to cancel the specified order. This will only work if the order has not yet been executed.
+     * Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.
      *
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
-     * @param  string $account_id The ID of the account to cancel the order in. (required)
-     * @param  \SnapTrade\Model\TradingCancelUserAccountOrderRequest $trading_cancel_user_account_order_request The Order ID to be canceled (required)
+     * @param  string $account_id account_id (required)
+     * @param  \SnapTrade\Model\TradingCancelUserAccountOrderRequest $trading_cancel_user_account_order_request trading_cancel_user_account_order_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['cancelUserAccountOrder'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
@@ -184,14 +184,14 @@ class TradingApi extends \SnapTrade\CustomApi
     /**
      * Operation cancelUserAccountOrderWithHttpInfo
      *
-     * Cancel open order in account
+     * Cancel order
      *
-     * Sends a signal to the brokerage to cancel the specified order. This will only work if the order has not yet been executed.
+     * Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $account_id The ID of the account to cancel the order in. (required)
-     * @param  \SnapTrade\Model\TradingCancelUserAccountOrderRequest $trading_cancel_user_account_order_request The Order ID to be canceled (required)
+     * @param  string $account_id (required)
+     * @param  \SnapTrade\Model\TradingCancelUserAccountOrderRequest $trading_cancel_user_account_order_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['cancelUserAccountOrder'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
@@ -353,14 +353,14 @@ class TradingApi extends \SnapTrade\CustomApi
     /**
      * Operation cancelUserAccountOrderAsync
      *
-     * Cancel open order in account
+     * Cancel order
      *
-     * Sends a signal to the brokerage to cancel the specified order. This will only work if the order has not yet been executed.
+     * Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $account_id The ID of the account to cancel the order in. (required)
-     * @param  \SnapTrade\Model\TradingCancelUserAccountOrderRequest $trading_cancel_user_account_order_request The Order ID to be canceled (required)
+     * @param  string $account_id (required)
+     * @param  \SnapTrade\Model\TradingCancelUserAccountOrderRequest $trading_cancel_user_account_order_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['cancelUserAccountOrder'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -390,14 +390,14 @@ class TradingApi extends \SnapTrade\CustomApi
     /**
      * Operation cancelUserAccountOrderAsyncWithHttpInfo
      *
-     * Cancel open order in account
+     * Cancel order
      *
-     * Sends a signal to the brokerage to cancel the specified order. This will only work if the order has not yet been executed.
+     * Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $account_id The ID of the account to cancel the order in. (required)
-     * @param  \SnapTrade\Model\TradingCancelUserAccountOrderRequest $trading_cancel_user_account_order_request The Order ID to be canceled (required)
+     * @param  string $account_id (required)
+     * @param  \SnapTrade\Model\TradingCancelUserAccountOrderRequest $trading_cancel_user_account_order_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['cancelUserAccountOrder'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -452,8 +452,8 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $account_id The ID of the account to cancel the order in. (required)
-     * @param  \SnapTrade\Model\TradingCancelUserAccountOrderRequest $trading_cancel_user_account_order_request The Order ID to be canceled (required)
+     * @param  string $account_id (required)
+     * @param  \SnapTrade\Model\TradingCancelUserAccountOrderRequest $trading_cancel_user_account_order_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['cancelUserAccountOrder'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -633,9 +633,9 @@ class TradingApi extends \SnapTrade\CustomApi
     /**
      * Operation getOrderImpact
      *
-     * Check the impact of a trade on an account
+     * Check order impact
      *
-     * Return the trade object and it&#39;s impact on the account for the specified order.
+     * Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a &#x60;Trade&#x60; object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the &#x60;Trade&#x60; object returned expires after 5 minutes. Any order placed using an expired &#x60;Trade&#x60; will be rejected.
      *
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
@@ -648,16 +648,16 @@ class TradingApi extends \SnapTrade\CustomApi
      */
     public function getOrderImpact(
 
+        $account_id,
+        $action,
+        $universal_symbol_id,
+        $order_type,
+        $time_in_force,
         $user_id,
         $user_secret,
-        $account_id = SENTINEL_VALUE,
-        $action = SENTINEL_VALUE,
-        $order_type = SENTINEL_VALUE,
         $price = SENTINEL_VALUE,
         $stop = SENTINEL_VALUE,
-        $time_in_force = SENTINEL_VALUE,
         $units = SENTINEL_VALUE,
-        $universal_symbol_id = SENTINEL_VALUE,
         $notional_value = SENTINEL_VALUE,
         string $contentType = self::contentTypes['getOrderImpact'][0]
     )
@@ -665,12 +665,12 @@ class TradingApi extends \SnapTrade\CustomApi
         $_body = [];
         $this->setRequestBodyProperty($_body, "account_id", $account_id);
         $this->setRequestBodyProperty($_body, "action", $action);
+        $this->setRequestBodyProperty($_body, "universal_symbol_id", $universal_symbol_id);
         $this->setRequestBodyProperty($_body, "order_type", $order_type);
+        $this->setRequestBodyProperty($_body, "time_in_force", $time_in_force);
         $this->setRequestBodyProperty($_body, "price", $price);
         $this->setRequestBodyProperty($_body, "stop", $stop);
-        $this->setRequestBodyProperty($_body, "time_in_force", $time_in_force);
         $this->setRequestBodyProperty($_body, "units", $units);
-        $this->setRequestBodyProperty($_body, "universal_symbol_id", $universal_symbol_id);
         $this->setRequestBodyProperty($_body, "notional_value", $notional_value);
         $manual_trade_form = $_body;
 
@@ -681,9 +681,9 @@ class TradingApi extends \SnapTrade\CustomApi
     /**
      * Operation getOrderImpactWithHttpInfo
      *
-     * Check the impact of a trade on an account
+     * Check order impact
      *
-     * Return the trade object and it&#39;s impact on the account for the specified order.
+     * Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a &#x60;Trade&#x60; object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the &#x60;Trade&#x60; object returned expires after 5 minutes. Any order placed using an expired &#x60;Trade&#x60; will be rejected.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -848,9 +848,9 @@ class TradingApi extends \SnapTrade\CustomApi
     /**
      * Operation getOrderImpactAsync
      *
-     * Check the impact of a trade on an account
+     * Check order impact
      *
-     * Return the trade object and it&#39;s impact on the account for the specified order.
+     * Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a &#x60;Trade&#x60; object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the &#x60;Trade&#x60; object returned expires after 5 minutes. Any order placed using an expired &#x60;Trade&#x60; will be rejected.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -862,16 +862,16 @@ class TradingApi extends \SnapTrade\CustomApi
      */
     public function getOrderImpactAsync(
 
+        $account_id,
+        $action,
+        $universal_symbol_id,
+        $order_type,
+        $time_in_force,
         $user_id,
         $user_secret,
-        $account_id = SENTINEL_VALUE,
-        $action = SENTINEL_VALUE,
-        $order_type = SENTINEL_VALUE,
         $price = SENTINEL_VALUE,
         $stop = SENTINEL_VALUE,
-        $time_in_force = SENTINEL_VALUE,
         $units = SENTINEL_VALUE,
-        $universal_symbol_id = SENTINEL_VALUE,
         $notional_value = SENTINEL_VALUE,
         string $contentType = self::contentTypes['getOrderImpact'][0]
     )
@@ -879,12 +879,12 @@ class TradingApi extends \SnapTrade\CustomApi
         $_body = [];
         $this->setRequestBodyProperty($_body, "account_id", $account_id);
         $this->setRequestBodyProperty($_body, "action", $action);
+        $this->setRequestBodyProperty($_body, "universal_symbol_id", $universal_symbol_id);
         $this->setRequestBodyProperty($_body, "order_type", $order_type);
+        $this->setRequestBodyProperty($_body, "time_in_force", $time_in_force);
         $this->setRequestBodyProperty($_body, "price", $price);
         $this->setRequestBodyProperty($_body, "stop", $stop);
-        $this->setRequestBodyProperty($_body, "time_in_force", $time_in_force);
         $this->setRequestBodyProperty($_body, "units", $units);
-        $this->setRequestBodyProperty($_body, "universal_symbol_id", $universal_symbol_id);
         $this->setRequestBodyProperty($_body, "notional_value", $notional_value);
         $manual_trade_form = $_body;
 
@@ -899,9 +899,9 @@ class TradingApi extends \SnapTrade\CustomApi
     /**
      * Operation getOrderImpactAsyncWithHttpInfo
      *
-     * Check the impact of a trade on an account
+     * Check order impact
      *
-     * Return the trade object and it&#39;s impact on the account for the specified order.
+     * Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a &#x60;Trade&#x60; object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the &#x60;Trade&#x60; object returned expires after 5 minutes. Any order placed using an expired &#x60;Trade&#x60; will be rejected.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -1124,13 +1124,13 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * Get symbol quotes
      *
-     * Returns quote(s) from the brokerage for the specified symbol(s).
+     * Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
      *
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
-     * @param  string $symbols List of universal_symbol_id or tickers to get quotes for. (required)
-     * @param  string $account_id The ID of the account to get quotes. (required)
-     * @param  bool $use_ticker Should be set to True if providing tickers. (optional)
+     * @param  string $symbols List of Universal Symbol IDs or tickers to get quotes for. (required)
+     * @param  string $account_id account_id (required)
+     * @param  bool $use_ticker Should be set to &#x60;True&#x60; if &#x60;symbols&#x60; are comprised of tickers. Defaults to &#x60;False&#x60; if not provided. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserAccountQuotes'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
@@ -1157,13 +1157,13 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * Get symbol quotes
      *
-     * Returns quote(s) from the brokerage for the specified symbol(s).
+     * Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $symbols List of universal_symbol_id or tickers to get quotes for. (required)
-     * @param  string $account_id The ID of the account to get quotes. (required)
-     * @param  bool $use_ticker Should be set to True if providing tickers. (optional)
+     * @param  string $symbols List of Universal Symbol IDs or tickers to get quotes for. (required)
+     * @param  string $account_id (required)
+     * @param  bool $use_ticker Should be set to &#x60;True&#x60; if &#x60;symbols&#x60; are comprised of tickers. Defaults to &#x60;False&#x60; if not provided. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserAccountQuotes'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
@@ -1305,13 +1305,13 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * Get symbol quotes
      *
-     * Returns quote(s) from the brokerage for the specified symbol(s).
+     * Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $symbols List of universal_symbol_id or tickers to get quotes for. (required)
-     * @param  string $account_id The ID of the account to get quotes. (required)
-     * @param  bool $use_ticker Should be set to True if providing tickers. (optional)
+     * @param  string $symbols List of Universal Symbol IDs or tickers to get quotes for. (required)
+     * @param  string $account_id (required)
+     * @param  bool $use_ticker Should be set to &#x60;True&#x60; if &#x60;symbols&#x60; are comprised of tickers. Defaults to &#x60;False&#x60; if not provided. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserAccountQuotes'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1341,13 +1341,13 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * Get symbol quotes
      *
-     * Returns quote(s) from the brokerage for the specified symbol(s).
+     * Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $symbols List of universal_symbol_id or tickers to get quotes for. (required)
-     * @param  string $account_id The ID of the account to get quotes. (required)
-     * @param  bool $use_ticker Should be set to True if providing tickers. (optional)
+     * @param  string $symbols List of Universal Symbol IDs or tickers to get quotes for. (required)
+     * @param  string $account_id (required)
+     * @param  bool $use_ticker Should be set to &#x60;True&#x60; if &#x60;symbols&#x60; are comprised of tickers. Defaults to &#x60;False&#x60; if not provided. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserAccountQuotes'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1402,9 +1402,9 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $symbols List of universal_symbol_id or tickers to get quotes for. (required)
-     * @param  string $account_id The ID of the account to get quotes. (required)
-     * @param  bool $use_ticker Should be set to True if providing tickers. (optional)
+     * @param  string $symbols List of Universal Symbol IDs or tickers to get quotes for. (required)
+     * @param  string $account_id (required)
+     * @param  bool $use_ticker Should be set to &#x60;True&#x60; if &#x60;symbols&#x60; are comprised of tickers. Defaults to &#x60;False&#x60; if not provided. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserAccountQuotes'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1595,9 +1595,9 @@ class TradingApi extends \SnapTrade\CustomApi
     /**
      * Operation placeForceOrder
      *
-     * Place a trade with NO validation.
+     * Place order
      *
-     * Places a specified trade in the specified account.
+     * Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.   This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact).
      *
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
@@ -1610,16 +1610,16 @@ class TradingApi extends \SnapTrade\CustomApi
      */
     public function placeForceOrder(
 
+        $account_id,
+        $action,
+        $universal_symbol_id,
+        $order_type,
+        $time_in_force,
         $user_id,
         $user_secret,
-        $account_id = SENTINEL_VALUE,
-        $action = SENTINEL_VALUE,
-        $order_type = SENTINEL_VALUE,
         $price = SENTINEL_VALUE,
         $stop = SENTINEL_VALUE,
-        $time_in_force = SENTINEL_VALUE,
         $units = SENTINEL_VALUE,
-        $universal_symbol_id = SENTINEL_VALUE,
         $notional_value = SENTINEL_VALUE,
         string $contentType = self::contentTypes['placeForceOrder'][0]
     )
@@ -1627,12 +1627,12 @@ class TradingApi extends \SnapTrade\CustomApi
         $_body = [];
         $this->setRequestBodyProperty($_body, "account_id", $account_id);
         $this->setRequestBodyProperty($_body, "action", $action);
+        $this->setRequestBodyProperty($_body, "universal_symbol_id", $universal_symbol_id);
         $this->setRequestBodyProperty($_body, "order_type", $order_type);
+        $this->setRequestBodyProperty($_body, "time_in_force", $time_in_force);
         $this->setRequestBodyProperty($_body, "price", $price);
         $this->setRequestBodyProperty($_body, "stop", $stop);
-        $this->setRequestBodyProperty($_body, "time_in_force", $time_in_force);
         $this->setRequestBodyProperty($_body, "units", $units);
-        $this->setRequestBodyProperty($_body, "universal_symbol_id", $universal_symbol_id);
         $this->setRequestBodyProperty($_body, "notional_value", $notional_value);
         $manual_trade_form = $_body;
 
@@ -1643,9 +1643,9 @@ class TradingApi extends \SnapTrade\CustomApi
     /**
      * Operation placeForceOrderWithHttpInfo
      *
-     * Place a trade with NO validation.
+     * Place order
      *
-     * Places a specified trade in the specified account.
+     * Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.   This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact).
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -1810,9 +1810,9 @@ class TradingApi extends \SnapTrade\CustomApi
     /**
      * Operation placeForceOrderAsync
      *
-     * Place a trade with NO validation.
+     * Place order
      *
-     * Places a specified trade in the specified account.
+     * Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.   This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact).
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -1824,16 +1824,16 @@ class TradingApi extends \SnapTrade\CustomApi
      */
     public function placeForceOrderAsync(
 
+        $account_id,
+        $action,
+        $universal_symbol_id,
+        $order_type,
+        $time_in_force,
         $user_id,
         $user_secret,
-        $account_id = SENTINEL_VALUE,
-        $action = SENTINEL_VALUE,
-        $order_type = SENTINEL_VALUE,
         $price = SENTINEL_VALUE,
         $stop = SENTINEL_VALUE,
-        $time_in_force = SENTINEL_VALUE,
         $units = SENTINEL_VALUE,
-        $universal_symbol_id = SENTINEL_VALUE,
         $notional_value = SENTINEL_VALUE,
         string $contentType = self::contentTypes['placeForceOrder'][0]
     )
@@ -1841,12 +1841,12 @@ class TradingApi extends \SnapTrade\CustomApi
         $_body = [];
         $this->setRequestBodyProperty($_body, "account_id", $account_id);
         $this->setRequestBodyProperty($_body, "action", $action);
+        $this->setRequestBodyProperty($_body, "universal_symbol_id", $universal_symbol_id);
         $this->setRequestBodyProperty($_body, "order_type", $order_type);
+        $this->setRequestBodyProperty($_body, "time_in_force", $time_in_force);
         $this->setRequestBodyProperty($_body, "price", $price);
         $this->setRequestBodyProperty($_body, "stop", $stop);
-        $this->setRequestBodyProperty($_body, "time_in_force", $time_in_force);
         $this->setRequestBodyProperty($_body, "units", $units);
-        $this->setRequestBodyProperty($_body, "universal_symbol_id", $universal_symbol_id);
         $this->setRequestBodyProperty($_body, "notional_value", $notional_value);
         $manual_trade_form = $_body;
 
@@ -1861,9 +1861,9 @@ class TradingApi extends \SnapTrade\CustomApi
     /**
      * Operation placeForceOrderAsyncWithHttpInfo
      *
-     * Place a trade with NO validation.
+     * Place order
      *
-     * Places a specified trade in the specified account.
+     * Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.   This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact).
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -2084,11 +2084,11 @@ class TradingApi extends \SnapTrade\CustomApi
     /**
      * Operation placeOrder
      *
-     * Place order
+     * Place checked order
      *
-     * Places the specified trade object. This places the order in the account and returns the status of the order from the brokerage.
+     * Places the previously checked order with the brokerage. The &#x60;tradeId&#x60; is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder).
      *
-     * @param  string $trade_id The ID of trade object obtained from trade/impact endpoint (required)
+     * @param  string $trade_id Obtained from calling the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact) (required)
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
      * @param  \SnapTrade\Model\ValidatedTradeBody $validated_trade_body validated_trade_body (optional)
@@ -2118,11 +2118,11 @@ class TradingApi extends \SnapTrade\CustomApi
     /**
      * Operation placeOrderWithHttpInfo
      *
-     * Place order
+     * Place checked order
      *
-     * Places the specified trade object. This places the order in the account and returns the status of the order from the brokerage.
+     * Places the previously checked order with the brokerage. The &#x60;tradeId&#x60; is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder).
      *
-     * @param  string $trade_id The ID of trade object obtained from trade/impact endpoint (required)
+     * @param  string $trade_id Obtained from calling the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact) (required)
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
      * @param  \SnapTrade\Model\ValidatedTradeBody $validated_trade_body (optional)
@@ -2264,11 +2264,11 @@ class TradingApi extends \SnapTrade\CustomApi
     /**
      * Operation placeOrderAsync
      *
-     * Place order
+     * Place checked order
      *
-     * Places the specified trade object. This places the order in the account and returns the status of the order from the brokerage.
+     * Places the previously checked order with the brokerage. The &#x60;tradeId&#x60; is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder).
      *
-     * @param  string $trade_id The ID of trade object obtained from trade/impact endpoint (required)
+     * @param  string $trade_id Obtained from calling the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact) (required)
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
      * @param  \SnapTrade\Model\ValidatedTradeBody $validated_trade_body (optional)
@@ -2301,11 +2301,11 @@ class TradingApi extends \SnapTrade\CustomApi
     /**
      * Operation placeOrderAsyncWithHttpInfo
      *
-     * Place order
+     * Place checked order
      *
-     * Places the specified trade object. This places the order in the account and returns the status of the order from the brokerage.
+     * Places the previously checked order with the brokerage. The &#x60;tradeId&#x60; is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder).
      *
-     * @param  string $trade_id The ID of trade object obtained from trade/impact endpoint (required)
+     * @param  string $trade_id Obtained from calling the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact) (required)
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
      * @param  \SnapTrade\Model\ValidatedTradeBody $validated_trade_body (optional)
@@ -2361,7 +2361,7 @@ class TradingApi extends \SnapTrade\CustomApi
     /**
      * Create request for operation 'placeOrder'
      *
-     * @param  string $trade_id The ID of trade object obtained from trade/impact endpoint (required)
+     * @param  string $trade_id Obtained from calling the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact) (required)
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
      * @param  \SnapTrade\Model\ValidatedTradeBody $validated_trade_body (optional)

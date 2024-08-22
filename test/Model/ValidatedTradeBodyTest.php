@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * ValidatedTradeBodyTest Class Doc Comment
  *
  * @category    Class
- * @description Validated Trade Form
+ * @description ValidatedTradeBody
  * @package     SnapTrade
  */
 class ValidatedTradeBodyTest extends TestCase

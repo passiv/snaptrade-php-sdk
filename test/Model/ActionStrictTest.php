@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * ActionStrictTest Class Doc Comment
  *
  * @category    Class
- * @description Trade Action
+ * @description The action describes the intent or side of a trade. This is either &#x60;BUY&#x60; or &#x60;SELL&#x60;
  * @package     SnapTrade
  */
 class ActionStrictTest extends TestCase

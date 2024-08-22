@@ -1,6 +1,6 @@
 <?php
 /**
- * ManualTradeFormTest
+ * ManualTradeImpactTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * ManualTradeFormTest Class Doc Comment
+ * ManualTradeImpactTest Class Doc Comment
  *
  * @category    Class
- * @description Inputs for placing an order with the brokerage.
+ * @description ManualTradeImpact
  * @package     SnapTrade
  */
-class ManualTradeFormTest extends TestCase
+class ManualTradeImpactTest extends TestCase
 {
 
     /**
@@ -64,90 +64,54 @@ class ManualTradeFormTest extends TestCase
     }
 
     /**
-     * Test "ManualTradeForm"
+     * Test "ManualTradeImpact"
      */
-    public function testManualTradeForm()
+    public function testManualTradeImpact()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "account_id"
+     * Test attribute "account"
      */
-    public function testPropertyAccountId()
+    public function testPropertyAccount()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "action"
+     * Test attribute "currency"
      */
-    public function testPropertyAction()
+    public function testPropertyCurrency()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "universal_symbol_id"
+     * Test attribute "remaining_cash"
      */
-    public function testPropertyUniversalSymbolId()
+    public function testPropertyRemainingCash()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "order_type"
+     * Test attribute "estimated_commission"
      */
-    public function testPropertyOrderType()
+    public function testPropertyEstimatedCommission()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "time_in_force"
+     * Test attribute "forex_fees"
      */
-    public function testPropertyTimeInForce()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "price"
-     */
-    public function testPropertyPrice()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "stop"
-     */
-    public function testPropertyStop()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "units"
-     */
-    public function testPropertyUnits()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "notional_value"
-     */
-    public function testPropertyNotionalValue()
+    public function testPropertyForexFees()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

@@ -61,7 +61,7 @@ class TradingCancelUserAccountOrderRequest implements ModelInterface, ArrayAcces
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'brokerage_order_id' => 'uuid'
+        'brokerage_order_id' => null
     ];
 
     /**
@@ -295,7 +295,7 @@ class TradingCancelUserAccountOrderRequest implements ModelInterface, ArrayAcces
     /**
      * Sets brokerage_order_id
      *
-     * @param string|null $brokerage_order_id brokerage_order_id
+     * @param string|null $brokerage_order_id Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
      *
      * @return self
      */

@@ -30,7 +30,7 @@ use \SnapTrade\ObjectSerializer;
  * ManualTradeSymbol Class Doc Comment
  *
  * @category Class
- * @description Manual trade symbol object
+ * @description Information about the security for the order.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
@@ -322,6 +322,7 @@ class ManualTradeSymbol implements ModelInterface, ArrayAccess, \JsonSerializabl
      * Gets brokerage_symbol_id
      *
      * @return string|null
+     * @deprecated
      */
     public function getBrokerageSymbolId()
     {
@@ -331,9 +332,10 @@ class ManualTradeSymbol implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets brokerage_symbol_id
      *
-     * @param string|null $brokerage_symbol_id brokerage_symbol_id
+     * @param string|null $brokerage_symbol_id A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.
      *
      * @return self
+     * @deprecated
      */
     public function setBrokerageSymbolId($brokerage_symbol_id)
     {
@@ -360,7 +362,7 @@ class ManualTradeSymbol implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets universal_symbol_id
      *
-     * @param string|null $universal_symbol_id universal_symbol_id
+     * @param string|null $universal_symbol_id Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
      *
      * @return self
      */
@@ -409,6 +411,7 @@ class ManualTradeSymbol implements ModelInterface, ArrayAccess, \JsonSerializabl
      * Gets local_id
      *
      * @return string|null
+     * @deprecated
      */
     public function getLocalId()
     {
@@ -418,9 +421,10 @@ class ManualTradeSymbol implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets local_id
      *
-     * @param string|null $local_id local_id
+     * @param string|null $local_id This field is deprecated and should not be used.
      *
      * @return self
+     * @deprecated
      */
     public function setLocalId($local_id)
     {
@@ -438,6 +442,7 @@ class ManualTradeSymbol implements ModelInterface, ArrayAccess, \JsonSerializabl
      * Gets description
      *
      * @return string|null
+     * @deprecated
      */
     public function getDescription()
     {
@@ -447,9 +452,10 @@ class ManualTradeSymbol implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets description
      *
-     * @param string|null $description description
+     * @param string|null $description This field is deprecated and should not be used.
      *
      * @return self
+     * @deprecated
      */
     public function setDescription($description)
     {
@@ -474,6 +480,7 @@ class ManualTradeSymbol implements ModelInterface, ArrayAccess, \JsonSerializabl
      * Gets symbol
      *
      * @return string|null
+     * @deprecated
      */
     public function getSymbol()
     {
@@ -483,9 +490,10 @@ class ManualTradeSymbol implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets symbol
      *
-     * @param string|null $symbol symbol
+     * @param string|null $symbol This field is deprecated and should not be used.
      *
      * @return self
+     * @deprecated
      */
     public function setSymbol($symbol)
     {

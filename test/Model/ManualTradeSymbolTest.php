@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * ManualTradeSymbolTest Class Doc Comment
  *
  * @category    Class
- * @description Manual trade symbol object
+ * @description Information about the security for the order.
  * @package     SnapTrade
  */
 class ManualTradeSymbolTest extends TestCase

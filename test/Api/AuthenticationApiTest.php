@@ -85,7 +85,7 @@ class AuthenticationApiTest extends TestCase
     /**
      * Test case for loginSnapTradeUser
      *
-     * Login user & generate connection link.
+     * Generate Connection Portal URL.
      *
      */
     public function testLoginSnapTradeUser()

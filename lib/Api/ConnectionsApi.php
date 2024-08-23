@@ -557,7 +557,7 @@ class ConnectionsApi extends \SnapTrade\CustomApi
      *
      * Force disable connection
      *
-     * Manually force the specified connection to become disabled. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a [&#x60;CONNECTION_BROKEN&#x60; webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-connection_broken) for the connection.  *Please contact us in order to use this endpoint as it is disabled by default.*
+     * Manually force the specified connection to become disabled. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a [&#x60;CONNECTION_BROKEN&#x60; webhook](/docs/webhooks#webhooks-connection_broken) for the connection.  *Please contact us in order to use this endpoint as it is disabled by default.*
      *
      * @param  string $authorization_id authorization_id (required)
      * @param  string $user_id user_id (required)
@@ -586,7 +586,7 @@ class ConnectionsApi extends \SnapTrade\CustomApi
      *
      * Force disable connection
      *
-     * Manually force the specified connection to become disabled. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a [&#x60;CONNECTION_BROKEN&#x60; webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-connection_broken) for the connection.  *Please contact us in order to use this endpoint as it is disabled by default.*
+     * Manually force the specified connection to become disabled. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a [&#x60;CONNECTION_BROKEN&#x60; webhook](/docs/webhooks#webhooks-connection_broken) for the connection.  *Please contact us in order to use this endpoint as it is disabled by default.*
      *
      * @param  string $authorization_id (required)
      * @param  string $user_id (required)
@@ -799,7 +799,7 @@ class ConnectionsApi extends \SnapTrade\CustomApi
      *
      * Force disable connection
      *
-     * Manually force the specified connection to become disabled. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a [&#x60;CONNECTION_BROKEN&#x60; webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-connection_broken) for the connection.  *Please contact us in order to use this endpoint as it is disabled by default.*
+     * Manually force the specified connection to become disabled. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a [&#x60;CONNECTION_BROKEN&#x60; webhook](/docs/webhooks#webhooks-connection_broken) for the connection.  *Please contact us in order to use this endpoint as it is disabled by default.*
      *
      * @param  string $authorization_id (required)
      * @param  string $user_id (required)
@@ -831,7 +831,7 @@ class ConnectionsApi extends \SnapTrade\CustomApi
      *
      * Force disable connection
      *
-     * Manually force the specified connection to become disabled. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a [&#x60;CONNECTION_BROKEN&#x60; webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-connection_broken) for the connection.  *Please contact us in order to use this endpoint as it is disabled by default.*
+     * Manually force the specified connection to become disabled. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a [&#x60;CONNECTION_BROKEN&#x60; webhook](/docs/webhooks#webhooks-connection_broken) for the connection.  *Please contact us in order to use this endpoint as it is disabled by default.*
      *
      * @param  string $authorization_id (required)
      * @param  string $user_id (required)
@@ -1427,7 +1427,7 @@ class ConnectionsApi extends \SnapTrade\CustomApi
      *
      * Refresh holdings for a connection
      *
-     * Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [&#x60;ACCOUNT_HOLDINGS_UPDATED&#x60; webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection.  *Please contact support for access as this endpoint is not enabled by default.*
+     * Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [&#x60;ACCOUNT_HOLDINGS_UPDATED&#x60; webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection.  *Please contact support for access as this endpoint is not enabled by default.*
      *
      * @param  string $authorization_id authorization_id (required)
      * @param  string $user_id user_id (required)
@@ -1456,7 +1456,7 @@ class ConnectionsApi extends \SnapTrade\CustomApi
      *
      * Refresh holdings for a connection
      *
-     * Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [&#x60;ACCOUNT_HOLDINGS_UPDATED&#x60; webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection.  *Please contact support for access as this endpoint is not enabled by default.*
+     * Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [&#x60;ACCOUNT_HOLDINGS_UPDATED&#x60; webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection.  *Please contact support for access as this endpoint is not enabled by default.*
      *
      * @param  string $authorization_id (required)
      * @param  string $user_id (required)
@@ -1669,7 +1669,7 @@ class ConnectionsApi extends \SnapTrade\CustomApi
      *
      * Refresh holdings for a connection
      *
-     * Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [&#x60;ACCOUNT_HOLDINGS_UPDATED&#x60; webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection.  *Please contact support for access as this endpoint is not enabled by default.*
+     * Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [&#x60;ACCOUNT_HOLDINGS_UPDATED&#x60; webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection.  *Please contact support for access as this endpoint is not enabled by default.*
      *
      * @param  string $authorization_id (required)
      * @param  string $user_id (required)
@@ -1701,7 +1701,7 @@ class ConnectionsApi extends \SnapTrade\CustomApi
      *
      * Refresh holdings for a connection
      *
-     * Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [&#x60;ACCOUNT_HOLDINGS_UPDATED&#x60; webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection.  *Please contact support for access as this endpoint is not enabled by default.*
+     * Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [&#x60;ACCOUNT_HOLDINGS_UPDATED&#x60; webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection.  *Please contact support for access as this endpoint is not enabled by default.*
      *
      * @param  string $authorization_id (required)
      * @param  string $user_id (required)

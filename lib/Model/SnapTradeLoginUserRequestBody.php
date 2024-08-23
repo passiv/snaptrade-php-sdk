@@ -408,7 +408,7 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
     /**
      * Sets immediate_redirect
      *
-     * @param bool|null $immediate_redirect When set to `true`, user will be redirected back to the partner's site instead of the connection portal. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](https://docs.snaptrade.com/docs/implement-connection-portal) for more information.
+     * @param bool|null $immediate_redirect When set to `true`, user will be redirected back to the partner's site instead of the connection portal. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](/docs/implement-connection-portal) for more information.
      *
      * @return self
      */
@@ -437,7 +437,7 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
     /**
      * Sets custom_redirect
      *
-     * @param string|null $custom_redirect URL to redirect the user to after the user connects their brokerage account. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](https://docs.snaptrade.com/docs/implement-connection-portal) for more information.
+     * @param string|null $custom_redirect URL to redirect the user to after the user connects their brokerage account. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](/docs/implement-connection-portal) for more information.
      *
      * @return self
      */
@@ -466,7 +466,7 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
     /**
      * Sets reconnect
      *
-     * @param string|null $reconnect The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See the [guide on fixing broken connections](https://docs.snaptrade.com/docs/fix-broken-connections) for more information.
+     * @param string|null $reconnect The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See the [guide on fixing broken connections](/docs/fix-broken-connections) for more information.
      *
      * @return self
      */

@@ -254,8 +254,9 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
 
     public const CONNECTION_TYPE_READ = 'read';
     public const CONNECTION_TYPE_TRADE = 'trade';
-    public const CONNECTION_PORTAL_VERSION_V2 = 'v2';
+    public const CONNECTION_PORTAL_VERSION_V4 = 'v4';
     public const CONNECTION_PORTAL_VERSION_V3 = 'v3';
+    public const CONNECTION_PORTAL_VERSION_V2 = 'v2';
 
     /**
      * Gets allowable values of the enum
@@ -278,8 +279,9 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
     public function getConnectionPortalVersionAllowableValues()
     {
         return [
-            self::CONNECTION_PORTAL_VERSION_V2,
+            self::CONNECTION_PORTAL_VERSION_V4,
             self::CONNECTION_PORTAL_VERSION_V3,
+            self::CONNECTION_PORTAL_VERSION_V2,
         ];
     }
 

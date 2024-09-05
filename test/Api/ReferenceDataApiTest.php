@@ -73,7 +73,7 @@ class ReferenceDataApiTest extends TestCase
     /**
      * Test case for getPartnerInfo
      *
-     * Get metadata related to Snaptrade partner.
+     * Get Client Info.
      *
      */
     public function testGetPartnerInfo()
@@ -85,7 +85,7 @@ class ReferenceDataApiTest extends TestCase
     /**
      * Test case for getSecurityTypes
      *
-     * List of all security types.
+     * List security types.
      *
      */
     public function testGetSecurityTypes()

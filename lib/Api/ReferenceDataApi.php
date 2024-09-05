@@ -512,9 +512,9 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
     /**
      * Operation getPartnerInfo
      *
-     * Get metadata related to Snaptrade partner
+     * Get Client Info
      *
-     * Returns useful data related to the specified ClientID, including allowed brokerages and data access.
+     * Returns configurations for your SnapTrade Client ID, including allowed brokerages and data access.
      *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPartnerInfo'] to see the possible values for this operation
      *
@@ -536,9 +536,9 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
     /**
      * Operation getPartnerInfoWithHttpInfo
      *
-     * Get metadata related to Snaptrade partner
+     * Get Client Info
      *
-     * Returns useful data related to the specified ClientID, including allowed brokerages and data access.
+     * Returns configurations for your SnapTrade Client ID, including allowed brokerages and data access.
      *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPartnerInfo'] to see the possible values for this operation
      *
@@ -720,9 +720,9 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
     /**
      * Operation getPartnerInfoAsync
      *
-     * Get metadata related to Snaptrade partner
+     * Get Client Info
      *
-     * Returns useful data related to the specified ClientID, including allowed brokerages and data access.
+     * Returns configurations for your SnapTrade Client ID, including allowed brokerages and data access.
      *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPartnerInfo'] to see the possible values for this operation
      *
@@ -747,9 +747,9 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
     /**
      * Operation getPartnerInfoAsyncWithHttpInfo
      *
-     * Get metadata related to Snaptrade partner
+     * Get Client Info
      *
-     * Returns useful data related to the specified ClientID, including allowed brokerages and data access.
+     * Returns configurations for your SnapTrade Client ID, including allowed brokerages and data access.
      *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPartnerInfo'] to see the possible values for this operation
      *
@@ -901,9 +901,9 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
     /**
      * Operation getSecurityTypes
      *
-     * List of all security types
+     * List security types
      *
-     * List security types available on SnapTrade.
+     * Return all available security types supported by SnapTrade.
      *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getSecurityTypes'] to see the possible values for this operation
      *
@@ -925,9 +925,9 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
     /**
      * Operation getSecurityTypesWithHttpInfo
      *
-     * List of all security types
+     * List security types
      *
-     * List security types available on SnapTrade.
+     * Return all available security types supported by SnapTrade.
      *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getSecurityTypes'] to see the possible values for this operation
      *
@@ -1040,9 +1040,9 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
     /**
      * Operation getSecurityTypesAsync
      *
-     * List of all security types
+     * List security types
      *
-     * List security types available on SnapTrade.
+     * Return all available security types supported by SnapTrade.
      *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getSecurityTypes'] to see the possible values for this operation
      *
@@ -1067,9 +1067,9 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
     /**
      * Operation getSecurityTypesAsyncWithHttpInfo
      *
-     * List of all security types
+     * List security types
      *
-     * List security types available on SnapTrade.
+     * Return all available security types supported by SnapTrade.
      *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getSecurityTypes'] to see the possible values for this operation
      *

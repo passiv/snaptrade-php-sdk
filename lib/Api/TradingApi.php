@@ -1601,7 +1601,7 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
-     * @param  \SnapTrade\Model\ManualTradeForm $manual_trade_form manual_trade_form (required)
+     * @param  \SnapTrade\Model\ManualTradeFormWithOptions $manual_trade_form_with_options manual_trade_form_with_options (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['placeForceOrder'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
@@ -1612,11 +1612,12 @@ class TradingApi extends \SnapTrade\CustomApi
 
         $account_id,
         $action,
-        $universal_symbol_id,
         $order_type,
         $time_in_force,
         $user_id,
         $user_secret,
+        $universal_symbol_id = SENTINEL_VALUE,
+        $symbol = SENTINEL_VALUE,
         $price = SENTINEL_VALUE,
         $stop = SENTINEL_VALUE,
         $units = SENTINEL_VALUE,
@@ -1628,15 +1629,16 @@ class TradingApi extends \SnapTrade\CustomApi
         $this->setRequestBodyProperty($_body, "account_id", $account_id);
         $this->setRequestBodyProperty($_body, "action", $action);
         $this->setRequestBodyProperty($_body, "universal_symbol_id", $universal_symbol_id);
+        $this->setRequestBodyProperty($_body, "symbol", $symbol);
         $this->setRequestBodyProperty($_body, "order_type", $order_type);
         $this->setRequestBodyProperty($_body, "time_in_force", $time_in_force);
         $this->setRequestBodyProperty($_body, "price", $price);
         $this->setRequestBodyProperty($_body, "stop", $stop);
         $this->setRequestBodyProperty($_body, "units", $units);
         $this->setRequestBodyProperty($_body, "notional_value", $notional_value);
-        $manual_trade_form = $_body;
+        $manual_trade_form_with_options = $_body;
 
-        list($response) = $this->placeForceOrderWithHttpInfo($user_id, $user_secret, $manual_trade_form, $contentType);
+        list($response) = $this->placeForceOrderWithHttpInfo($user_id, $user_secret, $manual_trade_form_with_options, $contentType);
         return $response;
     }
 
@@ -1649,16 +1651,16 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  \SnapTrade\Model\ManualTradeForm $manual_trade_form (required)
+     * @param  \SnapTrade\Model\ManualTradeFormWithOptions $manual_trade_form_with_options (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['placeForceOrder'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \SnapTrade\Model\AccountOrderRecord|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\Model403FailedRequestResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function placeForceOrderWithHttpInfo($user_id, $user_secret, $manual_trade_form, string $contentType = self::contentTypes['placeForceOrder'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    public function placeForceOrderWithHttpInfo($user_id, $user_secret, $manual_trade_form_with_options, string $contentType = self::contentTypes['placeForceOrder'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->placeForceOrderRequest($user_id, $user_secret, $manual_trade_form, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->placeForceOrderRequest($user_id, $user_secret, $manual_trade_form_with_options, $contentType);
 
         // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
@@ -1676,7 +1678,7 @@ class TradingApi extends \SnapTrade\CustomApi
                     return $this->placeForceOrderWithHttpInfo(
                         $user_id,
                         $user_secret,
-                        $manual_trade_form,
+                        $manual_trade_form_with_options,
                         $contentType,
                         $requestOptions->setRetryOAuth(false)
                     );
@@ -1816,7 +1818,7 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  \SnapTrade\Model\ManualTradeForm $manual_trade_form (required)
+     * @param  \SnapTrade\Model\ManualTradeFormWithOptions $manual_trade_form_with_options (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['placeForceOrder'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1826,11 +1828,12 @@ class TradingApi extends \SnapTrade\CustomApi
 
         $account_id,
         $action,
-        $universal_symbol_id,
         $order_type,
         $time_in_force,
         $user_id,
         $user_secret,
+        $universal_symbol_id = SENTINEL_VALUE,
+        $symbol = SENTINEL_VALUE,
         $price = SENTINEL_VALUE,
         $stop = SENTINEL_VALUE,
         $units = SENTINEL_VALUE,
@@ -1842,15 +1845,16 @@ class TradingApi extends \SnapTrade\CustomApi
         $this->setRequestBodyProperty($_body, "account_id", $account_id);
         $this->setRequestBodyProperty($_body, "action", $action);
         $this->setRequestBodyProperty($_body, "universal_symbol_id", $universal_symbol_id);
+        $this->setRequestBodyProperty($_body, "symbol", $symbol);
         $this->setRequestBodyProperty($_body, "order_type", $order_type);
         $this->setRequestBodyProperty($_body, "time_in_force", $time_in_force);
         $this->setRequestBodyProperty($_body, "price", $price);
         $this->setRequestBodyProperty($_body, "stop", $stop);
         $this->setRequestBodyProperty($_body, "units", $units);
         $this->setRequestBodyProperty($_body, "notional_value", $notional_value);
-        $manual_trade_form = $_body;
+        $manual_trade_form_with_options = $_body;
 
-        return $this->placeForceOrderAsyncWithHttpInfo($user_id, $user_secret, $manual_trade_form, $contentType)
+        return $this->placeForceOrderAsyncWithHttpInfo($user_id, $user_secret, $manual_trade_form_with_options, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1867,16 +1871,16 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  \SnapTrade\Model\ManualTradeForm $manual_trade_form (required)
+     * @param  \SnapTrade\Model\ManualTradeFormWithOptions $manual_trade_form_with_options (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['placeForceOrder'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function placeForceOrderAsyncWithHttpInfo($user_id, $user_secret, $manual_trade_form, string $contentType = self::contentTypes['placeForceOrder'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    public function placeForceOrderAsyncWithHttpInfo($user_id, $user_secret, $manual_trade_form_with_options, string $contentType = self::contentTypes['placeForceOrder'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\AccountOrderRecord';
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->placeForceOrderRequest($user_id, $user_secret, $manual_trade_form, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->placeForceOrderRequest($user_id, $user_secret, $manual_trade_form_with_options, $contentType);
 
         // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
@@ -1922,13 +1926,13 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  \SnapTrade\Model\ManualTradeForm $manual_trade_form (required)
+     * @param  \SnapTrade\Model\ManualTradeFormWithOptions $manual_trade_form_with_options (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['placeForceOrder'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function placeForceOrderRequest($user_id, $user_secret, $manual_trade_form, string $contentType = self::contentTypes['placeForceOrder'][0])
+    public function placeForceOrderRequest($user_id, $user_secret, $manual_trade_form_with_options, string $contentType = self::contentTypes['placeForceOrder'][0])
     {
 
         // Check if $user_id is a string
@@ -1951,18 +1955,18 @@ class TradingApi extends \SnapTrade\CustomApi
                 'Missing the required parameter user_secret when calling placeForceOrder'
             );
         }
-        if ($manual_trade_form !== SENTINEL_VALUE) {
-            if (!($manual_trade_form instanceof \SnapTrade\Model\ManualTradeForm)) {
-                if (!is_array($manual_trade_form))
-                    throw new \InvalidArgumentException('"manual_trade_form" must be associative array or an instance of \SnapTrade\Model\ManualTradeForm TradingApi.placeForceOrder.');
+        if ($manual_trade_form_with_options !== SENTINEL_VALUE) {
+            if (!($manual_trade_form_with_options instanceof \SnapTrade\Model\ManualTradeFormWithOptions)) {
+                if (!is_array($manual_trade_form_with_options))
+                    throw new \InvalidArgumentException('"manual_trade_form_with_options" must be associative array or an instance of \SnapTrade\Model\ManualTradeFormWithOptions TradingApi.placeForceOrder.');
                 else
-                    $manual_trade_form = new \SnapTrade\Model\ManualTradeForm($manual_trade_form);
+                    $manual_trade_form_with_options = new \SnapTrade\Model\ManualTradeFormWithOptions($manual_trade_form_with_options);
             }
         }
-        // verify the required parameter 'manual_trade_form' is set
-        if ($manual_trade_form === SENTINEL_VALUE || (is_array($manual_trade_form) && count($manual_trade_form) === 0)) {
+        // verify the required parameter 'manual_trade_form_with_options' is set
+        if ($manual_trade_form_with_options === SENTINEL_VALUE || (is_array($manual_trade_form_with_options) && count($manual_trade_form_with_options) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter manual_trade_form when calling placeForceOrder'
+                'Missing the required parameter manual_trade_form_with_options when calling placeForceOrder'
             );
         }
 
@@ -2007,12 +2011,12 @@ class TradingApi extends \SnapTrade\CustomApi
         );
 
         // for model (json/xml)
-        if (isset($manual_trade_form)) {
+        if (isset($manual_trade_form_with_options)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($manual_trade_form));
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($manual_trade_form_with_options));
             } else {
-                $httpBody = $manual_trade_form;
+                $httpBody = $manual_trade_form_with_options;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {

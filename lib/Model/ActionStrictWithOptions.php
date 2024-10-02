@@ -1,6 +1,6 @@
 <?php
 /**
- * ActionStrict
+ * ActionStrictWithOptions
  *
  * PHP version 7.4
  *
@@ -25,13 +25,13 @@ namespace SnapTrade\Model;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * ActionStrict Class Doc Comment
+ * ActionStrictWithOptions Class Doc Comment
  *
  * @category Class
- * @description The action describes the intent or side of a trade. This is either &#x60;BUY&#x60; or &#x60;SELL&#x60;.
+ * @description The action describes the intent or side of a trade. This is either &#x60;BUY&#x60; or &#x60;SELL&#x60; for Equity symbols or &#x60;BUY_TO_OPEN&#x60;, &#x60;BUY_TO_CLOSE&#x60;, &#x60;SELL_TO_OPEN&#x60; or &#x60;SELL_TO_CLOSE&#x60; for Options.
  * @package  SnapTrade
  */
-class ActionStrict
+class ActionStrictWithOptions
 {
     /**
      * Possible values of this enum
@@ -39,6 +39,14 @@ class ActionStrict
     public const BUY = 'BUY';
 
     public const SELL = 'SELL';
+
+    public const BUY_TO_OPEN = 'BUY_TO_OPEN';
+
+    public const BUY_TO_CLOSE = 'BUY_TO_CLOSE';
+
+    public const SELL_TO_OPEN = 'SELL_TO_OPEN';
+
+    public const SELL_TO_CLOSE = 'SELL_TO_CLOSE';
 
     /**
      * Gets allowable values of the enum
@@ -48,7 +56,11 @@ class ActionStrict
     {
         return [
             self::BUY,
-            self::SELL
+            self::SELL,
+            self::BUY_TO_OPEN,
+            self::BUY_TO_CLOSE,
+            self::SELL_TO_OPEN,
+            self::SELL_TO_CLOSE
         ];
     }
 }

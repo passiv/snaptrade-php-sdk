@@ -1654,11 +1654,12 @@ It's recommended to trigger a manual refresh of the account after placing an ord
 $result = $snaptrade->trading->placeForceOrder(
     account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631", 
     action: "BUY", 
-    universal_symbol_id: "2bcd7cc3-e922-4976-bce1-9858296801c3", 
     order_type: "Market", 
     time_in_force: "FOK", 
     user_id: "snaptrade-user-123", 
     user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61", 
+    universal_symbol_id: "2bcd7cc3-e922-4976-bce1-9858296801c3", 
+    symbol: "AAPL  131124C00240000", 
     price: 31.33, 
     stop: 31.33, 
     units: 10.5, 
@@ -1674,10 +1675,6 @@ Unique identifier for the connected brokerage account. This is the UUID used to 
 
 ##### action:<a id="action"></a>
 
-##### universal_symbol_id: `string`<a id="universal_symbol_id-string"></a>
-
-Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
-
 ##### order_type:<a id="order_type"></a>
 
 ##### time_in_force:<a id="time_in_force"></a>
@@ -1685,6 +1682,14 @@ Unique identifier for the symbol within SnapTrade. This is the ID used to refere
 ##### user_id: `string`<a id="user_id-string"></a>
 
 ##### user_secret: `string`<a id="user_secret-string"></a>
+
+##### universal_symbol_id: [`string`](./lib/Model/string.php)<a id="universal_symbol_id-stringlibmodelstringphp"></a>
+
+The universal symbol ID of the security to trade. Must be 'null' if `symbol` is provided, otherwise must be provided.
+
+##### symbol: `string`<a id="symbol-string"></a>
+
+The security's trading ticker symbol. This currently only support Options symbols in the 21 character OCC format. For example \\\"AAPL  131124C00240000\\\" represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format). If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
 
 ##### price: `float`<a id="price-float"></a>
 
@@ -1695,6 +1700,8 @@ The limit price for `Limit` and `StopLimit` orders.
 The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
 
 ##### units: [`float`](./lib/Model/float.php)<a id="units-floatlibmodelfloatphp"></a>
+
+For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract = 100 shares).
 
 ##### notional_value: [`ManualTradeFormNotionalValue`](./lib/Model/ManualTradeFormNotionalValue.php)<a id="notional_value-manualtradeformnotionalvaluelibmodelmanualtradeformnotionalvaluephp"></a>
 

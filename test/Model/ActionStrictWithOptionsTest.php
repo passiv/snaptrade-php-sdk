@@ -1,6 +1,6 @@
 <?php
 /**
- * ActionStrictTest
+ * ActionStrictWithOptionsTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * ActionStrictTest Class Doc Comment
+ * ActionStrictWithOptionsTest Class Doc Comment
  *
  * @category    Class
- * @description The action describes the intent or side of a trade. This is either &#x60;BUY&#x60; or &#x60;SELL&#x60;.
+ * @description The action describes the intent or side of a trade. This is either &#x60;BUY&#x60; or &#x60;SELL&#x60; for Equity symbols or &#x60;BUY_TO_OPEN&#x60;, &#x60;BUY_TO_CLOSE&#x60;, &#x60;SELL_TO_OPEN&#x60; or &#x60;SELL_TO_CLOSE&#x60; for Options.
  * @package     SnapTrade
  */
-class ActionStrictTest extends TestCase
+class ActionStrictWithOptionsTest extends TestCase
 {
 
     /**
@@ -64,9 +64,9 @@ class ActionStrictTest extends TestCase
     }
 
     /**
-     * Test "ActionStrict"
+     * Test "ActionStrictWithOptions"
      */
-    public function testActionStrict()
+    public function testActionStrictWithOptions()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

@@ -53,7 +53,6 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     protected static $openAPITypes = [
         'brokerage_order_id' => 'string',
         'status' => '\SnapTrade\Model\AccountOrderRecordStatus',
-        'symbol' => 'string',
         'universal_symbol' => '\SnapTrade\Model\AccountOrderRecordUniversalSymbol',
         'option_symbol' => '\SnapTrade\Model\AccountOrderRecordOptionSymbol',
         'action' => 'string',
@@ -69,7 +68,8 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
         'time_placed' => '\DateTime',
         'time_updated' => '\DateTime',
         'time_executed' => '\DateTime',
-        'expiry_date' => '\DateTime'
+        'expiry_date' => '\DateTime',
+        'symbol' => 'string'
     ];
 
     /**
@@ -82,7 +82,6 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     protected static $openAPIFormats = [
         'brokerage_order_id' => null,
         'status' => null,
-        'symbol' => 'uuid',
         'universal_symbol' => null,
         'option_symbol' => null,
         'action' => null,
@@ -98,7 +97,8 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
         'time_placed' => 'date-time',
         'time_updated' => 'date-time',
         'time_executed' => 'date-time',
-        'expiry_date' => 'date-time'
+        'expiry_date' => 'date-time',
+        'symbol' => 'uuid'
     ];
 
     /**
@@ -109,7 +109,6 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     protected static array $openAPINullables = [
         'brokerage_order_id' => false,
 		'status' => false,
-		'symbol' => false,
 		'universal_symbol' => false,
 		'option_symbol' => false,
 		'action' => false,
@@ -125,7 +124,8 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
 		'time_placed' => false,
 		'time_updated' => true,
 		'time_executed' => true,
-		'expiry_date' => true
+		'expiry_date' => true,
+		'symbol' => false
     ];
 
     /**
@@ -216,7 +216,6 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     protected static $attributeMap = [
         'brokerage_order_id' => 'brokerage_order_id',
         'status' => 'status',
-        'symbol' => 'symbol',
         'universal_symbol' => 'universal_symbol',
         'option_symbol' => 'option_symbol',
         'action' => 'action',
@@ -232,7 +231,8 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
         'time_placed' => 'time_placed',
         'time_updated' => 'time_updated',
         'time_executed' => 'time_executed',
-        'expiry_date' => 'expiry_date'
+        'expiry_date' => 'expiry_date',
+        'symbol' => 'symbol'
     ];
 
     /**
@@ -243,7 +243,6 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     protected static $setters = [
         'brokerage_order_id' => 'setBrokerageOrderId',
         'status' => 'setStatus',
-        'symbol' => 'setSymbol',
         'universal_symbol' => 'setUniversalSymbol',
         'option_symbol' => 'setOptionSymbol',
         'action' => 'setAction',
@@ -259,7 +258,8 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
         'time_placed' => 'setTimePlaced',
         'time_updated' => 'setTimeUpdated',
         'time_executed' => 'setTimeExecuted',
-        'expiry_date' => 'setExpiryDate'
+        'expiry_date' => 'setExpiryDate',
+        'symbol' => 'setSymbol'
     ];
 
     /**
@@ -270,7 +270,6 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     protected static $getters = [
         'brokerage_order_id' => 'getBrokerageOrderId',
         'status' => 'getStatus',
-        'symbol' => 'getSymbol',
         'universal_symbol' => 'getUniversalSymbol',
         'option_symbol' => 'getOptionSymbol',
         'action' => 'getAction',
@@ -286,7 +285,8 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
         'time_placed' => 'getTimePlaced',
         'time_updated' => 'getTimeUpdated',
         'time_executed' => 'getTimeExecuted',
-        'expiry_date' => 'getExpiryDate'
+        'expiry_date' => 'getExpiryDate',
+        'symbol' => 'getSymbol'
     ];
 
     /**
@@ -348,7 +348,6 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     {
         $this->setIfExists('brokerage_order_id', $data ?? [], null);
         $this->setIfExists('status', $data ?? [], null);
-        $this->setIfExists('symbol', $data ?? [], null);
         $this->setIfExists('universal_symbol', $data ?? [], null);
         $this->setIfExists('option_symbol', $data ?? [], null);
         $this->setIfExists('action', $data ?? [], null);
@@ -365,6 +364,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
         $this->setIfExists('time_updated', $data ?? [], null);
         $this->setIfExists('time_executed', $data ?? [], null);
         $this->setIfExists('expiry_date', $data ?? [], null);
+        $this->setIfExists('symbol', $data ?? [], null);
     }
 
     /**
@@ -463,37 +463,6 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
         }
 
         $this->container['status'] = $status;
-
-        return $this;
-    }
-
-    /**
-     * Gets symbol
-     *
-     * @return string|null
-     * @deprecated
-     */
-    public function getSymbol()
-    {
-        return $this->container['symbol'];
-    }
-
-    /**
-     * Sets symbol
-     *
-     * @param string|null $symbol A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.
-     *
-     * @return self
-     * @deprecated
-     */
-    public function setSymbol($symbol)
-    {
-
-        if (is_null($symbol)) {
-            throw new \InvalidArgumentException('non-nullable symbol cannot be null');
-        }
-
-        $this->container['symbol'] = $symbol;
 
         return $this;
     }
@@ -1035,6 +1004,37 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
         }
 
         $this->container['expiry_date'] = $expiry_date;
+
+        return $this;
+    }
+
+    /**
+     * Gets symbol
+     *
+     * @return string|null
+     * @deprecated
+     */
+    public function getSymbol()
+    {
+        return $this->container['symbol'];
+    }
+
+    /**
+     * Sets symbol
+     *
+     * @param string|null $symbol A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.
+     *
+     * @return self
+     * @deprecated
+     */
+    public function setSymbol($symbol)
+    {
+
+        if (is_null($symbol)) {
+            throw new \InvalidArgumentException('non-nullable symbol cannot be null');
+        }
+
+        $this->container['symbol'] = $symbol;
 
         return $this;
     }

@@ -91,15 +91,6 @@ class AccountOrderRecordTest extends TestCase
     }
 
     /**
-     * Test attribute "symbol"
-     */
-    public function testPropertySymbol()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test attribute "universal_symbol"
      */
     public function testPropertyUniversalSymbol()
@@ -238,6 +229,15 @@ class AccountOrderRecordTest extends TestCase
      * Test attribute "expiry_date"
      */
     public function testPropertyExpiryDate()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "symbol"
+     */
+    public function testPropertySymbol()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

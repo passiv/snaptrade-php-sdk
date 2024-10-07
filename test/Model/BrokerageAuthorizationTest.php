@@ -91,15 +91,6 @@ class BrokerageAuthorizationTest extends TestCase
     }
 
     /**
-     * Test attribute "updated_date"
-     */
-    public function testPropertyUpdatedDate()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test attribute "brokerage"
      */
     public function testPropertyBrokerage()
@@ -148,6 +139,15 @@ class BrokerageAuthorizationTest extends TestCase
      * Test attribute "meta"
      */
     public function testPropertyMeta()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "updated_date"
+     */
+    public function testPropertyUpdatedDate()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

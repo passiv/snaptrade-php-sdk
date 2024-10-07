@@ -136,15 +136,6 @@ class BrokerageTest extends TestCase
     }
 
     /**
-     * Test attribute "open_url"
-     */
-    public function testPropertyOpenUrl()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test attribute "url"
      */
     public function testPropertyUrl()
@@ -172,18 +163,18 @@ class BrokerageTest extends TestCase
     }
 
     /**
-     * Test attribute "allows_fractional_units"
+     * Test attribute "allows_trading"
      */
-    public function testPropertyAllowsFractionalUnits()
+    public function testPropertyAllowsTrading()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "allows_trading"
+     * Test attribute "allows_fractional_units"
      */
-    public function testPropertyAllowsTrading()
+    public function testPropertyAllowsFractionalUnits()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
@@ -220,6 +211,15 @@ class BrokerageTest extends TestCase
      * Test attribute "exchanges"
      */
     public function testPropertyExchanges()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "open_url"
+     */
+    public function testPropertyOpenUrl()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

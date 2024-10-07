@@ -58,16 +58,16 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
         'description' => 'string',
         'aws_s3_logo_url' => 'string',
         'aws_s3_square_logo_url' => 'string',
-        'open_url' => 'string',
         'url' => 'string',
         'enabled' => 'bool',
         'maintenance_mode' => 'bool',
-        'allows_fractional_units' => 'bool',
         'allows_trading' => 'bool',
+        'allows_fractional_units' => 'bool',
         'has_reporting' => 'bool',
         'is_real_time_connection' => 'bool',
         'brokerage_type' => '\SnapTrade\Model\BrokerageType',
-        'exchanges' => 'mixed[]'
+        'exchanges' => 'mixed[]',
+        'open_url' => 'string'
     ];
 
     /**
@@ -85,16 +85,16 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
         'description' => null,
         'aws_s3_logo_url' => 'url',
         'aws_s3_square_logo_url' => 'url',
-        'open_url' => 'url',
         'url' => 'url',
         'enabled' => null,
         'maintenance_mode' => null,
-        'allows_fractional_units' => null,
         'allows_trading' => null,
+        'allows_fractional_units' => null,
         'has_reporting' => null,
         'is_real_time_connection' => null,
         'brokerage_type' => null,
-        'exchanges' => null
+        'exchanges' => null,
+        'open_url' => 'url'
     ];
 
     /**
@@ -110,16 +110,16 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
 		'description' => false,
 		'aws_s3_logo_url' => false,
 		'aws_s3_square_logo_url' => true,
-		'open_url' => true,
 		'url' => false,
 		'enabled' => false,
 		'maintenance_mode' => false,
-		'allows_fractional_units' => true,
 		'allows_trading' => true,
+		'allows_fractional_units' => true,
 		'has_reporting' => true,
 		'is_real_time_connection' => false,
 		'brokerage_type' => false,
-		'exchanges' => false
+		'exchanges' => false,
+		'open_url' => true
     ];
 
     /**
@@ -215,16 +215,16 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
         'description' => 'description',
         'aws_s3_logo_url' => 'aws_s3_logo_url',
         'aws_s3_square_logo_url' => 'aws_s3_square_logo_url',
-        'open_url' => 'open_url',
         'url' => 'url',
         'enabled' => 'enabled',
         'maintenance_mode' => 'maintenance_mode',
-        'allows_fractional_units' => 'allows_fractional_units',
         'allows_trading' => 'allows_trading',
+        'allows_fractional_units' => 'allows_fractional_units',
         'has_reporting' => 'has_reporting',
         'is_real_time_connection' => 'is_real_time_connection',
         'brokerage_type' => 'brokerage_type',
-        'exchanges' => 'exchanges'
+        'exchanges' => 'exchanges',
+        'open_url' => 'open_url'
     ];
 
     /**
@@ -240,16 +240,16 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
         'description' => 'setDescription',
         'aws_s3_logo_url' => 'setAwsS3LogoUrl',
         'aws_s3_square_logo_url' => 'setAwsS3SquareLogoUrl',
-        'open_url' => 'setOpenUrl',
         'url' => 'setUrl',
         'enabled' => 'setEnabled',
         'maintenance_mode' => 'setMaintenanceMode',
-        'allows_fractional_units' => 'setAllowsFractionalUnits',
         'allows_trading' => 'setAllowsTrading',
+        'allows_fractional_units' => 'setAllowsFractionalUnits',
         'has_reporting' => 'setHasReporting',
         'is_real_time_connection' => 'setIsRealTimeConnection',
         'brokerage_type' => 'setBrokerageType',
-        'exchanges' => 'setExchanges'
+        'exchanges' => 'setExchanges',
+        'open_url' => 'setOpenUrl'
     ];
 
     /**
@@ -265,16 +265,16 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
         'description' => 'getDescription',
         'aws_s3_logo_url' => 'getAwsS3LogoUrl',
         'aws_s3_square_logo_url' => 'getAwsS3SquareLogoUrl',
-        'open_url' => 'getOpenUrl',
         'url' => 'getUrl',
         'enabled' => 'getEnabled',
         'maintenance_mode' => 'getMaintenanceMode',
-        'allows_fractional_units' => 'getAllowsFractionalUnits',
         'allows_trading' => 'getAllowsTrading',
+        'allows_fractional_units' => 'getAllowsFractionalUnits',
         'has_reporting' => 'getHasReporting',
         'is_real_time_connection' => 'getIsRealTimeConnection',
         'brokerage_type' => 'getBrokerageType',
-        'exchanges' => 'getExchanges'
+        'exchanges' => 'getExchanges',
+        'open_url' => 'getOpenUrl'
     ];
 
     /**
@@ -341,16 +341,16 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('description', $data ?? [], null);
         $this->setIfExists('aws_s3_logo_url', $data ?? [], null);
         $this->setIfExists('aws_s3_square_logo_url', $data ?? [], null);
-        $this->setIfExists('open_url', $data ?? [], null);
         $this->setIfExists('url', $data ?? [], null);
         $this->setIfExists('enabled', $data ?? [], null);
         $this->setIfExists('maintenance_mode', $data ?? [], null);
-        $this->setIfExists('allows_fractional_units', $data ?? [], null);
         $this->setIfExists('allows_trading', $data ?? [], null);
+        $this->setIfExists('allows_fractional_units', $data ?? [], null);
         $this->setIfExists('has_reporting', $data ?? [], null);
         $this->setIfExists('is_real_time_connection', $data ?? [], null);
         $this->setIfExists('brokerage_type', $data ?? [], null);
         $this->setIfExists('exchanges', $data ?? [], null);
+        $this->setIfExists('open_url', $data ?? [], null);
     }
 
     /**
@@ -606,44 +606,6 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets open_url
-     *
-     * @return string|null
-     * @deprecated
-     */
-    public function getOpenUrl()
-    {
-        return $this->container['open_url'];
-    }
-
-    /**
-     * Sets open_url
-     *
-     * @param string|null $open_url This field is deprecated.
-     *
-     * @return self
-     * @deprecated
-     */
-    public function setOpenUrl($open_url)
-    {
-
-        if (is_null($open_url)) {
-            array_push($this->openAPINullablesSetToNull, 'open_url');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('open_url', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['open_url'] = $open_url;
-
-        return $this;
-    }
-
-    /**
      * Gets url
      *
      * @return string|null
@@ -731,6 +693,42 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
+     * Gets allows_trading
+     *
+     * @return bool|null
+     */
+    public function getAllowsTrading()
+    {
+        return $this->container['allows_trading'];
+    }
+
+    /**
+     * Sets allows_trading
+     *
+     * @param bool|null $allows_trading Whether the brokerage allows trading through SnapTrade.
+     *
+     * @return self
+     */
+    public function setAllowsTrading($allows_trading)
+    {
+
+        if (is_null($allows_trading)) {
+            array_push($this->openAPINullablesSetToNull, 'allows_trading');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('allows_trading', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['allows_trading'] = $allows_trading;
+
+        return $this;
+    }
+
+    /**
      * Gets allows_fractional_units
      *
      * @return bool|null
@@ -764,42 +762,6 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['allows_fractional_units'] = $allows_fractional_units;
-
-        return $this;
-    }
-
-    /**
-     * Gets allows_trading
-     *
-     * @return bool|null
-     */
-    public function getAllowsTrading()
-    {
-        return $this->container['allows_trading'];
-    }
-
-    /**
-     * Sets allows_trading
-     *
-     * @param bool|null $allows_trading Whether the brokerage allows trading through SnapTrade.
-     *
-     * @return self
-     */
-    public function setAllowsTrading($allows_trading)
-    {
-
-        if (is_null($allows_trading)) {
-            array_push($this->openAPINullablesSetToNull, 'allows_trading');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('allows_trading', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['allows_trading'] = $allows_trading;
 
         return $this;
     }
@@ -929,6 +891,44 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['exchanges'] = $exchanges;
+
+        return $this;
+    }
+
+    /**
+     * Gets open_url
+     *
+     * @return string|null
+     * @deprecated
+     */
+    public function getOpenUrl()
+    {
+        return $this->container['open_url'];
+    }
+
+    /**
+     * Sets open_url
+     *
+     * @param string|null $open_url This field is deprecated.
+     *
+     * @return self
+     * @deprecated
+     */
+    public function setOpenUrl($open_url)
+    {
+
+        if (is_null($open_url)) {
+            array_push($this->openAPINullablesSetToNull, 'open_url');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('open_url', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['open_url'] = $open_url;
 
         return $this;
     }

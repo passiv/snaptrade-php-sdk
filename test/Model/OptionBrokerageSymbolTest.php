@@ -73,6 +73,15 @@ class OptionBrokerageSymbolTest extends TestCase
     }
 
     /**
+     * Test attribute "option_symbol"
+     */
+    public function testPropertyOptionSymbol()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "id"
      */
     public function testPropertyId()
@@ -85,15 +94,6 @@ class OptionBrokerageSymbolTest extends TestCase
      * Test attribute "description"
      */
     public function testPropertyDescription()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "option_symbol"
-     */
-    public function testPropertyOptionSymbol()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

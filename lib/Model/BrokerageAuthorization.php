@@ -53,13 +53,13 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
     protected static $openAPITypes = [
         'id' => 'string',
         'created_date' => '\DateTime',
-        'updated_date' => '\DateTime',
         'brokerage' => '\SnapTrade\Model\Brokerage',
         'name' => 'string',
         'type' => 'string',
         'disabled' => 'bool',
         'disabled_date' => '\DateTime',
-        'meta' => 'array<string,mixed>'
+        'meta' => 'array<string,mixed>',
+        'updated_date' => '\DateTime'
     ];
 
     /**
@@ -72,13 +72,13 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
     protected static $openAPIFormats = [
         'id' => 'uuid',
         'created_date' => 'date-time',
-        'updated_date' => 'date-time',
         'brokerage' => null,
         'name' => null,
         'type' => null,
         'disabled' => null,
         'disabled_date' => 'date-time',
-        'meta' => null
+        'meta' => null,
+        'updated_date' => 'date-time'
     ];
 
     /**
@@ -89,13 +89,13 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
     protected static array $openAPINullables = [
         'id' => false,
 		'created_date' => false,
-		'updated_date' => false,
 		'brokerage' => false,
 		'name' => false,
 		'type' => false,
 		'disabled' => false,
 		'disabled_date' => true,
-		'meta' => false
+		'meta' => false,
+		'updated_date' => false
     ];
 
     /**
@@ -186,13 +186,13 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
     protected static $attributeMap = [
         'id' => 'id',
         'created_date' => 'created_date',
-        'updated_date' => 'updated_date',
         'brokerage' => 'brokerage',
         'name' => 'name',
         'type' => 'type',
         'disabled' => 'disabled',
         'disabled_date' => 'disabled_date',
-        'meta' => 'meta'
+        'meta' => 'meta',
+        'updated_date' => 'updated_date'
     ];
 
     /**
@@ -203,13 +203,13 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
     protected static $setters = [
         'id' => 'setId',
         'created_date' => 'setCreatedDate',
-        'updated_date' => 'setUpdatedDate',
         'brokerage' => 'setBrokerage',
         'name' => 'setName',
         'type' => 'setType',
         'disabled' => 'setDisabled',
         'disabled_date' => 'setDisabledDate',
-        'meta' => 'setMeta'
+        'meta' => 'setMeta',
+        'updated_date' => 'setUpdatedDate'
     ];
 
     /**
@@ -220,13 +220,13 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
     protected static $getters = [
         'id' => 'getId',
         'created_date' => 'getCreatedDate',
-        'updated_date' => 'getUpdatedDate',
         'brokerage' => 'getBrokerage',
         'name' => 'getName',
         'type' => 'getType',
         'disabled' => 'getDisabled',
         'disabled_date' => 'getDisabledDate',
-        'meta' => 'getMeta'
+        'meta' => 'getMeta',
+        'updated_date' => 'getUpdatedDate'
     ];
 
     /**
@@ -288,13 +288,13 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
     {
         $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('created_date', $data ?? [], null);
-        $this->setIfExists('updated_date', $data ?? [], null);
         $this->setIfExists('brokerage', $data ?? [], null);
         $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('type', $data ?? [], null);
         $this->setIfExists('disabled', $data ?? [], null);
         $this->setIfExists('disabled_date', $data ?? [], null);
         $this->setIfExists('meta', $data ?? [], null);
+        $this->setIfExists('updated_date', $data ?? [], null);
     }
 
     /**
@@ -393,37 +393,6 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
         }
 
         $this->container['created_date'] = $created_date;
-
-        return $this;
-    }
-
-    /**
-     * Gets updated_date
-     *
-     * @return \DateTime|null
-     * @deprecated
-     */
-    public function getUpdatedDate()
-    {
-        return $this->container['updated_date'];
-    }
-
-    /**
-     * Sets updated_date
-     *
-     * @param \DateTime|null $updated_date Timestamp of when the connection was last updated in SnapTrade. This field is deprecated. Please let us know if you have a valid use case for this field.
-     *
-     * @return self
-     * @deprecated
-     */
-    public function setUpdatedDate($updated_date)
-    {
-
-        if (is_null($updated_date)) {
-            throw new \InvalidArgumentException('non-nullable updated_date cannot be null');
-        }
-
-        $this->container['updated_date'] = $updated_date;
 
         return $this;
     }
@@ -607,6 +576,37 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
         }
 
         $this->container['meta'] = $meta;
+
+        return $this;
+    }
+
+    /**
+     * Gets updated_date
+     *
+     * @return \DateTime|null
+     * @deprecated
+     */
+    public function getUpdatedDate()
+    {
+        return $this->container['updated_date'];
+    }
+
+    /**
+     * Sets updated_date
+     *
+     * @param \DateTime|null $updated_date Timestamp of when the connection was last updated in SnapTrade. This field is deprecated. Please let us know if you have a valid use case for this field.
+     *
+     * @return self
+     * @deprecated
+     */
+    public function setUpdatedDate($updated_date)
+    {
+
+        if (is_null($updated_date)) {
+            throw new \InvalidArgumentException('non-nullable updated_date cannot be null');
+        }
+
+        $this->container['updated_date'] = $updated_date;
 
         return $this;
     }

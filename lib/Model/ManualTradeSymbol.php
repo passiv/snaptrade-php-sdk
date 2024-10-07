@@ -51,12 +51,12 @@ class ManualTradeSymbol implements ModelInterface, ArrayAccess, \JsonSerializabl
       * @var string[]
       */
     protected static $openAPITypes = [
-        'brokerage_symbol_id' => 'string',
         'universal_symbol_id' => 'string',
         'currency' => '\SnapTrade\Model\Currency',
         'local_id' => 'string',
         'description' => 'string',
-        'symbol' => 'string'
+        'symbol' => 'string',
+        'brokerage_symbol_id' => 'string'
     ];
 
     /**
@@ -67,12 +67,12 @@ class ManualTradeSymbol implements ModelInterface, ArrayAccess, \JsonSerializabl
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'brokerage_symbol_id' => 'uuid',
         'universal_symbol_id' => 'uuid',
         'currency' => null,
         'local_id' => null,
         'description' => null,
-        'symbol' => null
+        'symbol' => null,
+        'brokerage_symbol_id' => 'uuid'
     ];
 
     /**
@@ -81,12 +81,12 @@ class ManualTradeSymbol implements ModelInterface, ArrayAccess, \JsonSerializabl
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'brokerage_symbol_id' => false,
-		'universal_symbol_id' => false,
+        'universal_symbol_id' => false,
 		'currency' => false,
 		'local_id' => false,
 		'description' => true,
-		'symbol' => false
+		'symbol' => false,
+		'brokerage_symbol_id' => false
     ];
 
     /**
@@ -175,12 +175,12 @@ class ManualTradeSymbol implements ModelInterface, ArrayAccess, \JsonSerializabl
      * @var string[]
      */
     protected static $attributeMap = [
-        'brokerage_symbol_id' => 'brokerage_symbol_id',
         'universal_symbol_id' => 'universal_symbol_id',
         'currency' => 'currency',
         'local_id' => 'local_id',
         'description' => 'description',
-        'symbol' => 'symbol'
+        'symbol' => 'symbol',
+        'brokerage_symbol_id' => 'brokerage_symbol_id'
     ];
 
     /**
@@ -189,12 +189,12 @@ class ManualTradeSymbol implements ModelInterface, ArrayAccess, \JsonSerializabl
      * @var string[]
      */
     protected static $setters = [
-        'brokerage_symbol_id' => 'setBrokerageSymbolId',
         'universal_symbol_id' => 'setUniversalSymbolId',
         'currency' => 'setCurrency',
         'local_id' => 'setLocalId',
         'description' => 'setDescription',
-        'symbol' => 'setSymbol'
+        'symbol' => 'setSymbol',
+        'brokerage_symbol_id' => 'setBrokerageSymbolId'
     ];
 
     /**
@@ -203,12 +203,12 @@ class ManualTradeSymbol implements ModelInterface, ArrayAccess, \JsonSerializabl
      * @var string[]
      */
     protected static $getters = [
-        'brokerage_symbol_id' => 'getBrokerageSymbolId',
         'universal_symbol_id' => 'getUniversalSymbolId',
         'currency' => 'getCurrency',
         'local_id' => 'getLocalId',
         'description' => 'getDescription',
-        'symbol' => 'getSymbol'
+        'symbol' => 'getSymbol',
+        'brokerage_symbol_id' => 'getBrokerageSymbolId'
     ];
 
     /**
@@ -268,12 +268,12 @@ class ManualTradeSymbol implements ModelInterface, ArrayAccess, \JsonSerializabl
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('brokerage_symbol_id', $data ?? [], null);
         $this->setIfExists('universal_symbol_id', $data ?? [], null);
         $this->setIfExists('currency', $data ?? [], null);
         $this->setIfExists('local_id', $data ?? [], null);
         $this->setIfExists('description', $data ?? [], null);
         $this->setIfExists('symbol', $data ?? [], null);
+        $this->setIfExists('brokerage_symbol_id', $data ?? [], null);
     }
 
     /**
@@ -317,37 +317,6 @@ class ManualTradeSymbol implements ModelInterface, ArrayAccess, \JsonSerializabl
         return count($this->listInvalidProperties()) === 0;
     }
 
-
-    /**
-     * Gets brokerage_symbol_id
-     *
-     * @return string|null
-     * @deprecated
-     */
-    public function getBrokerageSymbolId()
-    {
-        return $this->container['brokerage_symbol_id'];
-    }
-
-    /**
-     * Sets brokerage_symbol_id
-     *
-     * @param string|null $brokerage_symbol_id A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.
-     *
-     * @return self
-     * @deprecated
-     */
-    public function setBrokerageSymbolId($brokerage_symbol_id)
-    {
-
-        if (is_null($brokerage_symbol_id)) {
-            throw new \InvalidArgumentException('non-nullable brokerage_symbol_id cannot be null');
-        }
-
-        $this->container['brokerage_symbol_id'] = $brokerage_symbol_id;
-
-        return $this;
-    }
 
     /**
      * Gets universal_symbol_id
@@ -503,6 +472,37 @@ class ManualTradeSymbol implements ModelInterface, ArrayAccess, \JsonSerializabl
         }
 
         $this->container['symbol'] = $symbol;
+
+        return $this;
+    }
+
+    /**
+     * Gets brokerage_symbol_id
+     *
+     * @return string|null
+     * @deprecated
+     */
+    public function getBrokerageSymbolId()
+    {
+        return $this->container['brokerage_symbol_id'];
+    }
+
+    /**
+     * Sets brokerage_symbol_id
+     *
+     * @param string|null $brokerage_symbol_id A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.
+     *
+     * @return self
+     * @deprecated
+     */
+    public function setBrokerageSymbolId($brokerage_symbol_id)
+    {
+
+        if (is_null($brokerage_symbol_id)) {
+            throw new \InvalidArgumentException('non-nullable brokerage_symbol_id cannot be null');
+        }
+
+        $this->container['brokerage_symbol_id'] = $brokerage_symbol_id;
 
         return $this;
     }

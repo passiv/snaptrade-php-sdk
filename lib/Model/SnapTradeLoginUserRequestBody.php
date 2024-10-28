@@ -497,7 +497,7 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
     /**
      * Sets connection_type
      *
-     * @param string|null $connection_type Sets whether the connection should be read-only or trade-enabled.
+     * @param string|null $connection_type Sets whether the connection should be read-only or trade-enabled. Defaults to read-only if not specified.
      *
      * @return self
      */

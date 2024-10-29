@@ -77,7 +77,7 @@ class TransactionsStatus implements ModelInterface, ArrayAccess, \JsonSerializab
     protected static array $openAPINullables = [
         'initial_sync_completed' => false,
 		'last_successful_sync' => true,
-		'first_transaction_date' => false
+		'first_transaction_date' => true
     ];
 
     /**
@@ -383,7 +383,14 @@ class TransactionsStatus implements ModelInterface, ArrayAccess, \JsonSerializab
     {
 
         if (is_null($first_transaction_date)) {
-            throw new \InvalidArgumentException('non-nullable first_transaction_date cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'first_transaction_date');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('first_transaction_date', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['first_transaction_date'] = $first_transaction_date;

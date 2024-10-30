@@ -305,7 +305,7 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
         $this->setIfExists('custom_redirect', $data ?? [], null);
         $this->setIfExists('reconnect', $data ?? [], null);
         $this->setIfExists('connection_type', $data ?? [], 'read');
-        $this->setIfExists('connection_portal_version', $data ?? [], 'v3');
+        $this->setIfExists('connection_portal_version', $data ?? [], 'v4');
     }
 
     /**
@@ -536,7 +536,7 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
     /**
      * Sets connection_portal_version
      *
-     * @param string|null $connection_portal_version Sets the version of the connection portal to render.
+     * @param string|null $connection_portal_version Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4.
      *
      * @return self
      */

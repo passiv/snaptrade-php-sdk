@@ -119,6 +119,18 @@ class AccountInformationApiTest extends TestCase
     }
 
     /**
+     * Test case for getUserAccountRecentOrders
+     *
+     * List account recent executed orders.
+     *
+     */
+    public function testGetUserAccountRecentOrders()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for getUserHoldings
      *
      * List account holdings.

@@ -26,6 +26,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.accountInformation.getUserAccountDetails`](#snaptradeaccountinformationgetuseraccountdetails)
   * [`snaptrade.accountInformation.getUserAccountOrders`](#snaptradeaccountinformationgetuseraccountorders)
   * [`snaptrade.accountInformation.getUserAccountPositions`](#snaptradeaccountinformationgetuseraccountpositions)
+  * [`snaptrade.accountInformation.getUserAccountRecentOrders`](#snaptradeaccountinformationgetuseraccountrecentorders)
   * [`snaptrade.accountInformation.getUserHoldings`](#snaptradeaccountinformationgetuserholdings)
   * [`snaptrade.accountInformation.listUserAccounts`](#snaptradeaccountinformationlistuseraccounts)
   * [`snaptrade.accountInformation.updateUserAccount`](#snaptradeaccountinformationupdateuseraccount)
@@ -332,6 +333,47 @@ $result = $snaptrade->accountInformation->getUserAccountPositions(
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/positions` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.accountInformation.getUserAccountRecentOrders`<a id="snaptradeaccountinformationgetuseraccountrecentorders"></a>
+
+Returns a list of orders executed in the last 24 hours in the specified account.
+This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution
+Differs from /orders in that it only returns orders that have been *executed* in the last 24 hours as opposed to pending or cancelled orders up to 30 days old
+*Please contact support for access as this endpoint is not enabled by default.*
+
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $snaptrade->accountInformation->getUserAccountRecentOrders(
+    user_id: "snaptrade-user-123", 
+    user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61", 
+    account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631"
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### user_id: `string`<a id="user_id-string"></a>
+
+##### user_secret: `string`<a id="user_secret-string"></a>
+
+##### account_id: `string`<a id="account_id-string"></a>
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[**RecentOrdersResponse**](./lib/Model/RecentOrdersResponse.php)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/recentOrders` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

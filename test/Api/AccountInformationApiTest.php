@@ -131,6 +131,18 @@ class AccountInformationApiTest extends TestCase
     }
 
     /**
+     * Test case for getUserAccountReturnRates
+     *
+     * List account rate of returns.
+     *
+     */
+    public function testGetUserAccountReturnRates()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for getUserHoldings
      *
      * List account holdings.

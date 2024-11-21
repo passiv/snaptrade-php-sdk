@@ -2321,6 +2321,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
      * @param  string $account_id account_id (required)
+     * @param  bool $only_executed Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserAccountRecentOrders'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
@@ -2331,12 +2332,13 @@ class AccountInformationApi extends \SnapTrade\CustomApi
         $user_id,
         $user_secret,
         $account_id,
+        $only_executed = SENTINEL_VALUE,
 
         string $contentType = self::contentTypes['getUserAccountRecentOrders'][0]
     )
     {
 
-        list($response) = $this->getUserAccountRecentOrdersWithHttpInfo($user_id, $user_secret, $account_id, $contentType);
+        list($response) = $this->getUserAccountRecentOrdersWithHttpInfo($user_id, $user_secret, $account_id, $only_executed, $contentType);
         return $response;
     }
 
@@ -2350,15 +2352,16 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
      * @param  string $account_id (required)
+     * @param  bool $only_executed Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserAccountRecentOrders'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \SnapTrade\Model\RecentOrdersResponse|\SnapTrade\Model\Model403FeatureNotEnabledResponse|\SnapTrade\Model\Model500UnexpectedExceptionResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getUserAccountRecentOrdersWithHttpInfo($user_id, $user_secret, $account_id, string $contentType = self::contentTypes['getUserAccountRecentOrders'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    public function getUserAccountRecentOrdersWithHttpInfo($user_id, $user_secret, $account_id, $only_executed = null, string $contentType = self::contentTypes['getUserAccountRecentOrders'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->getUserAccountRecentOrdersRequest($user_id, $user_secret, $account_id, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getUserAccountRecentOrdersRequest($user_id, $user_secret, $account_id, $only_executed, $contentType);
 
         // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
@@ -2377,6 +2380,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
                         $user_id,
                         $user_secret,
                         $account_id,
+                        $only_executed,
                         $contentType,
                         $requestOptions->setRetryOAuth(false)
                     );
@@ -2517,6 +2521,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
      * @param  string $account_id (required)
+     * @param  bool $only_executed Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserAccountRecentOrders'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2526,12 +2531,13 @@ class AccountInformationApi extends \SnapTrade\CustomApi
         $user_id,
         $user_secret,
         $account_id,
+        $only_executed = SENTINEL_VALUE,
 
         string $contentType = self::contentTypes['getUserAccountRecentOrders'][0]
     )
     {
 
-        return $this->getUserAccountRecentOrdersAsyncWithHttpInfo($user_id, $user_secret, $account_id, $contentType)
+        return $this->getUserAccountRecentOrdersAsyncWithHttpInfo($user_id, $user_secret, $account_id, $only_executed, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -2549,15 +2555,16 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
      * @param  string $account_id (required)
+     * @param  bool $only_executed Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserAccountRecentOrders'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getUserAccountRecentOrdersAsyncWithHttpInfo($user_id, $user_secret, $account_id, string $contentType = self::contentTypes['getUserAccountRecentOrders'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    public function getUserAccountRecentOrdersAsyncWithHttpInfo($user_id, $user_secret, $account_id, $only_executed = null, string $contentType = self::contentTypes['getUserAccountRecentOrders'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\RecentOrdersResponse';
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->getUserAccountRecentOrdersRequest($user_id, $user_secret, $account_id, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getUserAccountRecentOrdersRequest($user_id, $user_secret, $account_id, $only_executed, $contentType);
 
         // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
@@ -2604,12 +2611,13 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
      * @param  string $account_id (required)
+     * @param  bool $only_executed Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserAccountRecentOrders'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getUserAccountRecentOrdersRequest($user_id, $user_secret, $account_id, string $contentType = self::contentTypes['getUserAccountRecentOrders'][0])
+    public function getUserAccountRecentOrdersRequest($user_id, $user_secret, $account_id, $only_executed = SENTINEL_VALUE, string $contentType = self::contentTypes['getUserAccountRecentOrders'][0])
     {
 
         // Check if $user_id is a string
@@ -2671,6 +2679,17 @@ class AccountInformationApi extends \SnapTrade\CustomApi
                 'form', // style
                 true, // explode
                 true // required
+            ) ?? []);
+        }
+        if ($only_executed !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $only_executed,
+                'only_executed', // param base name
+                'boolean', // openApiType
+                'form', // style
+                true, // explode
+                false // required
             ) ?? []);
         }
 

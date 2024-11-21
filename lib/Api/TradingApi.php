@@ -1128,7 +1128,7 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
-     * @param  string $symbols List of Universal Symbol IDs or tickers to get quotes for. (required)
+     * @param  string $symbols List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator (required)
      * @param  string $account_id account_id (required)
      * @param  bool $use_ticker Should be set to &#x60;True&#x60; if &#x60;symbols&#x60; are comprised of tickers. Defaults to &#x60;False&#x60; if not provided. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserAccountQuotes'] to see the possible values for this operation
@@ -1161,7 +1161,7 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $symbols List of Universal Symbol IDs or tickers to get quotes for. (required)
+     * @param  string $symbols List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator (required)
      * @param  string $account_id (required)
      * @param  bool $use_ticker Should be set to &#x60;True&#x60; if &#x60;symbols&#x60; are comprised of tickers. Defaults to &#x60;False&#x60; if not provided. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserAccountQuotes'] to see the possible values for this operation
@@ -1309,7 +1309,7 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $symbols List of Universal Symbol IDs or tickers to get quotes for. (required)
+     * @param  string $symbols List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator (required)
      * @param  string $account_id (required)
      * @param  bool $use_ticker Should be set to &#x60;True&#x60; if &#x60;symbols&#x60; are comprised of tickers. Defaults to &#x60;False&#x60; if not provided. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserAccountQuotes'] to see the possible values for this operation
@@ -1345,7 +1345,7 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $symbols List of Universal Symbol IDs or tickers to get quotes for. (required)
+     * @param  string $symbols List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator (required)
      * @param  string $account_id (required)
      * @param  bool $use_ticker Should be set to &#x60;True&#x60; if &#x60;symbols&#x60; are comprised of tickers. Defaults to &#x60;False&#x60; if not provided. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserAccountQuotes'] to see the possible values for this operation
@@ -1402,7 +1402,7 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $symbols List of Universal Symbol IDs or tickers to get quotes for. (required)
+     * @param  string $symbols List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator (required)
      * @param  string $account_id (required)
      * @param  bool $use_ticker Should be set to &#x60;True&#x60; if &#x60;symbols&#x60; are comprised of tickers. Defaults to &#x60;False&#x60; if not provided. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserAccountQuotes'] to see the possible values for this operation

@@ -1,6 +1,6 @@
 <?php
 /**
- * UniversalSymbolCurrency
+ * Model425FailedRequestResponse
  *
  * PHP version 7.4
  *
@@ -27,14 +27,14 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * UniversalSymbolCurrency Class Doc Comment
+ * Model425FailedRequestResponse Class Doc Comment
  *
  * @category Class
- * @description The currency in which the security is traded.
+ * @description Example for failed request response
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class UniversalSymbolCurrency implements ModelInterface, ArrayAccess, \JsonSerializable
+class Model425FailedRequestResponse implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -43,7 +43,7 @@ class UniversalSymbolCurrency implements ModelInterface, ArrayAccess, \JsonSeria
       *
       * @var string
       */
-    protected static $openAPIModelName = 'UniversalSymbol_currency';
+    protected static $openAPIModelName = '425FailedRequestResponse';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -51,9 +51,8 @@ class UniversalSymbolCurrency implements ModelInterface, ArrayAccess, \JsonSeria
       * @var string[]
       */
     protected static $openAPITypes = [
-        'id' => 'string',
-        'code' => 'string',
-        'name' => 'string'
+        'detail' => 'mixed',
+        'code' => 'mixed'
     ];
 
     /**
@@ -64,9 +63,8 @@ class UniversalSymbolCurrency implements ModelInterface, ArrayAccess, \JsonSeria
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'id' => 'uuid',
-        'code' => null,
-        'name' => null
+        'detail' => null,
+        'code' => null
     ];
 
     /**
@@ -75,9 +73,8 @@ class UniversalSymbolCurrency implements ModelInterface, ArrayAccess, \JsonSeria
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'id' => false,
-		'code' => false,
-		'name' => false
+        'detail' => true,
+		'code' => true
     ];
 
     /**
@@ -166,9 +163,8 @@ class UniversalSymbolCurrency implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $attributeMap = [
-        'id' => 'id',
-        'code' => 'code',
-        'name' => 'name'
+        'detail' => 'detail',
+        'code' => 'code'
     ];
 
     /**
@@ -177,9 +173,8 @@ class UniversalSymbolCurrency implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $setters = [
-        'id' => 'setId',
-        'code' => 'setCode',
-        'name' => 'setName'
+        'detail' => 'setDetail',
+        'code' => 'setCode'
     ];
 
     /**
@@ -188,9 +183,8 @@ class UniversalSymbolCurrency implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $getters = [
-        'id' => 'getId',
-        'code' => 'getCode',
-        'name' => 'getName'
+        'detail' => 'getDetail',
+        'code' => 'getCode'
     ];
 
     /**
@@ -250,9 +244,8 @@ class UniversalSymbolCurrency implements ModelInterface, ArrayAccess, \JsonSeria
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('detail', $data ?? [], null);
         $this->setIfExists('code', $data ?? [], null);
-        $this->setIfExists('name', $data ?? [], null);
     }
 
     /**
@@ -298,30 +291,37 @@ class UniversalSymbolCurrency implements ModelInterface, ArrayAccess, \JsonSeria
 
 
     /**
-     * Gets id
+     * Gets detail
      *
-     * @return string|null
+     * @return mixed|null
      */
-    public function getId()
+    public function getDetail()
     {
-        return $this->container['id'];
+        return $this->container['detail'];
     }
 
     /**
-     * Sets id
+     * Sets detail
      *
-     * @param string|null $id Unique identifier for the currency. This is the UUID used to reference the currency in SnapTrade.
+     * @param mixed|null $detail detail
      *
      * @return self
      */
-    public function setId($id)
+    public function setDetail($detail)
     {
 
-        if (is_null($id)) {
-            throw new \InvalidArgumentException('non-nullable id cannot be null');
+        if (is_null($detail)) {
+            array_push($this->openAPINullablesSetToNull, 'detail');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('detail', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
-        $this->container['id'] = $id;
+        $this->container['detail'] = $detail;
 
         return $this;
     }
@@ -329,7 +329,7 @@ class UniversalSymbolCurrency implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Gets code
      *
-     * @return string|null
+     * @return mixed|null
      */
     public function getCode()
     {
@@ -339,7 +339,7 @@ class UniversalSymbolCurrency implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Sets code
      *
-     * @param string|null $code The ISO-4217 currency code for the currency.
+     * @param mixed|null $code code
      *
      * @return self
      */
@@ -347,39 +347,17 @@ class UniversalSymbolCurrency implements ModelInterface, ArrayAccess, \JsonSeria
     {
 
         if (is_null($code)) {
-            throw new \InvalidArgumentException('non-nullable code cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'code');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('code', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['code'] = $code;
-
-        return $this;
-    }
-
-    /**
-     * Gets name
-     *
-     * @return string|null
-     */
-    public function getName()
-    {
-        return $this->container['name'];
-    }
-
-    /**
-     * Sets name
-     *
-     * @param string|null $name A human-friendly name of the currency.
-     *
-     * @return self
-     */
-    public function setName($name)
-    {
-
-        if (is_null($name)) {
-            throw new \InvalidArgumentException('non-nullable name cannot be null');
-        }
-
-        $this->container['name'] = $name;
 
         return $this;
     }

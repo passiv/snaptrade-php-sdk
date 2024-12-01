@@ -1,6 +1,6 @@
 <?php
 /**
- * UniversalSymbolExchange
+ * UniversalActivitySymbol
  *
  * PHP version 7.4
  *
@@ -27,14 +27,14 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * UniversalSymbolExchange Class Doc Comment
+ * UniversalActivitySymbol Class Doc Comment
  *
  * @category Class
- * @description The exchange on which the security is listed and traded.
+ * @description The security for the transaction. The field is &#x60;null&#x60; if the transaction is not related to a security (like a deposit, withdrawal, fee, etc). SnapTrade does a best effort to map the brokerage&#39;s symbol. In cases where the brokerage symbol is not recognized, the field will be set to &#x60;null&#x60;.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class UniversalSymbolExchange implements ModelInterface, ArrayAccess, \JsonSerializable
+class UniversalActivitySymbol implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -43,7 +43,7 @@ class UniversalSymbolExchange implements ModelInterface, ArrayAccess, \JsonSeria
       *
       * @var string
       */
-    protected static $openAPIModelName = 'UniversalSymbol_exchange';
+    protected static $openAPIModelName = 'UniversalActivity_symbol';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -52,13 +52,14 @@ class UniversalSymbolExchange implements ModelInterface, ArrayAccess, \JsonSeria
       */
     protected static $openAPITypes = [
         'id' => 'string',
-        'code' => 'string',
-        'mic_code' => 'string',
-        'name' => 'string',
-        'timezone' => 'string',
-        'start_time' => 'string',
-        'close_time' => 'string',
-        'suffix' => 'string'
+        'symbol' => 'string',
+        'raw_symbol' => 'string',
+        'description' => 'string',
+        'currency' => '\SnapTrade\Model\SymbolCurrency',
+        'exchange' => '\SnapTrade\Model\SymbolExchange',
+        'type' => '\SnapTrade\Model\SecurityType',
+        'figi_code' => 'string',
+        'figi_instrument' => '\SnapTrade\Model\SymbolFigiInstrument'
     ];
 
     /**
@@ -70,13 +71,14 @@ class UniversalSymbolExchange implements ModelInterface, ArrayAccess, \JsonSeria
       */
     protected static $openAPIFormats = [
         'id' => 'uuid',
-        'code' => null,
-        'mic_code' => null,
-        'name' => null,
-        'timezone' => null,
-        'start_time' => null,
-        'close_time' => null,
-        'suffix' => null
+        'symbol' => null,
+        'raw_symbol' => null,
+        'description' => null,
+        'currency' => null,
+        'exchange' => null,
+        'type' => null,
+        'figi_code' => null,
+        'figi_instrument' => null
     ];
 
     /**
@@ -86,13 +88,14 @@ class UniversalSymbolExchange implements ModelInterface, ArrayAccess, \JsonSeria
       */
     protected static array $openAPINullables = [
         'id' => false,
-		'code' => false,
-		'mic_code' => false,
-		'name' => false,
-		'timezone' => false,
-		'start_time' => false,
-		'close_time' => false,
-		'suffix' => true
+		'symbol' => false,
+		'raw_symbol' => false,
+		'description' => true,
+		'currency' => false,
+		'exchange' => false,
+		'type' => false,
+		'figi_code' => true,
+		'figi_instrument' => true
     ];
 
     /**
@@ -182,13 +185,14 @@ class UniversalSymbolExchange implements ModelInterface, ArrayAccess, \JsonSeria
      */
     protected static $attributeMap = [
         'id' => 'id',
-        'code' => 'code',
-        'mic_code' => 'mic_code',
-        'name' => 'name',
-        'timezone' => 'timezone',
-        'start_time' => 'start_time',
-        'close_time' => 'close_time',
-        'suffix' => 'suffix'
+        'symbol' => 'symbol',
+        'raw_symbol' => 'raw_symbol',
+        'description' => 'description',
+        'currency' => 'currency',
+        'exchange' => 'exchange',
+        'type' => 'type',
+        'figi_code' => 'figi_code',
+        'figi_instrument' => 'figi_instrument'
     ];
 
     /**
@@ -198,13 +202,14 @@ class UniversalSymbolExchange implements ModelInterface, ArrayAccess, \JsonSeria
      */
     protected static $setters = [
         'id' => 'setId',
-        'code' => 'setCode',
-        'mic_code' => 'setMicCode',
-        'name' => 'setName',
-        'timezone' => 'setTimezone',
-        'start_time' => 'setStartTime',
-        'close_time' => 'setCloseTime',
-        'suffix' => 'setSuffix'
+        'symbol' => 'setSymbol',
+        'raw_symbol' => 'setRawSymbol',
+        'description' => 'setDescription',
+        'currency' => 'setCurrency',
+        'exchange' => 'setExchange',
+        'type' => 'setType',
+        'figi_code' => 'setFigiCode',
+        'figi_instrument' => 'setFigiInstrument'
     ];
 
     /**
@@ -214,13 +219,14 @@ class UniversalSymbolExchange implements ModelInterface, ArrayAccess, \JsonSeria
      */
     protected static $getters = [
         'id' => 'getId',
-        'code' => 'getCode',
-        'mic_code' => 'getMicCode',
-        'name' => 'getName',
-        'timezone' => 'getTimezone',
-        'start_time' => 'getStartTime',
-        'close_time' => 'getCloseTime',
-        'suffix' => 'getSuffix'
+        'symbol' => 'getSymbol',
+        'raw_symbol' => 'getRawSymbol',
+        'description' => 'getDescription',
+        'currency' => 'getCurrency',
+        'exchange' => 'getExchange',
+        'type' => 'getType',
+        'figi_code' => 'getFigiCode',
+        'figi_instrument' => 'getFigiInstrument'
     ];
 
     /**
@@ -281,13 +287,14 @@ class UniversalSymbolExchange implements ModelInterface, ArrayAccess, \JsonSeria
     public function __construct(array $data = null)
     {
         $this->setIfExists('id', $data ?? [], null);
-        $this->setIfExists('code', $data ?? [], null);
-        $this->setIfExists('mic_code', $data ?? [], null);
-        $this->setIfExists('name', $data ?? [], null);
-        $this->setIfExists('timezone', $data ?? [], null);
-        $this->setIfExists('start_time', $data ?? [], null);
-        $this->setIfExists('close_time', $data ?? [], null);
-        $this->setIfExists('suffix', $data ?? [], null);
+        $this->setIfExists('symbol', $data ?? [], null);
+        $this->setIfExists('raw_symbol', $data ?? [], null);
+        $this->setIfExists('description', $data ?? [], null);
+        $this->setIfExists('currency', $data ?? [], null);
+        $this->setIfExists('exchange', $data ?? [], null);
+        $this->setIfExists('type', $data ?? [], null);
+        $this->setIfExists('figi_code', $data ?? [], null);
+        $this->setIfExists('figi_instrument', $data ?? [], null);
     }
 
     /**
@@ -345,7 +352,7 @@ class UniversalSymbolExchange implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Sets id
      *
-     * @param string|null $id Unique ID for the exchange in SnapTrade.
+     * @param string|null $id Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
      *
      * @return self
      */
@@ -362,211 +369,254 @@ class UniversalSymbolExchange implements ModelInterface, ArrayAccess, \JsonSeria
     }
 
     /**
-     * Gets code
+     * Gets symbol
      *
      * @return string|null
      */
-    public function getCode()
+    public function getSymbol()
     {
-        return $this->container['code'];
+        return $this->container['symbol'];
     }
 
     /**
-     * Sets code
+     * Sets symbol
      *
-     * @param string|null $code A short name for the exchange. For standardized exchange code, please us the `mic_code` field.
+     * @param string|null $symbol The security's trading ticker symbol. For example \"AAPL\" for Apple Inc. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on \"Yahoo Finance Market Coverage and Data Delays\"). For example, for securities traded on the Toronto Stock Exchange, the symbol has a '.TO' suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix.
      *
      * @return self
      */
-    public function setCode($code)
+    public function setSymbol($symbol)
     {
 
-        if (is_null($code)) {
-            throw new \InvalidArgumentException('non-nullable code cannot be null');
+        if (is_null($symbol)) {
+            throw new \InvalidArgumentException('non-nullable symbol cannot be null');
         }
 
-        $this->container['code'] = $code;
+        $this->container['symbol'] = $symbol;
 
         return $this;
     }
 
     /**
-     * Gets mic_code
+     * Gets raw_symbol
      *
      * @return string|null
      */
-    public function getMicCode()
+    public function getRawSymbol()
     {
-        return $this->container['mic_code'];
+        return $this->container['raw_symbol'];
     }
 
     /**
-     * Sets mic_code
+     * Sets raw_symbol
      *
-     * @param string|null $mic_code The [Market Identifier Code](https://en.wikipedia.org/wiki/Market_Identifier_Code) (MIC) for the exchange.
+     * @param string|null $raw_symbol The raw symbol is `symbol` with the exchange suffix removed. For example, if `symbol` is \"VAB.TO\", then `raw_symbol` is \"VAB\".
      *
      * @return self
      */
-    public function setMicCode($mic_code)
+    public function setRawSymbol($raw_symbol)
     {
 
-        if (is_null($mic_code)) {
-            throw new \InvalidArgumentException('non-nullable mic_code cannot be null');
+        if (is_null($raw_symbol)) {
+            throw new \InvalidArgumentException('non-nullable raw_symbol cannot be null');
         }
 
-        $this->container['mic_code'] = $mic_code;
+        $this->container['raw_symbol'] = $raw_symbol;
 
         return $this;
     }
 
     /**
-     * Gets name
+     * Gets description
      *
      * @return string|null
      */
-    public function getName()
+    public function getDescription()
     {
-        return $this->container['name'];
+        return $this->container['description'];
     }
 
     /**
-     * Sets name
+     * Sets description
      *
-     * @param string|null $name The full name of the exchange.
+     * @param string|null $description A human-readable description of the security. This is usually the company name or ETF name.
      *
      * @return self
      */
-    public function setName($name)
+    public function setDescription($description)
     {
 
-        if (is_null($name)) {
-            throw new \InvalidArgumentException('non-nullable name cannot be null');
-        }
-
-        $this->container['name'] = $name;
-
-        return $this;
-    }
-
-    /**
-     * Gets timezone
-     *
-     * @return string|null
-     */
-    public function getTimezone()
-    {
-        return $this->container['timezone'];
-    }
-
-    /**
-     * Sets timezone
-     *
-     * @param string|null $timezone The timezone for the trading hours (`start_time` and `close_time`) of the exchange.
-     *
-     * @return self
-     */
-    public function setTimezone($timezone)
-    {
-
-        if (is_null($timezone)) {
-            throw new \InvalidArgumentException('non-nullable timezone cannot be null');
-        }
-
-        $this->container['timezone'] = $timezone;
-
-        return $this;
-    }
-
-    /**
-     * Gets start_time
-     *
-     * @return string|null
-     */
-    public function getStartTime()
-    {
-        return $this->container['start_time'];
-    }
-
-    /**
-     * Sets start_time
-     *
-     * @param string|null $start_time The time when the exchange opens for trading.
-     *
-     * @return self
-     */
-    public function setStartTime($start_time)
-    {
-
-        if (is_null($start_time)) {
-            throw new \InvalidArgumentException('non-nullable start_time cannot be null');
-        }
-
-        $this->container['start_time'] = $start_time;
-
-        return $this;
-    }
-
-    /**
-     * Gets close_time
-     *
-     * @return string|null
-     */
-    public function getCloseTime()
-    {
-        return $this->container['close_time'];
-    }
-
-    /**
-     * Sets close_time
-     *
-     * @param string|null $close_time The time when the exchange closes for trading.
-     *
-     * @return self
-     */
-    public function setCloseTime($close_time)
-    {
-
-        if (is_null($close_time)) {
-            throw new \InvalidArgumentException('non-nullable close_time cannot be null');
-        }
-
-        $this->container['close_time'] = $close_time;
-
-        return $this;
-    }
-
-    /**
-     * Gets suffix
-     *
-     * @return string|null
-     */
-    public function getSuffix()
-    {
-        return $this->container['suffix'];
-    }
-
-    /**
-     * Sets suffix
-     *
-     * @param string|null $suffix The suffix to be appended to the symbol when trading on this exchange. For example, the suffix for the Toronto Stock Exchange is `.TO`. See `UniversalSymbol->symbol` and `UniversalSymbol->raw_symbol` for more detail.
-     *
-     * @return self
-     */
-    public function setSuffix($suffix)
-    {
-
-        if (is_null($suffix)) {
-            array_push($this->openAPINullablesSetToNull, 'suffix');
+        if (is_null($description)) {
+            array_push($this->openAPINullablesSetToNull, 'description');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('suffix', $nullablesSetToNull);
+            $index = array_search('description', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
 
-        $this->container['suffix'] = $suffix;
+        $this->container['description'] = $description;
+
+        return $this;
+    }
+
+    /**
+     * Gets currency
+     *
+     * @return \SnapTrade\Model\SymbolCurrency|null
+     */
+    public function getCurrency()
+    {
+        return $this->container['currency'];
+    }
+
+    /**
+     * Sets currency
+     *
+     * @param \SnapTrade\Model\SymbolCurrency|null $currency currency
+     *
+     * @return self
+     */
+    public function setCurrency($currency)
+    {
+
+        if (is_null($currency)) {
+            throw new \InvalidArgumentException('non-nullable currency cannot be null');
+        }
+
+        $this->container['currency'] = $currency;
+
+        return $this;
+    }
+
+    /**
+     * Gets exchange
+     *
+     * @return \SnapTrade\Model\SymbolExchange|null
+     */
+    public function getExchange()
+    {
+        return $this->container['exchange'];
+    }
+
+    /**
+     * Sets exchange
+     *
+     * @param \SnapTrade\Model\SymbolExchange|null $exchange exchange
+     *
+     * @return self
+     */
+    public function setExchange($exchange)
+    {
+
+        if (is_null($exchange)) {
+            throw new \InvalidArgumentException('non-nullable exchange cannot be null');
+        }
+
+        $this->container['exchange'] = $exchange;
+
+        return $this;
+    }
+
+    /**
+     * Gets type
+     *
+     * @return \SnapTrade\Model\SecurityType|null
+     */
+    public function getType()
+    {
+        return $this->container['type'];
+    }
+
+    /**
+     * Sets type
+     *
+     * @param \SnapTrade\Model\SecurityType|null $type type
+     *
+     * @return self
+     */
+    public function setType($type)
+    {
+
+        if (is_null($type)) {
+            throw new \InvalidArgumentException('non-nullable type cannot be null');
+        }
+
+        $this->container['type'] = $type;
+
+        return $this;
+    }
+
+    /**
+     * Gets figi_code
+     *
+     * @return string|null
+     */
+    public function getFigiCode()
+    {
+        return $this->container['figi_code'];
+    }
+
+    /**
+     * Sets figi_code
+     *
+     * @param string|null $figi_code This identifier is unique per security per trading venue. See section 1.4.1 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf) for more information. This value should be the same as the `figi_code` in the `figi_instrument` child property.
+     *
+     * @return self
+     */
+    public function setFigiCode($figi_code)
+    {
+
+        if (is_null($figi_code)) {
+            array_push($this->openAPINullablesSetToNull, 'figi_code');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('figi_code', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['figi_code'] = $figi_code;
+
+        return $this;
+    }
+
+    /**
+     * Gets figi_instrument
+     *
+     * @return \SnapTrade\Model\SymbolFigiInstrument|null
+     */
+    public function getFigiInstrument()
+    {
+        return $this->container['figi_instrument'];
+    }
+
+    /**
+     * Sets figi_instrument
+     *
+     * @param \SnapTrade\Model\SymbolFigiInstrument|null $figi_instrument figi_instrument
+     *
+     * @return self
+     */
+    public function setFigiInstrument($figi_instrument)
+    {
+
+        if (is_null($figi_instrument)) {
+            array_push($this->openAPINullablesSetToNull, 'figi_instrument');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('figi_instrument', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['figi_instrument'] = $figi_instrument;
 
         return $this;
     }

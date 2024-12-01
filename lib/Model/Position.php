@@ -55,8 +55,8 @@ class Position implements ModelInterface, ArrayAccess, \JsonSerializable
         'units' => 'float',
         'price' => 'float',
         'open_pnl' => 'float',
-        'fractional_units' => 'float',
-        'average_purchase_price' => 'float'
+        'average_purchase_price' => 'float',
+        'fractional_units' => 'float'
     ];
 
     /**
@@ -71,8 +71,8 @@ class Position implements ModelInterface, ArrayAccess, \JsonSerializable
         'units' => null,
         'price' => null,
         'open_pnl' => null,
-        'fractional_units' => null,
-        'average_purchase_price' => null
+        'average_purchase_price' => null,
+        'fractional_units' => null
     ];
 
     /**
@@ -85,8 +85,8 @@ class Position implements ModelInterface, ArrayAccess, \JsonSerializable
 		'units' => true,
 		'price' => true,
 		'open_pnl' => true,
-		'fractional_units' => true,
-		'average_purchase_price' => true
+		'average_purchase_price' => true,
+		'fractional_units' => true
     ];
 
     /**
@@ -179,8 +179,8 @@ class Position implements ModelInterface, ArrayAccess, \JsonSerializable
         'units' => 'units',
         'price' => 'price',
         'open_pnl' => 'open_pnl',
-        'fractional_units' => 'fractional_units',
-        'average_purchase_price' => 'average_purchase_price'
+        'average_purchase_price' => 'average_purchase_price',
+        'fractional_units' => 'fractional_units'
     ];
 
     /**
@@ -193,8 +193,8 @@ class Position implements ModelInterface, ArrayAccess, \JsonSerializable
         'units' => 'setUnits',
         'price' => 'setPrice',
         'open_pnl' => 'setOpenPnl',
-        'fractional_units' => 'setFractionalUnits',
-        'average_purchase_price' => 'setAveragePurchasePrice'
+        'average_purchase_price' => 'setAveragePurchasePrice',
+        'fractional_units' => 'setFractionalUnits'
     ];
 
     /**
@@ -207,8 +207,8 @@ class Position implements ModelInterface, ArrayAccess, \JsonSerializable
         'units' => 'getUnits',
         'price' => 'getPrice',
         'open_pnl' => 'getOpenPnl',
-        'fractional_units' => 'getFractionalUnits',
-        'average_purchase_price' => 'getAveragePurchasePrice'
+        'average_purchase_price' => 'getAveragePurchasePrice',
+        'fractional_units' => 'getFractionalUnits'
     ];
 
     /**
@@ -272,8 +272,8 @@ class Position implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('units', $data ?? [], null);
         $this->setIfExists('price', $data ?? [], null);
         $this->setIfExists('open_pnl', $data ?? [], null);
-        $this->setIfExists('fractional_units', $data ?? [], null);
         $this->setIfExists('average_purchase_price', $data ?? [], null);
+        $this->setIfExists('fractional_units', $data ?? [], null);
     }
 
     /**
@@ -456,6 +456,42 @@ class Position implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
+     * Gets average_purchase_price
+     *
+     * @return float|null
+     */
+    public function getAveragePurchasePrice()
+    {
+        return $this->container['average_purchase_price'];
+    }
+
+    /**
+     * Sets average_purchase_price
+     *
+     * @param float|null $average_purchase_price Cost basis _per share_ of this position.
+     *
+     * @return self
+     */
+    public function setAveragePurchasePrice($average_purchase_price)
+    {
+
+        if (is_null($average_purchase_price)) {
+            array_push($this->openAPINullablesSetToNull, 'average_purchase_price');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('average_purchase_price', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['average_purchase_price'] = $average_purchase_price;
+
+        return $this;
+    }
+
+    /**
      * Gets fractional_units
      *
      * @return float|null
@@ -489,42 +525,6 @@ class Position implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['fractional_units'] = $fractional_units;
-
-        return $this;
-    }
-
-    /**
-     * Gets average_purchase_price
-     *
-     * @return float|null
-     */
-    public function getAveragePurchasePrice()
-    {
-        return $this->container['average_purchase_price'];
-    }
-
-    /**
-     * Sets average_purchase_price
-     *
-     * @param float|null $average_purchase_price Cost basis _per share_ of this position.
-     *
-     * @return self
-     */
-    public function setAveragePurchasePrice($average_purchase_price)
-    {
-
-        if (is_null($average_purchase_price)) {
-            array_push($this->openAPINullablesSetToNull, 'average_purchase_price');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('average_purchase_price', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['average_purchase_price'] = $average_purchase_price;
 
         return $this;
     }

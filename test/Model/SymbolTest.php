@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * SymbolTest Class Doc Comment
  *
  * @category    Class
- * @description Symbol
+ * @description Uniquely describes a single security + exchange combination across all brokerages.
  * @package     SnapTrade
  */
 class SymbolTest extends TestCase
@@ -100,9 +100,9 @@ class SymbolTest extends TestCase
     }
 
     /**
-     * Test attribute "name"
+     * Test attribute "description"
      */
-    public function testPropertyName()
+    public function testPropertyDescription()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

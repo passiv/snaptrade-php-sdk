@@ -30,7 +30,6 @@ use \SnapTrade\ObjectSerializer;
  * DeleteUserResponse Class Doc Comment
  *
  * @category Class
- * @description Response when delete user is successful
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
@@ -52,6 +51,7 @@ class DeleteUserResponse implements ModelInterface, ArrayAccess, \JsonSerializab
       */
     protected static $openAPITypes = [
         'status' => 'string',
+        'detail' => 'string',
         'user_id' => 'string'
     ];
 
@@ -64,6 +64,7 @@ class DeleteUserResponse implements ModelInterface, ArrayAccess, \JsonSerializab
       */
     protected static $openAPIFormats = [
         'status' => null,
+        'detail' => null,
         'user_id' => null
     ];
 
@@ -74,6 +75,7 @@ class DeleteUserResponse implements ModelInterface, ArrayAccess, \JsonSerializab
       */
     protected static array $openAPINullables = [
         'status' => false,
+		'detail' => false,
 		'user_id' => false
     ];
 
@@ -164,6 +166,7 @@ class DeleteUserResponse implements ModelInterface, ArrayAccess, \JsonSerializab
      */
     protected static $attributeMap = [
         'status' => 'status',
+        'detail' => 'detail',
         'user_id' => 'userId'
     ];
 
@@ -174,6 +177,7 @@ class DeleteUserResponse implements ModelInterface, ArrayAccess, \JsonSerializab
      */
     protected static $setters = [
         'status' => 'setStatus',
+        'detail' => 'setDetail',
         'user_id' => 'setUserId'
     ];
 
@@ -184,6 +188,7 @@ class DeleteUserResponse implements ModelInterface, ArrayAccess, \JsonSerializab
      */
     protected static $getters = [
         'status' => 'getStatus',
+        'detail' => 'getDetail',
         'user_id' => 'getUserId'
     ];
 
@@ -245,6 +250,7 @@ class DeleteUserResponse implements ModelInterface, ArrayAccess, \JsonSerializab
     public function __construct(array $data = null)
     {
         $this->setIfExists('status', $data ?? [], null);
+        $this->setIfExists('detail', $data ?? [], null);
         $this->setIfExists('user_id', $data ?? [], null);
     }
 
@@ -303,7 +309,7 @@ class DeleteUserResponse implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets status
      *
-     * @param string|null $status Delete status
+     * @param string|null $status This is always `deleted` when a user is queued for deletion.
      *
      * @return self
      */
@@ -315,6 +321,35 @@ class DeleteUserResponse implements ModelInterface, ArrayAccess, \JsonSerializab
         }
 
         $this->container['status'] = $status;
+
+        return $this;
+    }
+
+    /**
+     * Gets detail
+     *
+     * @return string|null
+     */
+    public function getDetail()
+    {
+        return $this->container['detail'];
+    }
+
+    /**
+     * Sets detail
+     *
+     * @param string|null $detail Human friendly message about the deletion status.
+     *
+     * @return self
+     */
+    public function setDetail($detail)
+    {
+
+        if (is_null($detail)) {
+            throw new \InvalidArgumentException('non-nullable detail cannot be null');
+        }
+
+        $this->container['detail'] = $detail;
 
         return $this;
     }

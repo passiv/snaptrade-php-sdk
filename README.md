@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![Packagist](https://img.shields.io/badge/Packagist-v2.0.32-blue)](https://packagist.org/packages/konfig/snaptrade-php-sdk)
+[![Packagist](https://img.shields.io/badge/Packagist-v2.0.57-blue)](https://packagist.org/packages/konfig/snaptrade-php-sdk)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -26,6 +26,8 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.accountInformation.getUserAccountDetails`](#snaptradeaccountinformationgetuseraccountdetails)
   * [`snaptrade.accountInformation.getUserAccountOrders`](#snaptradeaccountinformationgetuseraccountorders)
   * [`snaptrade.accountInformation.getUserAccountPositions`](#snaptradeaccountinformationgetuseraccountpositions)
+  * [`snaptrade.accountInformation.getUserAccountRecentOrders`](#snaptradeaccountinformationgetuseraccountrecentorders)
+  * [`snaptrade.accountInformation.getUserAccountReturnRates`](#snaptradeaccountinformationgetuseraccountreturnrates)
   * [`snaptrade.accountInformation.getUserHoldings`](#snaptradeaccountinformationgetuserholdings)
   * [`snaptrade.accountInformation.listUserAccounts`](#snaptradeaccountinformationlistuseraccounts)
   * [`snaptrade.accountInformation.updateUserAccount`](#snaptradeaccountinformationupdateuseraccount)
@@ -40,6 +42,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.connections.listBrokerageAuthorizations`](#snaptradeconnectionslistbrokerageauthorizations)
   * [`snaptrade.connections.refreshBrokerageAuthorization`](#snaptradeconnectionsrefreshbrokerageauthorization)
   * [`snaptrade.connections.removeBrokerageAuthorization`](#snaptradeconnectionsremovebrokerageauthorization)
+  * [`snaptrade.connections.returnRates`](#snaptradeconnectionsreturnrates)
   * [`snaptrade.connections.sessionEvents`](#snaptradeconnectionssessionevents)
   * [`snaptrade.options.getOptionStrategy`](#snaptradeoptionsgetoptionstrategy)
   * [`snaptrade.options.getOptionsChain`](#snaptradeoptionsgetoptionschain)
@@ -86,7 +89,7 @@ To install the bindings via [Composer](https://getcomposer.org/), add the follow
     }
   ],
   "require": {
-    "konfig/snaptrade-php-sdk": "2.0.32"
+    "konfig/snaptrade-php-sdk": "2.0.57"
   }
 }
 ```
@@ -117,7 +120,7 @@ $snaptrade = new \SnapTrade\Client(
 
 $result = $snaptrade->accountInformation->getAllUserHoldings(
     user_id: "snaptrade-user-123", 
-    user_secret: "USERSECRET123", 
+    user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61", 
     brokerage_authorizations: "917c8734-8470-4a3e-a18f-57c3f2ee6631"
 );
 ```
@@ -139,7 +142,7 @@ account.
 ```php
 $result = $snaptrade->accountInformation->getAllUserHoldings(
     user_id: "snaptrade-user-123", 
-    user_secret: "USERSECRET123", 
+    user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61", 
     brokerage_authorizations: "917c8734-8470-4a3e-a18f-57c3f2ee6631"
 );
 ```
@@ -152,7 +155,7 @@ $result = $snaptrade->accountInformation->getAllUserHoldings(
 
 ##### brokerage_authorizations: `string`<a id="brokerage_authorizations-string"></a>
 
-Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations).
+Optional. Comma separated list of authorization IDs (only use if filtering is needed on one or more authorizations).
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -181,7 +184,7 @@ The data returned here is cached. How long the data is cached for varies by brok
 ```php
 $result = $snaptrade->accountInformation->getUserAccountBalance(
     user_id: "snaptrade-user-123", 
-    user_secret: "USERSECRET123", 
+    user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61", 
     account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631"
 );
 ```
@@ -221,7 +224,7 @@ The data returned here is always cached and refreshed once a day. **If you need 
 ```php
 $result = $snaptrade->accountInformation->getUserAccountDetails(
     user_id: "snaptrade-user-123", 
-    user_secret: "USERSECRET123", 
+    user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61", 
     account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631"
 );
 ```
@@ -261,7 +264,7 @@ The data returned here is cached. How long the data is cached for varies by brok
 ```php
 $result = $snaptrade->accountInformation->getUserAccountOrders(
     user_id: "snaptrade-user-123", 
-    user_secret: "USERSECRET123", 
+    user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61", 
     account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631", 
     state: "all", 
     days: 30
@@ -311,7 +314,7 @@ The data returned here is cached. How long the data is cached for varies by brok
 ```php
 $result = $snaptrade->accountInformation->getUserAccountPositions(
     user_id: "snaptrade-user-123", 
-    user_secret: "USERSECRET123", 
+    user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61", 
     account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631"
 );
 ```
@@ -338,6 +341,90 @@ $result = $snaptrade->accountInformation->getUserAccountPositions(
 ---
 
 
+### `snaptrade.accountInformation.getUserAccountRecentOrders`<a id="snaptradeaccountinformationgetuseraccountrecentorders"></a>
+
+Returns a list of orders executed in the last 24 hours in the specified account.
+This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution
+Differs from /orders in that it only returns orders that have been *executed* in the last 24 hours as opposed to pending or cancelled orders up to 30 days old
+*Please contact support for access as this endpoint is not enabled by default.*
+
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $snaptrade->accountInformation->getUserAccountRecentOrders(
+    user_id: "snaptrade-user-123", 
+    user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61", 
+    account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631", 
+    only_executed: True
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### user_id: `string`<a id="user_id-string"></a>
+
+##### user_secret: `string`<a id="user_secret-string"></a>
+
+##### account_id: `string`<a id="account_id-string"></a>
+
+##### only_executed: `bool`<a id="only_executed-bool"></a>
+
+Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[**RecentOrdersResponse**](./lib/Model/RecentOrdersResponse.php)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/recentOrders` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.accountInformation.getUserAccountReturnRates`<a id="snaptradeaccountinformationgetuseraccountreturnrates"></a>
+
+Returns a list of rate of return percents for a given account. Will include timeframes available from the brokerage, for example "ALL", "1Y", "6M", "3M", "1M"
+
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $snaptrade->accountInformation->getUserAccountReturnRates(
+    user_id: "snaptrade-user-123", 
+    user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61", 
+    account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631"
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### user_id: `string`<a id="user_id-string"></a>
+
+##### user_secret: `string`<a id="user_secret-string"></a>
+
+##### account_id: `string`<a id="account_id-string"></a>
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[**RateOfReturnResponse**](./lib/Model/RateOfReturnResponse.php)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/returnRates` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
 ### `snaptrade.accountInformation.getUserHoldings`<a id="snaptradeaccountinformationgetuserholdings"></a>
 
 Returns a list of balances, positions, and recent orders for the specified account. The data returned is similar to the data returned over the more fine-grained [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getUserAccountPositions) and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders) endpoints. __The finer-grained APIs are preferred. They are easier to work with, faster, and have better error handling than this coarse-grained API.__
@@ -352,7 +439,7 @@ The data returned here is cached. How long the data is cached for varies by brok
 $result = $snaptrade->accountInformation->getUserHoldings(
     account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631", 
     user_id: "snaptrade-user-123", 
-    user_secret: "USERSECRET123"
+    user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61"
 );
 ```
 
@@ -380,7 +467,7 @@ $result = $snaptrade->accountInformation->getUserHoldings(
 
 ### `snaptrade.accountInformation.listUserAccounts`<a id="snaptradeaccountinformationlistuseraccounts"></a>
 
-Returns all brokerage accounts known to SnapTrade for the authenticated user.
+Returns all brokerage accounts across all connections known to SnapTrade for the authenticated user.
 
 The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
 
@@ -391,7 +478,7 @@ The data returned here is always cached and refreshed once a day. **If you need 
 ```php
 $result = $snaptrade->accountInformation->listUserAccounts(
     user_id: "snaptrade-user-123", 
-    user_secret: "USERSECRET123"
+    user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61"
 );
 ```
 
@@ -425,7 +512,7 @@ Updates various properties of a specified account.
 ```php
 $result = $snaptrade->accountInformation->updateUserAccount(
     user_id: "snaptrade-user-123", 
-    user_secret: "USERSECRET123", 
+    user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61", 
     account_id: "accountId_example"
 );
 ```
@@ -481,7 +568,7 @@ $result = $snaptrade->apiStatus->check();
 
 ### `snaptrade.authentication.deleteSnapTradeUser`<a id="snaptradeauthenticationdeletesnaptradeuser"></a>
 
-Deletes a user you've registered over the SnapTrade API, and any data associated with them or their investment accounts.
+Deletes a registered user and all associated data. This action is irreversible. This API is asynchronous and will return a 200 status code if the request is accepted. The user and all associated data will be queued for deletion. Once deleted, a `USER_DELETED` webhook will be sent.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -512,7 +599,7 @@ $result = $snaptrade->authentication->deleteSnapTradeUser(
 
 ### `snaptrade.authentication.listSnapTradeUsers`<a id="snaptradeauthenticationlistsnaptradeusers"></a>
 
-Returns a list of users you've registered over the SnapTrade API.
+Returns a list of all registered user IDs. Please note that the response is not currently paginated.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -537,7 +624,10 @@ $result = $snaptrade->authentication->listSnapTradeUsers();
 
 ### `snaptrade.authentication.loginSnapTradeUser`<a id="snaptradeauthenticationloginsnaptradeuser"></a>
 
-Logs in a SnapTrade user and returns an authenticated connection portal URL for them to use to connect a brokerage account.
+Authenticates a SnapTrade user and returns the Connection Portal URL used for connecting brokerage accounts. Please check [this guide](/docs/implement-connection-portal) for how to integrate the Connection Portal into your app.
+
+Please note that the returned URL expires in 5 minutes.
+
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -545,13 +635,13 @@ Logs in a SnapTrade user and returns an authenticated connection portal URL for 
 ```php
 $result = $snaptrade->authentication->loginSnapTradeUser(
     user_id: "snaptrade-user-123", 
-    user_secret: "USERSECRET123", 
+    user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61", 
     broker: "ALPACA", 
     immediate_redirect: True, 
     custom_redirect: "https://snaptrade.com", 
     reconnect: "8b5f262d-4bb9-365d-888a-202bd3b15fa1", 
     connection_type: "read", 
-    connection_portal_version: "v2"
+    connection_portal_version: "v4"
 );
 ```
 
@@ -563,27 +653,27 @@ $result = $snaptrade->authentication->loginSnapTradeUser(
 
 ##### broker: `string`<a id="broker-string"></a>
 
-Slug of the brokerage to connect the user to. See [this document](https://snaptrade.notion.site/SnapTrade-Brokerage-Integrations-f83946a714a84c3caf599f6a945f0ead) for a list of supported brokerages and their slugs.
+Slug of the brokerage to connect the user to. See [the integrations page](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=3cfea70ef4254afc89704e47275a7a9a&pvs=4) for a list of supported brokerages and their slugs.
 
 ##### immediateRedirect: `bool`<a id="immediateredirect-bool"></a>
 
-When set to True, user will be redirected back to the partner's site instead of the connection portal
+When set to `true`, user will be redirected back to the partner's site instead of the connection portal. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](/docs/implement-connection-portal) for more information.
 
 ##### customRedirect: `string`<a id="customredirect-string"></a>
 
-URL to redirect the user to after the user connects their brokerage account
+URL to redirect the user to after the user connects their brokerage account. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](/docs/implement-connection-portal) for more information.
 
 ##### reconnect: `string`<a id="reconnect-string"></a>
 
-The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See ‘Reconnecting Accounts’ for more information.
+The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See the [guide on fixing broken connections](/docs/fix-broken-connections) for more information.
 
 ##### connectionType: `string`<a id="connectiontype-string"></a>
 
-Sets whether the connection should be read or trade
+Sets whether the connection should be read-only or trade-enabled. Defaults to read-only if not specified.
 
 ##### connectionPortalVersion: `string`<a id="connectionportalversion-string"></a>
 
-Sets the version of the connection portal to render, with a default to 'v3'
+Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4.
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -601,8 +691,8 @@ Sets the version of the connection portal to render, with a default to 'v3'
 
 ### `snaptrade.authentication.registerSnapTradeUser`<a id="snaptradeauthenticationregistersnaptradeuser"></a>
 
-Registers a new SnapTrade user under your ClientID. A user secret will be automatically generated for you and must be properly stored in your database.
-Most SnapTrade operations require a user ID and user secret to be passed as a parameter.
+Registers a new SnapTrade user under your Client ID. A user secret will be automatically generated for you and must be properly stored in your system.
+Most SnapTrade operations require a user ID and user secret to be passed in as parameters.
 
 
 
@@ -636,8 +726,7 @@ SnapTrade User ID. This is chosen by the API partner and can be any string that 
 
 ### `snaptrade.authentication.resetSnapTradeUserSecret`<a id="snaptradeauthenticationresetsnaptradeusersecret"></a>
 
-This API is used to rotate the secret for a SnapTrade user. You might use this if a userSecret
-is compromised. Please note that if you call this endpoint and fail to save the new secret, you'll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect.
+Rotates the secret for a SnapTrade user. You might use this if `userSecret` is compromised. Please note that if you call this endpoint and fail to save the new secret, you'll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect.
 
 
 
@@ -646,7 +735,7 @@ is compromised. Please note that if you call this endpoint and fail to save the 
 ```php
 $result = $snaptrade->authentication->resetSnapTradeUserSecret(
     user_id: "snaptrade-user-123", 
-    user_secret: "h81@cx1lkalablakwjaltkejraj11="
+    user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61"
 );
 ```
 
@@ -658,7 +747,7 @@ SnapTrade User ID. This is chosen by the API partner and can be any string that 
 
 ##### userSecret: `string`<a id="usersecret-string"></a>
 
-SnapTrade User Secret randomly generated by SnapTrade. This is privileged information and if compromised, should be rotated via the SnapTrade API.
+SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -676,24 +765,22 @@ SnapTrade User Secret randomly generated by SnapTrade. This is privileged inform
 
 ### `snaptrade.connections.detailBrokerageAuthorization`<a id="snaptradeconnectionsdetailbrokerageauthorization"></a>
 
-Returns a single brokerage authorization object for the specified ID.
+Returns a single connection for the specified ID.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```php
 $result = $snaptrade->connections->detailBrokerageAuthorization(
-    authorization_id: "2bcd7cc3-e922-4976-bce1-9858296801c3", 
+    authorization_id: "87b24961-b51e-4db8-9226-f198f6518a89", 
     user_id: "snaptrade-user-123", 
-    user_secret: "USERSECRET123"
+    user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61"
 );
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
 ##### authorization_id: `string`<a id="authorization_id-string"></a>
-
-The ID of a brokerage authorization object.
 
 ##### user_id: `string`<a id="user_id-string"></a>
 
@@ -715,24 +802,26 @@ The ID of a brokerage authorization object.
 
 ### `snaptrade.connections.disableBrokerageAuthorization`<a id="snaptradeconnectionsdisablebrokerageauthorization"></a>
 
-Manually disable a connection. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a CONNECTION_BROKEN webhook for the connection. Please contact us in order to use this endpoint as it is disabled by default.
+Manually force the specified connection to become disabled. This should only be used for testing a reconnect flow, and never used on production connections.
+Will trigger a disconnect as if it happened naturally, and send a [`CONNECTION_BROKEN` webhook](/docs/webhooks#webhooks-connection_broken) for the connection.
+
+*Please contact us in order to use this endpoint as it is disabled by default.*
+
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```php
 $result = $snaptrade->connections->disableBrokerageAuthorization(
-    authorization_id: "2bcd7cc3-e922-4976-bce1-9858296801c3", 
+    authorization_id: "87b24961-b51e-4db8-9226-f198f6518a89", 
     user_id: "snaptrade-user-123", 
-    user_secret: "USERSECRET123"
+    user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61"
 );
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
 ##### authorization_id: `string`<a id="authorization_id-string"></a>
-
-The ID of a brokerage authorization object.
 
 ##### user_id: `string`<a id="user_id-string"></a>
 
@@ -754,7 +843,12 @@ The ID of a brokerage authorization object.
 
 ### `snaptrade.connections.listBrokerageAuthorizations`<a id="snaptradeconnectionslistbrokerageauthorizations"></a>
 
-Returns a list of Brokerage Authorization objects for the user
+Returns a list of all connections for the specified user. Note that `Connection` and `Brokerage Authorization` are interchangeable, but the term `Connection` is preferred and used in the doc for consistency.
+
+A connection is usually tied to a single login at a brokerage. A single connection can contain multiple brokerage accounts.
+
+SnapTrade performs de-duping on connections for a given user. If the user has an existing connection with the brokerage, when connecting the brokerage with the same credentials, SnapTrade will return the existing connection instead of creating a new one.
+
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -762,7 +856,7 @@ Returns a list of Brokerage Authorization objects for the user
 ```php
 $result = $snaptrade->connections->listBrokerageAuthorizations(
     user_id: "snaptrade-user-123", 
-    user_secret: "USERSECRET123"
+    user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61"
 );
 ```
 
@@ -788,24 +882,25 @@ $result = $snaptrade->connections->listBrokerageAuthorizations(
 
 ### `snaptrade.connections.refreshBrokerageAuthorization`<a id="snaptradeconnectionsrefreshbrokerageauthorization"></a>
 
-Trigger a holdings update for all accounts under this authorization. Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will be sent once the sync completes. Please contact support for access as this endpoint is not enabled by default
+Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [`ACCOUNT_HOLDINGS_UPDATED` webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection.
+
+*Please contact support for access as this endpoint is not enabled by default.*
+
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```php
 $result = $snaptrade->connections->refreshBrokerageAuthorization(
-    authorization_id: "2bcd7cc3-e922-4976-bce1-9858296801c3", 
+    authorization_id: "87b24961-b51e-4db8-9226-f198f6518a89", 
     user_id: "snaptrade-user-123", 
-    user_secret: "USERSECRET123"
+    user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61"
 );
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
 ##### authorization_id: `string`<a id="authorization_id-string"></a>
-
-The ID of a brokerage authorization object.
 
 ##### user_id: `string`<a id="user_id-string"></a>
 
@@ -827,24 +922,22 @@ The ID of a brokerage authorization object.
 
 ### `snaptrade.connections.removeBrokerageAuthorization`<a id="snaptradeconnectionsremovebrokerageauthorization"></a>
 
-Deletes a specified brokerage authorization given by the ID.
+Deletes the connection specified by the ID. This will also delete all accounts and holdings associated with the connection. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the connection has been successfully deleted.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```php
 $snaptrade->connections->removeBrokerageAuthorization(
-    authorization_id: "2bcd7cc3-e922-4976-bce1-9858296801c3", 
+    authorization_id: "87b24961-b51e-4db8-9226-f198f6518a89", 
     user_id: "snaptrade-user-123", 
-    user_secret: "USERSECRET123"
+    user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61"
 );
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
 ##### authorization_id: `string`<a id="authorization_id-string"></a>
-
-The ID of the Authorization to delete.
 
 ##### user_id: `string`<a id="user_id-string"></a>
 
@@ -858,6 +951,44 @@ void (empty response body)
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/authorizations/{authorizationId}` `DELETE`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.connections.returnRates`<a id="snaptradeconnectionsreturnrates"></a>
+
+Returns a list of rate of return percents for a given connection. Will include timeframes available from the brokerage, for example "ALL", "1Y", "6M", "3M", "1M"
+
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $snaptrade->connections->returnRates(
+    user_id: "snaptrade-user-123", 
+    user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61", 
+    authorization_id: "87b24961-b51e-4db8-9226-f198f6518a89"
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### user_id: `string`<a id="user_id-string"></a>
+
+##### user_secret: `string`<a id="user_secret-string"></a>
+
+##### authorization_id: `string`<a id="authorization_id-string"></a>
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[**RateOfReturnResponse**](./lib/Model/RateOfReturnResponse.php)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/authorizations/{authorizationId}/returnRates` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -885,11 +1016,11 @@ $result = $snaptrade->connections->sessionEvents(
 
 ##### user_id: `string`<a id="user_id-string"></a>
 
-Optional comma seperated list of user IDs used to filter the request on specific users
+Optional comma separated list of user IDs used to filter the request on specific users
 
 ##### session_id: `string`<a id="session_id-string"></a>
 
-Optional comma seperated list of session IDs used to filter the request on specific users
+Optional comma separated list of session IDs used to filter the request on specific users
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -925,7 +1056,7 @@ $result = $snaptrade->options->getOptionStrategy(
     ], 
     strategy_type: "CUSTOM", 
     user_id: "snaptrade-user-123", 
-    user_secret: "USERSECRET123", 
+    user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61", 
     account_id: "accountId_example"
 );
 ```
@@ -970,7 +1101,7 @@ Returns the option chain for the specified symbol in the specified account.
 ```php
 $result = $snaptrade->options->getOptionsChain(
     user_id: "snaptrade-user-123", 
-    user_secret: "USERSECRET123", 
+    user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61", 
     account_id: "accountId_example", 
     symbol: "symbol_example"
 );
@@ -1015,7 +1146,7 @@ Returns a Strategy Quotes object which has latest market data of the specified o
 ```php
 $result = $snaptrade->options->getOptionsStrategyQuote(
     user_id: "snaptrade-user-123", 
-    user_secret: "USERSECRET123", 
+    user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61", 
     account_id: "accountId_example", 
     option_strategy_id: "2bcd7cc3-e922-4976-bce1-9858296801c3"
 );
@@ -1062,7 +1193,7 @@ The data returned here is cached. How long the data is cached for varies by brok
 ```php
 $result = $snaptrade->options->listOptionHoldings(
     user_id: "snaptrade-user-123", 
-    user_secret: "USERSECRET123", 
+    user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61", 
     account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631"
 );
 ```
@@ -1098,10 +1229,10 @@ Places the option strategy order and returns the order record received from the 
 
 ```php
 $result = $snaptrade->options->placeOptionStrategy(
-    order_type: "Limit", 
+    order_type: "Market", 
     time_in_force: "FOK", 
     user_id: "snaptrade-user-123", 
-    user_secret: "USERSECRET123", 
+    user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61", 
     account_id: "2bcd7cc3-e922-4976-bce1-9858296801c3", 
     option_strategy_id: "2bcd7cc3-e922-4976-bce1-9858296801c3", 
     price: 31.33
@@ -1179,7 +1310,7 @@ A currency pair based on currency code for example, {CAD-USD}
 
 ### `snaptrade.referenceData.getPartnerInfo`<a id="snaptradereferencedatagetpartnerinfo"></a>
 
-Returns useful data related to the specified ClientID, including allowed brokerages and data access.
+Returns configurations for your SnapTrade Client ID, including allowed brokerages and data access.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -1204,7 +1335,7 @@ $result = $snaptrade->referenceData->getPartnerInfo();
 
 ### `snaptrade.referenceData.getSecurityTypes`<a id="snaptradereferencedatagetsecuritytypes"></a>
 
-List security types available on SnapTrade.
+Return all available security types supported by SnapTrade.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -1254,9 +1385,7 @@ $result = $snaptrade->referenceData->getStockExchanges();
 
 ### `snaptrade.referenceData.getSymbols`<a id="snaptradereferencedatagetsymbols"></a>
 
-Returns a list of Universal Symbol objects that match a defined string.
-
-Matches on ticker or name.
+Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned.
 
 
 
@@ -1264,13 +1393,15 @@ Matches on ticker or name.
 
 ```php
 $result = $snaptrade->referenceData->getSymbols(
-    substring: "apple"
+    substring: "AAPL"
 );
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
 ##### substring: `string`<a id="substring-string"></a>
+
+The search query for symbols.
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -1288,7 +1419,8 @@ $result = $snaptrade->referenceData->getSymbols(
 
 ### `snaptrade.referenceData.getSymbolsByTicker`<a id="snaptradereferencedatagetsymbolsbyticker"></a>
 
-Returns the Universal Symbol object specified by the ticker or the universal_symbol_id.
+Returns the Universal Symbol object specified by the ticker or the Universal Symbol ID. When a ticker is specified, the first matching result is returned. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on "Yahoo Finance Market Coverage and Data Delays"). For example, for securities traded on the Toronto Stock Exchange, the symbol has a '.TO' suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix. Please use the ticker with the proper suffix for the best results.
+
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -1303,7 +1435,7 @@ $result = $snaptrade->referenceData->getSymbolsByTicker(
 
 ##### query: `string`<a id="query-string"></a>
 
-The ticker or universal_symbol_id of the UniversalSymbol to get.
+The ticker or Universal Symbol ID to look up the symbol with.
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -1429,9 +1561,9 @@ $result = $snaptrade->referenceData->listAllCurrenciesRates();
 
 ### `snaptrade.referenceData.symbolSearchUserAccount`<a id="snaptradereferencedatasymbolsearchuseraccount"></a>
 
-Returns a list of universal symbols that are supported by
-the specificied account. Returned symbols are based on the
-provided search string, matching on ticker and name.
+Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned.
+
+The search results are further limited to the symbols supported by the brokerage for which the account is under.
 
 
 
@@ -1440,9 +1572,9 @@ provided search string, matching on ticker and name.
 ```php
 $result = $snaptrade->referenceData->symbolSearchUserAccount(
     user_id: "snaptrade-user-123", 
-    user_secret: "USERSECRET123", 
+    user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61", 
     account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631", 
-    substring: "apple"
+    substring: "AAPL"
 );
 ```
 
@@ -1454,9 +1586,9 @@ $result = $snaptrade->referenceData->symbolSearchUserAccount(
 
 ##### account_id: `string`<a id="account_id-string"></a>
 
-The ID of the account to search for symbols within.
-
 ##### substring: `string`<a id="substring-string"></a>
+
+The search query for symbols.
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -1474,8 +1606,7 @@ The ID of the account to search for symbols within.
 
 ### `snaptrade.trading.cancelUserAccountOrder`<a id="snaptradetradingcanceluseraccountorder"></a>
 
-Sends a signal to the brokerage to cancel the specified order.
-This will only work if the order has not yet been executed.
+Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.
 
 
 
@@ -1484,9 +1615,9 @@ This will only work if the order has not yet been executed.
 ```php
 $result = $snaptrade->trading->cancelUserAccountOrder(
     user_id: "snaptrade-user-123", 
-    user_secret: "USERSECRET123", 
+    user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61", 
     account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631", 
-    brokerage_order_id: "2bcd7cc3-e922-4976-bce1-9858296801c3"
+    brokerage_order_id: "66a033fa-da74-4fcf-b527-feefdec9257e"
 );
 ```
 
@@ -1498,9 +1629,9 @@ $result = $snaptrade->trading->cancelUserAccountOrder(
 
 ##### account_id: `string`<a id="account_id-string"></a>
 
-The ID of the account to cancel the order in.
-
 ##### brokerage_order_id: `string`<a id="brokerage_order_id-string"></a>
+
+Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -1518,52 +1649,56 @@ The ID of the account to cancel the order in.
 
 ### `snaptrade.trading.getOrderImpact`<a id="snaptradetradinggetorderimpact"></a>
 
-Return the trade object and it's impact on the account for the specified order.
+Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a `Trade` object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the `Trade` object returned expires after 5 minutes. Any order placed using an expired `Trade` will be rejected.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```php
 $result = $snaptrade->trading->getOrderImpact(
-    user_id: "snaptrade-user-123", 
-    user_secret: "USERSECRET123", 
-    account_id: "2bcd7cc3-e922-4976-bce1-9858296801c3", 
+    account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631", 
     action: "BUY", 
-    order_type: "Limit", 
+    universal_symbol_id: "2bcd7cc3-e922-4976-bce1-9858296801c3", 
+    order_type: "Market", 
+    time_in_force: "FOK", 
+    user_id: "snaptrade-user-123", 
+    user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61", 
     price: 31.33, 
     stop: 31.33, 
-    time_in_force: "FOK", 
-    units: 3.14, 
-    universal_symbol_id: "2bcd7cc3-e922-4976-bce1-9858296801c3", 
+    units: 10.5, 
     notional_value: None
 );
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
+##### account_id: `string`<a id="account_id-string"></a>
+
+Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
+
+##### action:<a id="action"></a>
+
+##### universal_symbol_id: `string`<a id="universal_symbol_id-string"></a>
+
+Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
+
+##### order_type:<a id="order_type"></a>
+
+##### time_in_force:<a id="time_in_force"></a>
+
 ##### user_id: `string`<a id="user_id-string"></a>
 
 ##### user_secret: `string`<a id="user_secret-string"></a>
 
-##### account_id: `string`<a id="account_id-string"></a>
-
-##### action:<a id="action"></a>
-
-##### order_type:<a id="order_type"></a>
-
 ##### price: `float`<a id="price-float"></a>
 
-Trade Price if limit or stop limit order
+The limit price for `Limit` and `StopLimit` orders.
 
 ##### stop: `float`<a id="stop-float"></a>
 
-Stop Price. If stop loss or stop limit order, the price to trigger the stop
-
-##### time_in_force:<a id="time_in_force"></a>
+The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
 
 ##### units: [`float`](./lib/Model/float.php)<a id="units-floatlibmodelfloatphp"></a>
-
-##### universal_symbol_id: `string`<a id="universal_symbol_id-string"></a>
 
 ##### notional_value: [`ManualTradeFormNotionalValue`](./lib/Model/ManualTradeFormNotionalValue.php)<a id="notional_value-manualtradeformnotionalvaluelibmodelmanualtradeformnotionalvaluephp"></a>
 
@@ -1583,7 +1718,7 @@ Stop Price. If stop loss or stop limit order, the price to trigger the stop
 
 ### `snaptrade.trading.getUserAccountQuotes`<a id="snaptradetradinggetuseraccountquotes"></a>
 
-Returns quote(s) from the brokerage for the specified symbol(s).
+Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -1591,7 +1726,7 @@ Returns quote(s) from the brokerage for the specified symbol(s).
 ```php
 $result = $snaptrade->trading->getUserAccountQuotes(
     user_id: "snaptrade-user-123", 
-    user_secret: "USERSECRET123", 
+    user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61", 
     symbols: "symbols_example", 
     account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631", 
     use_ticker: True
@@ -1606,15 +1741,13 @@ $result = $snaptrade->trading->getUserAccountQuotes(
 
 ##### symbols: `string`<a id="symbols-string"></a>
 
-List of universal_symbol_id or tickers to get quotes for.
+List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator
 
 ##### account_id: `string`<a id="account_id-string"></a>
 
-The ID of the account to get quotes.
-
 ##### use_ticker: `bool`<a id="use_ticker-bool"></a>
 
-Should be set to True if providing tickers.
+Should be set to `True` if `symbols` are comprised of tickers. Defaults to `False` if not provided.
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -1632,52 +1765,68 @@ Should be set to True if providing tickers.
 
 ### `snaptrade.trading.placeForceOrder`<a id="snaptradetradingplaceforceorder"></a>
 
-Places a specified trade in the specified account.
+Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.
+
+This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact).
+
+It's recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this.
+
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```php
 $result = $snaptrade->trading->placeForceOrder(
-    user_id: "snaptrade-user-123", 
-    user_secret: "USERSECRET123", 
-    account_id: "2bcd7cc3-e922-4976-bce1-9858296801c3", 
+    account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631", 
     action: "BUY", 
-    order_type: "Limit", 
+    order_type: "Market", 
+    time_in_force: "FOK", 
+    user_id: "snaptrade-user-123", 
+    user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61", 
+    universal_symbol_id: "2bcd7cc3-e922-4976-bce1-9858296801c3", 
+    symbol: "AAPL  131124C00240000", 
     price: 31.33, 
     stop: 31.33, 
-    time_in_force: "FOK", 
-    units: 3.14, 
-    universal_symbol_id: "2bcd7cc3-e922-4976-bce1-9858296801c3", 
+    units: 10.5, 
     notional_value: None
 );
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### user_id: `string`<a id="user_id-string"></a>
-
-##### user_secret: `string`<a id="user_secret-string"></a>
-
 ##### account_id: `string`<a id="account_id-string"></a>
+
+Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
 
 ##### action:<a id="action"></a>
 
 ##### order_type:<a id="order_type"></a>
 
+##### time_in_force:<a id="time_in_force"></a>
+
+##### user_id: `string`<a id="user_id-string"></a>
+
+##### user_secret: `string`<a id="user_secret-string"></a>
+
+##### universal_symbol_id: [`string`](./lib/Model/string.php)<a id="universal_symbol_id-stringlibmodelstringphp"></a>
+
+The universal symbol ID of the security to trade. Must be 'null' if `symbol` is provided, otherwise must be provided.
+
+##### symbol: `string`<a id="symbol-string"></a>
+
+The security's trading ticker symbol. This currently only support Options symbols in the 21 character OCC format. For example \\\"AAPL  131124C00240000\\\" represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format). If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
+
 ##### price: `float`<a id="price-float"></a>
 
-Trade Price if limit or stop limit order
+The limit price for `Limit` and `StopLimit` orders.
 
 ##### stop: `float`<a id="stop-float"></a>
 
-Stop Price. If stop loss or stop limit order, the price to trigger the stop
-
-##### time_in_force:<a id="time_in_force"></a>
+The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
 
 ##### units: [`float`](./lib/Model/float.php)<a id="units-floatlibmodelfloatphp"></a>
 
-##### universal_symbol_id: `string`<a id="universal_symbol_id-string"></a>
+For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract = 100 shares).
 
 ##### notional_value: [`ManualTradeFormNotionalValue`](./lib/Model/ManualTradeFormNotionalValue.php)<a id="notional_value-manualtradeformnotionalvaluelibmodelmanualtradeformnotionalvaluephp"></a>
 
@@ -1697,8 +1846,9 @@ Stop Price. If stop loss or stop limit order, the price to trigger the stop
 
 ### `snaptrade.trading.placeOrder`<a id="snaptradetradingplaceorder"></a>
 
-Places the specified trade object. This places the order in the account and
-returns the status of the order from the brokerage.
+Places the previously checked order with the brokerage. The `tradeId` is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder).
+
+It's recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this.
 
 
 
@@ -1706,9 +1856,9 @@ returns the status of the order from the brokerage.
 
 ```php
 $result = $snaptrade->trading->placeOrder(
-    trade_id: "tradeId_example", 
+    trade_id: "139e307a-82f7-4402-b39e-4da7baa87758", 
     user_id: "snaptrade-user-123", 
-    user_secret: "USERSECRET123", 
+    user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61", 
     wait_to_confirm: True
 );
 ```
@@ -1717,7 +1867,7 @@ $result = $snaptrade->trading->placeOrder(
 
 ##### trade_id: `string`<a id="trade_id-string"></a>
 
-The ID of trade object obtained from trade/impact endpoint
+Obtained from calling the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact)
 
 ##### user_id: `string`<a id="user_id-string"></a>
 
@@ -1725,7 +1875,7 @@ The ID of trade object obtained from trade/impact endpoint
 
 ##### wait_to_confirm: `bool`<a id="wait_to_confirm-bool"></a>
 
-Optional, defaults to true. Determines if a wait is performed to check on order status. If false, latency will be reduced but orders returned will be more likely to be of status PENDING as we will not wait to check on the status before responding to the request
+Optional, defaults to true. Determines if a wait is performed to check on order status. If false, latency will be reduced but orders returned will be more likely to be of status `PENDING` as we will not wait to check on the status before responding to the request.
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -1743,7 +1893,12 @@ Optional, defaults to true. Determines if a wait is performed to check on order 
 
 ### `snaptrade.transactionsAndReporting.getActivities`<a id="snaptradetransactionsandreportinggetactivities"></a>
 
-Returns activities (transactions) for a user. Specifying start and end date is highly recommended for better performance
+Returns all historical transactions for the specified user and filtering criteria. It's recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There's a max number of 10000 transactions returned per request.
+
+There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.
+
+The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
+
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -1751,12 +1906,12 @@ Returns activities (transactions) for a user. Specifying start and end date is h
 ```php
 $result = $snaptrade->transactionsAndReporting->getActivities(
     user_id: "snaptrade-user-123", 
-    user_secret: "USERSECRET123", 
+    user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61", 
     start_date: "2022-01-24", 
     end_date: "2022-01-24", 
     accounts: "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2", 
     brokerage_authorizations: "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2", 
-    type: "DIVIDEND"
+    type: "BUY,SELL,DIVIDEND"
 );
 ```
 
@@ -1768,19 +1923,23 @@ $result = $snaptrade->transactionsAndReporting->getActivities(
 
 ##### start_date: `\DateTime`<a id="start_date-datetime"></a>
 
+The start date (inclusive) of the transaction history to retrieve. If not provided, the default is the first transaction known to SnapTrade based on `trade_date`.
+
 ##### end_date: `\DateTime`<a id="end_date-datetime"></a>
+
+The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on `trade_date`.
 
 ##### accounts: `string`<a id="accounts-string"></a>
 
-Optional comma seperated list of account IDs used to filter the request on specific accounts
+Optional comma separated list of SnapTrade Account IDs used to filter the request to specific accounts. If not provided, the default is all known brokerage accounts for the user. The `brokerageAuthorizations` parameter takes precedence over this parameter.
 
 ##### brokerage_authorizations: `string`<a id="brokerage_authorizations-string"></a>
 
-Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations
+Optional comma separated list of SnapTrade Connection (Brokerage Authorization) IDs used to filter the request to only accounts that belong to those connections. If not provided, the default is all connections for the user. This parameter takes precedence over the `accounts` parameter.
 
 ##### type: `string`<a id="type-string"></a>
 
-Optional comma seperated list of types to filter activities by. This is not an exhaustive list, if we fail to match to these types, we will return the raw description from the brokerage. Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT
+Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - `BUY` - Asset bought.   - `SELL` - Asset sold.   - `DIVIDEND` - Dividend payout.   - `CONTRIBUTION` - Cash contribution.   - `WITHDRAWAL` - Cash withdrawal.   - `REI` - Dividend reinvestment.   - `INTEREST` - Interest deposited into the account.   - `FEE` - Fee withdrawn from the account.   - `OPTIONEXPIRATION` - Option expiration event.   - `OPTIONASSIGNMENT` - Option assignment event.   - `OPTIONEXERCISE` - Option exercise event.   - `TRANSFER` - Transfer of assets from one account to another
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -1809,7 +1968,7 @@ $result = $snaptrade->transactionsAndReporting->getReportingCustomRange(
     start_date: "2022-01-24", 
     end_date: "2022-01-24", 
     user_id: "snaptrade-user-123", 
-    user_secret: "USERSECRET123", 
+    user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61", 
     accounts: "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2", 
     detailed: True, 
     frequency: "monthly"
@@ -1828,7 +1987,7 @@ $result = $snaptrade->transactionsAndReporting->getReportingCustomRange(
 
 ##### accounts: `string`<a id="accounts-string"></a>
 
-Optional comma seperated list of account IDs used to filter the request on specific accounts
+Optional comma separated list of account IDs used to filter the request on specific accounts
 
 ##### detailed: `bool`<a id="detailed-bool"></a>
 

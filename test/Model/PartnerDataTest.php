@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * PartnerDataTest Class Doc Comment
  *
  * @category    Class
- * @description SnapTrade Partner metadata
+ * @description Configurations for your SnapTrade Client ID, including allowed brokerages and data access.
  * @package     SnapTrade
  */
 class PartnerDataTest extends TestCase
@@ -73,18 +73,9 @@ class PartnerDataTest extends TestCase
     }
 
     /**
-     * Test attribute "redirect_uri"
+     * Test attribute "slug"
      */
-    public function testPropertyRedirectUri()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "allowed_brokerages"
-     */
-    public function testPropertyAllowedBrokerages()
+    public function testPropertySlug()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
@@ -100,15 +91,6 @@ class PartnerDataTest extends TestCase
     }
 
     /**
-     * Test attribute "slug"
-     */
-    public function testPropertySlug()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test attribute "logo_url"
      */
     public function testPropertyLogoUrl()
@@ -118,9 +100,9 @@ class PartnerDataTest extends TestCase
     }
 
     /**
-     * Test attribute "pin_required"
+     * Test attribute "allowed_brokerages"
      */
-    public function testPropertyPinRequired()
+    public function testPropertyAllowedBrokerages()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
@@ -175,6 +157,24 @@ class PartnerDataTest extends TestCase
      * Test attribute "can_access_orders"
      */
     public function testPropertyCanAccessOrders()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "redirect_uri"
+     */
+    public function testPropertyRedirectUri()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "pin_required"
+     */
+    public function testPropertyPinRequired()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

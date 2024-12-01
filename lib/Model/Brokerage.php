@@ -30,6 +30,7 @@ use \SnapTrade\ObjectSerializer;
  * Brokerage Class Doc Comment
  *
  * @category Class
+ * @description Describes a brokerage that SnapTrade supports.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
@@ -51,25 +52,22 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPITypes = [
         'id' => 'string',
+        'slug' => 'string',
         'name' => 'string',
         'display_name' => 'string',
         'description' => 'string',
         'aws_s3_logo_url' => 'string',
         'aws_s3_square_logo_url' => 'string',
-        'open_url' => 'string',
-        'slug' => 'string',
         'url' => 'string',
         'enabled' => 'bool',
         'maintenance_mode' => 'bool',
-        'allows_fractional_units' => 'bool',
         'allows_trading' => 'bool',
+        'allows_fractional_units' => 'bool',
         'has_reporting' => 'bool',
         'is_real_time_connection' => 'bool',
-        'allows_trading_through_snaptrade_api' => 'bool',
-        'is_scraping_integration' => 'bool',
-        'default_currency' => 'string',
         'brokerage_type' => '\SnapTrade\Model\BrokerageType',
-        'exchanges' => 'mixed[]'
+        'exchanges' => 'mixed[]',
+        'open_url' => 'string'
     ];
 
     /**
@@ -81,25 +79,22 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPIFormats = [
         'id' => 'uuid',
+        'slug' => null,
         'name' => null,
         'display_name' => null,
         'description' => null,
         'aws_s3_logo_url' => 'url',
         'aws_s3_square_logo_url' => 'url',
-        'open_url' => 'url',
-        'slug' => null,
         'url' => 'url',
         'enabled' => null,
         'maintenance_mode' => null,
-        'allows_fractional_units' => null,
         'allows_trading' => null,
+        'allows_fractional_units' => null,
         'has_reporting' => null,
         'is_real_time_connection' => null,
-        'allows_trading_through_snaptrade_api' => null,
-        'is_scraping_integration' => null,
-        'default_currency' => 'uuid',
         'brokerage_type' => null,
-        'exchanges' => null
+        'exchanges' => null,
+        'open_url' => 'url'
     ];
 
     /**
@@ -109,25 +104,22 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static array $openAPINullables = [
         'id' => false,
+		'slug' => false,
 		'name' => false,
 		'display_name' => false,
 		'description' => false,
 		'aws_s3_logo_url' => false,
 		'aws_s3_square_logo_url' => true,
-		'open_url' => true,
-		'slug' => false,
 		'url' => false,
 		'enabled' => false,
 		'maintenance_mode' => false,
-		'allows_fractional_units' => true,
 		'allows_trading' => true,
+		'allows_fractional_units' => true,
 		'has_reporting' => true,
 		'is_real_time_connection' => false,
-		'allows_trading_through_snaptrade_api' => true,
-		'is_scraping_integration' => false,
-		'default_currency' => false,
 		'brokerage_type' => false,
-		'exchanges' => false
+		'exchanges' => false,
+		'open_url' => true
     ];
 
     /**
@@ -217,25 +209,22 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $attributeMap = [
         'id' => 'id',
+        'slug' => 'slug',
         'name' => 'name',
         'display_name' => 'display_name',
         'description' => 'description',
         'aws_s3_logo_url' => 'aws_s3_logo_url',
         'aws_s3_square_logo_url' => 'aws_s3_square_logo_url',
-        'open_url' => 'open_url',
-        'slug' => 'slug',
         'url' => 'url',
         'enabled' => 'enabled',
         'maintenance_mode' => 'maintenance_mode',
-        'allows_fractional_units' => 'allows_fractional_units',
         'allows_trading' => 'allows_trading',
+        'allows_fractional_units' => 'allows_fractional_units',
         'has_reporting' => 'has_reporting',
         'is_real_time_connection' => 'is_real_time_connection',
-        'allows_trading_through_snaptrade_api' => 'allows_trading_through_snaptrade_api',
-        'is_scraping_integration' => 'is_scraping_integration',
-        'default_currency' => 'default_currency',
         'brokerage_type' => 'brokerage_type',
-        'exchanges' => 'exchanges'
+        'exchanges' => 'exchanges',
+        'open_url' => 'open_url'
     ];
 
     /**
@@ -245,25 +234,22 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $setters = [
         'id' => 'setId',
+        'slug' => 'setSlug',
         'name' => 'setName',
         'display_name' => 'setDisplayName',
         'description' => 'setDescription',
         'aws_s3_logo_url' => 'setAwsS3LogoUrl',
         'aws_s3_square_logo_url' => 'setAwsS3SquareLogoUrl',
-        'open_url' => 'setOpenUrl',
-        'slug' => 'setSlug',
         'url' => 'setUrl',
         'enabled' => 'setEnabled',
         'maintenance_mode' => 'setMaintenanceMode',
-        'allows_fractional_units' => 'setAllowsFractionalUnits',
         'allows_trading' => 'setAllowsTrading',
+        'allows_fractional_units' => 'setAllowsFractionalUnits',
         'has_reporting' => 'setHasReporting',
         'is_real_time_connection' => 'setIsRealTimeConnection',
-        'allows_trading_through_snaptrade_api' => 'setAllowsTradingThroughSnaptradeApi',
-        'is_scraping_integration' => 'setIsScrapingIntegration',
-        'default_currency' => 'setDefaultCurrency',
         'brokerage_type' => 'setBrokerageType',
-        'exchanges' => 'setExchanges'
+        'exchanges' => 'setExchanges',
+        'open_url' => 'setOpenUrl'
     ];
 
     /**
@@ -273,25 +259,22 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $getters = [
         'id' => 'getId',
+        'slug' => 'getSlug',
         'name' => 'getName',
         'display_name' => 'getDisplayName',
         'description' => 'getDescription',
         'aws_s3_logo_url' => 'getAwsS3LogoUrl',
         'aws_s3_square_logo_url' => 'getAwsS3SquareLogoUrl',
-        'open_url' => 'getOpenUrl',
-        'slug' => 'getSlug',
         'url' => 'getUrl',
         'enabled' => 'getEnabled',
         'maintenance_mode' => 'getMaintenanceMode',
-        'allows_fractional_units' => 'getAllowsFractionalUnits',
         'allows_trading' => 'getAllowsTrading',
+        'allows_fractional_units' => 'getAllowsFractionalUnits',
         'has_reporting' => 'getHasReporting',
         'is_real_time_connection' => 'getIsRealTimeConnection',
-        'allows_trading_through_snaptrade_api' => 'getAllowsTradingThroughSnaptradeApi',
-        'is_scraping_integration' => 'getIsScrapingIntegration',
-        'default_currency' => 'getDefaultCurrency',
         'brokerage_type' => 'getBrokerageType',
-        'exchanges' => 'getExchanges'
+        'exchanges' => 'getExchanges',
+        'open_url' => 'getOpenUrl'
     ];
 
     /**
@@ -352,25 +335,22 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
     public function __construct(array $data = null)
     {
         $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('slug', $data ?? [], null);
         $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('display_name', $data ?? [], null);
         $this->setIfExists('description', $data ?? [], null);
         $this->setIfExists('aws_s3_logo_url', $data ?? [], null);
         $this->setIfExists('aws_s3_square_logo_url', $data ?? [], null);
-        $this->setIfExists('open_url', $data ?? [], null);
-        $this->setIfExists('slug', $data ?? [], null);
         $this->setIfExists('url', $data ?? [], null);
         $this->setIfExists('enabled', $data ?? [], null);
         $this->setIfExists('maintenance_mode', $data ?? [], null);
-        $this->setIfExists('allows_fractional_units', $data ?? [], null);
         $this->setIfExists('allows_trading', $data ?? [], null);
+        $this->setIfExists('allows_fractional_units', $data ?? [], null);
         $this->setIfExists('has_reporting', $data ?? [], null);
         $this->setIfExists('is_real_time_connection', $data ?? [], null);
-        $this->setIfExists('allows_trading_through_snaptrade_api', $data ?? [], null);
-        $this->setIfExists('is_scraping_integration', $data ?? [], null);
-        $this->setIfExists('default_currency', $data ?? [], null);
         $this->setIfExists('brokerage_type', $data ?? [], null);
         $this->setIfExists('exchanges', $data ?? [], null);
+        $this->setIfExists('open_url', $data ?? [], null);
     }
 
     /**
@@ -428,7 +408,7 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets id
      *
-     * @param string|null $id id
+     * @param string|null $id Unique identifier for the brokerage firm. This is the UUID used to reference the brokerage in SnapTrade.
      *
      * @return self
      */
@@ -440,6 +420,35 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['id'] = $id;
+
+        return $this;
+    }
+
+    /**
+     * Gets slug
+     *
+     * @return string|null
+     */
+    public function getSlug()
+    {
+        return $this->container['slug'];
+    }
+
+    /**
+     * Sets slug
+     *
+     * @param string|null $slug A short, unique identifier for the brokerage. It is usually the name of the brokerage in capital letters and will never change.
+     *
+     * @return self
+     */
+    public function setSlug($slug)
+    {
+
+        if (is_null($slug)) {
+            throw new \InvalidArgumentException('non-nullable slug cannot be null');
+        }
+
+        $this->container['slug'] = $slug;
 
         return $this;
     }
@@ -515,7 +524,7 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets description
      *
-     * @param string|null $description description
+     * @param string|null $description A brief description of the brokerage.
      *
      * @return self
      */
@@ -544,7 +553,7 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets aws_s3_logo_url
      *
-     * @param string|null $aws_s3_logo_url aws_s3_logo_url
+     * @param string|null $aws_s3_logo_url URL to the brokerage's logo.
      *
      * @return self
      */
@@ -573,7 +582,7 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets aws_s3_square_logo_url
      *
-     * @param string|null $aws_s3_square_logo_url aws_s3_square_logo_url
+     * @param string|null $aws_s3_square_logo_url URL to the brokerage's logo in square format.
      *
      * @return self
      */
@@ -597,71 +606,6 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets open_url
-     *
-     * @return string|null
-     */
-    public function getOpenUrl()
-    {
-        return $this->container['open_url'];
-    }
-
-    /**
-     * Sets open_url
-     *
-     * @param string|null $open_url open_url
-     *
-     * @return self
-     */
-    public function setOpenUrl($open_url)
-    {
-
-        if (is_null($open_url)) {
-            array_push($this->openAPINullablesSetToNull, 'open_url');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('open_url', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['open_url'] = $open_url;
-
-        return $this;
-    }
-
-    /**
-     * Gets slug
-     *
-     * @return string|null
-     */
-    public function getSlug()
-    {
-        return $this->container['slug'];
-    }
-
-    /**
-     * Sets slug
-     *
-     * @param string|null $slug A unique identifier for that brokerage. It is usually the name of the brokerage in capital letters and will never change.
-     *
-     * @return self
-     */
-    public function setSlug($slug)
-    {
-
-        if (is_null($slug)) {
-            throw new \InvalidArgumentException('non-nullable slug cannot be null');
-        }
-
-        $this->container['slug'] = $slug;
-
-        return $this;
-    }
-
-    /**
      * Gets url
      *
      * @return string|null
@@ -674,7 +618,7 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets url
      *
-     * @param string|null $url url
+     * @param string|null $url URL to the brokerage's website.
      *
      * @return self
      */
@@ -703,7 +647,7 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets enabled
      *
-     * @param bool|null $enabled enabled
+     * @param bool|null $enabled Whether the brokerage is enabled in SnapTrade. A disabled brokerage will not be available for new connections.
      *
      * @return self
      */
@@ -732,7 +676,7 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets maintenance_mode
      *
-     * @param bool|null $maintenance_mode maintenance_mode
+     * @param bool|null $maintenance_mode Whether the brokerage is currently in maintenance mode. A brokerage in maintenance mode will not be available for new connections.
      *
      * @return self
      */
@@ -744,42 +688,6 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['maintenance_mode'] = $maintenance_mode;
-
-        return $this;
-    }
-
-    /**
-     * Gets allows_fractional_units
-     *
-     * @return bool|null
-     */
-    public function getAllowsFractionalUnits()
-    {
-        return $this->container['allows_fractional_units'];
-    }
-
-    /**
-     * Sets allows_fractional_units
-     *
-     * @param bool|null $allows_fractional_units allows_fractional_units
-     *
-     * @return self
-     */
-    public function setAllowsFractionalUnits($allows_fractional_units)
-    {
-
-        if (is_null($allows_fractional_units)) {
-            array_push($this->openAPINullablesSetToNull, 'allows_fractional_units');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('allows_fractional_units', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['allows_fractional_units'] = $allows_fractional_units;
 
         return $this;
     }
@@ -797,7 +705,7 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets allows_trading
      *
-     * @param bool|null $allows_trading allows_trading
+     * @param bool|null $allows_trading Whether the brokerage allows trading through SnapTrade.
      *
      * @return self
      */
@@ -821,9 +729,48 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
+     * Gets allows_fractional_units
+     *
+     * @return bool|null
+     * @deprecated
+     */
+    public function getAllowsFractionalUnits()
+    {
+        return $this->container['allows_fractional_units'];
+    }
+
+    /**
+     * Sets allows_fractional_units
+     *
+     * @param bool|null $allows_fractional_units This field is deprecated. Please contact us if you have a valid use case for it.
+     *
+     * @return self
+     * @deprecated
+     */
+    public function setAllowsFractionalUnits($allows_fractional_units)
+    {
+
+        if (is_null($allows_fractional_units)) {
+            array_push($this->openAPINullablesSetToNull, 'allows_fractional_units');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('allows_fractional_units', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['allows_fractional_units'] = $allows_fractional_units;
+
+        return $this;
+    }
+
+    /**
      * Gets has_reporting
      *
      * @return bool|null
+     * @deprecated
      */
     public function getHasReporting()
     {
@@ -833,9 +780,10 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets has_reporting
      *
-     * @param bool|null $has_reporting has_reporting
+     * @param bool|null $has_reporting This field is deprecated. Please contact us if you have a valid use case for it.
      *
      * @return self
+     * @deprecated
      */
     public function setHasReporting($has_reporting)
     {
@@ -860,6 +808,7 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
      * Gets is_real_time_connection
      *
      * @return bool|null
+     * @deprecated
      */
     public function getIsRealTimeConnection()
     {
@@ -869,9 +818,10 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets is_real_time_connection
      *
-     * @param bool|null $is_real_time_connection is_real_time_connection
+     * @param bool|null $is_real_time_connection This field is deprecated. Please contact us if you have a valid use case for it.
      *
      * @return self
+     * @deprecated
      */
     public function setIsRealTimeConnection($is_real_time_connection)
     {
@@ -881,100 +831,6 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['is_real_time_connection'] = $is_real_time_connection;
-
-        return $this;
-    }
-
-    /**
-     * Gets allows_trading_through_snaptrade_api
-     *
-     * @return bool|null
-     */
-    public function getAllowsTradingThroughSnaptradeApi()
-    {
-        return $this->container['allows_trading_through_snaptrade_api'];
-    }
-
-    /**
-     * Sets allows_trading_through_snaptrade_api
-     *
-     * @param bool|null $allows_trading_through_snaptrade_api allows_trading_through_snaptrade_api
-     *
-     * @return self
-     */
-    public function setAllowsTradingThroughSnaptradeApi($allows_trading_through_snaptrade_api)
-    {
-
-        if (is_null($allows_trading_through_snaptrade_api)) {
-            array_push($this->openAPINullablesSetToNull, 'allows_trading_through_snaptrade_api');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('allows_trading_through_snaptrade_api', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['allows_trading_through_snaptrade_api'] = $allows_trading_through_snaptrade_api;
-
-        return $this;
-    }
-
-    /**
-     * Gets is_scraping_integration
-     *
-     * @return bool|null
-     */
-    public function getIsScrapingIntegration()
-    {
-        return $this->container['is_scraping_integration'];
-    }
-
-    /**
-     * Sets is_scraping_integration
-     *
-     * @param bool|null $is_scraping_integration is_scraping_integration
-     *
-     * @return self
-     */
-    public function setIsScrapingIntegration($is_scraping_integration)
-    {
-
-        if (is_null($is_scraping_integration)) {
-            throw new \InvalidArgumentException('non-nullable is_scraping_integration cannot be null');
-        }
-
-        $this->container['is_scraping_integration'] = $is_scraping_integration;
-
-        return $this;
-    }
-
-    /**
-     * Gets default_currency
-     *
-     * @return string|null
-     */
-    public function getDefaultCurrency()
-    {
-        return $this->container['default_currency'];
-    }
-
-    /**
-     * Sets default_currency
-     *
-     * @param string|null $default_currency default_currency
-     *
-     * @return self
-     */
-    public function setDefaultCurrency($default_currency)
-    {
-
-        if (is_null($default_currency)) {
-            throw new \InvalidArgumentException('non-nullable default_currency cannot be null');
-        }
-
-        $this->container['default_currency'] = $default_currency;
 
         return $this;
     }
@@ -1012,6 +868,7 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
      * Gets exchanges
      *
      * @return mixed[]|null
+     * @deprecated
      */
     public function getExchanges()
     {
@@ -1021,9 +878,10 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets exchanges
      *
-     * @param mixed[]|null $exchanges List of exchange ID supported by brokerage
+     * @param mixed[]|null $exchanges This field is deprecated. Please contact us if you have a valid use case for it.
      *
      * @return self
+     * @deprecated
      */
     public function setExchanges($exchanges)
     {
@@ -1033,6 +891,44 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['exchanges'] = $exchanges;
+
+        return $this;
+    }
+
+    /**
+     * Gets open_url
+     *
+     * @return string|null
+     * @deprecated
+     */
+    public function getOpenUrl()
+    {
+        return $this->container['open_url'];
+    }
+
+    /**
+     * Sets open_url
+     *
+     * @param string|null $open_url This field is deprecated.
+     *
+     * @return self
+     * @deprecated
+     */
+    public function setOpenUrl($open_url)
+    {
+
+        if (is_null($open_url)) {
+            array_push($this->openAPINullablesSetToNull, 'open_url');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('open_url', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['open_url'] = $open_url;
 
         return $this;
     }

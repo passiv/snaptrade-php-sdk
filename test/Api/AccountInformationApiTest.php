@@ -121,7 +121,7 @@ class AccountInformationApiTest extends TestCase
     /**
      * Test case for getUserAccountRecentOrders
      *
-     * List account recent executed orders.
+     * List account recent orders (last 24 hours only).
      *
      */
     public function testGetUserAccountRecentOrders()

@@ -1622,6 +1622,9 @@ class TradingApi extends \SnapTrade\CustomApi
         $stop = SENTINEL_VALUE,
         $units = SENTINEL_VALUE,
         $notional_value = SENTINEL_VALUE,
+        $order_class = SENTINEL_VALUE,
+        $stop_loss = SENTINEL_VALUE,
+        $take_profit = SENTINEL_VALUE,
         string $contentType = self::contentTypes['placeForceOrder'][0]
     )
     {
@@ -1636,6 +1639,9 @@ class TradingApi extends \SnapTrade\CustomApi
         $this->setRequestBodyProperty($_body, "stop", $stop);
         $this->setRequestBodyProperty($_body, "units", $units);
         $this->setRequestBodyProperty($_body, "notional_value", $notional_value);
+        $this->setRequestBodyProperty($_body, "order_class", $order_class);
+        $this->setRequestBodyProperty($_body, "stop_loss", $stop_loss);
+        $this->setRequestBodyProperty($_body, "take_profit", $take_profit);
         $manual_trade_form_with_options = $_body;
 
         list($response) = $this->placeForceOrderWithHttpInfo($user_id, $user_secret, $manual_trade_form_with_options, $contentType);
@@ -1838,6 +1844,9 @@ class TradingApi extends \SnapTrade\CustomApi
         $stop = SENTINEL_VALUE,
         $units = SENTINEL_VALUE,
         $notional_value = SENTINEL_VALUE,
+        $order_class = SENTINEL_VALUE,
+        $stop_loss = SENTINEL_VALUE,
+        $take_profit = SENTINEL_VALUE,
         string $contentType = self::contentTypes['placeForceOrder'][0]
     )
     {
@@ -1852,6 +1861,9 @@ class TradingApi extends \SnapTrade\CustomApi
         $this->setRequestBodyProperty($_body, "stop", $stop);
         $this->setRequestBodyProperty($_body, "units", $units);
         $this->setRequestBodyProperty($_body, "notional_value", $notional_value);
+        $this->setRequestBodyProperty($_body, "order_class", $order_class);
+        $this->setRequestBodyProperty($_body, "stop_loss", $stop_loss);
+        $this->setRequestBodyProperty($_body, "take_profit", $take_profit);
         $manual_trade_form_with_options = $_body;
 
         return $this->placeForceOrderAsyncWithHttpInfo($user_id, $user_secret, $manual_trade_form_with_options, $contentType)

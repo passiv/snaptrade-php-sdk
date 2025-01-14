@@ -161,4 +161,31 @@ class ManualTradeFormWithOptionsTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "order_class"
+     */
+    public function testPropertyOrderClass()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "stop_loss"
+     */
+    public function testPropertyStopLoss()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "take_profit"
+     */
+    public function testPropertyTakeProfit()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

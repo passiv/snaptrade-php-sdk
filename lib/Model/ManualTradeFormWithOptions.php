@@ -60,7 +60,10 @@ class ManualTradeFormWithOptions implements ModelInterface, ArrayAccess, \JsonSe
         'price' => 'float',
         'stop' => 'float',
         'units' => 'float',
-        'notional_value' => '\SnapTrade\Model\ManualTradeFormNotionalValue'
+        'notional_value' => '\SnapTrade\Model\ManualTradeFormNotionalValue',
+        'order_class' => 'string',
+        'stop_loss' => '\SnapTrade\Model\ManualTradeFormWithOptionsStopLoss',
+        'take_profit' => '\SnapTrade\Model\ManualTradeFormWithOptionsTakeProfit'
     ];
 
     /**
@@ -80,7 +83,10 @@ class ManualTradeFormWithOptions implements ModelInterface, ArrayAccess, \JsonSe
         'price' => null,
         'stop' => null,
         'units' => null,
-        'notional_value' => null
+        'notional_value' => null,
+        'order_class' => null,
+        'stop_loss' => null,
+        'take_profit' => null
     ];
 
     /**
@@ -98,7 +104,10 @@ class ManualTradeFormWithOptions implements ModelInterface, ArrayAccess, \JsonSe
 		'price' => true,
 		'stop' => true,
 		'units' => true,
-		'notional_value' => true
+		'notional_value' => true,
+		'order_class' => true,
+		'stop_loss' => true,
+		'take_profit' => true
     ];
 
     /**
@@ -196,7 +205,10 @@ class ManualTradeFormWithOptions implements ModelInterface, ArrayAccess, \JsonSe
         'price' => 'price',
         'stop' => 'stop',
         'units' => 'units',
-        'notional_value' => 'notional_value'
+        'notional_value' => 'notional_value',
+        'order_class' => 'order_class',
+        'stop_loss' => 'stop_loss',
+        'take_profit' => 'take_profit'
     ];
 
     /**
@@ -214,7 +226,10 @@ class ManualTradeFormWithOptions implements ModelInterface, ArrayAccess, \JsonSe
         'price' => 'setPrice',
         'stop' => 'setStop',
         'units' => 'setUnits',
-        'notional_value' => 'setNotionalValue'
+        'notional_value' => 'setNotionalValue',
+        'order_class' => 'setOrderClass',
+        'stop_loss' => 'setStopLoss',
+        'take_profit' => 'setTakeProfit'
     ];
 
     /**
@@ -232,7 +247,10 @@ class ManualTradeFormWithOptions implements ModelInterface, ArrayAccess, \JsonSe
         'price' => 'getPrice',
         'stop' => 'getStop',
         'units' => 'getUnits',
-        'notional_value' => 'getNotionalValue'
+        'notional_value' => 'getNotionalValue',
+        'order_class' => 'getOrderClass',
+        'stop_loss' => 'getStopLoss',
+        'take_profit' => 'getTakeProfit'
     ];
 
     /**
@@ -276,6 +294,21 @@ class ManualTradeFormWithOptions implements ModelInterface, ArrayAccess, \JsonSe
         return self::$openAPIModelName;
     }
 
+    public const ORDER_CLASS_SIMPLE = 'SIMPLE';
+    public const ORDER_CLASS_BRACKET = 'BRACKET';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getOrderClassAllowableValues()
+    {
+        return [
+            self::ORDER_CLASS_SIMPLE,
+            self::ORDER_CLASS_BRACKET,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -302,6 +335,9 @@ class ManualTradeFormWithOptions implements ModelInterface, ArrayAccess, \JsonSe
         $this->setIfExists('stop', $data ?? [], null);
         $this->setIfExists('units', $data ?? [], null);
         $this->setIfExists('notional_value', $data ?? [], null);
+        $this->setIfExists('order_class', $data ?? [], null);
+        $this->setIfExists('stop_loss', $data ?? [], null);
+        $this->setIfExists('take_profit', $data ?? [], null);
     }
 
     /**
@@ -343,6 +379,15 @@ class ManualTradeFormWithOptions implements ModelInterface, ArrayAccess, \JsonSe
         if ($this->container['time_in_force'] === null) {
             $invalidProperties[] = "'time_in_force' can't be null";
         }
+        $allowedValues = $this->getOrderClassAllowableValues();
+        if (!is_null($this->container['order_class']) && !in_array($this->container['order_class'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'order_class', must be one of '%s'",
+                $this->container['order_class'],
+                implode("', '", $allowedValues)
+            );
+        }
+
         return $invalidProperties;
     }
 
@@ -686,6 +731,124 @@ class ManualTradeFormWithOptions implements ModelInterface, ArrayAccess, \JsonSe
         }
 
         $this->container['notional_value'] = $notional_value;
+
+        return $this;
+    }
+
+    /**
+     * Gets order_class
+     *
+     * @return string|null
+     */
+    public function getOrderClass()
+    {
+        return $this->container['order_class'];
+    }
+
+    /**
+     * Sets order_class
+     *
+     * @param string|null $order_class The class of order intended to be placed. Defaults to SIMPLE for regular, one legged trades. Set to BRACKET if looking to place a bracket (One-triggers-a-one-cancels-the-other) order, then specify take profit and stop loss conditions. Bracket orders currently only supported on Alpaca, Tradier, and Tradestation, contact us for more details
+     *
+     * @return self
+     */
+    public function setOrderClass($order_class)
+    {
+        $allowedValues = $this->getOrderClassAllowableValues();
+        if (!is_null($order_class) && !in_array($order_class, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'order_class', must be one of '%s'",
+                    $order_class,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+
+        if (is_null($order_class)) {
+            array_push($this->openAPINullablesSetToNull, 'order_class');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('order_class', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['order_class'] = $order_class;
+
+        return $this;
+    }
+
+    /**
+     * Gets stop_loss
+     *
+     * @return \SnapTrade\Model\ManualTradeFormWithOptionsStopLoss|null
+     */
+    public function getStopLoss()
+    {
+        return $this->container['stop_loss'];
+    }
+
+    /**
+     * Sets stop_loss
+     *
+     * @param \SnapTrade\Model\ManualTradeFormWithOptionsStopLoss|null $stop_loss stop_loss
+     *
+     * @return self
+     */
+    public function setStopLoss($stop_loss)
+    {
+
+        if (is_null($stop_loss)) {
+            array_push($this->openAPINullablesSetToNull, 'stop_loss');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('stop_loss', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['stop_loss'] = $stop_loss;
+
+        return $this;
+    }
+
+    /**
+     * Gets take_profit
+     *
+     * @return \SnapTrade\Model\ManualTradeFormWithOptionsTakeProfit|null
+     */
+    public function getTakeProfit()
+    {
+        return $this->container['take_profit'];
+    }
+
+    /**
+     * Sets take_profit
+     *
+     * @param \SnapTrade\Model\ManualTradeFormWithOptionsTakeProfit|null $take_profit take_profit
+     *
+     * @return self
+     */
+    public function setTakeProfit($take_profit)
+    {
+
+        if (is_null($take_profit)) {
+            array_push($this->openAPINullablesSetToNull, 'take_profit');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('take_profit', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['take_profit'] = $take_profit;
 
         return $this;
     }

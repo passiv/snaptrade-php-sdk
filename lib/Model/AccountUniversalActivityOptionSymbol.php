@@ -1,6 +1,6 @@
 <?php
 /**
- * UniversalActivityOptionSymbol
+ * AccountUniversalActivityOptionSymbol
  *
  * PHP version 7.4
  *
@@ -27,14 +27,14 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * UniversalActivityOptionSymbol Class Doc Comment
+ * AccountUniversalActivityOptionSymbol Class Doc Comment
  *
  * @category Class
  * @description The option security for the transaction. The field is &#x60;null&#x60; if the transaction is not related to an option security (like a deposit, withdrawal, fee, etc). SnapTrade does a best effort to map the brokerage&#39;s option symbol. In cases where the brokerage option symbol is not recognized, the field will be set to &#x60;null&#x60;.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class UniversalActivityOptionSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
+class AccountUniversalActivityOptionSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -43,7 +43,7 @@ class UniversalActivityOptionSymbol implements ModelInterface, ArrayAccess, \Jso
       *
       * @var string
       */
-    protected static $openAPIModelName = 'UniversalActivity_option_symbol';
+    protected static $openAPIModelName = 'AccountUniversalActivity_option_symbol';
 
     /**
       * Array of property to type mappings. Used for (de)serialization

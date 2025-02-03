@@ -1,6 +1,6 @@
 <?php
 /**
- * UniversalActivityCurrency
+ * PaginatedUniversalActivity
  *
  * PHP version 7.4
  *
@@ -27,14 +27,14 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * UniversalActivityCurrency Class Doc Comment
+ * PaginatedUniversalActivity Class Doc Comment
  *
  * @category Class
- * @description The currency in which the transaction &#x60;price&#x60; and &#x60;amount&#x60; is denominated.
+ * @description A paginated list of UniversalActivity objects.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class UniversalActivityCurrency implements ModelInterface, ArrayAccess, \JsonSerializable
+class PaginatedUniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -43,7 +43,7 @@ class UniversalActivityCurrency implements ModelInterface, ArrayAccess, \JsonSer
       *
       * @var string
       */
-    protected static $openAPIModelName = 'UniversalActivity_currency';
+    protected static $openAPIModelName = 'PaginatedUniversalActivity';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -51,9 +51,8 @@ class UniversalActivityCurrency implements ModelInterface, ArrayAccess, \JsonSer
       * @var string[]
       */
     protected static $openAPITypes = [
-        'id' => 'string',
-        'code' => 'string',
-        'name' => 'string'
+        'data' => '\SnapTrade\Model\AccountUniversalActivity[]',
+        'pagination' => '\SnapTrade\Model\PaginationDetails'
     ];
 
     /**
@@ -64,9 +63,8 @@ class UniversalActivityCurrency implements ModelInterface, ArrayAccess, \JsonSer
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'id' => 'uuid',
-        'code' => null,
-        'name' => null
+        'data' => null,
+        'pagination' => null
     ];
 
     /**
@@ -75,9 +73,8 @@ class UniversalActivityCurrency implements ModelInterface, ArrayAccess, \JsonSer
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'id' => false,
-		'code' => false,
-		'name' => false
+        'data' => false,
+		'pagination' => false
     ];
 
     /**
@@ -166,9 +163,8 @@ class UniversalActivityCurrency implements ModelInterface, ArrayAccess, \JsonSer
      * @var string[]
      */
     protected static $attributeMap = [
-        'id' => 'id',
-        'code' => 'code',
-        'name' => 'name'
+        'data' => 'data',
+        'pagination' => 'pagination'
     ];
 
     /**
@@ -177,9 +173,8 @@ class UniversalActivityCurrency implements ModelInterface, ArrayAccess, \JsonSer
      * @var string[]
      */
     protected static $setters = [
-        'id' => 'setId',
-        'code' => 'setCode',
-        'name' => 'setName'
+        'data' => 'setData',
+        'pagination' => 'setPagination'
     ];
 
     /**
@@ -188,9 +183,8 @@ class UniversalActivityCurrency implements ModelInterface, ArrayAccess, \JsonSer
      * @var string[]
      */
     protected static $getters = [
-        'id' => 'getId',
-        'code' => 'getCode',
-        'name' => 'getName'
+        'data' => 'getData',
+        'pagination' => 'getPagination'
     ];
 
     /**
@@ -250,9 +244,8 @@ class UniversalActivityCurrency implements ModelInterface, ArrayAccess, \JsonSer
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('id', $data ?? [], null);
-        $this->setIfExists('code', $data ?? [], null);
-        $this->setIfExists('name', $data ?? [], null);
+        $this->setIfExists('data', $data ?? [], null);
+        $this->setIfExists('pagination', $data ?? [], null);
     }
 
     /**
@@ -298,88 +291,59 @@ class UniversalActivityCurrency implements ModelInterface, ArrayAccess, \JsonSer
 
 
     /**
-     * Gets id
+     * Gets data
      *
-     * @return string|null
+     * @return \SnapTrade\Model\AccountUniversalActivity[]|null
      */
-    public function getId()
+    public function getData()
     {
-        return $this->container['id'];
+        return $this->container['data'];
     }
 
     /**
-     * Sets id
+     * Sets data
      *
-     * @param string|null $id Unique identifier for the currency. This is the UUID used to reference the currency in SnapTrade.
+     * @param \SnapTrade\Model\AccountUniversalActivity[]|null $data data
      *
      * @return self
      */
-    public function setId($id)
+    public function setData($data)
     {
 
-        if (is_null($id)) {
-            throw new \InvalidArgumentException('non-nullable id cannot be null');
+        if (is_null($data)) {
+            throw new \InvalidArgumentException('non-nullable data cannot be null');
         }
 
-        $this->container['id'] = $id;
+        $this->container['data'] = $data;
 
         return $this;
     }
 
     /**
-     * Gets code
+     * Gets pagination
      *
-     * @return string|null
+     * @return \SnapTrade\Model\PaginationDetails|null
      */
-    public function getCode()
+    public function getPagination()
     {
-        return $this->container['code'];
+        return $this->container['pagination'];
     }
 
     /**
-     * Sets code
+     * Sets pagination
      *
-     * @param string|null $code The ISO-4217 currency code for the currency.
+     * @param \SnapTrade\Model\PaginationDetails|null $pagination pagination
      *
      * @return self
      */
-    public function setCode($code)
+    public function setPagination($pagination)
     {
 
-        if (is_null($code)) {
-            throw new \InvalidArgumentException('non-nullable code cannot be null');
+        if (is_null($pagination)) {
+            throw new \InvalidArgumentException('non-nullable pagination cannot be null');
         }
 
-        $this->container['code'] = $code;
-
-        return $this;
-    }
-
-    /**
-     * Gets name
-     *
-     * @return string|null
-     */
-    public function getName()
-    {
-        return $this->container['name'];
-    }
-
-    /**
-     * Sets name
-     *
-     * @param string|null $name A human-friendly name of the currency.
-     *
-     * @return self
-     */
-    public function setName($name)
-    {
-
-        if (is_null($name)) {
-            throw new \InvalidArgumentException('non-nullable name cannot be null');
-        }
-
-        $this->container['name'] = $name;
+        $this->container['pagination'] = $pagination;
 
         return $this;
     }

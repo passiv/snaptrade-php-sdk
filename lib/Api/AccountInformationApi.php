@@ -170,19 +170,21 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * List account activities
      *
-     * Returns all historical transactions for the specified account. It&#39;s recommended to use &#x60;startDate&#x60; and &#x60;endDate&#x60; to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There&#39;s a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the &#x60;trade_date&#x60; field if you need them in a specific order.  The data returned here is always cached and refreshed once a day.
+     * Returns all historical transactions for the specified account.  This endpoint is paginated and will return a maximum of 1000 transactions per request. See the query parameters for pagination options.  Transaction are returned in reverse chronological order, using the &#x60;trade_date&#x60; field.  The data returned here is always cached and refreshed once a day.
      *
      * @param  string $account_id account_id (required)
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
      * @param  \DateTime $start_date The start date (inclusive) of the transaction history to retrieve. If not provided, the default is the first transaction known to SnapTrade based on &#x60;trade_date&#x60;. (optional)
      * @param  \DateTime $end_date The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on &#x60;trade_date&#x60;. (optional)
+     * @param  int $offset An integer that specifies the starting point of the paginated results. Default is 0. (optional)
+     * @param  int $limit An integer that specifies the maximum number of transactions to return. Default of 1000. (optional)
      * @param  string $type Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - &#x60;BUY&#x60; - Asset bought.   - &#x60;SELL&#x60; - Asset sold.   - &#x60;DIVIDEND&#x60; - Dividend payout.   - &#x60;CONTRIBUTION&#x60; - Cash contribution.   - &#x60;WITHDRAWAL&#x60; - Cash withdrawal.   - &#x60;REI&#x60; - Dividend reinvestment.   - &#x60;INTEREST&#x60; - Interest deposited into the account.   - &#x60;FEE&#x60; - Fee withdrawn from the account.   - &#x60;OPTIONEXPIRATION&#x60; - Option expiration event.   - &#x60;OPTIONASSIGNMENT&#x60; - Option assignment event.   - &#x60;OPTIONEXERCISE&#x60; - Option exercise event.   - &#x60;TRANSFER&#x60; - Transfer of assets from one account to another (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAccountActivities'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \SnapTrade\Model\UniversalActivity[]
+     * @return \SnapTrade\Model\PaginatedUniversalActivity[]
      */
     public function getAccountActivities(
         $account_id,
@@ -190,13 +192,15 @@ class AccountInformationApi extends \SnapTrade\CustomApi
         $user_secret,
         $start_date = SENTINEL_VALUE,
         $end_date = SENTINEL_VALUE,
+        $offset = SENTINEL_VALUE,
+        $limit = SENTINEL_VALUE,
         $type = SENTINEL_VALUE,
 
         string $contentType = self::contentTypes['getAccountActivities'][0]
     )
     {
 
-        list($response) = $this->getAccountActivitiesWithHttpInfo($account_id, $user_id, $user_secret, $start_date, $end_date, $type, $contentType);
+        list($response) = $this->getAccountActivitiesWithHttpInfo($account_id, $user_id, $user_secret, $start_date, $end_date, $offset, $limit, $type, $contentType);
         return $response;
     }
 
@@ -205,23 +209,25 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * List account activities
      *
-     * Returns all historical transactions for the specified account. It&#39;s recommended to use &#x60;startDate&#x60; and &#x60;endDate&#x60; to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There&#39;s a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the &#x60;trade_date&#x60; field if you need them in a specific order.  The data returned here is always cached and refreshed once a day.
+     * Returns all historical transactions for the specified account.  This endpoint is paginated and will return a maximum of 1000 transactions per request. See the query parameters for pagination options.  Transaction are returned in reverse chronological order, using the &#x60;trade_date&#x60; field.  The data returned here is always cached and refreshed once a day.
      *
      * @param  string $account_id (required)
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
      * @param  \DateTime $start_date The start date (inclusive) of the transaction history to retrieve. If not provided, the default is the first transaction known to SnapTrade based on &#x60;trade_date&#x60;. (optional)
      * @param  \DateTime $end_date The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on &#x60;trade_date&#x60;. (optional)
+     * @param  int $offset An integer that specifies the starting point of the paginated results. Default is 0. (optional)
+     * @param  int $limit An integer that specifies the maximum number of transactions to return. Default of 1000. (optional)
      * @param  string $type Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - &#x60;BUY&#x60; - Asset bought.   - &#x60;SELL&#x60; - Asset sold.   - &#x60;DIVIDEND&#x60; - Dividend payout.   - &#x60;CONTRIBUTION&#x60; - Cash contribution.   - &#x60;WITHDRAWAL&#x60; - Cash withdrawal.   - &#x60;REI&#x60; - Dividend reinvestment.   - &#x60;INTEREST&#x60; - Interest deposited into the account.   - &#x60;FEE&#x60; - Fee withdrawn from the account.   - &#x60;OPTIONEXPIRATION&#x60; - Option expiration event.   - &#x60;OPTIONASSIGNMENT&#x60; - Option assignment event.   - &#x60;OPTIONEXERCISE&#x60; - Option exercise event.   - &#x60;TRANSFER&#x60; - Transfer of assets from one account to another (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAccountActivities'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \SnapTrade\Model\UniversalActivity[], HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SnapTrade\Model\PaginatedUniversalActivity[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function getAccountActivitiesWithHttpInfo($account_id, $user_id, $user_secret, $start_date = null, $end_date = null, $type = null, string $contentType = self::contentTypes['getAccountActivities'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    public function getAccountActivitiesWithHttpInfo($account_id, $user_id, $user_secret, $start_date = null, $end_date = null, $offset = null, $limit = null, $type = null, string $contentType = self::contentTypes['getAccountActivities'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->getAccountActivitiesRequest($account_id, $user_id, $user_secret, $start_date, $end_date, $type, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getAccountActivitiesRequest($account_id, $user_id, $user_secret, $start_date, $end_date, $offset, $limit, $type, $contentType);
 
         // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
@@ -242,6 +248,8 @@ class AccountInformationApi extends \SnapTrade\CustomApi
                         $user_secret,
                         $start_date,
                         $end_date,
+                        $offset,
+                        $limit,
                         $type,
                         $contentType,
                         $requestOptions->setRetryOAuth(false)
@@ -280,23 +288,23 @@ class AccountInformationApi extends \SnapTrade\CustomApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\SnapTrade\Model\UniversalActivity[]' === '\SplFileObject') {
+                    if ('\SnapTrade\Model\PaginatedUniversalActivity[]' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\SnapTrade\Model\UniversalActivity[]' !== 'string') {
+                        if ('\SnapTrade\Model\PaginatedUniversalActivity[]' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\UniversalActivity[]', []),
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\PaginatedUniversalActivity[]', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = '\SnapTrade\Model\UniversalActivity[]';
+            $returnType = '\SnapTrade\Model\PaginatedUniversalActivity[]';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -317,7 +325,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\SnapTrade\Model\UniversalActivity[]',
+                        '\SnapTrade\Model\PaginatedUniversalActivity[]',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -332,13 +340,15 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * List account activities
      *
-     * Returns all historical transactions for the specified account. It&#39;s recommended to use &#x60;startDate&#x60; and &#x60;endDate&#x60; to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There&#39;s a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the &#x60;trade_date&#x60; field if you need them in a specific order.  The data returned here is always cached and refreshed once a day.
+     * Returns all historical transactions for the specified account.  This endpoint is paginated and will return a maximum of 1000 transactions per request. See the query parameters for pagination options.  Transaction are returned in reverse chronological order, using the &#x60;trade_date&#x60; field.  The data returned here is always cached and refreshed once a day.
      *
      * @param  string $account_id (required)
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
      * @param  \DateTime $start_date The start date (inclusive) of the transaction history to retrieve. If not provided, the default is the first transaction known to SnapTrade based on &#x60;trade_date&#x60;. (optional)
      * @param  \DateTime $end_date The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on &#x60;trade_date&#x60;. (optional)
+     * @param  int $offset An integer that specifies the starting point of the paginated results. Default is 0. (optional)
+     * @param  int $limit An integer that specifies the maximum number of transactions to return. Default of 1000. (optional)
      * @param  string $type Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - &#x60;BUY&#x60; - Asset bought.   - &#x60;SELL&#x60; - Asset sold.   - &#x60;DIVIDEND&#x60; - Dividend payout.   - &#x60;CONTRIBUTION&#x60; - Cash contribution.   - &#x60;WITHDRAWAL&#x60; - Cash withdrawal.   - &#x60;REI&#x60; - Dividend reinvestment.   - &#x60;INTEREST&#x60; - Interest deposited into the account.   - &#x60;FEE&#x60; - Fee withdrawn from the account.   - &#x60;OPTIONEXPIRATION&#x60; - Option expiration event.   - &#x60;OPTIONASSIGNMENT&#x60; - Option assignment event.   - &#x60;OPTIONEXERCISE&#x60; - Option exercise event.   - &#x60;TRANSFER&#x60; - Transfer of assets from one account to another (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAccountActivities'] to see the possible values for this operation
      *
@@ -351,13 +361,15 @@ class AccountInformationApi extends \SnapTrade\CustomApi
         $user_secret,
         $start_date = SENTINEL_VALUE,
         $end_date = SENTINEL_VALUE,
+        $offset = SENTINEL_VALUE,
+        $limit = SENTINEL_VALUE,
         $type = SENTINEL_VALUE,
 
         string $contentType = self::contentTypes['getAccountActivities'][0]
     )
     {
 
-        return $this->getAccountActivitiesAsyncWithHttpInfo($account_id, $user_id, $user_secret, $start_date, $end_date, $type, $contentType)
+        return $this->getAccountActivitiesAsyncWithHttpInfo($account_id, $user_id, $user_secret, $start_date, $end_date, $offset, $limit, $type, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -370,23 +382,25 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * List account activities
      *
-     * Returns all historical transactions for the specified account. It&#39;s recommended to use &#x60;startDate&#x60; and &#x60;endDate&#x60; to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There&#39;s a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the &#x60;trade_date&#x60; field if you need them in a specific order.  The data returned here is always cached and refreshed once a day.
+     * Returns all historical transactions for the specified account.  This endpoint is paginated and will return a maximum of 1000 transactions per request. See the query parameters for pagination options.  Transaction are returned in reverse chronological order, using the &#x60;trade_date&#x60; field.  The data returned here is always cached and refreshed once a day.
      *
      * @param  string $account_id (required)
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
      * @param  \DateTime $start_date The start date (inclusive) of the transaction history to retrieve. If not provided, the default is the first transaction known to SnapTrade based on &#x60;trade_date&#x60;. (optional)
      * @param  \DateTime $end_date The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on &#x60;trade_date&#x60;. (optional)
+     * @param  int $offset An integer that specifies the starting point of the paginated results. Default is 0. (optional)
+     * @param  int $limit An integer that specifies the maximum number of transactions to return. Default of 1000. (optional)
      * @param  string $type Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - &#x60;BUY&#x60; - Asset bought.   - &#x60;SELL&#x60; - Asset sold.   - &#x60;DIVIDEND&#x60; - Dividend payout.   - &#x60;CONTRIBUTION&#x60; - Cash contribution.   - &#x60;WITHDRAWAL&#x60; - Cash withdrawal.   - &#x60;REI&#x60; - Dividend reinvestment.   - &#x60;INTEREST&#x60; - Interest deposited into the account.   - &#x60;FEE&#x60; - Fee withdrawn from the account.   - &#x60;OPTIONEXPIRATION&#x60; - Option expiration event.   - &#x60;OPTIONASSIGNMENT&#x60; - Option assignment event.   - &#x60;OPTIONEXERCISE&#x60; - Option exercise event.   - &#x60;TRANSFER&#x60; - Transfer of assets from one account to another (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAccountActivities'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getAccountActivitiesAsyncWithHttpInfo($account_id, $user_id, $user_secret, $start_date = null, $end_date = null, $type = null, string $contentType = self::contentTypes['getAccountActivities'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    public function getAccountActivitiesAsyncWithHttpInfo($account_id, $user_id, $user_secret, $start_date = null, $end_date = null, $offset = null, $limit = null, $type = null, string $contentType = self::contentTypes['getAccountActivities'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $returnType = '\SnapTrade\Model\UniversalActivity[]';
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->getAccountActivitiesRequest($account_id, $user_id, $user_secret, $start_date, $end_date, $type, $contentType);
+        $returnType = '\SnapTrade\Model\PaginatedUniversalActivity[]';
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getAccountActivitiesRequest($account_id, $user_id, $user_secret, $start_date, $end_date, $offset, $limit, $type, $contentType);
 
         // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
@@ -435,13 +449,15 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      * @param  string $user_secret (required)
      * @param  \DateTime $start_date The start date (inclusive) of the transaction history to retrieve. If not provided, the default is the first transaction known to SnapTrade based on &#x60;trade_date&#x60;. (optional)
      * @param  \DateTime $end_date The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on &#x60;trade_date&#x60;. (optional)
+     * @param  int $offset An integer that specifies the starting point of the paginated results. Default is 0. (optional)
+     * @param  int $limit An integer that specifies the maximum number of transactions to return. Default of 1000. (optional)
      * @param  string $type Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - &#x60;BUY&#x60; - Asset bought.   - &#x60;SELL&#x60; - Asset sold.   - &#x60;DIVIDEND&#x60; - Dividend payout.   - &#x60;CONTRIBUTION&#x60; - Cash contribution.   - &#x60;WITHDRAWAL&#x60; - Cash withdrawal.   - &#x60;REI&#x60; - Dividend reinvestment.   - &#x60;INTEREST&#x60; - Interest deposited into the account.   - &#x60;FEE&#x60; - Fee withdrawn from the account.   - &#x60;OPTIONEXPIRATION&#x60; - Option expiration event.   - &#x60;OPTIONASSIGNMENT&#x60; - Option assignment event.   - &#x60;OPTIONEXERCISE&#x60; - Option exercise event.   - &#x60;TRANSFER&#x60; - Transfer of assets from one account to another (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAccountActivities'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getAccountActivitiesRequest($account_id, $user_id, $user_secret, $start_date = SENTINEL_VALUE, $end_date = SENTINEL_VALUE, $type = SENTINEL_VALUE, string $contentType = self::contentTypes['getAccountActivities'][0])
+    public function getAccountActivitiesRequest($account_id, $user_id, $user_secret, $start_date = SENTINEL_VALUE, $end_date = SENTINEL_VALUE, $offset = SENTINEL_VALUE, $limit = SENTINEL_VALUE, $type = SENTINEL_VALUE, string $contentType = self::contentTypes['getAccountActivities'][0])
     {
 
         // Check if $account_id is a string
@@ -474,7 +490,13 @@ class AccountInformationApi extends \SnapTrade\CustomApi
                 'Missing the required parameter user_secret when calling getAccountActivities'
             );
         }
-        // Check if $type is a string
+        if ($offset !== SENTINEL_VALUE && $offset < 0) {
+            throw new \InvalidArgumentException('invalid value for "offset" when calling AccountInformationApi.getAccountActivities, must be bigger than or equal to 0.');
+        }
+                if ($limit !== SENTINEL_VALUE && $limit < 1) {
+            throw new \InvalidArgumentException('invalid value for "limit" when calling AccountInformationApi.getAccountActivities, must be bigger than or equal to 1.');
+        }
+                // Check if $type is a string
         if ($type !== SENTINEL_VALUE && !is_string($type)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($type, true), gettype($type)));
         }
@@ -504,6 +526,28 @@ class AccountInformationApi extends \SnapTrade\CustomApi
                 $end_date,
                 'endDate', // param base name
                 'string', // openApiType
+                'form', // style
+                true, // explode
+                false // required
+            ) ?? []);
+        }
+        if ($offset !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $offset,
+                'offset', // param base name
+                'integer', // openApiType
+                'form', // style
+                true, // explode
+                false // required
+            ) ?? []);
+        }
+        if ($limit !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $limit,
+                'limit', // param base name
+                'integer', // openApiType
                 'form', // style
                 true, // explode
                 false // required

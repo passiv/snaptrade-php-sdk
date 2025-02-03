@@ -1,6 +1,6 @@
 <?php
 /**
- * UniversalActivitySymbolTest
+ * AccountUniversalActivityOptionSymbolTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * UniversalActivitySymbolTest Class Doc Comment
+ * AccountUniversalActivityOptionSymbolTest Class Doc Comment
  *
  * @category    Class
- * @description The security for the transaction. The field is &#x60;null&#x60; if the transaction is not related to a security (like a deposit, withdrawal, fee, etc). SnapTrade does a best effort to map the brokerage&#39;s symbol. In cases where the brokerage symbol is not recognized, the field will be set to &#x60;null&#x60;.
+ * @description The option security for the transaction. The field is &#x60;null&#x60; if the transaction is not related to an option security (like a deposit, withdrawal, fee, etc). SnapTrade does a best effort to map the brokerage&#39;s option symbol. In cases where the brokerage option symbol is not recognized, the field will be set to &#x60;null&#x60;.
  * @package     SnapTrade
  */
-class UniversalActivitySymbolTest extends TestCase
+class AccountUniversalActivityOptionSymbolTest extends TestCase
 {
 
     /**
@@ -64,9 +64,9 @@ class UniversalActivitySymbolTest extends TestCase
     }
 
     /**
-     * Test "UniversalActivitySymbol"
+     * Test "AccountUniversalActivityOptionSymbol"
      */
-    public function testUniversalActivitySymbol()
+    public function testAccountUniversalActivityOptionSymbol()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
@@ -82,72 +82,54 @@ class UniversalActivitySymbolTest extends TestCase
     }
 
     /**
-     * Test attribute "symbol"
+     * Test attribute "ticker"
      */
-    public function testPropertySymbol()
+    public function testPropertyTicker()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "raw_symbol"
+     * Test attribute "option_type"
      */
-    public function testPropertyRawSymbol()
+    public function testPropertyOptionType()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "description"
+     * Test attribute "strike_price"
      */
-    public function testPropertyDescription()
+    public function testPropertyStrikePrice()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "currency"
+     * Test attribute "expiration_date"
      */
-    public function testPropertyCurrency()
+    public function testPropertyExpirationDate()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "exchange"
+     * Test attribute "is_mini_option"
      */
-    public function testPropertyExchange()
+    public function testPropertyIsMiniOption()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "type"
+     * Test attribute "underlying_symbol"
      */
-    public function testPropertyType()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "figi_code"
-     */
-    public function testPropertyFigiCode()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "figi_instrument"
-     */
-    public function testPropertyFigiInstrument()
+    public function testPropertyUnderlyingSymbol()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

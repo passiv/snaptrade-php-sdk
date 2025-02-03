@@ -1,6 +1,6 @@
 <?php
 /**
- * UniversalActivityCurrencyTest
+ * PaginatedUniversalActivityTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * UniversalActivityCurrencyTest Class Doc Comment
+ * PaginatedUniversalActivityTest Class Doc Comment
  *
  * @category    Class
- * @description The currency in which the transaction &#x60;price&#x60; and &#x60;amount&#x60; is denominated.
+ * @description A paginated list of UniversalActivity objects.
  * @package     SnapTrade
  */
-class UniversalActivityCurrencyTest extends TestCase
+class PaginatedUniversalActivityTest extends TestCase
 {
 
     /**
@@ -64,36 +64,27 @@ class UniversalActivityCurrencyTest extends TestCase
     }
 
     /**
-     * Test "UniversalActivityCurrency"
+     * Test "PaginatedUniversalActivity"
      */
-    public function testUniversalActivityCurrency()
+    public function testPaginatedUniversalActivity()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "id"
+     * Test attribute "data"
      */
-    public function testPropertyId()
+    public function testPropertyData()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "code"
+     * Test attribute "pagination"
      */
-    public function testPropertyCode()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "name"
-     */
-    public function testPropertyName()
+    public function testPropertyPagination()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

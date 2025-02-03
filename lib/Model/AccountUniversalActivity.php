@@ -1,6 +1,6 @@
 <?php
 /**
- * UniversalActivity
+ * AccountUniversalActivity
  *
  * PHP version 7.4
  *
@@ -27,14 +27,14 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * UniversalActivity Class Doc Comment
+ * AccountUniversalActivity Class Doc Comment
  *
  * @category Class
  * @description A transaction or activity from an institution
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializable
+class AccountUniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -43,7 +43,7 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
       *
       * @var string
       */
-    protected static $openAPIModelName = 'UniversalActivity';
+    protected static $openAPIModelName = 'AccountUniversalActivity';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -52,7 +52,6 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
       */
     protected static $openAPITypes = [
         'id' => 'string',
-        'account' => '\SnapTrade\Model\AccountSimple',
         'symbol' => '\SnapTrade\Model\AccountUniversalActivitySymbol',
         'option_symbol' => '\SnapTrade\Model\AccountUniversalActivityOptionSymbol',
         'price' => 'float',
@@ -79,7 +78,6 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
       */
     protected static $openAPIFormats = [
         'id' => null,
-        'account' => null,
         'symbol' => null,
         'option_symbol' => null,
         'price' => null,
@@ -104,7 +102,6 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
       */
     protected static array $openAPINullables = [
         'id' => false,
-		'account' => false,
 		'symbol' => true,
 		'option_symbol' => true,
 		'price' => false,
@@ -209,7 +206,6 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
      */
     protected static $attributeMap = [
         'id' => 'id',
-        'account' => 'account',
         'symbol' => 'symbol',
         'option_symbol' => 'option_symbol',
         'price' => 'price',
@@ -234,7 +230,6 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
      */
     protected static $setters = [
         'id' => 'setId',
-        'account' => 'setAccount',
         'symbol' => 'setSymbol',
         'option_symbol' => 'setOptionSymbol',
         'price' => 'setPrice',
@@ -259,7 +254,6 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
      */
     protected static $getters = [
         'id' => 'getId',
-        'account' => 'getAccount',
         'symbol' => 'getSymbol',
         'option_symbol' => 'getOptionSymbol',
         'price' => 'getPrice',
@@ -335,7 +329,6 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
     public function __construct(array $data = null)
     {
         $this->setIfExists('id', $data ?? [], null);
-        $this->setIfExists('account', $data ?? [], null);
         $this->setIfExists('symbol', $data ?? [], null);
         $this->setIfExists('option_symbol', $data ?? [], null);
         $this->setIfExists('price', $data ?? [], null);
@@ -420,35 +413,6 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
         }
 
         $this->container['id'] = $id;
-
-        return $this;
-    }
-
-    /**
-     * Gets account
-     *
-     * @return \SnapTrade\Model\AccountSimple|null
-     */
-    public function getAccount()
-    {
-        return $this->container['account'];
-    }
-
-    /**
-     * Sets account
-     *
-     * @param \SnapTrade\Model\AccountSimple|null $account account
-     *
-     * @return self
-     */
-    public function setAccount($account)
-    {
-
-        if (is_null($account)) {
-            throw new \InvalidArgumentException('non-nullable account cannot be null');
-        }
-
-        $this->container['account'] = $account;
 
         return $this;
     }

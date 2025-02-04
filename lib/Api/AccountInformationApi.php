@@ -184,7 +184,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \SnapTrade\Model\PaginatedUniversalActivity[]
+     * @return \SnapTrade\Model\PaginatedUniversalActivity
      */
     public function getAccountActivities(
         $account_id,
@@ -223,7 +223,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \SnapTrade\Model\PaginatedUniversalActivity[], HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SnapTrade\Model\PaginatedUniversalActivity, HTTP status code, HTTP response headers (array of strings)
      */
     public function getAccountActivitiesWithHttpInfo($account_id, $user_id, $user_secret, $start_date = null, $end_date = null, $offset = null, $limit = null, $type = null, string $contentType = self::contentTypes['getAccountActivities'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
@@ -288,23 +288,23 @@ class AccountInformationApi extends \SnapTrade\CustomApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\SnapTrade\Model\PaginatedUniversalActivity[]' === '\SplFileObject') {
+                    if ('\SnapTrade\Model\PaginatedUniversalActivity' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\SnapTrade\Model\PaginatedUniversalActivity[]' !== 'string') {
+                        if ('\SnapTrade\Model\PaginatedUniversalActivity' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\PaginatedUniversalActivity[]', []),
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\PaginatedUniversalActivity', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = '\SnapTrade\Model\PaginatedUniversalActivity[]';
+            $returnType = '\SnapTrade\Model\PaginatedUniversalActivity';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -325,7 +325,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\SnapTrade\Model\PaginatedUniversalActivity[]',
+                        '\SnapTrade\Model\PaginatedUniversalActivity',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -399,7 +399,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      */
     public function getAccountActivitiesAsyncWithHttpInfo($account_id, $user_id, $user_secret, $start_date = null, $end_date = null, $offset = null, $limit = null, $type = null, string $contentType = self::contentTypes['getAccountActivities'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $returnType = '\SnapTrade\Model\PaginatedUniversalActivity[]';
+        $returnType = '\SnapTrade\Model\PaginatedUniversalActivity';
         ["request" => $request, "serializedBody" => $serializedBody] = $this->getAccountActivitiesRequest($account_id, $user_id, $user_secret, $start_date, $end_date, $offset, $limit, $type, $contentType);
 
         // Customization hook

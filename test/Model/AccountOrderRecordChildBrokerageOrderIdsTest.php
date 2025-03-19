@@ -1,6 +1,6 @@
 <?php
 /**
- * ManualTradeFormWithOptionsTakeProfitTest
+ * AccountOrderRecordChildBrokerageOrderIdsTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * ManualTradeFormWithOptionsTakeProfitTest Class Doc Comment
+ * AccountOrderRecordChildBrokerageOrderIdsTest Class Doc Comment
  *
  * @category    Class
- * @description ManualTradeFormWithOptionsTakeProfit
+ * @description AccountOrderRecordChildBrokerageOrderIds
  * @package     SnapTrade
  */
-class ManualTradeFormWithOptionsTakeProfitTest extends TestCase
+class AccountOrderRecordChildBrokerageOrderIdsTest extends TestCase
 {
 
     /**
@@ -64,18 +64,27 @@ class ManualTradeFormWithOptionsTakeProfitTest extends TestCase
     }
 
     /**
-     * Test "ManualTradeFormWithOptionsTakeProfit"
+     * Test "AccountOrderRecordChildBrokerageOrderIds"
      */
-    public function testManualTradeFormWithOptionsTakeProfit()
+    public function testAccountOrderRecordChildBrokerageOrderIds()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "limit_price"
+     * Test attribute "take_profit_order_id"
      */
-    public function testPropertyLimitPrice()
+    public function testPropertyTakeProfitOrderId()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "stop_loss_order_id"
+     */
+    public function testPropertyStopLossOrderId()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

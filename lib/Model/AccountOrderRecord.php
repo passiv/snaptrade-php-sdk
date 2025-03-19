@@ -69,7 +69,8 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
         'time_updated' => '\DateTime',
         'time_executed' => '\DateTime',
         'expiry_date' => '\DateTime',
-        'symbol' => 'string'
+        'symbol' => 'string',
+        'child_brokerage_order_ids' => '\SnapTrade\Model\AccountOrderRecordChildBrokerageOrderIds'
     ];
 
     /**
@@ -98,7 +99,8 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
         'time_updated' => 'date-time',
         'time_executed' => 'date-time',
         'expiry_date' => 'date-time',
-        'symbol' => 'uuid'
+        'symbol' => 'uuid',
+        'child_brokerage_order_ids' => null
     ];
 
     /**
@@ -125,7 +127,8 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
 		'time_updated' => true,
 		'time_executed' => true,
 		'expiry_date' => true,
-		'symbol' => false
+		'symbol' => false,
+		'child_brokerage_order_ids' => true
     ];
 
     /**
@@ -232,7 +235,8 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
         'time_updated' => 'time_updated',
         'time_executed' => 'time_executed',
         'expiry_date' => 'expiry_date',
-        'symbol' => 'symbol'
+        'symbol' => 'symbol',
+        'child_brokerage_order_ids' => 'child_brokerage_order_ids'
     ];
 
     /**
@@ -259,7 +263,8 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
         'time_updated' => 'setTimeUpdated',
         'time_executed' => 'setTimeExecuted',
         'expiry_date' => 'setExpiryDate',
-        'symbol' => 'setSymbol'
+        'symbol' => 'setSymbol',
+        'child_brokerage_order_ids' => 'setChildBrokerageOrderIds'
     ];
 
     /**
@@ -286,7 +291,8 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
         'time_updated' => 'getTimeUpdated',
         'time_executed' => 'getTimeExecuted',
         'expiry_date' => 'getExpiryDate',
-        'symbol' => 'getSymbol'
+        'symbol' => 'getSymbol',
+        'child_brokerage_order_ids' => 'getChildBrokerageOrderIds'
     ];
 
     /**
@@ -365,6 +371,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
         $this->setIfExists('time_executed', $data ?? [], null);
         $this->setIfExists('expiry_date', $data ?? [], null);
         $this->setIfExists('symbol', $data ?? [], null);
+        $this->setIfExists('child_brokerage_order_ids', $data ?? [], null);
     }
 
     /**
@@ -1035,6 +1042,42 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
         }
 
         $this->container['symbol'] = $symbol;
+
+        return $this;
+    }
+
+    /**
+     * Gets child_brokerage_order_ids
+     *
+     * @return \SnapTrade\Model\AccountOrderRecordChildBrokerageOrderIds|null
+     */
+    public function getChildBrokerageOrderIds()
+    {
+        return $this->container['child_brokerage_order_ids'];
+    }
+
+    /**
+     * Sets child_brokerage_order_ids
+     *
+     * @param \SnapTrade\Model\AccountOrderRecordChildBrokerageOrderIds|null $child_brokerage_order_ids child_brokerage_order_ids
+     *
+     * @return self
+     */
+    public function setChildBrokerageOrderIds($child_brokerage_order_ids)
+    {
+
+        if (is_null($child_brokerage_order_ids)) {
+            array_push($this->openAPINullablesSetToNull, 'child_brokerage_order_ids');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('child_brokerage_order_ids', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['child_brokerage_order_ids'] = $child_brokerage_order_ids;
 
         return $this;
     }

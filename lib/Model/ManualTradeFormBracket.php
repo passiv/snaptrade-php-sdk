@@ -1,6 +1,6 @@
 <?php
 /**
- * ManualTradeFormWithOptions
+ * ManualTradeFormBracket
  *
  * PHP version 7.4
  *
@@ -27,14 +27,14 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * ManualTradeFormWithOptions Class Doc Comment
+ * ManualTradeFormBracket Class Doc Comment
  *
  * @category Class
  * @description Inputs for placing an order with the brokerage.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class ManualTradeFormWithOptions implements ModelInterface, ArrayAccess, \JsonSerializable
+class ManualTradeFormBracket implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -43,7 +43,7 @@ class ManualTradeFormWithOptions implements ModelInterface, ArrayAccess, \JsonSe
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ManualTradeFormWithOptions';
+    protected static $openAPIModelName = 'ManualTradeFormBracket';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -53,14 +53,14 @@ class ManualTradeFormWithOptions implements ModelInterface, ArrayAccess, \JsonSe
     protected static $openAPITypes = [
         'account_id' => 'string',
         'action' => '\SnapTrade\Model\ActionStrictWithOptions',
-        'universal_symbol_id' => 'string',
         'symbol' => 'string',
         'order_type' => '\SnapTrade\Model\OrderTypeStrict',
         'time_in_force' => '\SnapTrade\Model\TimeInForceStrict',
         'price' => 'float',
         'stop' => 'float',
         'units' => 'float',
-        'notional_value' => '\SnapTrade\Model\ManualTradeFormNotionalValue'
+        'stop_loss' => '\SnapTrade\Model\StopLoss',
+        'take_profit' => '\SnapTrade\Model\TakeProfit'
     ];
 
     /**
@@ -73,14 +73,14 @@ class ManualTradeFormWithOptions implements ModelInterface, ArrayAccess, \JsonSe
     protected static $openAPIFormats = [
         'account_id' => 'uuid',
         'action' => null,
-        'universal_symbol_id' => null,
         'symbol' => null,
         'order_type' => null,
         'time_in_force' => null,
         'price' => null,
         'stop' => null,
         'units' => null,
-        'notional_value' => null
+        'stop_loss' => null,
+        'take_profit' => null
     ];
 
     /**
@@ -91,14 +91,14 @@ class ManualTradeFormWithOptions implements ModelInterface, ArrayAccess, \JsonSe
     protected static array $openAPINullables = [
         'account_id' => false,
 		'action' => false,
-		'universal_symbol_id' => true,
-		'symbol' => true,
+		'symbol' => false,
 		'order_type' => false,
 		'time_in_force' => false,
 		'price' => true,
 		'stop' => true,
-		'units' => true,
-		'notional_value' => true
+		'units' => false,
+		'stop_loss' => false,
+		'take_profit' => false
     ];
 
     /**
@@ -189,14 +189,14 @@ class ManualTradeFormWithOptions implements ModelInterface, ArrayAccess, \JsonSe
     protected static $attributeMap = [
         'account_id' => 'account_id',
         'action' => 'action',
-        'universal_symbol_id' => 'universal_symbol_id',
         'symbol' => 'symbol',
         'order_type' => 'order_type',
         'time_in_force' => 'time_in_force',
         'price' => 'price',
         'stop' => 'stop',
         'units' => 'units',
-        'notional_value' => 'notional_value'
+        'stop_loss' => 'stop_loss',
+        'take_profit' => 'take_profit'
     ];
 
     /**
@@ -207,14 +207,14 @@ class ManualTradeFormWithOptions implements ModelInterface, ArrayAccess, \JsonSe
     protected static $setters = [
         'account_id' => 'setAccountId',
         'action' => 'setAction',
-        'universal_symbol_id' => 'setUniversalSymbolId',
         'symbol' => 'setSymbol',
         'order_type' => 'setOrderType',
         'time_in_force' => 'setTimeInForce',
         'price' => 'setPrice',
         'stop' => 'setStop',
         'units' => 'setUnits',
-        'notional_value' => 'setNotionalValue'
+        'stop_loss' => 'setStopLoss',
+        'take_profit' => 'setTakeProfit'
     ];
 
     /**
@@ -225,14 +225,14 @@ class ManualTradeFormWithOptions implements ModelInterface, ArrayAccess, \JsonSe
     protected static $getters = [
         'account_id' => 'getAccountId',
         'action' => 'getAction',
-        'universal_symbol_id' => 'getUniversalSymbolId',
         'symbol' => 'getSymbol',
         'order_type' => 'getOrderType',
         'time_in_force' => 'getTimeInForce',
         'price' => 'getPrice',
         'stop' => 'getStop',
         'units' => 'getUnits',
-        'notional_value' => 'getNotionalValue'
+        'stop_loss' => 'getStopLoss',
+        'take_profit' => 'getTakeProfit'
     ];
 
     /**
@@ -294,14 +294,14 @@ class ManualTradeFormWithOptions implements ModelInterface, ArrayAccess, \JsonSe
     {
         $this->setIfExists('account_id', $data ?? [], null);
         $this->setIfExists('action', $data ?? [], null);
-        $this->setIfExists('universal_symbol_id', $data ?? [], null);
         $this->setIfExists('symbol', $data ?? [], null);
         $this->setIfExists('order_type', $data ?? [], null);
         $this->setIfExists('time_in_force', $data ?? [], null);
         $this->setIfExists('price', $data ?? [], null);
         $this->setIfExists('stop', $data ?? [], null);
         $this->setIfExists('units', $data ?? [], null);
-        $this->setIfExists('notional_value', $data ?? [], null);
+        $this->setIfExists('stop_loss', $data ?? [], null);
+        $this->setIfExists('take_profit', $data ?? [], null);
     }
 
     /**
@@ -337,11 +337,20 @@ class ManualTradeFormWithOptions implements ModelInterface, ArrayAccess, \JsonSe
         if ($this->container['action'] === null) {
             $invalidProperties[] = "'action' can't be null";
         }
+        if ($this->container['symbol'] === null) {
+            $invalidProperties[] = "'symbol' can't be null";
+        }
         if ($this->container['order_type'] === null) {
             $invalidProperties[] = "'order_type' can't be null";
         }
         if ($this->container['time_in_force'] === null) {
             $invalidProperties[] = "'time_in_force' can't be null";
+        }
+        if ($this->container['stop_loss'] === null) {
+            $invalidProperties[] = "'stop_loss' can't be null";
+        }
+        if ($this->container['take_profit'] === null) {
+            $invalidProperties[] = "'take_profit' can't be null";
         }
         return $invalidProperties;
     }
@@ -417,45 +426,9 @@ class ManualTradeFormWithOptions implements ModelInterface, ArrayAccess, \JsonSe
     }
 
     /**
-     * Gets universal_symbol_id
-     *
-     * @return string|null
-     */
-    public function getUniversalSymbolId()
-    {
-        return $this->container['universal_symbol_id'];
-    }
-
-    /**
-     * Sets universal_symbol_id
-     *
-     * @param string|null $universal_symbol_id The universal symbol ID of the security to trade. Must be 'null' if `symbol` is provided, otherwise must be provided.
-     *
-     * @return self
-     */
-    public function setUniversalSymbolId($universal_symbol_id)
-    {
-
-        if (is_null($universal_symbol_id)) {
-            array_push($this->openAPINullablesSetToNull, 'universal_symbol_id');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('universal_symbol_id', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['universal_symbol_id'] = $universal_symbol_id;
-
-        return $this;
-    }
-
-    /**
      * Gets symbol
      *
-     * @return string|null
+     * @return string
      */
     public function getSymbol()
     {
@@ -465,7 +438,7 @@ class ManualTradeFormWithOptions implements ModelInterface, ArrayAccess, \JsonSe
     /**
      * Sets symbol
      *
-     * @param string|null $symbol The security's trading ticker symbol. This currently supports stock symbols and Options symbols in the 21 character OCC format. For example \"AAPL  131124C00240000\" represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format). If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
+     * @param string $symbol The security's trading ticker symbol.
      *
      * @return self
      */
@@ -473,14 +446,7 @@ class ManualTradeFormWithOptions implements ModelInterface, ArrayAccess, \JsonSe
     {
 
         if (is_null($symbol)) {
-            array_push($this->openAPINullablesSetToNull, 'symbol');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('symbol', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable symbol cannot be null');
         }
 
         $this->container['symbol'] = $symbol;
@@ -631,7 +597,7 @@ class ManualTradeFormWithOptions implements ModelInterface, ArrayAccess, \JsonSe
     /**
      * Sets units
      *
-     * @param float|null $units For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract = 100 shares).
+     * @param float|null $units Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
      *
      * @return self
      */
@@ -639,14 +605,7 @@ class ManualTradeFormWithOptions implements ModelInterface, ArrayAccess, \JsonSe
     {
 
         if (is_null($units)) {
-            array_push($this->openAPINullablesSetToNull, 'units');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('units', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable units cannot be null');
         }
 
         $this->container['units'] = $units;
@@ -655,37 +614,59 @@ class ManualTradeFormWithOptions implements ModelInterface, ArrayAccess, \JsonSe
     }
 
     /**
-     * Gets notional_value
+     * Gets stop_loss
      *
-     * @return \SnapTrade\Model\ManualTradeFormNotionalValue|null
+     * @return \SnapTrade\Model\StopLoss
      */
-    public function getNotionalValue()
+    public function getStopLoss()
     {
-        return $this->container['notional_value'];
+        return $this->container['stop_loss'];
     }
 
     /**
-     * Sets notional_value
+     * Sets stop_loss
      *
-     * @param \SnapTrade\Model\ManualTradeFormNotionalValue|null $notional_value notional_value
+     * @param \SnapTrade\Model\StopLoss $stop_loss stop_loss
      *
      * @return self
      */
-    public function setNotionalValue($notional_value)
+    public function setStopLoss($stop_loss)
     {
 
-        if (is_null($notional_value)) {
-            array_push($this->openAPINullablesSetToNull, 'notional_value');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('notional_value', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if (is_null($stop_loss)) {
+            throw new \InvalidArgumentException('non-nullable stop_loss cannot be null');
         }
 
-        $this->container['notional_value'] = $notional_value;
+        $this->container['stop_loss'] = $stop_loss;
+
+        return $this;
+    }
+
+    /**
+     * Gets take_profit
+     *
+     * @return \SnapTrade\Model\TakeProfit
+     */
+    public function getTakeProfit()
+    {
+        return $this->container['take_profit'];
+    }
+
+    /**
+     * Sets take_profit
+     *
+     * @param \SnapTrade\Model\TakeProfit $take_profit take_profit
+     *
+     * @return self
+     */
+    public function setTakeProfit($take_profit)
+    {
+
+        if (is_null($take_profit)) {
+            throw new \InvalidArgumentException('non-nullable take_profit cannot be null');
+        }
+
+        $this->container['take_profit'] = $take_profit;
 
         return $this;
     }

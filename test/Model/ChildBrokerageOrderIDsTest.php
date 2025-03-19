@@ -1,6 +1,6 @@
 <?php
 /**
- * ManualTradeFormWithOptionsStopLossTest
+ * ChildBrokerageOrderIDsTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * ManualTradeFormWithOptionsStopLossTest Class Doc Comment
+ * ChildBrokerageOrderIDsTest Class Doc Comment
  *
  * @category    Class
- * @description ManualTradeFormWithOptionsStopLoss
+ * @description ChildBrokerageOrderIDs
  * @package     SnapTrade
  */
-class ManualTradeFormWithOptionsStopLossTest extends TestCase
+class ChildBrokerageOrderIDsTest extends TestCase
 {
 
     /**
@@ -64,27 +64,27 @@ class ManualTradeFormWithOptionsStopLossTest extends TestCase
     }
 
     /**
-     * Test "ManualTradeFormWithOptionsStopLoss"
+     * Test "ChildBrokerageOrderIDs"
      */
-    public function testManualTradeFormWithOptionsStopLoss()
+    public function testChildBrokerageOrderIDs()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "stop_price"
+     * Test attribute "take_profit_order_id"
      */
-    public function testPropertyStopPrice()
+    public function testPropertyTakeProfitOrderId()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "limit_price"
+     * Test attribute "stop_loss_order_id"
      */
-    public function testPropertyLimitPrice()
+    public function testPropertyStopLossOrderId()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

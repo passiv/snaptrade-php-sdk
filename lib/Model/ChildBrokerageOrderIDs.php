@@ -1,6 +1,6 @@
 <?php
 /**
- * ManualTradeFormWithOptionsTakeProfit
+ * ChildBrokerageOrderIDs
  *
  * PHP version 7.4
  *
@@ -27,13 +27,13 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * ManualTradeFormWithOptionsTakeProfit Class Doc Comment
+ * ChildBrokerageOrderIDs Class Doc Comment
  *
  * @category Class
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class ManualTradeFormWithOptionsTakeProfit implements ModelInterface, ArrayAccess, \JsonSerializable
+class ChildBrokerageOrderIDs implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -42,7 +42,7 @@ class ManualTradeFormWithOptionsTakeProfit implements ModelInterface, ArrayAcces
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ManualTradeFormWithOptions_take_profit';
+    protected static $openAPIModelName = 'ChildBrokerageOrderIDs';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -50,7 +50,8 @@ class ManualTradeFormWithOptionsTakeProfit implements ModelInterface, ArrayAcces
       * @var string[]
       */
     protected static $openAPITypes = [
-        'limit_price' => 'string'
+        'take_profit_order_id' => 'string',
+        'stop_loss_order_id' => 'string'
     ];
 
     /**
@@ -61,7 +62,8 @@ class ManualTradeFormWithOptionsTakeProfit implements ModelInterface, ArrayAcces
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'limit_price' => null
+        'take_profit_order_id' => null,
+        'stop_loss_order_id' => null
     ];
 
     /**
@@ -70,7 +72,8 @@ class ManualTradeFormWithOptionsTakeProfit implements ModelInterface, ArrayAcces
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'limit_price' => false
+        'take_profit_order_id' => false,
+		'stop_loss_order_id' => false
     ];
 
     /**
@@ -159,7 +162,8 @@ class ManualTradeFormWithOptionsTakeProfit implements ModelInterface, ArrayAcces
      * @var string[]
      */
     protected static $attributeMap = [
-        'limit_price' => 'limit_price'
+        'take_profit_order_id' => 'take_profit_order_id',
+        'stop_loss_order_id' => 'stop_loss_order_id'
     ];
 
     /**
@@ -168,7 +172,8 @@ class ManualTradeFormWithOptionsTakeProfit implements ModelInterface, ArrayAcces
      * @var string[]
      */
     protected static $setters = [
-        'limit_price' => 'setLimitPrice'
+        'take_profit_order_id' => 'setTakeProfitOrderId',
+        'stop_loss_order_id' => 'setStopLossOrderId'
     ];
 
     /**
@@ -177,7 +182,8 @@ class ManualTradeFormWithOptionsTakeProfit implements ModelInterface, ArrayAcces
      * @var string[]
      */
     protected static $getters = [
-        'limit_price' => 'getLimitPrice'
+        'take_profit_order_id' => 'getTakeProfitOrderId',
+        'stop_loss_order_id' => 'getStopLossOrderId'
     ];
 
     /**
@@ -237,7 +243,8 @@ class ManualTradeFormWithOptionsTakeProfit implements ModelInterface, ArrayAcces
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('limit_price', $data ?? [], null);
+        $this->setIfExists('take_profit_order_id', $data ?? [], null);
+        $this->setIfExists('stop_loss_order_id', $data ?? [], null);
     }
 
     /**
@@ -283,30 +290,59 @@ class ManualTradeFormWithOptionsTakeProfit implements ModelInterface, ArrayAcces
 
 
     /**
-     * Gets limit_price
+     * Gets take_profit_order_id
      *
      * @return string|null
      */
-    public function getLimitPrice()
+    public function getTakeProfitOrderId()
     {
-        return $this->container['limit_price'];
+        return $this->container['take_profit_order_id'];
     }
 
     /**
-     * Sets limit_price
+     * Sets take_profit_order_id
      *
-     * @param string|null $limit_price limit_price
+     * @param string|null $take_profit_order_id The brokerage order ID for the take profit leg of the bracket order
      *
      * @return self
      */
-    public function setLimitPrice($limit_price)
+    public function setTakeProfitOrderId($take_profit_order_id)
     {
 
-        if (is_null($limit_price)) {
-            throw new \InvalidArgumentException('non-nullable limit_price cannot be null');
+        if (is_null($take_profit_order_id)) {
+            throw new \InvalidArgumentException('non-nullable take_profit_order_id cannot be null');
         }
 
-        $this->container['limit_price'] = $limit_price;
+        $this->container['take_profit_order_id'] = $take_profit_order_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets stop_loss_order_id
+     *
+     * @return string|null
+     */
+    public function getStopLossOrderId()
+    {
+        return $this->container['stop_loss_order_id'];
+    }
+
+    /**
+     * Sets stop_loss_order_id
+     *
+     * @param string|null $stop_loss_order_id The brokerage order ID for the stop loss leg of the bracket order
+     *
+     * @return self
+     */
+    public function setStopLossOrderId($stop_loss_order_id)
+    {
+
+        if (is_null($stop_loss_order_id)) {
+            throw new \InvalidArgumentException('non-nullable stop_loss_order_id cannot be null');
+        }
+
+        $this->container['stop_loss_order_id'] = $stop_loss_order_id;
 
         return $this;
     }

@@ -1,6 +1,6 @@
 <?php
 /**
- * ManualTradeFormWithOptionsStopLoss
+ * AccountOrderRecordChildBrokerageOrderIds
  *
  * PHP version 7.4
  *
@@ -27,13 +27,13 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * ManualTradeFormWithOptionsStopLoss Class Doc Comment
+ * AccountOrderRecordChildBrokerageOrderIds Class Doc Comment
  *
  * @category Class
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class ManualTradeFormWithOptionsStopLoss implements ModelInterface, ArrayAccess, \JsonSerializable
+class AccountOrderRecordChildBrokerageOrderIds implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -42,7 +42,7 @@ class ManualTradeFormWithOptionsStopLoss implements ModelInterface, ArrayAccess,
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ManualTradeFormWithOptions_stop_loss';
+    protected static $openAPIModelName = 'AccountOrderRecord_child_brokerage_order_ids';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -50,8 +50,8 @@ class ManualTradeFormWithOptionsStopLoss implements ModelInterface, ArrayAccess,
       * @var string[]
       */
     protected static $openAPITypes = [
-        'stop_price' => 'string',
-        'limit_price' => 'string'
+        'take_profit_order_id' => 'string',
+        'stop_loss_order_id' => 'string'
     ];
 
     /**
@@ -62,8 +62,8 @@ class ManualTradeFormWithOptionsStopLoss implements ModelInterface, ArrayAccess,
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'stop_price' => null,
-        'limit_price' => null
+        'take_profit_order_id' => null,
+        'stop_loss_order_id' => null
     ];
 
     /**
@@ -72,8 +72,8 @@ class ManualTradeFormWithOptionsStopLoss implements ModelInterface, ArrayAccess,
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'stop_price' => false,
-		'limit_price' => true
+        'take_profit_order_id' => false,
+		'stop_loss_order_id' => false
     ];
 
     /**
@@ -162,8 +162,8 @@ class ManualTradeFormWithOptionsStopLoss implements ModelInterface, ArrayAccess,
      * @var string[]
      */
     protected static $attributeMap = [
-        'stop_price' => 'stop_price',
-        'limit_price' => 'limit_price'
+        'take_profit_order_id' => 'take_profit_order_id',
+        'stop_loss_order_id' => 'stop_loss_order_id'
     ];
 
     /**
@@ -172,8 +172,8 @@ class ManualTradeFormWithOptionsStopLoss implements ModelInterface, ArrayAccess,
      * @var string[]
      */
     protected static $setters = [
-        'stop_price' => 'setStopPrice',
-        'limit_price' => 'setLimitPrice'
+        'take_profit_order_id' => 'setTakeProfitOrderId',
+        'stop_loss_order_id' => 'setStopLossOrderId'
     ];
 
     /**
@@ -182,8 +182,8 @@ class ManualTradeFormWithOptionsStopLoss implements ModelInterface, ArrayAccess,
      * @var string[]
      */
     protected static $getters = [
-        'stop_price' => 'getStopPrice',
-        'limit_price' => 'getLimitPrice'
+        'take_profit_order_id' => 'getTakeProfitOrderId',
+        'stop_loss_order_id' => 'getStopLossOrderId'
     ];
 
     /**
@@ -243,8 +243,8 @@ class ManualTradeFormWithOptionsStopLoss implements ModelInterface, ArrayAccess,
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('stop_price', $data ?? [], null);
-        $this->setIfExists('limit_price', $data ?? [], null);
+        $this->setIfExists('take_profit_order_id', $data ?? [], null);
+        $this->setIfExists('stop_loss_order_id', $data ?? [], null);
     }
 
     /**
@@ -290,66 +290,59 @@ class ManualTradeFormWithOptionsStopLoss implements ModelInterface, ArrayAccess,
 
 
     /**
-     * Gets stop_price
+     * Gets take_profit_order_id
      *
      * @return string|null
      */
-    public function getStopPrice()
+    public function getTakeProfitOrderId()
     {
-        return $this->container['stop_price'];
+        return $this->container['take_profit_order_id'];
     }
 
     /**
-     * Sets stop_price
+     * Sets take_profit_order_id
      *
-     * @param string|null $stop_price stop_price
+     * @param string|null $take_profit_order_id The brokerage order ID for the take profit leg of the bracket order
      *
      * @return self
      */
-    public function setStopPrice($stop_price)
+    public function setTakeProfitOrderId($take_profit_order_id)
     {
 
-        if (is_null($stop_price)) {
-            throw new \InvalidArgumentException('non-nullable stop_price cannot be null');
+        if (is_null($take_profit_order_id)) {
+            throw new \InvalidArgumentException('non-nullable take_profit_order_id cannot be null');
         }
 
-        $this->container['stop_price'] = $stop_price;
+        $this->container['take_profit_order_id'] = $take_profit_order_id;
 
         return $this;
     }
 
     /**
-     * Gets limit_price
+     * Gets stop_loss_order_id
      *
      * @return string|null
      */
-    public function getLimitPrice()
+    public function getStopLossOrderId()
     {
-        return $this->container['limit_price'];
+        return $this->container['stop_loss_order_id'];
     }
 
     /**
-     * Sets limit_price
+     * Sets stop_loss_order_id
      *
-     * @param string|null $limit_price limit_price
+     * @param string|null $stop_loss_order_id The brokerage order ID for the stop loss leg of the bracket order
      *
      * @return self
      */
-    public function setLimitPrice($limit_price)
+    public function setStopLossOrderId($stop_loss_order_id)
     {
 
-        if (is_null($limit_price)) {
-            array_push($this->openAPINullablesSetToNull, 'limit_price');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('limit_price', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if (is_null($stop_loss_order_id)) {
+            throw new \InvalidArgumentException('non-nullable stop_loss_order_id cannot be null');
         }
 
-        $this->container['limit_price'] = $limit_price;
+        $this->container['stop_loss_order_id'] = $stop_loss_order_id;
 
         return $this;
     }

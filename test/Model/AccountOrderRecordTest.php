@@ -242,4 +242,13 @@ class AccountOrderRecordTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "child_brokerage_order_ids"
+     */
+    public function testPropertyChildBrokerageOrderIds()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * ManualTradeFormWithOptionsTest
+ * ManualTradeFormBracketTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * ManualTradeFormWithOptionsTest Class Doc Comment
+ * ManualTradeFormBracketTest Class Doc Comment
  *
  * @category    Class
  * @description Inputs for placing an order with the brokerage.
  * @package     SnapTrade
  */
-class ManualTradeFormWithOptionsTest extends TestCase
+class ManualTradeFormBracketTest extends TestCase
 {
 
     /**
@@ -64,9 +64,9 @@ class ManualTradeFormWithOptionsTest extends TestCase
     }
 
     /**
-     * Test "ManualTradeFormWithOptions"
+     * Test "ManualTradeFormBracket"
      */
-    public function testManualTradeFormWithOptions()
+    public function testManualTradeFormBracket()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
@@ -85,15 +85,6 @@ class ManualTradeFormWithOptionsTest extends TestCase
      * Test attribute "action"
      */
     public function testPropertyAction()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "universal_symbol_id"
-     */
-    public function testPropertyUniversalSymbolId()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
@@ -154,9 +145,18 @@ class ManualTradeFormWithOptionsTest extends TestCase
     }
 
     /**
-     * Test attribute "notional_value"
+     * Test attribute "stop_loss"
      */
-    public function testPropertyNotionalValue()
+    public function testPropertyStopLoss()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "take_profit"
+     */
+    public function testPropertyTakeProfit()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

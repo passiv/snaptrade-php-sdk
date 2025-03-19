@@ -95,6 +95,18 @@ class TradingApiTest extends TestCase
     }
 
     /**
+     * Test case for placeBracketOrder
+     *
+     * Place a Bracket Order.
+     *
+     */
+    public function testPlaceBracketOrder()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for placeForceOrder
      *
      * Place order.

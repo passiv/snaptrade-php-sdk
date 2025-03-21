@@ -64,9 +64,9 @@ class CryptoSpotQuote implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'bid' => null,
-        'ask' => null,
-        'mid' => null,
+        'bid' => 'decimal',
+        'ask' => 'decimal',
+        'mid' => 'decimal',
         'timestamp' => 'date-time'
     ];
 

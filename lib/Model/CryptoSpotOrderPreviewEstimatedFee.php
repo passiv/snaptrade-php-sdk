@@ -338,7 +338,7 @@ class CryptoSpotOrderPreviewEstimatedFee implements ModelInterface, ArrayAccess,
     /**
      * Sets amount
      *
-     * @param float $amount A decimal number represented as a string to avoid precision loss.
+     * @param float $amount amount
      *
      * @return self
      */

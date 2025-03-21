@@ -73,9 +73,9 @@ class TradingCryptoSpotPlaceOrderRequest implements ModelInterface, ArrayAccess,
         'side' => null,
         'type' => null,
         'time_in_force' => null,
-        'amount' => null,
-        'limit_price' => null,
-        'stop_price' => null,
+        'amount' => 'decimal',
+        'limit_price' => 'decimal',
+        'stop_price' => 'decimal',
         'post_only' => null,
         'expiration_date' => 'date-time'
     ];

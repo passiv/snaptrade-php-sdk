@@ -649,7 +649,7 @@ class TradingCryptoSpotPlaceOrderRequest implements ModelInterface, ArrayAccess,
     /**
      * Sets post_only
      *
-     * @param bool|null $post_only Required for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
+     * @param bool|null $post_only Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
      *
      * @return self
      */

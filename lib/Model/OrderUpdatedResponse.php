@@ -1,6 +1,6 @@
 <?php
 /**
- * CryptocurrencyPair
+ * OrderUpdatedResponse
  *
  * PHP version 7.4
  *
@@ -27,14 +27,13 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * CryptocurrencyPair Class Doc Comment
+ * OrderUpdatedResponse Class Doc Comment
  *
  * @category Class
- * @description A cryptocurrency symbol. This is a unique identifier for a cryptocurrency.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class CryptocurrencyPair implements ModelInterface, ArrayAccess, \JsonSerializable
+class OrderUpdatedResponse implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -43,7 +42,7 @@ class CryptocurrencyPair implements ModelInterface, ArrayAccess, \JsonSerializab
       *
       * @var string
       */
-    protected static $openAPIModelName = 'CryptocurrencyPair';
+    protected static $openAPIModelName = 'OrderUpdatedResponse';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -51,8 +50,8 @@ class CryptocurrencyPair implements ModelInterface, ArrayAccess, \JsonSerializab
       * @var string[]
       */
     protected static $openAPITypes = [
-        'base' => 'string',
-        'quote' => 'string'
+        'brokerage_order_id' => 'string',
+        'order' => '\SnapTrade\Model\AccountOrderRecord'
     ];
 
     /**
@@ -63,8 +62,8 @@ class CryptocurrencyPair implements ModelInterface, ArrayAccess, \JsonSerializab
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'base' => null,
-        'quote' => null
+        'brokerage_order_id' => null,
+        'order' => null
     ];
 
     /**
@@ -73,8 +72,8 @@ class CryptocurrencyPair implements ModelInterface, ArrayAccess, \JsonSerializab
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'base' => false,
-		'quote' => false
+        'brokerage_order_id' => false,
+		'order' => false
     ];
 
     /**
@@ -163,8 +162,8 @@ class CryptocurrencyPair implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $attributeMap = [
-        'base' => 'base',
-        'quote' => 'quote'
+        'brokerage_order_id' => 'brokerage_order_id',
+        'order' => 'order'
     ];
 
     /**
@@ -173,8 +172,8 @@ class CryptocurrencyPair implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $setters = [
-        'base' => 'setBase',
-        'quote' => 'setQuote'
+        'brokerage_order_id' => 'setBrokerageOrderId',
+        'order' => 'setOrder'
     ];
 
     /**
@@ -183,8 +182,8 @@ class CryptocurrencyPair implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $getters = [
-        'base' => 'getBase',
-        'quote' => 'getQuote'
+        'brokerage_order_id' => 'getBrokerageOrderId',
+        'order' => 'getOrder'
     ];
 
     /**
@@ -244,8 +243,8 @@ class CryptocurrencyPair implements ModelInterface, ArrayAccess, \JsonSerializab
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('base', $data ?? [], null);
-        $this->setIfExists('quote', $data ?? [], null);
+        $this->setIfExists('brokerage_order_id', $data ?? [], null);
+        $this->setIfExists('order', $data ?? [], null);
     }
 
     /**
@@ -275,11 +274,8 @@ class CryptocurrencyPair implements ModelInterface, ArrayAccess, \JsonSerializab
     {
         $invalidProperties = [];
 
-        if ($this->container['base'] === null) {
-            $invalidProperties[] = "'base' can't be null";
-        }
-        if ($this->container['quote'] === null) {
-            $invalidProperties[] = "'quote' can't be null";
+        if ($this->container['brokerage_order_id'] === null) {
+            $invalidProperties[] = "'brokerage_order_id' can't be null";
         }
         return $invalidProperties;
     }
@@ -297,59 +293,59 @@ class CryptocurrencyPair implements ModelInterface, ArrayAccess, \JsonSerializab
 
 
     /**
-     * Gets base
+     * Gets brokerage_order_id
      *
      * @return string
      */
-    public function getBase()
+    public function getBrokerageOrderId()
     {
-        return $this->container['base'];
+        return $this->container['brokerage_order_id'];
     }
 
     /**
-     * Sets base
+     * Sets brokerage_order_id
      *
-     * @param string $base The base currency of a pair (e.g., \"BTC\" in BTC/USD). Either fiat or cryptocurrency symbol, for fiat use ISO-4217 codes.
+     * @param string $brokerage_order_id Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
      *
      * @return self
      */
-    public function setBase($base)
+    public function setBrokerageOrderId($brokerage_order_id)
     {
 
-        if (is_null($base)) {
-            throw new \InvalidArgumentException('non-nullable base cannot be null');
+        if (is_null($brokerage_order_id)) {
+            throw new \InvalidArgumentException('non-nullable brokerage_order_id cannot be null');
         }
 
-        $this->container['base'] = $base;
+        $this->container['brokerage_order_id'] = $brokerage_order_id;
 
         return $this;
     }
 
     /**
-     * Gets quote
+     * Gets order
      *
-     * @return string
+     * @return \SnapTrade\Model\AccountOrderRecord|null
      */
-    public function getQuote()
+    public function getOrder()
     {
-        return $this->container['quote'];
+        return $this->container['order'];
     }
 
     /**
-     * Sets quote
+     * Sets order
      *
-     * @param string $quote The quote currency of a pair (e.g., \"USD\" in BTC/USD). Either fiat or cryptocurrency symbol, for fiat use ISO-4217 codes.
+     * @param \SnapTrade\Model\AccountOrderRecord|null $order order
      *
      * @return self
      */
-    public function setQuote($quote)
+    public function setOrder($order)
     {
 
-        if (is_null($quote)) {
-            throw new \InvalidArgumentException('non-nullable quote cannot be null');
+        if (is_null($order)) {
+            throw new \InvalidArgumentException('non-nullable order cannot be null');
         }
 
-        $this->container['quote'] = $quote;
+        $this->container['order'] = $order;
 
         return $this;
     }

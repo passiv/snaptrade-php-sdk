@@ -162,7 +162,7 @@ class CryptoSpotTradingApi extends \SnapTrade\CustomApi
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \SnapTrade\Model\AccountOrderRecord|\SnapTrade\Model\Model400FailedRequestResponse
+     * @return \SnapTrade\Model\OrderUpdatedResponse|\SnapTrade\Model\Model400FailedRequestResponse
      */
     public function cryptoSpotCancelOrder(
 
@@ -196,7 +196,7 @@ class CryptoSpotTradingApi extends \SnapTrade\CustomApi
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \SnapTrade\Model\AccountOrderRecord|\SnapTrade\Model\Model400FailedRequestResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SnapTrade\Model\OrderUpdatedResponse|\SnapTrade\Model\Model400FailedRequestResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function cryptoSpotCancelOrderWithHttpInfo($user_id, $user_secret, $account_id, $trading_crypto_spot_cancel_order_request, string $contentType = self::contentTypes['cryptoSpotCancelOrder'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
@@ -257,17 +257,17 @@ class CryptoSpotTradingApi extends \SnapTrade\CustomApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\SnapTrade\Model\AccountOrderRecord' === '\SplFileObject') {
+                    if ('\SnapTrade\Model\OrderUpdatedResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\SnapTrade\Model\AccountOrderRecord' !== 'string') {
+                        if ('\SnapTrade\Model\OrderUpdatedResponse' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\AccountOrderRecord', []),
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\OrderUpdatedResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -288,7 +288,7 @@ class CryptoSpotTradingApi extends \SnapTrade\CustomApi
                     ];
             }
 
-            $returnType = '\SnapTrade\Model\AccountOrderRecord';
+            $returnType = '\SnapTrade\Model\OrderUpdatedResponse';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -309,7 +309,7 @@ class CryptoSpotTradingApi extends \SnapTrade\CustomApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\SnapTrade\Model\AccountOrderRecord',
+                        '\SnapTrade\Model\OrderUpdatedResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -382,7 +382,7 @@ class CryptoSpotTradingApi extends \SnapTrade\CustomApi
      */
     public function cryptoSpotCancelOrderAsyncWithHttpInfo($user_id, $user_secret, $account_id, $trading_crypto_spot_cancel_order_request, string $contentType = self::contentTypes['cryptoSpotCancelOrder'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $returnType = '\SnapTrade\Model\AccountOrderRecord';
+        $returnType = '\SnapTrade\Model\OrderUpdatedResponse';
         ["request" => $request, "serializedBody" => $serializedBody] = $this->cryptoSpotCancelOrderRequest($user_id, $user_secret, $account_id, $trading_crypto_spot_cancel_order_request, $contentType);
 
         // Customization hook
@@ -622,7 +622,7 @@ class CryptoSpotTradingApi extends \SnapTrade\CustomApi
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \SnapTrade\Model\AccountOrderRecord|\SnapTrade\Model\Model400FailedRequestResponse
+     * @return \SnapTrade\Model\OrderUpdatedResponse|\SnapTrade\Model\Model400FailedRequestResponse
      */
     public function cryptoSpotPlaceOrder(
 
@@ -672,7 +672,7 @@ class CryptoSpotTradingApi extends \SnapTrade\CustomApi
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \SnapTrade\Model\AccountOrderRecord|\SnapTrade\Model\Model400FailedRequestResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SnapTrade\Model\OrderUpdatedResponse|\SnapTrade\Model\Model400FailedRequestResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function cryptoSpotPlaceOrderWithHttpInfo($user_id, $user_secret, $account_id, $trading_crypto_spot_place_order_request, string $contentType = self::contentTypes['cryptoSpotPlaceOrder'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
@@ -733,17 +733,17 @@ class CryptoSpotTradingApi extends \SnapTrade\CustomApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\SnapTrade\Model\AccountOrderRecord' === '\SplFileObject') {
+                    if ('\SnapTrade\Model\OrderUpdatedResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\SnapTrade\Model\AccountOrderRecord' !== 'string') {
+                        if ('\SnapTrade\Model\OrderUpdatedResponse' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\AccountOrderRecord', []),
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\OrderUpdatedResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -764,7 +764,7 @@ class CryptoSpotTradingApi extends \SnapTrade\CustomApi
                     ];
             }
 
-            $returnType = '\SnapTrade\Model\AccountOrderRecord';
+            $returnType = '\SnapTrade\Model\OrderUpdatedResponse';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -785,7 +785,7 @@ class CryptoSpotTradingApi extends \SnapTrade\CustomApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\SnapTrade\Model\AccountOrderRecord',
+                        '\SnapTrade\Model\OrderUpdatedResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -874,7 +874,7 @@ class CryptoSpotTradingApi extends \SnapTrade\CustomApi
      */
     public function cryptoSpotPlaceOrderAsyncWithHttpInfo($user_id, $user_secret, $account_id, $trading_crypto_spot_place_order_request, string $contentType = self::contentTypes['cryptoSpotPlaceOrder'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $returnType = '\SnapTrade\Model\AccountOrderRecord';
+        $returnType = '\SnapTrade\Model\OrderUpdatedResponse';
         ["request" => $request, "serializedBody" => $serializedBody] = $this->cryptoSpotPlaceOrderRequest($user_id, $user_secret, $account_id, $trading_crypto_spot_place_order_request, $contentType);
 
         // Customization hook
@@ -1102,7 +1102,7 @@ class CryptoSpotTradingApi extends \SnapTrade\CustomApi
     /**
      * Operation cryptoSpotPreviewOrder
      *
-     * Place a spot order on a crypto exchange
+     * Preview a crypto spot order
      *
      * Previews a cryptocurrency spot order using the specified account.
      *
@@ -1152,7 +1152,7 @@ class CryptoSpotTradingApi extends \SnapTrade\CustomApi
     /**
      * Operation cryptoSpotPreviewOrderWithHttpInfo
      *
-     * Place a spot order on a crypto exchange
+     * Preview a crypto spot order
      *
      * Previews a cryptocurrency spot order using the specified account.
      *
@@ -1298,7 +1298,7 @@ class CryptoSpotTradingApi extends \SnapTrade\CustomApi
     /**
      * Operation cryptoSpotPreviewOrderAsync
      *
-     * Place a spot order on a crypto exchange
+     * Preview a crypto spot order
      *
      * Previews a cryptocurrency spot order using the specified account.
      *
@@ -1351,7 +1351,7 @@ class CryptoSpotTradingApi extends \SnapTrade\CustomApi
     /**
      * Operation cryptoSpotPreviewOrderAsyncWithHttpInfo
      *
-     * Place a spot order on a crypto exchange
+     * Preview a crypto spot order
      *
      * Previews a cryptocurrency spot order using the specified account.
      *
@@ -1594,7 +1594,7 @@ class CryptoSpotTradingApi extends \SnapTrade\CustomApi
     /**
      * Operation cryptoSpotQuote
      *
-     * Get a quote for a cyrptocurrency market
+     * Get a cryptocurrency spot market quote
      *
      * Gets a quote for the specified account.
      *
@@ -1627,7 +1627,7 @@ class CryptoSpotTradingApi extends \SnapTrade\CustomApi
     /**
      * Operation cryptoSpotQuoteWithHttpInfo
      *
-     * Get a quote for a cyrptocurrency market
+     * Get a cryptocurrency spot market quote
      *
      * Gets a quote for the specified account.
      *
@@ -1775,7 +1775,7 @@ class CryptoSpotTradingApi extends \SnapTrade\CustomApi
     /**
      * Operation cryptoSpotQuoteAsync
      *
-     * Get a quote for a cyrptocurrency market
+     * Get a cryptocurrency spot market quote
      *
      * Gets a quote for the specified account.
      *
@@ -1811,7 +1811,7 @@ class CryptoSpotTradingApi extends \SnapTrade\CustomApi
     /**
      * Operation cryptoSpotQuoteAsyncWithHttpInfo
      *
-     * Get a quote for a cyrptocurrency market
+     * Get a cryptocurrency spot market quote
      *
      * Gets a quote for the specified account.
      *

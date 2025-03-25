@@ -85,7 +85,7 @@ class CryptoSpotTradingApiTest extends TestCase
     /**
      * Test case for cryptoSpotPreviewOrder
      *
-     * Place a spot order on a crypto exchange.
+     * Preview a crypto spot order.
      *
      */
     public function testCryptoSpotPreviewOrder()
@@ -97,7 +97,7 @@ class CryptoSpotTradingApiTest extends TestCase
     /**
      * Test case for cryptoSpotQuote
      *
-     * Get a quote for a cyrptocurrency market.
+     * Get a cryptocurrency spot market quote.
      *
      */
     public function testCryptoSpotQuote()

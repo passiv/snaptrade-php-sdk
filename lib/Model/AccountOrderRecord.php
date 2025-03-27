@@ -55,6 +55,8 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
         'status' => '\SnapTrade\Model\AccountOrderRecordStatus',
         'universal_symbol' => '\SnapTrade\Model\AccountOrderRecordUniversalSymbol',
         'option_symbol' => '\SnapTrade\Model\AccountOrderRecordOptionSymbol',
+        'quote_universal_symbol' => '\SnapTrade\Model\AccountOrderRecordQuoteUniversalSymbol',
+        'quote_currency' => '\SnapTrade\Model\AccountOrderRecordQuoteCurrency',
         'action' => 'string',
         'total_quantity' => 'float',
         'open_quantity' => 'float',
@@ -85,6 +87,8 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
         'status' => null,
         'universal_symbol' => null,
         'option_symbol' => null,
+        'quote_universal_symbol' => null,
+        'quote_currency' => null,
         'action' => null,
         'total_quantity' => null,
         'open_quantity' => null,
@@ -113,6 +117,8 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
 		'status' => false,
 		'universal_symbol' => false,
 		'option_symbol' => false,
+		'quote_universal_symbol' => false,
+		'quote_currency' => false,
 		'action' => false,
 		'total_quantity' => true,
 		'open_quantity' => true,
@@ -221,6 +227,8 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
         'status' => 'status',
         'universal_symbol' => 'universal_symbol',
         'option_symbol' => 'option_symbol',
+        'quote_universal_symbol' => 'quote_universal_symbol',
+        'quote_currency' => 'quote_currency',
         'action' => 'action',
         'total_quantity' => 'total_quantity',
         'open_quantity' => 'open_quantity',
@@ -249,6 +257,8 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
         'status' => 'setStatus',
         'universal_symbol' => 'setUniversalSymbol',
         'option_symbol' => 'setOptionSymbol',
+        'quote_universal_symbol' => 'setQuoteUniversalSymbol',
+        'quote_currency' => 'setQuoteCurrency',
         'action' => 'setAction',
         'total_quantity' => 'setTotalQuantity',
         'open_quantity' => 'setOpenQuantity',
@@ -277,6 +287,8 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
         'status' => 'getStatus',
         'universal_symbol' => 'getUniversalSymbol',
         'option_symbol' => 'getOptionSymbol',
+        'quote_universal_symbol' => 'getQuoteUniversalSymbol',
+        'quote_currency' => 'getQuoteCurrency',
         'action' => 'getAction',
         'total_quantity' => 'getTotalQuantity',
         'open_quantity' => 'getOpenQuantity',
@@ -356,6 +368,8 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
         $this->setIfExists('status', $data ?? [], null);
         $this->setIfExists('universal_symbol', $data ?? [], null);
         $this->setIfExists('option_symbol', $data ?? [], null);
+        $this->setIfExists('quote_universal_symbol', $data ?? [], null);
+        $this->setIfExists('quote_currency', $data ?? [], null);
         $this->setIfExists('action', $data ?? [], null);
         $this->setIfExists('total_quantity', $data ?? [], null);
         $this->setIfExists('open_quantity', $data ?? [], null);
@@ -528,6 +542,64 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
         }
 
         $this->container['option_symbol'] = $option_symbol;
+
+        return $this;
+    }
+
+    /**
+     * Gets quote_universal_symbol
+     *
+     * @return \SnapTrade\Model\AccountOrderRecordQuoteUniversalSymbol|null
+     */
+    public function getQuoteUniversalSymbol()
+    {
+        return $this->container['quote_universal_symbol'];
+    }
+
+    /**
+     * Sets quote_universal_symbol
+     *
+     * @param \SnapTrade\Model\AccountOrderRecordQuoteUniversalSymbol|null $quote_universal_symbol quote_universal_symbol
+     *
+     * @return self
+     */
+    public function setQuoteUniversalSymbol($quote_universal_symbol)
+    {
+
+        if (is_null($quote_universal_symbol)) {
+            throw new \InvalidArgumentException('non-nullable quote_universal_symbol cannot be null');
+        }
+
+        $this->container['quote_universal_symbol'] = $quote_universal_symbol;
+
+        return $this;
+    }
+
+    /**
+     * Gets quote_currency
+     *
+     * @return \SnapTrade\Model\AccountOrderRecordQuoteCurrency|null
+     */
+    public function getQuoteCurrency()
+    {
+        return $this->container['quote_currency'];
+    }
+
+    /**
+     * Sets quote_currency
+     *
+     * @param \SnapTrade\Model\AccountOrderRecordQuoteCurrency|null $quote_currency quote_currency
+     *
+     * @return self
+     */
+    public function setQuoteCurrency($quote_currency)
+    {
+
+        if (is_null($quote_currency)) {
+            throw new \InvalidArgumentException('non-nullable quote_currency cannot be null');
+        }
+
+        $this->container['quote_currency'] = $quote_currency;
 
         return $this;
     }

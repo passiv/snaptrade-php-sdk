@@ -109,6 +109,24 @@ class AccountOrderRecordTest extends TestCase
     }
 
     /**
+     * Test attribute "quote_universal_symbol"
+     */
+    public function testPropertyQuoteUniversalSymbol()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "quote_currency"
+     */
+    public function testPropertyQuoteCurrency()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "action"
      */
     public function testPropertyAction()

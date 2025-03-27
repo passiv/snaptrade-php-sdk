@@ -1,6 +1,6 @@
 <?php
 /**
- * ManualTradeFormBracket
+ * ManualTradeReplaceForm
  *
  * PHP version 7.4
  *
@@ -27,14 +27,14 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * ManualTradeFormBracket Class Doc Comment
+ * ManualTradeReplaceForm Class Doc Comment
  *
  * @category Class
  * @description Inputs for placing an order with the brokerage.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class ManualTradeFormBracket implements ModelInterface, ArrayAccess, \JsonSerializable
+class ManualTradeReplaceForm implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -43,7 +43,7 @@ class ManualTradeFormBracket implements ModelInterface, ArrayAccess, \JsonSerial
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ManualTradeFormBracket';
+    protected static $openAPIModelName = 'ManualTradeReplaceForm';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -51,16 +51,12 @@ class ManualTradeFormBracket implements ModelInterface, ArrayAccess, \JsonSerial
       * @var string[]
       */
     protected static $openAPITypes = [
-        'action' => '\SnapTrade\Model\ActionStrictWithOptions',
-        'symbol' => 'string',
-        'instrument' => '\SnapTrade\Model\TradingInstrument',
+        'action' => '\SnapTrade\Model\ActionStrict',
         'order_type' => '\SnapTrade\Model\OrderTypeStrict',
         'time_in_force' => '\SnapTrade\Model\TimeInForceStrict',
         'price' => 'float',
         'stop' => 'float',
-        'units' => 'float',
-        'stop_loss' => '\SnapTrade\Model\StopLoss',
-        'take_profit' => '\SnapTrade\Model\TakeProfit'
+        'units' => 'float'
     ];
 
     /**
@@ -72,15 +68,11 @@ class ManualTradeFormBracket implements ModelInterface, ArrayAccess, \JsonSerial
       */
     protected static $openAPIFormats = [
         'action' => null,
-        'symbol' => null,
-        'instrument' => null,
         'order_type' => null,
         'time_in_force' => null,
         'price' => null,
         'stop' => null,
-        'units' => null,
-        'stop_loss' => null,
-        'take_profit' => null
+        'units' => null
     ];
 
     /**
@@ -90,15 +82,11 @@ class ManualTradeFormBracket implements ModelInterface, ArrayAccess, \JsonSerial
       */
     protected static array $openAPINullables = [
         'action' => false,
-		'symbol' => false,
-		'instrument' => false,
 		'order_type' => false,
 		'time_in_force' => false,
 		'price' => true,
 		'stop' => true,
-		'units' => false,
-		'stop_loss' => false,
-		'take_profit' => false
+		'units' => true
     ];
 
     /**
@@ -188,15 +176,11 @@ class ManualTradeFormBracket implements ModelInterface, ArrayAccess, \JsonSerial
      */
     protected static $attributeMap = [
         'action' => 'action',
-        'symbol' => 'symbol',
-        'instrument' => 'instrument',
         'order_type' => 'order_type',
         'time_in_force' => 'time_in_force',
         'price' => 'price',
         'stop' => 'stop',
-        'units' => 'units',
-        'stop_loss' => 'stop_loss',
-        'take_profit' => 'take_profit'
+        'units' => 'units'
     ];
 
     /**
@@ -206,15 +190,11 @@ class ManualTradeFormBracket implements ModelInterface, ArrayAccess, \JsonSerial
      */
     protected static $setters = [
         'action' => 'setAction',
-        'symbol' => 'setSymbol',
-        'instrument' => 'setInstrument',
         'order_type' => 'setOrderType',
         'time_in_force' => 'setTimeInForce',
         'price' => 'setPrice',
         'stop' => 'setStop',
-        'units' => 'setUnits',
-        'stop_loss' => 'setStopLoss',
-        'take_profit' => 'setTakeProfit'
+        'units' => 'setUnits'
     ];
 
     /**
@@ -224,15 +204,11 @@ class ManualTradeFormBracket implements ModelInterface, ArrayAccess, \JsonSerial
      */
     protected static $getters = [
         'action' => 'getAction',
-        'symbol' => 'getSymbol',
-        'instrument' => 'getInstrument',
         'order_type' => 'getOrderType',
         'time_in_force' => 'getTimeInForce',
         'price' => 'getPrice',
         'stop' => 'getStop',
-        'units' => 'getUnits',
-        'stop_loss' => 'getStopLoss',
-        'take_profit' => 'getTakeProfit'
+        'units' => 'getUnits'
     ];
 
     /**
@@ -293,15 +269,11 @@ class ManualTradeFormBracket implements ModelInterface, ArrayAccess, \JsonSerial
     public function __construct(array $data = null)
     {
         $this->setIfExists('action', $data ?? [], null);
-        $this->setIfExists('symbol', $data ?? [], null);
-        $this->setIfExists('instrument', $data ?? [], null);
         $this->setIfExists('order_type', $data ?? [], null);
         $this->setIfExists('time_in_force', $data ?? [], null);
         $this->setIfExists('price', $data ?? [], null);
         $this->setIfExists('stop', $data ?? [], null);
         $this->setIfExists('units', $data ?? [], null);
-        $this->setIfExists('stop_loss', $data ?? [], null);
-        $this->setIfExists('take_profit', $data ?? [], null);
     }
 
     /**
@@ -334,20 +306,11 @@ class ManualTradeFormBracket implements ModelInterface, ArrayAccess, \JsonSerial
         if ($this->container['action'] === null) {
             $invalidProperties[] = "'action' can't be null";
         }
-        if ($this->container['instrument'] === null) {
-            $invalidProperties[] = "'instrument' can't be null";
-        }
         if ($this->container['order_type'] === null) {
             $invalidProperties[] = "'order_type' can't be null";
         }
         if ($this->container['time_in_force'] === null) {
             $invalidProperties[] = "'time_in_force' can't be null";
-        }
-        if ($this->container['stop_loss'] === null) {
-            $invalidProperties[] = "'stop_loss' can't be null";
-        }
-        if ($this->container['take_profit'] === null) {
-            $invalidProperties[] = "'take_profit' can't be null";
         }
         return $invalidProperties;
     }
@@ -367,7 +330,7 @@ class ManualTradeFormBracket implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Gets action
      *
-     * @return \SnapTrade\Model\ActionStrictWithOptions
+     * @return \SnapTrade\Model\ActionStrict
      */
     public function getAction()
     {
@@ -377,7 +340,7 @@ class ManualTradeFormBracket implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets action
      *
-     * @param \SnapTrade\Model\ActionStrictWithOptions $action action
+     * @param \SnapTrade\Model\ActionStrict $action action
      *
      * @return self
      */
@@ -389,64 +352,6 @@ class ManualTradeFormBracket implements ModelInterface, ArrayAccess, \JsonSerial
         }
 
         $this->container['action'] = $action;
-
-        return $this;
-    }
-
-    /**
-     * Gets symbol
-     *
-     * @return string|null
-     */
-    public function getSymbol()
-    {
-        return $this->container['symbol'];
-    }
-
-    /**
-     * Sets symbol
-     *
-     * @param string|null $symbol The security's trading ticker symbol.
-     *
-     * @return self
-     */
-    public function setSymbol($symbol)
-    {
-
-        if (is_null($symbol)) {
-            throw new \InvalidArgumentException('non-nullable symbol cannot be null');
-        }
-
-        $this->container['symbol'] = $symbol;
-
-        return $this;
-    }
-
-    /**
-     * Gets instrument
-     *
-     * @return \SnapTrade\Model\TradingInstrument
-     */
-    public function getInstrument()
-    {
-        return $this->container['instrument'];
-    }
-
-    /**
-     * Sets instrument
-     *
-     * @param \SnapTrade\Model\TradingInstrument $instrument instrument
-     *
-     * @return self
-     */
-    public function setInstrument($instrument)
-    {
-
-        if (is_null($instrument)) {
-            throw new \InvalidArgumentException('non-nullable instrument cannot be null');
-        }
-
-        $this->container['instrument'] = $instrument;
 
         return $this;
     }
@@ -594,7 +499,7 @@ class ManualTradeFormBracket implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets units
      *
-     * @param float|null $units Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
+     * @param float|null $units units
      *
      * @return self
      */
@@ -602,68 +507,17 @@ class ManualTradeFormBracket implements ModelInterface, ArrayAccess, \JsonSerial
     {
 
         if (is_null($units)) {
-            throw new \InvalidArgumentException('non-nullable units cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'units');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('units', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['units'] = $units;
-
-        return $this;
-    }
-
-    /**
-     * Gets stop_loss
-     *
-     * @return \SnapTrade\Model\StopLoss
-     */
-    public function getStopLoss()
-    {
-        return $this->container['stop_loss'];
-    }
-
-    /**
-     * Sets stop_loss
-     *
-     * @param \SnapTrade\Model\StopLoss $stop_loss stop_loss
-     *
-     * @return self
-     */
-    public function setStopLoss($stop_loss)
-    {
-
-        if (is_null($stop_loss)) {
-            throw new \InvalidArgumentException('non-nullable stop_loss cannot be null');
-        }
-
-        $this->container['stop_loss'] = $stop_loss;
-
-        return $this;
-    }
-
-    /**
-     * Gets take_profit
-     *
-     * @return \SnapTrade\Model\TakeProfit
-     */
-    public function getTakeProfit()
-    {
-        return $this->container['take_profit'];
-    }
-
-    /**
-     * Sets take_profit
-     *
-     * @param \SnapTrade\Model\TakeProfit $take_profit take_profit
-     *
-     * @return self
-     */
-    public function setTakeProfit($take_profit)
-    {
-
-        if (is_null($take_profit)) {
-            throw new \InvalidArgumentException('non-nullable take_profit cannot be null');
-        }
-
-        $this->container['take_profit'] = $take_profit;
 
         return $this;
     }

@@ -129,4 +129,16 @@ class TradingApiTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test case for replaceOrder
+     *
+     * Replaces an order with a new one.
+     *
+     */
+    public function testReplaceOrder()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

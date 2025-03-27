@@ -1,6 +1,6 @@
 <?php
 /**
- * ManualTradeFormBracketTest
+ * ManualTradeReplaceFormTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * ManualTradeFormBracketTest Class Doc Comment
+ * ManualTradeReplaceFormTest Class Doc Comment
  *
  * @category    Class
  * @description Inputs for placing an order with the brokerage.
  * @package     SnapTrade
  */
-class ManualTradeFormBracketTest extends TestCase
+class ManualTradeReplaceFormTest extends TestCase
 {
 
     /**
@@ -64,9 +64,9 @@ class ManualTradeFormBracketTest extends TestCase
     }
 
     /**
-     * Test "ManualTradeFormBracket"
+     * Test "ManualTradeReplaceForm"
      */
-    public function testManualTradeFormBracket()
+    public function testManualTradeReplaceForm()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
@@ -76,24 +76,6 @@ class ManualTradeFormBracketTest extends TestCase
      * Test attribute "action"
      */
     public function testPropertyAction()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "symbol"
-     */
-    public function testPropertySymbol()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "instrument"
-     */
-    public function testPropertyInstrument()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
@@ -139,24 +121,6 @@ class ManualTradeFormBracketTest extends TestCase
      * Test attribute "units"
      */
     public function testPropertyUnits()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "stop_loss"
-     */
-    public function testPropertyStopLoss()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "take_profit"
-     */
-    public function testPropertyTakeProfit()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

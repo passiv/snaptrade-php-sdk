@@ -72,6 +72,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.trading.placeBracketOrder`](#snaptradetradingplacebracketorder)
   * [`snaptrade.trading.placeForceOrder`](#snaptradetradingplaceforceorder)
   * [`snaptrade.trading.placeOrder`](#snaptradetradingplaceorder)
+  * [`snaptrade.trading.replaceOrder`](#snaptradetradingreplaceorder)
   * [`snaptrade.transactionsAndReporting.getActivities`](#snaptradetransactionsandreportinggetactivities)
   * [`snaptrade.transactionsAndReporting.getReportingCustomRange`](#snaptradetransactionsandreportinggetreportingcustomrange)
 
@@ -2153,9 +2154,11 @@ use. Only supported on certain brokerages
 
 ```php
 $result = $snaptrade->trading->placeBracketOrder(
-    account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631", 
     action: "BUY", 
-    symbol: "AAPL", 
+    instrument: [
+        "symbol" => "AAPL",
+        "type" => "EQUITY",
+    ], 
     order_type: "Market", 
     time_in_force: "FOK", 
     stop_loss: [
@@ -2165,8 +2168,10 @@ $result = $snaptrade->trading->placeBracketOrder(
     take_profit: [
         "limit_price" => "49.95",
     ], 
+    account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631", 
     user_id: "snaptrade-user-123", 
     user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61", 
+    symbol: "AAPL", 
     price: 31.33, 
     stop: 31.33, 
     units: 10.5
@@ -2175,15 +2180,9 @@ $result = $snaptrade->trading->placeBracketOrder(
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### account_id: `string`<a id="account_id-string"></a>
-
-Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
-
 ##### action:<a id="action"></a>
 
-##### symbol: `string`<a id="symbol-string"></a>
-
-The security's trading ticker symbol.
+##### instrument: [`TradingInstrument`](./lib/Model/TradingInstrument.php)<a id="instrument-tradinginstrumentlibmodeltradinginstrumentphp"></a>
 
 ##### order_type:<a id="order_type"></a>
 
@@ -2193,9 +2192,17 @@ The security's trading ticker symbol.
 
 ##### take_profit: [`TakeProfit`](./lib/Model/TakeProfit.php)<a id="take_profit-takeprofitlibmodeltakeprofitphp"></a>
 
+##### account_id: `string`<a id="account_id-string"></a>
+
+The ID of the account to execute the trade on.
+
 ##### user_id: `string`<a id="user_id-string"></a>
 
 ##### user_secret: `string`<a id="user_secret-string"></a>
+
+##### symbol: `string`<a id="symbol-string"></a>
+
+The security's trading ticker symbol.
 
 ##### price: `float`<a id="price-float"></a>
 
@@ -2216,7 +2223,7 @@ Number of shares for the order. This can be a decimal for fractional orders. Mus
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
-`/trade/placeBracketOrder` `POST`
+`/accounts/{accountId}/trading/bracket` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -2345,6 +2352,75 @@ Optional, defaults to true. Determines if a wait is performed to check on order 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/trade/{tradeId}` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.trading.replaceOrder`<a id="snaptradetradingreplaceorder"></a>
+
+Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling
+the existing order and placing a new one. The order's brokerage_order_id may or may not change, be sure to use the one
+returned in the response going forward. Only supported on some brokerages
+
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $snaptrade->trading->replaceOrder(
+    action: "BUY", 
+    order_type: "Market", 
+    time_in_force: "FOK", 
+    account_id: "2bcd7cc3-e922-4976-bce1-9858296801c3", 
+    brokerage_order_id: "66a033fa-da74-4fcf-b527-feefdec9257e", 
+    user_id: "snaptrade-user-123", 
+    user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61", 
+    price: 31.33, 
+    stop: 31.33, 
+    units: 10.5
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### action:<a id="action"></a>
+
+##### order_type:<a id="order_type"></a>
+
+##### time_in_force:<a id="time_in_force"></a>
+
+##### account_id: `string`<a id="account_id-string"></a>
+
+The ID of the account to execute the trade on.
+
+##### brokerage_order_id: `string`<a id="brokerage_order_id-string"></a>
+
+The Brokerage Order ID of the order to replace.
+
+##### user_id: `string`<a id="user_id-string"></a>
+
+##### user_secret: `string`<a id="user_secret-string"></a>
+
+##### price: `float`<a id="price-float"></a>
+
+The limit price for `Limit` and `StopLimit` orders.
+
+##### stop: `float`<a id="stop-float"></a>
+
+The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
+
+##### units: [`float`](./lib/Model/float.php)<a id="units-floatlibmodelfloatphp"></a>
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[**AccountOrderRecord**](./lib/Model/AccountOrderRecord.php)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/simple/{brokerageOrderId}/replace` `PATCH`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

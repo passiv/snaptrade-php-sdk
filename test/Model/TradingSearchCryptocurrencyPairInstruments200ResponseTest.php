@@ -1,6 +1,6 @@
 <?php
 /**
- * TradingCryptoSpotSymbols200ResponseTest
+ * TradingSearchCryptocurrencyPairInstruments200ResponseTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * TradingCryptoSpotSymbols200ResponseTest Class Doc Comment
+ * TradingSearchCryptocurrencyPairInstruments200ResponseTest Class Doc Comment
  *
  * @category    Class
  * @description The symbols
  * @package     SnapTrade
  */
-class TradingCryptoSpotSymbols200ResponseTest extends TestCase
+class TradingSearchCryptocurrencyPairInstruments200ResponseTest extends TestCase
 {
 
     /**
@@ -64,9 +64,9 @@ class TradingCryptoSpotSymbols200ResponseTest extends TestCase
     }
 
     /**
-     * Test "TradingCryptoSpotSymbols200Response"
+     * Test "TradingSearchCryptocurrencyPairInstruments200Response"
      */
-    public function testTradingCryptoSpotSymbols200Response()
+    public function testTradingSearchCryptocurrencyPairInstruments200Response()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

@@ -1,6 +1,6 @@
 <?php
 /**
- * TradingCryptoSpotPlaceOrderRequestTest
+ * TradingPlaceSimpleOrderRequestTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * TradingCryptoSpotPlaceOrderRequestTest Class Doc Comment
+ * TradingPlaceSimpleOrderRequestTest Class Doc Comment
  *
  * @category    Class
- * @description TradingCryptoSpotPlaceOrderRequest
+ * @description TradingPlaceSimpleOrderRequest
  * @package     SnapTrade
  */
-class TradingCryptoSpotPlaceOrderRequestTest extends TestCase
+class TradingPlaceSimpleOrderRequestTest extends TestCase
 {
 
     /**
@@ -64,18 +64,18 @@ class TradingCryptoSpotPlaceOrderRequestTest extends TestCase
     }
 
     /**
-     * Test "TradingCryptoSpotPlaceOrderRequest"
+     * Test "TradingPlaceSimpleOrderRequest"
      */
-    public function testTradingCryptoSpotPlaceOrderRequest()
+    public function testTradingPlaceSimpleOrderRequest()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "symbol"
+     * Test attribute "instrument"
      */
-    public function testPropertySymbol()
+    public function testPropertyInstrument()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

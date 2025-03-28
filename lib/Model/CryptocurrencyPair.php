@@ -30,7 +30,7 @@ use \SnapTrade\ObjectSerializer;
  * CryptocurrencyPair Class Doc Comment
  *
  * @category Class
- * @description A cryptocurrency symbol. This is a unique identifier for a cryptocurrency.
+ * @description A cryptocurrency pair instrument.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
@@ -51,6 +51,7 @@ class CryptocurrencyPair implements ModelInterface, ArrayAccess, \JsonSerializab
       * @var string[]
       */
     protected static $openAPITypes = [
+        'symbol' => 'string',
         'base' => 'string',
         'quote' => 'string'
     ];
@@ -63,6 +64,7 @@ class CryptocurrencyPair implements ModelInterface, ArrayAccess, \JsonSerializab
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
+        'symbol' => null,
         'base' => null,
         'quote' => null
     ];
@@ -73,7 +75,8 @@ class CryptocurrencyPair implements ModelInterface, ArrayAccess, \JsonSerializab
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'base' => false,
+        'symbol' => false,
+		'base' => false,
 		'quote' => false
     ];
 
@@ -163,6 +166,7 @@ class CryptocurrencyPair implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $attributeMap = [
+        'symbol' => 'symbol',
         'base' => 'base',
         'quote' => 'quote'
     ];
@@ -173,6 +177,7 @@ class CryptocurrencyPair implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $setters = [
+        'symbol' => 'setSymbol',
         'base' => 'setBase',
         'quote' => 'setQuote'
     ];
@@ -183,6 +188,7 @@ class CryptocurrencyPair implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $getters = [
+        'symbol' => 'getSymbol',
         'base' => 'getBase',
         'quote' => 'getQuote'
     ];
@@ -244,6 +250,7 @@ class CryptocurrencyPair implements ModelInterface, ArrayAccess, \JsonSerializab
      */
     public function __construct(array $data = null)
     {
+        $this->setIfExists('symbol', $data ?? [], null);
         $this->setIfExists('base', $data ?? [], null);
         $this->setIfExists('quote', $data ?? [], null);
     }
@@ -295,6 +302,35 @@ class CryptocurrencyPair implements ModelInterface, ArrayAccess, \JsonSerializab
         return count($this->listInvalidProperties()) === 0;
     }
 
+
+    /**
+     * Gets symbol
+     *
+     * @return string|null
+     */
+    public function getSymbol()
+    {
+        return $this->container['symbol'];
+    }
+
+    /**
+     * Sets symbol
+     *
+     * @param string|null $symbol Cryptocurrency pair instrument instrument symbol
+     *
+     * @return self
+     */
+    public function setSymbol($symbol)
+    {
+
+        if (is_null($symbol)) {
+            throw new \InvalidArgumentException('non-nullable symbol cannot be null');
+        }
+
+        $this->container['symbol'] = $symbol;
+
+        return $this;
+    }
 
     /**
      * Gets base

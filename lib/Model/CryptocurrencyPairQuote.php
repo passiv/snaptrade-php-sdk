@@ -1,6 +1,6 @@
 <?php
 /**
- * TradingCryptoSpotSymbols200Response
+ * CryptocurrencyPairQuote
  *
  * PHP version 7.4
  *
@@ -27,14 +27,13 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * TradingCryptoSpotSymbols200Response Class Doc Comment
+ * CryptocurrencyPairQuote Class Doc Comment
  *
  * @category Class
- * @description The symbols
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class TradingCryptoSpotSymbols200Response implements ModelInterface, ArrayAccess, \JsonSerializable
+class CryptocurrencyPairQuote implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -43,7 +42,7 @@ class TradingCryptoSpotSymbols200Response implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'Trading_cryptoSpotSymbols_200_response';
+    protected static $openAPIModelName = 'CryptocurrencyPairQuote';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -51,7 +50,10 @@ class TradingCryptoSpotSymbols200Response implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'items' => '\SnapTrade\Model\CryptocurrencyPair[]'
+        'bid' => 'float',
+        'ask' => 'float',
+        'mid' => 'float',
+        'timestamp' => '\DateTime'
     ];
 
     /**
@@ -62,7 +64,10 @@ class TradingCryptoSpotSymbols200Response implements ModelInterface, ArrayAccess
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'items' => null
+        'bid' => 'decimal',
+        'ask' => 'decimal',
+        'mid' => 'decimal',
+        'timestamp' => 'date-time'
     ];
 
     /**
@@ -71,7 +76,10 @@ class TradingCryptoSpotSymbols200Response implements ModelInterface, ArrayAccess
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'items' => false
+        'bid' => false,
+		'ask' => false,
+		'mid' => false,
+		'timestamp' => false
     ];
 
     /**
@@ -160,7 +168,10 @@ class TradingCryptoSpotSymbols200Response implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'items' => 'items'
+        'bid' => 'bid',
+        'ask' => 'ask',
+        'mid' => 'mid',
+        'timestamp' => 'timestamp'
     ];
 
     /**
@@ -169,7 +180,10 @@ class TradingCryptoSpotSymbols200Response implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'items' => 'setItems'
+        'bid' => 'setBid',
+        'ask' => 'setAsk',
+        'mid' => 'setMid',
+        'timestamp' => 'setTimestamp'
     ];
 
     /**
@@ -178,7 +192,10 @@ class TradingCryptoSpotSymbols200Response implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'items' => 'getItems'
+        'bid' => 'getBid',
+        'ask' => 'getAsk',
+        'mid' => 'getMid',
+        'timestamp' => 'getTimestamp'
     ];
 
     /**
@@ -238,7 +255,10 @@ class TradingCryptoSpotSymbols200Response implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('items', $data ?? [], null);
+        $this->setIfExists('bid', $data ?? [], null);
+        $this->setIfExists('ask', $data ?? [], null);
+        $this->setIfExists('mid', $data ?? [], null);
+        $this->setIfExists('timestamp', $data ?? [], null);
     }
 
     /**
@@ -268,8 +288,11 @@ class TradingCryptoSpotSymbols200Response implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['items'] === null) {
-            $invalidProperties[] = "'items' can't be null";
+        if ($this->container['bid'] === null) {
+            $invalidProperties[] = "'bid' can't be null";
+        }
+        if ($this->container['ask'] === null) {
+            $invalidProperties[] = "'ask' can't be null";
         }
         return $invalidProperties;
     }
@@ -287,30 +310,117 @@ class TradingCryptoSpotSymbols200Response implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets items
+     * Gets bid
      *
-     * @return \SnapTrade\Model\CryptocurrencyPair[]
+     * @return float
      */
-    public function getItems()
+    public function getBid()
     {
-        return $this->container['items'];
+        return $this->container['bid'];
     }
 
     /**
-     * Sets items
+     * Sets bid
      *
-     * @param \SnapTrade\Model\CryptocurrencyPair[] $items items
+     * @param float $bid The highest price a buyer is willing to pay.
      *
      * @return self
      */
-    public function setItems($items)
+    public function setBid($bid)
     {
 
-        if (is_null($items)) {
-            throw new \InvalidArgumentException('non-nullable items cannot be null');
+        if (is_null($bid)) {
+            throw new \InvalidArgumentException('non-nullable bid cannot be null');
         }
 
-        $this->container['items'] = $items;
+        $this->container['bid'] = $bid;
+
+        return $this;
+    }
+
+    /**
+     * Gets ask
+     *
+     * @return float
+     */
+    public function getAsk()
+    {
+        return $this->container['ask'];
+    }
+
+    /**
+     * Sets ask
+     *
+     * @param float $ask The lowest price a seller is willing to accept.
+     *
+     * @return self
+     */
+    public function setAsk($ask)
+    {
+
+        if (is_null($ask)) {
+            throw new \InvalidArgumentException('non-nullable ask cannot be null');
+        }
+
+        $this->container['ask'] = $ask;
+
+        return $this;
+    }
+
+    /**
+     * Gets mid
+     *
+     * @return float|null
+     */
+    public function getMid()
+    {
+        return $this->container['mid'];
+    }
+
+    /**
+     * Sets mid
+     *
+     * @param float|null $mid The market mid price.
+     *
+     * @return self
+     */
+    public function setMid($mid)
+    {
+
+        if (is_null($mid)) {
+            throw new \InvalidArgumentException('non-nullable mid cannot be null');
+        }
+
+        $this->container['mid'] = $mid;
+
+        return $this;
+    }
+
+    /**
+     * Gets timestamp
+     *
+     * @return \DateTime|null
+     */
+    public function getTimestamp()
+    {
+        return $this->container['timestamp'];
+    }
+
+    /**
+     * Sets timestamp
+     *
+     * @param \DateTime|null $timestamp The timestamp of the quote.
+     *
+     * @return self
+     */
+    public function setTimestamp($timestamp)
+    {
+
+        if (is_null($timestamp)) {
+            throw new \InvalidArgumentException('non-nullable timestamp cannot be null');
+        }
+
+        $this->container['timestamp'] = $timestamp;
 
         return $this;
     }

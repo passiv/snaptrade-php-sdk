@@ -1,6 +1,6 @@
 <?php
 /**
- * TradingCryptoSpotPlaceOrderRequest
+ * TradingPlaceSimpleOrderRequest
  *
  * PHP version 7.4
  *
@@ -27,13 +27,13 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * TradingCryptoSpotPlaceOrderRequest Class Doc Comment
+ * TradingPlaceSimpleOrderRequest Class Doc Comment
  *
  * @category Class
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class TradingCryptoSpotPlaceOrderRequest implements ModelInterface, ArrayAccess, \JsonSerializable
+class TradingPlaceSimpleOrderRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -42,7 +42,7 @@ class TradingCryptoSpotPlaceOrderRequest implements ModelInterface, ArrayAccess,
       *
       * @var string
       */
-    protected static $openAPIModelName = 'Trading_cryptoSpotPlaceOrder_request';
+    protected static $openAPIModelName = 'Trading_placeSimpleOrder_request';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -50,7 +50,7 @@ class TradingCryptoSpotPlaceOrderRequest implements ModelInterface, ArrayAccess,
       * @var string[]
       */
     protected static $openAPITypes = [
-        'symbol' => '\SnapTrade\Model\CryptocurrencyPair',
+        'instrument' => '\SnapTrade\Model\TradingInstrument',
         'side' => '\SnapTrade\Model\ActionStrict',
         'type' => 'string',
         'time_in_force' => 'string',
@@ -69,7 +69,7 @@ class TradingCryptoSpotPlaceOrderRequest implements ModelInterface, ArrayAccess,
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'symbol' => null,
+        'instrument' => null,
         'side' => null,
         'type' => null,
         'time_in_force' => null,
@@ -86,7 +86,7 @@ class TradingCryptoSpotPlaceOrderRequest implements ModelInterface, ArrayAccess,
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'symbol' => false,
+        'instrument' => false,
 		'side' => false,
 		'type' => false,
 		'time_in_force' => false,
@@ -183,7 +183,7 @@ class TradingCryptoSpotPlaceOrderRequest implements ModelInterface, ArrayAccess,
      * @var string[]
      */
     protected static $attributeMap = [
-        'symbol' => 'symbol',
+        'instrument' => 'instrument',
         'side' => 'side',
         'type' => 'type',
         'time_in_force' => 'time_in_force',
@@ -200,7 +200,7 @@ class TradingCryptoSpotPlaceOrderRequest implements ModelInterface, ArrayAccess,
      * @var string[]
      */
     protected static $setters = [
-        'symbol' => 'setSymbol',
+        'instrument' => 'setInstrument',
         'side' => 'setSide',
         'type' => 'setType',
         'time_in_force' => 'setTimeInForce',
@@ -217,7 +217,7 @@ class TradingCryptoSpotPlaceOrderRequest implements ModelInterface, ArrayAccess,
      * @var string[]
      */
     protected static $getters = [
-        'symbol' => 'getSymbol',
+        'instrument' => 'getInstrument',
         'side' => 'getSide',
         'type' => 'getType',
         'time_in_force' => 'getTimeInForce',
@@ -327,7 +327,7 @@ class TradingCryptoSpotPlaceOrderRequest implements ModelInterface, ArrayAccess,
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('symbol', $data ?? [], null);
+        $this->setIfExists('instrument', $data ?? [], null);
         $this->setIfExists('side', $data ?? [], null);
         $this->setIfExists('type', $data ?? [], null);
         $this->setIfExists('time_in_force', $data ?? [], null);
@@ -365,8 +365,8 @@ class TradingCryptoSpotPlaceOrderRequest implements ModelInterface, ArrayAccess,
     {
         $invalidProperties = [];
 
-        if ($this->container['symbol'] === null) {
-            $invalidProperties[] = "'symbol' can't be null";
+        if ($this->container['instrument'] === null) {
+            $invalidProperties[] = "'instrument' can't be null";
         }
         if ($this->container['side'] === null) {
             $invalidProperties[] = "'side' can't be null";
@@ -414,30 +414,30 @@ class TradingCryptoSpotPlaceOrderRequest implements ModelInterface, ArrayAccess,
 
 
     /**
-     * Gets symbol
+     * Gets instrument
      *
-     * @return \SnapTrade\Model\CryptocurrencyPair
+     * @return \SnapTrade\Model\TradingInstrument
      */
-    public function getSymbol()
+    public function getInstrument()
     {
-        return $this->container['symbol'];
+        return $this->container['instrument'];
     }
 
     /**
-     * Sets symbol
+     * Sets instrument
      *
-     * @param \SnapTrade\Model\CryptocurrencyPair $symbol symbol
+     * @param \SnapTrade\Model\TradingInstrument $instrument instrument
      *
      * @return self
      */
-    public function setSymbol($symbol)
+    public function setInstrument($instrument)
     {
 
-        if (is_null($symbol)) {
-            throw new \InvalidArgumentException('non-nullable symbol cannot be null');
+        if (is_null($instrument)) {
+            throw new \InvalidArgumentException('non-nullable instrument cannot be null');
         }
 
-        $this->container['symbol'] = $symbol;
+        $this->container['instrument'] = $instrument;
 
         return $this;
     }

@@ -1,6 +1,6 @@
 <?php
 /**
- * CryptoSpotOrderPreviewTest
+ * SimpleOrderPreviewTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * CryptoSpotOrderPreviewTest Class Doc Comment
+ * SimpleOrderPreviewTest Class Doc Comment
  *
  * @category    Class
- * @description Preview of a cryptocurrency spot order.
+ * @description Preview of an order.
  * @package     SnapTrade
  */
-class CryptoSpotOrderPreviewTest extends TestCase
+class SimpleOrderPreviewTest extends TestCase
 {
 
     /**
@@ -64,9 +64,9 @@ class CryptoSpotOrderPreviewTest extends TestCase
     }
 
     /**
-     * Test "CryptoSpotOrderPreview"
+     * Test "SimpleOrderPreview"
      */
-    public function testCryptoSpotOrderPreview()
+    public function testSimpleOrderPreview()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

@@ -1,6 +1,6 @@
 <?php
 /**
- * CryptoSpotOrderPreview
+ * SimpleOrderPreview
  *
  * PHP version 7.4
  *
@@ -27,14 +27,14 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * CryptoSpotOrderPreview Class Doc Comment
+ * SimpleOrderPreview Class Doc Comment
  *
  * @category Class
- * @description Preview of a cryptocurrency spot order.
+ * @description Preview of an order.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class CryptoSpotOrderPreview implements ModelInterface, ArrayAccess, \JsonSerializable
+class SimpleOrderPreview implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -43,7 +43,7 @@ class CryptoSpotOrderPreview implements ModelInterface, ArrayAccess, \JsonSerial
       *
       * @var string
       */
-    protected static $openAPIModelName = 'CryptoSpotOrderPreview';
+    protected static $openAPIModelName = 'SimpleOrderPreview';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -51,7 +51,7 @@ class CryptoSpotOrderPreview implements ModelInterface, ArrayAccess, \JsonSerial
       * @var string[]
       */
     protected static $openAPITypes = [
-        'estimated_fee' => '\SnapTrade\Model\CryptoSpotOrderPreviewEstimatedFee'
+        'estimated_fee' => '\SnapTrade\Model\SimpleOrderPreviewEstimatedFee'
     ];
 
     /**
@@ -286,7 +286,7 @@ class CryptoSpotOrderPreview implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Gets estimated_fee
      *
-     * @return \SnapTrade\Model\CryptoSpotOrderPreviewEstimatedFee|null
+     * @return \SnapTrade\Model\SimpleOrderPreviewEstimatedFee|null
      */
     public function getEstimatedFee()
     {
@@ -296,7 +296,7 @@ class CryptoSpotOrderPreview implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets estimated_fee
      *
-     * @param \SnapTrade\Model\CryptoSpotOrderPreviewEstimatedFee|null $estimated_fee estimated_fee
+     * @param \SnapTrade\Model\SimpleOrderPreviewEstimatedFee|null $estimated_fee estimated_fee
      *
      * @return self
      */

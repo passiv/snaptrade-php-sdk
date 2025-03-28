@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * CryptocurrencyPairTest Class Doc Comment
  *
  * @category    Class
- * @description A cryptocurrency symbol. This is a unique identifier for a cryptocurrency.
+ * @description A cryptocurrency pair instrument.
  * @package     SnapTrade
  */
 class CryptocurrencyPairTest extends TestCase
@@ -67,6 +67,15 @@ class CryptocurrencyPairTest extends TestCase
      * Test "CryptocurrencyPair"
      */
     public function testCryptocurrencyPair()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "symbol"
+     */
+    public function testPropertySymbol()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

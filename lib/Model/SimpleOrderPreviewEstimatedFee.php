@@ -1,6 +1,6 @@
 <?php
 /**
- * CryptoSpotQuote
+ * SimpleOrderPreviewEstimatedFee
  *
  * PHP version 7.4
  *
@@ -27,13 +27,14 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * CryptoSpotQuote Class Doc Comment
+ * SimpleOrderPreviewEstimatedFee Class Doc Comment
  *
  * @category Class
+ * @description The estimated order fee.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class CryptoSpotQuote implements ModelInterface, ArrayAccess, \JsonSerializable
+class SimpleOrderPreviewEstimatedFee implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -42,7 +43,7 @@ class CryptoSpotQuote implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'CryptoSpotQuote';
+    protected static $openAPIModelName = 'SimpleOrderPreview_estimated_fee';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -50,10 +51,8 @@ class CryptoSpotQuote implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'bid' => 'float',
-        'ask' => 'float',
-        'mid' => 'float',
-        'timestamp' => '\DateTime'
+        'currency' => 'string',
+        'amount' => 'float'
     ];
 
     /**
@@ -64,10 +63,8 @@ class CryptoSpotQuote implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'bid' => 'decimal',
-        'ask' => 'decimal',
-        'mid' => 'decimal',
-        'timestamp' => 'date-time'
+        'currency' => null,
+        'amount' => 'decimal'
     ];
 
     /**
@@ -76,10 +73,8 @@ class CryptoSpotQuote implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'bid' => false,
-		'ask' => false,
-		'mid' => false,
-		'timestamp' => false
+        'currency' => false,
+		'amount' => false
     ];
 
     /**
@@ -168,10 +163,8 @@ class CryptoSpotQuote implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'bid' => 'bid',
-        'ask' => 'ask',
-        'mid' => 'mid',
-        'timestamp' => 'timestamp'
+        'currency' => 'currency',
+        'amount' => 'amount'
     ];
 
     /**
@@ -180,10 +173,8 @@ class CryptoSpotQuote implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'bid' => 'setBid',
-        'ask' => 'setAsk',
-        'mid' => 'setMid',
-        'timestamp' => 'setTimestamp'
+        'currency' => 'setCurrency',
+        'amount' => 'setAmount'
     ];
 
     /**
@@ -192,10 +183,8 @@ class CryptoSpotQuote implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'bid' => 'getBid',
-        'ask' => 'getAsk',
-        'mid' => 'getMid',
-        'timestamp' => 'getTimestamp'
+        'currency' => 'getCurrency',
+        'amount' => 'getAmount'
     ];
 
     /**
@@ -255,10 +244,8 @@ class CryptoSpotQuote implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('bid', $data ?? [], null);
-        $this->setIfExists('ask', $data ?? [], null);
-        $this->setIfExists('mid', $data ?? [], null);
-        $this->setIfExists('timestamp', $data ?? [], null);
+        $this->setIfExists('currency', $data ?? [], null);
+        $this->setIfExists('amount', $data ?? [], null);
     }
 
     /**
@@ -288,11 +275,11 @@ class CryptoSpotQuote implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['bid'] === null) {
-            $invalidProperties[] = "'bid' can't be null";
+        if ($this->container['currency'] === null) {
+            $invalidProperties[] = "'currency' can't be null";
         }
-        if ($this->container['ask'] === null) {
-            $invalidProperties[] = "'ask' can't be null";
+        if ($this->container['amount'] === null) {
+            $invalidProperties[] = "'amount' can't be null";
         }
         return $invalidProperties;
     }
@@ -310,117 +297,59 @@ class CryptoSpotQuote implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets bid
+     * Gets currency
+     *
+     * @return string
+     */
+    public function getCurrency()
+    {
+        return $this->container['currency'];
+    }
+
+    /**
+     * Sets currency
+     *
+     * @param string $currency Symbol to identify a cryptocurrency or fiat currency on a crypto exchange. Fiat currencies symbols are ISO-4217 codes.
+     *
+     * @return self
+     */
+    public function setCurrency($currency)
+    {
+
+        if (is_null($currency)) {
+            throw new \InvalidArgumentException('non-nullable currency cannot be null');
+        }
+
+        $this->container['currency'] = $currency;
+
+        return $this;
+    }
+
+    /**
+     * Gets amount
      *
      * @return float
      */
-    public function getBid()
+    public function getAmount()
     {
-        return $this->container['bid'];
+        return $this->container['amount'];
     }
 
     /**
-     * Sets bid
+     * Sets amount
      *
-     * @param float $bid The highest price a buyer is willing to pay.
+     * @param float $amount amount
      *
      * @return self
      */
-    public function setBid($bid)
+    public function setAmount($amount)
     {
 
-        if (is_null($bid)) {
-            throw new \InvalidArgumentException('non-nullable bid cannot be null');
+        if (is_null($amount)) {
+            throw new \InvalidArgumentException('non-nullable amount cannot be null');
         }
 
-        $this->container['bid'] = $bid;
-
-        return $this;
-    }
-
-    /**
-     * Gets ask
-     *
-     * @return float
-     */
-    public function getAsk()
-    {
-        return $this->container['ask'];
-    }
-
-    /**
-     * Sets ask
-     *
-     * @param float $ask The lowest price a seller is willing to accept.
-     *
-     * @return self
-     */
-    public function setAsk($ask)
-    {
-
-        if (is_null($ask)) {
-            throw new \InvalidArgumentException('non-nullable ask cannot be null');
-        }
-
-        $this->container['ask'] = $ask;
-
-        return $this;
-    }
-
-    /**
-     * Gets mid
-     *
-     * @return float|null
-     */
-    public function getMid()
-    {
-        return $this->container['mid'];
-    }
-
-    /**
-     * Sets mid
-     *
-     * @param float|null $mid The market mid price.
-     *
-     * @return self
-     */
-    public function setMid($mid)
-    {
-
-        if (is_null($mid)) {
-            throw new \InvalidArgumentException('non-nullable mid cannot be null');
-        }
-
-        $this->container['mid'] = $mid;
-
-        return $this;
-    }
-
-    /**
-     * Gets timestamp
-     *
-     * @return \DateTime|null
-     */
-    public function getTimestamp()
-    {
-        return $this->container['timestamp'];
-    }
-
-    /**
-     * Sets timestamp
-     *
-     * @param \DateTime|null $timestamp The timestamp of the quote.
-     *
-     * @return self
-     */
-    public function setTimestamp($timestamp)
-    {
-
-        if (is_null($timestamp)) {
-            throw new \InvalidArgumentException('non-nullable timestamp cannot be null');
-        }
-
-        $this->container['timestamp'] = $timestamp;
+        $this->container['amount'] = $amount;
 
         return $this;
     }

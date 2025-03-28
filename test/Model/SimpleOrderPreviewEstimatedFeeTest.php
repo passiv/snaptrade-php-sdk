@@ -1,6 +1,6 @@
 <?php
 /**
- * TradingCryptoSpotCancelOrderRequestTest
+ * SimpleOrderPreviewEstimatedFeeTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * TradingCryptoSpotCancelOrderRequestTest Class Doc Comment
+ * SimpleOrderPreviewEstimatedFeeTest Class Doc Comment
  *
  * @category    Class
- * @description TradingCryptoSpotCancelOrderRequest
+ * @description The estimated order fee.
  * @package     SnapTrade
  */
-class TradingCryptoSpotCancelOrderRequestTest extends TestCase
+class SimpleOrderPreviewEstimatedFeeTest extends TestCase
 {
 
     /**
@@ -64,18 +64,27 @@ class TradingCryptoSpotCancelOrderRequestTest extends TestCase
     }
 
     /**
-     * Test "TradingCryptoSpotCancelOrderRequest"
+     * Test "SimpleOrderPreviewEstimatedFee"
      */
-    public function testTradingCryptoSpotCancelOrderRequest()
+    public function testSimpleOrderPreviewEstimatedFee()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "brokerage_order_id"
+     * Test attribute "currency"
      */
-    public function testPropertyBrokerageOrderId()
+    public function testPropertyCurrency()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "amount"
+     */
+    public function testPropertyAmount()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

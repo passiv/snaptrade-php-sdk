@@ -1,6 +1,6 @@
 <?php
 /**
- * CryptoSpotOrderPreviewEstimatedFeeTest
+ * CryptocurrencyPairQuoteTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * CryptoSpotOrderPreviewEstimatedFeeTest Class Doc Comment
+ * CryptocurrencyPairQuoteTest Class Doc Comment
  *
  * @category    Class
- * @description The estimated order fee.
+ * @description CryptocurrencyPairQuote
  * @package     SnapTrade
  */
-class CryptoSpotOrderPreviewEstimatedFeeTest extends TestCase
+class CryptocurrencyPairQuoteTest extends TestCase
 {
 
     /**
@@ -64,27 +64,45 @@ class CryptoSpotOrderPreviewEstimatedFeeTest extends TestCase
     }
 
     /**
-     * Test "CryptoSpotOrderPreviewEstimatedFee"
+     * Test "CryptocurrencyPairQuote"
      */
-    public function testCryptoSpotOrderPreviewEstimatedFee()
+    public function testCryptocurrencyPairQuote()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "currency"
+     * Test attribute "bid"
      */
-    public function testPropertyCurrency()
+    public function testPropertyBid()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "amount"
+     * Test attribute "ask"
      */
-    public function testPropertyAmount()
+    public function testPropertyAsk()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "mid"
+     */
+    public function testPropertyMid()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "timestamp"
+     */
+    public function testPropertyTimestamp()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

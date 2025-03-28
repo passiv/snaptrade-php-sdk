@@ -1,6 +1,6 @@
 <?php
 /**
- * TradingCryptoSpotCancelOrderRequest
+ * TradingSearchCryptocurrencyPairInstruments200Response
  *
  * PHP version 7.4
  *
@@ -27,13 +27,14 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * TradingCryptoSpotCancelOrderRequest Class Doc Comment
+ * TradingSearchCryptocurrencyPairInstruments200Response Class Doc Comment
  *
  * @category Class
+ * @description The symbols
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class TradingCryptoSpotCancelOrderRequest implements ModelInterface, ArrayAccess, \JsonSerializable
+class TradingSearchCryptocurrencyPairInstruments200Response implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -42,7 +43,7 @@ class TradingCryptoSpotCancelOrderRequest implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'Trading_cryptoSpotCancelOrder_request';
+    protected static $openAPIModelName = 'Trading_searchCryptocurrencyPairInstruments_200_response';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -50,7 +51,7 @@ class TradingCryptoSpotCancelOrderRequest implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'brokerage_order_id' => 'string'
+        'items' => '\SnapTrade\Model\CryptocurrencyPair[]'
     ];
 
     /**
@@ -61,7 +62,7 @@ class TradingCryptoSpotCancelOrderRequest implements ModelInterface, ArrayAccess
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'brokerage_order_id' => null
+        'items' => null
     ];
 
     /**
@@ -70,7 +71,7 @@ class TradingCryptoSpotCancelOrderRequest implements ModelInterface, ArrayAccess
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'brokerage_order_id' => false
+        'items' => false
     ];
 
     /**
@@ -159,7 +160,7 @@ class TradingCryptoSpotCancelOrderRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'brokerage_order_id' => 'brokerage_order_id'
+        'items' => 'items'
     ];
 
     /**
@@ -168,7 +169,7 @@ class TradingCryptoSpotCancelOrderRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'brokerage_order_id' => 'setBrokerageOrderId'
+        'items' => 'setItems'
     ];
 
     /**
@@ -177,7 +178,7 @@ class TradingCryptoSpotCancelOrderRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'brokerage_order_id' => 'getBrokerageOrderId'
+        'items' => 'getItems'
     ];
 
     /**
@@ -237,7 +238,7 @@ class TradingCryptoSpotCancelOrderRequest implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('brokerage_order_id', $data ?? [], null);
+        $this->setIfExists('items', $data ?? [], null);
     }
 
     /**
@@ -267,8 +268,8 @@ class TradingCryptoSpotCancelOrderRequest implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['brokerage_order_id'] === null) {
-            $invalidProperties[] = "'brokerage_order_id' can't be null";
+        if ($this->container['items'] === null) {
+            $invalidProperties[] = "'items' can't be null";
         }
         return $invalidProperties;
     }
@@ -286,30 +287,30 @@ class TradingCryptoSpotCancelOrderRequest implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets brokerage_order_id
+     * Gets items
      *
-     * @return string
+     * @return \SnapTrade\Model\CryptocurrencyPair[]
      */
-    public function getBrokerageOrderId()
+    public function getItems()
     {
-        return $this->container['brokerage_order_id'];
+        return $this->container['items'];
     }
 
     /**
-     * Sets brokerage_order_id
+     * Sets items
      *
-     * @param string $brokerage_order_id Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
+     * @param \SnapTrade\Model\CryptocurrencyPair[] $items items
      *
      * @return self
      */
-    public function setBrokerageOrderId($brokerage_order_id)
+    public function setItems($items)
     {
 
-        if (is_null($brokerage_order_id)) {
-            throw new \InvalidArgumentException('non-nullable brokerage_order_id cannot be null');
+        if (is_null($items)) {
+            throw new \InvalidArgumentException('non-nullable items cannot be null');
         }
 
-        $this->container['brokerage_order_id'] = $brokerage_order_id;
+        $this->container['items'] = $items;
 
         return $this;
     }

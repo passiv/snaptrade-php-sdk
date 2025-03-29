@@ -316,7 +316,7 @@ class CryptocurrencyPair implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets symbol
      *
-     * @param string|null $symbol Cryptocurrency pair instrument instrument symbol
+     * @param string|null $symbol Cryptocurrency pair instrument symbol
      *
      * @return self
      */

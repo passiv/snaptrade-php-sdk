@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * TradingSearchCryptocurrencyPairInstruments200ResponseTest Class Doc Comment
  *
  * @category    Class
- * @description The symbols
+ * @description The instruments
  * @package     SnapTrade
  */
 class TradingSearchCryptocurrencyPairInstruments200ResponseTest extends TestCase

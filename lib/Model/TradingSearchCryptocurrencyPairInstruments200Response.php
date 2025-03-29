@@ -30,7 +30,7 @@ use \SnapTrade\ObjectSerializer;
  * TradingSearchCryptocurrencyPairInstruments200Response Class Doc Comment
  *
  * @category Class
- * @description The symbols
+ * @description The instruments
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */

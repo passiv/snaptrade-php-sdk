@@ -73,7 +73,7 @@ class TradingInstrument implements ModelInterface, ArrayAccess, \JsonSerializabl
       */
     protected static array $openAPINullables = [
         'symbol' => false,
-		'type' => true
+		'type' => false
     ];
 
     /**
@@ -291,6 +291,12 @@ class TradingInstrument implements ModelInterface, ArrayAccess, \JsonSerializabl
     {
         $invalidProperties = [];
 
+        if ($this->container['symbol'] === null) {
+            $invalidProperties[] = "'symbol' can't be null";
+        }
+        if ($this->container['type'] === null) {
+            $invalidProperties[] = "'type' can't be null";
+        }
         $allowedValues = $this->getTypeAllowableValues();
         if (!is_null($this->container['type']) && !in_array($this->container['type'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
@@ -318,7 +324,7 @@ class TradingInstrument implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Gets symbol
      *
-     * @return string|null
+     * @return string
      */
     public function getSymbol()
     {
@@ -328,7 +334,7 @@ class TradingInstrument implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets symbol
      *
-     * @param string|null $symbol The security's trading ticker symbol
+     * @param string $symbol The instrument's trading ticker symbol
      *
      * @return self
      */
@@ -347,7 +353,7 @@ class TradingInstrument implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Gets type
      *
-     * @return string|null
+     * @return string
      */
     public function getType()
     {
@@ -357,14 +363,14 @@ class TradingInstrument implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets type
      *
-     * @param string|null $type type
+     * @param string $type The type of the instrument
      *
      * @return self
      */
     public function setType($type)
     {
         $allowedValues = $this->getTypeAllowableValues();
-        if (!is_null($type) && !in_array($type, $allowedValues, true)) {
+        if (!in_array($type, $allowedValues, true)) {
             throw new \InvalidArgumentException(
                 sprintf(
                     "Invalid value '%s' for 'type', must be one of '%s'",
@@ -375,14 +381,7 @@ class TradingInstrument implements ModelInterface, ArrayAccess, \JsonSerializabl
         }
 
         if (is_null($type)) {
-            array_push($this->openAPINullablesSetToNull, 'type');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('type', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable type cannot be null');
         }
 
         $this->container['type'] = $type;

@@ -145,6 +145,15 @@ class AccountTest extends TestCase
     }
 
     /**
+     * Test attribute "raw_type"
+     */
+    public function testPropertyRawType()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "meta"
      */
     public function testPropertyMeta()
@@ -166,15 +175,6 @@ class AccountTest extends TestCase
      * Test attribute "cash_restrictions"
      */
     public function testPropertyCashRestrictions()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "raw_type"
-     */
-    public function testPropertyRawType()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

@@ -59,10 +59,10 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
         'created_date' => '\DateTime',
         'sync_status' => '\SnapTrade\Model\AccountSyncStatus',
         'balance' => '\SnapTrade\Model\AccountBalance',
+        'raw_type' => 'string',
         'meta' => 'array<string,mixed>',
         'portfolio_group' => 'string',
-        'cash_restrictions' => 'string[]',
-        'raw_type' => 'string'
+        'cash_restrictions' => 'string[]'
     ];
 
     /**
@@ -81,10 +81,10 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
         'created_date' => 'date-time',
         'sync_status' => null,
         'balance' => null,
+        'raw_type' => null,
         'meta' => null,
         'portfolio_group' => 'uuid',
-        'cash_restrictions' => null,
-        'raw_type' => null
+        'cash_restrictions' => null
     ];
 
     /**
@@ -101,10 +101,10 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
 		'created_date' => false,
 		'sync_status' => false,
 		'balance' => false,
+		'raw_type' => true,
 		'meta' => false,
 		'portfolio_group' => false,
-		'cash_restrictions' => false,
-		'raw_type' => true
+		'cash_restrictions' => false
     ];
 
     /**
@@ -201,10 +201,10 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
         'created_date' => 'created_date',
         'sync_status' => 'sync_status',
         'balance' => 'balance',
+        'raw_type' => 'raw_type',
         'meta' => 'meta',
         'portfolio_group' => 'portfolio_group',
-        'cash_restrictions' => 'cash_restrictions',
-        'raw_type' => 'raw_type'
+        'cash_restrictions' => 'cash_restrictions'
     ];
 
     /**
@@ -221,10 +221,10 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
         'created_date' => 'setCreatedDate',
         'sync_status' => 'setSyncStatus',
         'balance' => 'setBalance',
+        'raw_type' => 'setRawType',
         'meta' => 'setMeta',
         'portfolio_group' => 'setPortfolioGroup',
-        'cash_restrictions' => 'setCashRestrictions',
-        'raw_type' => 'setRawType'
+        'cash_restrictions' => 'setCashRestrictions'
     ];
 
     /**
@@ -241,10 +241,10 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
         'created_date' => 'getCreatedDate',
         'sync_status' => 'getSyncStatus',
         'balance' => 'getBalance',
+        'raw_type' => 'getRawType',
         'meta' => 'getMeta',
         'portfolio_group' => 'getPortfolioGroup',
-        'cash_restrictions' => 'getCashRestrictions',
-        'raw_type' => 'getRawType'
+        'cash_restrictions' => 'getCashRestrictions'
     ];
 
     /**
@@ -312,10 +312,10 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('created_date', $data ?? [], null);
         $this->setIfExists('sync_status', $data ?? [], null);
         $this->setIfExists('balance', $data ?? [], null);
+        $this->setIfExists('raw_type', $data ?? [], null);
         $this->setIfExists('meta', $data ?? [], null);
         $this->setIfExists('portfolio_group', $data ?? [], null);
         $this->setIfExists('cash_restrictions', $data ?? [], null);
-        $this->setIfExists('raw_type', $data ?? [], null);
     }
 
     /**
@@ -624,6 +624,42 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
+     * Gets raw_type
+     *
+     * @return string|null
+     */
+    public function getRawType()
+    {
+        return $this->container['raw_type'];
+    }
+
+    /**
+     * Sets raw_type
+     *
+     * @param string|null $raw_type The account type as provided by the brokerage
+     *
+     * @return self
+     */
+    public function setRawType($raw_type)
+    {
+
+        if (is_null($raw_type)) {
+            array_push($this->openAPINullablesSetToNull, 'raw_type');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('raw_type', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['raw_type'] = $raw_type;
+
+        return $this;
+    }
+
+    /**
      * Gets meta
      *
      * @return array<string,mixed>|null
@@ -712,42 +748,6 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['cash_restrictions'] = $cash_restrictions;
-
-        return $this;
-    }
-
-    /**
-     * Gets raw_type
-     *
-     * @return string|null
-     */
-    public function getRawType()
-    {
-        return $this->container['raw_type'];
-    }
-
-    /**
-     * Sets raw_type
-     *
-     * @param string|null $raw_type The account type as provided by the brokerage
-     *
-     * @return self
-     */
-    public function setRawType($raw_type)
-    {
-
-        if (is_null($raw_type)) {
-            array_push($this->openAPINullablesSetToNull, 'raw_type');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('raw_type', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['raw_type'] = $raw_type;
 
         return $this;
     }

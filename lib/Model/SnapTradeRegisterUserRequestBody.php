@@ -268,6 +268,9 @@ class SnapTradeRegisterUserRequestBody implements ModelInterface, ArrayAccess, \
     {
         $invalidProperties = [];
 
+        if ($this->container['user_id'] === null) {
+            $invalidProperties[] = "'user_id' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -286,7 +289,7 @@ class SnapTradeRegisterUserRequestBody implements ModelInterface, ArrayAccess, \
     /**
      * Gets user_id
      *
-     * @return string|null
+     * @return string
      */
     public function getUserId()
     {
@@ -296,7 +299,7 @@ class SnapTradeRegisterUserRequestBody implements ModelInterface, ArrayAccess, \
     /**
      * Sets user_id
      *
-     * @param string|null $user_id SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
+     * @param string $user_id SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
      *
      * @return self
      */

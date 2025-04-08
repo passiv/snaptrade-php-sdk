@@ -109,7 +109,7 @@ class AccountInformationApiTest extends TestCase
     /**
      * Test case for getUserAccountOrders
      *
-     * List account recent orders.
+     * List account orders.
      *
      */
     public function testGetUserAccountOrders()

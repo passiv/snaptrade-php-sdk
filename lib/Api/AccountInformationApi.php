@@ -1952,7 +1952,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
     /**
      * Operation getUserAccountOrders
      *
-     * List account recent orders
+     * List account orders
      *
      * Returns a list of recent orders in the specified account.  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
      *
@@ -1985,7 +1985,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
     /**
      * Operation getUserAccountOrdersWithHttpInfo
      *
-     * List account recent orders
+     * List account orders
      *
      * Returns a list of recent orders in the specified account.  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
      *
@@ -2133,7 +2133,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
     /**
      * Operation getUserAccountOrdersAsync
      *
-     * List account recent orders
+     * List account orders
      *
      * Returns a list of recent orders in the specified account.  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
      *
@@ -2169,7 +2169,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
     /**
      * Operation getUserAccountOrdersAsyncWithHttpInfo
      *
-     * List account recent orders
+     * List account orders
      *
      * Returns a list of recent orders in the specified account.  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
      *

@@ -363,7 +363,7 @@ class TradingInstrument implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets type
      *
-     * @param string $type The type of the instrument
+     * @param string $type The instrument's type
      *
      * @return self
      */

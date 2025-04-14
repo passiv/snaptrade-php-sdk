@@ -109,6 +109,15 @@ class ManualTradeReplaceFormTest extends TestCase
     }
 
     /**
+     * Test attribute "symbol"
+     */
+    public function testPropertySymbol()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "stop"
      */
     public function testPropertyStop()

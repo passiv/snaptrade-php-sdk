@@ -55,6 +55,7 @@ class ManualTradeReplaceForm implements ModelInterface, ArrayAccess, \JsonSerial
         'order_type' => '\SnapTrade\Model\OrderTypeStrict',
         'time_in_force' => '\SnapTrade\Model\TimeInForceStrict',
         'price' => 'float',
+        'symbol' => 'string',
         'stop' => 'float',
         'units' => 'float'
     ];
@@ -71,6 +72,7 @@ class ManualTradeReplaceForm implements ModelInterface, ArrayAccess, \JsonSerial
         'order_type' => null,
         'time_in_force' => null,
         'price' => null,
+        'symbol' => null,
         'stop' => null,
         'units' => null
     ];
@@ -85,6 +87,7 @@ class ManualTradeReplaceForm implements ModelInterface, ArrayAccess, \JsonSerial
 		'order_type' => false,
 		'time_in_force' => false,
 		'price' => true,
+		'symbol' => false,
 		'stop' => true,
 		'units' => true
     ];
@@ -179,6 +182,7 @@ class ManualTradeReplaceForm implements ModelInterface, ArrayAccess, \JsonSerial
         'order_type' => 'order_type',
         'time_in_force' => 'time_in_force',
         'price' => 'price',
+        'symbol' => 'symbol',
         'stop' => 'stop',
         'units' => 'units'
     ];
@@ -193,6 +197,7 @@ class ManualTradeReplaceForm implements ModelInterface, ArrayAccess, \JsonSerial
         'order_type' => 'setOrderType',
         'time_in_force' => 'setTimeInForce',
         'price' => 'setPrice',
+        'symbol' => 'setSymbol',
         'stop' => 'setStop',
         'units' => 'setUnits'
     ];
@@ -207,6 +212,7 @@ class ManualTradeReplaceForm implements ModelInterface, ArrayAccess, \JsonSerial
         'order_type' => 'getOrderType',
         'time_in_force' => 'getTimeInForce',
         'price' => 'getPrice',
+        'symbol' => 'getSymbol',
         'stop' => 'getStop',
         'units' => 'getUnits'
     ];
@@ -272,6 +278,7 @@ class ManualTradeReplaceForm implements ModelInterface, ArrayAccess, \JsonSerial
         $this->setIfExists('order_type', $data ?? [], null);
         $this->setIfExists('time_in_force', $data ?? [], null);
         $this->setIfExists('price', $data ?? [], null);
+        $this->setIfExists('symbol', $data ?? [], null);
         $this->setIfExists('stop', $data ?? [], null);
         $this->setIfExists('units', $data ?? [], null);
     }
@@ -446,6 +453,35 @@ class ManualTradeReplaceForm implements ModelInterface, ArrayAccess, \JsonSerial
         }
 
         $this->container['price'] = $price;
+
+        return $this;
+    }
+
+    /**
+     * Gets symbol
+     *
+     * @return string|null
+     */
+    public function getSymbol()
+    {
+        return $this->container['symbol'];
+    }
+
+    /**
+     * Sets symbol
+     *
+     * @param string|null $symbol The security's trading ticker symbol
+     *
+     * @return self
+     */
+    public function setSymbol($symbol)
+    {
+
+        if (is_null($symbol)) {
+            throw new \InvalidArgumentException('non-nullable symbol cannot be null');
+        }
+
+        $this->container['symbol'] = $symbol;
 
         return $this;
     }

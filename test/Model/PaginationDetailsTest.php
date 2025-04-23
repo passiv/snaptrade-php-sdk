@@ -89,4 +89,13 @@ class PaginationDetailsTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "total"
+     */
+    public function testPropertyTotal()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

@@ -52,7 +52,8 @@ class PaginationDetails implements ModelInterface, ArrayAccess, \JsonSerializabl
       */
     protected static $openAPITypes = [
         'offset' => 'int',
-        'limit' => 'int'
+        'limit' => 'int',
+        'total' => 'int'
     ];
 
     /**
@@ -64,7 +65,8 @@ class PaginationDetails implements ModelInterface, ArrayAccess, \JsonSerializabl
       */
     protected static $openAPIFormats = [
         'offset' => null,
-        'limit' => null
+        'limit' => null,
+        'total' => null
     ];
 
     /**
@@ -74,7 +76,8 @@ class PaginationDetails implements ModelInterface, ArrayAccess, \JsonSerializabl
       */
     protected static array $openAPINullables = [
         'offset' => false,
-		'limit' => false
+		'limit' => false,
+		'total' => false
     ];
 
     /**
@@ -164,7 +167,8 @@ class PaginationDetails implements ModelInterface, ArrayAccess, \JsonSerializabl
      */
     protected static $attributeMap = [
         'offset' => 'offset',
-        'limit' => 'limit'
+        'limit' => 'limit',
+        'total' => 'total'
     ];
 
     /**
@@ -174,7 +178,8 @@ class PaginationDetails implements ModelInterface, ArrayAccess, \JsonSerializabl
      */
     protected static $setters = [
         'offset' => 'setOffset',
-        'limit' => 'setLimit'
+        'limit' => 'setLimit',
+        'total' => 'setTotal'
     ];
 
     /**
@@ -184,7 +189,8 @@ class PaginationDetails implements ModelInterface, ArrayAccess, \JsonSerializabl
      */
     protected static $getters = [
         'offset' => 'getOffset',
-        'limit' => 'getLimit'
+        'limit' => 'getLimit',
+        'total' => 'getTotal'
     ];
 
     /**
@@ -246,6 +252,7 @@ class PaginationDetails implements ModelInterface, ArrayAccess, \JsonSerializabl
     {
         $this->setIfExists('offset', $data ?? [], null);
         $this->setIfExists('limit', $data ?? [], null);
+        $this->setIfExists('total', $data ?? [], null);
     }
 
     /**
@@ -344,6 +351,35 @@ class PaginationDetails implements ModelInterface, ArrayAccess, \JsonSerializabl
         }
 
         $this->container['limit'] = $limit;
+
+        return $this;
+    }
+
+    /**
+     * Gets total
+     *
+     * @return int|null
+     */
+    public function getTotal()
+    {
+        return $this->container['total'];
+    }
+
+    /**
+     * Sets total
+     *
+     * @param int|null $total The total number of items available to be returned over the API.
+     *
+     * @return self
+     */
+    public function setTotal($total)
+    {
+
+        if (is_null($total)) {
+            throw new \InvalidArgumentException('non-nullable total cannot be null');
+        }
+
+        $this->container['total'] = $total;
 
         return $this;
     }

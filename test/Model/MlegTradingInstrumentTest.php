@@ -1,6 +1,6 @@
 <?php
 /**
- * TimeInForceStrictTest
+ * MlegTradingInstrumentTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * TimeInForceStrictTest Class Doc Comment
+ * MlegTradingInstrumentTest Class Doc Comment
  *
  * @category    Class
- * @description The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values:   - &#x60;Day&#x60; - Day. The order is valid only for the trading day on which it is placed.   - &#x60;GTC&#x60; - Good Til Canceled. The order is valid until it is executed or canceled.   - &#x60;FOK&#x60; - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - &#x60;IOC&#x60; - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.
+ * @description MlegTradingInstrument
  * @package     SnapTrade
  */
-class TimeInForceStrictTest extends TestCase
+class MlegTradingInstrumentTest extends TestCase
 {
 
     /**
@@ -64,9 +64,27 @@ class TimeInForceStrictTest extends TestCase
     }
 
     /**
-     * Test "TimeInForceStrict"
+     * Test "MlegTradingInstrument"
      */
-    public function testTimeInForceStrict()
+    public function testMlegTradingInstrument()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "symbol"
+     */
+    public function testPropertySymbol()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "type"
+     */
+    public function testPropertyType()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

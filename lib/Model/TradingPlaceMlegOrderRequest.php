@@ -1,6 +1,6 @@
 <?php
 /**
- * TradingPlaceSimpleOrderRequest
+ * TradingPlaceMlegOrderRequest
  *
  * PHP version 7.4
  *
@@ -27,13 +27,13 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * TradingPlaceSimpleOrderRequest Class Doc Comment
+ * TradingPlaceMlegOrderRequest Class Doc Comment
  *
  * @category Class
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class TradingPlaceSimpleOrderRequest implements ModelInterface, ArrayAccess, \JsonSerializable
+class TradingPlaceMlegOrderRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -42,7 +42,7 @@ class TradingPlaceSimpleOrderRequest implements ModelInterface, ArrayAccess, \Js
       *
       * @var string
       */
-    protected static $openAPIModelName = 'Trading_placeSimpleOrder_request';
+    protected static $openAPIModelName = 'Trading_placeMlegOrder_request';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -50,15 +50,11 @@ class TradingPlaceSimpleOrderRequest implements ModelInterface, ArrayAccess, \Js
       * @var string[]
       */
     protected static $openAPITypes = [
-        'instrument' => '\SnapTrade\Model\TradingInstrument',
-        'side' => '\SnapTrade\Model\ActionStrict',
         'type' => 'string',
         'time_in_force' => '\SnapTrade\Model\TimeInForceStrict',
-        'amount' => 'float',
         'limit_price' => 'float',
         'stop_price' => 'float',
-        'post_only' => 'bool',
-        'expiration_date' => '\DateTime'
+        'legs' => '\SnapTrade\Model\MlegLeg[]'
     ];
 
     /**
@@ -69,15 +65,11 @@ class TradingPlaceSimpleOrderRequest implements ModelInterface, ArrayAccess, \Js
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'instrument' => null,
-        'side' => null,
         'type' => null,
         'time_in_force' => null,
-        'amount' => 'decimal',
         'limit_price' => 'decimal',
         'stop_price' => 'decimal',
-        'post_only' => null,
-        'expiration_date' => 'date-time'
+        'legs' => null
     ];
 
     /**
@@ -86,15 +78,11 @@ class TradingPlaceSimpleOrderRequest implements ModelInterface, ArrayAccess, \Js
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'instrument' => false,
-		'side' => false,
-		'type' => false,
+        'type' => false,
 		'time_in_force' => false,
-		'amount' => false,
-		'limit_price' => false,
-		'stop_price' => false,
-		'post_only' => false,
-		'expiration_date' => false
+		'limit_price' => true,
+		'stop_price' => true,
+		'legs' => false
     ];
 
     /**
@@ -183,15 +171,11 @@ class TradingPlaceSimpleOrderRequest implements ModelInterface, ArrayAccess, \Js
      * @var string[]
      */
     protected static $attributeMap = [
-        'instrument' => 'instrument',
-        'side' => 'side',
         'type' => 'type',
         'time_in_force' => 'time_in_force',
-        'amount' => 'amount',
         'limit_price' => 'limit_price',
         'stop_price' => 'stop_price',
-        'post_only' => 'post_only',
-        'expiration_date' => 'expiration_date'
+        'legs' => 'legs'
     ];
 
     /**
@@ -200,15 +184,11 @@ class TradingPlaceSimpleOrderRequest implements ModelInterface, ArrayAccess, \Js
      * @var string[]
      */
     protected static $setters = [
-        'instrument' => 'setInstrument',
-        'side' => 'setSide',
         'type' => 'setType',
         'time_in_force' => 'setTimeInForce',
-        'amount' => 'setAmount',
         'limit_price' => 'setLimitPrice',
         'stop_price' => 'setStopPrice',
-        'post_only' => 'setPostOnly',
-        'expiration_date' => 'setExpirationDate'
+        'legs' => 'setLegs'
     ];
 
     /**
@@ -217,15 +197,11 @@ class TradingPlaceSimpleOrderRequest implements ModelInterface, ArrayAccess, \Js
      * @var string[]
      */
     protected static $getters = [
-        'instrument' => 'getInstrument',
-        'side' => 'getSide',
         'type' => 'getType',
         'time_in_force' => 'getTimeInForce',
-        'amount' => 'getAmount',
         'limit_price' => 'getLimitPrice',
         'stop_price' => 'getStopPrice',
-        'post_only' => 'getPostOnly',
-        'expiration_date' => 'getExpirationDate'
+        'legs' => 'getLegs'
     ];
 
     /**
@@ -273,8 +249,6 @@ class TradingPlaceSimpleOrderRequest implements ModelInterface, ArrayAccess, \Js
     public const TYPE_LIMIT = 'LIMIT';
     public const TYPE_STOP_LOSS_MARKET = 'STOP_LOSS_MARKET';
     public const TYPE_STOP_LOSS_LIMIT = 'STOP_LOSS_LIMIT';
-    public const TYPE_TAKE_PROFIT_MARKET = 'TAKE_PROFIT_MARKET';
-    public const TYPE_TAKE_PROFIT_LIMIT = 'TAKE_PROFIT_LIMIT';
 
     /**
      * Gets allowable values of the enum
@@ -288,8 +262,6 @@ class TradingPlaceSimpleOrderRequest implements ModelInterface, ArrayAccess, \Js
             self::TYPE_LIMIT,
             self::TYPE_STOP_LOSS_MARKET,
             self::TYPE_STOP_LOSS_LIMIT,
-            self::TYPE_TAKE_PROFIT_MARKET,
-            self::TYPE_TAKE_PROFIT_LIMIT,
         ];
     }
 
@@ -308,15 +280,11 @@ class TradingPlaceSimpleOrderRequest implements ModelInterface, ArrayAccess, \Js
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('instrument', $data ?? [], null);
-        $this->setIfExists('side', $data ?? [], null);
         $this->setIfExists('type', $data ?? [], null);
         $this->setIfExists('time_in_force', $data ?? [], null);
-        $this->setIfExists('amount', $data ?? [], null);
         $this->setIfExists('limit_price', $data ?? [], null);
         $this->setIfExists('stop_price', $data ?? [], null);
-        $this->setIfExists('post_only', $data ?? [], null);
-        $this->setIfExists('expiration_date', $data ?? [], null);
+        $this->setIfExists('legs', $data ?? [], null);
     }
 
     /**
@@ -346,12 +314,6 @@ class TradingPlaceSimpleOrderRequest implements ModelInterface, ArrayAccess, \Js
     {
         $invalidProperties = [];
 
-        if ($this->container['instrument'] === null) {
-            $invalidProperties[] = "'instrument' can't be null";
-        }
-        if ($this->container['side'] === null) {
-            $invalidProperties[] = "'side' can't be null";
-        }
         if ($this->container['type'] === null) {
             $invalidProperties[] = "'type' can't be null";
         }
@@ -367,8 +329,8 @@ class TradingPlaceSimpleOrderRequest implements ModelInterface, ArrayAccess, \Js
         if ($this->container['time_in_force'] === null) {
             $invalidProperties[] = "'time_in_force' can't be null";
         }
-        if ($this->container['amount'] === null) {
-            $invalidProperties[] = "'amount' can't be null";
+        if ($this->container['legs'] === null) {
+            $invalidProperties[] = "'legs' can't be null";
         }
         return $invalidProperties;
     }
@@ -384,64 +346,6 @@ class TradingPlaceSimpleOrderRequest implements ModelInterface, ArrayAccess, \Js
         return count($this->listInvalidProperties()) === 0;
     }
 
-
-    /**
-     * Gets instrument
-     *
-     * @return \SnapTrade\Model\TradingInstrument
-     */
-    public function getInstrument()
-    {
-        return $this->container['instrument'];
-    }
-
-    /**
-     * Sets instrument
-     *
-     * @param \SnapTrade\Model\TradingInstrument $instrument instrument
-     *
-     * @return self
-     */
-    public function setInstrument($instrument)
-    {
-
-        if (is_null($instrument)) {
-            throw new \InvalidArgumentException('non-nullable instrument cannot be null');
-        }
-
-        $this->container['instrument'] = $instrument;
-
-        return $this;
-    }
-
-    /**
-     * Gets side
-     *
-     * @return \SnapTrade\Model\ActionStrict
-     */
-    public function getSide()
-    {
-        return $this->container['side'];
-    }
-
-    /**
-     * Sets side
-     *
-     * @param \SnapTrade\Model\ActionStrict $side side
-     *
-     * @return self
-     */
-    public function setSide($side)
-    {
-
-        if (is_null($side)) {
-            throw new \InvalidArgumentException('non-nullable side cannot be null');
-        }
-
-        $this->container['side'] = $side;
-
-        return $this;
-    }
 
     /**
      * Gets type
@@ -512,35 +416,6 @@ class TradingPlaceSimpleOrderRequest implements ModelInterface, ArrayAccess, \Js
     }
 
     /**
-     * Gets amount
-     *
-     * @return float
-     */
-    public function getAmount()
-    {
-        return $this->container['amount'];
-    }
-
-    /**
-     * Sets amount
-     *
-     * @param float $amount The amount of the base currency to buy or sell.
-     *
-     * @return self
-     */
-    public function setAmount($amount)
-    {
-
-        if (is_null($amount)) {
-            throw new \InvalidArgumentException('non-nullable amount cannot be null');
-        }
-
-        $this->container['amount'] = $amount;
-
-        return $this;
-    }
-
-    /**
      * Gets limit_price
      *
      * @return float|null
@@ -553,7 +428,7 @@ class TradingPlaceSimpleOrderRequest implements ModelInterface, ArrayAccess, \Js
     /**
      * Sets limit_price
      *
-     * @param float|null $limit_price The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
+     * @param float|null $limit_price The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT.
      *
      * @return self
      */
@@ -561,7 +436,14 @@ class TradingPlaceSimpleOrderRequest implements ModelInterface, ArrayAccess, \Js
     {
 
         if (is_null($limit_price)) {
-            throw new \InvalidArgumentException('non-nullable limit_price cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'limit_price');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('limit_price', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['limit_price'] = $limit_price;
@@ -582,7 +464,7 @@ class TradingPlaceSimpleOrderRequest implements ModelInterface, ArrayAccess, \Js
     /**
      * Sets stop_price
      *
-     * @param float|null $stop_price The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
+     * @param float|null $stop_price The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
      *
      * @return self
      */
@@ -590,7 +472,14 @@ class TradingPlaceSimpleOrderRequest implements ModelInterface, ArrayAccess, \Js
     {
 
         if (is_null($stop_price)) {
-            throw new \InvalidArgumentException('non-nullable stop_price cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'stop_price');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('stop_price', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['stop_price'] = $stop_price;
@@ -599,59 +488,30 @@ class TradingPlaceSimpleOrderRequest implements ModelInterface, ArrayAccess, \Js
     }
 
     /**
-     * Gets post_only
+     * Gets legs
      *
-     * @return bool|null
+     * @return \SnapTrade\Model\MlegLeg[]
      */
-    public function getPostOnly()
+    public function getLegs()
     {
-        return $this->container['post_only'];
+        return $this->container['legs'];
     }
 
     /**
-     * Sets post_only
+     * Sets legs
      *
-     * @param bool|null $post_only Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
+     * @param \SnapTrade\Model\MlegLeg[] $legs legs
      *
      * @return self
      */
-    public function setPostOnly($post_only)
+    public function setLegs($legs)
     {
 
-        if (is_null($post_only)) {
-            throw new \InvalidArgumentException('non-nullable post_only cannot be null');
+        if (is_null($legs)) {
+            throw new \InvalidArgumentException('non-nullable legs cannot be null');
         }
 
-        $this->container['post_only'] = $post_only;
-
-        return $this;
-    }
-
-    /**
-     * Gets expiration_date
-     *
-     * @return \DateTime|null
-     */
-    public function getExpirationDate()
-    {
-        return $this->container['expiration_date'];
-    }
-
-    /**
-     * Sets expiration_date
-     *
-     * @param \DateTime|null $expiration_date The expiration date of the order. Required if the time_in_force is GTD.
-     *
-     * @return self
-     */
-    public function setExpirationDate($expiration_date)
-    {
-
-        if (is_null($expiration_date)) {
-            throw new \InvalidArgumentException('non-nullable expiration_date cannot be null');
-        }
-
-        $this->container['expiration_date'] = $expiration_date;
+        $this->container['legs'] = $legs;
 
         return $this;
     }

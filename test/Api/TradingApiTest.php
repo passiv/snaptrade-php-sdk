@@ -143,6 +143,18 @@ class TradingApiTest extends TestCase
     }
 
     /**
+     * Test case for placeMlegOrder
+     *
+     * Place multi-leg option order.
+     *
+     */
+    public function testPlaceMlegOrder()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for placeOrder
      *
      * Place checked order.

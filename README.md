@@ -68,6 +68,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.trading.getUserAccountQuotes`](#snaptradetradinggetuseraccountquotes)
   * [`snaptrade.trading.placeBracketOrder`](#snaptradetradingplacebracketorder)
   * [`snaptrade.trading.placeForceOrder`](#snaptradetradingplaceforceorder)
+  * [`snaptrade.trading.placeMlegOrder`](#snaptradetradingplacemlegorder)
   * [`snaptrade.trading.placeOrder`](#snaptradetradingplaceorder)
   * [`snaptrade.trading.placeSimpleOrder`](#snaptradetradingplacesimpleorder)
   * [`snaptrade.trading.previewSimpleOrder`](#snaptradetradingpreviewsimpleorder)
@@ -1314,7 +1315,7 @@ Places the option strategy order and returns the order record received from the 
 ```php
 $result = $snaptrade->options->placeOptionStrategy(
     order_type: "Market", 
-    time_in_force: "FOK", 
+    time_in_force: "Day", 
     user_id: "snaptrade-user-123", 
     user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61", 
     account_id: "2bcd7cc3-e922-4976-bce1-9858296801c3", 
@@ -1826,7 +1827,7 @@ $result = $snaptrade->trading->getOrderImpact(
     action: "BUY", 
     universal_symbol_id: "2bcd7cc3-e922-4976-bce1-9858296801c3", 
     order_type: "Market", 
-    time_in_force: "FOK", 
+    time_in_force: "Day", 
     user_id: "snaptrade-user-123", 
     user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61", 
     price: 31.33, 
@@ -1946,7 +1947,7 @@ $result = $snaptrade->trading->placeBracketOrder(
         "type" => "EQUITY",
     ], 
     order_type: "Market", 
-    time_in_force: "FOK", 
+    time_in_force: "Day", 
     stop_loss: [
         "stop_price" => "48.55",
         "limit_price" => "48.50",
@@ -2033,7 +2034,7 @@ $result = $snaptrade->trading->placeForceOrder(
     account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631", 
     action: "BUY", 
     order_type: "Market", 
-    time_in_force: "FOK", 
+    time_in_force: "Day", 
     user_id: "snaptrade-user-123", 
     user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61", 
     universal_symbol_id: "2bcd7cc3-e922-4976-bce1-9858296801c3", 
@@ -2091,6 +2092,74 @@ For Equity orders, this represents the number of shares for the order. This can 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/trade/place` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.trading.placeMlegOrder`<a id="snaptradetradingplacemlegorder"></a>
+
+Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support
+
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $snaptrade->trading->placeMlegOrder(
+    type: "MARKET", 
+    time_in_force: "Day", 
+    legs: [
+        [
+            "instrument" => [
+                "symbol" => "PBI   250718C00006000",
+                "type" => "OPTION",
+            ],
+            "action" => "BUY_TO_OPEN",
+            "units" => 1,
+        ]
+    ], 
+    user_id: "snaptrade-user-123", 
+    user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61", 
+    account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631", 
+    limit_price: "", 
+    stop_price: ""
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### type: `string`<a id="type-string"></a>
+
+The type of order to place.
+
+##### time_in_force:<a id="time_in_force"></a>
+
+##### legs: [`MlegLeg`](./lib/Model/MlegLeg.php)[]<a id="legs-mlegleglibmodelmleglegphp"></a>
+
+##### user_id: `string`<a id="user_id-string"></a>
+
+##### user_secret: `string`<a id="user_secret-string"></a>
+
+##### account_id: `string`<a id="account_id-string"></a>
+
+##### limit_price: `float`<a id="limit_price-float"></a>
+
+The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT.
+
+##### stop_price: `float`<a id="stop_price-float"></a>
+
+The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[**MlegOrderResponse**](./lib/Model/MlegOrderResponse.php)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/options` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -2161,7 +2230,7 @@ $result = $snaptrade->trading->placeSimpleOrder(
     ], 
     side: "BUY", 
     type: "MARKET", 
-    time_in_force: "GTC", 
+    time_in_force: "Day", 
     amount: "123.45", 
     user_id: "snaptrade-user-123", 
     user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61", 
@@ -2183,9 +2252,7 @@ $result = $snaptrade->trading->placeSimpleOrder(
 
 The type of order to place.
 
-##### time_in_force: `string`<a id="time_in_force-string"></a>
-
-The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - `GTD` - Good Til Date. The order is valid until the specified date.
+##### time_in_force:<a id="time_in_force"></a>
 
 ##### amount: `float`<a id="amount-float"></a>
 
@@ -2243,7 +2310,7 @@ $result = $snaptrade->trading->previewSimpleOrder(
     ], 
     side: "BUY", 
     type: "MARKET", 
-    time_in_force: "GTC", 
+    time_in_force: "Day", 
     amount: "123.45", 
     user_id: "snaptrade-user-123", 
     user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61", 
@@ -2265,9 +2332,7 @@ $result = $snaptrade->trading->previewSimpleOrder(
 
 The type of order to place.
 
-##### time_in_force: `string`<a id="time_in_force-string"></a>
-
-The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - `GTD` - Good Til Date. The order is valid until the specified date.
+##### time_in_force:<a id="time_in_force"></a>
 
 ##### amount: `float`<a id="amount-float"></a>
 
@@ -2323,7 +2388,7 @@ returned in the response going forward. Only supported on some brokerages
 $result = $snaptrade->trading->replaceOrder(
     action: "BUY", 
     order_type: "Market", 
-    time_in_force: "FOK", 
+    time_in_force: "Day", 
     account_id: "2bcd7cc3-e922-4976-bce1-9858296801c3", 
     brokerage_order_id: "66a033fa-da74-4fcf-b527-feefdec9257e", 
     user_id: "snaptrade-user-123", 

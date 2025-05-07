@@ -1,6 +1,6 @@
 <?php
 /**
- * TradingPlaceMlegOrderRequest
+ * MlegTradeForm
  *
  * PHP version 7.4
  *
@@ -27,13 +27,14 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * TradingPlaceMlegOrderRequest Class Doc Comment
+ * MlegTradeForm Class Doc Comment
  *
  * @category Class
+ * @description Inputs for placing a multi-leg order with the brokerage.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class TradingPlaceMlegOrderRequest implements ModelInterface, ArrayAccess, \JsonSerializable
+class MlegTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -42,7 +43,7 @@ class TradingPlaceMlegOrderRequest implements ModelInterface, ArrayAccess, \Json
       *
       * @var string
       */
-    protected static $openAPIModelName = 'Trading_placeMlegOrder_request';
+    protected static $openAPIModelName = 'MlegTradeForm';
 
     /**
       * Array of property to type mappings. Used for (de)serialization

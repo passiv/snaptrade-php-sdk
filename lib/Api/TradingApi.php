@@ -3540,7 +3540,7 @@ class TradingApi extends \SnapTrade\CustomApi
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
      * @param  string $account_id account_id (required)
-     * @param  \SnapTrade\Model\TradingPlaceMlegOrderRequest $trading_place_mleg_order_request trading_place_mleg_order_request (required)
+     * @param  \SnapTrade\Model\MlegTradeForm $mleg_trade_form mleg_trade_form (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['placeMlegOrder'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
@@ -3566,9 +3566,9 @@ class TradingApi extends \SnapTrade\CustomApi
         $this->setRequestBodyProperty($_body, "limit_price", $limit_price);
         $this->setRequestBodyProperty($_body, "stop_price", $stop_price);
         $this->setRequestBodyProperty($_body, "legs", $legs);
-        $trading_place_mleg_order_request = $_body;
+        $mleg_trade_form = $_body;
 
-        list($response) = $this->placeMlegOrderWithHttpInfo($user_id, $user_secret, $account_id, $trading_place_mleg_order_request, $contentType);
+        list($response) = $this->placeMlegOrderWithHttpInfo($user_id, $user_secret, $account_id, $mleg_trade_form, $contentType);
         return $response;
     }
 
@@ -3582,16 +3582,16 @@ class TradingApi extends \SnapTrade\CustomApi
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
      * @param  string $account_id (required)
-     * @param  \SnapTrade\Model\TradingPlaceMlegOrderRequest $trading_place_mleg_order_request (required)
+     * @param  \SnapTrade\Model\MlegTradeForm $mleg_trade_form (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['placeMlegOrder'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \SnapTrade\Model\MlegOrderResponse|\SnapTrade\Model\Model400FailedRequestResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function placeMlegOrderWithHttpInfo($user_id, $user_secret, $account_id, $trading_place_mleg_order_request, string $contentType = self::contentTypes['placeMlegOrder'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    public function placeMlegOrderWithHttpInfo($user_id, $user_secret, $account_id, $mleg_trade_form, string $contentType = self::contentTypes['placeMlegOrder'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->placeMlegOrderRequest($user_id, $user_secret, $account_id, $trading_place_mleg_order_request, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->placeMlegOrderRequest($user_id, $user_secret, $account_id, $mleg_trade_form, $contentType);
 
         // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
@@ -3610,7 +3610,7 @@ class TradingApi extends \SnapTrade\CustomApi
                         $user_id,
                         $user_secret,
                         $account_id,
-                        $trading_place_mleg_order_request,
+                        $mleg_trade_form,
                         $contentType,
                         $requestOptions->setRetryOAuth(false)
                     );
@@ -3728,7 +3728,7 @@ class TradingApi extends \SnapTrade\CustomApi
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
      * @param  string $account_id (required)
-     * @param  \SnapTrade\Model\TradingPlaceMlegOrderRequest $trading_place_mleg_order_request (required)
+     * @param  \SnapTrade\Model\MlegTradeForm $mleg_trade_form (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['placeMlegOrder'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3753,9 +3753,9 @@ class TradingApi extends \SnapTrade\CustomApi
         $this->setRequestBodyProperty($_body, "limit_price", $limit_price);
         $this->setRequestBodyProperty($_body, "stop_price", $stop_price);
         $this->setRequestBodyProperty($_body, "legs", $legs);
-        $trading_place_mleg_order_request = $_body;
+        $mleg_trade_form = $_body;
 
-        return $this->placeMlegOrderAsyncWithHttpInfo($user_id, $user_secret, $account_id, $trading_place_mleg_order_request, $contentType)
+        return $this->placeMlegOrderAsyncWithHttpInfo($user_id, $user_secret, $account_id, $mleg_trade_form, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -3773,16 +3773,16 @@ class TradingApi extends \SnapTrade\CustomApi
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
      * @param  string $account_id (required)
-     * @param  \SnapTrade\Model\TradingPlaceMlegOrderRequest $trading_place_mleg_order_request (required)
+     * @param  \SnapTrade\Model\MlegTradeForm $mleg_trade_form (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['placeMlegOrder'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function placeMlegOrderAsyncWithHttpInfo($user_id, $user_secret, $account_id, $trading_place_mleg_order_request, string $contentType = self::contentTypes['placeMlegOrder'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    public function placeMlegOrderAsyncWithHttpInfo($user_id, $user_secret, $account_id, $mleg_trade_form, string $contentType = self::contentTypes['placeMlegOrder'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\MlegOrderResponse';
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->placeMlegOrderRequest($user_id, $user_secret, $account_id, $trading_place_mleg_order_request, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->placeMlegOrderRequest($user_id, $user_secret, $account_id, $mleg_trade_form, $contentType);
 
         // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
@@ -3829,13 +3829,13 @@ class TradingApi extends \SnapTrade\CustomApi
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
      * @param  string $account_id (required)
-     * @param  \SnapTrade\Model\TradingPlaceMlegOrderRequest $trading_place_mleg_order_request (required)
+     * @param  \SnapTrade\Model\MlegTradeForm $mleg_trade_form (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['placeMlegOrder'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function placeMlegOrderRequest($user_id, $user_secret, $account_id, $trading_place_mleg_order_request, string $contentType = self::contentTypes['placeMlegOrder'][0])
+    public function placeMlegOrderRequest($user_id, $user_secret, $account_id, $mleg_trade_form, string $contentType = self::contentTypes['placeMlegOrder'][0])
     {
 
         // Check if $user_id is a string
@@ -3868,18 +3868,18 @@ class TradingApi extends \SnapTrade\CustomApi
                 'Missing the required parameter account_id when calling placeMlegOrder'
             );
         }
-        if ($trading_place_mleg_order_request !== SENTINEL_VALUE) {
-            if (!($trading_place_mleg_order_request instanceof \SnapTrade\Model\TradingPlaceMlegOrderRequest)) {
-                if (!is_array($trading_place_mleg_order_request))
-                    throw new \InvalidArgumentException('"trading_place_mleg_order_request" must be associative array or an instance of \SnapTrade\Model\TradingPlaceMlegOrderRequest TradingApi.placeMlegOrder.');
+        if ($mleg_trade_form !== SENTINEL_VALUE) {
+            if (!($mleg_trade_form instanceof \SnapTrade\Model\MlegTradeForm)) {
+                if (!is_array($mleg_trade_form))
+                    throw new \InvalidArgumentException('"mleg_trade_form" must be associative array or an instance of \SnapTrade\Model\MlegTradeForm TradingApi.placeMlegOrder.');
                 else
-                    $trading_place_mleg_order_request = new \SnapTrade\Model\TradingPlaceMlegOrderRequest($trading_place_mleg_order_request);
+                    $mleg_trade_form = new \SnapTrade\Model\MlegTradeForm($mleg_trade_form);
             }
         }
-        // verify the required parameter 'trading_place_mleg_order_request' is set
-        if ($trading_place_mleg_order_request === SENTINEL_VALUE || (is_array($trading_place_mleg_order_request) && count($trading_place_mleg_order_request) === 0)) {
+        // verify the required parameter 'mleg_trade_form' is set
+        if ($mleg_trade_form === SENTINEL_VALUE || (is_array($mleg_trade_form) && count($mleg_trade_form) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter trading_place_mleg_order_request when calling placeMlegOrder'
+                'Missing the required parameter mleg_trade_form when calling placeMlegOrder'
             );
         }
 
@@ -3932,12 +3932,12 @@ class TradingApi extends \SnapTrade\CustomApi
         );
 
         // for model (json/xml)
-        if (isset($trading_place_mleg_order_request)) {
+        if (isset($mleg_trade_form)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($trading_place_mleg_order_request));
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($mleg_trade_form));
             } else {
-                $httpBody = $trading_place_mleg_order_request;
+                $httpBody = $mleg_trade_form;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {

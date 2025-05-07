@@ -1,6 +1,6 @@
 <?php
 /**
- * TradingPlaceMlegOrderRequestTest
+ * MlegTradeFormTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * TradingPlaceMlegOrderRequestTest Class Doc Comment
+ * MlegTradeFormTest Class Doc Comment
  *
  * @category    Class
- * @description TradingPlaceMlegOrderRequest
+ * @description Inputs for placing a multi-leg order with the brokerage.
  * @package     SnapTrade
  */
-class TradingPlaceMlegOrderRequestTest extends TestCase
+class MlegTradeFormTest extends TestCase
 {
 
     /**
@@ -64,9 +64,9 @@ class TradingPlaceMlegOrderRequestTest extends TestCase
     }
 
     /**
-     * Test "TradingPlaceMlegOrderRequest"
+     * Test "MlegTradeForm"
      */
-    public function testTradingPlaceMlegOrderRequest()
+    public function testMlegTradeForm()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

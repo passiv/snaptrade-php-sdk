@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * AccountTest Class Doc Comment
  *
  * @category    Class
- * @description A single brokerage account at a financial institution.
+ * @description A single account at a brokerage.
  * @package     SnapTrade
  */
 class AccountTest extends TestCase
@@ -91,15 +91,6 @@ class AccountTest extends TestCase
     }
 
     /**
-     * Test attribute "portfolio_group"
-     */
-    public function testPropertyPortfolioGroup()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test attribute "name"
      */
     public function testPropertyName()
@@ -136,24 +127,6 @@ class AccountTest extends TestCase
     }
 
     /**
-     * Test attribute "meta"
-     */
-    public function testPropertyMeta()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "cash_restrictions"
-     */
-    public function testPropertyCashRestrictions()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test attribute "sync_status"
      */
     public function testPropertySyncStatus()
@@ -166,6 +139,42 @@ class AccountTest extends TestCase
      * Test attribute "balance"
      */
     public function testPropertyBalance()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "raw_type"
+     */
+    public function testPropertyRawType()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "meta"
+     */
+    public function testPropertyMeta()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "portfolio_group"
+     */
+    public function testPropertyPortfolioGroup()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "cash_restrictions"
+     */
+    public function testPropertyCashRestrictions()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

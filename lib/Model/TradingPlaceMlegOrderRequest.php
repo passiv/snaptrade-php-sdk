@@ -50,7 +50,7 @@ class TradingPlaceMlegOrderRequest implements ModelInterface, ArrayAccess, \Json
       * @var string[]
       */
     protected static $openAPITypes = [
-        'type' => 'string',
+        'type' => '\SnapTrade\Model\MlegOrderTypeStrict',
         'time_in_force' => '\SnapTrade\Model\TimeInForceStrict',
         'limit_price' => 'float',
         'stop_price' => 'float',
@@ -245,25 +245,6 @@ class TradingPlaceMlegOrderRequest implements ModelInterface, ArrayAccess, \Json
         return self::$openAPIModelName;
     }
 
-    public const TYPE_MARKET = 'MARKET';
-    public const TYPE_LIMIT = 'LIMIT';
-    public const TYPE_STOP_LOSS_MARKET = 'STOP_LOSS_MARKET';
-    public const TYPE_STOP_LOSS_LIMIT = 'STOP_LOSS_LIMIT';
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getTypeAllowableValues()
-    {
-        return [
-            self::TYPE_MARKET,
-            self::TYPE_LIMIT,
-            self::TYPE_STOP_LOSS_MARKET,
-            self::TYPE_STOP_LOSS_LIMIT,
-        ];
-    }
 
     /**
      * Associative array for storing property values
@@ -317,15 +298,6 @@ class TradingPlaceMlegOrderRequest implements ModelInterface, ArrayAccess, \Json
         if ($this->container['type'] === null) {
             $invalidProperties[] = "'type' can't be null";
         }
-        $allowedValues = $this->getTypeAllowableValues();
-        if (!is_null($this->container['type']) && !in_array($this->container['type'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'type', must be one of '%s'",
-                $this->container['type'],
-                implode("', '", $allowedValues)
-            );
-        }
-
         if ($this->container['time_in_force'] === null) {
             $invalidProperties[] = "'time_in_force' can't be null";
         }
@@ -350,7 +322,7 @@ class TradingPlaceMlegOrderRequest implements ModelInterface, ArrayAccess, \Json
     /**
      * Gets type
      *
-     * @return string
+     * @return \SnapTrade\Model\MlegOrderTypeStrict
      */
     public function getType()
     {
@@ -360,22 +332,12 @@ class TradingPlaceMlegOrderRequest implements ModelInterface, ArrayAccess, \Json
     /**
      * Sets type
      *
-     * @param string $type The type of order to place.
+     * @param \SnapTrade\Model\MlegOrderTypeStrict $type type
      *
      * @return self
      */
     public function setType($type)
     {
-        $allowedValues = $this->getTypeAllowableValues();
-        if (!in_array($type, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'type', must be one of '%s'",
-                    $type,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
 
         if (is_null($type)) {
             throw new \InvalidArgumentException('non-nullable type cannot be null');

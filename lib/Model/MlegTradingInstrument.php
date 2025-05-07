@@ -51,7 +51,7 @@ class MlegTradingInstrument implements ModelInterface, ArrayAccess, \JsonSeriali
       */
     protected static $openAPITypes = [
         'symbol' => 'string',
-        'type' => 'string'
+        'instrument_type' => '\SnapTrade\Model\MlegInstrumentType'
     ];
 
     /**
@@ -63,7 +63,7 @@ class MlegTradingInstrument implements ModelInterface, ArrayAccess, \JsonSeriali
       */
     protected static $openAPIFormats = [
         'symbol' => null,
-        'type' => null
+        'instrument_type' => null
     ];
 
     /**
@@ -73,7 +73,7 @@ class MlegTradingInstrument implements ModelInterface, ArrayAccess, \JsonSeriali
       */
     protected static array $openAPINullables = [
         'symbol' => false,
-		'type' => false
+		'instrument_type' => false
     ];
 
     /**
@@ -163,7 +163,7 @@ class MlegTradingInstrument implements ModelInterface, ArrayAccess, \JsonSeriali
      */
     protected static $attributeMap = [
         'symbol' => 'symbol',
-        'type' => 'type'
+        'instrument_type' => 'instrument_type'
     ];
 
     /**
@@ -173,7 +173,7 @@ class MlegTradingInstrument implements ModelInterface, ArrayAccess, \JsonSeriali
      */
     protected static $setters = [
         'symbol' => 'setSymbol',
-        'type' => 'setType'
+        'instrument_type' => 'setInstrumentType'
     ];
 
     /**
@@ -183,7 +183,7 @@ class MlegTradingInstrument implements ModelInterface, ArrayAccess, \JsonSeriali
      */
     protected static $getters = [
         'symbol' => 'getSymbol',
-        'type' => 'getType'
+        'instrument_type' => 'getInstrumentType'
     ];
 
     /**
@@ -227,21 +227,6 @@ class MlegTradingInstrument implements ModelInterface, ArrayAccess, \JsonSeriali
         return self::$openAPIModelName;
     }
 
-    public const TYPE_OPTION = 'OPTION';
-    public const TYPE_EQUITY = 'EQUITY';
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getTypeAllowableValues()
-    {
-        return [
-            self::TYPE_OPTION,
-            self::TYPE_EQUITY,
-        ];
-    }
 
     /**
      * Associative array for storing property values
@@ -259,7 +244,7 @@ class MlegTradingInstrument implements ModelInterface, ArrayAccess, \JsonSeriali
     public function __construct(array $data = null)
     {
         $this->setIfExists('symbol', $data ?? [], null);
-        $this->setIfExists('type', $data ?? [], null);
+        $this->setIfExists('instrument_type', $data ?? [], null);
     }
 
     /**
@@ -292,18 +277,9 @@ class MlegTradingInstrument implements ModelInterface, ArrayAccess, \JsonSeriali
         if ($this->container['symbol'] === null) {
             $invalidProperties[] = "'symbol' can't be null";
         }
-        if ($this->container['type'] === null) {
-            $invalidProperties[] = "'type' can't be null";
+        if ($this->container['instrument_type'] === null) {
+            $invalidProperties[] = "'instrument_type' can't be null";
         }
-        $allowedValues = $this->getTypeAllowableValues();
-        if (!is_null($this->container['type']) && !in_array($this->container['type'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'type', must be one of '%s'",
-                $this->container['type'],
-                implode("', '", $allowedValues)
-            );
-        }
-
         return $invalidProperties;
     }
 
@@ -349,40 +325,30 @@ class MlegTradingInstrument implements ModelInterface, ArrayAccess, \JsonSeriali
     }
 
     /**
-     * Gets type
+     * Gets instrument_type
      *
-     * @return string
+     * @return \SnapTrade\Model\MlegInstrumentType
      */
-    public function getType()
+    public function getInstrumentType()
     {
-        return $this->container['type'];
+        return $this->container['instrument_type'];
     }
 
     /**
-     * Sets type
+     * Sets instrument_type
      *
-     * @param string $type The instrument's type
+     * @param \SnapTrade\Model\MlegInstrumentType $instrument_type instrument_type
      *
      * @return self
      */
-    public function setType($type)
+    public function setInstrumentType($instrument_type)
     {
-        $allowedValues = $this->getTypeAllowableValues();
-        if (!in_array($type, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'type', must be one of '%s'",
-                    $type,
-                    implode("', '", $allowedValues)
-                )
-            );
+
+        if (is_null($instrument_type)) {
+            throw new \InvalidArgumentException('non-nullable instrument_type cannot be null');
         }
 
-        if (is_null($type)) {
-            throw new \InvalidArgumentException('non-nullable type cannot be null');
-        }
-
-        $this->container['type'] = $type;
+        $this->container['instrument_type'] = $instrument_type;
 
         return $this;
     }

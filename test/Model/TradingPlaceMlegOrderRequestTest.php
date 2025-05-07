@@ -73,9 +73,9 @@ class TradingPlaceMlegOrderRequestTest extends TestCase
     }
 
     /**
-     * Test attribute "type"
+     * Test attribute "order_type"
      */
-    public function testPropertyType()
+    public function testPropertyOrderType()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

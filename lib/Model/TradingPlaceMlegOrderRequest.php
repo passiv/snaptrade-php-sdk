@@ -50,7 +50,7 @@ class TradingPlaceMlegOrderRequest implements ModelInterface, ArrayAccess, \Json
       * @var string[]
       */
     protected static $openAPITypes = [
-        'type' => '\SnapTrade\Model\MlegOrderTypeStrict',
+        'order_type' => '\SnapTrade\Model\MlegOrderTypeStrict',
         'time_in_force' => '\SnapTrade\Model\TimeInForceStrict',
         'limit_price' => 'float',
         'stop_price' => 'float',
@@ -65,7 +65,7 @@ class TradingPlaceMlegOrderRequest implements ModelInterface, ArrayAccess, \Json
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'type' => null,
+        'order_type' => null,
         'time_in_force' => null,
         'limit_price' => 'decimal',
         'stop_price' => 'decimal',
@@ -78,7 +78,7 @@ class TradingPlaceMlegOrderRequest implements ModelInterface, ArrayAccess, \Json
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'type' => false,
+        'order_type' => false,
 		'time_in_force' => false,
 		'limit_price' => true,
 		'stop_price' => true,
@@ -171,7 +171,7 @@ class TradingPlaceMlegOrderRequest implements ModelInterface, ArrayAccess, \Json
      * @var string[]
      */
     protected static $attributeMap = [
-        'type' => 'type',
+        'order_type' => 'order_type',
         'time_in_force' => 'time_in_force',
         'limit_price' => 'limit_price',
         'stop_price' => 'stop_price',
@@ -184,7 +184,7 @@ class TradingPlaceMlegOrderRequest implements ModelInterface, ArrayAccess, \Json
      * @var string[]
      */
     protected static $setters = [
-        'type' => 'setType',
+        'order_type' => 'setOrderType',
         'time_in_force' => 'setTimeInForce',
         'limit_price' => 'setLimitPrice',
         'stop_price' => 'setStopPrice',
@@ -197,7 +197,7 @@ class TradingPlaceMlegOrderRequest implements ModelInterface, ArrayAccess, \Json
      * @var string[]
      */
     protected static $getters = [
-        'type' => 'getType',
+        'order_type' => 'getOrderType',
         'time_in_force' => 'getTimeInForce',
         'limit_price' => 'getLimitPrice',
         'stop_price' => 'getStopPrice',
@@ -261,7 +261,7 @@ class TradingPlaceMlegOrderRequest implements ModelInterface, ArrayAccess, \Json
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('type', $data ?? [], null);
+        $this->setIfExists('order_type', $data ?? [], null);
         $this->setIfExists('time_in_force', $data ?? [], null);
         $this->setIfExists('limit_price', $data ?? [], null);
         $this->setIfExists('stop_price', $data ?? [], null);
@@ -295,8 +295,8 @@ class TradingPlaceMlegOrderRequest implements ModelInterface, ArrayAccess, \Json
     {
         $invalidProperties = [];
 
-        if ($this->container['type'] === null) {
-            $invalidProperties[] = "'type' can't be null";
+        if ($this->container['order_type'] === null) {
+            $invalidProperties[] = "'order_type' can't be null";
         }
         if ($this->container['time_in_force'] === null) {
             $invalidProperties[] = "'time_in_force' can't be null";
@@ -320,30 +320,30 @@ class TradingPlaceMlegOrderRequest implements ModelInterface, ArrayAccess, \Json
 
 
     /**
-     * Gets type
+     * Gets order_type
      *
      * @return \SnapTrade\Model\MlegOrderTypeStrict
      */
-    public function getType()
+    public function getOrderType()
     {
-        return $this->container['type'];
+        return $this->container['order_type'];
     }
 
     /**
-     * Sets type
+     * Sets order_type
      *
-     * @param \SnapTrade\Model\MlegOrderTypeStrict $type type
+     * @param \SnapTrade\Model\MlegOrderTypeStrict $order_type order_type
      *
      * @return self
      */
-    public function setType($type)
+    public function setOrderType($order_type)
     {
 
-        if (is_null($type)) {
-            throw new \InvalidArgumentException('non-nullable type cannot be null');
+        if (is_null($order_type)) {
+            throw new \InvalidArgumentException('non-nullable order_type cannot be null');
         }
 
-        $this->container['type'] = $type;
+        $this->container['order_type'] = $order_type;
 
         return $this;
     }

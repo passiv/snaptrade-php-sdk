@@ -1,6 +1,6 @@
 <?php
 /**
- * MlegTradingInstrumentTest
+ * MlegInstrumentTypeTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * MlegTradingInstrumentTest Class Doc Comment
+ * MlegInstrumentTypeTest Class Doc Comment
  *
  * @category    Class
- * @description MlegTradingInstrument
+ * @description The instrument&#39;s type
  * @package     SnapTrade
  */
-class MlegTradingInstrumentTest extends TestCase
+class MlegInstrumentTypeTest extends TestCase
 {
 
     /**
@@ -64,27 +64,9 @@ class MlegTradingInstrumentTest extends TestCase
     }
 
     /**
-     * Test "MlegTradingInstrument"
+     * Test "MlegInstrumentType"
      */
-    public function testMlegTradingInstrument()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "symbol"
-     */
-    public function testPropertySymbol()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "instrument_type"
-     */
-    public function testPropertyInstrumentType()
+    public function testMlegInstrumentType()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

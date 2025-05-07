@@ -2108,13 +2108,13 @@ Places a multi-leg option order. Only supported on certain option trading broker
 
 ```php
 $result = $snaptrade->trading->placeMlegOrder(
-    type: "MARKET", 
+    order_type: "MARKET", 
     time_in_force: "Day", 
     legs: [
         [
             "instrument" => [
                 "symbol" => "PBI   250718C00006000",
-                "type" => "OPTION",
+                "instrument_type" => "OPTION",
             ],
             "action" => "BUY_TO_OPEN",
             "units" => 1,
@@ -2130,7 +2130,7 @@ $result = $snaptrade->trading->placeMlegOrder(
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### type:<a id="type"></a>
+##### order_type:<a id="order_type"></a>
 
 ##### time_in_force:<a id="time_in_force"></a>
 

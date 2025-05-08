@@ -1,6 +1,6 @@
 <?php
 /**
- * TradingPlaceSimpleOrderRequestTest
+ * SimpleOrderFormTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * TradingPlaceSimpleOrderRequestTest Class Doc Comment
+ * SimpleOrderFormTest Class Doc Comment
  *
  * @category    Class
- * @description TradingPlaceSimpleOrderRequest
+ * @description SimpleOrderForm
  * @package     SnapTrade
  */
-class TradingPlaceSimpleOrderRequestTest extends TestCase
+class SimpleOrderFormTest extends TestCase
 {
 
     /**
@@ -64,9 +64,9 @@ class TradingPlaceSimpleOrderRequestTest extends TestCase
     }
 
     /**
-     * Test "TradingPlaceSimpleOrderRequest"
+     * Test "SimpleOrderForm"
      */
-    public function testTradingPlaceSimpleOrderRequest()
+    public function testSimpleOrderForm()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

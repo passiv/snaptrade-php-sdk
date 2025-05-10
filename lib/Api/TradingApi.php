@@ -4470,7 +4470,7 @@ class TradingApi extends \SnapTrade\CustomApi
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
      * @param  string $account_id account_id (required)
-     * @param  \SnapTrade\Model\TradingPlaceSimpleOrderRequest $trading_place_simple_order_request trading_place_simple_order_request (required)
+     * @param  \SnapTrade\Model\SimpleOrderForm $simple_order_form simple_order_form (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['placeSimpleOrder'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
@@ -4504,9 +4504,9 @@ class TradingApi extends \SnapTrade\CustomApi
         $this->setRequestBodyProperty($_body, "stop_price", $stop_price);
         $this->setRequestBodyProperty($_body, "post_only", $post_only);
         $this->setRequestBodyProperty($_body, "expiration_date", $expiration_date);
-        $trading_place_simple_order_request = $_body;
+        $simple_order_form = $_body;
 
-        list($response) = $this->placeSimpleOrderWithHttpInfo($user_id, $user_secret, $account_id, $trading_place_simple_order_request, $contentType);
+        list($response) = $this->placeSimpleOrderWithHttpInfo($user_id, $user_secret, $account_id, $simple_order_form, $contentType);
         return $response;
     }
 
@@ -4520,16 +4520,16 @@ class TradingApi extends \SnapTrade\CustomApi
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
      * @param  string $account_id (required)
-     * @param  \SnapTrade\Model\TradingPlaceSimpleOrderRequest $trading_place_simple_order_request (required)
+     * @param  \SnapTrade\Model\SimpleOrderForm $simple_order_form (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['placeSimpleOrder'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \SnapTrade\Model\OrderUpdatedResponse|\SnapTrade\Model\Model400FailedRequestResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function placeSimpleOrderWithHttpInfo($user_id, $user_secret, $account_id, $trading_place_simple_order_request, string $contentType = self::contentTypes['placeSimpleOrder'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    public function placeSimpleOrderWithHttpInfo($user_id, $user_secret, $account_id, $simple_order_form, string $contentType = self::contentTypes['placeSimpleOrder'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->placeSimpleOrderRequest($user_id, $user_secret, $account_id, $trading_place_simple_order_request, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->placeSimpleOrderRequest($user_id, $user_secret, $account_id, $simple_order_form, $contentType);
 
         // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
@@ -4548,7 +4548,7 @@ class TradingApi extends \SnapTrade\CustomApi
                         $user_id,
                         $user_secret,
                         $account_id,
-                        $trading_place_simple_order_request,
+                        $simple_order_form,
                         $contentType,
                         $requestOptions->setRetryOAuth(false)
                     );
@@ -4666,7 +4666,7 @@ class TradingApi extends \SnapTrade\CustomApi
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
      * @param  string $account_id (required)
-     * @param  \SnapTrade\Model\TradingPlaceSimpleOrderRequest $trading_place_simple_order_request (required)
+     * @param  \SnapTrade\Model\SimpleOrderForm $simple_order_form (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['placeSimpleOrder'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -4699,9 +4699,9 @@ class TradingApi extends \SnapTrade\CustomApi
         $this->setRequestBodyProperty($_body, "stop_price", $stop_price);
         $this->setRequestBodyProperty($_body, "post_only", $post_only);
         $this->setRequestBodyProperty($_body, "expiration_date", $expiration_date);
-        $trading_place_simple_order_request = $_body;
+        $simple_order_form = $_body;
 
-        return $this->placeSimpleOrderAsyncWithHttpInfo($user_id, $user_secret, $account_id, $trading_place_simple_order_request, $contentType)
+        return $this->placeSimpleOrderAsyncWithHttpInfo($user_id, $user_secret, $account_id, $simple_order_form, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -4719,16 +4719,16 @@ class TradingApi extends \SnapTrade\CustomApi
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
      * @param  string $account_id (required)
-     * @param  \SnapTrade\Model\TradingPlaceSimpleOrderRequest $trading_place_simple_order_request (required)
+     * @param  \SnapTrade\Model\SimpleOrderForm $simple_order_form (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['placeSimpleOrder'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function placeSimpleOrderAsyncWithHttpInfo($user_id, $user_secret, $account_id, $trading_place_simple_order_request, string $contentType = self::contentTypes['placeSimpleOrder'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    public function placeSimpleOrderAsyncWithHttpInfo($user_id, $user_secret, $account_id, $simple_order_form, string $contentType = self::contentTypes['placeSimpleOrder'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\OrderUpdatedResponse';
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->placeSimpleOrderRequest($user_id, $user_secret, $account_id, $trading_place_simple_order_request, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->placeSimpleOrderRequest($user_id, $user_secret, $account_id, $simple_order_form, $contentType);
 
         // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
@@ -4775,13 +4775,13 @@ class TradingApi extends \SnapTrade\CustomApi
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
      * @param  string $account_id (required)
-     * @param  \SnapTrade\Model\TradingPlaceSimpleOrderRequest $trading_place_simple_order_request (required)
+     * @param  \SnapTrade\Model\SimpleOrderForm $simple_order_form (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['placeSimpleOrder'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function placeSimpleOrderRequest($user_id, $user_secret, $account_id, $trading_place_simple_order_request, string $contentType = self::contentTypes['placeSimpleOrder'][0])
+    public function placeSimpleOrderRequest($user_id, $user_secret, $account_id, $simple_order_form, string $contentType = self::contentTypes['placeSimpleOrder'][0])
     {
 
         // Check if $user_id is a string
@@ -4814,18 +4814,18 @@ class TradingApi extends \SnapTrade\CustomApi
                 'Missing the required parameter account_id when calling placeSimpleOrder'
             );
         }
-        if ($trading_place_simple_order_request !== SENTINEL_VALUE) {
-            if (!($trading_place_simple_order_request instanceof \SnapTrade\Model\TradingPlaceSimpleOrderRequest)) {
-                if (!is_array($trading_place_simple_order_request))
-                    throw new \InvalidArgumentException('"trading_place_simple_order_request" must be associative array or an instance of \SnapTrade\Model\TradingPlaceSimpleOrderRequest TradingApi.placeSimpleOrder.');
+        if ($simple_order_form !== SENTINEL_VALUE) {
+            if (!($simple_order_form instanceof \SnapTrade\Model\SimpleOrderForm)) {
+                if (!is_array($simple_order_form))
+                    throw new \InvalidArgumentException('"simple_order_form" must be associative array or an instance of \SnapTrade\Model\SimpleOrderForm TradingApi.placeSimpleOrder.');
                 else
-                    $trading_place_simple_order_request = new \SnapTrade\Model\TradingPlaceSimpleOrderRequest($trading_place_simple_order_request);
+                    $simple_order_form = new \SnapTrade\Model\SimpleOrderForm($simple_order_form);
             }
         }
-        // verify the required parameter 'trading_place_simple_order_request' is set
-        if ($trading_place_simple_order_request === SENTINEL_VALUE || (is_array($trading_place_simple_order_request) && count($trading_place_simple_order_request) === 0)) {
+        // verify the required parameter 'simple_order_form' is set
+        if ($simple_order_form === SENTINEL_VALUE || (is_array($simple_order_form) && count($simple_order_form) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter trading_place_simple_order_request when calling placeSimpleOrder'
+                'Missing the required parameter simple_order_form when calling placeSimpleOrder'
             );
         }
 
@@ -4878,12 +4878,12 @@ class TradingApi extends \SnapTrade\CustomApi
         );
 
         // for model (json/xml)
-        if (isset($trading_place_simple_order_request)) {
+        if (isset($simple_order_form)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($trading_place_simple_order_request));
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($simple_order_form));
             } else {
-                $httpBody = $trading_place_simple_order_request;
+                $httpBody = $simple_order_form;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -4962,7 +4962,7 @@ class TradingApi extends \SnapTrade\CustomApi
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
      * @param  string $account_id account_id (required)
-     * @param  \SnapTrade\Model\TradingPlaceSimpleOrderRequest $trading_place_simple_order_request trading_place_simple_order_request (required)
+     * @param  \SnapTrade\Model\SimpleOrderForm $simple_order_form simple_order_form (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['previewSimpleOrder'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
@@ -4996,9 +4996,9 @@ class TradingApi extends \SnapTrade\CustomApi
         $this->setRequestBodyProperty($_body, "stop_price", $stop_price);
         $this->setRequestBodyProperty($_body, "post_only", $post_only);
         $this->setRequestBodyProperty($_body, "expiration_date", $expiration_date);
-        $trading_place_simple_order_request = $_body;
+        $simple_order_form = $_body;
 
-        list($response) = $this->previewSimpleOrderWithHttpInfo($user_id, $user_secret, $account_id, $trading_place_simple_order_request, $contentType);
+        list($response) = $this->previewSimpleOrderWithHttpInfo($user_id, $user_secret, $account_id, $simple_order_form, $contentType);
         return $response;
     }
 
@@ -5012,16 +5012,16 @@ class TradingApi extends \SnapTrade\CustomApi
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
      * @param  string $account_id (required)
-     * @param  \SnapTrade\Model\TradingPlaceSimpleOrderRequest $trading_place_simple_order_request (required)
+     * @param  \SnapTrade\Model\SimpleOrderForm $simple_order_form (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['previewSimpleOrder'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \SnapTrade\Model\SimpleOrderPreview|\SnapTrade\Model\Model400FailedRequestResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function previewSimpleOrderWithHttpInfo($user_id, $user_secret, $account_id, $trading_place_simple_order_request, string $contentType = self::contentTypes['previewSimpleOrder'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    public function previewSimpleOrderWithHttpInfo($user_id, $user_secret, $account_id, $simple_order_form, string $contentType = self::contentTypes['previewSimpleOrder'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->previewSimpleOrderRequest($user_id, $user_secret, $account_id, $trading_place_simple_order_request, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->previewSimpleOrderRequest($user_id, $user_secret, $account_id, $simple_order_form, $contentType);
 
         // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
@@ -5040,7 +5040,7 @@ class TradingApi extends \SnapTrade\CustomApi
                         $user_id,
                         $user_secret,
                         $account_id,
-                        $trading_place_simple_order_request,
+                        $simple_order_form,
                         $contentType,
                         $requestOptions->setRetryOAuth(false)
                     );
@@ -5158,7 +5158,7 @@ class TradingApi extends \SnapTrade\CustomApi
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
      * @param  string $account_id (required)
-     * @param  \SnapTrade\Model\TradingPlaceSimpleOrderRequest $trading_place_simple_order_request (required)
+     * @param  \SnapTrade\Model\SimpleOrderForm $simple_order_form (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['previewSimpleOrder'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -5191,9 +5191,9 @@ class TradingApi extends \SnapTrade\CustomApi
         $this->setRequestBodyProperty($_body, "stop_price", $stop_price);
         $this->setRequestBodyProperty($_body, "post_only", $post_only);
         $this->setRequestBodyProperty($_body, "expiration_date", $expiration_date);
-        $trading_place_simple_order_request = $_body;
+        $simple_order_form = $_body;
 
-        return $this->previewSimpleOrderAsyncWithHttpInfo($user_id, $user_secret, $account_id, $trading_place_simple_order_request, $contentType)
+        return $this->previewSimpleOrderAsyncWithHttpInfo($user_id, $user_secret, $account_id, $simple_order_form, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -5211,16 +5211,16 @@ class TradingApi extends \SnapTrade\CustomApi
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
      * @param  string $account_id (required)
-     * @param  \SnapTrade\Model\TradingPlaceSimpleOrderRequest $trading_place_simple_order_request (required)
+     * @param  \SnapTrade\Model\SimpleOrderForm $simple_order_form (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['previewSimpleOrder'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function previewSimpleOrderAsyncWithHttpInfo($user_id, $user_secret, $account_id, $trading_place_simple_order_request, string $contentType = self::contentTypes['previewSimpleOrder'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    public function previewSimpleOrderAsyncWithHttpInfo($user_id, $user_secret, $account_id, $simple_order_form, string $contentType = self::contentTypes['previewSimpleOrder'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\SimpleOrderPreview';
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->previewSimpleOrderRequest($user_id, $user_secret, $account_id, $trading_place_simple_order_request, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->previewSimpleOrderRequest($user_id, $user_secret, $account_id, $simple_order_form, $contentType);
 
         // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
@@ -5267,13 +5267,13 @@ class TradingApi extends \SnapTrade\CustomApi
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
      * @param  string $account_id (required)
-     * @param  \SnapTrade\Model\TradingPlaceSimpleOrderRequest $trading_place_simple_order_request (required)
+     * @param  \SnapTrade\Model\SimpleOrderForm $simple_order_form (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['previewSimpleOrder'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function previewSimpleOrderRequest($user_id, $user_secret, $account_id, $trading_place_simple_order_request, string $contentType = self::contentTypes['previewSimpleOrder'][0])
+    public function previewSimpleOrderRequest($user_id, $user_secret, $account_id, $simple_order_form, string $contentType = self::contentTypes['previewSimpleOrder'][0])
     {
 
         // Check if $user_id is a string
@@ -5306,18 +5306,18 @@ class TradingApi extends \SnapTrade\CustomApi
                 'Missing the required parameter account_id when calling previewSimpleOrder'
             );
         }
-        if ($trading_place_simple_order_request !== SENTINEL_VALUE) {
-            if (!($trading_place_simple_order_request instanceof \SnapTrade\Model\TradingPlaceSimpleOrderRequest)) {
-                if (!is_array($trading_place_simple_order_request))
-                    throw new \InvalidArgumentException('"trading_place_simple_order_request" must be associative array or an instance of \SnapTrade\Model\TradingPlaceSimpleOrderRequest TradingApi.previewSimpleOrder.');
+        if ($simple_order_form !== SENTINEL_VALUE) {
+            if (!($simple_order_form instanceof \SnapTrade\Model\SimpleOrderForm)) {
+                if (!is_array($simple_order_form))
+                    throw new \InvalidArgumentException('"simple_order_form" must be associative array or an instance of \SnapTrade\Model\SimpleOrderForm TradingApi.previewSimpleOrder.');
                 else
-                    $trading_place_simple_order_request = new \SnapTrade\Model\TradingPlaceSimpleOrderRequest($trading_place_simple_order_request);
+                    $simple_order_form = new \SnapTrade\Model\SimpleOrderForm($simple_order_form);
             }
         }
-        // verify the required parameter 'trading_place_simple_order_request' is set
-        if ($trading_place_simple_order_request === SENTINEL_VALUE || (is_array($trading_place_simple_order_request) && count($trading_place_simple_order_request) === 0)) {
+        // verify the required parameter 'simple_order_form' is set
+        if ($simple_order_form === SENTINEL_VALUE || (is_array($simple_order_form) && count($simple_order_form) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter trading_place_simple_order_request when calling previewSimpleOrder'
+                'Missing the required parameter simple_order_form when calling previewSimpleOrder'
             );
         }
 
@@ -5370,12 +5370,12 @@ class TradingApi extends \SnapTrade\CustomApi
         );
 
         // for model (json/xml)
-        if (isset($trading_place_simple_order_request)) {
+        if (isset($simple_order_form)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($trading_place_simple_order_request));
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($simple_order_form));
             } else {
-                $httpBody = $trading_place_simple_order_request;
+                $httpBody = $simple_order_form;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {

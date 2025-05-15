@@ -59,7 +59,8 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
         'disabled' => 'bool',
         'disabled_date' => '\DateTime',
         'meta' => 'array<string,mixed>',
-        'updated_date' => '\DateTime'
+        'updated_date' => '\DateTime',
+        'is_eligible_for_payout' => 'bool'
     ];
 
     /**
@@ -78,7 +79,8 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
         'disabled' => null,
         'disabled_date' => 'date-time',
         'meta' => null,
-        'updated_date' => 'date-time'
+        'updated_date' => 'date-time',
+        'is_eligible_for_payout' => null
     ];
 
     /**
@@ -95,7 +97,8 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
 		'disabled' => false,
 		'disabled_date' => true,
 		'meta' => false,
-		'updated_date' => false
+		'updated_date' => false,
+		'is_eligible_for_payout' => false
     ];
 
     /**
@@ -192,7 +195,8 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
         'disabled' => 'disabled',
         'disabled_date' => 'disabled_date',
         'meta' => 'meta',
-        'updated_date' => 'updated_date'
+        'updated_date' => 'updated_date',
+        'is_eligible_for_payout' => 'is_eligible_for_payout'
     ];
 
     /**
@@ -209,7 +213,8 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
         'disabled' => 'setDisabled',
         'disabled_date' => 'setDisabledDate',
         'meta' => 'setMeta',
-        'updated_date' => 'setUpdatedDate'
+        'updated_date' => 'setUpdatedDate',
+        'is_eligible_for_payout' => 'setIsEligibleForPayout'
     ];
 
     /**
@@ -226,7 +231,8 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
         'disabled' => 'getDisabled',
         'disabled_date' => 'getDisabledDate',
         'meta' => 'getMeta',
-        'updated_date' => 'getUpdatedDate'
+        'updated_date' => 'getUpdatedDate',
+        'is_eligible_for_payout' => 'getIsEligibleForPayout'
     ];
 
     /**
@@ -295,6 +301,7 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
         $this->setIfExists('disabled_date', $data ?? [], null);
         $this->setIfExists('meta', $data ?? [], null);
         $this->setIfExists('updated_date', $data ?? [], null);
+        $this->setIfExists('is_eligible_for_payout', $data ?? [], null);
     }
 
     /**
@@ -607,6 +614,35 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
         }
 
         $this->container['updated_date'] = $updated_date;
+
+        return $this;
+    }
+
+    /**
+     * Gets is_eligible_for_payout
+     *
+     * @return bool|null
+     */
+    public function getIsEligibleForPayout()
+    {
+        return $this->container['is_eligible_for_payout'];
+    }
+
+    /**
+     * Sets is_eligible_for_payout
+     *
+     * @param bool|null $is_eligible_for_payout Whether the connection is eligible for a payout.
+     *
+     * @return self
+     */
+    public function setIsEligibleForPayout($is_eligible_for_payout)
+    {
+
+        if (is_null($is_eligible_for_payout)) {
+            throw new \InvalidArgumentException('non-nullable is_eligible_for_payout cannot be null');
+        }
+
+        $this->container['is_eligible_for_payout'] = $is_eligible_for_payout;
 
         return $this;
     }

@@ -152,4 +152,13 @@ class BrokerageAuthorizationTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "is_eligible_for_payout"
+     */
+    public function testPropertyIsEligibleForPayout()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

@@ -59,6 +59,7 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
         'created_date' => '\DateTime',
         'sync_status' => '\SnapTrade\Model\AccountSyncStatus',
         'balance' => '\SnapTrade\Model\AccountBalance',
+        'status' => 'string',
         'raw_type' => 'string',
         'meta' => 'array<string,mixed>',
         'portfolio_group' => 'string',
@@ -81,6 +82,7 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
         'created_date' => 'date-time',
         'sync_status' => null,
         'balance' => null,
+        'status' => null,
         'raw_type' => null,
         'meta' => null,
         'portfolio_group' => 'uuid',
@@ -101,6 +103,7 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
 		'created_date' => false,
 		'sync_status' => false,
 		'balance' => false,
+		'status' => true,
 		'raw_type' => true,
 		'meta' => false,
 		'portfolio_group' => false,
@@ -201,6 +204,7 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
         'created_date' => 'created_date',
         'sync_status' => 'sync_status',
         'balance' => 'balance',
+        'status' => 'status',
         'raw_type' => 'raw_type',
         'meta' => 'meta',
         'portfolio_group' => 'portfolio_group',
@@ -221,6 +225,7 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
         'created_date' => 'setCreatedDate',
         'sync_status' => 'setSyncStatus',
         'balance' => 'setBalance',
+        'status' => 'setStatus',
         'raw_type' => 'setRawType',
         'meta' => 'setMeta',
         'portfolio_group' => 'setPortfolioGroup',
@@ -241,6 +246,7 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
         'created_date' => 'getCreatedDate',
         'sync_status' => 'getSyncStatus',
         'balance' => 'getBalance',
+        'status' => 'getStatus',
         'raw_type' => 'getRawType',
         'meta' => 'getMeta',
         'portfolio_group' => 'getPortfolioGroup',
@@ -288,6 +294,21 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
+    public const STATUS_OPEN = 'open';
+    public const STATUS_CLOSED = 'closed';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getStatusAllowableValues()
+    {
+        return [
+            self::STATUS_OPEN,
+            self::STATUS_CLOSED,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -312,6 +333,7 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('created_date', $data ?? [], null);
         $this->setIfExists('sync_status', $data ?? [], null);
         $this->setIfExists('balance', $data ?? [], null);
+        $this->setIfExists('status', $data ?? [], null);
         $this->setIfExists('raw_type', $data ?? [], null);
         $this->setIfExists('meta', $data ?? [], null);
         $this->setIfExists('portfolio_group', $data ?? [], null);
@@ -369,6 +391,15 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
         if ($this->container['balance'] === null) {
             $invalidProperties[] = "'balance' can't be null";
         }
+        $allowedValues = $this->getStatusAllowableValues();
+        if (!is_null($this->container['status']) && !in_array($this->container['status'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'status', must be one of '%s'",
+                $this->container['status'],
+                implode("', '", $allowedValues)
+            );
+        }
+
         return $invalidProperties;
     }
 
@@ -619,6 +650,52 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['balance'] = $balance;
+
+        return $this;
+    }
+
+    /**
+     * Gets status
+     *
+     * @return string|null
+     */
+    public function getStatus()
+    {
+        return $this->container['status'];
+    }
+
+    /**
+     * Sets status
+     *
+     * @param string|null $status The current status of the account. Can be either \"open\", \"closed\", or null if the status is unknown or not provided by the brokerage.
+     *
+     * @return self
+     */
+    public function setStatus($status)
+    {
+        $allowedValues = $this->getStatusAllowableValues();
+        if (!is_null($status) && !in_array($status, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'status', must be one of '%s'",
+                    $status,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+
+        if (is_null($status)) {
+            array_push($this->openAPINullablesSetToNull, 'status');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('status', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['status'] = $status;
 
         return $this;
     }

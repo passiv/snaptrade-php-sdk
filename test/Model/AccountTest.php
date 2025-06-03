@@ -145,6 +145,15 @@ class AccountTest extends TestCase
     }
 
     /**
+     * Test attribute "status"
+     */
+    public function testPropertyStatus()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "raw_type"
      */
     public function testPropertyRawType()

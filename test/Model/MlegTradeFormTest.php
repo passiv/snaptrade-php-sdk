@@ -109,6 +109,15 @@ class MlegTradeFormTest extends TestCase
     }
 
     /**
+     * Test attribute "price_effect"
+     */
+    public function testPropertyPriceEffect()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "legs"
      */
     public function testPropertyLegs()

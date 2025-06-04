@@ -55,6 +55,7 @@ class MlegTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
         'time_in_force' => '\SnapTrade\Model\TimeInForceStrict',
         'limit_price' => 'float',
         'stop_price' => 'float',
+        'price_effect' => 'string',
         'legs' => '\SnapTrade\Model\MlegLeg[]'
     ];
 
@@ -70,6 +71,7 @@ class MlegTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
         'time_in_force' => null,
         'limit_price' => 'decimal',
         'stop_price' => 'decimal',
+        'price_effect' => null,
         'legs' => null
     ];
 
@@ -83,6 +85,7 @@ class MlegTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
 		'time_in_force' => false,
 		'limit_price' => true,
 		'stop_price' => true,
+		'price_effect' => true,
 		'legs' => false
     ];
 
@@ -176,6 +179,7 @@ class MlegTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
         'time_in_force' => 'time_in_force',
         'limit_price' => 'limit_price',
         'stop_price' => 'stop_price',
+        'price_effect' => 'price_effect',
         'legs' => 'legs'
     ];
 
@@ -189,6 +193,7 @@ class MlegTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
         'time_in_force' => 'setTimeInForce',
         'limit_price' => 'setLimitPrice',
         'stop_price' => 'setStopPrice',
+        'price_effect' => 'setPriceEffect',
         'legs' => 'setLegs'
     ];
 
@@ -202,6 +207,7 @@ class MlegTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
         'time_in_force' => 'getTimeInForce',
         'limit_price' => 'getLimitPrice',
         'stop_price' => 'getStopPrice',
+        'price_effect' => 'getPriceEffect',
         'legs' => 'getLegs'
     ];
 
@@ -266,6 +272,7 @@ class MlegTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('time_in_force', $data ?? [], null);
         $this->setIfExists('limit_price', $data ?? [], null);
         $this->setIfExists('stop_price', $data ?? [], null);
+        $this->setIfExists('price_effect', $data ?? [], null);
         $this->setIfExists('legs', $data ?? [], null);
     }
 
@@ -446,6 +453,42 @@ class MlegTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['stop_price'] = $stop_price;
+
+        return $this;
+    }
+
+    /**
+     * Gets price_effect
+     *
+     * @return string|null
+     */
+    public function getPriceEffect()
+    {
+        return $this->container['price_effect'];
+    }
+
+    /**
+     * Sets price_effect
+     *
+     * @param string|null $price_effect price_effect
+     *
+     * @return self
+     */
+    public function setPriceEffect($price_effect)
+    {
+
+        if (is_null($price_effect)) {
+            array_push($this->openAPINullablesSetToNull, 'price_effect');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('price_effect', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['price_effect'] = $price_effect;
 
         return $this;
     }

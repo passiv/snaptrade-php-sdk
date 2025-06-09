@@ -296,6 +296,7 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
 
     public const STATUS_OPEN = 'open';
     public const STATUS_CLOSED = 'closed';
+    public const STATUS_ARCHIVED = 'archived';
 
     /**
      * Gets allowable values of the enum
@@ -307,6 +308,7 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
         return [
             self::STATUS_OPEN,
             self::STATUS_CLOSED,
+            self::STATUS_ARCHIVED,
         ];
     }
 
@@ -667,7 +669,7 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets status
      *
-     * @param string|null $status The current status of the account. Can be either \"open\", \"closed\", or null if the status is unknown or not provided by the brokerage.
+     * @param string|null $status The current status of the account. Can be either \"open\", \"closed\", \"archived\" or null if the status is unknown or not provided by the brokerage.
      *
      * @return self
      */

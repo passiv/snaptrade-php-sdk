@@ -45,6 +45,9 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.connections.removeBrokerageAuthorization`](#snaptradeconnectionsremovebrokerageauthorization)
   * [`snaptrade.connections.returnRates`](#snaptradeconnectionsreturnrates)
   * [`snaptrade.connections.sessionEvents`](#snaptradeconnectionssessionevents)
+  * [`snaptrade.cryptoTrading.getCryptocurrencyPairQuote`](#snaptradecryptotradinggetcryptocurrencypairquote)
+  * [`snaptrade.cryptoTrading.placeSimpleOrder`](#snaptradecryptotradingplacesimpleorder)
+  * [`snaptrade.cryptoTrading.searchCryptocurrencyPairInstruments`](#snaptradecryptotradingsearchcryptocurrencypairinstruments)
   * [`snaptrade.options.getOptionStrategy`](#snaptradeoptionsgetoptionstrategy)
   * [`snaptrade.options.getOptionsChain`](#snaptradeoptionsgetoptionschain)
   * [`snaptrade.options.getOptionsStrategyQuote`](#snaptradeoptionsgetoptionsstrategyquote)
@@ -63,17 +66,14 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.referenceData.symbolSearchUserAccount`](#snaptradereferencedatasymbolsearchuseraccount)
   * [`snaptrade.trading.cancelOrder`](#snaptradetradingcancelorder)
   * [`snaptrade.trading.cancelUserAccountOrder`](#snaptradetradingcanceluseraccountorder)
-  * [`snaptrade.trading.getCryptocurrencyPairQuote`](#snaptradetradinggetcryptocurrencypairquote)
   * [`snaptrade.trading.getOrderImpact`](#snaptradetradinggetorderimpact)
   * [`snaptrade.trading.getUserAccountQuotes`](#snaptradetradinggetuseraccountquotes)
   * [`snaptrade.trading.placeBracketOrder`](#snaptradetradingplacebracketorder)
   * [`snaptrade.trading.placeForceOrder`](#snaptradetradingplaceforceorder)
   * [`snaptrade.trading.placeMlegOrder`](#snaptradetradingplacemlegorder)
   * [`snaptrade.trading.placeOrder`](#snaptradetradingplaceorder)
-  * [`snaptrade.trading.placeSimpleOrder`](#snaptradetradingplacesimpleorder)
   * [`snaptrade.trading.previewSimpleOrder`](#snaptradetradingpreviewsimpleorder)
   * [`snaptrade.trading.replaceOrder`](#snaptradetradingreplaceorder)
-  * [`snaptrade.trading.searchCryptocurrencyPairInstruments`](#snaptradetradingsearchcryptocurrencypairinstruments)
   * [`snaptrade.transactionsAndReporting.getActivities`](#snaptradetransactionsandreportinggetactivities)
   * [`snaptrade.transactionsAndReporting.getReportingCustomRange`](#snaptradetransactionsandreportinggetreportingcustomrange)
 
@@ -1121,6 +1121,174 @@ Optional comma separated list of session IDs used to filter the request on speci
 ---
 
 
+### `snaptrade.cryptoTrading.getCryptocurrencyPairQuote`<a id="snaptradecryptotradinggetcryptocurrencypairquote"></a>
+
+Gets a quote for the specified account.
+
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $snaptrade->cryptoTrading->getCryptocurrencyPairQuote(
+    user_id: "snaptrade-user-123", 
+    user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61", 
+    account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631", 
+    instrument_symbol: "BTC-USD"
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### user_id: `string`<a id="user_id-string"></a>
+
+##### user_secret: `string`<a id="user_secret-string"></a>
+
+##### account_id: `string`<a id="account_id-string"></a>
+
+##### instrument_symbol: `string`<a id="instrument_symbol-string"></a>
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[**CryptocurrencyPairQuote**](./lib/Model/CryptocurrencyPairQuote.php)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.cryptoTrading.placeSimpleOrder`<a id="snaptradecryptotradingplacesimpleorder"></a>
+
+Places an order in the specified account.
+This endpoint does not compute the impact to the account balance from the order before submitting the order.
+
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $snaptrade->cryptoTrading->placeSimpleOrder(
+    instrument: [
+        "symbol" => "AAPL",
+        "type" => "EQUITY",
+    ], 
+    side: "BUY", 
+    type: "MARKET", 
+    time_in_force: "GTC", 
+    amount: "123.45", 
+    user_id: "snaptrade-user-123", 
+    user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61", 
+    account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631", 
+    limit_price: "123.45", 
+    stop_price: "123.45", 
+    post_only: False, 
+    expiration_date: "2024-01-01T00:00:00Z"
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### instrument: [`TradingInstrument`](./lib/Model/TradingInstrument.php)<a id="instrument-tradinginstrumentlibmodeltradinginstrumentphp"></a>
+
+##### side:<a id="side"></a>
+
+##### type: `string`<a id="type-string"></a>
+
+The type of order to place.
+
+##### time_in_force: `string`<a id="time_in_force-string"></a>
+
+The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - `GTD` - Good Til Date. The order is valid until the specified date.
+
+##### amount: `float`<a id="amount-float"></a>
+
+The amount of the base currency to buy or sell.
+
+##### user_id: `string`<a id="user_id-string"></a>
+
+##### user_secret: `string`<a id="user_secret-string"></a>
+
+##### account_id: `string`<a id="account_id-string"></a>
+
+##### limit_price: `float`<a id="limit_price-float"></a>
+
+The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
+
+##### stop_price: `float`<a id="stop_price-float"></a>
+
+The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
+
+##### post_only: `bool`<a id="post_only-bool"></a>
+
+Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
+
+##### expiration_date: `\DateTime`<a id="expiration_date-datetime"></a>
+
+The expiration date of the order. Required if the time_in_force is GTD.
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[**OrderUpdatedResponse**](./lib/Model/OrderUpdatedResponse.php)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/simple` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.cryptoTrading.searchCryptocurrencyPairInstruments`<a id="snaptradecryptotradingsearchcryptocurrencypairinstruments"></a>
+
+Searches cryptocurrency pairs instruments accessible to the specified account.
+
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $snaptrade->cryptoTrading->searchCryptocurrencyPairInstruments(
+    user_id: "snaptrade-user-123", 
+    user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61", 
+    account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631", 
+    base: "BTC", 
+    quote: "USD"
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### user_id: `string`<a id="user_id-string"></a>
+
+##### user_secret: `string`<a id="user_secret-string"></a>
+
+##### account_id: `string`<a id="account_id-string"></a>
+
+##### base: `string`<a id="base-string"></a>
+
+##### quote: `string`<a id="quote-string"></a>
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[**TradingSearchCryptocurrencyPairInstruments200Response**](./lib/Model/TradingSearchCryptocurrencyPairInstruments200Response.php)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/instruments/cryptocurrencyPairs` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
 ### `snaptrade.options.getOptionStrategy`<a id="snaptradeoptionsgetoptionstrategy"></a>
 
 Creates an option strategy object that will be used to place an option strategy order.
@@ -1773,47 +1941,6 @@ Order ID returned by brokerage. This is the unique identifier for the order in t
 ---
 
 
-### `snaptrade.trading.getCryptocurrencyPairQuote`<a id="snaptradetradinggetcryptocurrencypairquote"></a>
-
-Gets a quote for the specified account.
-
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```php
-$result = $snaptrade->trading->getCryptocurrencyPairQuote(
-    user_id: "snaptrade-user-123", 
-    user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61", 
-    account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631", 
-    instrument_symbol: "BTC-USD"
-);
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### user_id: `string`<a id="user_id-string"></a>
-
-##### user_secret: `string`<a id="user_secret-string"></a>
-
-##### account_id: `string`<a id="account_id-string"></a>
-
-##### instrument_symbol: `string`<a id="instrument_symbol-string"></a>
-
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[**CryptocurrencyPairQuote**](./lib/Model/CryptocurrencyPairQuote.php)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
 ### `snaptrade.trading.getOrderImpact`<a id="snaptradetradinggetorderimpact"></a>
 
 Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a `Trade` object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the `Trade` object returned expires after 5 minutes. Any order placed using an expired `Trade` will be rejected.
@@ -2214,89 +2341,6 @@ Optional, defaults to true. Determines if a wait is performed to check on order 
 ---
 
 
-### `snaptrade.trading.placeSimpleOrder`<a id="snaptradetradingplacesimpleorder"></a>
-
-Places an order in the specified account.
-This endpoint does not compute the impact to the account balance from the order before submitting the order.
-
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```php
-$result = $snaptrade->trading->placeSimpleOrder(
-    instrument: [
-        "symbol" => "AAPL",
-        "type" => "EQUITY",
-    ], 
-    side: "BUY", 
-    type: "MARKET", 
-    time_in_force: "GTC", 
-    amount: "123.45", 
-    user_id: "snaptrade-user-123", 
-    user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61", 
-    account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631", 
-    limit_price: "123.45", 
-    stop_price: "123.45", 
-    post_only: False, 
-    expiration_date: "2024-01-01T00:00:00Z"
-);
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### instrument: [`TradingInstrument`](./lib/Model/TradingInstrument.php)<a id="instrument-tradinginstrumentlibmodeltradinginstrumentphp"></a>
-
-##### side:<a id="side"></a>
-
-##### type: `string`<a id="type-string"></a>
-
-The type of order to place.
-
-##### time_in_force: `string`<a id="time_in_force-string"></a>
-
-The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - `GTD` - Good Til Date. The order is valid until the specified date.
-
-##### amount: `float`<a id="amount-float"></a>
-
-The amount of the base currency to buy or sell.
-
-##### user_id: `string`<a id="user_id-string"></a>
-
-##### user_secret: `string`<a id="user_secret-string"></a>
-
-##### account_id: `string`<a id="account_id-string"></a>
-
-##### limit_price: `float`<a id="limit_price-float"></a>
-
-The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
-
-##### stop_price: `float`<a id="stop_price-float"></a>
-
-The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
-
-##### post_only: `bool`<a id="post_only-bool"></a>
-
-Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
-
-##### expiration_date: `\DateTime`<a id="expiration_date-datetime"></a>
-
-The expiration date of the order. Required if the time_in_force is GTD.
-
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[**OrderUpdatedResponse**](./lib/Model/OrderUpdatedResponse.php)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/trading/simple` `POST`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
 ### `snaptrade.trading.previewSimpleOrder`<a id="snaptradetradingpreviewsimpleorder"></a>
 
 Previews an order using the specified account.
@@ -2447,50 +2491,6 @@ The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/trading/simple/{brokerageOrderId}/replace` `PATCH`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.trading.searchCryptocurrencyPairInstruments`<a id="snaptradetradingsearchcryptocurrencypairinstruments"></a>
-
-Searches cryptocurrency pairs instruments accessible to the specified account.
-
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```php
-$result = $snaptrade->trading->searchCryptocurrencyPairInstruments(
-    user_id: "snaptrade-user-123", 
-    user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61", 
-    account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631", 
-    base: "BTC", 
-    quote: "USD"
-);
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### user_id: `string`<a id="user_id-string"></a>
-
-##### user_secret: `string`<a id="user_secret-string"></a>
-
-##### account_id: `string`<a id="account_id-string"></a>
-
-##### base: `string`<a id="base-string"></a>
-
-##### quote: `string`<a id="quote-string"></a>
-
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[**TradingSearchCryptocurrencyPairInstruments200Response**](./lib/Model/TradingSearchCryptocurrencyPairInstruments200Response.php)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/trading/instruments/cryptocurrencyPairs` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

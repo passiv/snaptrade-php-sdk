@@ -83,6 +83,18 @@ class TradingApiTest extends TestCase
     }
 
     /**
+     * Test case for getCryptocurrencyPairQuote
+     *
+     * Get cryptocurrency pair quote.
+     *
+     */
+    public function testGetCryptocurrencyPairQuote()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for getOrderImpact
      *
      * Check order impact.
@@ -155,6 +167,18 @@ class TradingApiTest extends TestCase
     }
 
     /**
+     * Test case for placeSimpleOrder
+     *
+     * Place order.
+     *
+     */
+    public function testPlaceSimpleOrder()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for previewSimpleOrder
      *
      * Preview order.
@@ -173,6 +197,18 @@ class TradingApiTest extends TestCase
      *
      */
     public function testReplaceOrder()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for searchCryptocurrencyPairInstruments
+     *
+     * Search cryptocurrency pairs instruments.
+     *
+     */
+    public function testSearchCryptocurrencyPairInstruments()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

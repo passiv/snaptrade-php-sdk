@@ -3535,7 +3535,7 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * Place multi-leg option order
      *
-     * Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support
+     * Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support.
      *
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
@@ -3579,7 +3579,7 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * Place multi-leg option order
      *
-     * Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support
+     * Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -3725,7 +3725,7 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * Place multi-leg option order
      *
-     * Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support
+     * Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -3772,7 +3772,7 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * Place multi-leg option order
      *
-     * Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support
+     * Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)

@@ -54,9 +54,9 @@ class SimpleOrderForm implements ModelInterface, ArrayAccess, \JsonSerializable
         'side' => '\SnapTrade\Model\ActionStrict',
         'type' => 'string',
         'time_in_force' => 'string',
-        'amount' => 'float',
-        'limit_price' => 'float',
-        'stop_price' => 'float',
+        'amount' => 'string',
+        'limit_price' => 'string',
+        'stop_price' => 'string',
         'post_only' => 'bool',
         'expiration_date' => '\DateTime'
     ];
@@ -73,9 +73,9 @@ class SimpleOrderForm implements ModelInterface, ArrayAccess, \JsonSerializable
         'side' => null,
         'type' => null,
         'time_in_force' => null,
-        'amount' => 'decimal',
-        'limit_price' => 'decimal',
-        'stop_price' => 'decimal',
+        'amount' => null,
+        'limit_price' => null,
+        'stop_price' => null,
         'post_only' => null,
         'expiration_date' => 'date-time'
     ];
@@ -552,7 +552,7 @@ class SimpleOrderForm implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets amount
      *
-     * @return float
+     * @return string
      */
     public function getAmount()
     {
@@ -562,7 +562,7 @@ class SimpleOrderForm implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets amount
      *
-     * @param float $amount The amount of the base currency to buy or sell.
+     * @param string $amount The amount of the base currency to buy or sell.
      *
      * @return self
      */
@@ -581,7 +581,7 @@ class SimpleOrderForm implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets limit_price
      *
-     * @return float|null
+     * @return string|null
      */
     public function getLimitPrice()
     {
@@ -591,7 +591,7 @@ class SimpleOrderForm implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets limit_price
      *
-     * @param float|null $limit_price The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
+     * @param string|null $limit_price The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
      *
      * @return self
      */
@@ -610,7 +610,7 @@ class SimpleOrderForm implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets stop_price
      *
-     * @return float|null
+     * @return string|null
      */
     public function getStopPrice()
     {
@@ -620,7 +620,7 @@ class SimpleOrderForm implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets stop_price
      *
-     * @param float|null $stop_price The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
+     * @param string|null $stop_price The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
      *
      * @return self
      */

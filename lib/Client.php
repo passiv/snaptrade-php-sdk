@@ -13,6 +13,8 @@ class Client
     
     public readonly \SnapTrade\Api\ConnectionsApi $connections;
     
+    public readonly \SnapTrade\Api\CryptoTradingApi $cryptoTrading;
+    
     public readonly \SnapTrade\Api\OptionsApi $options;
     
     public readonly \SnapTrade\Api\ReferenceDataApi $referenceData;
@@ -48,6 +50,7 @@ class Client
         $this->apiStatus = new \SnapTrade\Api\ApiStatusApi($config);
         $this->authentication = new \SnapTrade\Api\AuthenticationApi($config);
         $this->connections = new \SnapTrade\Api\ConnectionsApi($config);
+        $this->cryptoTrading = new \SnapTrade\Api\CryptoTradingApi($config);
         $this->options = new \SnapTrade\Api\OptionsApi($config);
         $this->referenceData = new \SnapTrade\Api\ReferenceDataApi($config);
         $this->trading = new \SnapTrade\Api\TradingApi($config);

@@ -201,4 +201,16 @@ class TradingApiTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test case for searchCryptocurrencyPairInstruments
+     *
+     * Search cryptocurrency pairs instruments.
+     *
+     */
+    public function testSearchCryptocurrencyPairInstruments()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

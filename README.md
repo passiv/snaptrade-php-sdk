@@ -45,7 +45,6 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.connections.removeBrokerageAuthorization`](#snaptradeconnectionsremovebrokerageauthorization)
   * [`snaptrade.connections.returnRates`](#snaptradeconnectionsreturnrates)
   * [`snaptrade.connections.sessionEvents`](#snaptradeconnectionssessionevents)
-  * [`snaptrade.cryptoTrading.searchCryptocurrencyPairInstruments`](#snaptradecryptotradingsearchcryptocurrencypairinstruments)
   * [`snaptrade.options.getOptionStrategy`](#snaptradeoptionsgetoptionstrategy)
   * [`snaptrade.options.getOptionsChain`](#snaptradeoptionsgetoptionschain)
   * [`snaptrade.options.getOptionsStrategyQuote`](#snaptradeoptionsgetoptionsstrategyquote)
@@ -74,6 +73,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.trading.placeSimpleOrder`](#snaptradetradingplacesimpleorder)
   * [`snaptrade.trading.previewSimpleOrder`](#snaptradetradingpreviewsimpleorder)
   * [`snaptrade.trading.replaceOrder`](#snaptradetradingreplaceorder)
+  * [`snaptrade.trading.searchCryptocurrencyPairInstruments`](#snaptradetradingsearchcryptocurrencypairinstruments)
   * [`snaptrade.transactionsAndReporting.getActivities`](#snaptradetransactionsandreportinggetactivities)
   * [`snaptrade.transactionsAndReporting.getReportingCustomRange`](#snaptradetransactionsandreportinggetreportingcustomrange)
 
@@ -1115,50 +1115,6 @@ Optional comma separated list of session IDs used to filter the request on speci
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/sessionEvents` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.cryptoTrading.searchCryptocurrencyPairInstruments`<a id="snaptradecryptotradingsearchcryptocurrencypairinstruments"></a>
-
-Searches cryptocurrency pairs instruments accessible to the specified account.
-
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```php
-$result = $snaptrade->cryptoTrading->searchCryptocurrencyPairInstruments(
-    user_id: "snaptrade-user-123", 
-    user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61", 
-    account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631", 
-    base: "BTC", 
-    quote: "USD"
-);
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### user_id: `string`<a id="user_id-string"></a>
-
-##### user_secret: `string`<a id="user_secret-string"></a>
-
-##### account_id: `string`<a id="account_id-string"></a>
-
-##### base: `string`<a id="base-string"></a>
-
-##### quote: `string`<a id="quote-string"></a>
-
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[**TradingSearchCryptocurrencyPairInstruments200Response**](./lib/Model/TradingSearchCryptocurrencyPairInstruments200Response.php)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/trading/instruments/cryptocurrencyPairs` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -2491,6 +2447,50 @@ The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/trading/simple/{brokerageOrderId}/replace` `PATCH`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.trading.searchCryptocurrencyPairInstruments`<a id="snaptradetradingsearchcryptocurrencypairinstruments"></a>
+
+Searches cryptocurrency pairs instruments accessible to the specified account.
+
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $snaptrade->trading->searchCryptocurrencyPairInstruments(
+    user_id: "snaptrade-user-123", 
+    user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61", 
+    account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631", 
+    base: "BTC", 
+    quote: "USD"
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### user_id: `string`<a id="user_id-string"></a>
+
+##### user_secret: `string`<a id="user_secret-string"></a>
+
+##### account_id: `string`<a id="account_id-string"></a>
+
+##### base: `string`<a id="base-string"></a>
+
+##### quote: `string`<a id="quote-string"></a>
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[**TradingSearchCryptocurrencyPairInstruments200Response**](./lib/Model/TradingSearchCryptocurrencyPairInstruments200Response.php)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/instruments/cryptocurrencyPairs` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

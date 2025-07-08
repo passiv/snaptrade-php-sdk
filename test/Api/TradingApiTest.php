@@ -61,7 +61,7 @@ class TradingApiTest extends TestCase
     /**
      * Test case for cancelOrder
      *
-     * Cancel an order..
+     * Cancel crypto order.
      *
      */
     public function testCancelOrder()
@@ -169,7 +169,7 @@ class TradingApiTest extends TestCase
     /**
      * Test case for placeSimpleOrder
      *
-     * Place order.
+     * Place crypto order.
      *
      */
     public function testPlaceSimpleOrder()
@@ -181,7 +181,7 @@ class TradingApiTest extends TestCase
     /**
      * Test case for previewSimpleOrder
      *
-     * Preview order.
+     * Preview crypto order.
      *
      */
     public function testPreviewSimpleOrder()
@@ -193,7 +193,7 @@ class TradingApiTest extends TestCase
     /**
      * Test case for replaceOrder
      *
-     * Replaces an order with a new one.
+     * Replace crypto order.
      *
      */
     public function testReplaceOrder()

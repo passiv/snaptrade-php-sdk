@@ -73,7 +73,7 @@ class TradingApiTest extends TestCase
     /**
      * Test case for cancelUserAccountOrder
      *
-     * Cancel order.
+     * Cancel equity order.
      *
      */
     public function testCancelUserAccountOrder()
@@ -85,7 +85,7 @@ class TradingApiTest extends TestCase
     /**
      * Test case for getCryptocurrencyPairQuote
      *
-     * Get cryptocurrency pair quote.
+     * Get crypto pair quote.
      *
      */
     public function testGetCryptocurrencyPairQuote()
@@ -97,7 +97,7 @@ class TradingApiTest extends TestCase
     /**
      * Test case for getOrderImpact
      *
-     * Check order impact.
+     * Check equity order impact.
      *
      */
     public function testGetOrderImpact()
@@ -109,7 +109,7 @@ class TradingApiTest extends TestCase
     /**
      * Test case for getUserAccountQuotes
      *
-     * Get symbol quotes.
+     * Get equity symbol quotes.
      *
      */
     public function testGetUserAccountQuotes()
@@ -121,7 +121,7 @@ class TradingApiTest extends TestCase
     /**
      * Test case for placeBracketOrder
      *
-     * Place a Bracket Order.
+     * Place bracket equity order.
      *
      */
     public function testPlaceBracketOrder()
@@ -133,7 +133,7 @@ class TradingApiTest extends TestCase
     /**
      * Test case for placeForceOrder
      *
-     * Place order.
+     * Place equity order.
      *
      */
     public function testPlaceForceOrder()
@@ -145,7 +145,7 @@ class TradingApiTest extends TestCase
     /**
      * Test case for placeMlegOrder
      *
-     * Place multi-leg option order.
+     * Place option order.
      *
      */
     public function testPlaceMlegOrder()
@@ -157,7 +157,7 @@ class TradingApiTest extends TestCase
     /**
      * Test case for placeOrder
      *
-     * Place checked order.
+     * Place checked equity order.
      *
      */
     public function testPlaceOrder()
@@ -205,7 +205,7 @@ class TradingApiTest extends TestCase
     /**
      * Test case for searchCryptocurrencyPairInstruments
      *
-     * Search cryptocurrency pairs instruments.
+     * Get crypto pairs.
      *
      */
     public function testSearchCryptocurrencyPairInstruments()

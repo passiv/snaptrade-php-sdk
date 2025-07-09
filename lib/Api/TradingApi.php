@@ -625,7 +625,7 @@ class TradingApi extends \SnapTrade\CustomApi
     /**
      * Operation cancelUserAccountOrder
      *
-     * Cancel order
+     * Cancel equity order
      *
      * Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.
      *
@@ -659,7 +659,7 @@ class TradingApi extends \SnapTrade\CustomApi
     /**
      * Operation cancelUserAccountOrderWithHttpInfo
      *
-     * Cancel order
+     * Cancel equity order
      *
      * Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.
      *
@@ -828,7 +828,7 @@ class TradingApi extends \SnapTrade\CustomApi
     /**
      * Operation cancelUserAccountOrderAsync
      *
-     * Cancel order
+     * Cancel equity order
      *
      * Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.
      *
@@ -865,7 +865,7 @@ class TradingApi extends \SnapTrade\CustomApi
     /**
      * Operation cancelUserAccountOrderAsyncWithHttpInfo
      *
-     * Cancel order
+     * Cancel equity order
      *
      * Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.
      *
@@ -1108,7 +1108,7 @@ class TradingApi extends \SnapTrade\CustomApi
     /**
      * Operation getCryptocurrencyPairQuote
      *
-     * Get cryptocurrency pair quote
+     * Get crypto pair quote
      *
      * Gets a quote for the specified account.
      *
@@ -1139,7 +1139,7 @@ class TradingApi extends \SnapTrade\CustomApi
     /**
      * Operation getCryptocurrencyPairQuoteWithHttpInfo
      *
-     * Get cryptocurrency pair quote
+     * Get crypto pair quote
      *
      * Gets a quote for the specified account.
      *
@@ -1285,7 +1285,7 @@ class TradingApi extends \SnapTrade\CustomApi
     /**
      * Operation getCryptocurrencyPairQuoteAsync
      *
-     * Get cryptocurrency pair quote
+     * Get crypto pair quote
      *
      * Gets a quote for the specified account.
      *
@@ -1319,7 +1319,7 @@ class TradingApi extends \SnapTrade\CustomApi
     /**
      * Operation getCryptocurrencyPairQuoteAsyncWithHttpInfo
      *
-     * Get cryptocurrency pair quote
+     * Get crypto pair quote
      *
      * Gets a quote for the specified account.
      *
@@ -1559,7 +1559,7 @@ class TradingApi extends \SnapTrade\CustomApi
     /**
      * Operation getOrderImpact
      *
-     * Check order impact
+     * Check equity order impact
      *
      * Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a &#x60;Trade&#x60; object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the &#x60;Trade&#x60; object returned expires after 5 minutes. Any order placed using an expired &#x60;Trade&#x60; will be rejected.
      *
@@ -1607,7 +1607,7 @@ class TradingApi extends \SnapTrade\CustomApi
     /**
      * Operation getOrderImpactWithHttpInfo
      *
-     * Check order impact
+     * Check equity order impact
      *
      * Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a &#x60;Trade&#x60; object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the &#x60;Trade&#x60; object returned expires after 5 minutes. Any order placed using an expired &#x60;Trade&#x60; will be rejected.
      *
@@ -1774,7 +1774,7 @@ class TradingApi extends \SnapTrade\CustomApi
     /**
      * Operation getOrderImpactAsync
      *
-     * Check order impact
+     * Check equity order impact
      *
      * Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a &#x60;Trade&#x60; object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the &#x60;Trade&#x60; object returned expires after 5 minutes. Any order placed using an expired &#x60;Trade&#x60; will be rejected.
      *
@@ -1825,7 +1825,7 @@ class TradingApi extends \SnapTrade\CustomApi
     /**
      * Operation getOrderImpactAsyncWithHttpInfo
      *
-     * Check order impact
+     * Check equity order impact
      *
      * Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a &#x60;Trade&#x60; object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the &#x60;Trade&#x60; object returned expires after 5 minutes. Any order placed using an expired &#x60;Trade&#x60; will be rejected.
      *
@@ -2048,7 +2048,7 @@ class TradingApi extends \SnapTrade\CustomApi
     /**
      * Operation getUserAccountQuotes
      *
-     * Get symbol quotes
+     * Get equity symbol quotes
      *
      * Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
      *
@@ -2081,7 +2081,7 @@ class TradingApi extends \SnapTrade\CustomApi
     /**
      * Operation getUserAccountQuotesWithHttpInfo
      *
-     * Get symbol quotes
+     * Get equity symbol quotes
      *
      * Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
      *
@@ -2229,7 +2229,7 @@ class TradingApi extends \SnapTrade\CustomApi
     /**
      * Operation getUserAccountQuotesAsync
      *
-     * Get symbol quotes
+     * Get equity symbol quotes
      *
      * Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
      *
@@ -2265,7 +2265,7 @@ class TradingApi extends \SnapTrade\CustomApi
     /**
      * Operation getUserAccountQuotesAsyncWithHttpInfo
      *
-     * Get symbol quotes
+     * Get equity symbol quotes
      *
      * Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
      *
@@ -2521,7 +2521,7 @@ class TradingApi extends \SnapTrade\CustomApi
     /**
      * Operation placeBracketOrder
      *
-     * Place a Bracket Order
+     * Place bracket equity order
      *
      * Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages
      *
@@ -2573,7 +2573,7 @@ class TradingApi extends \SnapTrade\CustomApi
     /**
      * Operation placeBracketOrderWithHttpInfo
      *
-     * Place a Bracket Order
+     * Place bracket equity order
      *
      * Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages
      *
@@ -2742,7 +2742,7 @@ class TradingApi extends \SnapTrade\CustomApi
     /**
      * Operation placeBracketOrderAsync
      *
-     * Place a Bracket Order
+     * Place bracket equity order
      *
      * Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages
      *
@@ -2797,7 +2797,7 @@ class TradingApi extends \SnapTrade\CustomApi
     /**
      * Operation placeBracketOrderAsyncWithHttpInfo
      *
-     * Place a Bracket Order
+     * Place bracket equity order
      *
      * Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages
      *
@@ -3040,7 +3040,7 @@ class TradingApi extends \SnapTrade\CustomApi
     /**
      * Operation placeForceOrder
      *
-     * Place order
+     * Place equity order
      *
      * Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.  This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact).  It&#39;s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this.
      *
@@ -3090,7 +3090,7 @@ class TradingApi extends \SnapTrade\CustomApi
     /**
      * Operation placeForceOrderWithHttpInfo
      *
-     * Place order
+     * Place equity order
      *
      * Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.  This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact).  It&#39;s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this.
      *
@@ -3257,7 +3257,7 @@ class TradingApi extends \SnapTrade\CustomApi
     /**
      * Operation placeForceOrderAsync
      *
-     * Place order
+     * Place equity order
      *
      * Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.  This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact).  It&#39;s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this.
      *
@@ -3310,7 +3310,7 @@ class TradingApi extends \SnapTrade\CustomApi
     /**
      * Operation placeForceOrderAsyncWithHttpInfo
      *
-     * Place order
+     * Place equity order
      *
      * Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.  This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact).  It&#39;s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this.
      *
@@ -3533,7 +3533,7 @@ class TradingApi extends \SnapTrade\CustomApi
     /**
      * Operation placeMlegOrder
      *
-     * Place multi-leg option order
+     * Place option order
      *
      * Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support
      *
@@ -3577,7 +3577,7 @@ class TradingApi extends \SnapTrade\CustomApi
     /**
      * Operation placeMlegOrderWithHttpInfo
      *
-     * Place multi-leg option order
+     * Place option order
      *
      * Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support
      *
@@ -3723,7 +3723,7 @@ class TradingApi extends \SnapTrade\CustomApi
     /**
      * Operation placeMlegOrderAsync
      *
-     * Place multi-leg option order
+     * Place option order
      *
      * Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support
      *
@@ -3770,7 +3770,7 @@ class TradingApi extends \SnapTrade\CustomApi
     /**
      * Operation placeMlegOrderAsyncWithHttpInfo
      *
-     * Place multi-leg option order
+     * Place option order
      *
      * Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support
      *
@@ -4013,7 +4013,7 @@ class TradingApi extends \SnapTrade\CustomApi
     /**
      * Operation placeOrder
      *
-     * Place checked order
+     * Place checked equity order
      *
      * Places the previously checked order with the brokerage. The &#x60;tradeId&#x60; is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder).  It&#39;s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this.
      *
@@ -4047,7 +4047,7 @@ class TradingApi extends \SnapTrade\CustomApi
     /**
      * Operation placeOrderWithHttpInfo
      *
-     * Place checked order
+     * Place checked equity order
      *
      * Places the previously checked order with the brokerage. The &#x60;tradeId&#x60; is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder).  It&#39;s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this.
      *
@@ -4193,7 +4193,7 @@ class TradingApi extends \SnapTrade\CustomApi
     /**
      * Operation placeOrderAsync
      *
-     * Place checked order
+     * Place checked equity order
      *
      * Places the previously checked order with the brokerage. The &#x60;tradeId&#x60; is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder).  It&#39;s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this.
      *
@@ -4230,7 +4230,7 @@ class TradingApi extends \SnapTrade\CustomApi
     /**
      * Operation placeOrderAsyncWithHttpInfo
      *
-     * Place checked order
+     * Place checked equity order
      *
      * Places the previously checked order with the brokerage. The &#x60;tradeId&#x60; is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder).  It&#39;s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this.
      *
@@ -5984,7 +5984,7 @@ class TradingApi extends \SnapTrade\CustomApi
     /**
      * Operation searchCryptocurrencyPairInstruments
      *
-     * Search cryptocurrency pairs instruments
+     * Get crypto pairs
      *
      * Searches cryptocurrency pairs instruments accessible to the specified account.
      *
@@ -6017,7 +6017,7 @@ class TradingApi extends \SnapTrade\CustomApi
     /**
      * Operation searchCryptocurrencyPairInstrumentsWithHttpInfo
      *
-     * Search cryptocurrency pairs instruments
+     * Get crypto pairs
      *
      * Searches cryptocurrency pairs instruments accessible to the specified account.
      *
@@ -6165,7 +6165,7 @@ class TradingApi extends \SnapTrade\CustomApi
     /**
      * Operation searchCryptocurrencyPairInstrumentsAsync
      *
-     * Search cryptocurrency pairs instruments
+     * Get crypto pairs
      *
      * Searches cryptocurrency pairs instruments accessible to the specified account.
      *
@@ -6201,7 +6201,7 @@ class TradingApi extends \SnapTrade\CustomApi
     /**
      * Operation searchCryptocurrencyPairInstrumentsAsyncWithHttpInfo
      *
-     * Search cryptocurrency pairs instruments
+     * Get crypto pairs
      *
      * Searches cryptocurrency pairs instruments accessible to the specified account.
      *

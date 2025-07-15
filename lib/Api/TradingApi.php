@@ -5451,7 +5451,7 @@ class TradingApi extends \SnapTrade\CustomApi
     /**
      * Operation replaceOrder
      *
-     * Replace crypto order
+     * Replace equity order
      *
      * Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages
      *
@@ -5499,7 +5499,7 @@ class TradingApi extends \SnapTrade\CustomApi
     /**
      * Operation replaceOrderWithHttpInfo
      *
-     * Replace crypto order
+     * Replace equity order
      *
      * Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages
      *
@@ -5670,7 +5670,7 @@ class TradingApi extends \SnapTrade\CustomApi
     /**
      * Operation replaceOrderAsync
      *
-     * Replace crypto order
+     * Replace equity order
      *
      * Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages
      *
@@ -5721,7 +5721,7 @@ class TradingApi extends \SnapTrade\CustomApi
     /**
      * Operation replaceOrderAsyncWithHttpInfo
      *
-     * Replace crypto order
+     * Replace equity order
      *
      * Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages
      *

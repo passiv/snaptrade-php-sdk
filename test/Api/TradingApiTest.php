@@ -193,7 +193,7 @@ class TradingApiTest extends TestCase
     /**
      * Test case for replaceOrder
      *
-     * Replace crypto order.
+     * Replace equity order.
      *
      */
     public function testReplaceOrder()

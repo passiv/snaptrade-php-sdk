@@ -2151,7 +2151,7 @@ The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT.
 
 The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
 
-##### price_effect: [`string`](./lib/Model/string.php)<a id="price_effect-stringlibmodelstringphp"></a>
+##### price_effect: [`MlegPriceEffectStrict`](./lib/Model/MlegPriceEffectStrict.php)<a id="price_effect-mlegpriceeffectstrictlibmodelmlegpriceeffectstrictphp"></a>
 
 
 #### 🔄 Return<a id="🔄-return"></a>

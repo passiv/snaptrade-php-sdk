@@ -1716,14 +1716,16 @@ $result = $snaptrade->trading->cancelOrder(
 
 ##### brokerage_order_id: `string`<a id="brokerage_order_id-string"></a>
 
+Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
+
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[**OrderUpdatedResponse**](./lib/Model/OrderUpdatedResponse.php)
+[**CancelOrderResponse**](./lib/Model/CancelOrderResponse.php)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
-`/accounts/{accountId}/trading/simple/{brokerageOrderId}/cancel` `POST`
+`/accounts/{accountId}/trading/cancel` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

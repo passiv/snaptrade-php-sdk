@@ -61,7 +61,7 @@ class TradingApiTest extends TestCase
     /**
      * Test case for cancelOrder
      *
-     * Cancel crypto order.
+     * Cancel order.
      *
      */
     public function testCancelOrder()

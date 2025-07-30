@@ -83,6 +83,9 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
         'listAllBrokerageAuthorizationType' => [
             'application/json',
         ],
+        'listAllBrokerageInstruments' => [
+            'application/json',
+        ],
         'listAllBrokerages' => [
             'application/json',
         ],
@@ -2517,6 +2520,350 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
         }
 
 
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('clientId');
+        if ($apiKey !== null) {
+            $queryParams['clientId'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Signature');
+        if ($apiKey !== null) {
+            $headers['Signature'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('timestamp');
+        if ($apiKey !== null) {
+            $queryParams['timestamp'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $method = 'GET';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
+    }
+
+    /**
+     * Operation listAllBrokerageInstruments
+     *
+     * Get a list of instruments available on the brokerage.
+     *
+     * Returns a list of all brokerage instruments available for a given brokerage, optionally filtered by a search. Not all brokerages support this. The ones that don&#39;t will return an empty list.
+     *
+     * @param  string $brokerage_id brokerage_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAllBrokerageInstruments'] to see the possible values for this operation
+     *
+     * @throws \SnapTrade\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SnapTrade\Model\BrokerageInstrumentsResponse
+     */
+    public function listAllBrokerageInstruments(
+        $brokerage_id,
+
+        string $contentType = self::contentTypes['listAllBrokerageInstruments'][0]
+    )
+    {
+
+        list($response) = $this->listAllBrokerageInstrumentsWithHttpInfo($brokerage_id, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation listAllBrokerageInstrumentsWithHttpInfo
+     *
+     * Get a list of instruments available on the brokerage.
+     *
+     * Returns a list of all brokerage instruments available for a given brokerage, optionally filtered by a search. Not all brokerages support this. The ones that don&#39;t will return an empty list.
+     *
+     * @param  string $brokerage_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAllBrokerageInstruments'] to see the possible values for this operation
+     *
+     * @throws \SnapTrade\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SnapTrade\Model\BrokerageInstrumentsResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function listAllBrokerageInstrumentsWithHttpInfo($brokerage_id, string $contentType = self::contentTypes['listAllBrokerageInstruments'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    {
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->listAllBrokerageInstrumentsRequest($brokerage_id, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                if (
+                    ($e->getCode() == 401 || $e->getCode() == 403) &&
+                    !empty($this->getConfig()->getAccessToken()) &&
+                    $requestOptions->shouldRetryOAuth()
+                ) {
+                    return $this->listAllBrokerageInstrumentsWithHttpInfo(
+                        $brokerage_id,
+                        $contentType,
+                        $requestOptions->setRetryOAuth(false)
+                    );
+                }
+
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('\SnapTrade\Model\BrokerageInstrumentsResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\SnapTrade\Model\BrokerageInstrumentsResponse' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\BrokerageInstrumentsResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\SnapTrade\Model\BrokerageInstrumentsResponse';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SnapTrade\Model\BrokerageInstrumentsResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation listAllBrokerageInstrumentsAsync
+     *
+     * Get a list of instruments available on the brokerage.
+     *
+     * Returns a list of all brokerage instruments available for a given brokerage, optionally filtered by a search. Not all brokerages support this. The ones that don&#39;t will return an empty list.
+     *
+     * @param  string $brokerage_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAllBrokerageInstruments'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listAllBrokerageInstrumentsAsync(
+        $brokerage_id,
+
+        string $contentType = self::contentTypes['listAllBrokerageInstruments'][0]
+    )
+    {
+
+        return $this->listAllBrokerageInstrumentsAsyncWithHttpInfo($brokerage_id, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation listAllBrokerageInstrumentsAsyncWithHttpInfo
+     *
+     * Get a list of instruments available on the brokerage.
+     *
+     * Returns a list of all brokerage instruments available for a given brokerage, optionally filtered by a search. Not all brokerages support this. The ones that don&#39;t will return an empty list.
+     *
+     * @param  string $brokerage_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAllBrokerageInstruments'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listAllBrokerageInstrumentsAsyncWithHttpInfo($brokerage_id, string $contentType = self::contentTypes['listAllBrokerageInstruments'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    {
+        $returnType = '\SnapTrade\Model\BrokerageInstrumentsResponse';
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->listAllBrokerageInstrumentsRequest($brokerage_id, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'listAllBrokerageInstruments'
+     *
+     * @param  string $brokerage_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAllBrokerageInstruments'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function listAllBrokerageInstrumentsRequest($brokerage_id, string $contentType = self::contentTypes['listAllBrokerageInstruments'][0])
+    {
+
+        // Check if $brokerage_id is a string
+        if ($brokerage_id !== SENTINEL_VALUE && !is_string($brokerage_id)) {
+            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($brokerage_id, true), gettype($brokerage_id)));
+        }
+        // verify the required parameter 'brokerage_id' is set
+        if ($brokerage_id === SENTINEL_VALUE || (is_array($brokerage_id) && count($brokerage_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter brokerage_id when calling listAllBrokerageInstruments'
+            );
+        }
+
+
+        $resourcePath = '/brokerages/{brokerageId}/instruments';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($brokerage_id !== SENTINEL_VALUE) {
+            $resourcePath = str_replace(
+                '{' . 'brokerageId' . '}',
+                ObjectSerializer::toPathValue($brokerage_id),
+                $resourcePath
+            );
+        }
 
 
         $headers = $this->headerSelector->selectHeaders(

@@ -143,6 +143,18 @@ class ReferenceDataApiTest extends TestCase
     }
 
     /**
+     * Test case for listAllBrokerageInstruments
+     *
+     * Get a list of instruments available on the brokerage..
+     *
+     */
+    public function testListAllBrokerageInstruments()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for listAllBrokerages
      *
      * Get brokerages.

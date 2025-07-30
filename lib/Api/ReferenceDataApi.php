@@ -2599,9 +2599,9 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
     /**
      * Operation listAllBrokerageInstruments
      *
-     * Get a list of instruments available on the brokerage.
+     * Get brokerage instruments
      *
-     * Returns a list of all brokerage instruments available for a given brokerage, optionally filtered by a search. Not all brokerages support this. The ones that don&#39;t will return an empty list.
+     * Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don&#39;t will return an empty list.
      *
      * @param  string $brokerage_id brokerage_id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAllBrokerageInstruments'] to see the possible values for this operation
@@ -2624,9 +2624,9 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
     /**
      * Operation listAllBrokerageInstrumentsWithHttpInfo
      *
-     * Get a list of instruments available on the brokerage.
+     * Get brokerage instruments
      *
-     * Returns a list of all brokerage instruments available for a given brokerage, optionally filtered by a search. Not all brokerages support this. The ones that don&#39;t will return an empty list.
+     * Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don&#39;t will return an empty list.
      *
      * @param  string $brokerage_id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAllBrokerageInstruments'] to see the possible values for this operation
@@ -2741,9 +2741,9 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
     /**
      * Operation listAllBrokerageInstrumentsAsync
      *
-     * Get a list of instruments available on the brokerage.
+     * Get brokerage instruments
      *
-     * Returns a list of all brokerage instruments available for a given brokerage, optionally filtered by a search. Not all brokerages support this. The ones that don&#39;t will return an empty list.
+     * Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don&#39;t will return an empty list.
      *
      * @param  string $brokerage_id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAllBrokerageInstruments'] to see the possible values for this operation
@@ -2769,9 +2769,9 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
     /**
      * Operation listAllBrokerageInstrumentsAsyncWithHttpInfo
      *
-     * Get a list of instruments available on the brokerage.
+     * Get brokerage instruments
      *
-     * Returns a list of all brokerage instruments available for a given brokerage, optionally filtered by a search. Not all brokerages support this. The ones that don&#39;t will return an empty list.
+     * Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don&#39;t will return an empty list.
      *
      * @param  string $brokerage_id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAllBrokerageInstruments'] to see the possible values for this operation

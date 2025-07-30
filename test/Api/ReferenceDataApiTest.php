@@ -145,7 +145,7 @@ class ReferenceDataApiTest extends TestCase
     /**
      * Test case for listAllBrokerageInstruments
      *
-     * Get a list of instruments available on the brokerage..
+     * Get brokerage instruments.
      *
      */
     public function testListAllBrokerageInstruments()

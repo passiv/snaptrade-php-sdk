@@ -1,6 +1,6 @@
 <?php
 /**
- * SimpleOrderPreview
+ * CryptoOrderPreview
  *
  * PHP version 7.4
  *
@@ -27,14 +27,14 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * SimpleOrderPreview Class Doc Comment
+ * CryptoOrderPreview Class Doc Comment
  *
  * @category Class
  * @description Preview of an order.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class SimpleOrderPreview implements ModelInterface, ArrayAccess, \JsonSerializable
+class CryptoOrderPreview implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -43,7 +43,7 @@ class SimpleOrderPreview implements ModelInterface, ArrayAccess, \JsonSerializab
       *
       * @var string
       */
-    protected static $openAPIModelName = 'SimpleOrderPreview';
+    protected static $openAPIModelName = 'CryptoOrderPreview';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -51,7 +51,7 @@ class SimpleOrderPreview implements ModelInterface, ArrayAccess, \JsonSerializab
       * @var string[]
       */
     protected static $openAPITypes = [
-        'estimated_fee' => '\SnapTrade\Model\SimpleOrderPreviewEstimatedFee'
+        'estimated_fee' => '\SnapTrade\Model\CryptoOrderPreviewEstimatedFee'
     ];
 
     /**
@@ -286,7 +286,7 @@ class SimpleOrderPreview implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Gets estimated_fee
      *
-     * @return \SnapTrade\Model\SimpleOrderPreviewEstimatedFee|null
+     * @return \SnapTrade\Model\CryptoOrderPreviewEstimatedFee|null
      */
     public function getEstimatedFee()
     {
@@ -296,7 +296,7 @@ class SimpleOrderPreview implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets estimated_fee
      *
-     * @param \SnapTrade\Model\SimpleOrderPreviewEstimatedFee|null $estimated_fee estimated_fee
+     * @param \SnapTrade\Model\CryptoOrderPreviewEstimatedFee|null $estimated_fee estimated_fee
      *
      * @return self
      */

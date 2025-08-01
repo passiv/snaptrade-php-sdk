@@ -1,6 +1,6 @@
 <?php
 /**
- * ManualTradeReplaceFormTest
+ * CryptoOrderFormTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * ManualTradeReplaceFormTest Class Doc Comment
+ * CryptoOrderFormTest Class Doc Comment
  *
  * @category    Class
- * @description Inputs for replacing an order with the brokerage.
+ * @description CryptoOrderForm
  * @package     SnapTrade
  */
-class ManualTradeReplaceFormTest extends TestCase
+class CryptoOrderFormTest extends TestCase
 {
 
     /**
@@ -64,36 +64,36 @@ class ManualTradeReplaceFormTest extends TestCase
     }
 
     /**
-     * Test "ManualTradeReplaceForm"
+     * Test "CryptoOrderForm"
      */
-    public function testManualTradeReplaceForm()
+    public function testCryptoOrderForm()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "brokerage_order_id"
+     * Test attribute "instrument"
      */
-    public function testPropertyBrokerageOrderId()
+    public function testPropertyInstrument()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "action"
+     * Test attribute "side"
      */
-    public function testPropertyAction()
+    public function testPropertySide()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "order_type"
+     * Test attribute "type"
      */
-    public function testPropertyOrderType()
+    public function testPropertyType()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
@@ -109,36 +109,45 @@ class ManualTradeReplaceFormTest extends TestCase
     }
 
     /**
-     * Test attribute "price"
+     * Test attribute "amount"
      */
-    public function testPropertyPrice()
+    public function testPropertyAmount()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "symbol"
+     * Test attribute "limit_price"
      */
-    public function testPropertySymbol()
+    public function testPropertyLimitPrice()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "stop"
+     * Test attribute "stop_price"
      */
-    public function testPropertyStop()
+    public function testPropertyStopPrice()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "units"
+     * Test attribute "post_only"
      */
-    public function testPropertyUnits()
+    public function testPropertyPostOnly()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "expiration_date"
+     */
+    public function testPropertyExpirationDate()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

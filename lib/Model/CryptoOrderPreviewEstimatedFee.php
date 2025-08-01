@@ -1,6 +1,6 @@
 <?php
 /**
- * ManualTradeReplaceForm
+ * CryptoOrderPreviewEstimatedFee
  *
  * PHP version 7.4
  *
@@ -27,14 +27,14 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * ManualTradeReplaceForm Class Doc Comment
+ * CryptoOrderPreviewEstimatedFee Class Doc Comment
  *
  * @category Class
- * @description Inputs for replacing an order with the brokerage.
+ * @description The estimated order fee.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class ManualTradeReplaceForm implements ModelInterface, ArrayAccess, \JsonSerializable
+class CryptoOrderPreviewEstimatedFee implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -43,7 +43,7 @@ class ManualTradeReplaceForm implements ModelInterface, ArrayAccess, \JsonSerial
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ManualTradeReplaceForm';
+    protected static $openAPIModelName = 'CryptoOrderPreview_estimated_fee';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -51,14 +51,8 @@ class ManualTradeReplaceForm implements ModelInterface, ArrayAccess, \JsonSerial
       * @var string[]
       */
     protected static $openAPITypes = [
-        'brokerage_order_id' => 'string',
-        'action' => '\SnapTrade\Model\ActionStrict',
-        'order_type' => '\SnapTrade\Model\OrderTypeStrict',
-        'time_in_force' => '\SnapTrade\Model\TimeInForceStrict',
-        'price' => 'float',
-        'symbol' => 'string',
-        'stop' => 'float',
-        'units' => 'float'
+        'currency' => 'string',
+        'amount' => 'float'
     ];
 
     /**
@@ -69,14 +63,8 @@ class ManualTradeReplaceForm implements ModelInterface, ArrayAccess, \JsonSerial
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'brokerage_order_id' => null,
-        'action' => null,
-        'order_type' => null,
-        'time_in_force' => null,
-        'price' => null,
-        'symbol' => null,
-        'stop' => null,
-        'units' => null
+        'currency' => null,
+        'amount' => 'decimal'
     ];
 
     /**
@@ -85,14 +73,8 @@ class ManualTradeReplaceForm implements ModelInterface, ArrayAccess, \JsonSerial
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'brokerage_order_id' => false,
-		'action' => false,
-		'order_type' => false,
-		'time_in_force' => false,
-		'price' => true,
-		'symbol' => false,
-		'stop' => true,
-		'units' => true
+        'currency' => false,
+		'amount' => false
     ];
 
     /**
@@ -181,14 +163,8 @@ class ManualTradeReplaceForm implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $attributeMap = [
-        'brokerage_order_id' => 'brokerage_order_id',
-        'action' => 'action',
-        'order_type' => 'order_type',
-        'time_in_force' => 'time_in_force',
-        'price' => 'price',
-        'symbol' => 'symbol',
-        'stop' => 'stop',
-        'units' => 'units'
+        'currency' => 'currency',
+        'amount' => 'amount'
     ];
 
     /**
@@ -197,14 +173,8 @@ class ManualTradeReplaceForm implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $setters = [
-        'brokerage_order_id' => 'setBrokerageOrderId',
-        'action' => 'setAction',
-        'order_type' => 'setOrderType',
-        'time_in_force' => 'setTimeInForce',
-        'price' => 'setPrice',
-        'symbol' => 'setSymbol',
-        'stop' => 'setStop',
-        'units' => 'setUnits'
+        'currency' => 'setCurrency',
+        'amount' => 'setAmount'
     ];
 
     /**
@@ -213,14 +183,8 @@ class ManualTradeReplaceForm implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $getters = [
-        'brokerage_order_id' => 'getBrokerageOrderId',
-        'action' => 'getAction',
-        'order_type' => 'getOrderType',
-        'time_in_force' => 'getTimeInForce',
-        'price' => 'getPrice',
-        'symbol' => 'getSymbol',
-        'stop' => 'getStop',
-        'units' => 'getUnits'
+        'currency' => 'getCurrency',
+        'amount' => 'getAmount'
     ];
 
     /**
@@ -280,14 +244,8 @@ class ManualTradeReplaceForm implements ModelInterface, ArrayAccess, \JsonSerial
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('brokerage_order_id', $data ?? [], null);
-        $this->setIfExists('action', $data ?? [], null);
-        $this->setIfExists('order_type', $data ?? [], null);
-        $this->setIfExists('time_in_force', $data ?? [], null);
-        $this->setIfExists('price', $data ?? [], null);
-        $this->setIfExists('symbol', $data ?? [], null);
-        $this->setIfExists('stop', $data ?? [], null);
-        $this->setIfExists('units', $data ?? [], null);
+        $this->setIfExists('currency', $data ?? [], null);
+        $this->setIfExists('amount', $data ?? [], null);
     }
 
     /**
@@ -317,17 +275,11 @@ class ManualTradeReplaceForm implements ModelInterface, ArrayAccess, \JsonSerial
     {
         $invalidProperties = [];
 
-        if ($this->container['brokerage_order_id'] === null) {
-            $invalidProperties[] = "'brokerage_order_id' can't be null";
+        if ($this->container['currency'] === null) {
+            $invalidProperties[] = "'currency' can't be null";
         }
-        if ($this->container['action'] === null) {
-            $invalidProperties[] = "'action' can't be null";
-        }
-        if ($this->container['order_type'] === null) {
-            $invalidProperties[] = "'order_type' can't be null";
-        }
-        if ($this->container['time_in_force'] === null) {
-            $invalidProperties[] = "'time_in_force' can't be null";
+        if ($this->container['amount'] === null) {
+            $invalidProperties[] = "'amount' can't be null";
         }
         return $invalidProperties;
     }
@@ -345,254 +297,59 @@ class ManualTradeReplaceForm implements ModelInterface, ArrayAccess, \JsonSerial
 
 
     /**
-     * Gets brokerage_order_id
+     * Gets currency
      *
      * @return string
      */
-    public function getBrokerageOrderId()
+    public function getCurrency()
     {
-        return $this->container['brokerage_order_id'];
+        return $this->container['currency'];
     }
 
     /**
-     * Sets brokerage_order_id
+     * Sets currency
      *
-     * @param string $brokerage_order_id Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
+     * @param string $currency Symbol to identify a cryptocurrency or fiat currency on a crypto exchange. Fiat currencies symbols are ISO-4217 codes.
      *
      * @return self
      */
-    public function setBrokerageOrderId($brokerage_order_id)
+    public function setCurrency($currency)
     {
 
-        if (is_null($brokerage_order_id)) {
-            throw new \InvalidArgumentException('non-nullable brokerage_order_id cannot be null');
+        if (is_null($currency)) {
+            throw new \InvalidArgumentException('non-nullable currency cannot be null');
         }
 
-        $this->container['brokerage_order_id'] = $brokerage_order_id;
+        $this->container['currency'] = $currency;
 
         return $this;
     }
 
     /**
-     * Gets action
+     * Gets amount
      *
-     * @return \SnapTrade\Model\ActionStrict
+     * @return float
      */
-    public function getAction()
+    public function getAmount()
     {
-        return $this->container['action'];
+        return $this->container['amount'];
     }
 
     /**
-     * Sets action
+     * Sets amount
      *
-     * @param \SnapTrade\Model\ActionStrict $action action
+     * @param float $amount amount
      *
      * @return self
      */
-    public function setAction($action)
+    public function setAmount($amount)
     {
 
-        if (is_null($action)) {
-            throw new \InvalidArgumentException('non-nullable action cannot be null');
+        if (is_null($amount)) {
+            throw new \InvalidArgumentException('non-nullable amount cannot be null');
         }
 
-        $this->container['action'] = $action;
-
-        return $this;
-    }
-
-    /**
-     * Gets order_type
-     *
-     * @return \SnapTrade\Model\OrderTypeStrict
-     */
-    public function getOrderType()
-    {
-        return $this->container['order_type'];
-    }
-
-    /**
-     * Sets order_type
-     *
-     * @param \SnapTrade\Model\OrderTypeStrict $order_type order_type
-     *
-     * @return self
-     */
-    public function setOrderType($order_type)
-    {
-
-        if (is_null($order_type)) {
-            throw new \InvalidArgumentException('non-nullable order_type cannot be null');
-        }
-
-        $this->container['order_type'] = $order_type;
-
-        return $this;
-    }
-
-    /**
-     * Gets time_in_force
-     *
-     * @return \SnapTrade\Model\TimeInForceStrict
-     */
-    public function getTimeInForce()
-    {
-        return $this->container['time_in_force'];
-    }
-
-    /**
-     * Sets time_in_force
-     *
-     * @param \SnapTrade\Model\TimeInForceStrict $time_in_force time_in_force
-     *
-     * @return self
-     */
-    public function setTimeInForce($time_in_force)
-    {
-
-        if (is_null($time_in_force)) {
-            throw new \InvalidArgumentException('non-nullable time_in_force cannot be null');
-        }
-
-        $this->container['time_in_force'] = $time_in_force;
-
-        return $this;
-    }
-
-    /**
-     * Gets price
-     *
-     * @return float|null
-     */
-    public function getPrice()
-    {
-        return $this->container['price'];
-    }
-
-    /**
-     * Sets price
-     *
-     * @param float|null $price The limit price for `Limit` and `StopLimit` orders.
-     *
-     * @return self
-     */
-    public function setPrice($price)
-    {
-
-        if (is_null($price)) {
-            array_push($this->openAPINullablesSetToNull, 'price');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('price', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['price'] = $price;
-
-        return $this;
-    }
-
-    /**
-     * Gets symbol
-     *
-     * @return string|null
-     */
-    public function getSymbol()
-    {
-        return $this->container['symbol'];
-    }
-
-    /**
-     * Sets symbol
-     *
-     * @param string|null $symbol The security's trading ticker symbol
-     *
-     * @return self
-     */
-    public function setSymbol($symbol)
-    {
-
-        if (is_null($symbol)) {
-            throw new \InvalidArgumentException('non-nullable symbol cannot be null');
-        }
-
-        $this->container['symbol'] = $symbol;
-
-        return $this;
-    }
-
-    /**
-     * Gets stop
-     *
-     * @return float|null
-     */
-    public function getStop()
-    {
-        return $this->container['stop'];
-    }
-
-    /**
-     * Sets stop
-     *
-     * @param float|null $stop The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
-     *
-     * @return self
-     */
-    public function setStop($stop)
-    {
-
-        if (is_null($stop)) {
-            array_push($this->openAPINullablesSetToNull, 'stop');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('stop', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['stop'] = $stop;
-
-        return $this;
-    }
-
-    /**
-     * Gets units
-     *
-     * @return float|null
-     */
-    public function getUnits()
-    {
-        return $this->container['units'];
-    }
-
-    /**
-     * Sets units
-     *
-     * @param float|null $units units
-     *
-     * @return self
-     */
-    public function setUnits($units)
-    {
-
-        if (is_null($units)) {
-            array_push($this->openAPINullablesSetToNull, 'units');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('units', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['units'] = $units;
+        $this->container['amount'] = $amount;
 
         return $this;
     }

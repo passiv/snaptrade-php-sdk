@@ -1,6 +1,6 @@
 <?php
 /**
- * SimpleOrderPreviewEstimatedFeeTest
+ * CryptoTradingInstrumentTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * SimpleOrderPreviewEstimatedFeeTest Class Doc Comment
+ * CryptoTradingInstrumentTest Class Doc Comment
  *
  * @category    Class
- * @description The estimated order fee.
+ * @description CryptoTradingInstrument
  * @package     SnapTrade
  */
-class SimpleOrderPreviewEstimatedFeeTest extends TestCase
+class CryptoTradingInstrumentTest extends TestCase
 {
 
     /**
@@ -64,27 +64,27 @@ class SimpleOrderPreviewEstimatedFeeTest extends TestCase
     }
 
     /**
-     * Test "SimpleOrderPreviewEstimatedFee"
+     * Test "CryptoTradingInstrument"
      */
-    public function testSimpleOrderPreviewEstimatedFee()
+    public function testCryptoTradingInstrument()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "currency"
+     * Test attribute "symbol"
      */
-    public function testPropertyCurrency()
+    public function testPropertySymbol()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "amount"
+     * Test attribute "type"
      */
-    public function testPropertyAmount()
+    public function testPropertyType()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

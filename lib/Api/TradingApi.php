@@ -80,6 +80,9 @@ class TradingApi extends \SnapTrade\CustomApi
         'placeBracketOrder' => [
             'application/json',
         ],
+        'placeCryptoOrder' => [
+            'application/json',
+        ],
         'placeForceOrder' => [
             'application/json',
         ],
@@ -89,10 +92,7 @@ class TradingApi extends \SnapTrade\CustomApi
         'placeOrder' => [
             'application/json',
         ],
-        'placeSimpleOrder' => [
-            'application/json',
-        ],
-        'previewSimpleOrder' => [
+        'previewCryptoOrder' => [
             'application/json',
         ],
         'replaceOrder' => [
@@ -176,7 +176,7 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * Cancel order
      *
-     * Cancels an order in the specified account.
+     * Cancels an order in the specified account. Accepts order IDs for all asset types.
      *
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
@@ -210,7 +210,7 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * Cancel order
      *
-     * Cancels an order in the specified account.
+     * Cancels an order in the specified account. Accepts order IDs for all asset types.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -356,7 +356,7 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * Cancel order
      *
-     * Cancels an order in the specified account.
+     * Cancels an order in the specified account. Accepts order IDs for all asset types.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -393,7 +393,7 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * Cancel order
      *
-     * Cancels an order in the specified account.
+     * Cancels an order in the specified account. Accepts order IDs for all asset types.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -636,7 +636,7 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * Cancel equity order
      *
-     * Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.
+     * **This endpoint is deprecated. Please switch to [the new cancel order endpoint](/reference/Trading/Trading_cancelOrder) ** Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.
      *
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
@@ -647,6 +647,7 @@ class TradingApi extends \SnapTrade\CustomApi
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\AccountOrderRecord|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\Model500UnexpectedExceptionResponse
+     * @deprecated
      */
     public function cancelUserAccountOrder(
 
@@ -670,7 +671,7 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * Cancel equity order
      *
-     * Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.
+     * **This endpoint is deprecated. Please switch to [the new cancel order endpoint](/reference/Trading/Trading_cancelOrder) ** Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -681,6 +682,7 @@ class TradingApi extends \SnapTrade\CustomApi
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \SnapTrade\Model\AccountOrderRecord|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\Model500UnexpectedExceptionResponse, HTTP status code, HTTP response headers (array of strings)
+     * @deprecated
      */
     public function cancelUserAccountOrderWithHttpInfo($user_id, $user_secret, $account_id, $trading_cancel_user_account_order_request, string $contentType = self::contentTypes['cancelUserAccountOrder'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
@@ -839,7 +841,7 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * Cancel equity order
      *
-     * Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.
+     * **This endpoint is deprecated. Please switch to [the new cancel order endpoint](/reference/Trading/Trading_cancelOrder) ** Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -849,6 +851,7 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @deprecated
      */
     public function cancelUserAccountOrderAsync(
 
@@ -876,7 +879,7 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * Cancel equity order
      *
-     * Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.
+     * **This endpoint is deprecated. Please switch to [the new cancel order endpoint](/reference/Trading/Trading_cancelOrder) ** Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -886,6 +889,7 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @deprecated
      */
     public function cancelUserAccountOrderAsyncWithHttpInfo($user_id, $user_secret, $account_id, $trading_cancel_user_account_order_request, string $contentType = self::contentTypes['cancelUserAccountOrder'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
@@ -942,6 +946,7 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
+     * @deprecated
      */
     public function cancelUserAccountOrderRequest($user_id, $user_secret, $account_id, $trading_cancel_user_account_order_request, string $contentType = self::contentTypes['cancelUserAccountOrder'][0])
     {
@@ -3047,6 +3052,498 @@ class TradingApi extends \SnapTrade\CustomApi
     }
 
     /**
+     * Operation placeCryptoOrder
+     *
+     * Place crypto order
+     *
+     * Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order.
+     *
+     * @param  string $user_id user_id (required)
+     * @param  string $user_secret user_secret (required)
+     * @param  string $account_id account_id (required)
+     * @param  \SnapTrade\Model\CryptoOrderForm $crypto_order_form crypto_order_form (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['placeCryptoOrder'] to see the possible values for this operation
+     *
+     * @throws \SnapTrade\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SnapTrade\Model\OrderUpdatedResponse|\SnapTrade\Model\Model400FailedRequestResponse
+     */
+    public function placeCryptoOrder(
+
+        $instrument,
+        $side,
+        $type,
+        $time_in_force,
+        $amount,
+        $user_id,
+        $user_secret,
+        $account_id,
+        $limit_price = SENTINEL_VALUE,
+        $stop_price = SENTINEL_VALUE,
+        $post_only = SENTINEL_VALUE,
+        $expiration_date = SENTINEL_VALUE,
+        string $contentType = self::contentTypes['placeCryptoOrder'][0]
+    )
+    {
+        $_body = [];
+        $this->setRequestBodyProperty($_body, "instrument", $instrument);
+        $this->setRequestBodyProperty($_body, "side", $side);
+        $this->setRequestBodyProperty($_body, "type", $type);
+        $this->setRequestBodyProperty($_body, "time_in_force", $time_in_force);
+        $this->setRequestBodyProperty($_body, "amount", $amount);
+        $this->setRequestBodyProperty($_body, "limit_price", $limit_price);
+        $this->setRequestBodyProperty($_body, "stop_price", $stop_price);
+        $this->setRequestBodyProperty($_body, "post_only", $post_only);
+        $this->setRequestBodyProperty($_body, "expiration_date", $expiration_date);
+        $crypto_order_form = $_body;
+
+        list($response) = $this->placeCryptoOrderWithHttpInfo($user_id, $user_secret, $account_id, $crypto_order_form, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation placeCryptoOrderWithHttpInfo
+     *
+     * Place crypto order
+     *
+     * Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order.
+     *
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
+     * @param  string $account_id (required)
+     * @param  \SnapTrade\Model\CryptoOrderForm $crypto_order_form (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['placeCryptoOrder'] to see the possible values for this operation
+     *
+     * @throws \SnapTrade\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SnapTrade\Model\OrderUpdatedResponse|\SnapTrade\Model\Model400FailedRequestResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function placeCryptoOrderWithHttpInfo($user_id, $user_secret, $account_id, $crypto_order_form, string $contentType = self::contentTypes['placeCryptoOrder'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    {
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->placeCryptoOrderRequest($user_id, $user_secret, $account_id, $crypto_order_form, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                if (
+                    ($e->getCode() == 401 || $e->getCode() == 403) &&
+                    !empty($this->getConfig()->getAccessToken()) &&
+                    $requestOptions->shouldRetryOAuth()
+                ) {
+                    return $this->placeCryptoOrderWithHttpInfo(
+                        $user_id,
+                        $user_secret,
+                        $account_id,
+                        $crypto_order_form,
+                        $contentType,
+                        $requestOptions->setRetryOAuth(false)
+                    );
+                }
+
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('\SnapTrade\Model\OrderUpdatedResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\SnapTrade\Model\OrderUpdatedResponse' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\OrderUpdatedResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if ('\SnapTrade\Model\Model400FailedRequestResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\SnapTrade\Model\Model400FailedRequestResponse' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\Model400FailedRequestResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\SnapTrade\Model\OrderUpdatedResponse';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SnapTrade\Model\OrderUpdatedResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SnapTrade\Model\Model400FailedRequestResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation placeCryptoOrderAsync
+     *
+     * Place crypto order
+     *
+     * Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order.
+     *
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
+     * @param  string $account_id (required)
+     * @param  \SnapTrade\Model\CryptoOrderForm $crypto_order_form (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['placeCryptoOrder'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function placeCryptoOrderAsync(
+
+        $instrument,
+        $side,
+        $type,
+        $time_in_force,
+        $amount,
+        $user_id,
+        $user_secret,
+        $account_id,
+        $limit_price = SENTINEL_VALUE,
+        $stop_price = SENTINEL_VALUE,
+        $post_only = SENTINEL_VALUE,
+        $expiration_date = SENTINEL_VALUE,
+        string $contentType = self::contentTypes['placeCryptoOrder'][0]
+    )
+    {
+        $_body = [];
+        $this->setRequestBodyProperty($_body, "instrument", $instrument);
+        $this->setRequestBodyProperty($_body, "side", $side);
+        $this->setRequestBodyProperty($_body, "type", $type);
+        $this->setRequestBodyProperty($_body, "time_in_force", $time_in_force);
+        $this->setRequestBodyProperty($_body, "amount", $amount);
+        $this->setRequestBodyProperty($_body, "limit_price", $limit_price);
+        $this->setRequestBodyProperty($_body, "stop_price", $stop_price);
+        $this->setRequestBodyProperty($_body, "post_only", $post_only);
+        $this->setRequestBodyProperty($_body, "expiration_date", $expiration_date);
+        $crypto_order_form = $_body;
+
+        return $this->placeCryptoOrderAsyncWithHttpInfo($user_id, $user_secret, $account_id, $crypto_order_form, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation placeCryptoOrderAsyncWithHttpInfo
+     *
+     * Place crypto order
+     *
+     * Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order.
+     *
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
+     * @param  string $account_id (required)
+     * @param  \SnapTrade\Model\CryptoOrderForm $crypto_order_form (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['placeCryptoOrder'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function placeCryptoOrderAsyncWithHttpInfo($user_id, $user_secret, $account_id, $crypto_order_form, string $contentType = self::contentTypes['placeCryptoOrder'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    {
+        $returnType = '\SnapTrade\Model\OrderUpdatedResponse';
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->placeCryptoOrderRequest($user_id, $user_secret, $account_id, $crypto_order_form, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'placeCryptoOrder'
+     *
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
+     * @param  string $account_id (required)
+     * @param  \SnapTrade\Model\CryptoOrderForm $crypto_order_form (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['placeCryptoOrder'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function placeCryptoOrderRequest($user_id, $user_secret, $account_id, $crypto_order_form, string $contentType = self::contentTypes['placeCryptoOrder'][0])
+    {
+
+        // Check if $user_id is a string
+        if ($user_id !== SENTINEL_VALUE && !is_string($user_id)) {
+            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_id, true), gettype($user_id)));
+        }
+        // verify the required parameter 'user_id' is set
+        if ($user_id === SENTINEL_VALUE || (is_array($user_id) && count($user_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter user_id when calling placeCryptoOrder'
+            );
+        }
+        // Check if $user_secret is a string
+        if ($user_secret !== SENTINEL_VALUE && !is_string($user_secret)) {
+            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
+        }
+        // verify the required parameter 'user_secret' is set
+        if ($user_secret === SENTINEL_VALUE || (is_array($user_secret) && count($user_secret) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter user_secret when calling placeCryptoOrder'
+            );
+        }
+        // Check if $account_id is a string
+        if ($account_id !== SENTINEL_VALUE && !is_string($account_id)) {
+            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($account_id, true), gettype($account_id)));
+        }
+        // verify the required parameter 'account_id' is set
+        if ($account_id === SENTINEL_VALUE || (is_array($account_id) && count($account_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter account_id when calling placeCryptoOrder'
+            );
+        }
+        if ($crypto_order_form !== SENTINEL_VALUE) {
+            if (!($crypto_order_form instanceof \SnapTrade\Model\CryptoOrderForm)) {
+                if (!is_array($crypto_order_form))
+                    throw new \InvalidArgumentException('"crypto_order_form" must be associative array or an instance of \SnapTrade\Model\CryptoOrderForm TradingApi.placeCryptoOrder.');
+                else
+                    $crypto_order_form = new \SnapTrade\Model\CryptoOrderForm($crypto_order_form);
+            }
+        }
+        // verify the required parameter 'crypto_order_form' is set
+        if ($crypto_order_form === SENTINEL_VALUE || (is_array($crypto_order_form) && count($crypto_order_form) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter crypto_order_form when calling placeCryptoOrder'
+            );
+        }
+
+
+        $resourcePath = '/accounts/{accountId}/trading/crypto';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        if ($user_id !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_id,
+                'userId', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
+        if ($user_secret !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_secret,
+                'userSecret', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
+
+
+        // path params
+        if ($account_id !== SENTINEL_VALUE) {
+            $resourcePath = str_replace(
+                '{' . 'accountId' . '}',
+                ObjectSerializer::toPathValue($account_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($crypto_order_form)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($crypto_order_form));
+            } else {
+                $httpBody = $crypto_order_form;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('clientId');
+        if ($apiKey !== null) {
+            $queryParams['clientId'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Signature');
+        if ($apiKey !== null) {
+            $headers['Signature'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('timestamp');
+        if ($apiKey !== null) {
+            $queryParams['timestamp'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $method = 'POST';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
+    }
+
+    /**
      * Operation placeForceOrder
      *
      * Place equity order
@@ -4474,23 +4971,23 @@ class TradingApi extends \SnapTrade\CustomApi
     }
 
     /**
-     * Operation placeSimpleOrder
+     * Operation previewCryptoOrder
      *
-     * Place crypto order
+     * Preview crypto order
      *
-     * Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order.
+     * Previews an order using the specified account.
      *
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
      * @param  string $account_id account_id (required)
-     * @param  \SnapTrade\Model\SimpleOrderForm $simple_order_form simple_order_form (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['placeSimpleOrder'] to see the possible values for this operation
+     * @param  \SnapTrade\Model\CryptoOrderForm $crypto_order_form crypto_order_form (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['previewCryptoOrder'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \SnapTrade\Model\OrderUpdatedResponse|\SnapTrade\Model\Model400FailedRequestResponse
+     * @return \SnapTrade\Model\CryptoOrderPreview|\SnapTrade\Model\Model400FailedRequestResponse
      */
-    public function placeSimpleOrder(
+    public function previewCryptoOrder(
 
         $instrument,
         $side,
@@ -4504,7 +5001,7 @@ class TradingApi extends \SnapTrade\CustomApi
         $stop_price = SENTINEL_VALUE,
         $post_only = SENTINEL_VALUE,
         $expiration_date = SENTINEL_VALUE,
-        string $contentType = self::contentTypes['placeSimpleOrder'][0]
+        string $contentType = self::contentTypes['previewCryptoOrder'][0]
     )
     {
         $_body = [];
@@ -4517,32 +5014,32 @@ class TradingApi extends \SnapTrade\CustomApi
         $this->setRequestBodyProperty($_body, "stop_price", $stop_price);
         $this->setRequestBodyProperty($_body, "post_only", $post_only);
         $this->setRequestBodyProperty($_body, "expiration_date", $expiration_date);
-        $simple_order_form = $_body;
+        $crypto_order_form = $_body;
 
-        list($response) = $this->placeSimpleOrderWithHttpInfo($user_id, $user_secret, $account_id, $simple_order_form, $contentType);
+        list($response) = $this->previewCryptoOrderWithHttpInfo($user_id, $user_secret, $account_id, $crypto_order_form, $contentType);
         return $response;
     }
 
     /**
-     * Operation placeSimpleOrderWithHttpInfo
+     * Operation previewCryptoOrderWithHttpInfo
      *
-     * Place crypto order
+     * Preview crypto order
      *
-     * Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order.
+     * Previews an order using the specified account.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
      * @param  string $account_id (required)
-     * @param  \SnapTrade\Model\SimpleOrderForm $simple_order_form (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['placeSimpleOrder'] to see the possible values for this operation
+     * @param  \SnapTrade\Model\CryptoOrderForm $crypto_order_form (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['previewCryptoOrder'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \SnapTrade\Model\OrderUpdatedResponse|\SnapTrade\Model\Model400FailedRequestResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SnapTrade\Model\CryptoOrderPreview|\SnapTrade\Model\Model400FailedRequestResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function placeSimpleOrderWithHttpInfo($user_id, $user_secret, $account_id, $simple_order_form, string $contentType = self::contentTypes['placeSimpleOrder'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    public function previewCryptoOrderWithHttpInfo($user_id, $user_secret, $account_id, $crypto_order_form, string $contentType = self::contentTypes['previewCryptoOrder'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->placeSimpleOrderRequest($user_id, $user_secret, $account_id, $simple_order_form, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->previewCryptoOrderRequest($user_id, $user_secret, $account_id, $crypto_order_form, $contentType);
 
         // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
@@ -4557,11 +5054,11 @@ class TradingApi extends \SnapTrade\CustomApi
                     !empty($this->getConfig()->getAccessToken()) &&
                     $requestOptions->shouldRetryOAuth()
                 ) {
-                    return $this->placeSimpleOrderWithHttpInfo(
+                    return $this->previewCryptoOrderWithHttpInfo(
                         $user_id,
                         $user_secret,
                         $account_id,
-                        $simple_order_form,
+                        $crypto_order_form,
                         $contentType,
                         $requestOptions->setRetryOAuth(false)
                     );
@@ -4599,17 +5096,17 @@ class TradingApi extends \SnapTrade\CustomApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\SnapTrade\Model\OrderUpdatedResponse' === '\SplFileObject') {
+                    if ('\SnapTrade\Model\CryptoOrderPreview' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\SnapTrade\Model\OrderUpdatedResponse' !== 'string') {
+                        if ('\SnapTrade\Model\CryptoOrderPreview' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\OrderUpdatedResponse', []),
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\CryptoOrderPreview', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -4630,7 +5127,7 @@ class TradingApi extends \SnapTrade\CustomApi
                     ];
             }
 
-            $returnType = '\SnapTrade\Model\OrderUpdatedResponse';
+            $returnType = '\SnapTrade\Model\CryptoOrderPreview';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -4651,7 +5148,7 @@ class TradingApi extends \SnapTrade\CustomApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\SnapTrade\Model\OrderUpdatedResponse',
+                        '\SnapTrade\Model\CryptoOrderPreview',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -4670,22 +5167,22 @@ class TradingApi extends \SnapTrade\CustomApi
     }
 
     /**
-     * Operation placeSimpleOrderAsync
+     * Operation previewCryptoOrderAsync
      *
-     * Place crypto order
+     * Preview crypto order
      *
-     * Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order.
+     * Previews an order using the specified account.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
      * @param  string $account_id (required)
-     * @param  \SnapTrade\Model\SimpleOrderForm $simple_order_form (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['placeSimpleOrder'] to see the possible values for this operation
+     * @param  \SnapTrade\Model\CryptoOrderForm $crypto_order_form (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['previewCryptoOrder'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function placeSimpleOrderAsync(
+    public function previewCryptoOrderAsync(
 
         $instrument,
         $side,
@@ -4699,7 +5196,7 @@ class TradingApi extends \SnapTrade\CustomApi
         $stop_price = SENTINEL_VALUE,
         $post_only = SENTINEL_VALUE,
         $expiration_date = SENTINEL_VALUE,
-        string $contentType = self::contentTypes['placeSimpleOrder'][0]
+        string $contentType = self::contentTypes['previewCryptoOrder'][0]
     )
     {
         $_body = [];
@@ -4712,9 +5209,9 @@ class TradingApi extends \SnapTrade\CustomApi
         $this->setRequestBodyProperty($_body, "stop_price", $stop_price);
         $this->setRequestBodyProperty($_body, "post_only", $post_only);
         $this->setRequestBodyProperty($_body, "expiration_date", $expiration_date);
-        $simple_order_form = $_body;
+        $crypto_order_form = $_body;
 
-        return $this->placeSimpleOrderAsyncWithHttpInfo($user_id, $user_secret, $account_id, $simple_order_form, $contentType)
+        return $this->previewCryptoOrderAsyncWithHttpInfo($user_id, $user_secret, $account_id, $crypto_order_form, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -4723,25 +5220,25 @@ class TradingApi extends \SnapTrade\CustomApi
     }
 
     /**
-     * Operation placeSimpleOrderAsyncWithHttpInfo
+     * Operation previewCryptoOrderAsyncWithHttpInfo
      *
-     * Place crypto order
+     * Preview crypto order
      *
-     * Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order.
+     * Previews an order using the specified account.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
      * @param  string $account_id (required)
-     * @param  \SnapTrade\Model\SimpleOrderForm $simple_order_form (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['placeSimpleOrder'] to see the possible values for this operation
+     * @param  \SnapTrade\Model\CryptoOrderForm $crypto_order_form (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['previewCryptoOrder'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function placeSimpleOrderAsyncWithHttpInfo($user_id, $user_secret, $account_id, $simple_order_form, string $contentType = self::contentTypes['placeSimpleOrder'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    public function previewCryptoOrderAsyncWithHttpInfo($user_id, $user_secret, $account_id, $crypto_order_form, string $contentType = self::contentTypes['previewCryptoOrder'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $returnType = '\SnapTrade\Model\OrderUpdatedResponse';
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->placeSimpleOrderRequest($user_id, $user_secret, $account_id, $simple_order_form, $contentType);
+        $returnType = '\SnapTrade\Model\CryptoOrderPreview';
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->previewCryptoOrderRequest($user_id, $user_secret, $account_id, $crypto_order_form, $contentType);
 
         // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
@@ -4783,18 +5280,18 @@ class TradingApi extends \SnapTrade\CustomApi
     }
 
     /**
-     * Create request for operation 'placeSimpleOrder'
+     * Create request for operation 'previewCryptoOrder'
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
      * @param  string $account_id (required)
-     * @param  \SnapTrade\Model\SimpleOrderForm $simple_order_form (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['placeSimpleOrder'] to see the possible values for this operation
+     * @param  \SnapTrade\Model\CryptoOrderForm $crypto_order_form (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['previewCryptoOrder'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function placeSimpleOrderRequest($user_id, $user_secret, $account_id, $simple_order_form, string $contentType = self::contentTypes['placeSimpleOrder'][0])
+    public function previewCryptoOrderRequest($user_id, $user_secret, $account_id, $crypto_order_form, string $contentType = self::contentTypes['previewCryptoOrder'][0])
     {
 
         // Check if $user_id is a string
@@ -4804,7 +5301,7 @@ class TradingApi extends \SnapTrade\CustomApi
         // verify the required parameter 'user_id' is set
         if ($user_id === SENTINEL_VALUE || (is_array($user_id) && count($user_id) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter user_id when calling placeSimpleOrder'
+                'Missing the required parameter user_id when calling previewCryptoOrder'
             );
         }
         // Check if $user_secret is a string
@@ -4814,7 +5311,7 @@ class TradingApi extends \SnapTrade\CustomApi
         // verify the required parameter 'user_secret' is set
         if ($user_secret === SENTINEL_VALUE || (is_array($user_secret) && count($user_secret) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter user_secret when calling placeSimpleOrder'
+                'Missing the required parameter user_secret when calling previewCryptoOrder'
             );
         }
         // Check if $account_id is a string
@@ -4824,26 +5321,26 @@ class TradingApi extends \SnapTrade\CustomApi
         // verify the required parameter 'account_id' is set
         if ($account_id === SENTINEL_VALUE || (is_array($account_id) && count($account_id) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter account_id when calling placeSimpleOrder'
+                'Missing the required parameter account_id when calling previewCryptoOrder'
             );
         }
-        if ($simple_order_form !== SENTINEL_VALUE) {
-            if (!($simple_order_form instanceof \SnapTrade\Model\SimpleOrderForm)) {
-                if (!is_array($simple_order_form))
-                    throw new \InvalidArgumentException('"simple_order_form" must be associative array or an instance of \SnapTrade\Model\SimpleOrderForm TradingApi.placeSimpleOrder.');
+        if ($crypto_order_form !== SENTINEL_VALUE) {
+            if (!($crypto_order_form instanceof \SnapTrade\Model\CryptoOrderForm)) {
+                if (!is_array($crypto_order_form))
+                    throw new \InvalidArgumentException('"crypto_order_form" must be associative array or an instance of \SnapTrade\Model\CryptoOrderForm TradingApi.previewCryptoOrder.');
                 else
-                    $simple_order_form = new \SnapTrade\Model\SimpleOrderForm($simple_order_form);
+                    $crypto_order_form = new \SnapTrade\Model\CryptoOrderForm($crypto_order_form);
             }
         }
-        // verify the required parameter 'simple_order_form' is set
-        if ($simple_order_form === SENTINEL_VALUE || (is_array($simple_order_form) && count($simple_order_form) === 0)) {
+        // verify the required parameter 'crypto_order_form' is set
+        if ($crypto_order_form === SENTINEL_VALUE || (is_array($crypto_order_form) && count($crypto_order_form) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter simple_order_form when calling placeSimpleOrder'
+                'Missing the required parameter crypto_order_form when calling previewCryptoOrder'
             );
         }
 
 
-        $resourcePath = '/accounts/{accountId}/trading/simple';
+        $resourcePath = '/accounts/{accountId}/trading/crypto/preview';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -4891,504 +5388,12 @@ class TradingApi extends \SnapTrade\CustomApi
         );
 
         // for model (json/xml)
-        if (isset($simple_order_form)) {
+        if (isset($crypto_order_form)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($simple_order_form));
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($crypto_order_form));
             } else {
-                $httpBody = $simple_order_form;
-            }
-        } elseif (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\json_encode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('clientId');
-        if ($apiKey !== null) {
-            $queryParams['clientId'] = $apiKey;
-        }
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('Signature');
-        if ($apiKey !== null) {
-            $headers['Signature'] = $apiKey;
-        }
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('timestamp');
-        if ($apiKey !== null) {
-            $queryParams['timestamp'] = $apiKey;
-        }
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $method = 'POST';
-        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
-
-        $operationHost = $this->config->getHost();
-        $query = ObjectSerializer::buildQuery($queryParams);
-        return [
-            "request" => new Request(
-                $method,
-                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-                $headers,
-                $httpBody
-            ),
-            "serializedBody" => $httpBody
-        ];
-    }
-
-    /**
-     * Operation previewSimpleOrder
-     *
-     * Preview crypto order
-     *
-     * Previews an order using the specified account.
-     *
-     * @param  string $user_id user_id (required)
-     * @param  string $user_secret user_secret (required)
-     * @param  string $account_id account_id (required)
-     * @param  \SnapTrade\Model\SimpleOrderForm $simple_order_form simple_order_form (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['previewSimpleOrder'] to see the possible values for this operation
-     *
-     * @throws \SnapTrade\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \SnapTrade\Model\SimpleOrderPreview|\SnapTrade\Model\Model400FailedRequestResponse
-     */
-    public function previewSimpleOrder(
-
-        $instrument,
-        $side,
-        $type,
-        $time_in_force,
-        $amount,
-        $user_id,
-        $user_secret,
-        $account_id,
-        $limit_price = SENTINEL_VALUE,
-        $stop_price = SENTINEL_VALUE,
-        $post_only = SENTINEL_VALUE,
-        $expiration_date = SENTINEL_VALUE,
-        string $contentType = self::contentTypes['previewSimpleOrder'][0]
-    )
-    {
-        $_body = [];
-        $this->setRequestBodyProperty($_body, "instrument", $instrument);
-        $this->setRequestBodyProperty($_body, "side", $side);
-        $this->setRequestBodyProperty($_body, "type", $type);
-        $this->setRequestBodyProperty($_body, "time_in_force", $time_in_force);
-        $this->setRequestBodyProperty($_body, "amount", $amount);
-        $this->setRequestBodyProperty($_body, "limit_price", $limit_price);
-        $this->setRequestBodyProperty($_body, "stop_price", $stop_price);
-        $this->setRequestBodyProperty($_body, "post_only", $post_only);
-        $this->setRequestBodyProperty($_body, "expiration_date", $expiration_date);
-        $simple_order_form = $_body;
-
-        list($response) = $this->previewSimpleOrderWithHttpInfo($user_id, $user_secret, $account_id, $simple_order_form, $contentType);
-        return $response;
-    }
-
-    /**
-     * Operation previewSimpleOrderWithHttpInfo
-     *
-     * Preview crypto order
-     *
-     * Previews an order using the specified account.
-     *
-     * @param  string $user_id (required)
-     * @param  string $user_secret (required)
-     * @param  string $account_id (required)
-     * @param  \SnapTrade\Model\SimpleOrderForm $simple_order_form (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['previewSimpleOrder'] to see the possible values for this operation
-     *
-     * @throws \SnapTrade\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return array of \SnapTrade\Model\SimpleOrderPreview|\SnapTrade\Model\Model400FailedRequestResponse, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function previewSimpleOrderWithHttpInfo($user_id, $user_secret, $account_id, $simple_order_form, string $contentType = self::contentTypes['previewSimpleOrder'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
-    {
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->previewSimpleOrderRequest($user_id, $user_secret, $account_id, $simple_order_form, $contentType);
-
-        // Customization hook
-        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                if (
-                    ($e->getCode() == 401 || $e->getCode() == 403) &&
-                    !empty($this->getConfig()->getAccessToken()) &&
-                    $requestOptions->shouldRetryOAuth()
-                ) {
-                    return $this->previewSimpleOrderWithHttpInfo(
-                        $user_id,
-                        $user_secret,
-                        $account_id,
-                        $simple_order_form,
-                        $contentType,
-                        $requestOptions->setRetryOAuth(false)
-                    );
-                }
-
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            } catch (ConnectException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    null,
-                    null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
-
-            switch($statusCode) {
-                case 200:
-                    if ('\SnapTrade\Model\SimpleOrderPreview' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\SnapTrade\Model\SimpleOrderPreview' !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\SimpleOrderPreview', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                case 400:
-                    if ('\SnapTrade\Model\Model400FailedRequestResponse' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\SnapTrade\Model\Model400FailedRequestResponse' !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\Model400FailedRequestResponse', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = '\SnapTrade\Model\SimpleOrderPreview';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    $content = json_decode($content);
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\SnapTrade\Model\SimpleOrderPreview',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 400:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\SnapTrade\Model\Model400FailedRequestResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation previewSimpleOrderAsync
-     *
-     * Preview crypto order
-     *
-     * Previews an order using the specified account.
-     *
-     * @param  string $user_id (required)
-     * @param  string $user_secret (required)
-     * @param  string $account_id (required)
-     * @param  \SnapTrade\Model\SimpleOrderForm $simple_order_form (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['previewSimpleOrder'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function previewSimpleOrderAsync(
-
-        $instrument,
-        $side,
-        $type,
-        $time_in_force,
-        $amount,
-        $user_id,
-        $user_secret,
-        $account_id,
-        $limit_price = SENTINEL_VALUE,
-        $stop_price = SENTINEL_VALUE,
-        $post_only = SENTINEL_VALUE,
-        $expiration_date = SENTINEL_VALUE,
-        string $contentType = self::contentTypes['previewSimpleOrder'][0]
-    )
-    {
-        $_body = [];
-        $this->setRequestBodyProperty($_body, "instrument", $instrument);
-        $this->setRequestBodyProperty($_body, "side", $side);
-        $this->setRequestBodyProperty($_body, "type", $type);
-        $this->setRequestBodyProperty($_body, "time_in_force", $time_in_force);
-        $this->setRequestBodyProperty($_body, "amount", $amount);
-        $this->setRequestBodyProperty($_body, "limit_price", $limit_price);
-        $this->setRequestBodyProperty($_body, "stop_price", $stop_price);
-        $this->setRequestBodyProperty($_body, "post_only", $post_only);
-        $this->setRequestBodyProperty($_body, "expiration_date", $expiration_date);
-        $simple_order_form = $_body;
-
-        return $this->previewSimpleOrderAsyncWithHttpInfo($user_id, $user_secret, $account_id, $simple_order_form, $contentType)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation previewSimpleOrderAsyncWithHttpInfo
-     *
-     * Preview crypto order
-     *
-     * Previews an order using the specified account.
-     *
-     * @param  string $user_id (required)
-     * @param  string $user_secret (required)
-     * @param  string $account_id (required)
-     * @param  \SnapTrade\Model\SimpleOrderForm $simple_order_form (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['previewSimpleOrder'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function previewSimpleOrderAsyncWithHttpInfo($user_id, $user_secret, $account_id, $simple_order_form, string $contentType = self::contentTypes['previewSimpleOrder'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
-    {
-        $returnType = '\SnapTrade\Model\SimpleOrderPreview';
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->previewSimpleOrderRequest($user_id, $user_secret, $account_id, $simple_order_form, $contentType);
-
-        // Customization hook
-        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    if ($returnType === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        (string) $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'previewSimpleOrder'
-     *
-     * @param  string $user_id (required)
-     * @param  string $user_secret (required)
-     * @param  string $account_id (required)
-     * @param  \SnapTrade\Model\SimpleOrderForm $simple_order_form (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['previewSimpleOrder'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function previewSimpleOrderRequest($user_id, $user_secret, $account_id, $simple_order_form, string $contentType = self::contentTypes['previewSimpleOrder'][0])
-    {
-
-        // Check if $user_id is a string
-        if ($user_id !== SENTINEL_VALUE && !is_string($user_id)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_id, true), gettype($user_id)));
-        }
-        // verify the required parameter 'user_id' is set
-        if ($user_id === SENTINEL_VALUE || (is_array($user_id) && count($user_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter user_id when calling previewSimpleOrder'
-            );
-        }
-        // Check if $user_secret is a string
-        if ($user_secret !== SENTINEL_VALUE && !is_string($user_secret)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
-        }
-        // verify the required parameter 'user_secret' is set
-        if ($user_secret === SENTINEL_VALUE || (is_array($user_secret) && count($user_secret) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter user_secret when calling previewSimpleOrder'
-            );
-        }
-        // Check if $account_id is a string
-        if ($account_id !== SENTINEL_VALUE && !is_string($account_id)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($account_id, true), gettype($account_id)));
-        }
-        // verify the required parameter 'account_id' is set
-        if ($account_id === SENTINEL_VALUE || (is_array($account_id) && count($account_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter account_id when calling previewSimpleOrder'
-            );
-        }
-        if ($simple_order_form !== SENTINEL_VALUE) {
-            if (!($simple_order_form instanceof \SnapTrade\Model\SimpleOrderForm)) {
-                if (!is_array($simple_order_form))
-                    throw new \InvalidArgumentException('"simple_order_form" must be associative array or an instance of \SnapTrade\Model\SimpleOrderForm TradingApi.previewSimpleOrder.');
-                else
-                    $simple_order_form = new \SnapTrade\Model\SimpleOrderForm($simple_order_form);
-            }
-        }
-        // verify the required parameter 'simple_order_form' is set
-        if ($simple_order_form === SENTINEL_VALUE || (is_array($simple_order_form) && count($simple_order_form) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter simple_order_form when calling previewSimpleOrder'
-            );
-        }
-
-
-        $resourcePath = '/accounts/{accountId}/trading/simple/preview';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-        if ($user_id !== SENTINEL_VALUE) {
-            // query params
-            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-                $user_id,
-                'userId', // param base name
-                'string', // openApiType
-                'form', // style
-                true, // explode
-                true // required
-            ) ?? []);
-        }
-        if ($user_secret !== SENTINEL_VALUE) {
-            // query params
-            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-                $user_secret,
-                'userSecret', // param base name
-                'string', // openApiType
-                'form', // style
-                true, // explode
-                true // required
-            ) ?? []);
-        }
-
-
-        // path params
-        if ($account_id !== SENTINEL_VALUE) {
-            $resourcePath = str_replace(
-                '{' . 'accountId' . '}',
-                ObjectSerializer::toPathValue($account_id),
-                $resourcePath
-            );
-        }
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (isset($simple_order_form)) {
-            if (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($simple_order_form));
-            } else {
-                $httpBody = $simple_order_form;
+                $httpBody = $crypto_order_form;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -5465,7 +5470,6 @@ class TradingApi extends \SnapTrade\CustomApi
      * Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages
      *
      * @param  string $account_id The ID of the account to execute the trade on. (required)
-     * @param  string $brokerage_order_id The Brokerage Order ID of the order to replace. (required)
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
      * @param  \SnapTrade\Model\ManualTradeReplaceForm $manual_trade_replace_form manual_trade_replace_form (required)
@@ -5477,11 +5481,11 @@ class TradingApi extends \SnapTrade\CustomApi
      */
     public function replaceOrder(
 
+        $brokerage_order_id,
         $action,
         $order_type,
         $time_in_force,
         $account_id,
-        $brokerage_order_id,
         $user_id,
         $user_secret,
         $price = SENTINEL_VALUE,
@@ -5492,6 +5496,7 @@ class TradingApi extends \SnapTrade\CustomApi
     )
     {
         $_body = [];
+        $this->setRequestBodyProperty($_body, "brokerage_order_id", $brokerage_order_id);
         $this->setRequestBodyProperty($_body, "action", $action);
         $this->setRequestBodyProperty($_body, "order_type", $order_type);
         $this->setRequestBodyProperty($_body, "time_in_force", $time_in_force);
@@ -5501,7 +5506,7 @@ class TradingApi extends \SnapTrade\CustomApi
         $this->setRequestBodyProperty($_body, "units", $units);
         $manual_trade_replace_form = $_body;
 
-        list($response) = $this->replaceOrderWithHttpInfo($account_id, $brokerage_order_id, $user_id, $user_secret, $manual_trade_replace_form, $contentType);
+        list($response) = $this->replaceOrderWithHttpInfo($account_id, $user_id, $user_secret, $manual_trade_replace_form, $contentType);
         return $response;
     }
 
@@ -5513,7 +5518,6 @@ class TradingApi extends \SnapTrade\CustomApi
      * Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages
      *
      * @param  string $account_id The ID of the account to execute the trade on. (required)
-     * @param  string $brokerage_order_id The Brokerage Order ID of the order to replace. (required)
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
      * @param  \SnapTrade\Model\ManualTradeReplaceForm $manual_trade_replace_form (required)
@@ -5523,9 +5527,9 @@ class TradingApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return array of \SnapTrade\Model\AccountOrderRecord|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\Model403FailedRequestResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function replaceOrderWithHttpInfo($account_id, $brokerage_order_id, $user_id, $user_secret, $manual_trade_replace_form, string $contentType = self::contentTypes['replaceOrder'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    public function replaceOrderWithHttpInfo($account_id, $user_id, $user_secret, $manual_trade_replace_form, string $contentType = self::contentTypes['replaceOrder'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->replaceOrderRequest($account_id, $brokerage_order_id, $user_id, $user_secret, $manual_trade_replace_form, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->replaceOrderRequest($account_id, $user_id, $user_secret, $manual_trade_replace_form, $contentType);
 
         // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
@@ -5542,7 +5546,6 @@ class TradingApi extends \SnapTrade\CustomApi
                 ) {
                     return $this->replaceOrderWithHttpInfo(
                         $account_id,
-                        $brokerage_order_id,
                         $user_id,
                         $user_secret,
                         $manual_trade_replace_form,
@@ -5684,7 +5687,6 @@ class TradingApi extends \SnapTrade\CustomApi
      * Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages
      *
      * @param  string $account_id The ID of the account to execute the trade on. (required)
-     * @param  string $brokerage_order_id The Brokerage Order ID of the order to replace. (required)
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
      * @param  \SnapTrade\Model\ManualTradeReplaceForm $manual_trade_replace_form (required)
@@ -5695,11 +5697,11 @@ class TradingApi extends \SnapTrade\CustomApi
      */
     public function replaceOrderAsync(
 
+        $brokerage_order_id,
         $action,
         $order_type,
         $time_in_force,
         $account_id,
-        $brokerage_order_id,
         $user_id,
         $user_secret,
         $price = SENTINEL_VALUE,
@@ -5710,6 +5712,7 @@ class TradingApi extends \SnapTrade\CustomApi
     )
     {
         $_body = [];
+        $this->setRequestBodyProperty($_body, "brokerage_order_id", $brokerage_order_id);
         $this->setRequestBodyProperty($_body, "action", $action);
         $this->setRequestBodyProperty($_body, "order_type", $order_type);
         $this->setRequestBodyProperty($_body, "time_in_force", $time_in_force);
@@ -5719,7 +5722,7 @@ class TradingApi extends \SnapTrade\CustomApi
         $this->setRequestBodyProperty($_body, "units", $units);
         $manual_trade_replace_form = $_body;
 
-        return $this->replaceOrderAsyncWithHttpInfo($account_id, $brokerage_order_id, $user_id, $user_secret, $manual_trade_replace_form, $contentType)
+        return $this->replaceOrderAsyncWithHttpInfo($account_id, $user_id, $user_secret, $manual_trade_replace_form, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -5735,7 +5738,6 @@ class TradingApi extends \SnapTrade\CustomApi
      * Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages
      *
      * @param  string $account_id The ID of the account to execute the trade on. (required)
-     * @param  string $brokerage_order_id The Brokerage Order ID of the order to replace. (required)
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
      * @param  \SnapTrade\Model\ManualTradeReplaceForm $manual_trade_replace_form (required)
@@ -5744,10 +5746,10 @@ class TradingApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function replaceOrderAsyncWithHttpInfo($account_id, $brokerage_order_id, $user_id, $user_secret, $manual_trade_replace_form, string $contentType = self::contentTypes['replaceOrder'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    public function replaceOrderAsyncWithHttpInfo($account_id, $user_id, $user_secret, $manual_trade_replace_form, string $contentType = self::contentTypes['replaceOrder'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\AccountOrderRecord';
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->replaceOrderRequest($account_id, $brokerage_order_id, $user_id, $user_secret, $manual_trade_replace_form, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->replaceOrderRequest($account_id, $user_id, $user_secret, $manual_trade_replace_form, $contentType);
 
         // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
@@ -5792,7 +5794,6 @@ class TradingApi extends \SnapTrade\CustomApi
      * Create request for operation 'replaceOrder'
      *
      * @param  string $account_id The ID of the account to execute the trade on. (required)
-     * @param  string $brokerage_order_id The Brokerage Order ID of the order to replace. (required)
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
      * @param  \SnapTrade\Model\ManualTradeReplaceForm $manual_trade_replace_form (required)
@@ -5801,7 +5802,7 @@ class TradingApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function replaceOrderRequest($account_id, $brokerage_order_id, $user_id, $user_secret, $manual_trade_replace_form, string $contentType = self::contentTypes['replaceOrder'][0])
+    public function replaceOrderRequest($account_id, $user_id, $user_secret, $manual_trade_replace_form, string $contentType = self::contentTypes['replaceOrder'][0])
     {
 
         // Check if $account_id is a string
@@ -5812,16 +5813,6 @@ class TradingApi extends \SnapTrade\CustomApi
         if ($account_id === SENTINEL_VALUE || (is_array($account_id) && count($account_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter account_id when calling replaceOrder'
-            );
-        }
-        // Check if $brokerage_order_id is a string
-        if ($brokerage_order_id !== SENTINEL_VALUE && !is_string($brokerage_order_id)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($brokerage_order_id, true), gettype($brokerage_order_id)));
-        }
-        // verify the required parameter 'brokerage_order_id' is set
-        if ($brokerage_order_id === SENTINEL_VALUE || (is_array($brokerage_order_id) && count($brokerage_order_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter brokerage_order_id when calling replaceOrder'
             );
         }
         // Check if $user_id is a string
@@ -5860,7 +5851,7 @@ class TradingApi extends \SnapTrade\CustomApi
         }
 
 
-        $resourcePath = '/accounts/{accountId}/trading/simple/{brokerageOrderId}/replace';
+        $resourcePath = '/accounts/{accountId}/trading/replace';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -5896,14 +5887,6 @@ class TradingApi extends \SnapTrade\CustomApi
             $resourcePath = str_replace(
                 '{' . 'accountId' . '}',
                 ObjectSerializer::toPathValue($account_id),
-                $resourcePath
-            );
-        }
-        // path params
-        if ($brokerage_order_id !== SENTINEL_VALUE) {
-            $resourcePath = str_replace(
-                '{' . 'brokerageOrderId' . '}',
-                ObjectSerializer::toPathValue($brokerage_order_id),
                 $resourcePath
             );
         }
@@ -5974,7 +5957,7 @@ class TradingApi extends \SnapTrade\CustomApi
             $headers
         );
 
-        $method = 'PATCH';
+        $method = 'POST';
         $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();

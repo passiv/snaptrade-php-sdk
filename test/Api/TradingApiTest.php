@@ -131,6 +131,18 @@ class TradingApiTest extends TestCase
     }
 
     /**
+     * Test case for placeCryptoOrder
+     *
+     * Place crypto order.
+     *
+     */
+    public function testPlaceCryptoOrder()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for placeForceOrder
      *
      * Place equity order.
@@ -167,24 +179,12 @@ class TradingApiTest extends TestCase
     }
 
     /**
-     * Test case for placeSimpleOrder
-     *
-     * Place crypto order.
-     *
-     */
-    public function testPlaceSimpleOrder()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for previewSimpleOrder
+     * Test case for previewCryptoOrder
      *
      * Preview crypto order.
      *
      */
-    public function testPreviewSimpleOrder()
+    public function testPreviewCryptoOrder()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

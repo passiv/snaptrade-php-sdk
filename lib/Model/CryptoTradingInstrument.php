@@ -1,6 +1,6 @@
 <?php
 /**
- * SimpleOrderPreviewEstimatedFee
+ * CryptoTradingInstrument
  *
  * PHP version 7.4
  *
@@ -27,14 +27,13 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * SimpleOrderPreviewEstimatedFee Class Doc Comment
+ * CryptoTradingInstrument Class Doc Comment
  *
  * @category Class
- * @description The estimated order fee.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class SimpleOrderPreviewEstimatedFee implements ModelInterface, ArrayAccess, \JsonSerializable
+class CryptoTradingInstrument implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -43,7 +42,7 @@ class SimpleOrderPreviewEstimatedFee implements ModelInterface, ArrayAccess, \Js
       *
       * @var string
       */
-    protected static $openAPIModelName = 'SimpleOrderPreview_estimated_fee';
+    protected static $openAPIModelName = 'CryptoTradingInstrument';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -51,8 +50,8 @@ class SimpleOrderPreviewEstimatedFee implements ModelInterface, ArrayAccess, \Js
       * @var string[]
       */
     protected static $openAPITypes = [
-        'currency' => 'string',
-        'amount' => 'float'
+        'symbol' => 'string',
+        'type' => 'string'
     ];
 
     /**
@@ -63,8 +62,8 @@ class SimpleOrderPreviewEstimatedFee implements ModelInterface, ArrayAccess, \Js
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'currency' => null,
-        'amount' => 'decimal'
+        'symbol' => null,
+        'type' => null
     ];
 
     /**
@@ -73,8 +72,8 @@ class SimpleOrderPreviewEstimatedFee implements ModelInterface, ArrayAccess, \Js
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'currency' => false,
-		'amount' => false
+        'symbol' => false,
+		'type' => false
     ];
 
     /**
@@ -163,8 +162,8 @@ class SimpleOrderPreviewEstimatedFee implements ModelInterface, ArrayAccess, \Js
      * @var string[]
      */
     protected static $attributeMap = [
-        'currency' => 'currency',
-        'amount' => 'amount'
+        'symbol' => 'symbol',
+        'type' => 'type'
     ];
 
     /**
@@ -173,8 +172,8 @@ class SimpleOrderPreviewEstimatedFee implements ModelInterface, ArrayAccess, \Js
      * @var string[]
      */
     protected static $setters = [
-        'currency' => 'setCurrency',
-        'amount' => 'setAmount'
+        'symbol' => 'setSymbol',
+        'type' => 'setType'
     ];
 
     /**
@@ -183,8 +182,8 @@ class SimpleOrderPreviewEstimatedFee implements ModelInterface, ArrayAccess, \Js
      * @var string[]
      */
     protected static $getters = [
-        'currency' => 'getCurrency',
-        'amount' => 'getAmount'
+        'symbol' => 'getSymbol',
+        'type' => 'getType'
     ];
 
     /**
@@ -228,6 +227,21 @@ class SimpleOrderPreviewEstimatedFee implements ModelInterface, ArrayAccess, \Js
         return self::$openAPIModelName;
     }
 
+    public const TYPE_CRYPTOCURRENCY = 'CRYPTOCURRENCY';
+    public const TYPE_CRYPTOCURRENCY_PAIR = 'CRYPTOCURRENCY_PAIR';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getTypeAllowableValues()
+    {
+        return [
+            self::TYPE_CRYPTOCURRENCY,
+            self::TYPE_CRYPTOCURRENCY_PAIR,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -244,8 +258,8 @@ class SimpleOrderPreviewEstimatedFee implements ModelInterface, ArrayAccess, \Js
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('currency', $data ?? [], null);
-        $this->setIfExists('amount', $data ?? [], null);
+        $this->setIfExists('symbol', $data ?? [], null);
+        $this->setIfExists('type', $data ?? [], null);
     }
 
     /**
@@ -275,12 +289,21 @@ class SimpleOrderPreviewEstimatedFee implements ModelInterface, ArrayAccess, \Js
     {
         $invalidProperties = [];
 
-        if ($this->container['currency'] === null) {
-            $invalidProperties[] = "'currency' can't be null";
+        if ($this->container['symbol'] === null) {
+            $invalidProperties[] = "'symbol' can't be null";
         }
-        if ($this->container['amount'] === null) {
-            $invalidProperties[] = "'amount' can't be null";
+        if ($this->container['type'] === null) {
+            $invalidProperties[] = "'type' can't be null";
         }
+        $allowedValues = $this->getTypeAllowableValues();
+        if (!is_null($this->container['type']) && !in_array($this->container['type'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'type', must be one of '%s'",
+                $this->container['type'],
+                implode("', '", $allowedValues)
+            );
+        }
+
         return $invalidProperties;
     }
 
@@ -297,59 +320,69 @@ class SimpleOrderPreviewEstimatedFee implements ModelInterface, ArrayAccess, \Js
 
 
     /**
-     * Gets currency
+     * Gets symbol
      *
      * @return string
      */
-    public function getCurrency()
+    public function getSymbol()
     {
-        return $this->container['currency'];
+        return $this->container['symbol'];
     }
 
     /**
-     * Sets currency
+     * Sets symbol
      *
-     * @param string $currency Symbol to identify a cryptocurrency or fiat currency on a crypto exchange. Fiat currencies symbols are ISO-4217 codes.
+     * @param string $symbol The instrument's trading ticker symbol
      *
      * @return self
      */
-    public function setCurrency($currency)
+    public function setSymbol($symbol)
     {
 
-        if (is_null($currency)) {
-            throw new \InvalidArgumentException('non-nullable currency cannot be null');
+        if (is_null($symbol)) {
+            throw new \InvalidArgumentException('non-nullable symbol cannot be null');
         }
 
-        $this->container['currency'] = $currency;
+        $this->container['symbol'] = $symbol;
 
         return $this;
     }
 
     /**
-     * Gets amount
+     * Gets type
      *
-     * @return float
+     * @return string
      */
-    public function getAmount()
+    public function getType()
     {
-        return $this->container['amount'];
+        return $this->container['type'];
     }
 
     /**
-     * Sets amount
+     * Sets type
      *
-     * @param float $amount amount
+     * @param string $type The instrument's type
      *
      * @return self
      */
-    public function setAmount($amount)
+    public function setType($type)
     {
-
-        if (is_null($amount)) {
-            throw new \InvalidArgumentException('non-nullable amount cannot be null');
+        $allowedValues = $this->getTypeAllowableValues();
+        if (!in_array($type, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'type', must be one of '%s'",
+                    $type,
+                    implode("', '", $allowedValues)
+                )
+            );
         }
 
-        $this->container['amount'] = $amount;
+        if (is_null($type)) {
+            throw new \InvalidArgumentException('non-nullable type cannot be null');
+        }
+
+        $this->container['type'] = $type;
 
         return $this;
     }

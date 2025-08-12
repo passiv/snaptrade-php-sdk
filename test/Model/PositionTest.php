@@ -109,18 +109,18 @@ class PositionTest extends TestCase
     }
 
     /**
-     * Test attribute "fractional_units"
+     * Test attribute "average_purchase_price"
      */
-    public function testPropertyFractionalUnits()
+    public function testPropertyAveragePurchasePrice()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "average_purchase_price"
+     * Test attribute "fractional_units"
      */
-    public function testPropertyAveragePurchasePrice()
+    public function testPropertyFractionalUnits()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

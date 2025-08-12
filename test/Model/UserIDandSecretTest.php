@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * UserIDandSecretTest Class Doc Comment
  *
  * @category    Class
- * @description Response when register user is successful
+ * @description UserIDandSecret
  * @package     SnapTrade
  */
 class UserIDandSecretTest extends TestCase

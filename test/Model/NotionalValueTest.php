@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * NotionalValueTest Class Doc Comment
  *
  * @category    Class
- * @description Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. **Only available for Alpaca, Alpaca Paper, and Robinhood.**
+ * @description Total notional amount for the order. Must be &#x60;null&#x60; if &#x60;units&#x60; is provided. Can only work with &#x60;Market&#x60; for &#x60;order_type&#x60; and &#x60;Day&#x60; for &#x60;time_in_force&#x60;. This is only available for certain brokerages. Please check the [integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;e7bbcbf9f272441593f93decde660687) for more information.
  * @package     SnapTrade
  */
 class NotionalValueTest extends TestCase

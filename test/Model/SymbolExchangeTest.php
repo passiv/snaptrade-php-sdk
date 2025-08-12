@@ -1,6 +1,6 @@
 <?php
 /**
- * UniversalSymbolExchangeTest
+ * SymbolExchangeTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * UniversalSymbolExchangeTest Class Doc Comment
+ * SymbolExchangeTest Class Doc Comment
  *
  * @category    Class
  * @description The exchange on which the security is listed and traded.
  * @package     SnapTrade
  */
-class UniversalSymbolExchangeTest extends TestCase
+class SymbolExchangeTest extends TestCase
 {
 
     /**
@@ -64,9 +64,9 @@ class UniversalSymbolExchangeTest extends TestCase
     }
 
     /**
-     * Test "UniversalSymbolExchange"
+     * Test "SymbolExchange"
      */
-    public function testUniversalSymbolExchange()
+    public function testSymbolExchange()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

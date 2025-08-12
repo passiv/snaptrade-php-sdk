@@ -30,7 +30,7 @@ use \SnapTrade\ObjectSerializer;
  * Account Class Doc Comment
  *
  * @category Class
- * @description A single brokerage account at a financial institution.
+ * @description A single account at a brokerage.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
@@ -53,15 +53,17 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPITypes = [
         'id' => 'string',
         'brokerage_authorization' => 'string',
-        'portfolio_group' => 'string',
         'name' => 'string',
         'number' => 'string',
         'institution_name' => 'string',
         'created_date' => '\DateTime',
-        'meta' => 'array<string,mixed>',
-        'cash_restrictions' => 'string[]',
         'sync_status' => '\SnapTrade\Model\AccountSyncStatus',
-        'balance' => '\SnapTrade\Model\AccountBalance'
+        'balance' => '\SnapTrade\Model\AccountBalance',
+        'status' => 'string',
+        'raw_type' => 'string',
+        'meta' => 'array<string,mixed>',
+        'portfolio_group' => 'string',
+        'cash_restrictions' => 'string[]'
     ];
 
     /**
@@ -74,15 +76,17 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPIFormats = [
         'id' => null,
         'brokerage_authorization' => 'uuid',
-        'portfolio_group' => 'uuid',
         'name' => null,
         'number' => null,
         'institution_name' => null,
         'created_date' => 'date-time',
-        'meta' => null,
-        'cash_restrictions' => null,
         'sync_status' => null,
-        'balance' => null
+        'balance' => null,
+        'status' => null,
+        'raw_type' => null,
+        'meta' => null,
+        'portfolio_group' => 'uuid',
+        'cash_restrictions' => null
     ];
 
     /**
@@ -93,15 +97,17 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static array $openAPINullables = [
         'id' => false,
 		'brokerage_authorization' => false,
-		'portfolio_group' => false,
 		'name' => true,
 		'number' => false,
 		'institution_name' => false,
 		'created_date' => false,
-		'meta' => false,
-		'cash_restrictions' => false,
 		'sync_status' => false,
-		'balance' => false
+		'balance' => false,
+		'status' => true,
+		'raw_type' => true,
+		'meta' => false,
+		'portfolio_group' => false,
+		'cash_restrictions' => false
     ];
 
     /**
@@ -192,15 +198,17 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $attributeMap = [
         'id' => 'id',
         'brokerage_authorization' => 'brokerage_authorization',
-        'portfolio_group' => 'portfolio_group',
         'name' => 'name',
         'number' => 'number',
         'institution_name' => 'institution_name',
         'created_date' => 'created_date',
-        'meta' => 'meta',
-        'cash_restrictions' => 'cash_restrictions',
         'sync_status' => 'sync_status',
-        'balance' => 'balance'
+        'balance' => 'balance',
+        'status' => 'status',
+        'raw_type' => 'raw_type',
+        'meta' => 'meta',
+        'portfolio_group' => 'portfolio_group',
+        'cash_restrictions' => 'cash_restrictions'
     ];
 
     /**
@@ -211,15 +219,17 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $setters = [
         'id' => 'setId',
         'brokerage_authorization' => 'setBrokerageAuthorization',
-        'portfolio_group' => 'setPortfolioGroup',
         'name' => 'setName',
         'number' => 'setNumber',
         'institution_name' => 'setInstitutionName',
         'created_date' => 'setCreatedDate',
-        'meta' => 'setMeta',
-        'cash_restrictions' => 'setCashRestrictions',
         'sync_status' => 'setSyncStatus',
-        'balance' => 'setBalance'
+        'balance' => 'setBalance',
+        'status' => 'setStatus',
+        'raw_type' => 'setRawType',
+        'meta' => 'setMeta',
+        'portfolio_group' => 'setPortfolioGroup',
+        'cash_restrictions' => 'setCashRestrictions'
     ];
 
     /**
@@ -230,15 +240,17 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $getters = [
         'id' => 'getId',
         'brokerage_authorization' => 'getBrokerageAuthorization',
-        'portfolio_group' => 'getPortfolioGroup',
         'name' => 'getName',
         'number' => 'getNumber',
         'institution_name' => 'getInstitutionName',
         'created_date' => 'getCreatedDate',
-        'meta' => 'getMeta',
-        'cash_restrictions' => 'getCashRestrictions',
         'sync_status' => 'getSyncStatus',
-        'balance' => 'getBalance'
+        'balance' => 'getBalance',
+        'status' => 'getStatus',
+        'raw_type' => 'getRawType',
+        'meta' => 'getMeta',
+        'portfolio_group' => 'getPortfolioGroup',
+        'cash_restrictions' => 'getCashRestrictions'
     ];
 
     /**
@@ -282,6 +294,23 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
+    public const STATUS_OPEN = 'open';
+    public const STATUS_CLOSED = 'closed';
+    public const STATUS_ARCHIVED = 'archived';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getStatusAllowableValues()
+    {
+        return [
+            self::STATUS_OPEN,
+            self::STATUS_CLOSED,
+            self::STATUS_ARCHIVED,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -300,15 +329,17 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('brokerage_authorization', $data ?? [], null);
-        $this->setIfExists('portfolio_group', $data ?? [], null);
         $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('number', $data ?? [], null);
         $this->setIfExists('institution_name', $data ?? [], null);
         $this->setIfExists('created_date', $data ?? [], null);
-        $this->setIfExists('meta', $data ?? [], null);
-        $this->setIfExists('cash_restrictions', $data ?? [], null);
         $this->setIfExists('sync_status', $data ?? [], null);
         $this->setIfExists('balance', $data ?? [], null);
+        $this->setIfExists('status', $data ?? [], null);
+        $this->setIfExists('raw_type', $data ?? [], null);
+        $this->setIfExists('meta', $data ?? [], null);
+        $this->setIfExists('portfolio_group', $data ?? [], null);
+        $this->setIfExists('cash_restrictions', $data ?? [], null);
     }
 
     /**
@@ -338,6 +369,39 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
+        if ($this->container['id'] === null) {
+            $invalidProperties[] = "'id' can't be null";
+        }
+        if ($this->container['brokerage_authorization'] === null) {
+            $invalidProperties[] = "'brokerage_authorization' can't be null";
+        }
+        if ($this->container['name'] === null) {
+            $invalidProperties[] = "'name' can't be null";
+        }
+        if ($this->container['number'] === null) {
+            $invalidProperties[] = "'number' can't be null";
+        }
+        if ($this->container['institution_name'] === null) {
+            $invalidProperties[] = "'institution_name' can't be null";
+        }
+        if ($this->container['created_date'] === null) {
+            $invalidProperties[] = "'created_date' can't be null";
+        }
+        if ($this->container['sync_status'] === null) {
+            $invalidProperties[] = "'sync_status' can't be null";
+        }
+        if ($this->container['balance'] === null) {
+            $invalidProperties[] = "'balance' can't be null";
+        }
+        $allowedValues = $this->getStatusAllowableValues();
+        if (!is_null($this->container['status']) && !in_array($this->container['status'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'status', must be one of '%s'",
+                $this->container['status'],
+                implode("', '", $allowedValues)
+            );
+        }
+
         return $invalidProperties;
     }
 
@@ -356,7 +420,7 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets id
      *
-     * @return string|null
+     * @return string
      */
     public function getId()
     {
@@ -366,7 +430,7 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets id
      *
-     * @param string|null $id Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. This ID should not change for as long as the connection stays active. If the connection is deleted and re-added, a new account ID will be generated. If you want a stable identifier for the account, use the `number` field.
+     * @param string $id Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. This ID should not change for as long as the connection stays active. If the connection is deleted and re-added, a new account ID will be generated.
      *
      * @return self
      */
@@ -385,7 +449,7 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets brokerage_authorization
      *
-     * @return string|null
+     * @return string
      */
     public function getBrokerageAuthorization()
     {
@@ -395,7 +459,7 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets brokerage_authorization
      *
-     * @param string|null $brokerage_authorization Unique identifier for the connection (brokerage authorization). This is the UUID used to reference the connection in SnapTrade.
+     * @param string $brokerage_authorization Unique identifier for the connection. This is the UUID used to reference the connection in SnapTrade.
      *
      * @return self
      */
@@ -407,6 +471,300 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['brokerage_authorization'] = $brokerage_authorization;
+
+        return $this;
+    }
+
+    /**
+     * Gets name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->container['name'];
+    }
+
+    /**
+     * Sets name
+     *
+     * @param string $name A display name for the account. Either assigned by the user or by the brokerage itself. For certain brokerages, SnapTrade appends the brokerage name to the account name for clarity.
+     *
+     * @return self
+     */
+    public function setName($name)
+    {
+
+        if (is_null($name)) {
+            array_push($this->openAPINullablesSetToNull, 'name');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('name', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['name'] = $name;
+
+        return $this;
+    }
+
+    /**
+     * Gets number
+     *
+     * @return string
+     */
+    public function getNumber()
+    {
+        return $this->container['number'];
+    }
+
+    /**
+     * Sets number
+     *
+     * @param string $number The account number assigned by the brokerage. For some brokerages, this field may be masked for security reasons.
+     *
+     * @return self
+     */
+    public function setNumber($number)
+    {
+
+        if (is_null($number)) {
+            throw new \InvalidArgumentException('non-nullable number cannot be null');
+        }
+
+        $this->container['number'] = $number;
+
+        return $this;
+    }
+
+    /**
+     * Gets institution_name
+     *
+     * @return string
+     */
+    public function getInstitutionName()
+    {
+        return $this->container['institution_name'];
+    }
+
+    /**
+     * Sets institution_name
+     *
+     * @param string $institution_name The name of the brokerage that holds the account.
+     *
+     * @return self
+     */
+    public function setInstitutionName($institution_name)
+    {
+
+        if (is_null($institution_name)) {
+            throw new \InvalidArgumentException('non-nullable institution_name cannot be null');
+        }
+
+        $this->container['institution_name'] = $institution_name;
+
+        return $this;
+    }
+
+    /**
+     * Gets created_date
+     *
+     * @return \DateTime
+     */
+    public function getCreatedDate()
+    {
+        return $this->container['created_date'];
+    }
+
+    /**
+     * Sets created_date
+     *
+     * @param \DateTime $created_date Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the brokerage.
+     *
+     * @return self
+     */
+    public function setCreatedDate($created_date)
+    {
+
+        if (is_null($created_date)) {
+            throw new \InvalidArgumentException('non-nullable created_date cannot be null');
+        }
+
+        $this->container['created_date'] = $created_date;
+
+        return $this;
+    }
+
+    /**
+     * Gets sync_status
+     *
+     * @return \SnapTrade\Model\AccountSyncStatus
+     */
+    public function getSyncStatus()
+    {
+        return $this->container['sync_status'];
+    }
+
+    /**
+     * Sets sync_status
+     *
+     * @param \SnapTrade\Model\AccountSyncStatus $sync_status sync_status
+     *
+     * @return self
+     */
+    public function setSyncStatus($sync_status)
+    {
+
+        if (is_null($sync_status)) {
+            throw new \InvalidArgumentException('non-nullable sync_status cannot be null');
+        }
+
+        $this->container['sync_status'] = $sync_status;
+
+        return $this;
+    }
+
+    /**
+     * Gets balance
+     *
+     * @return \SnapTrade\Model\AccountBalance
+     */
+    public function getBalance()
+    {
+        return $this->container['balance'];
+    }
+
+    /**
+     * Sets balance
+     *
+     * @param \SnapTrade\Model\AccountBalance $balance balance
+     *
+     * @return self
+     */
+    public function setBalance($balance)
+    {
+
+        if (is_null($balance)) {
+            throw new \InvalidArgumentException('non-nullable balance cannot be null');
+        }
+
+        $this->container['balance'] = $balance;
+
+        return $this;
+    }
+
+    /**
+     * Gets status
+     *
+     * @return string|null
+     */
+    public function getStatus()
+    {
+        return $this->container['status'];
+    }
+
+    /**
+     * Sets status
+     *
+     * @param string|null $status The current status of the account. Can be either \"open\", \"closed\", \"archived\" or null if the status is unknown or not provided by the brokerage.
+     *
+     * @return self
+     */
+    public function setStatus($status)
+    {
+        $allowedValues = $this->getStatusAllowableValues();
+        if (!is_null($status) && !in_array($status, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'status', must be one of '%s'",
+                    $status,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+
+        if (is_null($status)) {
+            array_push($this->openAPINullablesSetToNull, 'status');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('status', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['status'] = $status;
+
+        return $this;
+    }
+
+    /**
+     * Gets raw_type
+     *
+     * @return string|null
+     */
+    public function getRawType()
+    {
+        return $this->container['raw_type'];
+    }
+
+    /**
+     * Sets raw_type
+     *
+     * @param string|null $raw_type The account type as provided by the brokerage
+     *
+     * @return self
+     */
+    public function setRawType($raw_type)
+    {
+
+        if (is_null($raw_type)) {
+            array_push($this->openAPINullablesSetToNull, 'raw_type');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('raw_type', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['raw_type'] = $raw_type;
+
+        return $this;
+    }
+
+    /**
+     * Gets meta
+     *
+     * @return array<string,mixed>|null
+     * @deprecated
+     */
+    public function getMeta()
+    {
+        return $this->container['meta'];
+    }
+
+    /**
+     * Sets meta
+     *
+     * @param array<string,mixed>|null $meta Additional information about the account, such as account type, status, etc. This information is specific to the brokerage and there's no standard format for this data. This field is deprecated and subject to removal in a future version.
+     *
+     * @return self
+     * @deprecated
+     */
+    public function setMeta($meta)
+    {
+
+        if (is_null($meta)) {
+            throw new \InvalidArgumentException('non-nullable meta cannot be null');
+        }
+
+        $this->container['meta'] = $meta;
 
         return $this;
     }
@@ -443,160 +801,6 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets name
-     *
-     * @return string|null
-     */
-    public function getName()
-    {
-        return $this->container['name'];
-    }
-
-    /**
-     * Sets name
-     *
-     * @param string|null $name A display name for the account. Either assigned by the user or by the financial institution itself. For certain institutions, SnapTrade appends the institution name to the account name for clarity.
-     *
-     * @return self
-     */
-    public function setName($name)
-    {
-
-        if (is_null($name)) {
-            array_push($this->openAPINullablesSetToNull, 'name');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('name', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['name'] = $name;
-
-        return $this;
-    }
-
-    /**
-     * Gets number
-     *
-     * @return string|null
-     */
-    public function getNumber()
-    {
-        return $this->container['number'];
-    }
-
-    /**
-     * Sets number
-     *
-     * @param string|null $number The account number assigned by the financial institution.
-     *
-     * @return self
-     */
-    public function setNumber($number)
-    {
-
-        if (is_null($number)) {
-            throw new \InvalidArgumentException('non-nullable number cannot be null');
-        }
-
-        $this->container['number'] = $number;
-
-        return $this;
-    }
-
-    /**
-     * Gets institution_name
-     *
-     * @return string|null
-     */
-    public function getInstitutionName()
-    {
-        return $this->container['institution_name'];
-    }
-
-    /**
-     * Sets institution_name
-     *
-     * @param string|null $institution_name The name of the financial institution that holds the account.
-     *
-     * @return self
-     */
-    public function setInstitutionName($institution_name)
-    {
-
-        if (is_null($institution_name)) {
-            throw new \InvalidArgumentException('non-nullable institution_name cannot be null');
-        }
-
-        $this->container['institution_name'] = $institution_name;
-
-        return $this;
-    }
-
-    /**
-     * Gets created_date
-     *
-     * @return \DateTime|null
-     */
-    public function getCreatedDate()
-    {
-        return $this->container['created_date'];
-    }
-
-    /**
-     * Sets created_date
-     *
-     * @param \DateTime|null $created_date Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the financial institution.
-     *
-     * @return self
-     */
-    public function setCreatedDate($created_date)
-    {
-
-        if (is_null($created_date)) {
-            throw new \InvalidArgumentException('non-nullable created_date cannot be null');
-        }
-
-        $this->container['created_date'] = $created_date;
-
-        return $this;
-    }
-
-    /**
-     * Gets meta
-     *
-     * @return array<string,mixed>|null
-     * @deprecated
-     */
-    public function getMeta()
-    {
-        return $this->container['meta'];
-    }
-
-    /**
-     * Sets meta
-     *
-     * @param array<string,mixed>|null $meta Additional information about the account, such as account type, status, etc. This information is specific to the financial institution and there's no standard format for this data. Please use at your own risk.
-     *
-     * @return self
-     * @deprecated
-     */
-    public function setMeta($meta)
-    {
-
-        if (is_null($meta)) {
-            throw new \InvalidArgumentException('non-nullable meta cannot be null');
-        }
-
-        $this->container['meta'] = $meta;
-
-        return $this;
-    }
-
-    /**
      * Gets cash_restrictions
      *
      * @return string[]|null
@@ -623,64 +827,6 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['cash_restrictions'] = $cash_restrictions;
-
-        return $this;
-    }
-
-    /**
-     * Gets sync_status
-     *
-     * @return \SnapTrade\Model\AccountSyncStatus|null
-     */
-    public function getSyncStatus()
-    {
-        return $this->container['sync_status'];
-    }
-
-    /**
-     * Sets sync_status
-     *
-     * @param \SnapTrade\Model\AccountSyncStatus|null $sync_status sync_status
-     *
-     * @return self
-     */
-    public function setSyncStatus($sync_status)
-    {
-
-        if (is_null($sync_status)) {
-            throw new \InvalidArgumentException('non-nullable sync_status cannot be null');
-        }
-
-        $this->container['sync_status'] = $sync_status;
-
-        return $this;
-    }
-
-    /**
-     * Gets balance
-     *
-     * @return \SnapTrade\Model\AccountBalance|null
-     */
-    public function getBalance()
-    {
-        return $this->container['balance'];
-    }
-
-    /**
-     * Sets balance
-     *
-     * @param \SnapTrade\Model\AccountBalance|null $balance balance
-     *
-     * @return self
-     */
-    public function setBalance($balance)
-    {
-
-        if (is_null($balance)) {
-            throw new \InvalidArgumentException('non-nullable balance cannot be null');
-        }
-
-        $this->container['balance'] = $balance;
 
         return $this;
     }

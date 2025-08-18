@@ -1,6 +1,6 @@
 <?php
 /**
- * PositionTest
+ * PositionCurrencyTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * PositionTest Class Doc Comment
+ * PositionCurrencyTest Class Doc Comment
  *
  * @category    Class
- * @description Describes a single stock/ETF/crypto/mutual fund position in an account.
+ * @description The &#39;position currency&#39; (&#x60;price&#x60; and &#x60;average_purchase_price&#x60;). This currency can potentially be different from the &#39;listing currency&#39; of the security. The &#39;listing currency&#39; is what&#39;s quoted on the listing exchange, while the &#39;position currency&#39; is what the brokerage uses to hold and value your position.
  * @package     SnapTrade
  */
-class PositionTest extends TestCase
+class PositionCurrencyTest extends TestCase
 {
 
     /**
@@ -64,72 +64,36 @@ class PositionTest extends TestCase
     }
 
     /**
-     * Test "Position"
+     * Test "PositionCurrency"
      */
-    public function testPosition()
+    public function testPositionCurrency()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "symbol"
+     * Test attribute "id"
      */
-    public function testPropertySymbol()
+    public function testPropertyId()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "units"
+     * Test attribute "code"
      */
-    public function testPropertyUnits()
+    public function testPropertyCode()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "price"
+     * Test attribute "name"
      */
-    public function testPropertyPrice()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "open_pnl"
-     */
-    public function testPropertyOpenPnl()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "average_purchase_price"
-     */
-    public function testPropertyAveragePurchasePrice()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "fractional_units"
-     */
-    public function testPropertyFractionalUnits()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "currency"
-     */
-    public function testPropertyCurrency()
+    public function testPropertyName()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

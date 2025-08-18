@@ -145,7 +145,7 @@ class TradingApiTest extends TestCase
     /**
      * Test case for placeForceOrder
      *
-     * Place equity order.
+     * Place order.
      *
      */
     public function testPlaceForceOrder()

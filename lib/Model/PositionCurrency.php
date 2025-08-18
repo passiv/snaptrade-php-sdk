@@ -1,6 +1,6 @@
 <?php
 /**
- * Position
+ * PositionCurrency
  *
  * PHP version 7.4
  *
@@ -27,14 +27,14 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * Position Class Doc Comment
+ * PositionCurrency Class Doc Comment
  *
  * @category Class
- * @description Describes a single stock/ETF/crypto/mutual fund position in an account.
+ * @description The &#39;position currency&#39; (&#x60;price&#x60; and &#x60;average_purchase_price&#x60;). This currency can potentially be different from the &#39;listing currency&#39; of the security. The &#39;listing currency&#39; is what&#39;s quoted on the listing exchange, while the &#39;position currency&#39; is what the brokerage uses to hold and value your position.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class Position implements ModelInterface, ArrayAccess, \JsonSerializable
+class PositionCurrency implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -43,7 +43,7 @@ class Position implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'Position';
+    protected static $openAPIModelName = 'Position_currency';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -51,13 +51,9 @@ class Position implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'symbol' => '\SnapTrade\Model\PositionSymbol',
-        'units' => 'float',
-        'price' => 'float',
-        'open_pnl' => 'float',
-        'average_purchase_price' => 'float',
-        'fractional_units' => 'float',
-        'currency' => '\SnapTrade\Model\PositionCurrency'
+        'id' => 'string',
+        'code' => 'string',
+        'name' => 'string'
     ];
 
     /**
@@ -68,13 +64,9 @@ class Position implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'symbol' => null,
-        'units' => null,
-        'price' => null,
-        'open_pnl' => null,
-        'average_purchase_price' => null,
-        'fractional_units' => null,
-        'currency' => null
+        'id' => 'uuid',
+        'code' => null,
+        'name' => null
     ];
 
     /**
@@ -83,13 +75,9 @@ class Position implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'symbol' => false,
-		'units' => true,
-		'price' => true,
-		'open_pnl' => true,
-		'average_purchase_price' => true,
-		'fractional_units' => true,
-		'currency' => false
+        'id' => false,
+		'code' => false,
+		'name' => false
     ];
 
     /**
@@ -178,13 +166,9 @@ class Position implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'symbol' => 'symbol',
-        'units' => 'units',
-        'price' => 'price',
-        'open_pnl' => 'open_pnl',
-        'average_purchase_price' => 'average_purchase_price',
-        'fractional_units' => 'fractional_units',
-        'currency' => 'currency'
+        'id' => 'id',
+        'code' => 'code',
+        'name' => 'name'
     ];
 
     /**
@@ -193,13 +177,9 @@ class Position implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'symbol' => 'setSymbol',
-        'units' => 'setUnits',
-        'price' => 'setPrice',
-        'open_pnl' => 'setOpenPnl',
-        'average_purchase_price' => 'setAveragePurchasePrice',
-        'fractional_units' => 'setFractionalUnits',
-        'currency' => 'setCurrency'
+        'id' => 'setId',
+        'code' => 'setCode',
+        'name' => 'setName'
     ];
 
     /**
@@ -208,13 +188,9 @@ class Position implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'symbol' => 'getSymbol',
-        'units' => 'getUnits',
-        'price' => 'getPrice',
-        'open_pnl' => 'getOpenPnl',
-        'average_purchase_price' => 'getAveragePurchasePrice',
-        'fractional_units' => 'getFractionalUnits',
-        'currency' => 'getCurrency'
+        'id' => 'getId',
+        'code' => 'getCode',
+        'name' => 'getName'
     ];
 
     /**
@@ -274,13 +250,9 @@ class Position implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('symbol', $data ?? [], null);
-        $this->setIfExists('units', $data ?? [], null);
-        $this->setIfExists('price', $data ?? [], null);
-        $this->setIfExists('open_pnl', $data ?? [], null);
-        $this->setIfExists('average_purchase_price', $data ?? [], null);
-        $this->setIfExists('fractional_units', $data ?? [], null);
-        $this->setIfExists('currency', $data ?? [], null);
+        $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('code', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
     }
 
     /**
@@ -326,241 +298,88 @@ class Position implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets symbol
+     * Gets id
      *
-     * @return \SnapTrade\Model\PositionSymbol|null
+     * @return string|null
      */
-    public function getSymbol()
+    public function getId()
     {
-        return $this->container['symbol'];
+        return $this->container['id'];
     }
 
     /**
-     * Sets symbol
+     * Sets id
      *
-     * @param \SnapTrade\Model\PositionSymbol|null $symbol symbol
+     * @param string|null $id Unique identifier for the currency. This is the UUID used to reference the currency in SnapTrade.
      *
      * @return self
      */
-    public function setSymbol($symbol)
+    public function setId($id)
     {
 
-        if (is_null($symbol)) {
-            throw new \InvalidArgumentException('non-nullable symbol cannot be null');
+        if (is_null($id)) {
+            throw new \InvalidArgumentException('non-nullable id cannot be null');
         }
 
-        $this->container['symbol'] = $symbol;
+        $this->container['id'] = $id;
 
         return $this;
     }
 
     /**
-     * Gets units
+     * Gets code
      *
-     * @return float|null
+     * @return string|null
      */
-    public function getUnits()
+    public function getCode()
     {
-        return $this->container['units'];
+        return $this->container['code'];
     }
 
     /**
-     * Sets units
+     * Sets code
      *
-     * @param float|null $units The number of shares of the position. This can be fractional or integer units.
+     * @param string|null $code The ISO-4217 currency code for the currency.
      *
      * @return self
      */
-    public function setUnits($units)
+    public function setCode($code)
     {
 
-        if (is_null($units)) {
-            array_push($this->openAPINullablesSetToNull, 'units');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('units', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if (is_null($code)) {
+            throw new \InvalidArgumentException('non-nullable code cannot be null');
         }
 
-        $this->container['units'] = $units;
+        $this->container['code'] = $code;
 
         return $this;
     }
 
     /**
-     * Gets price
+     * Gets name
      *
-     * @return float|null
+     * @return string|null
      */
-    public function getPrice()
+    public function getName()
     {
-        return $this->container['price'];
+        return $this->container['name'];
     }
 
     /**
-     * Sets price
+     * Sets name
      *
-     * @param float|null $price Last known market price for the symbol. The freshness of this price depends on the brokerage. Some brokerages provide real-time prices, while others provide delayed prices. It is recommended that you rely on your own third-party market data provider for most up to date prices.
+     * @param string|null $name A human-friendly name of the currency.
      *
      * @return self
      */
-    public function setPrice($price)
+    public function setName($name)
     {
 
-        if (is_null($price)) {
-            array_push($this->openAPINullablesSetToNull, 'price');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('price', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if (is_null($name)) {
+            throw new \InvalidArgumentException('non-nullable name cannot be null');
         }
 
-        $this->container['price'] = $price;
-
-        return $this;
-    }
-
-    /**
-     * Gets open_pnl
-     *
-     * @return float|null
-     */
-    public function getOpenPnl()
-    {
-        return $this->container['open_pnl'];
-    }
-
-    /**
-     * Sets open_pnl
-     *
-     * @param float|null $open_pnl The profit or loss on the position since it was opened. This is calculated as the difference between the current market value of the position and the total cost of the position. It is recommended to calculate this value using the average purchase price and the current market price yourself, instead of relying on this field.
-     *
-     * @return self
-     */
-    public function setOpenPnl($open_pnl)
-    {
-
-        if (is_null($open_pnl)) {
-            array_push($this->openAPINullablesSetToNull, 'open_pnl');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('open_pnl', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['open_pnl'] = $open_pnl;
-
-        return $this;
-    }
-
-    /**
-     * Gets average_purchase_price
-     *
-     * @return float|null
-     */
-    public function getAveragePurchasePrice()
-    {
-        return $this->container['average_purchase_price'];
-    }
-
-    /**
-     * Sets average_purchase_price
-     *
-     * @param float|null $average_purchase_price Cost basis _per share_ of this position.
-     *
-     * @return self
-     */
-    public function setAveragePurchasePrice($average_purchase_price)
-    {
-
-        if (is_null($average_purchase_price)) {
-            array_push($this->openAPINullablesSetToNull, 'average_purchase_price');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('average_purchase_price', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['average_purchase_price'] = $average_purchase_price;
-
-        return $this;
-    }
-
-    /**
-     * Gets fractional_units
-     *
-     * @return float|null
-     * @deprecated
-     */
-    public function getFractionalUnits()
-    {
-        return $this->container['fractional_units'];
-    }
-
-    /**
-     * Sets fractional_units
-     *
-     * @param float|null $fractional_units Deprecated, use the `units` field for both fractional and integer units going forward
-     *
-     * @return self
-     * @deprecated
-     */
-    public function setFractionalUnits($fractional_units)
-    {
-
-        if (is_null($fractional_units)) {
-            array_push($this->openAPINullablesSetToNull, 'fractional_units');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('fractional_units', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['fractional_units'] = $fractional_units;
-
-        return $this;
-    }
-
-    /**
-     * Gets currency
-     *
-     * @return \SnapTrade\Model\PositionCurrency|null
-     */
-    public function getCurrency()
-    {
-        return $this->container['currency'];
-    }
-
-    /**
-     * Sets currency
-     *
-     * @param \SnapTrade\Model\PositionCurrency|null $currency currency
-     *
-     * @return self
-     */
-    public function setCurrency($currency)
-    {
-
-        if (is_null($currency)) {
-            throw new \InvalidArgumentException('non-nullable currency cannot be null');
-        }
-
-        $this->container['currency'] = $currency;
+        $this->container['name'] = $name;
 
         return $this;
     }

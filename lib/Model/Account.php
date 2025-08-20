@@ -297,6 +297,7 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
     public const STATUS_OPEN = 'open';
     public const STATUS_CLOSED = 'closed';
     public const STATUS_ARCHIVED = 'archived';
+    public const STATUS_UNAVAILABLE = 'unavailable';
 
     /**
      * Gets allowable values of the enum
@@ -309,6 +310,7 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
             self::STATUS_OPEN,
             self::STATUS_CLOSED,
             self::STATUS_ARCHIVED,
+            self::STATUS_UNAVAILABLE,
         ];
     }
 

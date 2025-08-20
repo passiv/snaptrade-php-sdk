@@ -107,6 +107,18 @@ class AccountInformationApiTest extends TestCase
     }
 
     /**
+     * Test case for getUserAccountOrderDetail
+     *
+     * Get account order detail.
+     *
+     */
+    public function testGetUserAccountOrderDetail()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for getUserAccountOrders
      *
      * List account orders.

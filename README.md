@@ -46,11 +46,8 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.connections.removeBrokerageAuthorization`](#snaptradeconnectionsremovebrokerageauthorization)
   * [`snaptrade.connections.returnRates`](#snaptradeconnectionsreturnrates)
   * [`snaptrade.connections.sessionEvents`](#snaptradeconnectionssessionevents)
-  * [`snaptrade.options.getOptionStrategy`](#snaptradeoptionsgetoptionstrategy)
   * [`snaptrade.options.getOptionsChain`](#snaptradeoptionsgetoptionschain)
-  * [`snaptrade.options.getOptionsStrategyQuote`](#snaptradeoptionsgetoptionsstrategyquote)
   * [`snaptrade.options.listOptionHoldings`](#snaptradeoptionslistoptionholdings)
-  * [`snaptrade.options.placeOptionStrategy`](#snaptradeoptionsplaceoptionstrategy)
   * [`snaptrade.referenceData.getCurrencyExchangeRatePair`](#snaptradereferencedatagetcurrencyexchangeratepair)
   * [`snaptrade.referenceData.getPartnerInfo`](#snaptradereferencedatagetpartnerinfo)
   * [`snaptrade.referenceData.getSecurityTypes`](#snaptradereferencedatagetsecuritytypes)
@@ -1164,61 +1161,6 @@ Optional comma separated list of session IDs used to filter the request on speci
 ---
 
 
-### `snaptrade.options.getOptionStrategy`<a id="snaptradeoptionsgetoptionstrategy"></a>
-
-Creates an option strategy object that will be used to place an option strategy order.
-
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```php
-$result = $snaptrade->options->getOptionStrategy(
-    underlying_symbol_id: "2bcd7cc3-e922-4976-bce1-9858296801c3", 
-    legs: [
-        [
-            "action" => "BUY_TO_OPEN",
-            "option_symbol_id" => "SPY220819P00200000",
-            "quantity" => 1,
-        ]
-    ], 
-    strategy_type: "CUSTOM", 
-    user_id: "snaptrade-user-123", 
-    user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61", 
-    account_id: "accountId_example"
-);
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### underlying_symbol_id: `string`<a id="underlying_symbol_id-string"></a>
-
-##### legs: [`OptionLeg`](./lib/Model/OptionLeg.php)[]<a id="legs-optionleglibmodeloptionlegphp"></a>
-
-##### strategy_type: `string`<a id="strategy_type-string"></a>
-
-##### user_id: `string`<a id="user_id-string"></a>
-
-##### user_secret: `string`<a id="user_secret-string"></a>
-
-##### account_id: `string`<a id="account_id-string"></a>
-
-The ID of the account to create the option strategy object in.
-
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[**StrategyQuotes**](./lib/Model/StrategyQuotes.php)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/optionStrategy` `POST`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
 ### `snaptrade.options.getOptionsChain`<a id="snaptradeoptionsgetoptionschain"></a>
 
 Returns the option chain for the specified symbol in the specified account.
@@ -1263,51 +1205,6 @@ Universal symbol ID if symbol
 ---
 
 
-### `snaptrade.options.getOptionsStrategyQuote`<a id="snaptradeoptionsgetoptionsstrategyquote"></a>
-
-Returns a Strategy Quotes object which has latest market data of the specified option strategy.
-
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```php
-$result = $snaptrade->options->getOptionsStrategyQuote(
-    user_id: "snaptrade-user-123", 
-    user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61", 
-    account_id: "accountId_example", 
-    option_strategy_id: "2bcd7cc3-e922-4976-bce1-9858296801c3"
-);
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### user_id: `string`<a id="user_id-string"></a>
-
-##### user_secret: `string`<a id="user_secret-string"></a>
-
-##### account_id: `string`<a id="account_id-string"></a>
-
-The ID of the account the strategy will be placed in.
-
-##### option_strategy_id: `string`<a id="option_strategy_id-string"></a>
-
-Option strategy id obtained from response when creating option strategy object
-
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[**StrategyQuotes**](./lib/Model/StrategyQuotes.php)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/optionStrategy/{optionStrategyId}` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
 ### `snaptrade.options.listOptionHoldings`<a id="snaptradeoptionslistoptionholdings"></a>
 
 Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).
@@ -1342,61 +1239,6 @@ $result = $snaptrade->options->listOptionHoldings(
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/options` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.options.placeOptionStrategy`<a id="snaptradeoptionsplaceoptionstrategy"></a>
-
-Places the option strategy order and returns the order record received from the brokerage.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```php
-$result = $snaptrade->options->placeOptionStrategy(
-    order_type: "Market", 
-    time_in_force: "Day", 
-    user_id: "snaptrade-user-123", 
-    user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61", 
-    account_id: "2bcd7cc3-e922-4976-bce1-9858296801c3", 
-    option_strategy_id: "2bcd7cc3-e922-4976-bce1-9858296801c3", 
-    price: 31.33
-);
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### order_type:<a id="order_type"></a>
-
-##### time_in_force:<a id="time_in_force"></a>
-
-##### user_id: `string`<a id="user_id-string"></a>
-
-##### user_secret: `string`<a id="user_secret-string"></a>
-
-##### account_id: `string`<a id="account_id-string"></a>
-
-The ID of the account to execute the strategy in.
-
-##### option_strategy_id: `string`<a id="option_strategy_id-string"></a>
-
-Option strategy id obtained from response when creating option strategy object
-
-##### price: `float`<a id="price-float"></a>
-
-Trade Price if limit or stop limit order
-
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[**StrategyOrderRecord**](./lib/Model/StrategyOrderRecord.php)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/optionStrategy/{optionStrategyId}/execute` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

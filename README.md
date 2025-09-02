@@ -335,7 +335,7 @@ $result = $snaptrade->accountInformation->getUserAccountDetails(
 
 ### `snaptrade.accountInformation.getUserAccountOrderDetail`<a id="snaptradeaccountinformationgetuseraccountorderdetail"></a>
 
-Returns the detail of a single order in the specified account.
+Returns the detail of a single order using the external order ID provided in the request body.
 
 This endpoint is always realtime and does not rely on cached data.
 
@@ -347,22 +347,24 @@ This endpoint only returns orders placed through SnapTrade. In other words, orde
 
 ```php
 $result = $snaptrade->accountInformation->getUserAccountOrderDetail(
-    user_id: "snaptrade-user-123", 
-    user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61", 
+    external_order_id: "66a033fa-da74-4fcf-b527-feefdec9257e", 
     account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631", 
-    brokerage_order_id: "66a033fa-da74-4fcf-b527-feefdec9257e"
+    user_id: "snaptrade-user-123", 
+    user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61"
 );
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### user_id: `string`<a id="user_id-string"></a>
+##### external_order_id: `string`<a id="external_order_id-string"></a>
 
-##### user_secret: `string`<a id="user_secret-string"></a>
+Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
 
 ##### account_id: `string`<a id="account_id-string"></a>
 
-##### brokerage_order_id: `string`<a id="brokerage_order_id-string"></a>
+##### user_id: `string`<a id="user_id-string"></a>
+
+##### user_secret: `string`<a id="user_secret-string"></a>
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -371,7 +373,7 @@ $result = $snaptrade->accountInformation->getUserAccountOrderDetail(
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
-`/accounts/{accountId}/orders/{brokerageOrderId}` `GET`
+`/accounts/{accountId}/orders/details` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

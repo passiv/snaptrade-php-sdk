@@ -1957,29 +1957,32 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * Get account order detail
      *
-     * Returns the detail of a single order in the specified account.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.
+     * Returns the detail of a single order using the external order ID provided in the request body.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.
      *
+     * @param  string $account_id account_id (required)
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
-     * @param  string $account_id account_id (required)
-     * @param  string $brokerage_order_id brokerage_order_id (required)
+     * @param  \SnapTrade\Model\AccountInformationGetUserAccountOrderDetailRequest $account_information_get_user_account_order_detail_request account_information_get_user_account_order_detail_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserAccountOrderDetail'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \SnapTrade\Model\AccountOrderRecord|\SnapTrade\Model\Model404FailedRequestResponse|\SnapTrade\Model\Model500UnexpectedExceptionResponse
+     * @return \SnapTrade\Model\AccountOrderRecord|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\Model404FailedRequestResponse|\SnapTrade\Model\Model500UnexpectedExceptionResponse
      */
     public function getUserAccountOrderDetail(
+
+        $external_order_id,
+        $account_id,
         $user_id,
         $user_secret,
-        $account_id,
-        $brokerage_order_id,
-
         string $contentType = self::contentTypes['getUserAccountOrderDetail'][0]
     )
     {
+        $_body = [];
+        $this->setRequestBodyProperty($_body, "external_order_id", $external_order_id);
+        $account_information_get_user_account_order_detail_request = $_body;
 
-        list($response) = $this->getUserAccountOrderDetailWithHttpInfo($user_id, $user_secret, $account_id, $brokerage_order_id, $contentType);
+        list($response) = $this->getUserAccountOrderDetailWithHttpInfo($account_id, $user_id, $user_secret, $account_information_get_user_account_order_detail_request, $contentType);
         return $response;
     }
 
@@ -1988,24 +1991,24 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * Get account order detail
      *
-     * Returns the detail of a single order in the specified account.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.
+     * Returns the detail of a single order using the external order ID provided in the request body.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.
      *
+     * @param  string $account_id (required)
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $account_id (required)
-     * @param  string $brokerage_order_id (required)
+     * @param  \SnapTrade\Model\AccountInformationGetUserAccountOrderDetailRequest $account_information_get_user_account_order_detail_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserAccountOrderDetail'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \SnapTrade\Model\AccountOrderRecord|\SnapTrade\Model\Model404FailedRequestResponse|\SnapTrade\Model\Model500UnexpectedExceptionResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SnapTrade\Model\AccountOrderRecord|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\Model404FailedRequestResponse|\SnapTrade\Model\Model500UnexpectedExceptionResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getUserAccountOrderDetailWithHttpInfo($user_id, $user_secret, $account_id, $brokerage_order_id, string $contentType = self::contentTypes['getUserAccountOrderDetail'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    public function getUserAccountOrderDetailWithHttpInfo($account_id, $user_id, $user_secret, $account_information_get_user_account_order_detail_request, string $contentType = self::contentTypes['getUserAccountOrderDetail'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->getUserAccountOrderDetailRequest($user_id, $user_secret, $account_id, $brokerage_order_id, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getUserAccountOrderDetailRequest($account_id, $user_id, $user_secret, $account_information_get_user_account_order_detail_request, $contentType);
 
         // Customization hook
-        $this->beforeSendHook($request, $requestOptions, $this->config);
+        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
 
         try {
             $options = $this->createHttpClientOption();
@@ -2018,10 +2021,10 @@ class AccountInformationApi extends \SnapTrade\CustomApi
                     $requestOptions->shouldRetryOAuth()
                 ) {
                     return $this->getUserAccountOrderDetailWithHttpInfo(
+                        $account_id,
                         $user_id,
                         $user_secret,
-                        $account_id,
-                        $brokerage_order_id,
+                        $account_information_get_user_account_order_detail_request,
                         $contentType,
                         $requestOptions->setRetryOAuth(false)
                     );
@@ -2070,6 +2073,21 @@ class AccountInformationApi extends \SnapTrade\CustomApi
 
                     return [
                         ObjectSerializer::deserialize($content, '\SnapTrade\Model\AccountOrderRecord', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if ('\SnapTrade\Model\Model400FailedRequestResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\SnapTrade\Model\Model400FailedRequestResponse' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\Model400FailedRequestResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -2131,6 +2149,14 @@ class AccountInformationApi extends \SnapTrade\CustomApi
                     );
                     $e->setResponseObject($data);
                     break;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SnapTrade\Model\Model400FailedRequestResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -2157,28 +2183,31 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * Get account order detail
      *
-     * Returns the detail of a single order in the specified account.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.
+     * Returns the detail of a single order using the external order ID provided in the request body.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.
      *
+     * @param  string $account_id (required)
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $account_id (required)
-     * @param  string $brokerage_order_id (required)
+     * @param  \SnapTrade\Model\AccountInformationGetUserAccountOrderDetailRequest $account_information_get_user_account_order_detail_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserAccountOrderDetail'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function getUserAccountOrderDetailAsync(
+
+        $external_order_id,
+        $account_id,
         $user_id,
         $user_secret,
-        $account_id,
-        $brokerage_order_id,
-
         string $contentType = self::contentTypes['getUserAccountOrderDetail'][0]
     )
     {
+        $_body = [];
+        $this->setRequestBodyProperty($_body, "external_order_id", $external_order_id);
+        $account_information_get_user_account_order_detail_request = $_body;
 
-        return $this->getUserAccountOrderDetailAsyncWithHttpInfo($user_id, $user_secret, $account_id, $brokerage_order_id, $contentType)
+        return $this->getUserAccountOrderDetailAsyncWithHttpInfo($account_id, $user_id, $user_secret, $account_information_get_user_account_order_detail_request, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -2191,24 +2220,24 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * Get account order detail
      *
-     * Returns the detail of a single order in the specified account.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.
+     * Returns the detail of a single order using the external order ID provided in the request body.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.
      *
+     * @param  string $account_id (required)
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $account_id (required)
-     * @param  string $brokerage_order_id (required)
+     * @param  \SnapTrade\Model\AccountInformationGetUserAccountOrderDetailRequest $account_information_get_user_account_order_detail_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserAccountOrderDetail'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getUserAccountOrderDetailAsyncWithHttpInfo($user_id, $user_secret, $account_id, $brokerage_order_id, string $contentType = self::contentTypes['getUserAccountOrderDetail'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    public function getUserAccountOrderDetailAsyncWithHttpInfo($account_id, $user_id, $user_secret, $account_information_get_user_account_order_detail_request, string $contentType = self::contentTypes['getUserAccountOrderDetail'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\AccountOrderRecord';
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->getUserAccountOrderDetailRequest($user_id, $user_secret, $account_id, $brokerage_order_id, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getUserAccountOrderDetailRequest($account_id, $user_id, $user_secret, $account_information_get_user_account_order_detail_request, $contentType);
 
         // Customization hook
-        $this->beforeSendHook($request, $requestOptions, $this->config);
+        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2249,18 +2278,28 @@ class AccountInformationApi extends \SnapTrade\CustomApi
     /**
      * Create request for operation 'getUserAccountOrderDetail'
      *
+     * @param  string $account_id (required)
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $account_id (required)
-     * @param  string $brokerage_order_id (required)
+     * @param  \SnapTrade\Model\AccountInformationGetUserAccountOrderDetailRequest $account_information_get_user_account_order_detail_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserAccountOrderDetail'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getUserAccountOrderDetailRequest($user_id, $user_secret, $account_id, $brokerage_order_id, string $contentType = self::contentTypes['getUserAccountOrderDetail'][0])
+    public function getUserAccountOrderDetailRequest($account_id, $user_id, $user_secret, $account_information_get_user_account_order_detail_request, string $contentType = self::contentTypes['getUserAccountOrderDetail'][0])
     {
 
+        // Check if $account_id is a string
+        if ($account_id !== SENTINEL_VALUE && !is_string($account_id)) {
+            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($account_id, true), gettype($account_id)));
+        }
+        // verify the required parameter 'account_id' is set
+        if ($account_id === SENTINEL_VALUE || (is_array($account_id) && count($account_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter account_id when calling getUserAccountOrderDetail'
+            );
+        }
         // Check if $user_id is a string
         if ($user_id !== SENTINEL_VALUE && !is_string($user_id)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_id, true), gettype($user_id)));
@@ -2281,29 +2320,23 @@ class AccountInformationApi extends \SnapTrade\CustomApi
                 'Missing the required parameter user_secret when calling getUserAccountOrderDetail'
             );
         }
-        // Check if $account_id is a string
-        if ($account_id !== SENTINEL_VALUE && !is_string($account_id)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($account_id, true), gettype($account_id)));
+        if ($account_information_get_user_account_order_detail_request !== SENTINEL_VALUE) {
+            if (!($account_information_get_user_account_order_detail_request instanceof \SnapTrade\Model\AccountInformationGetUserAccountOrderDetailRequest)) {
+                if (!is_array($account_information_get_user_account_order_detail_request))
+                    throw new \InvalidArgumentException('"account_information_get_user_account_order_detail_request" must be associative array or an instance of \SnapTrade\Model\AccountInformationGetUserAccountOrderDetailRequest AccountInformationApi.getUserAccountOrderDetail.');
+                else
+                    $account_information_get_user_account_order_detail_request = new \SnapTrade\Model\AccountInformationGetUserAccountOrderDetailRequest($account_information_get_user_account_order_detail_request);
+            }
         }
-        // verify the required parameter 'account_id' is set
-        if ($account_id === SENTINEL_VALUE || (is_array($account_id) && count($account_id) === 0)) {
+        // verify the required parameter 'account_information_get_user_account_order_detail_request' is set
+        if ($account_information_get_user_account_order_detail_request === SENTINEL_VALUE || (is_array($account_information_get_user_account_order_detail_request) && count($account_information_get_user_account_order_detail_request) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter account_id when calling getUserAccountOrderDetail'
-            );
-        }
-        // Check if $brokerage_order_id is a string
-        if ($brokerage_order_id !== SENTINEL_VALUE && !is_string($brokerage_order_id)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($brokerage_order_id, true), gettype($brokerage_order_id)));
-        }
-        // verify the required parameter 'brokerage_order_id' is set
-        if ($brokerage_order_id === SENTINEL_VALUE || (is_array($brokerage_order_id) && count($brokerage_order_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter brokerage_order_id when calling getUserAccountOrderDetail'
+                'Missing the required parameter account_information_get_user_account_order_detail_request when calling getUserAccountOrderDetail'
             );
         }
 
 
-        $resourcePath = '/accounts/{accountId}/orders/{brokerageOrderId}';
+        $resourcePath = '/accounts/{accountId}/orders/details';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -2342,14 +2375,6 @@ class AccountInformationApi extends \SnapTrade\CustomApi
                 $resourcePath
             );
         }
-        // path params
-        if ($brokerage_order_id !== SENTINEL_VALUE) {
-            $resourcePath = str_replace(
-                '{' . 'brokerageOrderId' . '}',
-                ObjectSerializer::toPathValue($brokerage_order_id),
-                $resourcePath
-            );
-        }
 
 
         $headers = $this->headerSelector->selectHeaders(
@@ -2359,7 +2384,14 @@ class AccountInformationApi extends \SnapTrade\CustomApi
         );
 
         // for model (json/xml)
-        if (count($formParams) > 0) {
+        if (isset($account_information_get_user_account_order_detail_request)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($account_information_get_user_account_order_detail_request));
+            } else {
+                $httpBody = $account_information_get_user_account_order_detail_request;
+            }
+        } elseif (count($formParams) > 0) {
             if ($multipart) {
                 $multipartContents = [];
                 foreach ($formParams as $formParamName => $formParamValue) {
@@ -2410,7 +2442,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
             $headers
         );
 
-        $method = 'GET';
+        $method = 'POST';
         $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();

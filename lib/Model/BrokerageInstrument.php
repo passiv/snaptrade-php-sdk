@@ -295,6 +295,9 @@ class BrokerageInstrument implements ModelInterface, ArrayAccess, \JsonSerializa
     {
         $invalidProperties = [];
 
+        if ($this->container['symbol'] === null) {
+            $invalidProperties[] = "'symbol' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -313,7 +316,7 @@ class BrokerageInstrument implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Gets symbol
      *
-     * @return string|null
+     * @return string
      */
     public function getSymbol()
     {
@@ -323,7 +326,7 @@ class BrokerageInstrument implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Sets symbol
      *
-     * @param string|null $symbol The instrument's trading symbol / ticker.
+     * @param string $symbol The instrument's trading symbol / ticker.
      *
      * @return self
      */

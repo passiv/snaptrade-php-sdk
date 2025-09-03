@@ -2603,7 +2603,7 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      *
      * Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don&#39;t will return an empty list.
      *
-     * @param  string $brokerage_id brokerage_id (required)
+     * @param  string $slug A short, unique identifier for the brokerage. It is usually the name of the brokerage in capital letters and will never change. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAllBrokerageInstruments'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
@@ -2611,13 +2611,13 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * @return \SnapTrade\Model\BrokerageInstrumentsResponse
      */
     public function listAllBrokerageInstruments(
-        $brokerage_id,
+        $slug,
 
         string $contentType = self::contentTypes['listAllBrokerageInstruments'][0]
     )
     {
 
-        list($response) = $this->listAllBrokerageInstrumentsWithHttpInfo($brokerage_id, $contentType);
+        list($response) = $this->listAllBrokerageInstrumentsWithHttpInfo($slug, $contentType);
         return $response;
     }
 
@@ -2628,16 +2628,16 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      *
      * Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don&#39;t will return an empty list.
      *
-     * @param  string $brokerage_id (required)
+     * @param  string $slug A short, unique identifier for the brokerage. It is usually the name of the brokerage in capital letters and will never change. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAllBrokerageInstruments'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \SnapTrade\Model\BrokerageInstrumentsResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function listAllBrokerageInstrumentsWithHttpInfo($brokerage_id, string $contentType = self::contentTypes['listAllBrokerageInstruments'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    public function listAllBrokerageInstrumentsWithHttpInfo($slug, string $contentType = self::contentTypes['listAllBrokerageInstruments'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->listAllBrokerageInstrumentsRequest($brokerage_id, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->listAllBrokerageInstrumentsRequest($slug, $contentType);
 
         // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
@@ -2653,7 +2653,7 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
                     $requestOptions->shouldRetryOAuth()
                 ) {
                     return $this->listAllBrokerageInstrumentsWithHttpInfo(
-                        $brokerage_id,
+                        $slug,
                         $contentType,
                         $requestOptions->setRetryOAuth(false)
                     );
@@ -2745,20 +2745,20 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      *
      * Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don&#39;t will return an empty list.
      *
-     * @param  string $brokerage_id (required)
+     * @param  string $slug A short, unique identifier for the brokerage. It is usually the name of the brokerage in capital letters and will never change. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAllBrokerageInstruments'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function listAllBrokerageInstrumentsAsync(
-        $brokerage_id,
+        $slug,
 
         string $contentType = self::contentTypes['listAllBrokerageInstruments'][0]
     )
     {
 
-        return $this->listAllBrokerageInstrumentsAsyncWithHttpInfo($brokerage_id, $contentType)
+        return $this->listAllBrokerageInstrumentsAsyncWithHttpInfo($slug, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -2773,16 +2773,16 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      *
      * Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don&#39;t will return an empty list.
      *
-     * @param  string $brokerage_id (required)
+     * @param  string $slug A short, unique identifier for the brokerage. It is usually the name of the brokerage in capital letters and will never change. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAllBrokerageInstruments'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listAllBrokerageInstrumentsAsyncWithHttpInfo($brokerage_id, string $contentType = self::contentTypes['listAllBrokerageInstruments'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    public function listAllBrokerageInstrumentsAsyncWithHttpInfo($slug, string $contentType = self::contentTypes['listAllBrokerageInstruments'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\BrokerageInstrumentsResponse';
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->listAllBrokerageInstrumentsRequest($brokerage_id, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->listAllBrokerageInstrumentsRequest($slug, $contentType);
 
         // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
@@ -2826,28 +2826,28 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
     /**
      * Create request for operation 'listAllBrokerageInstruments'
      *
-     * @param  string $brokerage_id (required)
+     * @param  string $slug A short, unique identifier for the brokerage. It is usually the name of the brokerage in capital letters and will never change. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAllBrokerageInstruments'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function listAllBrokerageInstrumentsRequest($brokerage_id, string $contentType = self::contentTypes['listAllBrokerageInstruments'][0])
+    public function listAllBrokerageInstrumentsRequest($slug, string $contentType = self::contentTypes['listAllBrokerageInstruments'][0])
     {
 
-        // Check if $brokerage_id is a string
-        if ($brokerage_id !== SENTINEL_VALUE && !is_string($brokerage_id)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($brokerage_id, true), gettype($brokerage_id)));
+        // Check if $slug is a string
+        if ($slug !== SENTINEL_VALUE && !is_string($slug)) {
+            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($slug, true), gettype($slug)));
         }
-        // verify the required parameter 'brokerage_id' is set
-        if ($brokerage_id === SENTINEL_VALUE || (is_array($brokerage_id) && count($brokerage_id) === 0)) {
+        // verify the required parameter 'slug' is set
+        if ($slug === SENTINEL_VALUE || (is_array($slug) && count($slug) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter brokerage_id when calling listAllBrokerageInstruments'
+                'Missing the required parameter slug when calling listAllBrokerageInstruments'
             );
         }
 
 
-        $resourcePath = '/brokerages/{brokerageId}/instruments';
+        $resourcePath = '/brokerages/{slug}/instruments';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -2857,10 +2857,10 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
 
 
         // path params
-        if ($brokerage_id !== SENTINEL_VALUE) {
+        if ($slug !== SENTINEL_VALUE) {
             $resourcePath = str_replace(
-                '{' . 'brokerageId' . '}',
-                ObjectSerializer::toPathValue($brokerage_id),
+                '{' . 'slug' . '}',
+                ObjectSerializer::toPathValue($slug),
                 $resourcePath
             );
         }

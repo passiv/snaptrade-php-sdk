@@ -254,6 +254,7 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
 
     public const CONNECTION_TYPE_READ = 'read';
     public const CONNECTION_TYPE_TRADE = 'trade';
+    public const CONNECTION_TYPE_TRADE_IF_AVAILABLE = 'trade-if-available';
     public const CONNECTION_PORTAL_VERSION_V4 = 'v4';
     public const CONNECTION_PORTAL_VERSION_V3 = 'v3';
     public const CONNECTION_PORTAL_VERSION_V2 = 'v2';
@@ -268,6 +269,7 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
         return [
             self::CONNECTION_TYPE_READ,
             self::CONNECTION_TYPE_TRADE,
+            self::CONNECTION_TYPE_TRADE_IF_AVAILABLE,
         ];
     }
 
@@ -497,7 +499,7 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
     /**
      * Sets connection_type
      *
-     * @param string|null $connection_type Sets whether the connection should be read-only or trade-enabled. Defaults to read-only if not specified.
+     * @param string|null $connection_type Determines connection permissions (default: read) - `read`: Data access only. - `trade`: Data and trading access. - `trade-if-available`: Attempts to establish a trading connection if the brokerage supports it, otherwise falls back to read-only access automatically.
      *
      * @return self
      */

@@ -50,7 +50,7 @@ class AccountInformationGetUserAccountOrderDetailRequest implements ModelInterfa
       * @var string[]
       */
     protected static $openAPITypes = [
-        'external_order_id' => 'string'
+        'brokerage_order_id' => 'string'
     ];
 
     /**
@@ -61,7 +61,7 @@ class AccountInformationGetUserAccountOrderDetailRequest implements ModelInterfa
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'external_order_id' => null
+        'brokerage_order_id' => null
     ];
 
     /**
@@ -70,7 +70,7 @@ class AccountInformationGetUserAccountOrderDetailRequest implements ModelInterfa
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'external_order_id' => false
+        'brokerage_order_id' => false
     ];
 
     /**
@@ -159,7 +159,7 @@ class AccountInformationGetUserAccountOrderDetailRequest implements ModelInterfa
      * @var string[]
      */
     protected static $attributeMap = [
-        'external_order_id' => 'external_order_id'
+        'brokerage_order_id' => 'brokerage_order_id'
     ];
 
     /**
@@ -168,7 +168,7 @@ class AccountInformationGetUserAccountOrderDetailRequest implements ModelInterfa
      * @var string[]
      */
     protected static $setters = [
-        'external_order_id' => 'setExternalOrderId'
+        'brokerage_order_id' => 'setBrokerageOrderId'
     ];
 
     /**
@@ -177,7 +177,7 @@ class AccountInformationGetUserAccountOrderDetailRequest implements ModelInterfa
      * @var string[]
      */
     protected static $getters = [
-        'external_order_id' => 'getExternalOrderId'
+        'brokerage_order_id' => 'getBrokerageOrderId'
     ];
 
     /**
@@ -237,7 +237,7 @@ class AccountInformationGetUserAccountOrderDetailRequest implements ModelInterfa
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('external_order_id', $data ?? [], null);
+        $this->setIfExists('brokerage_order_id', $data ?? [], null);
     }
 
     /**
@@ -267,8 +267,8 @@ class AccountInformationGetUserAccountOrderDetailRequest implements ModelInterfa
     {
         $invalidProperties = [];
 
-        if ($this->container['external_order_id'] === null) {
-            $invalidProperties[] = "'external_order_id' can't be null";
+        if ($this->container['brokerage_order_id'] === null) {
+            $invalidProperties[] = "'brokerage_order_id' can't be null";
         }
         return $invalidProperties;
     }
@@ -286,30 +286,30 @@ class AccountInformationGetUserAccountOrderDetailRequest implements ModelInterfa
 
 
     /**
-     * Gets external_order_id
+     * Gets brokerage_order_id
      *
      * @return string
      */
-    public function getExternalOrderId()
+    public function getBrokerageOrderId()
     {
-        return $this->container['external_order_id'];
+        return $this->container['brokerage_order_id'];
     }
 
     /**
-     * Sets external_order_id
+     * Sets brokerage_order_id
      *
-     * @param string $external_order_id Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
+     * @param string $brokerage_order_id Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
      *
      * @return self
      */
-    public function setExternalOrderId($external_order_id)
+    public function setBrokerageOrderId($brokerage_order_id)
     {
 
-        if (is_null($external_order_id)) {
-            throw new \InvalidArgumentException('non-nullable external_order_id cannot be null');
+        if (is_null($brokerage_order_id)) {
+            throw new \InvalidArgumentException('non-nullable brokerage_order_id cannot be null');
         }
 
-        $this->container['external_order_id'] = $external_order_id;
+        $this->container['brokerage_order_id'] = $brokerage_order_id;
 
         return $this;
     }

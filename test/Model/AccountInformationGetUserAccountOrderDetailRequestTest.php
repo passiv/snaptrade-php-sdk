@@ -73,9 +73,9 @@ class AccountInformationGetUserAccountOrderDetailRequestTest extends TestCase
     }
 
     /**
-     * Test attribute "external_order_id"
+     * Test attribute "brokerage_order_id"
      */
-    public function testPropertyExternalOrderId()
+    public function testPropertyBrokerageOrderId()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

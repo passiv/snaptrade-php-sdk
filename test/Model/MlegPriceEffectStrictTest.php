@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * MlegPriceEffectStrictTest Class Doc Comment
  *
  * @category    Class
- * @description The desired price_effect for LIMIT and STOP_LOSS_LIMIT orders. Only required for certain brokerages like ETrade.
+ * @description The desired price_effect for LIMIT and STOP_LOSS_LIMIT orders
  * @package     SnapTrade
  */
 class MlegPriceEffectStrictTest extends TestCase

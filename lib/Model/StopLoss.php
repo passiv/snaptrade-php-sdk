@@ -30,7 +30,7 @@ use \SnapTrade\ObjectSerializer;
  * StopLoss Class Doc Comment
  *
  * @category Class
- * @description Details of the stop loss order. Only to be used when order_class &#x3D; BRACKET. stop_price is required, limit_price is optional
+ * @description Takes in string value for stop_price and limit_price. stop_price is required, limit_price is optional
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */

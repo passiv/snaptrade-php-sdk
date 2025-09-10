@@ -30,7 +30,7 @@ use \SnapTrade\ObjectSerializer;
  * TakeProfit Class Doc Comment
  *
  * @category Class
- * @description Details of the take profit order. Only to be used when order_class &#x3D; BRACKET.
+ * @description Takes in a string value for limit_price
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */

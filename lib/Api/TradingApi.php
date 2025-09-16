@@ -2560,7 +2560,6 @@ class TradingApi extends \SnapTrade\CustomApi
         $account_id,
         $user_id,
         $user_secret,
-        $symbol = SENTINEL_VALUE,
         $price = SENTINEL_VALUE,
         $stop = SENTINEL_VALUE,
         $units = SENTINEL_VALUE,
@@ -2569,7 +2568,6 @@ class TradingApi extends \SnapTrade\CustomApi
     {
         $_body = [];
         $this->setRequestBodyProperty($_body, "action", $action);
-        $this->setRequestBodyProperty($_body, "symbol", $symbol);
         $this->setRequestBodyProperty($_body, "instrument", $instrument);
         $this->setRequestBodyProperty($_body, "order_type", $order_type);
         $this->setRequestBodyProperty($_body, "time_in_force", $time_in_force);
@@ -2780,7 +2778,6 @@ class TradingApi extends \SnapTrade\CustomApi
         $account_id,
         $user_id,
         $user_secret,
-        $symbol = SENTINEL_VALUE,
         $price = SENTINEL_VALUE,
         $stop = SENTINEL_VALUE,
         $units = SENTINEL_VALUE,
@@ -2789,7 +2786,6 @@ class TradingApi extends \SnapTrade\CustomApi
     {
         $_body = [];
         $this->setRequestBodyProperty($_body, "action", $action);
-        $this->setRequestBodyProperty($_body, "symbol", $symbol);
         $this->setRequestBodyProperty($_body, "instrument", $instrument);
         $this->setRequestBodyProperty($_body, "order_type", $order_type);
         $this->setRequestBodyProperty($_body, "time_in_force", $time_in_force);

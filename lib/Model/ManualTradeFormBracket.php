@@ -52,7 +52,6 @@ class ManualTradeFormBracket implements ModelInterface, ArrayAccess, \JsonSerial
       */
     protected static $openAPITypes = [
         'action' => '\SnapTrade\Model\ActionStrictWithOptions',
-        'symbol' => 'string',
         'instrument' => '\SnapTrade\Model\TradingInstrument',
         'order_type' => '\SnapTrade\Model\OrderTypeStrict',
         'time_in_force' => '\SnapTrade\Model\TimeInForceStrict',
@@ -72,7 +71,6 @@ class ManualTradeFormBracket implements ModelInterface, ArrayAccess, \JsonSerial
       */
     protected static $openAPIFormats = [
         'action' => null,
-        'symbol' => null,
         'instrument' => null,
         'order_type' => null,
         'time_in_force' => null,
@@ -90,7 +88,6 @@ class ManualTradeFormBracket implements ModelInterface, ArrayAccess, \JsonSerial
       */
     protected static array $openAPINullables = [
         'action' => false,
-		'symbol' => false,
 		'instrument' => false,
 		'order_type' => false,
 		'time_in_force' => false,
@@ -188,7 +185,6 @@ class ManualTradeFormBracket implements ModelInterface, ArrayAccess, \JsonSerial
      */
     protected static $attributeMap = [
         'action' => 'action',
-        'symbol' => 'symbol',
         'instrument' => 'instrument',
         'order_type' => 'order_type',
         'time_in_force' => 'time_in_force',
@@ -206,7 +202,6 @@ class ManualTradeFormBracket implements ModelInterface, ArrayAccess, \JsonSerial
      */
     protected static $setters = [
         'action' => 'setAction',
-        'symbol' => 'setSymbol',
         'instrument' => 'setInstrument',
         'order_type' => 'setOrderType',
         'time_in_force' => 'setTimeInForce',
@@ -224,7 +219,6 @@ class ManualTradeFormBracket implements ModelInterface, ArrayAccess, \JsonSerial
      */
     protected static $getters = [
         'action' => 'getAction',
-        'symbol' => 'getSymbol',
         'instrument' => 'getInstrument',
         'order_type' => 'getOrderType',
         'time_in_force' => 'getTimeInForce',
@@ -293,7 +287,6 @@ class ManualTradeFormBracket implements ModelInterface, ArrayAccess, \JsonSerial
     public function __construct(array $data = null)
     {
         $this->setIfExists('action', $data ?? [], null);
-        $this->setIfExists('symbol', $data ?? [], null);
         $this->setIfExists('instrument', $data ?? [], null);
         $this->setIfExists('order_type', $data ?? [], null);
         $this->setIfExists('time_in_force', $data ?? [], null);
@@ -389,35 +382,6 @@ class ManualTradeFormBracket implements ModelInterface, ArrayAccess, \JsonSerial
         }
 
         $this->container['action'] = $action;
-
-        return $this;
-    }
-
-    /**
-     * Gets symbol
-     *
-     * @return string|null
-     */
-    public function getSymbol()
-    {
-        return $this->container['symbol'];
-    }
-
-    /**
-     * Sets symbol
-     *
-     * @param string|null $symbol The security's trading ticker symbol.
-     *
-     * @return self
-     */
-    public function setSymbol($symbol)
-    {
-
-        if (is_null($symbol)) {
-            throw new \InvalidArgumentException('non-nullable symbol cannot be null');
-        }
-
-        $this->container['symbol'] = $symbol;
 
         return $this;
     }

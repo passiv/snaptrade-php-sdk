@@ -57,7 +57,8 @@ class Position implements ModelInterface, ArrayAccess, \JsonSerializable
         'open_pnl' => 'float',
         'average_purchase_price' => 'float',
         'fractional_units' => 'float',
-        'currency' => '\SnapTrade\Model\PositionCurrency'
+        'currency' => '\SnapTrade\Model\PositionCurrency',
+        'cash_equivalent' => 'bool'
     ];
 
     /**
@@ -74,7 +75,8 @@ class Position implements ModelInterface, ArrayAccess, \JsonSerializable
         'open_pnl' => null,
         'average_purchase_price' => null,
         'fractional_units' => null,
-        'currency' => null
+        'currency' => null,
+        'cash_equivalent' => null
     ];
 
     /**
@@ -89,7 +91,8 @@ class Position implements ModelInterface, ArrayAccess, \JsonSerializable
 		'open_pnl' => true,
 		'average_purchase_price' => true,
 		'fractional_units' => true,
-		'currency' => false
+		'currency' => false,
+		'cash_equivalent' => true
     ];
 
     /**
@@ -184,7 +187,8 @@ class Position implements ModelInterface, ArrayAccess, \JsonSerializable
         'open_pnl' => 'open_pnl',
         'average_purchase_price' => 'average_purchase_price',
         'fractional_units' => 'fractional_units',
-        'currency' => 'currency'
+        'currency' => 'currency',
+        'cash_equivalent' => 'cash_equivalent'
     ];
 
     /**
@@ -199,7 +203,8 @@ class Position implements ModelInterface, ArrayAccess, \JsonSerializable
         'open_pnl' => 'setOpenPnl',
         'average_purchase_price' => 'setAveragePurchasePrice',
         'fractional_units' => 'setFractionalUnits',
-        'currency' => 'setCurrency'
+        'currency' => 'setCurrency',
+        'cash_equivalent' => 'setCashEquivalent'
     ];
 
     /**
@@ -214,7 +219,8 @@ class Position implements ModelInterface, ArrayAccess, \JsonSerializable
         'open_pnl' => 'getOpenPnl',
         'average_purchase_price' => 'getAveragePurchasePrice',
         'fractional_units' => 'getFractionalUnits',
-        'currency' => 'getCurrency'
+        'currency' => 'getCurrency',
+        'cash_equivalent' => 'getCashEquivalent'
     ];
 
     /**
@@ -281,6 +287,7 @@ class Position implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('average_purchase_price', $data ?? [], null);
         $this->setIfExists('fractional_units', $data ?? [], null);
         $this->setIfExists('currency', $data ?? [], null);
+        $this->setIfExists('cash_equivalent', $data ?? [], null);
     }
 
     /**
@@ -561,6 +568,42 @@ class Position implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['currency'] = $currency;
+
+        return $this;
+    }
+
+    /**
+     * Gets cash_equivalent
+     *
+     * @return bool|null
+     */
+    public function getCashEquivalent()
+    {
+        return $this->container['cash_equivalent'];
+    }
+
+    /**
+     * Sets cash_equivalent
+     *
+     * @param bool|null $cash_equivalent If the position is a cash equivalent (usually a money market fund) that is also counted in account cash balance and buying power
+     *
+     * @return self
+     */
+    public function setCashEquivalent($cash_equivalent)
+    {
+
+        if (is_null($cash_equivalent)) {
+            array_push($this->openAPINullablesSetToNull, 'cash_equivalent');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('cash_equivalent', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['cash_equivalent'] = $cash_equivalent;
 
         return $this;
     }

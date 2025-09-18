@@ -134,4 +134,13 @@ class PositionTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "cash_equivalent"
+     */
+    public function testPropertyCashEquivalent()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

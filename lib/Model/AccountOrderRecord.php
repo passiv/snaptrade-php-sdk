@@ -58,10 +58,10 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
         'quote_universal_symbol' => '\SnapTrade\Model\AccountOrderRecordQuoteUniversalSymbol',
         'quote_currency' => '\SnapTrade\Model\AccountOrderRecordQuoteCurrency',
         'action' => 'string',
-        'total_quantity' => 'float',
-        'open_quantity' => 'float',
-        'canceled_quantity' => 'float',
-        'filled_quantity' => 'float',
+        'total_quantity' => 'string',
+        'open_quantity' => 'string',
+        'canceled_quantity' => 'string',
+        'filled_quantity' => 'string',
         'execution_price' => 'float',
         'limit_price' => 'float',
         'stop_price' => 'float',
@@ -636,7 +636,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Gets total_quantity
      *
-     * @return float|null
+     * @return string|null
      */
     public function getTotalQuantity()
     {
@@ -646,7 +646,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets total_quantity
      *
-     * @param float|null $total_quantity The total number of shares or contracts of the order. This should be the sum of the filled, canceled, and open quantities. Can be a decimal number for fractional shares.
+     * @param string|null $total_quantity The total number of shares or contracts of the order. This should be the sum of the filled, canceled, and open quantities. Can be a decimal number for fractional shares.
      *
      * @return self
      */
@@ -672,7 +672,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Gets open_quantity
      *
-     * @return float|null
+     * @return string|null
      */
     public function getOpenQuantity()
     {
@@ -682,7 +682,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets open_quantity
      *
-     * @param float|null $open_quantity The number of shares or contracts that are still open (waiting for execution). Can be a decimal number for fractional shares.
+     * @param string|null $open_quantity The number of shares or contracts that are still open (waiting for execution). Can be a decimal number for fractional shares.
      *
      * @return self
      */
@@ -708,7 +708,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Gets canceled_quantity
      *
-     * @return float|null
+     * @return string|null
      */
     public function getCanceledQuantity()
     {
@@ -718,7 +718,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets canceled_quantity
      *
-     * @param float|null $canceled_quantity The number of shares or contracts that have been canceled. Can be a decimal number for fractional shares.
+     * @param string|null $canceled_quantity The number of shares or contracts that have been canceled. Can be a decimal number for fractional shares.
      *
      * @return self
      */
@@ -744,7 +744,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Gets filled_quantity
      *
-     * @return float|null
+     * @return string|null
      */
     public function getFilledQuantity()
     {
@@ -754,7 +754,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets filled_quantity
      *
-     * @param float|null $filled_quantity The number of shares or contracts that have been filled. Can be a decimal number for fractional shares.
+     * @param string|null $filled_quantity The number of shares or contracts that have been filled. Can be a decimal number for fractional shares.
      *
      * @return self
      */

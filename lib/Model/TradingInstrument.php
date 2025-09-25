@@ -228,6 +228,7 @@ class TradingInstrument implements ModelInterface, ArrayAccess, \JsonSerializabl
     }
 
     public const TYPE_EQUITY = 'EQUITY';
+    public const TYPE_OPTION = 'OPTION';
     public const TYPE_CRYPTOCURRENCY = 'CRYPTOCURRENCY';
     public const TYPE_CRYPTOCURRENCY_PAIR = 'CRYPTOCURRENCY_PAIR';
 
@@ -240,6 +241,7 @@ class TradingInstrument implements ModelInterface, ArrayAccess, \JsonSerializabl
     {
         return [
             self::TYPE_EQUITY,
+            self::TYPE_OPTION,
             self::TYPE_CRYPTOCURRENCY,
             self::TYPE_CRYPTOCURRENCY_PAIR,
         ];
@@ -334,7 +336,7 @@ class TradingInstrument implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets symbol
      *
-     * @param string $symbol The instrument's trading ticker symbol
+     * @param string $symbol The instrument's trading ticker symbol. This currently supports stock symbols and Options symbols in the 21 character OCC format. For example `AAPL  131124C00240000` represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)
      *
      * @return self
      */

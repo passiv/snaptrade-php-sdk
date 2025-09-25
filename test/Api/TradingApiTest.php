@@ -121,7 +121,7 @@ class TradingApiTest extends TestCase
     /**
      * Test case for placeBracketOrder
      *
-     * Place bracket equity order.
+     * Place bracket order.
      *
      */
     public function testPlaceBracketOrder()

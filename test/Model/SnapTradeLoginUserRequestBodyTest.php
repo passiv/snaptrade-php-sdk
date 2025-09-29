@@ -118,6 +118,15 @@ class SnapTradeLoginUserRequestBodyTest extends TestCase
     }
 
     /**
+     * Test attribute "show_close_button"
+     */
+    public function testPropertyShowCloseButton()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "connection_portal_version"
      */
     public function testPropertyConnectionPortalVersion()

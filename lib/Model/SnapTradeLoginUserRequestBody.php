@@ -56,6 +56,7 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
         'custom_redirect' => 'string',
         'reconnect' => 'string',
         'connection_type' => 'string',
+        'show_close_button' => 'bool',
         'connection_portal_version' => 'string'
     ];
 
@@ -72,6 +73,7 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
         'custom_redirect' => null,
         'reconnect' => null,
         'connection_type' => null,
+        'show_close_button' => null,
         'connection_portal_version' => null
     ];
 
@@ -86,6 +88,7 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
 		'custom_redirect' => false,
 		'reconnect' => false,
 		'connection_type' => false,
+		'show_close_button' => false,
 		'connection_portal_version' => false
     ];
 
@@ -180,6 +183,7 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
         'custom_redirect' => 'customRedirect',
         'reconnect' => 'reconnect',
         'connection_type' => 'connectionType',
+        'show_close_button' => 'showCloseButton',
         'connection_portal_version' => 'connectionPortalVersion'
     ];
 
@@ -194,6 +198,7 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
         'custom_redirect' => 'setCustomRedirect',
         'reconnect' => 'setReconnect',
         'connection_type' => 'setConnectionType',
+        'show_close_button' => 'setShowCloseButton',
         'connection_portal_version' => 'setConnectionPortalVersion'
     ];
 
@@ -208,6 +213,7 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
         'custom_redirect' => 'getCustomRedirect',
         'reconnect' => 'getReconnect',
         'connection_type' => 'getConnectionType',
+        'show_close_button' => 'getShowCloseButton',
         'connection_portal_version' => 'getConnectionPortalVersion'
     ];
 
@@ -307,6 +313,7 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
         $this->setIfExists('custom_redirect', $data ?? [], null);
         $this->setIfExists('reconnect', $data ?? [], null);
         $this->setIfExists('connection_type', $data ?? [], 'read');
+        $this->setIfExists('show_close_button', $data ?? [], null);
         $this->setIfExists('connection_portal_version', $data ?? [], 'v4');
     }
 
@@ -521,6 +528,35 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
         }
 
         $this->container['connection_type'] = $connection_type;
+
+        return $this;
+    }
+
+    /**
+     * Gets show_close_button
+     *
+     * @return bool|null
+     */
+    public function getShowCloseButton()
+    {
+        return $this->container['show_close_button'];
+    }
+
+    /**
+     * Sets show_close_button
+     *
+     * @param bool|null $show_close_button Controls whether the close (X) button is displayed in the connection portal. When false, you control closing behavior from your app. Defaults to true.
+     *
+     * @return self
+     */
+    public function setShowCloseButton($show_close_button)
+    {
+
+        if (is_null($show_close_button)) {
+            throw new \InvalidArgumentException('non-nullable show_close_button cannot be null');
+        }
+
+        $this->container['show_close_button'] = $show_close_button;
 
         return $this;
     }

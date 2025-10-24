@@ -57,6 +57,7 @@ class ManualTradeFormWithOptions implements ModelInterface, ArrayAccess, \JsonSe
         'symbol' => 'string',
         'order_type' => '\SnapTrade\Model\OrderTypeStrict',
         'time_in_force' => '\SnapTrade\Model\TimeInForceStrict',
+        'trading_session' => '\SnapTrade\Model\TradingSession',
         'price' => 'float',
         'stop' => 'float',
         'units' => 'float',
@@ -77,6 +78,7 @@ class ManualTradeFormWithOptions implements ModelInterface, ArrayAccess, \JsonSe
         'symbol' => null,
         'order_type' => null,
         'time_in_force' => null,
+        'trading_session' => null,
         'price' => null,
         'stop' => null,
         'units' => null,
@@ -95,6 +97,7 @@ class ManualTradeFormWithOptions implements ModelInterface, ArrayAccess, \JsonSe
 		'symbol' => true,
 		'order_type' => false,
 		'time_in_force' => false,
+		'trading_session' => false,
 		'price' => true,
 		'stop' => true,
 		'units' => true,
@@ -193,6 +196,7 @@ class ManualTradeFormWithOptions implements ModelInterface, ArrayAccess, \JsonSe
         'symbol' => 'symbol',
         'order_type' => 'order_type',
         'time_in_force' => 'time_in_force',
+        'trading_session' => 'trading_session',
         'price' => 'price',
         'stop' => 'stop',
         'units' => 'units',
@@ -211,6 +215,7 @@ class ManualTradeFormWithOptions implements ModelInterface, ArrayAccess, \JsonSe
         'symbol' => 'setSymbol',
         'order_type' => 'setOrderType',
         'time_in_force' => 'setTimeInForce',
+        'trading_session' => 'setTradingSession',
         'price' => 'setPrice',
         'stop' => 'setStop',
         'units' => 'setUnits',
@@ -229,6 +234,7 @@ class ManualTradeFormWithOptions implements ModelInterface, ArrayAccess, \JsonSe
         'symbol' => 'getSymbol',
         'order_type' => 'getOrderType',
         'time_in_force' => 'getTimeInForce',
+        'trading_session' => 'getTradingSession',
         'price' => 'getPrice',
         'stop' => 'getStop',
         'units' => 'getUnits',
@@ -298,6 +304,7 @@ class ManualTradeFormWithOptions implements ModelInterface, ArrayAccess, \JsonSe
         $this->setIfExists('symbol', $data ?? [], null);
         $this->setIfExists('order_type', $data ?? [], null);
         $this->setIfExists('time_in_force', $data ?? [], null);
+        $this->setIfExists('trading_session', $data ?? [], null);
         $this->setIfExists('price', $data ?? [], null);
         $this->setIfExists('stop', $data ?? [], null);
         $this->setIfExists('units', $data ?? [], null);
@@ -542,6 +549,35 @@ class ManualTradeFormWithOptions implements ModelInterface, ArrayAccess, \JsonSe
         }
 
         $this->container['time_in_force'] = $time_in_force;
+
+        return $this;
+    }
+
+    /**
+     * Gets trading_session
+     *
+     * @return \SnapTrade\Model\TradingSession|null
+     */
+    public function getTradingSession()
+    {
+        return $this->container['trading_session'];
+    }
+
+    /**
+     * Sets trading_session
+     *
+     * @param \SnapTrade\Model\TradingSession|null $trading_session trading_session
+     *
+     * @return self
+     */
+    public function setTradingSession($trading_session)
+    {
+
+        if (is_null($trading_session)) {
+            throw new \InvalidArgumentException('non-nullable trading_session cannot be null');
+        }
+
+        $this->container['trading_session'] = $trading_session;
 
         return $this;
     }

@@ -3565,6 +3565,7 @@ class TradingApi extends \SnapTrade\CustomApi
         $user_secret,
         $universal_symbol_id = SENTINEL_VALUE,
         $symbol = SENTINEL_VALUE,
+        $trading_session = SENTINEL_VALUE,
         $price = SENTINEL_VALUE,
         $stop = SENTINEL_VALUE,
         $units = SENTINEL_VALUE,
@@ -3579,6 +3580,7 @@ class TradingApi extends \SnapTrade\CustomApi
         $this->setRequestBodyProperty($_body, "symbol", $symbol);
         $this->setRequestBodyProperty($_body, "order_type", $order_type);
         $this->setRequestBodyProperty($_body, "time_in_force", $time_in_force);
+        $this->setRequestBodyProperty($_body, "trading_session", $trading_session);
         $this->setRequestBodyProperty($_body, "price", $price);
         $this->setRequestBodyProperty($_body, "stop", $stop);
         $this->setRequestBodyProperty($_body, "units", $units);
@@ -3781,6 +3783,7 @@ class TradingApi extends \SnapTrade\CustomApi
         $user_secret,
         $universal_symbol_id = SENTINEL_VALUE,
         $symbol = SENTINEL_VALUE,
+        $trading_session = SENTINEL_VALUE,
         $price = SENTINEL_VALUE,
         $stop = SENTINEL_VALUE,
         $units = SENTINEL_VALUE,
@@ -3795,6 +3798,7 @@ class TradingApi extends \SnapTrade\CustomApi
         $this->setRequestBodyProperty($_body, "symbol", $symbol);
         $this->setRequestBodyProperty($_body, "order_type", $order_type);
         $this->setRequestBodyProperty($_body, "time_in_force", $time_in_force);
+        $this->setRequestBodyProperty($_body, "trading_session", $trading_session);
         $this->setRequestBodyProperty($_body, "price", $price);
         $this->setRequestBodyProperty($_body, "stop", $stop);
         $this->setRequestBodyProperty($_body, "units", $units);

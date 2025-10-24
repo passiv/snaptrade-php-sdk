@@ -127,6 +127,15 @@ class ManualTradeFormWithOptionsTest extends TestCase
     }
 
     /**
+     * Test attribute "trading_session"
+     */
+    public function testPropertyTradingSession()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "price"
      */
     public function testPropertyPrice()

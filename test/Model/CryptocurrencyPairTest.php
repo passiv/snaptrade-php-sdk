@@ -98,4 +98,13 @@ class CryptocurrencyPairTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "increment"
+     */
+    public function testPropertyIncrement()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

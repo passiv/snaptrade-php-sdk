@@ -53,7 +53,8 @@ class CryptocurrencyPair implements ModelInterface, ArrayAccess, \JsonSerializab
     protected static $openAPITypes = [
         'symbol' => 'string',
         'base' => 'string',
-        'quote' => 'string'
+        'quote' => 'string',
+        'increment' => 'string'
     ];
 
     /**
@@ -66,7 +67,8 @@ class CryptocurrencyPair implements ModelInterface, ArrayAccess, \JsonSerializab
     protected static $openAPIFormats = [
         'symbol' => null,
         'base' => null,
-        'quote' => null
+        'quote' => null,
+        'increment' => null
     ];
 
     /**
@@ -77,7 +79,8 @@ class CryptocurrencyPair implements ModelInterface, ArrayAccess, \JsonSerializab
     protected static array $openAPINullables = [
         'symbol' => false,
 		'base' => false,
-		'quote' => false
+		'quote' => false,
+		'increment' => true
     ];
 
     /**
@@ -168,7 +171,8 @@ class CryptocurrencyPair implements ModelInterface, ArrayAccess, \JsonSerializab
     protected static $attributeMap = [
         'symbol' => 'symbol',
         'base' => 'base',
-        'quote' => 'quote'
+        'quote' => 'quote',
+        'increment' => 'increment'
     ];
 
     /**
@@ -179,7 +183,8 @@ class CryptocurrencyPair implements ModelInterface, ArrayAccess, \JsonSerializab
     protected static $setters = [
         'symbol' => 'setSymbol',
         'base' => 'setBase',
-        'quote' => 'setQuote'
+        'quote' => 'setQuote',
+        'increment' => 'setIncrement'
     ];
 
     /**
@@ -190,7 +195,8 @@ class CryptocurrencyPair implements ModelInterface, ArrayAccess, \JsonSerializab
     protected static $getters = [
         'symbol' => 'getSymbol',
         'base' => 'getBase',
-        'quote' => 'getQuote'
+        'quote' => 'getQuote',
+        'increment' => 'getIncrement'
     ];
 
     /**
@@ -253,6 +259,7 @@ class CryptocurrencyPair implements ModelInterface, ArrayAccess, \JsonSerializab
         $this->setIfExists('symbol', $data ?? [], null);
         $this->setIfExists('base', $data ?? [], null);
         $this->setIfExists('quote', $data ?? [], null);
+        $this->setIfExists('increment', $data ?? [], null);
     }
 
     /**
@@ -386,6 +393,42 @@ class CryptocurrencyPair implements ModelInterface, ArrayAccess, \JsonSerializab
         }
 
         $this->container['quote'] = $quote;
+
+        return $this;
+    }
+
+    /**
+     * Gets increment
+     *
+     * @return string|null
+     */
+    public function getIncrement()
+    {
+        return $this->container['increment'];
+    }
+
+    /**
+     * Sets increment
+     *
+     * @param string|null $increment increment
+     *
+     * @return self
+     */
+    public function setIncrement($increment)
+    {
+
+        if (is_null($increment)) {
+            array_push($this->openAPINullablesSetToNull, 'increment');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('increment', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['increment'] = $increment;
 
         return $this;
     }

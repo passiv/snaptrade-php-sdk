@@ -57,6 +57,7 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
         'reconnect' => 'string',
         'connection_type' => 'string',
         'show_close_button' => 'bool',
+        'dark_mode' => 'bool',
         'connection_portal_version' => 'string'
     ];
 
@@ -74,6 +75,7 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
         'reconnect' => null,
         'connection_type' => null,
         'show_close_button' => null,
+        'dark_mode' => null,
         'connection_portal_version' => null
     ];
 
@@ -89,6 +91,7 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
 		'reconnect' => false,
 		'connection_type' => false,
 		'show_close_button' => false,
+		'dark_mode' => false,
 		'connection_portal_version' => false
     ];
 
@@ -184,6 +187,7 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
         'reconnect' => 'reconnect',
         'connection_type' => 'connectionType',
         'show_close_button' => 'showCloseButton',
+        'dark_mode' => 'darkMode',
         'connection_portal_version' => 'connectionPortalVersion'
     ];
 
@@ -199,6 +203,7 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
         'reconnect' => 'setReconnect',
         'connection_type' => 'setConnectionType',
         'show_close_button' => 'setShowCloseButton',
+        'dark_mode' => 'setDarkMode',
         'connection_portal_version' => 'setConnectionPortalVersion'
     ];
 
@@ -214,6 +219,7 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
         'reconnect' => 'getReconnect',
         'connection_type' => 'getConnectionType',
         'show_close_button' => 'getShowCloseButton',
+        'dark_mode' => 'getDarkMode',
         'connection_portal_version' => 'getConnectionPortalVersion'
     ];
 
@@ -314,6 +320,7 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
         $this->setIfExists('reconnect', $data ?? [], null);
         $this->setIfExists('connection_type', $data ?? [], 'read');
         $this->setIfExists('show_close_button', $data ?? [], null);
+        $this->setIfExists('dark_mode', $data ?? [], null);
         $this->setIfExists('connection_portal_version', $data ?? [], 'v4');
     }
 
@@ -557,6 +564,35 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
         }
 
         $this->container['show_close_button'] = $show_close_button;
+
+        return $this;
+    }
+
+    /**
+     * Gets dark_mode
+     *
+     * @return bool|null
+     */
+    public function getDarkMode()
+    {
+        return $this->container['dark_mode'];
+    }
+
+    /**
+     * Sets dark_mode
+     *
+     * @param bool|null $dark_mode Enable dark mode for the connection portal. Defaults to false.
+     *
+     * @return self
+     */
+    public function setDarkMode($dark_mode)
+    {
+
+        if (is_null($dark_mode)) {
+            throw new \InvalidArgumentException('non-nullable dark_mode cannot be null');
+        }
+
+        $this->container['dark_mode'] = $dark_mode;
 
         return $this;
     }

@@ -800,6 +800,7 @@ $result = $snaptrade->authentication->loginSnapTradeUser(
     reconnect: "8b5f262d-4bb9-365d-888a-202bd3b15fa1", 
     connection_type: "read", 
     show_close_button: True, 
+    dark_mode: True, 
     connection_portal_version: "v4"
 );
 ```
@@ -833,6 +834,10 @@ Determines connection permissions (default: read) - `read`: Data access only. - 
 ##### showCloseButton: `bool`<a id="showclosebutton-bool"></a>
 
 Controls whether the close (X) button is displayed in the connection portal. When false, you control closing behavior from your app. Defaults to true.
+
+##### darkMode: `bool`<a id="darkmode-bool"></a>
+
+Enable dark mode for the connection portal. Defaults to false.
 
 ##### connectionPortalVersion: `string`<a id="connectionportalversion-string"></a>
 

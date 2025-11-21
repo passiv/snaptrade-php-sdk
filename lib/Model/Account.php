@@ -63,7 +63,8 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
         'raw_type' => 'string',
         'meta' => 'array<string,mixed>',
         'portfolio_group' => 'string',
-        'cash_restrictions' => 'string[]'
+        'cash_restrictions' => 'string[]',
+        'is_paper' => 'bool'
     ];
 
     /**
@@ -86,7 +87,8 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
         'raw_type' => null,
         'meta' => null,
         'portfolio_group' => 'uuid',
-        'cash_restrictions' => null
+        'cash_restrictions' => null,
+        'is_paper' => null
     ];
 
     /**
@@ -107,7 +109,8 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
 		'raw_type' => true,
 		'meta' => false,
 		'portfolio_group' => false,
-		'cash_restrictions' => false
+		'cash_restrictions' => false,
+		'is_paper' => false
     ];
 
     /**
@@ -208,7 +211,8 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
         'raw_type' => 'raw_type',
         'meta' => 'meta',
         'portfolio_group' => 'portfolio_group',
-        'cash_restrictions' => 'cash_restrictions'
+        'cash_restrictions' => 'cash_restrictions',
+        'is_paper' => 'is_paper'
     ];
 
     /**
@@ -229,7 +233,8 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
         'raw_type' => 'setRawType',
         'meta' => 'setMeta',
         'portfolio_group' => 'setPortfolioGroup',
-        'cash_restrictions' => 'setCashRestrictions'
+        'cash_restrictions' => 'setCashRestrictions',
+        'is_paper' => 'setIsPaper'
     ];
 
     /**
@@ -250,7 +255,8 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
         'raw_type' => 'getRawType',
         'meta' => 'getMeta',
         'portfolio_group' => 'getPortfolioGroup',
-        'cash_restrictions' => 'getCashRestrictions'
+        'cash_restrictions' => 'getCashRestrictions',
+        'is_paper' => 'getIsPaper'
     ];
 
     /**
@@ -342,6 +348,7 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('meta', $data ?? [], null);
         $this->setIfExists('portfolio_group', $data ?? [], null);
         $this->setIfExists('cash_restrictions', $data ?? [], null);
+        $this->setIfExists('is_paper', $data ?? [], null);
     }
 
     /**
@@ -404,6 +411,9 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
             );
         }
 
+        if ($this->container['is_paper'] === null) {
+            $invalidProperties[] = "'is_paper' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -829,6 +839,35 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['cash_restrictions'] = $cash_restrictions;
+
+        return $this;
+    }
+
+    /**
+     * Gets is_paper
+     *
+     * @return bool
+     */
+    public function getIsPaper()
+    {
+        return $this->container['is_paper'];
+    }
+
+    /**
+     * Sets is_paper
+     *
+     * @param bool $is_paper Indicates whether the account is a paper (simulated) trading account.
+     *
+     * @return self
+     */
+    public function setIsPaper($is_paper)
+    {
+
+        if (is_null($is_paper)) {
+            throw new \InvalidArgumentException('non-nullable is_paper cannot be null');
+        }
+
+        $this->container['is_paper'] = $is_paper;
 
         return $this;
     }

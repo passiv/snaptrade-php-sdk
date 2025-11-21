@@ -188,4 +188,13 @@ class AccountTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "is_paper"
+     */
+    public function testPropertyIsPaper()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

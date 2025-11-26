@@ -631,7 +631,7 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets is_eligible_for_payout
      *
-     * @param bool|null $is_eligible_for_payout Whether the connection is eligible for a payout.
+     * @param bool|null $is_eligible_for_payout Whether the connection is eligible for a payout. This is an experimental field that is NOT generally available for all partners. Do not use in production without speaking to the SnapTrade team.
      *
      * @return self
      */

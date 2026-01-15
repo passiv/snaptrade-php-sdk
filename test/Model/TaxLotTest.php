@@ -1,6 +1,6 @@
 <?php
 /**
- * PositionTest
+ * TaxLotTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * PositionTest Class Doc Comment
+ * TaxLotTest Class Doc Comment
  *
  * @category    Class
- * @description Describes a single stock/ETF/crypto/mutual fund position in an account.
+ * @description Describes a single tax lot for a position.
  * @package     SnapTrade
  */
-class PositionTest extends TestCase
+class TaxLotTest extends TestCase
 {
 
     /**
@@ -64,90 +64,63 @@ class PositionTest extends TestCase
     }
 
     /**
-     * Test "Position"
+     * Test "TaxLot"
      */
-    public function testPosition()
+    public function testTaxLot()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "symbol"
+     * Test attribute "original_purchase_date"
      */
-    public function testPropertySymbol()
+    public function testPropertyOriginalPurchaseDate()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "units"
+     * Test attribute "quantity"
      */
-    public function testPropertyUnits()
+    public function testPropertyQuantity()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "price"
+     * Test attribute "purchased_price"
      */
-    public function testPropertyPrice()
+    public function testPropertyPurchasedPrice()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "open_pnl"
+     * Test attribute "cost_basis"
      */
-    public function testPropertyOpenPnl()
+    public function testPropertyCostBasis()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "average_purchase_price"
+     * Test attribute "current_value"
      */
-    public function testPropertyAveragePurchasePrice()
+    public function testPropertyCurrentValue()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "fractional_units"
+     * Test attribute "position_type"
      */
-    public function testPropertyFractionalUnits()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "currency"
-     */
-    public function testPropertyCurrency()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "cash_equivalent"
-     */
-    public function testPropertyCashEquivalent()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "tax_lots"
-     */
-    public function testPropertyTaxLots()
+    public function testPropertyPositionType()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

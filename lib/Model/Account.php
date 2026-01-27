@@ -57,6 +57,8 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
         'number' => 'string',
         'institution_name' => 'string',
         'created_date' => '\DateTime',
+        'funding_date' => '\DateTime',
+        'opening_date' => '\DateTime',
         'sync_status' => '\SnapTrade\Model\AccountSyncStatus',
         'balance' => '\SnapTrade\Model\AccountBalance',
         'status' => 'string',
@@ -81,6 +83,8 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
         'number' => null,
         'institution_name' => null,
         'created_date' => 'date-time',
+        'funding_date' => 'date-time',
+        'opening_date' => 'date-time',
         'sync_status' => null,
         'balance' => null,
         'status' => null,
@@ -103,6 +107,8 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
 		'number' => false,
 		'institution_name' => false,
 		'created_date' => false,
+		'funding_date' => true,
+		'opening_date' => true,
 		'sync_status' => false,
 		'balance' => false,
 		'status' => true,
@@ -205,6 +211,8 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
         'number' => 'number',
         'institution_name' => 'institution_name',
         'created_date' => 'created_date',
+        'funding_date' => 'funding_date',
+        'opening_date' => 'opening_date',
         'sync_status' => 'sync_status',
         'balance' => 'balance',
         'status' => 'status',
@@ -227,6 +235,8 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
         'number' => 'setNumber',
         'institution_name' => 'setInstitutionName',
         'created_date' => 'setCreatedDate',
+        'funding_date' => 'setFundingDate',
+        'opening_date' => 'setOpeningDate',
         'sync_status' => 'setSyncStatus',
         'balance' => 'setBalance',
         'status' => 'setStatus',
@@ -249,6 +259,8 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
         'number' => 'getNumber',
         'institution_name' => 'getInstitutionName',
         'created_date' => 'getCreatedDate',
+        'funding_date' => 'getFundingDate',
+        'opening_date' => 'getOpeningDate',
         'sync_status' => 'getSyncStatus',
         'balance' => 'getBalance',
         'status' => 'getStatus',
@@ -341,6 +353,8 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('number', $data ?? [], null);
         $this->setIfExists('institution_name', $data ?? [], null);
         $this->setIfExists('created_date', $data ?? [], null);
+        $this->setIfExists('funding_date', $data ?? [], null);
+        $this->setIfExists('opening_date', $data ?? [], null);
         $this->setIfExists('sync_status', $data ?? [], null);
         $this->setIfExists('balance', $data ?? [], null);
         $this->setIfExists('status', $data ?? [], null);
@@ -606,6 +620,78 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['created_date'] = $created_date;
+
+        return $this;
+    }
+
+    /**
+     * Gets funding_date
+     *
+     * @return \DateTime|null
+     */
+    public function getFundingDate()
+    {
+        return $this->container['funding_date'];
+    }
+
+    /**
+     * Sets funding_date
+     *
+     * @param \DateTime|null $funding_date Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was funded.
+     *
+     * @return self
+     */
+    public function setFundingDate($funding_date)
+    {
+
+        if (is_null($funding_date)) {
+            array_push($this->openAPINullablesSetToNull, 'funding_date');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('funding_date', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['funding_date'] = $funding_date;
+
+        return $this;
+    }
+
+    /**
+     * Gets opening_date
+     *
+     * @return \DateTime|null
+     */
+    public function getOpeningDate()
+    {
+        return $this->container['opening_date'];
+    }
+
+    /**
+     * Sets opening_date
+     *
+     * @param \DateTime|null $opening_date Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the brokerage.
+     *
+     * @return self
+     */
+    public function setOpeningDate($opening_date)
+    {
+
+        if (is_null($opening_date)) {
+            array_push($this->openAPINullablesSetToNull, 'opening_date');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('opening_date', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['opening_date'] = $opening_date;
 
         return $this;
     }

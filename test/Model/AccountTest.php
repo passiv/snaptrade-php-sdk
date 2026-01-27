@@ -127,6 +127,24 @@ class AccountTest extends TestCase
     }
 
     /**
+     * Test attribute "funding_date"
+     */
+    public function testPropertyFundingDate()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "opening_date"
+     */
+    public function testPropertyOpeningDate()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "sync_status"
      */
     public function testPropertySyncStatus()

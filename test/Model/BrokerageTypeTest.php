@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * BrokerageTypeTest Class Doc Comment
  *
  * @category    Class
- * @description Type of brokerage
+ * @description Type of brokerage. Currently supports traditional brokerages and crypto exchanges.
  * @package     SnapTrade
  */
 class BrokerageTypeTest extends TestCase

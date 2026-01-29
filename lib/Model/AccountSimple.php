@@ -30,7 +30,7 @@ use \SnapTrade\ObjectSerializer;
  * AccountSimple Class Doc Comment
  *
  * @category Class
- * @description SnapTradeUser Investment Account
+ * @description A single account at a brokerage.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
@@ -317,7 +317,7 @@ class AccountSimple implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets id
      *
-     * @param string|null $id id
+     * @param string|null $id Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
      *
      * @return self
      */
@@ -346,7 +346,7 @@ class AccountSimple implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets name
      *
-     * @param string|null $name name
+     * @param string|null $name A display name for the account. Either assigned by the user or by the brokerage itself. For certain brokerages, SnapTrade appends the brokerage name to the account name for clarity.
      *
      * @return self
      */
@@ -375,7 +375,7 @@ class AccountSimple implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets number
      *
-     * @param string|null $number number
+     * @param string|null $number The account number assigned by the brokerage. For some brokerages, this field may be masked for security reasons.
      *
      * @return self
      */

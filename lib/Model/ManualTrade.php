@@ -30,7 +30,7 @@ use \SnapTrade\ObjectSerializer;
  * ManualTrade Class Doc Comment
  *
  * @category Class
- * @description A manual trade object
+ * @description Contains the details of a submitted order.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
@@ -54,7 +54,7 @@ class ManualTrade implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'string',
         'account' => 'string',
         'order_type' => '\SnapTrade\Model\OrderTypeStrict',
-        'time_in_force' => 'string',
+        'time_in_force' => '\SnapTrade\Model\TimeInForceStrict',
         'symbol' => '\SnapTrade\Model\ManualTradeSymbol',
         'action' => '\SnapTrade\Model\ActionStrict',
         'units' => 'float',
@@ -70,7 +70,7 @@ class ManualTrade implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPIFormats = [
         'id' => 'uuid',
-        'account' => null,
+        'account' => 'uuid',
         'order_type' => null,
         'time_in_force' => null,
         'symbol' => null,
@@ -345,7 +345,7 @@ class ManualTrade implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets id
      *
-     * @param string|null $id id
+     * @param string|null $id Unique identifier for the submitted order through SnapTrade.
      *
      * @return self
      */
@@ -374,7 +374,7 @@ class ManualTrade implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets account
      *
-     * @param string|null $account account
+     * @param string|null $account Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
      *
      * @return self
      */
@@ -422,7 +422,7 @@ class ManualTrade implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets time_in_force
      *
-     * @return string|null
+     * @return \SnapTrade\Model\TimeInForceStrict|null
      */
     public function getTimeInForce()
     {
@@ -432,7 +432,7 @@ class ManualTrade implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets time_in_force
      *
-     * @param string|null $time_in_force Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled   * GTD - Good Til Date
+     * @param \SnapTrade\Model\TimeInForceStrict|null $time_in_force time_in_force
      *
      * @return self
      */

@@ -55,12 +55,12 @@ class AccountOrderRecordUniversalSymbol implements ModelInterface, ArrayAccess, 
         'symbol' => 'string',
         'raw_symbol' => 'string',
         'description' => 'string',
-        'currency' => '\SnapTrade\Model\UniversalSymbolCurrency',
-        'exchange' => '\SnapTrade\Model\UniversalSymbolExchange',
+        'currency' => '\SnapTrade\Model\SymbolCurrency',
+        'exchange' => '\SnapTrade\Model\SymbolExchange',
         'type' => '\SnapTrade\Model\SecurityType',
-        'currencies' => '\SnapTrade\Model\Currency[]',
         'figi_code' => 'string',
-        'figi_instrument' => '\SnapTrade\Model\SymbolFigiInstrument'
+        'figi_instrument' => '\SnapTrade\Model\SymbolFigiInstrument',
+        'currencies' => '\SnapTrade\Model\Currency[]'
     ];
 
     /**
@@ -78,9 +78,9 @@ class AccountOrderRecordUniversalSymbol implements ModelInterface, ArrayAccess, 
         'currency' => null,
         'exchange' => null,
         'type' => null,
-        'currencies' => null,
         'figi_code' => null,
-        'figi_instrument' => null
+        'figi_instrument' => null,
+        'currencies' => null
     ];
 
     /**
@@ -96,9 +96,9 @@ class AccountOrderRecordUniversalSymbol implements ModelInterface, ArrayAccess, 
 		'currency' => false,
 		'exchange' => false,
 		'type' => false,
-		'currencies' => false,
 		'figi_code' => true,
-		'figi_instrument' => true
+		'figi_instrument' => true,
+		'currencies' => false
     ];
 
     /**
@@ -194,9 +194,9 @@ class AccountOrderRecordUniversalSymbol implements ModelInterface, ArrayAccess, 
         'currency' => 'currency',
         'exchange' => 'exchange',
         'type' => 'type',
-        'currencies' => 'currencies',
         'figi_code' => 'figi_code',
-        'figi_instrument' => 'figi_instrument'
+        'figi_instrument' => 'figi_instrument',
+        'currencies' => 'currencies'
     ];
 
     /**
@@ -212,9 +212,9 @@ class AccountOrderRecordUniversalSymbol implements ModelInterface, ArrayAccess, 
         'currency' => 'setCurrency',
         'exchange' => 'setExchange',
         'type' => 'setType',
-        'currencies' => 'setCurrencies',
         'figi_code' => 'setFigiCode',
-        'figi_instrument' => 'setFigiInstrument'
+        'figi_instrument' => 'setFigiInstrument',
+        'currencies' => 'setCurrencies'
     ];
 
     /**
@@ -230,9 +230,9 @@ class AccountOrderRecordUniversalSymbol implements ModelInterface, ArrayAccess, 
         'currency' => 'getCurrency',
         'exchange' => 'getExchange',
         'type' => 'getType',
-        'currencies' => 'getCurrencies',
         'figi_code' => 'getFigiCode',
-        'figi_instrument' => 'getFigiInstrument'
+        'figi_instrument' => 'getFigiInstrument',
+        'currencies' => 'getCurrencies'
     ];
 
     /**
@@ -299,9 +299,9 @@ class AccountOrderRecordUniversalSymbol implements ModelInterface, ArrayAccess, 
         $this->setIfExists('currency', $data ?? [], null);
         $this->setIfExists('exchange', $data ?? [], null);
         $this->setIfExists('type', $data ?? [], null);
-        $this->setIfExists('currencies', $data ?? [], null);
         $this->setIfExists('figi_code', $data ?? [], null);
         $this->setIfExists('figi_instrument', $data ?? [], null);
+        $this->setIfExists('currencies', $data ?? [], null);
     }
 
     /**
@@ -490,7 +490,7 @@ class AccountOrderRecordUniversalSymbol implements ModelInterface, ArrayAccess, 
     /**
      * Gets currency
      *
-     * @return \SnapTrade\Model\UniversalSymbolCurrency
+     * @return \SnapTrade\Model\SymbolCurrency
      */
     public function getCurrency()
     {
@@ -500,7 +500,7 @@ class AccountOrderRecordUniversalSymbol implements ModelInterface, ArrayAccess, 
     /**
      * Sets currency
      *
-     * @param \SnapTrade\Model\UniversalSymbolCurrency $currency currency
+     * @param \SnapTrade\Model\SymbolCurrency $currency currency
      *
      * @return self
      */
@@ -519,7 +519,7 @@ class AccountOrderRecordUniversalSymbol implements ModelInterface, ArrayAccess, 
     /**
      * Gets exchange
      *
-     * @return \SnapTrade\Model\UniversalSymbolExchange|null
+     * @return \SnapTrade\Model\SymbolExchange|null
      */
     public function getExchange()
     {
@@ -529,7 +529,7 @@ class AccountOrderRecordUniversalSymbol implements ModelInterface, ArrayAccess, 
     /**
      * Sets exchange
      *
-     * @param \SnapTrade\Model\UniversalSymbolExchange|null $exchange exchange
+     * @param \SnapTrade\Model\SymbolExchange|null $exchange exchange
      *
      * @return self
      */
@@ -570,37 +570,6 @@ class AccountOrderRecordUniversalSymbol implements ModelInterface, ArrayAccess, 
         }
 
         $this->container['type'] = $type;
-
-        return $this;
-    }
-
-    /**
-     * Gets currencies
-     *
-     * @return \SnapTrade\Model\Currency[]
-     * @deprecated
-     */
-    public function getCurrencies()
-    {
-        return $this->container['currencies'];
-    }
-
-    /**
-     * Sets currencies
-     *
-     * @param \SnapTrade\Model\Currency[] $currencies This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
-     *
-     * @return self
-     * @deprecated
-     */
-    public function setCurrencies($currencies)
-    {
-
-        if (is_null($currencies)) {
-            throw new \InvalidArgumentException('non-nullable currencies cannot be null');
-        }
-
-        $this->container['currencies'] = $currencies;
 
         return $this;
     }
@@ -673,6 +642,37 @@ class AccountOrderRecordUniversalSymbol implements ModelInterface, ArrayAccess, 
         }
 
         $this->container['figi_instrument'] = $figi_instrument;
+
+        return $this;
+    }
+
+    /**
+     * Gets currencies
+     *
+     * @return \SnapTrade\Model\Currency[]
+     * @deprecated
+     */
+    public function getCurrencies()
+    {
+        return $this->container['currencies'];
+    }
+
+    /**
+     * Sets currencies
+     *
+     * @param \SnapTrade\Model\Currency[] $currencies This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
+     *
+     * @return self
+     * @deprecated
+     */
+    public function setCurrencies($currencies)
+    {
+
+        if (is_null($currencies)) {
+            throw new \InvalidArgumentException('non-nullable currencies cannot be null');
+        }
+
+        $this->container['currencies'] = $currencies;
 
         return $this;
     }

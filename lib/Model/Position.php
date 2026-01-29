@@ -55,8 +55,11 @@ class Position implements ModelInterface, ArrayAccess, \JsonSerializable
         'units' => 'float',
         'price' => 'float',
         'open_pnl' => 'float',
+        'average_purchase_price' => 'float',
         'fractional_units' => 'float',
-        'average_purchase_price' => 'float'
+        'currency' => '\SnapTrade\Model\PositionCurrency',
+        'cash_equivalent' => 'bool',
+        'tax_lots' => '\SnapTrade\Model\TaxLot[]'
     ];
 
     /**
@@ -71,8 +74,11 @@ class Position implements ModelInterface, ArrayAccess, \JsonSerializable
         'units' => null,
         'price' => null,
         'open_pnl' => null,
+        'average_purchase_price' => null,
         'fractional_units' => null,
-        'average_purchase_price' => null
+        'currency' => null,
+        'cash_equivalent' => null,
+        'tax_lots' => null
     ];
 
     /**
@@ -85,8 +91,11 @@ class Position implements ModelInterface, ArrayAccess, \JsonSerializable
 		'units' => true,
 		'price' => true,
 		'open_pnl' => true,
+		'average_purchase_price' => true,
 		'fractional_units' => true,
-		'average_purchase_price' => true
+		'currency' => false,
+		'cash_equivalent' => true,
+		'tax_lots' => false
     ];
 
     /**
@@ -179,8 +188,11 @@ class Position implements ModelInterface, ArrayAccess, \JsonSerializable
         'units' => 'units',
         'price' => 'price',
         'open_pnl' => 'open_pnl',
+        'average_purchase_price' => 'average_purchase_price',
         'fractional_units' => 'fractional_units',
-        'average_purchase_price' => 'average_purchase_price'
+        'currency' => 'currency',
+        'cash_equivalent' => 'cash_equivalent',
+        'tax_lots' => 'tax_lots'
     ];
 
     /**
@@ -193,8 +205,11 @@ class Position implements ModelInterface, ArrayAccess, \JsonSerializable
         'units' => 'setUnits',
         'price' => 'setPrice',
         'open_pnl' => 'setOpenPnl',
+        'average_purchase_price' => 'setAveragePurchasePrice',
         'fractional_units' => 'setFractionalUnits',
-        'average_purchase_price' => 'setAveragePurchasePrice'
+        'currency' => 'setCurrency',
+        'cash_equivalent' => 'setCashEquivalent',
+        'tax_lots' => 'setTaxLots'
     ];
 
     /**
@@ -207,8 +222,11 @@ class Position implements ModelInterface, ArrayAccess, \JsonSerializable
         'units' => 'getUnits',
         'price' => 'getPrice',
         'open_pnl' => 'getOpenPnl',
+        'average_purchase_price' => 'getAveragePurchasePrice',
         'fractional_units' => 'getFractionalUnits',
-        'average_purchase_price' => 'getAveragePurchasePrice'
+        'currency' => 'getCurrency',
+        'cash_equivalent' => 'getCashEquivalent',
+        'tax_lots' => 'getTaxLots'
     ];
 
     /**
@@ -272,8 +290,11 @@ class Position implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('units', $data ?? [], null);
         $this->setIfExists('price', $data ?? [], null);
         $this->setIfExists('open_pnl', $data ?? [], null);
-        $this->setIfExists('fractional_units', $data ?? [], null);
         $this->setIfExists('average_purchase_price', $data ?? [], null);
+        $this->setIfExists('fractional_units', $data ?? [], null);
+        $this->setIfExists('currency', $data ?? [], null);
+        $this->setIfExists('cash_equivalent', $data ?? [], null);
+        $this->setIfExists('tax_lots', $data ?? [], null);
     }
 
     /**
@@ -456,6 +477,42 @@ class Position implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
+     * Gets average_purchase_price
+     *
+     * @return float|null
+     */
+    public function getAveragePurchasePrice()
+    {
+        return $this->container['average_purchase_price'];
+    }
+
+    /**
+     * Sets average_purchase_price
+     *
+     * @param float|null $average_purchase_price Cost basis _per share_ of this position.
+     *
+     * @return self
+     */
+    public function setAveragePurchasePrice($average_purchase_price)
+    {
+
+        if (is_null($average_purchase_price)) {
+            array_push($this->openAPINullablesSetToNull, 'average_purchase_price');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('average_purchase_price', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['average_purchase_price'] = $average_purchase_price;
+
+        return $this;
+    }
+
+    /**
      * Gets fractional_units
      *
      * @return float|null
@@ -494,37 +551,95 @@ class Position implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets average_purchase_price
+     * Gets currency
      *
-     * @return float|null
+     * @return \SnapTrade\Model\PositionCurrency|null
      */
-    public function getAveragePurchasePrice()
+    public function getCurrency()
     {
-        return $this->container['average_purchase_price'];
+        return $this->container['currency'];
     }
 
     /**
-     * Sets average_purchase_price
+     * Sets currency
      *
-     * @param float|null $average_purchase_price Cost basis _per share_ of this position.
+     * @param \SnapTrade\Model\PositionCurrency|null $currency currency
      *
      * @return self
      */
-    public function setAveragePurchasePrice($average_purchase_price)
+    public function setCurrency($currency)
     {
 
-        if (is_null($average_purchase_price)) {
-            array_push($this->openAPINullablesSetToNull, 'average_purchase_price');
+        if (is_null($currency)) {
+            throw new \InvalidArgumentException('non-nullable currency cannot be null');
+        }
+
+        $this->container['currency'] = $currency;
+
+        return $this;
+    }
+
+    /**
+     * Gets cash_equivalent
+     *
+     * @return bool|null
+     */
+    public function getCashEquivalent()
+    {
+        return $this->container['cash_equivalent'];
+    }
+
+    /**
+     * Sets cash_equivalent
+     *
+     * @param bool|null $cash_equivalent If the position is a cash equivalent (usually a money market fund) that is also counted in account cash balance and buying power
+     *
+     * @return self
+     */
+    public function setCashEquivalent($cash_equivalent)
+    {
+
+        if (is_null($cash_equivalent)) {
+            array_push($this->openAPINullablesSetToNull, 'cash_equivalent');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('average_purchase_price', $nullablesSetToNull);
+            $index = array_search('cash_equivalent', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
 
-        $this->container['average_purchase_price'] = $average_purchase_price;
+        $this->container['cash_equivalent'] = $cash_equivalent;
+
+        return $this;
+    }
+
+    /**
+     * Gets tax_lots
+     *
+     * @return \SnapTrade\Model\TaxLot[]|null
+     */
+    public function getTaxLots()
+    {
+        return $this->container['tax_lots'];
+    }
+
+    /**
+     * Sets tax_lots
+     *
+     * @param \SnapTrade\Model\TaxLot[]|null $tax_lots List of tax lots for the given position (disabled by default, contact support if needed)
+     *
+     * @return self
+     */
+    public function setTaxLots($tax_lots)
+    {
+
+        if (is_null($tax_lots)) {
+            throw new \InvalidArgumentException('non-nullable tax_lots cannot be null');
+        }
+
+        $this->container['tax_lots'] = $tax_lots;
 
         return $this;
     }

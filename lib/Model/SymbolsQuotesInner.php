@@ -51,9 +51,9 @@ class SymbolsQuotesInner implements ModelInterface, ArrayAccess, \JsonSerializab
       */
     protected static $openAPITypes = [
         'symbol' => '\SnapTrade\Model\UniversalSymbol',
+        'last_trade_price' => 'float',
         'bid_price' => 'float',
         'ask_price' => 'float',
-        'last_trade_price' => 'float',
         'bid_size' => 'float',
         'ask_size' => 'float'
     ];
@@ -67,9 +67,9 @@ class SymbolsQuotesInner implements ModelInterface, ArrayAccess, \JsonSerializab
       */
     protected static $openAPIFormats = [
         'symbol' => null,
+        'last_trade_price' => null,
         'bid_price' => null,
         'ask_price' => null,
-        'last_trade_price' => null,
         'bid_size' => null,
         'ask_size' => null
     ];
@@ -81,9 +81,9 @@ class SymbolsQuotesInner implements ModelInterface, ArrayAccess, \JsonSerializab
       */
     protected static array $openAPINullables = [
         'symbol' => false,
+		'last_trade_price' => false,
 		'bid_price' => false,
 		'ask_price' => false,
-		'last_trade_price' => false,
 		'bid_size' => false,
 		'ask_size' => false
     ];
@@ -175,9 +175,9 @@ class SymbolsQuotesInner implements ModelInterface, ArrayAccess, \JsonSerializab
      */
     protected static $attributeMap = [
         'symbol' => 'symbol',
+        'last_trade_price' => 'last_trade_price',
         'bid_price' => 'bid_price',
         'ask_price' => 'ask_price',
-        'last_trade_price' => 'last_trade_price',
         'bid_size' => 'bid_size',
         'ask_size' => 'ask_size'
     ];
@@ -189,9 +189,9 @@ class SymbolsQuotesInner implements ModelInterface, ArrayAccess, \JsonSerializab
      */
     protected static $setters = [
         'symbol' => 'setSymbol',
+        'last_trade_price' => 'setLastTradePrice',
         'bid_price' => 'setBidPrice',
         'ask_price' => 'setAskPrice',
-        'last_trade_price' => 'setLastTradePrice',
         'bid_size' => 'setBidSize',
         'ask_size' => 'setAskSize'
     ];
@@ -203,9 +203,9 @@ class SymbolsQuotesInner implements ModelInterface, ArrayAccess, \JsonSerializab
      */
     protected static $getters = [
         'symbol' => 'getSymbol',
+        'last_trade_price' => 'getLastTradePrice',
         'bid_price' => 'getBidPrice',
         'ask_price' => 'getAskPrice',
-        'last_trade_price' => 'getLastTradePrice',
         'bid_size' => 'getBidSize',
         'ask_size' => 'getAskSize'
     ];
@@ -268,9 +268,9 @@ class SymbolsQuotesInner implements ModelInterface, ArrayAccess, \JsonSerializab
     public function __construct(array $data = null)
     {
         $this->setIfExists('symbol', $data ?? [], null);
+        $this->setIfExists('last_trade_price', $data ?? [], null);
         $this->setIfExists('bid_price', $data ?? [], null);
         $this->setIfExists('ask_price', $data ?? [], null);
-        $this->setIfExists('last_trade_price', $data ?? [], null);
         $this->setIfExists('bid_size', $data ?? [], null);
         $this->setIfExists('ask_size', $data ?? [], null);
     }
@@ -347,6 +347,35 @@ class SymbolsQuotesInner implements ModelInterface, ArrayAccess, \JsonSerializab
     }
 
     /**
+     * Gets last_trade_price
+     *
+     * @return float|null
+     */
+    public function getLastTradePrice()
+    {
+        return $this->container['last_trade_price'];
+    }
+
+    /**
+     * Sets last_trade_price
+     *
+     * @param float|null $last_trade_price The most recent trade price from the brokerage.
+     *
+     * @return self
+     */
+    public function setLastTradePrice($last_trade_price)
+    {
+
+        if (is_null($last_trade_price)) {
+            throw new \InvalidArgumentException('non-nullable last_trade_price cannot be null');
+        }
+
+        $this->container['last_trade_price'] = $last_trade_price;
+
+        return $this;
+    }
+
+    /**
      * Gets bid_price
      *
      * @return float|null
@@ -359,7 +388,7 @@ class SymbolsQuotesInner implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets bid_price
      *
-     * @param float|null $bid_price bid_price
+     * @param float|null $bid_price The most recent bid price from the brokerage.
      *
      * @return self
      */
@@ -388,7 +417,7 @@ class SymbolsQuotesInner implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets ask_price
      *
-     * @param float|null $ask_price ask_price
+     * @param float|null $ask_price The most recent price from the brokerage.
      *
      * @return self
      */
@@ -400,35 +429,6 @@ class SymbolsQuotesInner implements ModelInterface, ArrayAccess, \JsonSerializab
         }
 
         $this->container['ask_price'] = $ask_price;
-
-        return $this;
-    }
-
-    /**
-     * Gets last_trade_price
-     *
-     * @return float|null
-     */
-    public function getLastTradePrice()
-    {
-        return $this->container['last_trade_price'];
-    }
-
-    /**
-     * Sets last_trade_price
-     *
-     * @param float|null $last_trade_price last_trade_price
-     *
-     * @return self
-     */
-    public function setLastTradePrice($last_trade_price)
-    {
-
-        if (is_null($last_trade_price)) {
-            throw new \InvalidArgumentException('non-nullable last_trade_price cannot be null');
-        }
-
-        $this->container['last_trade_price'] = $last_trade_price;
 
         return $this;
     }
@@ -446,7 +446,7 @@ class SymbolsQuotesInner implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets bid_size
      *
-     * @param float|null $bid_size bid_size
+     * @param float|null $bid_size The most recent bid size from the brokerage.
      *
      * @return self
      */
@@ -475,7 +475,7 @@ class SymbolsQuotesInner implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets ask_size
      *
-     * @param float|null $ask_size ask_size
+     * @param float|null $ask_size The most recent ask size from the brokerage.
      *
      * @return self
      */

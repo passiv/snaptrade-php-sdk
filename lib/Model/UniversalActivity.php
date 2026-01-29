@@ -53,21 +53,21 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
     protected static $openAPITypes = [
         'id' => 'string',
         'account' => '\SnapTrade\Model\AccountSimple',
+        'symbol' => '\SnapTrade\Model\AccountUniversalActivitySymbol',
+        'option_symbol' => '\SnapTrade\Model\AccountUniversalActivityOptionSymbol',
+        'price' => 'float',
+        'units' => 'float',
         'amount' => 'float',
-        'currency' => '\SnapTrade\Model\Currency',
+        'currency' => '\SnapTrade\Model\AccountUniversalActivityCurrency',
+        'type' => 'string',
+        'option_type' => 'string',
         'description' => 'string',
+        'trade_date' => '\DateTime',
+        'settlement_date' => '\DateTime',
         'fee' => 'float',
         'fx_rate' => 'float',
         'institution' => 'string',
-        'option_type' => 'string',
-        'price' => 'float',
-        'settlement_date' => 'string',
-        'external_reference_id' => 'string',
-        'symbol' => '\SnapTrade\Model\Symbol',
-        'option_symbol' => '\SnapTrade\Model\OptionsSymbol',
-        'trade_date' => 'string',
-        'type' => 'string',
-        'units' => 'float'
+        'external_reference_id' => 'string'
     ];
 
     /**
@@ -80,21 +80,21 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
     protected static $openAPIFormats = [
         'id' => null,
         'account' => null,
+        'symbol' => null,
+        'option_symbol' => null,
+        'price' => null,
+        'units' => null,
         'amount' => null,
         'currency' => null,
+        'type' => null,
+        'option_type' => null,
         'description' => null,
+        'trade_date' => 'date-time',
+        'settlement_date' => 'date-time',
         'fee' => null,
         'fx_rate' => null,
         'institution' => null,
-        'option_type' => null,
-        'price' => null,
-        'settlement_date' => null,
-        'external_reference_id' => null,
-        'symbol' => null,
-        'option_symbol' => null,
-        'trade_date' => null,
-        'type' => null,
-        'units' => null
+        'external_reference_id' => null
     ];
 
     /**
@@ -105,21 +105,21 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
     protected static array $openAPINullables = [
         'id' => false,
 		'account' => false,
+		'symbol' => true,
+		'option_symbol' => true,
+		'price' => false,
+		'units' => false,
 		'amount' => true,
 		'currency' => false,
+		'type' => false,
+		'option_type' => false,
 		'description' => false,
+		'trade_date' => true,
+		'settlement_date' => false,
 		'fee' => false,
 		'fx_rate' => true,
 		'institution' => false,
-		'option_type' => false,
-		'price' => false,
-		'settlement_date' => false,
-		'external_reference_id' => true,
-		'symbol' => false,
-		'option_symbol' => false,
-		'trade_date' => true,
-		'type' => false,
-		'units' => false
+		'external_reference_id' => true
     ];
 
     /**
@@ -210,21 +210,21 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
     protected static $attributeMap = [
         'id' => 'id',
         'account' => 'account',
+        'symbol' => 'symbol',
+        'option_symbol' => 'option_symbol',
+        'price' => 'price',
+        'units' => 'units',
         'amount' => 'amount',
         'currency' => 'currency',
+        'type' => 'type',
+        'option_type' => 'option_type',
         'description' => 'description',
+        'trade_date' => 'trade_date',
+        'settlement_date' => 'settlement_date',
         'fee' => 'fee',
         'fx_rate' => 'fx_rate',
         'institution' => 'institution',
-        'option_type' => 'option_type',
-        'price' => 'price',
-        'settlement_date' => 'settlement_date',
-        'external_reference_id' => 'external_reference_id',
-        'symbol' => 'symbol',
-        'option_symbol' => 'option_symbol',
-        'trade_date' => 'trade_date',
-        'type' => 'type',
-        'units' => 'units'
+        'external_reference_id' => 'external_reference_id'
     ];
 
     /**
@@ -235,21 +235,21 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
     protected static $setters = [
         'id' => 'setId',
         'account' => 'setAccount',
+        'symbol' => 'setSymbol',
+        'option_symbol' => 'setOptionSymbol',
+        'price' => 'setPrice',
+        'units' => 'setUnits',
         'amount' => 'setAmount',
         'currency' => 'setCurrency',
+        'type' => 'setType',
+        'option_type' => 'setOptionType',
         'description' => 'setDescription',
+        'trade_date' => 'setTradeDate',
+        'settlement_date' => 'setSettlementDate',
         'fee' => 'setFee',
         'fx_rate' => 'setFxRate',
         'institution' => 'setInstitution',
-        'option_type' => 'setOptionType',
-        'price' => 'setPrice',
-        'settlement_date' => 'setSettlementDate',
-        'external_reference_id' => 'setExternalReferenceId',
-        'symbol' => 'setSymbol',
-        'option_symbol' => 'setOptionSymbol',
-        'trade_date' => 'setTradeDate',
-        'type' => 'setType',
-        'units' => 'setUnits'
+        'external_reference_id' => 'setExternalReferenceId'
     ];
 
     /**
@@ -260,21 +260,21 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
     protected static $getters = [
         'id' => 'getId',
         'account' => 'getAccount',
+        'symbol' => 'getSymbol',
+        'option_symbol' => 'getOptionSymbol',
+        'price' => 'getPrice',
+        'units' => 'getUnits',
         'amount' => 'getAmount',
         'currency' => 'getCurrency',
+        'type' => 'getType',
+        'option_type' => 'getOptionType',
         'description' => 'getDescription',
+        'trade_date' => 'getTradeDate',
+        'settlement_date' => 'getSettlementDate',
         'fee' => 'getFee',
         'fx_rate' => 'getFxRate',
         'institution' => 'getInstitution',
-        'option_type' => 'getOptionType',
-        'price' => 'getPrice',
-        'settlement_date' => 'getSettlementDate',
-        'external_reference_id' => 'getExternalReferenceId',
-        'symbol' => 'getSymbol',
-        'option_symbol' => 'getOptionSymbol',
-        'trade_date' => 'getTradeDate',
-        'type' => 'getType',
-        'units' => 'getUnits'
+        'external_reference_id' => 'getExternalReferenceId'
     ];
 
     /**
@@ -336,21 +336,21 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
     {
         $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('account', $data ?? [], null);
+        $this->setIfExists('symbol', $data ?? [], null);
+        $this->setIfExists('option_symbol', $data ?? [], null);
+        $this->setIfExists('price', $data ?? [], null);
+        $this->setIfExists('units', $data ?? [], null);
         $this->setIfExists('amount', $data ?? [], null);
         $this->setIfExists('currency', $data ?? [], null);
+        $this->setIfExists('type', $data ?? [], null);
+        $this->setIfExists('option_type', $data ?? [], null);
         $this->setIfExists('description', $data ?? [], null);
+        $this->setIfExists('trade_date', $data ?? [], null);
+        $this->setIfExists('settlement_date', $data ?? [], null);
         $this->setIfExists('fee', $data ?? [], null);
         $this->setIfExists('fx_rate', $data ?? [], null);
         $this->setIfExists('institution', $data ?? [], null);
-        $this->setIfExists('option_type', $data ?? [], null);
-        $this->setIfExists('price', $data ?? [], null);
-        $this->setIfExists('settlement_date', $data ?? [], null);
         $this->setIfExists('external_reference_id', $data ?? [], null);
-        $this->setIfExists('symbol', $data ?? [], null);
-        $this->setIfExists('option_symbol', $data ?? [], null);
-        $this->setIfExists('trade_date', $data ?? [], null);
-        $this->setIfExists('type', $data ?? [], null);
-        $this->setIfExists('units', $data ?? [], null);
     }
 
     /**
@@ -408,7 +408,7 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets id
      *
-     * @param string|null $id id
+     * @param string|null $id Unique identifier for the transaction. This is the ID used to reference the transaction in SnapTrade.  Please note that this ID _can_ change if the transaction is deleted and re-added. Under normal circumstances, SnapTrade does not delete transactions. The only time this would happen is if SnapTrade re-fetches and reprocesses the data from the brokerage, which is rare. If you require a stable ID, please let us know and we can work with you to provide one.
      *
      * @return self
      */
@@ -454,6 +454,136 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
     }
 
     /**
+     * Gets symbol
+     *
+     * @return \SnapTrade\Model\AccountUniversalActivitySymbol|null
+     */
+    public function getSymbol()
+    {
+        return $this->container['symbol'];
+    }
+
+    /**
+     * Sets symbol
+     *
+     * @param \SnapTrade\Model\AccountUniversalActivitySymbol|null $symbol symbol
+     *
+     * @return self
+     */
+    public function setSymbol($symbol)
+    {
+
+        if (is_null($symbol)) {
+            array_push($this->openAPINullablesSetToNull, 'symbol');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('symbol', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['symbol'] = $symbol;
+
+        return $this;
+    }
+
+    /**
+     * Gets option_symbol
+     *
+     * @return \SnapTrade\Model\AccountUniversalActivityOptionSymbol|null
+     */
+    public function getOptionSymbol()
+    {
+        return $this->container['option_symbol'];
+    }
+
+    /**
+     * Sets option_symbol
+     *
+     * @param \SnapTrade\Model\AccountUniversalActivityOptionSymbol|null $option_symbol option_symbol
+     *
+     * @return self
+     */
+    public function setOptionSymbol($option_symbol)
+    {
+
+        if (is_null($option_symbol)) {
+            array_push($this->openAPINullablesSetToNull, 'option_symbol');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('option_symbol', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['option_symbol'] = $option_symbol;
+
+        return $this;
+    }
+
+    /**
+     * Gets price
+     *
+     * @return float|null
+     */
+    public function getPrice()
+    {
+        return $this->container['price'];
+    }
+
+    /**
+     * Sets price
+     *
+     * @param float|null $price The price of the security for the transaction. This is mostly applicable to `BUY`, `SELL`, and `DIVIDEND` transactions.
+     *
+     * @return self
+     */
+    public function setPrice($price)
+    {
+
+        if (is_null($price)) {
+            throw new \InvalidArgumentException('non-nullable price cannot be null');
+        }
+
+        $this->container['price'] = $price;
+
+        return $this;
+    }
+
+    /**
+     * Gets units
+     *
+     * @return float|null
+     */
+    public function getUnits()
+    {
+        return $this->container['units'];
+    }
+
+    /**
+     * Sets units
+     *
+     * @param float|null $units The number of units of the security for the transaction. This is mostly applicable to `BUY`, `SELL`, and `DIVIDEND` transactions.
+     *
+     * @return self
+     */
+    public function setUnits($units)
+    {
+
+        if (is_null($units)) {
+            throw new \InvalidArgumentException('non-nullable units cannot be null');
+        }
+
+        $this->container['units'] = $units;
+
+        return $this;
+    }
+
+    /**
      * Gets amount
      *
      * @return float|null
@@ -466,7 +596,7 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets amount
      *
-     * @param float|null $amount amount
+     * @param float|null $amount The amount of the transaction denominated in `currency`. This can be positive or negative. In general, transactions that positively affect the account balance (like sell, deposits, dividends, etc) will have a positive amount, while transactions that negatively affect the account balance (like buy, withdrawals, fees, etc) will have a negative amount.
      *
      * @return self
      */
@@ -492,7 +622,7 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Gets currency
      *
-     * @return \SnapTrade\Model\Currency|null
+     * @return \SnapTrade\Model\AccountUniversalActivityCurrency|null
      */
     public function getCurrency()
     {
@@ -502,7 +632,7 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets currency
      *
-     * @param \SnapTrade\Model\Currency|null $currency currency
+     * @param \SnapTrade\Model\AccountUniversalActivityCurrency|null $currency currency
      *
      * @return self
      */
@@ -514,6 +644,64 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
         }
 
         $this->container['currency'] = $currency;
+
+        return $this;
+    }
+
+    /**
+     * Gets type
+     *
+     * @return string|null
+     */
+    public function getType()
+    {
+        return $this->container['type'];
+    }
+
+    /**
+     * Sets type
+     *
+     * @param string|null $type A string representing the type of transaction. SnapTrade does a best effort to categorize the brokerage transaction types into a common set of values. Here are some of the most popular values:   - `BUY` - Asset bought.   - `SELL` - Asset sold.   - `DIVIDEND` - Dividend payout.   - `CONTRIBUTION` - Cash contribution.   - `WITHDRAWAL` - Cash withdrawal.   - `REI` - Dividend reinvestment.   - `INTEREST` - Interest deposited into the account.   - `FEE` - Fee withdrawn from the account.   - `OPTIONEXPIRATION` - Option expiration event. `option_symbol` contains the related option contract info.   - `OPTIONASSIGNMENT` - Option assignment event. `option_symbol` contains the related option contract info.   - `OPTIONEXERCISE` - Option exercise event. `option_symbol` contains the related option contract info.
+     *
+     * @return self
+     */
+    public function setType($type)
+    {
+
+        if (is_null($type)) {
+            throw new \InvalidArgumentException('non-nullable type cannot be null');
+        }
+
+        $this->container['type'] = $type;
+
+        return $this;
+    }
+
+    /**
+     * Gets option_type
+     *
+     * @return string|null
+     */
+    public function getOptionType()
+    {
+        return $this->container['option_type'];
+    }
+
+    /**
+     * Sets option_type
+     *
+     * @param string|null $option_type If an option `BUY` or `SELL` transaction, this further specifies the type of action. The possible values are: - BUY_TO_OPEN - BUY_TO_CLOSE - SELL_TO_OPEN - SELL_TO_CLOSE
+     *
+     * @return self
+     */
+    public function setOptionType($option_type)
+    {
+
+        if (is_null($option_type)) {
+            throw new \InvalidArgumentException('non-nullable option_type cannot be null');
+        }
+
+        $this->container['option_type'] = $option_type;
 
         return $this;
     }
@@ -531,7 +719,7 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets description
      *
-     * @param string|null $description description
+     * @param string|null $description A human-readable description of the transaction. This is usually the brokerage's description of the transaction.
      *
      * @return self
      */
@@ -543,6 +731,71 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
         }
 
         $this->container['description'] = $description;
+
+        return $this;
+    }
+
+    /**
+     * Gets trade_date
+     *
+     * @return \DateTime|null
+     */
+    public function getTradeDate()
+    {
+        return $this->container['trade_date'];
+    }
+
+    /**
+     * Sets trade_date
+     *
+     * @param \DateTime|null $trade_date The recorded time for the transaction. The granularity of this timestamp depends on the brokerage. Some brokerages provide the exact time of the transaction, while others provide only the date. Please check the [integrations page](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=6fab8012ade6441fa0c6d9af9c55ce3a) for the specific brokerage to see the granularity of the timestamps. Note that even though the field is named `trade_date`, it can represent any type of transaction, not just trades.
+     *
+     * @return self
+     */
+    public function setTradeDate($trade_date)
+    {
+
+        if (is_null($trade_date)) {
+            array_push($this->openAPINullablesSetToNull, 'trade_date');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('trade_date', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['trade_date'] = $trade_date;
+
+        return $this;
+    }
+
+    /**
+     * Gets settlement_date
+     *
+     * @return \DateTime|null
+     */
+    public function getSettlementDate()
+    {
+        return $this->container['settlement_date'];
+    }
+
+    /**
+     * Sets settlement_date
+     *
+     * @param \DateTime|null $settlement_date The date on which the transaction is settled.
+     *
+     * @return self
+     */
+    public function setSettlementDate($settlement_date)
+    {
+
+        if (is_null($settlement_date)) {
+            throw new \InvalidArgumentException('non-nullable settlement_date cannot be null');
+        }
+
+        $this->container['settlement_date'] = $settlement_date;
 
         return $this;
     }
@@ -560,7 +813,7 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets fee
      *
-     * @param float|null $fee fee
+     * @param float|null $fee Any fee associated with the transaction if provided by the brokerage.
      *
      * @return self
      */
@@ -625,7 +878,7 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets institution
      *
-     * @param string|null $institution institution
+     * @param string|null $institution The institution that the transaction is associated with. This is usually the brokerage name.
      *
      * @return self
      */
@@ -637,93 +890,6 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
         }
 
         $this->container['institution'] = $institution;
-
-        return $this;
-    }
-
-    /**
-     * Gets option_type
-     *
-     * @return string|null
-     */
-    public function getOptionType()
-    {
-        return $this->container['option_type'];
-    }
-
-    /**
-     * Sets option_type
-     *
-     * @param string|null $option_type If an option transaction, then it's type (BUY_TO_OPEN, SELL_TO_CLOSE, etc), otherwise empty string
-     *
-     * @return self
-     */
-    public function setOptionType($option_type)
-    {
-
-        if (is_null($option_type)) {
-            throw new \InvalidArgumentException('non-nullable option_type cannot be null');
-        }
-
-        $this->container['option_type'] = $option_type;
-
-        return $this;
-    }
-
-    /**
-     * Gets price
-     *
-     * @return float|null
-     */
-    public function getPrice()
-    {
-        return $this->container['price'];
-    }
-
-    /**
-     * Sets price
-     *
-     * @param float|null $price price
-     *
-     * @return self
-     */
-    public function setPrice($price)
-    {
-
-        if (is_null($price)) {
-            throw new \InvalidArgumentException('non-nullable price cannot be null');
-        }
-
-        $this->container['price'] = $price;
-
-        return $this;
-    }
-
-    /**
-     * Gets settlement_date
-     *
-     * @return string|null
-     */
-    public function getSettlementDate()
-    {
-        return $this->container['settlement_date'];
-    }
-
-    /**
-     * Sets settlement_date
-     *
-     * @param string|null $settlement_date settlement_date
-     *
-     * @return self
-     */
-    public function setSettlementDate($settlement_date)
-    {
-
-        if (is_null($settlement_date)) {
-            throw new \InvalidArgumentException('non-nullable settlement_date cannot be null');
-        }
-
-        $this->container['settlement_date'] = $settlement_date;
 
         return $this;
     }
@@ -741,7 +907,7 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets external_reference_id
      *
-     * @param string|null $external_reference_id Reference ID from brokerage used to identify related transactions. For example if an order comprises of several transactions (buy, fee, fx), they can be grouped if they share the same external_reference_id
+     * @param string|null $external_reference_id Reference ID from brokerage used to identify related transactions. For example if an order comprises of several transactions (buy, fee, fx), they can be grouped if they share the same `external_reference_id`
      *
      * @return self
      */
@@ -760,158 +926,6 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
         }
 
         $this->container['external_reference_id'] = $external_reference_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets symbol
-     *
-     * @return \SnapTrade\Model\Symbol|null
-     */
-    public function getSymbol()
-    {
-        return $this->container['symbol'];
-    }
-
-    /**
-     * Sets symbol
-     *
-     * @param \SnapTrade\Model\Symbol|null $symbol symbol
-     *
-     * @return self
-     */
-    public function setSymbol($symbol)
-    {
-
-        if (is_null($symbol)) {
-            throw new \InvalidArgumentException('non-nullable symbol cannot be null');
-        }
-
-        $this->container['symbol'] = $symbol;
-
-        return $this;
-    }
-
-    /**
-     * Gets option_symbol
-     *
-     * @return \SnapTrade\Model\OptionsSymbol|null
-     */
-    public function getOptionSymbol()
-    {
-        return $this->container['option_symbol'];
-    }
-
-    /**
-     * Sets option_symbol
-     *
-     * @param \SnapTrade\Model\OptionsSymbol|null $option_symbol option_symbol
-     *
-     * @return self
-     */
-    public function setOptionSymbol($option_symbol)
-    {
-
-        if (is_null($option_symbol)) {
-            throw new \InvalidArgumentException('non-nullable option_symbol cannot be null');
-        }
-
-        $this->container['option_symbol'] = $option_symbol;
-
-        return $this;
-    }
-
-    /**
-     * Gets trade_date
-     *
-     * @return string|null
-     */
-    public function getTradeDate()
-    {
-        return $this->container['trade_date'];
-    }
-
-    /**
-     * Sets trade_date
-     *
-     * @param string|null $trade_date trade_date
-     *
-     * @return self
-     */
-    public function setTradeDate($trade_date)
-    {
-
-        if (is_null($trade_date)) {
-            array_push($this->openAPINullablesSetToNull, 'trade_date');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('trade_date', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['trade_date'] = $trade_date;
-
-        return $this;
-    }
-
-    /**
-     * Gets type
-     *
-     * @return string|null
-     */
-    public function getType()
-    {
-        return $this->container['type'];
-    }
-
-    /**
-     * Sets type
-     *
-     * @param string|null $type Potential values include (but are not limited to) - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT
-     *
-     * @return self
-     */
-    public function setType($type)
-    {
-
-        if (is_null($type)) {
-            throw new \InvalidArgumentException('non-nullable type cannot be null');
-        }
-
-        $this->container['type'] = $type;
-
-        return $this;
-    }
-
-    /**
-     * Gets units
-     *
-     * @return float|null
-     */
-    public function getUnits()
-    {
-        return $this->container['units'];
-    }
-
-    /**
-     * Sets units
-     *
-     * @param float|null $units Usually but not necessarily an integer
-     *
-     * @return self
-     */
-    public function setUnits($units)
-    {
-
-        if (is_null($units)) {
-            throw new \InvalidArgumentException('non-nullable units cannot be null');
-        }
-
-        $this->container['units'] = $units;
 
         return $this;
     }

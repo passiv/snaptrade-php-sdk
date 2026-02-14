@@ -125,4 +125,13 @@ class TaxLotTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "lot_id"
+     */
+    public function testPropertyLotId()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

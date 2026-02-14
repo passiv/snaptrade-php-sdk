@@ -56,7 +56,8 @@ class TaxLot implements ModelInterface, ArrayAccess, \JsonSerializable
         'purchased_price' => 'string',
         'cost_basis' => 'string',
         'current_value' => 'string',
-        'position_type' => 'string'
+        'position_type' => 'string',
+        'lot_id' => 'string'
     ];
 
     /**
@@ -72,7 +73,8 @@ class TaxLot implements ModelInterface, ArrayAccess, \JsonSerializable
         'purchased_price' => null,
         'cost_basis' => null,
         'current_value' => null,
-        'position_type' => null
+        'position_type' => null,
+        'lot_id' => null
     ];
 
     /**
@@ -86,7 +88,8 @@ class TaxLot implements ModelInterface, ArrayAccess, \JsonSerializable
 		'purchased_price' => true,
 		'cost_basis' => true,
 		'current_value' => true,
-		'position_type' => true
+		'position_type' => true,
+		'lot_id' => true
     ];
 
     /**
@@ -180,7 +183,8 @@ class TaxLot implements ModelInterface, ArrayAccess, \JsonSerializable
         'purchased_price' => 'purchased_price',
         'cost_basis' => 'cost_basis',
         'current_value' => 'current_value',
-        'position_type' => 'position_type'
+        'position_type' => 'position_type',
+        'lot_id' => 'lot_id'
     ];
 
     /**
@@ -194,7 +198,8 @@ class TaxLot implements ModelInterface, ArrayAccess, \JsonSerializable
         'purchased_price' => 'setPurchasedPrice',
         'cost_basis' => 'setCostBasis',
         'current_value' => 'setCurrentValue',
-        'position_type' => 'setPositionType'
+        'position_type' => 'setPositionType',
+        'lot_id' => 'setLotId'
     ];
 
     /**
@@ -208,7 +213,8 @@ class TaxLot implements ModelInterface, ArrayAccess, \JsonSerializable
         'purchased_price' => 'getPurchasedPrice',
         'cost_basis' => 'getCostBasis',
         'current_value' => 'getCurrentValue',
-        'position_type' => 'getPositionType'
+        'position_type' => 'getPositionType',
+        'lot_id' => 'getLotId'
     ];
 
     /**
@@ -274,6 +280,7 @@ class TaxLot implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('cost_basis', $data ?? [], null);
         $this->setIfExists('current_value', $data ?? [], null);
         $this->setIfExists('position_type', $data ?? [], null);
+        $this->setIfExists('lot_id', $data ?? [], null);
     }
 
     /**
@@ -530,6 +537,42 @@ class TaxLot implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['position_type'] = $position_type;
+
+        return $this;
+    }
+
+    /**
+     * Gets lot_id
+     *
+     * @return string|null
+     */
+    public function getLotId()
+    {
+        return $this->container['lot_id'];
+    }
+
+    /**
+     * Sets lot_id
+     *
+     * @param string|null $lot_id The unique id for this specific tax lot
+     *
+     * @return self
+     */
+    public function setLotId($lot_id)
+    {
+
+        if (is_null($lot_id)) {
+            array_push($this->openAPINullablesSetToNull, 'lot_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('lot_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['lot_id'] = $lot_id;
 
         return $this;
     }

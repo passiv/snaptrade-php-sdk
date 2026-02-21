@@ -95,6 +95,18 @@ class TradingApiTest extends TestCase
     }
 
     /**
+     * Test case for getOptionImpact
+     *
+     * Get option order impact.
+     *
+     */
+    public function testGetOptionImpact()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for getOrderImpact
      *
      * Check equity order impact.

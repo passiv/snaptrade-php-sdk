@@ -66,6 +66,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.trading.cancelOrder`](#snaptradetradingcancelorder)
   * [`snaptrade.trading.cancelUserAccountOrder`](#snaptradetradingcanceluseraccountorder)
   * [`snaptrade.trading.getCryptocurrencyPairQuote`](#snaptradetradinggetcryptocurrencypairquote)
+  * [`snaptrade.trading.getOptionImpact`](#snaptradetradinggetoptionimpact)
   * [`snaptrade.trading.getOrderImpact`](#snaptradetradinggetorderimpact)
   * [`snaptrade.trading.getUserAccountQuotes`](#snaptradetradinggetuseraccountquotes)
   * [`snaptrade.trading.placeBracketOrder`](#snaptradetradingplacebracketorder)
@@ -1923,6 +1924,76 @@ $result = $snaptrade->trading->getCryptocurrencyPairQuote(
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.trading.getOptionImpact`<a id="snaptradetradinggetoptionimpact"></a>
+
+Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it.
+Only supported for certain brokerages. Please refer to https://snaptrade.notion.site/brokerages for more information on brokerage trading support.
+
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $snaptrade->trading->getOptionImpact(
+    order_type: "MARKET", 
+    time_in_force: "Day", 
+    legs: [
+        [
+            "instrument" => [
+                "symbol" => "PBI   250718C00006000",
+                "instrument_type" => "OPTION",
+            ],
+            "action" => "BUY_TO_OPEN",
+            "units" => 1,
+        ]
+    ], 
+    user_id: "snaptrade-user-123", 
+    user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61", 
+    account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631", 
+    limit_price: "", 
+    stop_price: "", 
+    price_effect: "DEBIT"
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### order_type:<a id="order_type"></a>
+
+##### time_in_force:<a id="time_in_force"></a>
+
+##### legs: [`MlegLeg`](./lib/Model/MlegLeg.php)[]<a id="legs-mlegleglibmodelmleglegphp"></a>
+
+##### user_id: `string`<a id="user_id-string"></a>
+
+##### user_secret: `string`<a id="user_secret-string"></a>
+
+##### account_id: `string`<a id="account_id-string"></a>
+
+##### limit_price: `float`<a id="limit_price-float"></a>
+
+The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT.
+
+##### stop_price: `float`<a id="stop_price-float"></a>
+
+The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
+
+##### price_effect: [`MlegPriceEffectStrict`](./lib/Model/MlegPriceEffectStrict.php)<a id="price_effect-mlegpriceeffectstrictlibmodelmlegpriceeffectstrictphp"></a>
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[**OptionImpact**](./lib/Model/OptionImpact.php)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/options/impact` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

@@ -71,6 +71,9 @@ class TradingApi extends \SnapTrade\CustomApi
         'getCryptocurrencyPairQuote' => [
             'application/json',
         ],
+        'getOptionImpact' => [
+            'application/json',
+        ],
         'getOrderImpact' => [
             'application/json',
         ],
@@ -1555,6 +1558,509 @@ class TradingApi extends \SnapTrade\CustomApi
         );
 
         $method = 'GET';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
+    }
+
+    /**
+     * Operation getOptionImpact
+     *
+     * Get option order impact
+     *
+     * Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it. Only supported for certain brokerages. Please refer to https://snaptrade.notion.site/brokerages for more information on brokerage trading support.
+     *
+     * @param  string $user_id user_id (required)
+     * @param  string $user_secret user_secret (required)
+     * @param  string $account_id account_id (required)
+     * @param  \SnapTrade\Model\MlegTradeForm $mleg_trade_form mleg_trade_form (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOptionImpact'] to see the possible values for this operation
+     *
+     * @throws \SnapTrade\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SnapTrade\Model\OptionImpact|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\Model403FailedRequestResponse
+     */
+    public function getOptionImpact(
+
+        $order_type,
+        $time_in_force,
+        $legs,
+        $user_id,
+        $user_secret,
+        $account_id,
+        $limit_price = SENTINEL_VALUE,
+        $stop_price = SENTINEL_VALUE,
+        $price_effect = SENTINEL_VALUE,
+        string $contentType = self::contentTypes['getOptionImpact'][0]
+    )
+    {
+        $_body = [];
+        $this->setRequestBodyProperty($_body, "order_type", $order_type);
+        $this->setRequestBodyProperty($_body, "time_in_force", $time_in_force);
+        $this->setRequestBodyProperty($_body, "limit_price", $limit_price);
+        $this->setRequestBodyProperty($_body, "stop_price", $stop_price);
+        $this->setRequestBodyProperty($_body, "price_effect", $price_effect);
+        $this->setRequestBodyProperty($_body, "legs", $legs);
+        $mleg_trade_form = $_body;
+
+        list($response) = $this->getOptionImpactWithHttpInfo($user_id, $user_secret, $account_id, $mleg_trade_form, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation getOptionImpactWithHttpInfo
+     *
+     * Get option order impact
+     *
+     * Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it. Only supported for certain brokerages. Please refer to https://snaptrade.notion.site/brokerages for more information on brokerage trading support.
+     *
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
+     * @param  string $account_id (required)
+     * @param  \SnapTrade\Model\MlegTradeForm $mleg_trade_form (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOptionImpact'] to see the possible values for this operation
+     *
+     * @throws \SnapTrade\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SnapTrade\Model\OptionImpact|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\Model403FailedRequestResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getOptionImpactWithHttpInfo($user_id, $user_secret, $account_id, $mleg_trade_form, string $contentType = self::contentTypes['getOptionImpact'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    {
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getOptionImpactRequest($user_id, $user_secret, $account_id, $mleg_trade_form, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                if (
+                    ($e->getCode() == 401 || $e->getCode() == 403) &&
+                    !empty($this->getConfig()->getAccessToken()) &&
+                    $requestOptions->shouldRetryOAuth()
+                ) {
+                    return $this->getOptionImpactWithHttpInfo(
+                        $user_id,
+                        $user_secret,
+                        $account_id,
+                        $mleg_trade_form,
+                        $contentType,
+                        $requestOptions->setRetryOAuth(false)
+                    );
+                }
+
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('\SnapTrade\Model\OptionImpact' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\SnapTrade\Model\OptionImpact' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\OptionImpact', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if ('\SnapTrade\Model\Model400FailedRequestResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\SnapTrade\Model\Model400FailedRequestResponse' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\Model400FailedRequestResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 403:
+                    if ('\SnapTrade\Model\Model403FailedRequestResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\SnapTrade\Model\Model403FailedRequestResponse' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\Model403FailedRequestResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\SnapTrade\Model\OptionImpact';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SnapTrade\Model\OptionImpact',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SnapTrade\Model\Model400FailedRequestResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 403:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SnapTrade\Model\Model403FailedRequestResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getOptionImpactAsync
+     *
+     * Get option order impact
+     *
+     * Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it. Only supported for certain brokerages. Please refer to https://snaptrade.notion.site/brokerages for more information on brokerage trading support.
+     *
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
+     * @param  string $account_id (required)
+     * @param  \SnapTrade\Model\MlegTradeForm $mleg_trade_form (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOptionImpact'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getOptionImpactAsync(
+
+        $order_type,
+        $time_in_force,
+        $legs,
+        $user_id,
+        $user_secret,
+        $account_id,
+        $limit_price = SENTINEL_VALUE,
+        $stop_price = SENTINEL_VALUE,
+        $price_effect = SENTINEL_VALUE,
+        string $contentType = self::contentTypes['getOptionImpact'][0]
+    )
+    {
+        $_body = [];
+        $this->setRequestBodyProperty($_body, "order_type", $order_type);
+        $this->setRequestBodyProperty($_body, "time_in_force", $time_in_force);
+        $this->setRequestBodyProperty($_body, "limit_price", $limit_price);
+        $this->setRequestBodyProperty($_body, "stop_price", $stop_price);
+        $this->setRequestBodyProperty($_body, "price_effect", $price_effect);
+        $this->setRequestBodyProperty($_body, "legs", $legs);
+        $mleg_trade_form = $_body;
+
+        return $this->getOptionImpactAsyncWithHttpInfo($user_id, $user_secret, $account_id, $mleg_trade_form, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getOptionImpactAsyncWithHttpInfo
+     *
+     * Get option order impact
+     *
+     * Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it. Only supported for certain brokerages. Please refer to https://snaptrade.notion.site/brokerages for more information on brokerage trading support.
+     *
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
+     * @param  string $account_id (required)
+     * @param  \SnapTrade\Model\MlegTradeForm $mleg_trade_form (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOptionImpact'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getOptionImpactAsyncWithHttpInfo($user_id, $user_secret, $account_id, $mleg_trade_form, string $contentType = self::contentTypes['getOptionImpact'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    {
+        $returnType = '\SnapTrade\Model\OptionImpact';
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getOptionImpactRequest($user_id, $user_secret, $account_id, $mleg_trade_form, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getOptionImpact'
+     *
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
+     * @param  string $account_id (required)
+     * @param  \SnapTrade\Model\MlegTradeForm $mleg_trade_form (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOptionImpact'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function getOptionImpactRequest($user_id, $user_secret, $account_id, $mleg_trade_form, string $contentType = self::contentTypes['getOptionImpact'][0])
+    {
+
+        // Check if $user_id is a string
+        if ($user_id !== SENTINEL_VALUE && !is_string($user_id)) {
+            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_id, true), gettype($user_id)));
+        }
+        // verify the required parameter 'user_id' is set
+        if ($user_id === SENTINEL_VALUE || (is_array($user_id) && count($user_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter user_id when calling getOptionImpact'
+            );
+        }
+        // Check if $user_secret is a string
+        if ($user_secret !== SENTINEL_VALUE && !is_string($user_secret)) {
+            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
+        }
+        // verify the required parameter 'user_secret' is set
+        if ($user_secret === SENTINEL_VALUE || (is_array($user_secret) && count($user_secret) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter user_secret when calling getOptionImpact'
+            );
+        }
+        // Check if $account_id is a string
+        if ($account_id !== SENTINEL_VALUE && !is_string($account_id)) {
+            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($account_id, true), gettype($account_id)));
+        }
+        // verify the required parameter 'account_id' is set
+        if ($account_id === SENTINEL_VALUE || (is_array($account_id) && count($account_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter account_id when calling getOptionImpact'
+            );
+        }
+        if ($mleg_trade_form !== SENTINEL_VALUE) {
+            if (!($mleg_trade_form instanceof \SnapTrade\Model\MlegTradeForm)) {
+                if (!is_array($mleg_trade_form))
+                    throw new \InvalidArgumentException('"mleg_trade_form" must be associative array or an instance of \SnapTrade\Model\MlegTradeForm TradingApi.getOptionImpact.');
+                else
+                    $mleg_trade_form = new \SnapTrade\Model\MlegTradeForm($mleg_trade_form);
+            }
+        }
+        // verify the required parameter 'mleg_trade_form' is set
+        if ($mleg_trade_form === SENTINEL_VALUE || (is_array($mleg_trade_form) && count($mleg_trade_form) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter mleg_trade_form when calling getOptionImpact'
+            );
+        }
+
+
+        $resourcePath = '/accounts/{accountId}/trading/options/impact';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        if ($user_id !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_id,
+                'userId', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
+        if ($user_secret !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_secret,
+                'userSecret', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
+
+
+        // path params
+        if ($account_id !== SENTINEL_VALUE) {
+            $resourcePath = str_replace(
+                '{' . 'accountId' . '}',
+                ObjectSerializer::toPathValue($account_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($mleg_trade_form)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($mleg_trade_form));
+            } else {
+                $httpBody = $mleg_trade_form;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('clientId');
+        if ($apiKey !== null) {
+            $queryParams['clientId'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Signature');
+        if ($apiKey !== null) {
+            $headers['Signature'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('timestamp');
+        if ($apiKey !== null) {
+            $queryParams['timestamp'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $method = 'POST';
         $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();

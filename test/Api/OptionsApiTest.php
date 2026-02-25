@@ -59,6 +59,18 @@ class OptionsApiTest extends TestCase
     }
 
     /**
+     * Test case for getOptionQuote
+     *
+     * Get option quote.
+     *
+     */
+    public function testGetOptionQuote()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for getOptionsChain
      *
      * Get the options chain for a symbol.

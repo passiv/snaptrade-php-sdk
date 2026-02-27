@@ -54,6 +54,7 @@ class AccountSimple implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'string',
         'name' => 'string',
         'number' => 'string',
+        'institution_account_id' => 'string',
         'sync_status' => '\SnapTrade\Model\AccountSyncStatus'
     ];
 
@@ -68,6 +69,7 @@ class AccountSimple implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'uuid',
         'name' => null,
         'number' => null,
+        'institution_account_id' => null,
         'sync_status' => null
     ];
 
@@ -80,6 +82,7 @@ class AccountSimple implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => false,
 		'name' => false,
 		'number' => false,
+		'institution_account_id' => true,
 		'sync_status' => false
     ];
 
@@ -172,6 +175,7 @@ class AccountSimple implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'id',
         'name' => 'name',
         'number' => 'number',
+        'institution_account_id' => 'institution_account_id',
         'sync_status' => 'sync_status'
     ];
 
@@ -184,6 +188,7 @@ class AccountSimple implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'setId',
         'name' => 'setName',
         'number' => 'setNumber',
+        'institution_account_id' => 'setInstitutionAccountId',
         'sync_status' => 'setSyncStatus'
     ];
 
@@ -196,6 +201,7 @@ class AccountSimple implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'getId',
         'name' => 'getName',
         'number' => 'getNumber',
+        'institution_account_id' => 'getInstitutionAccountId',
         'sync_status' => 'getSyncStatus'
     ];
 
@@ -259,6 +265,7 @@ class AccountSimple implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('number', $data ?? [], null);
+        $this->setIfExists('institution_account_id', $data ?? [], null);
         $this->setIfExists('sync_status', $data ?? [], null);
     }
 
@@ -387,6 +394,42 @@ class AccountSimple implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['number'] = $number;
+
+        return $this;
+    }
+
+    /**
+     * Gets institution_account_id
+     *
+     * @return string|null
+     */
+    public function getInstitutionAccountId()
+    {
+        return $this->container['institution_account_id'];
+    }
+
+    /**
+     * Sets institution_account_id
+     *
+     * @param string|null $institution_account_id A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same brokerage account across multiple connections.
+     *
+     * @return self
+     */
+    public function setInstitutionAccountId($institution_account_id)
+    {
+
+        if (is_null($institution_account_id)) {
+            array_push($this->openAPINullablesSetToNull, 'institution_account_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('institution_account_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['institution_account_id'] = $institution_account_id;
 
         return $this;
     }

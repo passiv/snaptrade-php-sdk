@@ -55,6 +55,7 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
         'brokerage_authorization' => 'string',
         'name' => 'string',
         'number' => 'string',
+        'institution_account_id' => 'string',
         'institution_name' => 'string',
         'created_date' => '\DateTime',
         'funding_date' => '\DateTime',
@@ -81,6 +82,7 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
         'brokerage_authorization' => 'uuid',
         'name' => null,
         'number' => null,
+        'institution_account_id' => null,
         'institution_name' => null,
         'created_date' => 'date-time',
         'funding_date' => 'date-time',
@@ -105,6 +107,7 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
 		'brokerage_authorization' => false,
 		'name' => true,
 		'number' => false,
+		'institution_account_id' => true,
 		'institution_name' => false,
 		'created_date' => false,
 		'funding_date' => true,
@@ -209,6 +212,7 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
         'brokerage_authorization' => 'brokerage_authorization',
         'name' => 'name',
         'number' => 'number',
+        'institution_account_id' => 'institution_account_id',
         'institution_name' => 'institution_name',
         'created_date' => 'created_date',
         'funding_date' => 'funding_date',
@@ -233,6 +237,7 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
         'brokerage_authorization' => 'setBrokerageAuthorization',
         'name' => 'setName',
         'number' => 'setNumber',
+        'institution_account_id' => 'setInstitutionAccountId',
         'institution_name' => 'setInstitutionName',
         'created_date' => 'setCreatedDate',
         'funding_date' => 'setFundingDate',
@@ -257,6 +262,7 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
         'brokerage_authorization' => 'getBrokerageAuthorization',
         'name' => 'getName',
         'number' => 'getNumber',
+        'institution_account_id' => 'getInstitutionAccountId',
         'institution_name' => 'getInstitutionName',
         'created_date' => 'getCreatedDate',
         'funding_date' => 'getFundingDate',
@@ -351,6 +357,7 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('brokerage_authorization', $data ?? [], null);
         $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('number', $data ?? [], null);
+        $this->setIfExists('institution_account_id', $data ?? [], null);
         $this->setIfExists('institution_name', $data ?? [], null);
         $this->setIfExists('created_date', $data ?? [], null);
         $this->setIfExists('funding_date', $data ?? [], null);
@@ -562,6 +569,42 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['number'] = $number;
+
+        return $this;
+    }
+
+    /**
+     * Gets institution_account_id
+     *
+     * @return string|null
+     */
+    public function getInstitutionAccountId()
+    {
+        return $this->container['institution_account_id'];
+    }
+
+    /**
+     * Sets institution_account_id
+     *
+     * @param string|null $institution_account_id A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same brokerage account across multiple connections.
+     *
+     * @return self
+     */
+    public function setInstitutionAccountId($institution_account_id)
+    {
+
+        if (is_null($institution_account_id)) {
+            array_push($this->openAPINullablesSetToNull, 'institution_account_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('institution_account_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['institution_account_id'] = $institution_account_id;
 
         return $this;
     }

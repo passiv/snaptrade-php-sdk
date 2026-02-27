@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * ManualTradeFormTest Class Doc Comment
  *
  * @category    Class
- * @description Manual Trade Form
+ * @description Inputs for placing an order with the brokerage.
  * @package     SnapTrade
  */
 class ManualTradeFormTest extends TestCase
@@ -91,9 +91,27 @@ class ManualTradeFormTest extends TestCase
     }
 
     /**
+     * Test attribute "universal_symbol_id"
+     */
+    public function testPropertyUniversalSymbolId()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "order_type"
      */
     public function testPropertyOrderType()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "time_in_force"
+     */
+    public function testPropertyTimeInForce()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
@@ -118,27 +136,9 @@ class ManualTradeFormTest extends TestCase
     }
 
     /**
-     * Test attribute "time_in_force"
-     */
-    public function testPropertyTimeInForce()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test attribute "units"
      */
     public function testPropertyUnits()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "universal_symbol_id"
-     */
-    public function testPropertyUniversalSymbolId()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

@@ -30,7 +30,7 @@ use \SnapTrade\ObjectSerializer;
  * BrokerageType Class Doc Comment
  *
  * @category Class
- * @description Type of brokerage
+ * @description Type of brokerage. Currently supports traditional brokerages and crypto exchanges.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */

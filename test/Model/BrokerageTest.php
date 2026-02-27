@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * BrokerageTest Class Doc Comment
  *
  * @category    Class
- * @description Brokerage
+ * @description Describes a brokerage that SnapTrade supports.
  * @package     SnapTrade
  */
 class BrokerageTest extends TestCase
@@ -82,6 +82,15 @@ class BrokerageTest extends TestCase
     }
 
     /**
+     * Test attribute "slug"
+     */
+    public function testPropertySlug()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "name"
      */
     public function testPropertyName()
@@ -127,24 +136,6 @@ class BrokerageTest extends TestCase
     }
 
     /**
-     * Test attribute "open_url"
-     */
-    public function testPropertyOpenUrl()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "slug"
-     */
-    public function testPropertySlug()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test attribute "url"
      */
     public function testPropertyUrl()
@@ -172,18 +163,18 @@ class BrokerageTest extends TestCase
     }
 
     /**
-     * Test attribute "allows_fractional_units"
+     * Test attribute "allows_trading"
      */
-    public function testPropertyAllowsFractionalUnits()
+    public function testPropertyAllowsTrading()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "allows_trading"
+     * Test attribute "allows_fractional_units"
      */
-    public function testPropertyAllowsTrading()
+    public function testPropertyAllowsFractionalUnits()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
@@ -208,33 +199,6 @@ class BrokerageTest extends TestCase
     }
 
     /**
-     * Test attribute "allows_trading_through_snaptrade_api"
-     */
-    public function testPropertyAllowsTradingThroughSnaptradeApi()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "is_scraping_integration"
-     */
-    public function testPropertyIsScrapingIntegration()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "default_currency"
-     */
-    public function testPropertyDefaultCurrency()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test attribute "brokerage_type"
      */
     public function testPropertyBrokerageType()
@@ -247,6 +211,15 @@ class BrokerageTest extends TestCase
      * Test attribute "exchanges"
      */
     public function testPropertyExchanges()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "open_url"
+     */
+    public function testPropertyOpenUrl()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

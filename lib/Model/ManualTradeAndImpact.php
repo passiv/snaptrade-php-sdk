@@ -30,7 +30,6 @@ use \SnapTrade\ObjectSerializer;
  * ManualTradeAndImpact Class Doc Comment
  *
  * @category Class
- * @description Manual Trade and Impact object
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
@@ -52,7 +51,7 @@ class ManualTradeAndImpact implements ModelInterface, ArrayAccess, \JsonSerializ
       */
     protected static $openAPITypes = [
         'trade' => '\SnapTrade\Model\ManualTrade',
-        'trade_impacts' => '\SnapTrade\Model\ManualTrade[]',
+        'trade_impacts' => '\SnapTrade\Model\ManualTradeImpact[]',
         'combined_remaining_balance' => '\SnapTrade\Model\ManualTradeBalance'
     ];
 
@@ -329,7 +328,7 @@ class ManualTradeAndImpact implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Gets trade_impacts
      *
-     * @return \SnapTrade\Model\ManualTrade[]|null
+     * @return \SnapTrade\Model\ManualTradeImpact[]|null
      */
     public function getTradeImpacts()
     {
@@ -339,7 +338,7 @@ class ManualTradeAndImpact implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets trade_impacts
      *
-     * @param \SnapTrade\Model\ManualTrade[]|null $trade_impacts trade_impacts
+     * @param \SnapTrade\Model\ManualTradeImpact[]|null $trade_impacts List of impacts of the trade on the account. The list always contains one value at the moment.
      *
      * @return self
      */

@@ -82,6 +82,15 @@ class SymbolsQuotesInnerTest extends TestCase
     }
 
     /**
+     * Test attribute "last_trade_price"
+     */
+    public function testPropertyLastTradePrice()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "bid_price"
      */
     public function testPropertyBidPrice()
@@ -94,15 +103,6 @@ class SymbolsQuotesInnerTest extends TestCase
      * Test attribute "ask_price"
      */
     public function testPropertyAskPrice()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "last_trade_price"
-     */
-    public function testPropertyLastTradePrice()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

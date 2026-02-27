@@ -109,6 +109,15 @@ class PositionTest extends TestCase
     }
 
     /**
+     * Test attribute "average_purchase_price"
+     */
+    public function testPropertyAveragePurchasePrice()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "fractional_units"
      */
     public function testPropertyFractionalUnits()
@@ -118,9 +127,27 @@ class PositionTest extends TestCase
     }
 
     /**
-     * Test attribute "average_purchase_price"
+     * Test attribute "currency"
      */
-    public function testPropertyAveragePurchasePrice()
+    public function testPropertyCurrency()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "cash_equivalent"
+     */
+    public function testPropertyCashEquivalent()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "tax_lots"
+     */
+    public function testPropertyTaxLots()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

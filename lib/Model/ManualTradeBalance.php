@@ -30,7 +30,7 @@ use \SnapTrade\ObjectSerializer;
  * ManualTradeBalance Class Doc Comment
  *
  * @category Class
- * @description Balance
+ * @description Estimated remaining balance of the account after the trade is executed.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
@@ -51,7 +51,7 @@ class ManualTradeBalance implements ModelInterface, ArrayAccess, \JsonSerializab
       * @var string[]
       */
     protected static $openAPITypes = [
-        'account' => '\SnapTrade\Model\Account',
+        'account' => '\SnapTrade\Model\AccountSimple',
         'currency' => '\SnapTrade\Model\Currency',
         'cash' => 'float'
     ];
@@ -300,7 +300,7 @@ class ManualTradeBalance implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Gets account
      *
-     * @return \SnapTrade\Model\Account|null
+     * @return \SnapTrade\Model\AccountSimple|null
      */
     public function getAccount()
     {
@@ -310,7 +310,7 @@ class ManualTradeBalance implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets account
      *
-     * @param \SnapTrade\Model\Account|null $account account
+     * @param \SnapTrade\Model\AccountSimple|null $account account
      *
      * @return self
      */
@@ -368,7 +368,7 @@ class ManualTradeBalance implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets cash
      *
-     * @param float|null $cash Cash
+     * @param float|null $cash Estimated amount of cash remaining in the account after the trade. At the moment this is the same as `remaining_cash` under `trade_impacts`.
      *
      * @return self
      */

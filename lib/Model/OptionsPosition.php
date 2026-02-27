@@ -54,8 +54,8 @@ class OptionsPosition implements ModelInterface, ArrayAccess, \JsonSerializable
         'symbol' => '\SnapTrade\Model\OptionBrokerageSymbol',
         'price' => 'float',
         'units' => 'float',
-        'currency' => '\SnapTrade\Model\OptionsPositionCurrency',
-        'average_purchase_price' => 'float'
+        'average_purchase_price' => 'float',
+        'currency' => '\SnapTrade\Model\OptionsPositionCurrency'
     ];
 
     /**
@@ -69,8 +69,8 @@ class OptionsPosition implements ModelInterface, ArrayAccess, \JsonSerializable
         'symbol' => null,
         'price' => null,
         'units' => null,
-        'currency' => null,
-        'average_purchase_price' => null
+        'average_purchase_price' => null,
+        'currency' => null
     ];
 
     /**
@@ -82,8 +82,8 @@ class OptionsPosition implements ModelInterface, ArrayAccess, \JsonSerializable
         'symbol' => false,
 		'price' => true,
 		'units' => false,
-		'currency' => true,
-		'average_purchase_price' => true
+		'average_purchase_price' => true,
+		'currency' => true
     ];
 
     /**
@@ -175,8 +175,8 @@ class OptionsPosition implements ModelInterface, ArrayAccess, \JsonSerializable
         'symbol' => 'symbol',
         'price' => 'price',
         'units' => 'units',
-        'currency' => 'currency',
-        'average_purchase_price' => 'average_purchase_price'
+        'average_purchase_price' => 'average_purchase_price',
+        'currency' => 'currency'
     ];
 
     /**
@@ -188,8 +188,8 @@ class OptionsPosition implements ModelInterface, ArrayAccess, \JsonSerializable
         'symbol' => 'setSymbol',
         'price' => 'setPrice',
         'units' => 'setUnits',
-        'currency' => 'setCurrency',
-        'average_purchase_price' => 'setAveragePurchasePrice'
+        'average_purchase_price' => 'setAveragePurchasePrice',
+        'currency' => 'setCurrency'
     ];
 
     /**
@@ -201,8 +201,8 @@ class OptionsPosition implements ModelInterface, ArrayAccess, \JsonSerializable
         'symbol' => 'getSymbol',
         'price' => 'getPrice',
         'units' => 'getUnits',
-        'currency' => 'getCurrency',
-        'average_purchase_price' => 'getAveragePurchasePrice'
+        'average_purchase_price' => 'getAveragePurchasePrice',
+        'currency' => 'getCurrency'
     ];
 
     /**
@@ -265,8 +265,8 @@ class OptionsPosition implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('symbol', $data ?? [], null);
         $this->setIfExists('price', $data ?? [], null);
         $this->setIfExists('units', $data ?? [], null);
-        $this->setIfExists('currency', $data ?? [], null);
         $this->setIfExists('average_purchase_price', $data ?? [], null);
+        $this->setIfExists('currency', $data ?? [], null);
     }
 
     /**
@@ -353,7 +353,7 @@ class OptionsPosition implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets price
      *
-     * @param float|null $price Last known market price for the option contract. The freshness of this price depends on the brokerage. Some brokerages provide real-time prices, while others provide delayed prices. It is recommended that you rely on your own third-party market data provider for most up to date prices.
+     * @param float|null $price Last known market price _per share_ of the option contract. The freshness of this price depends on the brokerage. Some brokerages provide real-time prices, while others provide delayed prices. It is recommended that you rely on your own third-party market data provider for most up to date prices.
      *
      * @return self
      */
@@ -406,6 +406,42 @@ class OptionsPosition implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
+     * Gets average_purchase_price
+     *
+     * @return float|null
+     */
+    public function getAveragePurchasePrice()
+    {
+        return $this->container['average_purchase_price'];
+    }
+
+    /**
+     * Sets average_purchase_price
+     *
+     * @param float|null $average_purchase_price Cost basis _per contract_ of this option position. To get the cost basis _per share_, divide this value by the number of shares per contract (usually 100).
+     *
+     * @return self
+     */
+    public function setAveragePurchasePrice($average_purchase_price)
+    {
+
+        if (is_null($average_purchase_price)) {
+            array_push($this->openAPINullablesSetToNull, 'average_purchase_price');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('average_purchase_price', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['average_purchase_price'] = $average_purchase_price;
+
+        return $this;
+    }
+
+    /**
      * Gets currency
      *
      * @return \SnapTrade\Model\OptionsPositionCurrency|null
@@ -439,42 +475,6 @@ class OptionsPosition implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['currency'] = $currency;
-
-        return $this;
-    }
-
-    /**
-     * Gets average_purchase_price
-     *
-     * @return float|null
-     */
-    public function getAveragePurchasePrice()
-    {
-        return $this->container['average_purchase_price'];
-    }
-
-    /**
-     * Sets average_purchase_price
-     *
-     * @param float|null $average_purchase_price Cost basis _per contract_ of this option position. To get the cost basis _per share_, divide this value by the number of shares per contract (usually 100).
-     *
-     * @return self
-     */
-    public function setAveragePurchasePrice($average_purchase_price)
-    {
-
-        if (is_null($average_purchase_price)) {
-            array_push($this->openAPINullablesSetToNull, 'average_purchase_price');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('average_purchase_price', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['average_purchase_price'] = $average_purchase_price;
 
         return $this;
     }

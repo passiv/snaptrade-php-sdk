@@ -100,18 +100,18 @@ class OptionsPositionTest extends TestCase
     }
 
     /**
-     * Test attribute "currency"
+     * Test attribute "average_purchase_price"
      */
-    public function testPropertyCurrency()
+    public function testPropertyAveragePurchasePrice()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "average_purchase_price"
+     * Test attribute "currency"
      */
-    public function testPropertyAveragePurchasePrice()
+    public function testPropertyCurrency()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

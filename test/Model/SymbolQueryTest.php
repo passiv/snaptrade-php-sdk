@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * SymbolQueryTest Class Doc Comment
  *
  * @category    Class
- * @description Symbol query for searching for symbols
+ * @description SymbolQuery
  * @package     SnapTrade
  */
 class SymbolQueryTest extends TestCase

@@ -30,7 +30,6 @@ use \SnapTrade\ObjectSerializer;
  * SymbolQuery Class Doc Comment
  *
  * @category Class
- * @description Symbol query for searching for symbols
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
@@ -296,7 +295,7 @@ class SymbolQuery implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets substring
      *
-     * @param string|null $substring substring
+     * @param string|null $substring The search query for symbols.
      *
      * @return self
      */

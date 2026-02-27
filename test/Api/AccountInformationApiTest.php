@@ -59,6 +59,18 @@ class AccountInformationApiTest extends TestCase
     }
 
     /**
+     * Test case for getAccountActivities
+     *
+     * List account activities.
+     *
+     */
+    public function testGetAccountActivities()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for getAllUserHoldings
      *
      * List all accounts for the user, plus balances, positions, and orders for each account..
@@ -95,9 +107,21 @@ class AccountInformationApiTest extends TestCase
     }
 
     /**
+     * Test case for getUserAccountOrderDetail
+     *
+     * Get account order detail.
+     *
+     */
+    public function testGetUserAccountOrderDetail()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for getUserAccountOrders
      *
-     * List account recent orders.
+     * List account orders.
      *
      */
     public function testGetUserAccountOrders()
@@ -113,6 +137,30 @@ class AccountInformationApiTest extends TestCase
      *
      */
     public function testGetUserAccountPositions()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for getUserAccountRecentOrders
+     *
+     * List account recent orders (last 24 hours only).
+     *
+     */
+    public function testGetUserAccountRecentOrders()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for getUserAccountReturnRates
+     *
+     * List account rate of returns.
+     *
+     */
+    public function testGetUserAccountReturnRates()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

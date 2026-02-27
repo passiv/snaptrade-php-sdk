@@ -109,6 +109,15 @@ class AccountTest extends TestCase
     }
 
     /**
+     * Test attribute "institution_account_id"
+     */
+    public function testPropertyInstitutionAccountId()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "institution_name"
      */
     public function testPropertyInstitutionName()

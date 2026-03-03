@@ -62,6 +62,9 @@ class ConnectionsApi extends \SnapTrade\CustomApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
+        'deleteConnection' => [
+            'application/json',
+        ],
         'detailBrokerageAuthorization' => [
             'application/json',
         ],
@@ -151,6 +154,408 @@ class ConnectionsApi extends \SnapTrade\CustomApi
         // user did not pass in a value for this parameter
         if ($value === SENTINEL_VALUE) return;
         $body[$property] = $value;
+    }
+
+    /**
+     * Operation deleteConnection
+     *
+     * Delete connection
+     *
+     * Deletes the SnapTrade connection specified by the ID. This will also remove the accounts and holdings data associated with the connection from SnapTrade. This action is irreversible. This endpoint is asynchronous, a 200 response indicates that a task has been queued to delete the connection. Listen for the [&#x60;CONNECTION_DELETED&#x60; webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-connection_deleted) webhook to know when the deletion has been completed and the data has been removed.
+     *
+     * @param  string $connection_id connection_id (required)
+     * @param  string $user_id user_id (required)
+     * @param  string $user_secret user_secret (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteConnection'] to see the possible values for this operation
+     *
+     * @throws \SnapTrade\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SnapTrade\Model\DeleteConnectionConfirmation
+     */
+    public function deleteConnection(
+        $connection_id,
+        $user_id,
+        $user_secret,
+
+        string $contentType = self::contentTypes['deleteConnection'][0]
+    )
+    {
+
+        list($response) = $this->deleteConnectionWithHttpInfo($connection_id, $user_id, $user_secret, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation deleteConnectionWithHttpInfo
+     *
+     * Delete connection
+     *
+     * Deletes the SnapTrade connection specified by the ID. This will also remove the accounts and holdings data associated with the connection from SnapTrade. This action is irreversible. This endpoint is asynchronous, a 200 response indicates that a task has been queued to delete the connection. Listen for the [&#x60;CONNECTION_DELETED&#x60; webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-connection_deleted) webhook to know when the deletion has been completed and the data has been removed.
+     *
+     * @param  string $connection_id (required)
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteConnection'] to see the possible values for this operation
+     *
+     * @throws \SnapTrade\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SnapTrade\Model\DeleteConnectionConfirmation, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function deleteConnectionWithHttpInfo($connection_id, $user_id, $user_secret, string $contentType = self::contentTypes['deleteConnection'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    {
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->deleteConnectionRequest($connection_id, $user_id, $user_secret, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                if (
+                    ($e->getCode() == 401 || $e->getCode() == 403) &&
+                    !empty($this->getConfig()->getAccessToken()) &&
+                    $requestOptions->shouldRetryOAuth()
+                ) {
+                    return $this->deleteConnectionWithHttpInfo(
+                        $connection_id,
+                        $user_id,
+                        $user_secret,
+                        $contentType,
+                        $requestOptions->setRetryOAuth(false)
+                    );
+                }
+
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('\SnapTrade\Model\DeleteConnectionConfirmation' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\SnapTrade\Model\DeleteConnectionConfirmation' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\DeleteConnectionConfirmation', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\SnapTrade\Model\DeleteConnectionConfirmation';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SnapTrade\Model\DeleteConnectionConfirmation',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation deleteConnectionAsync
+     *
+     * Delete connection
+     *
+     * Deletes the SnapTrade connection specified by the ID. This will also remove the accounts and holdings data associated with the connection from SnapTrade. This action is irreversible. This endpoint is asynchronous, a 200 response indicates that a task has been queued to delete the connection. Listen for the [&#x60;CONNECTION_DELETED&#x60; webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-connection_deleted) webhook to know when the deletion has been completed and the data has been removed.
+     *
+     * @param  string $connection_id (required)
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteConnection'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function deleteConnectionAsync(
+        $connection_id,
+        $user_id,
+        $user_secret,
+
+        string $contentType = self::contentTypes['deleteConnection'][0]
+    )
+    {
+
+        return $this->deleteConnectionAsyncWithHttpInfo($connection_id, $user_id, $user_secret, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation deleteConnectionAsyncWithHttpInfo
+     *
+     * Delete connection
+     *
+     * Deletes the SnapTrade connection specified by the ID. This will also remove the accounts and holdings data associated with the connection from SnapTrade. This action is irreversible. This endpoint is asynchronous, a 200 response indicates that a task has been queued to delete the connection. Listen for the [&#x60;CONNECTION_DELETED&#x60; webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-connection_deleted) webhook to know when the deletion has been completed and the data has been removed.
+     *
+     * @param  string $connection_id (required)
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteConnection'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function deleteConnectionAsyncWithHttpInfo($connection_id, $user_id, $user_secret, string $contentType = self::contentTypes['deleteConnection'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    {
+        $returnType = '\SnapTrade\Model\DeleteConnectionConfirmation';
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->deleteConnectionRequest($connection_id, $user_id, $user_secret, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'deleteConnection'
+     *
+     * @param  string $connection_id (required)
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteConnection'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function deleteConnectionRequest($connection_id, $user_id, $user_secret, string $contentType = self::contentTypes['deleteConnection'][0])
+    {
+
+        // Check if $connection_id is a string
+        if ($connection_id !== SENTINEL_VALUE && !is_string($connection_id)) {
+            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($connection_id, true), gettype($connection_id)));
+        }
+        // verify the required parameter 'connection_id' is set
+        if ($connection_id === SENTINEL_VALUE || (is_array($connection_id) && count($connection_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter connection_id when calling deleteConnection'
+            );
+        }
+        // Check if $user_id is a string
+        if ($user_id !== SENTINEL_VALUE && !is_string($user_id)) {
+            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_id, true), gettype($user_id)));
+        }
+        // verify the required parameter 'user_id' is set
+        if ($user_id === SENTINEL_VALUE || (is_array($user_id) && count($user_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter user_id when calling deleteConnection'
+            );
+        }
+        // Check if $user_secret is a string
+        if ($user_secret !== SENTINEL_VALUE && !is_string($user_secret)) {
+            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
+        }
+        // verify the required parameter 'user_secret' is set
+        if ($user_secret === SENTINEL_VALUE || (is_array($user_secret) && count($user_secret) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter user_secret when calling deleteConnection'
+            );
+        }
+
+
+        $resourcePath = '/connection/{connectionId}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        if ($user_id !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_id,
+                'userId', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
+        if ($user_secret !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_secret,
+                'userSecret', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
+
+
+        // path params
+        if ($connection_id !== SENTINEL_VALUE) {
+            $resourcePath = str_replace(
+                '{' . 'connectionId' . '}',
+                ObjectSerializer::toPathValue($connection_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('clientId');
+        if ($apiKey !== null) {
+            $queryParams['clientId'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Signature');
+        if ($apiKey !== null) {
+            $headers['Signature'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('timestamp');
+        if ($apiKey !== null) {
+            $queryParams['timestamp'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $method = 'DELETE';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
     }
 
     /**

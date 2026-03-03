@@ -59,6 +59,18 @@ class ConnectionsApiTest extends TestCase
     }
 
     /**
+     * Test case for deleteConnection
+     *
+     * Delete connection.
+     *
+     */
+    public function testDeleteConnection()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for detailBrokerageAuthorization
      *
      * Get connection detail.

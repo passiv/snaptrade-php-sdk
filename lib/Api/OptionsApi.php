@@ -62,19 +62,13 @@ class OptionsApi extends \SnapTrade\CustomApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'getOptionStrategy' => [
+        'getOptionQuote' => [
             'application/json',
         ],
         'getOptionsChain' => [
             'application/json',
         ],
-        'getOptionsStrategyQuote' => [
-            'application/json',
-        ],
         'listOptionHoldings' => [
-            'application/json',
-        ],
-        'placeOptionStrategy' => [
             'application/json',
         ],
     ];
@@ -148,62 +142,56 @@ class OptionsApi extends \SnapTrade\CustomApi
     }
 
     /**
-     * Operation getOptionStrategy
+     * Operation getOptionQuote
      *
-     * Create options strategy
+     * Get option quote
+     *
+     * Returns a real-time quote for a single option contract. The option contract is specified using an OCC-formatted symbol.  OCC format: &#x60;AAPL  251219C00150000&#x60; (underlying padded to 6 characters with spaces, followed by date, put/call, and strike).
      *
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
-     * @param  string $account_id The ID of the account to create the option strategy object in. (required)
-     * @param  \SnapTrade\Model\OptionsGetOptionStrategyRequest $options_get_option_strategy_request options_get_option_strategy_request (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOptionStrategy'] to see the possible values for this operation
+     * @param  string $symbol The OCC-formatted option symbol. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOptionQuote'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \SnapTrade\Model\StrategyQuotes|\SnapTrade\Model\Model500UnexpectedExceptionResponse
+     * @return \SnapTrade\Model\OptionQuote|\SnapTrade\Model\Model404FailedRequestResponse|\SnapTrade\Model\Model500UnexpectedExceptionResponse
      */
-    public function getOptionStrategy(
-
-        $underlying_symbol_id,
-        $legs,
-        $strategy_type,
+    public function getOptionQuote(
         $user_id,
         $user_secret,
-        $account_id,
-        string $contentType = self::contentTypes['getOptionStrategy'][0]
+        $symbol,
+
+        string $contentType = self::contentTypes['getOptionQuote'][0]
     )
     {
-        $_body = [];
-        $this->setRequestBodyProperty($_body, "underlying_symbol_id", $underlying_symbol_id);
-        $this->setRequestBodyProperty($_body, "legs", $legs);
-        $this->setRequestBodyProperty($_body, "strategy_type", $strategy_type);
-        $options_get_option_strategy_request = $_body;
 
-        list($response) = $this->getOptionStrategyWithHttpInfo($user_id, $user_secret, $account_id, $options_get_option_strategy_request, $contentType);
+        list($response) = $this->getOptionQuoteWithHttpInfo($user_id, $user_secret, $symbol, $contentType);
         return $response;
     }
 
     /**
-     * Operation getOptionStrategyWithHttpInfo
+     * Operation getOptionQuoteWithHttpInfo
      *
-     * Create options strategy
+     * Get option quote
+     *
+     * Returns a real-time quote for a single option contract. The option contract is specified using an OCC-formatted symbol.  OCC format: &#x60;AAPL  251219C00150000&#x60; (underlying padded to 6 characters with spaces, followed by date, put/call, and strike).
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $account_id The ID of the account to create the option strategy object in. (required)
-     * @param  \SnapTrade\Model\OptionsGetOptionStrategyRequest $options_get_option_strategy_request (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOptionStrategy'] to see the possible values for this operation
+     * @param  string $symbol The OCC-formatted option symbol. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOptionQuote'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \SnapTrade\Model\StrategyQuotes|\SnapTrade\Model\Model500UnexpectedExceptionResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SnapTrade\Model\OptionQuote|\SnapTrade\Model\Model404FailedRequestResponse|\SnapTrade\Model\Model500UnexpectedExceptionResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getOptionStrategyWithHttpInfo($user_id, $user_secret, $account_id, $options_get_option_strategy_request, string $contentType = self::contentTypes['getOptionStrategy'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    public function getOptionQuoteWithHttpInfo($user_id, $user_secret, $symbol, string $contentType = self::contentTypes['getOptionQuote'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->getOptionStrategyRequest($user_id, $user_secret, $account_id, $options_get_option_strategy_request, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getOptionQuoteRequest($user_id, $user_secret, $symbol, $contentType);
 
         // Customization hook
-        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         try {
             $options = $this->createHttpClientOption();
@@ -215,11 +203,10 @@ class OptionsApi extends \SnapTrade\CustomApi
                     !empty($this->getConfig()->getAccessToken()) &&
                     $requestOptions->shouldRetryOAuth()
                 ) {
-                    return $this->getOptionStrategyWithHttpInfo(
+                    return $this->getOptionQuoteWithHttpInfo(
                         $user_id,
                         $user_secret,
-                        $account_id,
-                        $options_get_option_strategy_request,
+                        $symbol,
                         $contentType,
                         $requestOptions->setRetryOAuth(false)
                     );
@@ -257,17 +244,32 @@ class OptionsApi extends \SnapTrade\CustomApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\SnapTrade\Model\StrategyQuotes' === '\SplFileObject') {
+                    if ('\SnapTrade\Model\OptionQuote' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\SnapTrade\Model\StrategyQuotes' !== 'string') {
+                        if ('\SnapTrade\Model\OptionQuote' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\StrategyQuotes', []),
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\OptionQuote', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\SnapTrade\Model\Model404FailedRequestResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\SnapTrade\Model\Model404FailedRequestResponse' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\Model404FailedRequestResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -288,7 +290,7 @@ class OptionsApi extends \SnapTrade\CustomApi
                     ];
             }
 
-            $returnType = '\SnapTrade\Model\StrategyQuotes';
+            $returnType = '\SnapTrade\Model\OptionQuote';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -309,7 +311,15 @@ class OptionsApi extends \SnapTrade\CustomApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\SnapTrade\Model\StrategyQuotes',
+                        '\SnapTrade\Model\OptionQuote',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SnapTrade\Model\Model404FailedRequestResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -328,37 +338,30 @@ class OptionsApi extends \SnapTrade\CustomApi
     }
 
     /**
-     * Operation getOptionStrategyAsync
+     * Operation getOptionQuoteAsync
      *
-     * Create options strategy
+     * Get option quote
+     *
+     * Returns a real-time quote for a single option contract. The option contract is specified using an OCC-formatted symbol.  OCC format: &#x60;AAPL  251219C00150000&#x60; (underlying padded to 6 characters with spaces, followed by date, put/call, and strike).
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $account_id The ID of the account to create the option strategy object in. (required)
-     * @param  \SnapTrade\Model\OptionsGetOptionStrategyRequest $options_get_option_strategy_request (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOptionStrategy'] to see the possible values for this operation
+     * @param  string $symbol The OCC-formatted option symbol. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOptionQuote'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getOptionStrategyAsync(
-
-        $underlying_symbol_id,
-        $legs,
-        $strategy_type,
+    public function getOptionQuoteAsync(
         $user_id,
         $user_secret,
-        $account_id,
-        string $contentType = self::contentTypes['getOptionStrategy'][0]
+        $symbol,
+
+        string $contentType = self::contentTypes['getOptionQuote'][0]
     )
     {
-        $_body = [];
-        $this->setRequestBodyProperty($_body, "underlying_symbol_id", $underlying_symbol_id);
-        $this->setRequestBodyProperty($_body, "legs", $legs);
-        $this->setRequestBodyProperty($_body, "strategy_type", $strategy_type);
-        $options_get_option_strategy_request = $_body;
 
-        return $this->getOptionStrategyAsyncWithHttpInfo($user_id, $user_secret, $account_id, $options_get_option_strategy_request, $contentType)
+        return $this->getOptionQuoteAsyncWithHttpInfo($user_id, $user_secret, $symbol, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -367,26 +370,27 @@ class OptionsApi extends \SnapTrade\CustomApi
     }
 
     /**
-     * Operation getOptionStrategyAsyncWithHttpInfo
+     * Operation getOptionQuoteAsyncWithHttpInfo
      *
-     * Create options strategy
+     * Get option quote
+     *
+     * Returns a real-time quote for a single option contract. The option contract is specified using an OCC-formatted symbol.  OCC format: &#x60;AAPL  251219C00150000&#x60; (underlying padded to 6 characters with spaces, followed by date, put/call, and strike).
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $account_id The ID of the account to create the option strategy object in. (required)
-     * @param  \SnapTrade\Model\OptionsGetOptionStrategyRequest $options_get_option_strategy_request (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOptionStrategy'] to see the possible values for this operation
+     * @param  string $symbol The OCC-formatted option symbol. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOptionQuote'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getOptionStrategyAsyncWithHttpInfo($user_id, $user_secret, $account_id, $options_get_option_strategy_request, string $contentType = self::contentTypes['getOptionStrategy'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    public function getOptionQuoteAsyncWithHttpInfo($user_id, $user_secret, $symbol, string $contentType = self::contentTypes['getOptionQuote'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        $returnType = '\SnapTrade\Model\StrategyQuotes';
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->getOptionStrategyRequest($user_id, $user_secret, $account_id, $options_get_option_strategy_request, $contentType);
+        $returnType = '\SnapTrade\Model\OptionQuote';
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getOptionQuoteRequest($user_id, $user_secret, $symbol, $contentType);
 
         // Customization hook
-        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
+        $this->beforeSendHook($request, $requestOptions, $this->config);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -425,18 +429,17 @@ class OptionsApi extends \SnapTrade\CustomApi
     }
 
     /**
-     * Create request for operation 'getOptionStrategy'
+     * Create request for operation 'getOptionQuote'
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $account_id The ID of the account to create the option strategy object in. (required)
-     * @param  \SnapTrade\Model\OptionsGetOptionStrategyRequest $options_get_option_strategy_request (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOptionStrategy'] to see the possible values for this operation
+     * @param  string $symbol The OCC-formatted option symbol. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOptionQuote'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getOptionStrategyRequest($user_id, $user_secret, $account_id, $options_get_option_strategy_request, string $contentType = self::contentTypes['getOptionStrategy'][0])
+    public function getOptionQuoteRequest($user_id, $user_secret, $symbol, string $contentType = self::contentTypes['getOptionQuote'][0])
     {
 
         // Check if $user_id is a string
@@ -446,7 +449,7 @@ class OptionsApi extends \SnapTrade\CustomApi
         // verify the required parameter 'user_id' is set
         if ($user_id === SENTINEL_VALUE || (is_array($user_id) && count($user_id) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter user_id when calling getOptionStrategy'
+                'Missing the required parameter user_id when calling getOptionQuote'
             );
         }
         // Check if $user_secret is a string
@@ -456,36 +459,22 @@ class OptionsApi extends \SnapTrade\CustomApi
         // verify the required parameter 'user_secret' is set
         if ($user_secret === SENTINEL_VALUE || (is_array($user_secret) && count($user_secret) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter user_secret when calling getOptionStrategy'
+                'Missing the required parameter user_secret when calling getOptionQuote'
             );
         }
-        // Check if $account_id is a string
-        if ($account_id !== SENTINEL_VALUE && !is_string($account_id)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($account_id, true), gettype($account_id)));
+        // Check if $symbol is a string
+        if ($symbol !== SENTINEL_VALUE && !is_string($symbol)) {
+            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($symbol, true), gettype($symbol)));
         }
-        // verify the required parameter 'account_id' is set
-        if ($account_id === SENTINEL_VALUE || (is_array($account_id) && count($account_id) === 0)) {
+        // verify the required parameter 'symbol' is set
+        if ($symbol === SENTINEL_VALUE || (is_array($symbol) && count($symbol) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter account_id when calling getOptionStrategy'
-            );
-        }
-        if ($options_get_option_strategy_request !== SENTINEL_VALUE) {
-            if (!($options_get_option_strategy_request instanceof \SnapTrade\Model\OptionsGetOptionStrategyRequest)) {
-                if (!is_array($options_get_option_strategy_request))
-                    throw new \InvalidArgumentException('"options_get_option_strategy_request" must be associative array or an instance of \SnapTrade\Model\OptionsGetOptionStrategyRequest OptionsApi.getOptionStrategy.');
-                else
-                    $options_get_option_strategy_request = new \SnapTrade\Model\OptionsGetOptionStrategyRequest($options_get_option_strategy_request);
-            }
-        }
-        // verify the required parameter 'options_get_option_strategy_request' is set
-        if ($options_get_option_strategy_request === SENTINEL_VALUE || (is_array($options_get_option_strategy_request) && count($options_get_option_strategy_request) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter options_get_option_strategy_request when calling getOptionStrategy'
+                'Missing the required parameter symbol when calling getOptionQuote'
             );
         }
 
 
-        $resourcePath = '/accounts/{accountId}/optionStrategy';
+        $resourcePath = '/marketData/options/quotes';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -514,16 +503,19 @@ class OptionsApi extends \SnapTrade\CustomApi
                 true // required
             ) ?? []);
         }
-
-
-        // path params
-        if ($account_id !== SENTINEL_VALUE) {
-            $resourcePath = str_replace(
-                '{' . 'accountId' . '}',
-                ObjectSerializer::toPathValue($account_id),
-                $resourcePath
-            );
+        if ($symbol !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $symbol,
+                'symbol', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
         }
+
+
 
 
         $headers = $this->headerSelector->selectHeaders(
@@ -533,14 +525,7 @@ class OptionsApi extends \SnapTrade\CustomApi
         );
 
         // for model (json/xml)
-        if (isset($options_get_option_strategy_request)) {
-            if (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($options_get_option_strategy_request));
-            } else {
-                $httpBody = $options_get_option_strategy_request;
-            }
-        } elseif (count($formParams) > 0) {
+        if (count($formParams) > 0) {
             if ($multipart) {
                 $multipartContents = [];
                 foreach ($formParams as $formParamName => $formParamValue) {
@@ -591,7 +576,7 @@ class OptionsApi extends \SnapTrade\CustomApi
             $headers
         );
 
-        $method = 'POST';
+        $method = 'GET';
         $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
@@ -611,6 +596,8 @@ class OptionsApi extends \SnapTrade\CustomApi
      * Operation getOptionsChain
      *
      * Get the options chain for a symbol
+     *
+     * Returns the option chain for the specified symbol in the specified account.
      *
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
@@ -640,6 +627,8 @@ class OptionsApi extends \SnapTrade\CustomApi
      * Operation getOptionsChainWithHttpInfo
      *
      * Get the options chain for a symbol
+     *
+     * Returns the option chain for the specified symbol in the specified account.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -785,6 +774,8 @@ class OptionsApi extends \SnapTrade\CustomApi
      *
      * Get the options chain for a symbol
      *
+     * Returns the option chain for the specified symbol in the specified account.
+     *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
      * @param  string $account_id The ID of the account to get the options chain from. (required)
@@ -816,6 +807,8 @@ class OptionsApi extends \SnapTrade\CustomApi
      * Operation getOptionsChainAsyncWithHttpInfo
      *
      * Get the options chain for a symbol
+     *
+     * Returns the option chain for the specified symbol in the specified account.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -1054,452 +1047,11 @@ class OptionsApi extends \SnapTrade\CustomApi
     }
 
     /**
-     * Operation getOptionsStrategyQuote
-     *
-     * Get options strategy quotes
-     *
-     * @param  string $user_id user_id (required)
-     * @param  string $user_secret user_secret (required)
-     * @param  string $account_id The ID of the account the strategy will be placed in. (required)
-     * @param  string $option_strategy_id Option strategy id obtained from response when creating option strategy object (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOptionsStrategyQuote'] to see the possible values for this operation
-     *
-     * @throws \SnapTrade\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \SnapTrade\Model\StrategyQuotes|\SnapTrade\Model\Model500UnexpectedExceptionResponse
-     */
-    public function getOptionsStrategyQuote(
-        $user_id,
-        $user_secret,
-        $account_id,
-        $option_strategy_id,
-
-        string $contentType = self::contentTypes['getOptionsStrategyQuote'][0]
-    )
-    {
-
-        list($response) = $this->getOptionsStrategyQuoteWithHttpInfo($user_id, $user_secret, $account_id, $option_strategy_id, $contentType);
-        return $response;
-    }
-
-    /**
-     * Operation getOptionsStrategyQuoteWithHttpInfo
-     *
-     * Get options strategy quotes
-     *
-     * @param  string $user_id (required)
-     * @param  string $user_secret (required)
-     * @param  string $account_id The ID of the account the strategy will be placed in. (required)
-     * @param  string $option_strategy_id Option strategy id obtained from response when creating option strategy object (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOptionsStrategyQuote'] to see the possible values for this operation
-     *
-     * @throws \SnapTrade\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return array of \SnapTrade\Model\StrategyQuotes|\SnapTrade\Model\Model500UnexpectedExceptionResponse, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function getOptionsStrategyQuoteWithHttpInfo($user_id, $user_secret, $account_id, $option_strategy_id, string $contentType = self::contentTypes['getOptionsStrategyQuote'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
-    {
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->getOptionsStrategyQuoteRequest($user_id, $user_secret, $account_id, $option_strategy_id, $contentType);
-
-        // Customization hook
-        $this->beforeSendHook($request, $requestOptions, $this->config);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                if (
-                    ($e->getCode() == 401 || $e->getCode() == 403) &&
-                    !empty($this->getConfig()->getAccessToken()) &&
-                    $requestOptions->shouldRetryOAuth()
-                ) {
-                    return $this->getOptionsStrategyQuoteWithHttpInfo(
-                        $user_id,
-                        $user_secret,
-                        $account_id,
-                        $option_strategy_id,
-                        $contentType,
-                        $requestOptions->setRetryOAuth(false)
-                    );
-                }
-
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            } catch (ConnectException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    null,
-                    null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
-
-            switch($statusCode) {
-                case 200:
-                    if ('\SnapTrade\Model\StrategyQuotes' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\SnapTrade\Model\StrategyQuotes' !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\StrategyQuotes', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                case 500:
-                    if ('\SnapTrade\Model\Model500UnexpectedExceptionResponse' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\SnapTrade\Model\Model500UnexpectedExceptionResponse' !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\Model500UnexpectedExceptionResponse', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = '\SnapTrade\Model\StrategyQuotes';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    $content = json_decode($content);
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\SnapTrade\Model\StrategyQuotes',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 500:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\SnapTrade\Model\Model500UnexpectedExceptionResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation getOptionsStrategyQuoteAsync
-     *
-     * Get options strategy quotes
-     *
-     * @param  string $user_id (required)
-     * @param  string $user_secret (required)
-     * @param  string $account_id The ID of the account the strategy will be placed in. (required)
-     * @param  string $option_strategy_id Option strategy id obtained from response when creating option strategy object (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOptionsStrategyQuote'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function getOptionsStrategyQuoteAsync(
-        $user_id,
-        $user_secret,
-        $account_id,
-        $option_strategy_id,
-
-        string $contentType = self::contentTypes['getOptionsStrategyQuote'][0]
-    )
-    {
-
-        return $this->getOptionsStrategyQuoteAsyncWithHttpInfo($user_id, $user_secret, $account_id, $option_strategy_id, $contentType)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation getOptionsStrategyQuoteAsyncWithHttpInfo
-     *
-     * Get options strategy quotes
-     *
-     * @param  string $user_id (required)
-     * @param  string $user_secret (required)
-     * @param  string $account_id The ID of the account the strategy will be placed in. (required)
-     * @param  string $option_strategy_id Option strategy id obtained from response when creating option strategy object (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOptionsStrategyQuote'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function getOptionsStrategyQuoteAsyncWithHttpInfo($user_id, $user_secret, $account_id, $option_strategy_id, string $contentType = self::contentTypes['getOptionsStrategyQuote'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
-    {
-        $returnType = '\SnapTrade\Model\StrategyQuotes';
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->getOptionsStrategyQuoteRequest($user_id, $user_secret, $account_id, $option_strategy_id, $contentType);
-
-        // Customization hook
-        $this->beforeSendHook($request, $requestOptions, $this->config);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    if ($returnType === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        (string) $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'getOptionsStrategyQuote'
-     *
-     * @param  string $user_id (required)
-     * @param  string $user_secret (required)
-     * @param  string $account_id The ID of the account the strategy will be placed in. (required)
-     * @param  string $option_strategy_id Option strategy id obtained from response when creating option strategy object (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOptionsStrategyQuote'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function getOptionsStrategyQuoteRequest($user_id, $user_secret, $account_id, $option_strategy_id, string $contentType = self::contentTypes['getOptionsStrategyQuote'][0])
-    {
-
-        // Check if $user_id is a string
-        if ($user_id !== SENTINEL_VALUE && !is_string($user_id)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_id, true), gettype($user_id)));
-        }
-        // verify the required parameter 'user_id' is set
-        if ($user_id === SENTINEL_VALUE || (is_array($user_id) && count($user_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter user_id when calling getOptionsStrategyQuote'
-            );
-        }
-        // Check if $user_secret is a string
-        if ($user_secret !== SENTINEL_VALUE && !is_string($user_secret)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
-        }
-        // verify the required parameter 'user_secret' is set
-        if ($user_secret === SENTINEL_VALUE || (is_array($user_secret) && count($user_secret) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter user_secret when calling getOptionsStrategyQuote'
-            );
-        }
-        // Check if $account_id is a string
-        if ($account_id !== SENTINEL_VALUE && !is_string($account_id)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($account_id, true), gettype($account_id)));
-        }
-        // verify the required parameter 'account_id' is set
-        if ($account_id === SENTINEL_VALUE || (is_array($account_id) && count($account_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter account_id when calling getOptionsStrategyQuote'
-            );
-        }
-        // Check if $option_strategy_id is a string
-        if ($option_strategy_id !== SENTINEL_VALUE && !is_string($option_strategy_id)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($option_strategy_id, true), gettype($option_strategy_id)));
-        }
-        // verify the required parameter 'option_strategy_id' is set
-        if ($option_strategy_id === SENTINEL_VALUE || (is_array($option_strategy_id) && count($option_strategy_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter option_strategy_id when calling getOptionsStrategyQuote'
-            );
-        }
-
-
-        $resourcePath = '/accounts/{accountId}/optionStrategy/{optionStrategyId}';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-        if ($user_id !== SENTINEL_VALUE) {
-            // query params
-            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-                $user_id,
-                'userId', // param base name
-                'string', // openApiType
-                'form', // style
-                true, // explode
-                true // required
-            ) ?? []);
-        }
-        if ($user_secret !== SENTINEL_VALUE) {
-            // query params
-            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-                $user_secret,
-                'userSecret', // param base name
-                'string', // openApiType
-                'form', // style
-                true, // explode
-                true // required
-            ) ?? []);
-        }
-
-
-        // path params
-        if ($account_id !== SENTINEL_VALUE) {
-            $resourcePath = str_replace(
-                '{' . 'accountId' . '}',
-                ObjectSerializer::toPathValue($account_id),
-                $resourcePath
-            );
-        }
-        // path params
-        if ($option_strategy_id !== SENTINEL_VALUE) {
-            $resourcePath = str_replace(
-                '{' . 'optionStrategyId' . '}',
-                ObjectSerializer::toPathValue($option_strategy_id),
-                $resourcePath
-            );
-        }
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\json_encode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('clientId');
-        if ($apiKey !== null) {
-            $queryParams['clientId'] = $apiKey;
-        }
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('Signature');
-        if ($apiKey !== null) {
-            $headers['Signature'] = $apiKey;
-        }
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('timestamp');
-        if ($apiKey !== null) {
-            $queryParams['timestamp'] = $apiKey;
-        }
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $method = 'GET';
-        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
-
-        $operationHost = $this->config->getHost();
-        $query = ObjectSerializer::buildQuery($queryParams);
-        return [
-            "request" => new Request(
-                $method,
-                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-                $headers,
-                $httpBody
-            ),
-            "serializedBody" => $httpBody
-        ];
-    }
-
-    /**
      * Operation listOptionHoldings
      *
      * List account option positions
+     *
+     * Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
      *
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
@@ -1527,6 +1079,8 @@ class OptionsApi extends \SnapTrade\CustomApi
      * Operation listOptionHoldingsWithHttpInfo
      *
      * List account option positions
+     *
+     * Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -1670,6 +1224,8 @@ class OptionsApi extends \SnapTrade\CustomApi
      *
      * List account option positions
      *
+     * Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
+     *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
      * @param  string $account_id (required)
@@ -1699,6 +1255,8 @@ class OptionsApi extends \SnapTrade\CustomApi
      * Operation listOptionHoldingsAsyncWithHttpInfo
      *
      * List account option positions
+     *
+     * Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -1898,492 +1456,6 @@ class OptionsApi extends \SnapTrade\CustomApi
         );
 
         $method = 'GET';
-        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
-
-        $operationHost = $this->config->getHost();
-        $query = ObjectSerializer::buildQuery($queryParams);
-        return [
-            "request" => new Request(
-                $method,
-                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-                $headers,
-                $httpBody
-            ),
-            "serializedBody" => $httpBody
-        ];
-    }
-
-    /**
-     * Operation placeOptionStrategy
-     *
-     * Place an option strategy order
-     *
-     * @param  string $user_id user_id (required)
-     * @param  string $user_secret user_secret (required)
-     * @param  string $account_id The ID of the account to execute the strategy in. (required)
-     * @param  string $option_strategy_id Option strategy id obtained from response when creating option strategy object (required)
-     * @param  \SnapTrade\Model\OptionsPlaceOptionStrategyRequest $options_place_option_strategy_request options_place_option_strategy_request (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['placeOptionStrategy'] to see the possible values for this operation
-     *
-     * @throws \SnapTrade\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \SnapTrade\Model\StrategyOrderRecord|\SnapTrade\Model\Model500UnexpectedExceptionResponse
-     */
-    public function placeOptionStrategy(
-
-        $order_type,
-        $time_in_force,
-        $user_id,
-        $user_secret,
-        $account_id,
-        $option_strategy_id,
-        $price = SENTINEL_VALUE,
-        string $contentType = self::contentTypes['placeOptionStrategy'][0]
-    )
-    {
-        $_body = [];
-        $this->setRequestBodyProperty($_body, "order_type", $order_type);
-        $this->setRequestBodyProperty($_body, "time_in_force", $time_in_force);
-        $this->setRequestBodyProperty($_body, "price", $price);
-        $options_place_option_strategy_request = $_body;
-
-        list($response) = $this->placeOptionStrategyWithHttpInfo($user_id, $user_secret, $account_id, $option_strategy_id, $options_place_option_strategy_request, $contentType);
-        return $response;
-    }
-
-    /**
-     * Operation placeOptionStrategyWithHttpInfo
-     *
-     * Place an option strategy order
-     *
-     * @param  string $user_id (required)
-     * @param  string $user_secret (required)
-     * @param  string $account_id The ID of the account to execute the strategy in. (required)
-     * @param  string $option_strategy_id Option strategy id obtained from response when creating option strategy object (required)
-     * @param  \SnapTrade\Model\OptionsPlaceOptionStrategyRequest $options_place_option_strategy_request (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['placeOptionStrategy'] to see the possible values for this operation
-     *
-     * @throws \SnapTrade\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return array of \SnapTrade\Model\StrategyOrderRecord|\SnapTrade\Model\Model500UnexpectedExceptionResponse, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function placeOptionStrategyWithHttpInfo($user_id, $user_secret, $account_id, $option_strategy_id, $options_place_option_strategy_request, string $contentType = self::contentTypes['placeOptionStrategy'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
-    {
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->placeOptionStrategyRequest($user_id, $user_secret, $account_id, $option_strategy_id, $options_place_option_strategy_request, $contentType);
-
-        // Customization hook
-        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                if (
-                    ($e->getCode() == 401 || $e->getCode() == 403) &&
-                    !empty($this->getConfig()->getAccessToken()) &&
-                    $requestOptions->shouldRetryOAuth()
-                ) {
-                    return $this->placeOptionStrategyWithHttpInfo(
-                        $user_id,
-                        $user_secret,
-                        $account_id,
-                        $option_strategy_id,
-                        $options_place_option_strategy_request,
-                        $contentType,
-                        $requestOptions->setRetryOAuth(false)
-                    );
-                }
-
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            } catch (ConnectException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    null,
-                    null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
-
-            switch($statusCode) {
-                case 200:
-                    if ('\SnapTrade\Model\StrategyOrderRecord' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\SnapTrade\Model\StrategyOrderRecord' !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\StrategyOrderRecord', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                case 500:
-                    if ('\SnapTrade\Model\Model500UnexpectedExceptionResponse' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\SnapTrade\Model\Model500UnexpectedExceptionResponse' !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\Model500UnexpectedExceptionResponse', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = '\SnapTrade\Model\StrategyOrderRecord';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    $content = json_decode($content);
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\SnapTrade\Model\StrategyOrderRecord',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 500:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\SnapTrade\Model\Model500UnexpectedExceptionResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation placeOptionStrategyAsync
-     *
-     * Place an option strategy order
-     *
-     * @param  string $user_id (required)
-     * @param  string $user_secret (required)
-     * @param  string $account_id The ID of the account to execute the strategy in. (required)
-     * @param  string $option_strategy_id Option strategy id obtained from response when creating option strategy object (required)
-     * @param  \SnapTrade\Model\OptionsPlaceOptionStrategyRequest $options_place_option_strategy_request (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['placeOptionStrategy'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function placeOptionStrategyAsync(
-
-        $order_type,
-        $time_in_force,
-        $user_id,
-        $user_secret,
-        $account_id,
-        $option_strategy_id,
-        $price = SENTINEL_VALUE,
-        string $contentType = self::contentTypes['placeOptionStrategy'][0]
-    )
-    {
-        $_body = [];
-        $this->setRequestBodyProperty($_body, "order_type", $order_type);
-        $this->setRequestBodyProperty($_body, "time_in_force", $time_in_force);
-        $this->setRequestBodyProperty($_body, "price", $price);
-        $options_place_option_strategy_request = $_body;
-
-        return $this->placeOptionStrategyAsyncWithHttpInfo($user_id, $user_secret, $account_id, $option_strategy_id, $options_place_option_strategy_request, $contentType)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation placeOptionStrategyAsyncWithHttpInfo
-     *
-     * Place an option strategy order
-     *
-     * @param  string $user_id (required)
-     * @param  string $user_secret (required)
-     * @param  string $account_id The ID of the account to execute the strategy in. (required)
-     * @param  string $option_strategy_id Option strategy id obtained from response when creating option strategy object (required)
-     * @param  \SnapTrade\Model\OptionsPlaceOptionStrategyRequest $options_place_option_strategy_request (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['placeOptionStrategy'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function placeOptionStrategyAsyncWithHttpInfo($user_id, $user_secret, $account_id, $option_strategy_id, $options_place_option_strategy_request, string $contentType = self::contentTypes['placeOptionStrategy'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
-    {
-        $returnType = '\SnapTrade\Model\StrategyOrderRecord';
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->placeOptionStrategyRequest($user_id, $user_secret, $account_id, $option_strategy_id, $options_place_option_strategy_request, $contentType);
-
-        // Customization hook
-        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    if ($returnType === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        (string) $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'placeOptionStrategy'
-     *
-     * @param  string $user_id (required)
-     * @param  string $user_secret (required)
-     * @param  string $account_id The ID of the account to execute the strategy in. (required)
-     * @param  string $option_strategy_id Option strategy id obtained from response when creating option strategy object (required)
-     * @param  \SnapTrade\Model\OptionsPlaceOptionStrategyRequest $options_place_option_strategy_request (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['placeOptionStrategy'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function placeOptionStrategyRequest($user_id, $user_secret, $account_id, $option_strategy_id, $options_place_option_strategy_request, string $contentType = self::contentTypes['placeOptionStrategy'][0])
-    {
-
-        // Check if $user_id is a string
-        if ($user_id !== SENTINEL_VALUE && !is_string($user_id)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_id, true), gettype($user_id)));
-        }
-        // verify the required parameter 'user_id' is set
-        if ($user_id === SENTINEL_VALUE || (is_array($user_id) && count($user_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter user_id when calling placeOptionStrategy'
-            );
-        }
-        // Check if $user_secret is a string
-        if ($user_secret !== SENTINEL_VALUE && !is_string($user_secret)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
-        }
-        // verify the required parameter 'user_secret' is set
-        if ($user_secret === SENTINEL_VALUE || (is_array($user_secret) && count($user_secret) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter user_secret when calling placeOptionStrategy'
-            );
-        }
-        // Check if $account_id is a string
-        if ($account_id !== SENTINEL_VALUE && !is_string($account_id)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($account_id, true), gettype($account_id)));
-        }
-        // verify the required parameter 'account_id' is set
-        if ($account_id === SENTINEL_VALUE || (is_array($account_id) && count($account_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter account_id when calling placeOptionStrategy'
-            );
-        }
-        // Check if $option_strategy_id is a string
-        if ($option_strategy_id !== SENTINEL_VALUE && !is_string($option_strategy_id)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($option_strategy_id, true), gettype($option_strategy_id)));
-        }
-        // verify the required parameter 'option_strategy_id' is set
-        if ($option_strategy_id === SENTINEL_VALUE || (is_array($option_strategy_id) && count($option_strategy_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter option_strategy_id when calling placeOptionStrategy'
-            );
-        }
-        if ($options_place_option_strategy_request !== SENTINEL_VALUE) {
-            if (!($options_place_option_strategy_request instanceof \SnapTrade\Model\OptionsPlaceOptionStrategyRequest)) {
-                if (!is_array($options_place_option_strategy_request))
-                    throw new \InvalidArgumentException('"options_place_option_strategy_request" must be associative array or an instance of \SnapTrade\Model\OptionsPlaceOptionStrategyRequest OptionsApi.placeOptionStrategy.');
-                else
-                    $options_place_option_strategy_request = new \SnapTrade\Model\OptionsPlaceOptionStrategyRequest($options_place_option_strategy_request);
-            }
-        }
-        // verify the required parameter 'options_place_option_strategy_request' is set
-        if ($options_place_option_strategy_request === SENTINEL_VALUE || (is_array($options_place_option_strategy_request) && count($options_place_option_strategy_request) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter options_place_option_strategy_request when calling placeOptionStrategy'
-            );
-        }
-
-
-        $resourcePath = '/accounts/{accountId}/optionStrategy/{optionStrategyId}/execute';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-        if ($user_id !== SENTINEL_VALUE) {
-            // query params
-            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-                $user_id,
-                'userId', // param base name
-                'string', // openApiType
-                'form', // style
-                true, // explode
-                true // required
-            ) ?? []);
-        }
-        if ($user_secret !== SENTINEL_VALUE) {
-            // query params
-            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-                $user_secret,
-                'userSecret', // param base name
-                'string', // openApiType
-                'form', // style
-                true, // explode
-                true // required
-            ) ?? []);
-        }
-
-
-        // path params
-        if ($account_id !== SENTINEL_VALUE) {
-            $resourcePath = str_replace(
-                '{' . 'accountId' . '}',
-                ObjectSerializer::toPathValue($account_id),
-                $resourcePath
-            );
-        }
-        // path params
-        if ($option_strategy_id !== SENTINEL_VALUE) {
-            $resourcePath = str_replace(
-                '{' . 'optionStrategyId' . '}',
-                ObjectSerializer::toPathValue($option_strategy_id),
-                $resourcePath
-            );
-        }
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (isset($options_place_option_strategy_request)) {
-            if (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($options_place_option_strategy_request));
-            } else {
-                $httpBody = $options_place_option_strategy_request;
-            }
-        } elseif (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\json_encode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('clientId');
-        if ($apiKey !== null) {
-            $queryParams['clientId'] = $apiKey;
-        }
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('Signature');
-        if ($apiKey !== null) {
-            $headers['Signature'] = $apiKey;
-        }
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('timestamp');
-        if ($apiKey !== null) {
-            $queryParams['timestamp'] = $apiKey;
-        }
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $method = 'POST';
         $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();

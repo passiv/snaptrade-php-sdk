@@ -59,9 +59,21 @@ class TradingApiTest extends TestCase
     }
 
     /**
+     * Test case for cancelOrder
+     *
+     * Cancel order.
+     *
+     */
+    public function testCancelOrder()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for cancelUserAccountOrder
      *
-     * Cancel open order in account.
+     * Cancel equity order.
      *
      */
     public function testCancelUserAccountOrder()
@@ -71,9 +83,33 @@ class TradingApiTest extends TestCase
     }
 
     /**
+     * Test case for getCryptocurrencyPairQuote
+     *
+     * Get crypto pair quote.
+     *
+     */
+    public function testGetCryptocurrencyPairQuote()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for getOptionImpact
+     *
+     * Get option order impact.
+     *
+     */
+    public function testGetOptionImpact()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for getOrderImpact
      *
-     * Check the impact of a trade on an account.
+     * Check equity order impact.
      *
      */
     public function testGetOrderImpact()
@@ -85,7 +121,7 @@ class TradingApiTest extends TestCase
     /**
      * Test case for getUserAccountQuotes
      *
-     * Get symbol quotes.
+     * Get equity symbol quotes.
      *
      */
     public function testGetUserAccountQuotes()
@@ -95,9 +131,33 @@ class TradingApiTest extends TestCase
     }
 
     /**
+     * Test case for placeBracketOrder
+     *
+     * Place bracket order.
+     *
+     */
+    public function testPlaceBracketOrder()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for placeCryptoOrder
+     *
+     * Place crypto order.
+     *
+     */
+    public function testPlaceCryptoOrder()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for placeForceOrder
      *
-     * Place a trade with NO validation..
+     * Place equity order.
      *
      */
     public function testPlaceForceOrder()
@@ -107,12 +167,60 @@ class TradingApiTest extends TestCase
     }
 
     /**
+     * Test case for placeMlegOrder
+     *
+     * Place option order.
+     *
+     */
+    public function testPlaceMlegOrder()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for placeOrder
      *
-     * Place order.
+     * Place checked equity order.
      *
      */
     public function testPlaceOrder()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for previewCryptoOrder
+     *
+     * Preview crypto order.
+     *
+     */
+    public function testPreviewCryptoOrder()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for replaceOrder
+     *
+     * Replace order.
+     *
+     */
+    public function testReplaceOrder()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for searchCryptocurrencyPairInstruments
+     *
+     * Get crypto pairs.
+     *
+     */
+    public function testSearchCryptocurrencyPairInstruments()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

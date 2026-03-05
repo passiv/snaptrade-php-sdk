@@ -56,6 +56,8 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
         'custom_redirect' => 'string',
         'reconnect' => 'string',
         'connection_type' => 'string',
+        'show_close_button' => 'bool',
+        'dark_mode' => 'bool',
         'connection_portal_version' => 'string'
     ];
 
@@ -72,6 +74,8 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
         'custom_redirect' => null,
         'reconnect' => null,
         'connection_type' => null,
+        'show_close_button' => null,
+        'dark_mode' => null,
         'connection_portal_version' => null
     ];
 
@@ -86,6 +90,8 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
 		'custom_redirect' => false,
 		'reconnect' => false,
 		'connection_type' => false,
+		'show_close_button' => false,
+		'dark_mode' => false,
 		'connection_portal_version' => false
     ];
 
@@ -180,6 +186,8 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
         'custom_redirect' => 'customRedirect',
         'reconnect' => 'reconnect',
         'connection_type' => 'connectionType',
+        'show_close_button' => 'showCloseButton',
+        'dark_mode' => 'darkMode',
         'connection_portal_version' => 'connectionPortalVersion'
     ];
 
@@ -194,6 +202,8 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
         'custom_redirect' => 'setCustomRedirect',
         'reconnect' => 'setReconnect',
         'connection_type' => 'setConnectionType',
+        'show_close_button' => 'setShowCloseButton',
+        'dark_mode' => 'setDarkMode',
         'connection_portal_version' => 'setConnectionPortalVersion'
     ];
 
@@ -208,6 +218,8 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
         'custom_redirect' => 'getCustomRedirect',
         'reconnect' => 'getReconnect',
         'connection_type' => 'getConnectionType',
+        'show_close_button' => 'getShowCloseButton',
+        'dark_mode' => 'getDarkMode',
         'connection_portal_version' => 'getConnectionPortalVersion'
     ];
 
@@ -254,8 +266,10 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
 
     public const CONNECTION_TYPE_READ = 'read';
     public const CONNECTION_TYPE_TRADE = 'trade';
-    public const CONNECTION_PORTAL_VERSION_V2 = 'v2';
+    public const CONNECTION_TYPE_TRADE_IF_AVAILABLE = 'trade-if-available';
+    public const CONNECTION_PORTAL_VERSION_V4 = 'v4';
     public const CONNECTION_PORTAL_VERSION_V3 = 'v3';
+    public const CONNECTION_PORTAL_VERSION_V2 = 'v2';
 
     /**
      * Gets allowable values of the enum
@@ -267,6 +281,7 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
         return [
             self::CONNECTION_TYPE_READ,
             self::CONNECTION_TYPE_TRADE,
+            self::CONNECTION_TYPE_TRADE_IF_AVAILABLE,
         ];
     }
 
@@ -278,8 +293,9 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
     public function getConnectionPortalVersionAllowableValues()
     {
         return [
-            self::CONNECTION_PORTAL_VERSION_V2,
+            self::CONNECTION_PORTAL_VERSION_V4,
             self::CONNECTION_PORTAL_VERSION_V3,
+            self::CONNECTION_PORTAL_VERSION_V2,
         ];
     }
 
@@ -302,8 +318,10 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
         $this->setIfExists('immediate_redirect', $data ?? [], null);
         $this->setIfExists('custom_redirect', $data ?? [], null);
         $this->setIfExists('reconnect', $data ?? [], null);
-        $this->setIfExists('connection_type', $data ?? [], null);
-        $this->setIfExists('connection_portal_version', $data ?? [], null);
+        $this->setIfExists('connection_type', $data ?? [], 'read');
+        $this->setIfExists('show_close_button', $data ?? [], null);
+        $this->setIfExists('dark_mode', $data ?? [], null);
+        $this->setIfExists('connection_portal_version', $data ?? [], 'v4');
     }
 
     /**
@@ -379,7 +397,7 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
     /**
      * Sets broker
      *
-     * @param string|null $broker Slug of the brokerage to connect the user to. See [this document](https://snaptrade.notion.site/SnapTrade-Brokerage-Integrations-f83946a714a84c3caf599f6a945f0ead) for a list of supported brokerages and their slugs.
+     * @param string|null $broker Slug of the brokerage to connect the user to. See [the integrations page](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=3cfea70ef4254afc89704e47275a7a9a&pvs=4) for a list of supported brokerages and their slugs.
      *
      * @return self
      */
@@ -408,7 +426,7 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
     /**
      * Sets immediate_redirect
      *
-     * @param bool|null $immediate_redirect When set to True, user will be redirected back to the partner's site instead of the connection portal
+     * @param bool|null $immediate_redirect When set to `true`, user will be redirected back to the partner's site instead of the connection portal. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](/docs/implement-connection-portal) for more information.
      *
      * @return self
      */
@@ -437,7 +455,7 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
     /**
      * Sets custom_redirect
      *
-     * @param string|null $custom_redirect URL to redirect the user to after the user connects their brokerage account
+     * @param string|null $custom_redirect URL to redirect the user to after the user connects their brokerage account. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](/docs/implement-connection-portal) for more information.
      *
      * @return self
      */
@@ -466,7 +484,7 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
     /**
      * Sets reconnect
      *
-     * @param string|null $reconnect The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See ‘Reconnecting Accounts’ for more information.
+     * @param string|null $reconnect The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See the [guide on fixing broken connections](/docs/fix-broken-connections) for more information.
      *
      * @return self
      */
@@ -495,7 +513,7 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
     /**
      * Sets connection_type
      *
-     * @param string|null $connection_type Sets whether the connection should be read or trade
+     * @param string|null $connection_type Determines connection permissions (default: read) - `read`: Data access only. - `trade`: Data and trading access. - `trade-if-available`: Attempts to establish a trading connection if the brokerage supports it, otherwise falls back to read-only access automatically.
      *
      * @return self
      */
@@ -522,6 +540,64 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
     }
 
     /**
+     * Gets show_close_button
+     *
+     * @return bool|null
+     */
+    public function getShowCloseButton()
+    {
+        return $this->container['show_close_button'];
+    }
+
+    /**
+     * Sets show_close_button
+     *
+     * @param bool|null $show_close_button Controls whether the close (X) button is displayed in the connection portal. When false, you control closing behavior from your app. Defaults to true.
+     *
+     * @return self
+     */
+    public function setShowCloseButton($show_close_button)
+    {
+
+        if (is_null($show_close_button)) {
+            throw new \InvalidArgumentException('non-nullable show_close_button cannot be null');
+        }
+
+        $this->container['show_close_button'] = $show_close_button;
+
+        return $this;
+    }
+
+    /**
+     * Gets dark_mode
+     *
+     * @return bool|null
+     */
+    public function getDarkMode()
+    {
+        return $this->container['dark_mode'];
+    }
+
+    /**
+     * Sets dark_mode
+     *
+     * @param bool|null $dark_mode Enable dark mode for the connection portal. Defaults to false.
+     *
+     * @return self
+     */
+    public function setDarkMode($dark_mode)
+    {
+
+        if (is_null($dark_mode)) {
+            throw new \InvalidArgumentException('non-nullable dark_mode cannot be null');
+        }
+
+        $this->container['dark_mode'] = $dark_mode;
+
+        return $this;
+    }
+
+    /**
      * Gets connection_portal_version
      *
      * @return string|null
@@ -534,7 +610,7 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
     /**
      * Sets connection_portal_version
      *
-     * @param string|null $connection_portal_version Sets the version of the connection portal to render, with a default to 'v3'
+     * @param string|null $connection_portal_version Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4.
      *
      * @return self
      */

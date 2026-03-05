@@ -55,12 +55,12 @@ class UnderlyingSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
         'symbol' => 'string',
         'raw_symbol' => 'string',
         'description' => 'string',
-        'currency' => '\SnapTrade\Model\UniversalSymbolCurrency',
+        'currency' => '\SnapTrade\Model\SymbolCurrency',
         'exchange' => '\SnapTrade\Model\UnderlyingSymbolExchange',
         'type' => '\SnapTrade\Model\UnderlyingSymbolType',
-        'currencies' => '\SnapTrade\Model\Currency[]',
         'figi_code' => 'string',
-        'figi_instrument' => '\SnapTrade\Model\SymbolFigiInstrument'
+        'figi_instrument' => '\SnapTrade\Model\SymbolFigiInstrument',
+        'currencies' => '\SnapTrade\Model\Currency[]'
     ];
 
     /**
@@ -78,9 +78,9 @@ class UnderlyingSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
         'currency' => null,
         'exchange' => null,
         'type' => null,
-        'currencies' => null,
         'figi_code' => null,
-        'figi_instrument' => null
+        'figi_instrument' => null,
+        'currencies' => null
     ];
 
     /**
@@ -96,9 +96,9 @@ class UnderlyingSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
 		'currency' => false,
 		'exchange' => false,
 		'type' => false,
-		'currencies' => false,
 		'figi_code' => true,
-		'figi_instrument' => true
+		'figi_instrument' => true,
+		'currencies' => false
     ];
 
     /**
@@ -194,9 +194,9 @@ class UnderlyingSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
         'currency' => 'currency',
         'exchange' => 'exchange',
         'type' => 'type',
-        'currencies' => 'currencies',
         'figi_code' => 'figi_code',
-        'figi_instrument' => 'figi_instrument'
+        'figi_instrument' => 'figi_instrument',
+        'currencies' => 'currencies'
     ];
 
     /**
@@ -212,9 +212,9 @@ class UnderlyingSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
         'currency' => 'setCurrency',
         'exchange' => 'setExchange',
         'type' => 'setType',
-        'currencies' => 'setCurrencies',
         'figi_code' => 'setFigiCode',
-        'figi_instrument' => 'setFigiInstrument'
+        'figi_instrument' => 'setFigiInstrument',
+        'currencies' => 'setCurrencies'
     ];
 
     /**
@@ -230,9 +230,9 @@ class UnderlyingSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
         'currency' => 'getCurrency',
         'exchange' => 'getExchange',
         'type' => 'getType',
-        'currencies' => 'getCurrencies',
         'figi_code' => 'getFigiCode',
-        'figi_instrument' => 'getFigiInstrument'
+        'figi_instrument' => 'getFigiInstrument',
+        'currencies' => 'getCurrencies'
     ];
 
     /**
@@ -299,9 +299,9 @@ class UnderlyingSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('currency', $data ?? [], null);
         $this->setIfExists('exchange', $data ?? [], null);
         $this->setIfExists('type', $data ?? [], null);
-        $this->setIfExists('currencies', $data ?? [], null);
         $this->setIfExists('figi_code', $data ?? [], null);
         $this->setIfExists('figi_instrument', $data ?? [], null);
+        $this->setIfExists('currencies', $data ?? [], null);
     }
 
     /**
@@ -472,7 +472,7 @@ class UnderlyingSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets currency
      *
-     * @return \SnapTrade\Model\UniversalSymbolCurrency|null
+     * @return \SnapTrade\Model\SymbolCurrency|null
      */
     public function getCurrency()
     {
@@ -482,7 +482,7 @@ class UnderlyingSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets currency
      *
-     * @param \SnapTrade\Model\UniversalSymbolCurrency|null $currency currency
+     * @param \SnapTrade\Model\SymbolCurrency|null $currency currency
      *
      * @return self
      */
@@ -557,37 +557,6 @@ class UnderlyingSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets currencies
-     *
-     * @return \SnapTrade\Model\Currency[]|null
-     * @deprecated
-     */
-    public function getCurrencies()
-    {
-        return $this->container['currencies'];
-    }
-
-    /**
-     * Sets currencies
-     *
-     * @param \SnapTrade\Model\Currency[]|null $currencies This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
-     *
-     * @return self
-     * @deprecated
-     */
-    public function setCurrencies($currencies)
-    {
-
-        if (is_null($currencies)) {
-            throw new \InvalidArgumentException('non-nullable currencies cannot be null');
-        }
-
-        $this->container['currencies'] = $currencies;
-
-        return $this;
-    }
-
-    /**
      * Gets figi_code
      *
      * @return string|null
@@ -655,6 +624,37 @@ class UnderlyingSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['figi_instrument'] = $figi_instrument;
+
+        return $this;
+    }
+
+    /**
+     * Gets currencies
+     *
+     * @return \SnapTrade\Model\Currency[]|null
+     * @deprecated
+     */
+    public function getCurrencies()
+    {
+        return $this->container['currencies'];
+    }
+
+    /**
+     * Sets currencies
+     *
+     * @param \SnapTrade\Model\Currency[]|null $currencies This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
+     *
+     * @return self
+     * @deprecated
+     */
+    public function setCurrencies($currencies)
+    {
+
+        if (is_null($currencies)) {
+            throw new \InvalidArgumentException('non-nullable currencies cannot be null');
+        }
+
+        $this->container['currencies'] = $currencies;
 
         return $this;
     }

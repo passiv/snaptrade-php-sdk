@@ -61,6 +61,7 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
         'url' => 'string',
         'enabled' => 'bool',
         'maintenance_mode' => 'bool',
+        'is_degraded' => 'bool',
         'allows_trading' => 'bool',
         'allows_fractional_units' => 'bool',
         'has_reporting' => 'bool',
@@ -88,6 +89,7 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
         'url' => 'url',
         'enabled' => null,
         'maintenance_mode' => null,
+        'is_degraded' => null,
         'allows_trading' => null,
         'allows_fractional_units' => null,
         'has_reporting' => null,
@@ -113,6 +115,7 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
 		'url' => false,
 		'enabled' => false,
 		'maintenance_mode' => false,
+		'is_degraded' => false,
 		'allows_trading' => true,
 		'allows_fractional_units' => true,
 		'has_reporting' => true,
@@ -218,6 +221,7 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
         'url' => 'url',
         'enabled' => 'enabled',
         'maintenance_mode' => 'maintenance_mode',
+        'is_degraded' => 'is_degraded',
         'allows_trading' => 'allows_trading',
         'allows_fractional_units' => 'allows_fractional_units',
         'has_reporting' => 'has_reporting',
@@ -243,6 +247,7 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
         'url' => 'setUrl',
         'enabled' => 'setEnabled',
         'maintenance_mode' => 'setMaintenanceMode',
+        'is_degraded' => 'setIsDegraded',
         'allows_trading' => 'setAllowsTrading',
         'allows_fractional_units' => 'setAllowsFractionalUnits',
         'has_reporting' => 'setHasReporting',
@@ -268,6 +273,7 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
         'url' => 'getUrl',
         'enabled' => 'getEnabled',
         'maintenance_mode' => 'getMaintenanceMode',
+        'is_degraded' => 'getIsDegraded',
         'allows_trading' => 'getAllowsTrading',
         'allows_fractional_units' => 'getAllowsFractionalUnits',
         'has_reporting' => 'getHasReporting',
@@ -344,6 +350,7 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('url', $data ?? [], null);
         $this->setIfExists('enabled', $data ?? [], null);
         $this->setIfExists('maintenance_mode', $data ?? [], null);
+        $this->setIfExists('is_degraded', $data ?? [], null);
         $this->setIfExists('allows_trading', $data ?? [], null);
         $this->setIfExists('allows_fractional_units', $data ?? [], null);
         $this->setIfExists('has_reporting', $data ?? [], null);
@@ -688,6 +695,35 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['maintenance_mode'] = $maintenance_mode;
+
+        return $this;
+    }
+
+    /**
+     * Gets is_degraded
+     *
+     * @return bool|null
+     */
+    public function getIsDegraded()
+    {
+        return $this->container['is_degraded'];
+    }
+
+    /**
+     * Sets is_degraded
+     *
+     * @param bool|null $is_degraded Whether the brokerage is currently degraded. A degraded brokerage may have reduced functionality or be experiencing technical issues.
+     *
+     * @return self
+     */
+    public function setIsDegraded($is_degraded)
+    {
+
+        if (is_null($is_degraded)) {
+            throw new \InvalidArgumentException('non-nullable is_degraded cannot be null');
+        }
+
+        $this->container['is_degraded'] = $is_degraded;
 
         return $this;
     }

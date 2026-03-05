@@ -163,6 +163,15 @@ class BrokerageTest extends TestCase
     }
 
     /**
+     * Test attribute "is_degraded"
+     */
+    public function testPropertyIsDegraded()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "allows_trading"
      */
     public function testPropertyAllowsTrading()

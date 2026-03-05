@@ -1,6 +1,7 @@
 <?php
 /**
- * ExperimentalEndpointsApiTest
+ * AccountValueHistoryResponseTest
+ *
  * PHP version 7.4
  *
  * @category Class
@@ -20,18 +21,22 @@
  */
 
 
-namespace SnapTrade\Test\Api;
+namespace SnapTrade\Test\Model;
 
-use \SnapTrade\Configuration;
-use \SnapTrade\ApiException;
-use \SnapTrade\ObjectSerializer;
 use PHPUnit\Framework\TestCase;
 
-class ExperimentalEndpointsApiTest extends TestCase
+/**
+ * AccountValueHistoryResponseTest Class Doc Comment
+ *
+ * @category    Class
+ * @description The response to the account value history endpoint, containing a list of estimated account values at different points in time.
+ * @package     SnapTrade
+ */
+class AccountValueHistoryResponseTest extends TestCase
 {
 
     /**
-     * Setup before running any test cases
+     * Setup before running any test case
      */
     public static function setUpBeforeClass(): void
     {
@@ -59,48 +64,27 @@ class ExperimentalEndpointsApiTest extends TestCase
     }
 
     /**
-     * Test case for getAccountBalanceHistory
-     *
-     * List historical account total value.
-     *
+     * Test "AccountValueHistoryResponse"
      */
-    public function testGetAccountBalanceHistory()
+    public function testAccountValueHistoryResponse()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for getUserAccountOrderDetailV2
-     *
-     * Get account order detail (V2).
-     *
+     * Test attribute "history"
      */
-    public function testGetUserAccountOrderDetailV2()
+    public function testPropertyHistory()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for getUserAccountOrdersV2
-     *
-     * List account orders v2.
-     *
+     * Test attribute "currency"
      */
-    public function testGetUserAccountOrdersV2()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for getUserAccountRecentOrdersV2
-     *
-     * List account recent orders (V2, last 24 hours only).
-     *
-     */
-    public function testGetUserAccountRecentOrdersV2()
+    public function testPropertyCurrency()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

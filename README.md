@@ -47,6 +47,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.connections.removeBrokerageAuthorization`](#snaptradeconnectionsremovebrokerageauthorization)
   * [`snaptrade.connections.returnRates`](#snaptradeconnectionsreturnrates)
   * [`snaptrade.connections.sessionEvents`](#snaptradeconnectionssessionevents)
+  * [`snaptrade.experimentalEndpoints.getAccountBalanceHistory`](#snaptradeexperimentalendpointsgetaccountbalancehistory)
   * [`snaptrade.experimentalEndpoints.getUserAccountOrderDetailV2`](#snaptradeexperimentalendpointsgetuseraccountorderdetailv2)
   * [`snaptrade.experimentalEndpoints.getUserAccountOrdersV2`](#snaptradeexperimentalendpointsgetuseraccountordersv2)
   * [`snaptrade.experimentalEndpoints.getUserAccountRecentOrdersV2`](#snaptradeexperimentalendpointsgetuseraccountrecentordersv2)
@@ -1241,6 +1242,44 @@ Optional comma separated list of session IDs used to filter the request on speci
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/sessionEvents` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.experimentalEndpoints.getAccountBalanceHistory`<a id="snaptradeexperimentalendpointsgetaccountbalancehistory"></a>
+
+An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and only available for certain brokerages with a maximum lookback of 1 year.
+
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $snaptrade->experimentalEndpoints->getAccountBalanceHistory(
+    user_id: "snaptrade-user-123", 
+    user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61", 
+    account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631"
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### user_id: `string`<a id="user_id-string"></a>
+
+##### user_secret: `string`<a id="user_secret-string"></a>
+
+##### account_id: `string`<a id="account_id-string"></a>
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[**AccountValueHistoryResponse**](./lib/Model/AccountValueHistoryResponse.php)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/balanceHistory` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

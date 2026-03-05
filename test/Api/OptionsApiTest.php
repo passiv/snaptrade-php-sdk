@@ -71,18 +71,6 @@ class OptionsApiTest extends TestCase
     }
 
     /**
-     * Test case for getOptionsChain
-     *
-     * Get the options chain for a symbol.
-     *
-     */
-    public function testGetOptionsChain()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test case for listOptionHoldings
      *
      * List account option positions.

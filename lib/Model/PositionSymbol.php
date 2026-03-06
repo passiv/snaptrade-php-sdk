@@ -423,7 +423,7 @@ class PositionSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets local_id
      *
-     * @param string|null $local_id This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
+     * @param string|null $local_id This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this.
      *
      * @return self
      * @deprecated
@@ -461,7 +461,7 @@ class PositionSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets is_quotable
      *
-     * @param bool|null $is_quotable This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
+     * @param bool|null $is_quotable This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this.
      *
      * @return self
      * @deprecated
@@ -492,7 +492,7 @@ class PositionSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets is_tradable
      *
-     * @param bool|null $is_tradable This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
+     * @param bool|null $is_tradable This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this.
      *
      * @return self
      * @deprecated

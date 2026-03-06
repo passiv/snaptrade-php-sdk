@@ -397,7 +397,7 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
     /**
      * Sets broker
      *
-     * @param string|null $broker Slug of the brokerage to connect the user to. See [the integrations page](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=3cfea70ef4254afc89704e47275a7a9a&pvs=4) for a list of supported brokerages and their slugs.
+     * @param string|null $broker Slug of the brokerage to connect the user to. See [the integrations page](https://support.snaptrade.com/brokerages) for a list of supported brokerages and their slugs.
      *
      * @return self
      */

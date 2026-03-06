@@ -924,7 +924,7 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets portfolio_group
      *
-     * @param string|null $portfolio_group Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a usecase for it.
+     * @param string|null $portfolio_group Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a use case for it.
      *
      * @return self
      * @deprecated

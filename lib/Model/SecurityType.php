@@ -405,7 +405,7 @@ class SecurityType implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets is_supported
      *
-     * @param bool|null $is_supported This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
+     * @param bool|null $is_supported This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this.
      *
      * @return self
      * @deprecated

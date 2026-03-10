@@ -30,7 +30,7 @@ use \SnapTrade\ObjectSerializer;
  * OptionImpact Class Doc Comment
  *
  * @category Class
- * @description Estimated cost and fees for an option order before it is placed.
+ * @description Estimated cash change and fees for an option order before it is placed.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
@@ -51,8 +51,9 @@ class OptionImpact implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'estimated_cost' => 'string',
-        'estimated_transaction_fee' => 'string'
+        'estimated_cash_change' => 'string',
+        'cash_change_direction' => 'string',
+        'estimated_fee_total' => 'string'
     ];
 
     /**
@@ -63,8 +64,9 @@ class OptionImpact implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'estimated_cost' => null,
-        'estimated_transaction_fee' => null
+        'estimated_cash_change' => null,
+        'cash_change_direction' => null,
+        'estimated_fee_total' => null
     ];
 
     /**
@@ -73,8 +75,9 @@ class OptionImpact implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'estimated_cost' => false,
-		'estimated_transaction_fee' => false
+        'estimated_cash_change' => false,
+		'cash_change_direction' => true,
+		'estimated_fee_total' => false
     ];
 
     /**
@@ -163,8 +166,9 @@ class OptionImpact implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'estimated_cost' => 'estimated_cost',
-        'estimated_transaction_fee' => 'estimated_transaction_fee'
+        'estimated_cash_change' => 'estimated_cash_change',
+        'cash_change_direction' => 'cash_change_direction',
+        'estimated_fee_total' => 'estimated_fee_total'
     ];
 
     /**
@@ -173,8 +177,9 @@ class OptionImpact implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'estimated_cost' => 'setEstimatedCost',
-        'estimated_transaction_fee' => 'setEstimatedTransactionFee'
+        'estimated_cash_change' => 'setEstimatedCashChange',
+        'cash_change_direction' => 'setCashChangeDirection',
+        'estimated_fee_total' => 'setEstimatedFeeTotal'
     ];
 
     /**
@@ -183,8 +188,9 @@ class OptionImpact implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'estimated_cost' => 'getEstimatedCost',
-        'estimated_transaction_fee' => 'getEstimatedTransactionFee'
+        'estimated_cash_change' => 'getEstimatedCashChange',
+        'cash_change_direction' => 'getCashChangeDirection',
+        'estimated_fee_total' => 'getEstimatedFeeTotal'
     ];
 
     /**
@@ -228,6 +234,25 @@ class OptionImpact implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
+    public const CASH_CHANGE_DIRECTION_CREDIT = 'CREDIT';
+    public const CASH_CHANGE_DIRECTION_DEBIT = 'DEBIT';
+    public const CASH_CHANGE_DIRECTION_EVEN = 'EVEN';
+    public const CASH_CHANGE_DIRECTION_UNKNOWN = 'UNKNOWN';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getCashChangeDirectionAllowableValues()
+    {
+        return [
+            self::CASH_CHANGE_DIRECTION_CREDIT,
+            self::CASH_CHANGE_DIRECTION_DEBIT,
+            self::CASH_CHANGE_DIRECTION_EVEN,
+            self::CASH_CHANGE_DIRECTION_UNKNOWN,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -244,8 +269,9 @@ class OptionImpact implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('estimated_cost', $data ?? [], null);
-        $this->setIfExists('estimated_transaction_fee', $data ?? [], null);
+        $this->setIfExists('estimated_cash_change', $data ?? [], null);
+        $this->setIfExists('cash_change_direction', $data ?? [], null);
+        $this->setIfExists('estimated_fee_total', $data ?? [], null);
     }
 
     /**
@@ -275,6 +301,15 @@ class OptionImpact implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
+        $allowedValues = $this->getCashChangeDirectionAllowableValues();
+        if (!is_null($this->container['cash_change_direction']) && !in_array($this->container['cash_change_direction'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'cash_change_direction', must be one of '%s'",
+                $this->container['cash_change_direction'],
+                implode("', '", $allowedValues)
+            );
+        }
+
         return $invalidProperties;
     }
 
@@ -291,59 +326,105 @@ class OptionImpact implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets estimated_cost
+     * Gets estimated_cash_change
      *
      * @return string|null
      */
-    public function getEstimatedCost()
+    public function getEstimatedCashChange()
     {
-        return $this->container['estimated_cost'];
+        return $this->container['estimated_cash_change'];
     }
 
     /**
-     * Sets estimated_cost
+     * Sets estimated_cash_change
      *
-     * @param string|null $estimated_cost Estimated option premium for the order (before fees).
+     * @param string|null $estimated_cash_change Estimated cash change for the order, before fees.
      *
      * @return self
      */
-    public function setEstimatedCost($estimated_cost)
+    public function setEstimatedCashChange($estimated_cash_change)
     {
 
-        if (is_null($estimated_cost)) {
-            throw new \InvalidArgumentException('non-nullable estimated_cost cannot be null');
+        if (is_null($estimated_cash_change)) {
+            throw new \InvalidArgumentException('non-nullable estimated_cash_change cannot be null');
         }
 
-        $this->container['estimated_cost'] = $estimated_cost;
+        $this->container['estimated_cash_change'] = $estimated_cash_change;
 
         return $this;
     }
 
     /**
-     * Gets estimated_transaction_fee
+     * Gets cash_change_direction
      *
      * @return string|null
      */
-    public function getEstimatedTransactionFee()
+    public function getCashChangeDirection()
     {
-        return $this->container['estimated_transaction_fee'];
+        return $this->container['cash_change_direction'];
     }
 
     /**
-     * Sets estimated_transaction_fee
+     * Sets cash_change_direction
      *
-     * @param string|null $estimated_transaction_fee Estimated transaction fees and commissions for the order.
+     * @param string|null $cash_change_direction Direction of the cash change. CREDIT means cash is received, DEBIT means cash is paid out, EVEN means no cash changes hands. UNKNOWN if the direction cannot be determined from the request.
      *
      * @return self
      */
-    public function setEstimatedTransactionFee($estimated_transaction_fee)
+    public function setCashChangeDirection($cash_change_direction)
     {
-
-        if (is_null($estimated_transaction_fee)) {
-            throw new \InvalidArgumentException('non-nullable estimated_transaction_fee cannot be null');
+        $allowedValues = $this->getCashChangeDirectionAllowableValues();
+        if (!is_null($cash_change_direction) && !in_array($cash_change_direction, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'cash_change_direction', must be one of '%s'",
+                    $cash_change_direction,
+                    implode("', '", $allowedValues)
+                )
+            );
         }
 
-        $this->container['estimated_transaction_fee'] = $estimated_transaction_fee;
+        if (is_null($cash_change_direction)) {
+            array_push($this->openAPINullablesSetToNull, 'cash_change_direction');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('cash_change_direction', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['cash_change_direction'] = $cash_change_direction;
+
+        return $this;
+    }
+
+    /**
+     * Gets estimated_fee_total
+     *
+     * @return string|null
+     */
+    public function getEstimatedFeeTotal()
+    {
+        return $this->container['estimated_fee_total'];
+    }
+
+    /**
+     * Sets estimated_fee_total
+     *
+     * @param string|null $estimated_fee_total Estimated total transaction fees and commissions for the order.
+     *
+     * @return self
+     */
+    public function setEstimatedFeeTotal($estimated_fee_total)
+    {
+
+        if (is_null($estimated_fee_total)) {
+            throw new \InvalidArgumentException('non-nullable estimated_fee_total cannot be null');
+        }
+
+        $this->container['estimated_fee_total'] = $estimated_fee_total;
 
         return $this;
     }

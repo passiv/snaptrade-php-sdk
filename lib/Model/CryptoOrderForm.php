@@ -591,7 +591,7 @@ class CryptoOrderForm implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets limit_price
      *
-     * @param float|null $limit_price The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
+     * @param float|null $limit_price The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT` or `TAKE_PROFIT_LIMIT`.
      *
      * @return self
      */
@@ -620,7 +620,7 @@ class CryptoOrderForm implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets stop_price
      *
-     * @param float|null $stop_price The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
+     * @param float|null $stop_price The stop price. Required if the order type is `STOP_LOSS_MARKET`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT_MARKET` or `TAKE_PROFIT_LIMIT`.
      *
      * @return self
      */
@@ -649,7 +649,7 @@ class CryptoOrderForm implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets post_only
      *
-     * @param bool|null $post_only Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
+     * @param bool|null $post_only Valid and required only for order type `LIMIT`. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
      *
      * @return self
      */
@@ -678,7 +678,7 @@ class CryptoOrderForm implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets expiration_date
      *
-     * @param \DateTime|null $expiration_date The expiration date of the order. Required if the time_in_force is GTD.
+     * @param \DateTime|null $expiration_date The expiration date of the order. Required if the time_in_force is `GTD`.
      *
      * @return self
      */

@@ -143,10 +143,11 @@ class OptionsApi extends \SnapTrade\CustomApi
      *
      * Get option quote
      *
-     * Returns a real-time quote for a single option contract. The option contract is specified using an OCC-formatted symbol.  OCC format: &#x60;AAPL  251219C00150000&#x60; (underlying padded to 6 characters with spaces, followed by date, put/call, and strike).
+     * Returns a real-time quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example &#x60;AAPL  251114C00240000&#x60; represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)
      *
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
+     * @param  string $account_id account_id (required)
      * @param  string $symbol The OCC-formatted option symbol. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOptionQuote'] to see the possible values for this operation
      *
@@ -157,13 +158,14 @@ class OptionsApi extends \SnapTrade\CustomApi
     public function getOptionQuote(
         $user_id,
         $user_secret,
+        $account_id,
         $symbol,
 
         string $contentType = self::contentTypes['getOptionQuote'][0]
     )
     {
 
-        list($response) = $this->getOptionQuoteWithHttpInfo($user_id, $user_secret, $symbol, $contentType);
+        list($response) = $this->getOptionQuoteWithHttpInfo($user_id, $user_secret, $account_id, $symbol, $contentType);
         return $response;
     }
 
@@ -172,10 +174,11 @@ class OptionsApi extends \SnapTrade\CustomApi
      *
      * Get option quote
      *
-     * Returns a real-time quote for a single option contract. The option contract is specified using an OCC-formatted symbol.  OCC format: &#x60;AAPL  251219C00150000&#x60; (underlying padded to 6 characters with spaces, followed by date, put/call, and strike).
+     * Returns a real-time quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example &#x60;AAPL  251114C00240000&#x60; represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
+     * @param  string $account_id (required)
      * @param  string $symbol The OCC-formatted option symbol. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOptionQuote'] to see the possible values for this operation
      *
@@ -183,9 +186,9 @@ class OptionsApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return array of \SnapTrade\Model\OptionQuote|\SnapTrade\Model\Model404FailedRequestResponse|\SnapTrade\Model\Model500UnexpectedExceptionResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getOptionQuoteWithHttpInfo($user_id, $user_secret, $symbol, string $contentType = self::contentTypes['getOptionQuote'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    public function getOptionQuoteWithHttpInfo($user_id, $user_secret, $account_id, $symbol, string $contentType = self::contentTypes['getOptionQuote'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->getOptionQuoteRequest($user_id, $user_secret, $symbol, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getOptionQuoteRequest($user_id, $user_secret, $account_id, $symbol, $contentType);
 
         // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
@@ -203,6 +206,7 @@ class OptionsApi extends \SnapTrade\CustomApi
                     return $this->getOptionQuoteWithHttpInfo(
                         $user_id,
                         $user_secret,
+                        $account_id,
                         $symbol,
                         $contentType,
                         $requestOptions->setRetryOAuth(false)
@@ -270,7 +274,7 @@ class OptionsApi extends \SnapTrade\CustomApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
-                case 500:
+                case 429:
                     if ('\SnapTrade\Model\Model500UnexpectedExceptionResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
@@ -321,7 +325,7 @@ class OptionsApi extends \SnapTrade\CustomApi
                     );
                     $e->setResponseObject($data);
                     break;
-                case 500:
+                case 429:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\SnapTrade\Model\Model500UnexpectedExceptionResponse',
@@ -339,10 +343,11 @@ class OptionsApi extends \SnapTrade\CustomApi
      *
      * Get option quote
      *
-     * Returns a real-time quote for a single option contract. The option contract is specified using an OCC-formatted symbol.  OCC format: &#x60;AAPL  251219C00150000&#x60; (underlying padded to 6 characters with spaces, followed by date, put/call, and strike).
+     * Returns a real-time quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example &#x60;AAPL  251114C00240000&#x60; represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
+     * @param  string $account_id (required)
      * @param  string $symbol The OCC-formatted option symbol. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOptionQuote'] to see the possible values for this operation
      *
@@ -352,13 +357,14 @@ class OptionsApi extends \SnapTrade\CustomApi
     public function getOptionQuoteAsync(
         $user_id,
         $user_secret,
+        $account_id,
         $symbol,
 
         string $contentType = self::contentTypes['getOptionQuote'][0]
     )
     {
 
-        return $this->getOptionQuoteAsyncWithHttpInfo($user_id, $user_secret, $symbol, $contentType)
+        return $this->getOptionQuoteAsyncWithHttpInfo($user_id, $user_secret, $account_id, $symbol, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -371,20 +377,21 @@ class OptionsApi extends \SnapTrade\CustomApi
      *
      * Get option quote
      *
-     * Returns a real-time quote for a single option contract. The option contract is specified using an OCC-formatted symbol.  OCC format: &#x60;AAPL  251219C00150000&#x60; (underlying padded to 6 characters with spaces, followed by date, put/call, and strike).
+     * Returns a real-time quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example &#x60;AAPL  251114C00240000&#x60; represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
+     * @param  string $account_id (required)
      * @param  string $symbol The OCC-formatted option symbol. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOptionQuote'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getOptionQuoteAsyncWithHttpInfo($user_id, $user_secret, $symbol, string $contentType = self::contentTypes['getOptionQuote'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    public function getOptionQuoteAsyncWithHttpInfo($user_id, $user_secret, $account_id, $symbol, string $contentType = self::contentTypes['getOptionQuote'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\OptionQuote';
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->getOptionQuoteRequest($user_id, $user_secret, $symbol, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getOptionQuoteRequest($user_id, $user_secret, $account_id, $symbol, $contentType);
 
         // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
@@ -430,13 +437,14 @@ class OptionsApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
+     * @param  string $account_id (required)
      * @param  string $symbol The OCC-formatted option symbol. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOptionQuote'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getOptionQuoteRequest($user_id, $user_secret, $symbol, string $contentType = self::contentTypes['getOptionQuote'][0])
+    public function getOptionQuoteRequest($user_id, $user_secret, $account_id, $symbol, string $contentType = self::contentTypes['getOptionQuote'][0])
     {
 
         // Check if $user_id is a string
@@ -459,6 +467,16 @@ class OptionsApi extends \SnapTrade\CustomApi
                 'Missing the required parameter user_secret when calling getOptionQuote'
             );
         }
+        // Check if $account_id is a string
+        if ($account_id !== SENTINEL_VALUE && !is_string($account_id)) {
+            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($account_id, true), gettype($account_id)));
+        }
+        // verify the required parameter 'account_id' is set
+        if ($account_id === SENTINEL_VALUE || (is_array($account_id) && count($account_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter account_id when calling getOptionQuote'
+            );
+        }
         // Check if $symbol is a string
         if ($symbol !== SENTINEL_VALUE && !is_string($symbol)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($symbol, true), gettype($symbol)));
@@ -471,7 +489,7 @@ class OptionsApi extends \SnapTrade\CustomApi
         }
 
 
-        $resourcePath = '/marketData/options/quotes';
+        $resourcePath = '/accounts/{accountId}/quotes/options';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -513,6 +531,14 @@ class OptionsApi extends \SnapTrade\CustomApi
         }
 
 
+        // path params
+        if ($account_id !== SENTINEL_VALUE) {
+            $resourcePath = str_replace(
+                '{' . 'accountId' . '}',
+                ObjectSerializer::toPathValue($account_id),
+                $resourcePath
+            );
+        }
 
 
         $headers = $this->headerSelector->selectHeaders(

@@ -398,7 +398,7 @@ class MlegTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets limit_price
      *
-     * @param float|null $limit_price The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT.
+     * @param float|null $limit_price The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT`.
      *
      * @return self
      */
@@ -434,7 +434,7 @@ class MlegTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets stop_price
      *
-     * @param float|null $stop_price The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
+     * @param float|null $stop_price The stop price. Required if the order type is `STOP_LOSS_MARKET`, `STOP_LOSS_LIMIT`.
      *
      * @return self
      */

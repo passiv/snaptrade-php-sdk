@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * OptionImpactTest Class Doc Comment
  *
  * @category    Class
- * @description Estimated cost and fees for an option order before it is placed.
+ * @description Estimated cash change and fees for an option order before it is placed.
  * @package     SnapTrade
  */
 class OptionImpactTest extends TestCase
@@ -73,18 +73,27 @@ class OptionImpactTest extends TestCase
     }
 
     /**
-     * Test attribute "estimated_cost"
+     * Test attribute "estimated_cash_change"
      */
-    public function testPropertyEstimatedCost()
+    public function testPropertyEstimatedCashChange()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "estimated_transaction_fee"
+     * Test attribute "cash_change_direction"
      */
-    public function testPropertyEstimatedTransactionFee()
+    public function testPropertyCashChangeDirection()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "estimated_fee_total"
+     */
+    public function testPropertyEstimatedFeeTotal()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

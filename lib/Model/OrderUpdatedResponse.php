@@ -51,7 +51,7 @@ class OrderUpdatedResponse implements ModelInterface, ArrayAccess, \JsonSerializ
       */
     protected static $openAPITypes = [
         'brokerage_order_id' => 'string',
-        'order' => '\SnapTrade\Model\AccountOrderRecord'
+        'order' => '\SnapTrade\Model\OrderUpdatedResponseOrder'
     ];
 
     /**
@@ -73,7 +73,7 @@ class OrderUpdatedResponse implements ModelInterface, ArrayAccess, \JsonSerializ
       */
     protected static array $openAPINullables = [
         'brokerage_order_id' => false,
-		'order' => false
+		'order' => true
     ];
 
     /**
@@ -324,7 +324,7 @@ class OrderUpdatedResponse implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Gets order
      *
-     * @return \SnapTrade\Model\AccountOrderRecord|null
+     * @return \SnapTrade\Model\OrderUpdatedResponseOrder|null
      */
     public function getOrder()
     {
@@ -334,7 +334,7 @@ class OrderUpdatedResponse implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets order
      *
-     * @param \SnapTrade\Model\AccountOrderRecord|null $order order
+     * @param \SnapTrade\Model\OrderUpdatedResponseOrder|null $order order
      *
      * @return self
      */
@@ -342,7 +342,14 @@ class OrderUpdatedResponse implements ModelInterface, ArrayAccess, \JsonSerializ
     {
 
         if (is_null($order)) {
-            throw new \InvalidArgumentException('non-nullable order cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'order');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('order', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['order'] = $order;

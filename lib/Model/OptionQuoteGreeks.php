@@ -1,6 +1,6 @@
 <?php
 /**
- * OrderUpdatedResponse
+ * OptionQuoteGreeks
  *
  * PHP version 7.4
  *
@@ -27,13 +27,14 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * OrderUpdatedResponse Class Doc Comment
+ * OptionQuoteGreeks Class Doc Comment
  *
  * @category Class
+ * @description The Greeks for the option contract.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class OrderUpdatedResponse implements ModelInterface, ArrayAccess, \JsonSerializable
+class OptionQuoteGreeks implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -42,7 +43,7 @@ class OrderUpdatedResponse implements ModelInterface, ArrayAccess, \JsonSerializ
       *
       * @var string
       */
-    protected static $openAPIModelName = 'OrderUpdatedResponse';
+    protected static $openAPIModelName = 'OptionQuote_greeks';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -50,8 +51,10 @@ class OrderUpdatedResponse implements ModelInterface, ArrayAccess, \JsonSerializ
       * @var string[]
       */
     protected static $openAPITypes = [
-        'brokerage_order_id' => 'string',
-        'order' => '\SnapTrade\Model\OrderUpdatedResponseOrder'
+        'delta' => 'float',
+        'gamma' => 'float',
+        'theta' => 'float',
+        'vega' => 'float'
     ];
 
     /**
@@ -62,8 +65,10 @@ class OrderUpdatedResponse implements ModelInterface, ArrayAccess, \JsonSerializ
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'brokerage_order_id' => null,
-        'order' => null
+        'delta' => null,
+        'gamma' => null,
+        'theta' => null,
+        'vega' => null
     ];
 
     /**
@@ -72,8 +77,10 @@ class OrderUpdatedResponse implements ModelInterface, ArrayAccess, \JsonSerializ
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'brokerage_order_id' => false,
-		'order' => true
+        'delta' => false,
+		'gamma' => false,
+		'theta' => false,
+		'vega' => false
     ];
 
     /**
@@ -162,8 +169,10 @@ class OrderUpdatedResponse implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $attributeMap = [
-        'brokerage_order_id' => 'brokerage_order_id',
-        'order' => 'order'
+        'delta' => 'delta',
+        'gamma' => 'gamma',
+        'theta' => 'theta',
+        'vega' => 'vega'
     ];
 
     /**
@@ -172,8 +181,10 @@ class OrderUpdatedResponse implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $setters = [
-        'brokerage_order_id' => 'setBrokerageOrderId',
-        'order' => 'setOrder'
+        'delta' => 'setDelta',
+        'gamma' => 'setGamma',
+        'theta' => 'setTheta',
+        'vega' => 'setVega'
     ];
 
     /**
@@ -182,8 +193,10 @@ class OrderUpdatedResponse implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $getters = [
-        'brokerage_order_id' => 'getBrokerageOrderId',
-        'order' => 'getOrder'
+        'delta' => 'getDelta',
+        'gamma' => 'getGamma',
+        'theta' => 'getTheta',
+        'vega' => 'getVega'
     ];
 
     /**
@@ -243,8 +256,10 @@ class OrderUpdatedResponse implements ModelInterface, ArrayAccess, \JsonSerializ
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('brokerage_order_id', $data ?? [], null);
-        $this->setIfExists('order', $data ?? [], null);
+        $this->setIfExists('delta', $data ?? [], null);
+        $this->setIfExists('gamma', $data ?? [], null);
+        $this->setIfExists('theta', $data ?? [], null);
+        $this->setIfExists('vega', $data ?? [], null);
     }
 
     /**
@@ -274,9 +289,6 @@ class OrderUpdatedResponse implements ModelInterface, ArrayAccess, \JsonSerializ
     {
         $invalidProperties = [];
 
-        if ($this->container['brokerage_order_id'] === null) {
-            $invalidProperties[] = "'brokerage_order_id' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -293,66 +305,117 @@ class OrderUpdatedResponse implements ModelInterface, ArrayAccess, \JsonSerializ
 
 
     /**
-     * Gets brokerage_order_id
+     * Gets delta
      *
-     * @return string
+     * @return float|null
      */
-    public function getBrokerageOrderId()
+    public function getDelta()
     {
-        return $this->container['brokerage_order_id'];
+        return $this->container['delta'];
     }
 
     /**
-     * Sets brokerage_order_id
+     * Sets delta
      *
-     * @param string $brokerage_order_id Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
+     * @param float|null $delta Delta represents the rate of change between the option's price and a $1 change in the underlying asset's price.
      *
      * @return self
      */
-    public function setBrokerageOrderId($brokerage_order_id)
+    public function setDelta($delta)
     {
 
-        if (is_null($brokerage_order_id)) {
-            throw new \InvalidArgumentException('non-nullable brokerage_order_id cannot be null');
+        if (is_null($delta)) {
+            throw new \InvalidArgumentException('non-nullable delta cannot be null');
         }
 
-        $this->container['brokerage_order_id'] = $brokerage_order_id;
+        $this->container['delta'] = $delta;
 
         return $this;
     }
 
     /**
-     * Gets order
+     * Gets gamma
      *
-     * @return \SnapTrade\Model\OrderUpdatedResponseOrder|null
+     * @return float|null
      */
-    public function getOrder()
+    public function getGamma()
     {
-        return $this->container['order'];
+        return $this->container['gamma'];
     }
 
     /**
-     * Sets order
+     * Sets gamma
      *
-     * @param \SnapTrade\Model\OrderUpdatedResponseOrder|null $order order
+     * @param float|null $gamma Gamma represents the rate of change between an option's delta and the underlying asset's price.
      *
      * @return self
      */
-    public function setOrder($order)
+    public function setGamma($gamma)
     {
 
-        if (is_null($order)) {
-            array_push($this->openAPINullablesSetToNull, 'order');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('order', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if (is_null($gamma)) {
+            throw new \InvalidArgumentException('non-nullable gamma cannot be null');
         }
 
-        $this->container['order'] = $order;
+        $this->container['gamma'] = $gamma;
+
+        return $this;
+    }
+
+    /**
+     * Gets theta
+     *
+     * @return float|null
+     */
+    public function getTheta()
+    {
+        return $this->container['theta'];
+    }
+
+    /**
+     * Sets theta
+     *
+     * @param float|null $theta Theta represents the rate of change between the option price and time, or time sensitivity - sometimes known as an option's time decay.
+     *
+     * @return self
+     */
+    public function setTheta($theta)
+    {
+
+        if (is_null($theta)) {
+            throw new \InvalidArgumentException('non-nullable theta cannot be null');
+        }
+
+        $this->container['theta'] = $theta;
+
+        return $this;
+    }
+
+    /**
+     * Gets vega
+     *
+     * @return float|null
+     */
+    public function getVega()
+    {
+        return $this->container['vega'];
+    }
+
+    /**
+     * Sets vega
+     *
+     * @param float|null $vega Vega represents the rate of change between an option's value and the underlying asset's implied volatility.
+     *
+     * @return self
+     */
+    public function setVega($vega)
+    {
+
+        if (is_null($vega)) {
+            throw new \InvalidArgumentException('non-nullable vega cannot be null');
+        }
+
+        $this->container['vega'] = $vega;
 
         return $this;
     }

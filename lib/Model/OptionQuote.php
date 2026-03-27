@@ -52,17 +52,10 @@ class OptionQuote implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPITypes = [
         'symbol' => 'string',
-        'bid_price' => 'float',
-        'bid_size' => 'int',
-        'ask_price' => 'float',
-        'ask_size' => 'int',
-        'last_price' => 'float',
-        'last_size' => 'int',
-        'open_interest' => 'int',
-        'volume' => 'int',
+        'synthetic_price' => 'float',
         'implied_volatility' => 'float',
-        'underlying_price' => 'float',
-        'timestamp' => '\DateTime'
+        'timestamp' => '\DateTime',
+        'greeks' => '\SnapTrade\Model\OptionQuoteGreeks'
     ];
 
     /**
@@ -74,17 +67,10 @@ class OptionQuote implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPIFormats = [
         'symbol' => null,
-        'bid_price' => null,
-        'bid_size' => null,
-        'ask_price' => null,
-        'ask_size' => null,
-        'last_price' => null,
-        'last_size' => null,
-        'open_interest' => null,
-        'volume' => null,
+        'synthetic_price' => null,
         'implied_volatility' => null,
-        'underlying_price' => null,
-        'timestamp' => 'date-time'
+        'timestamp' => 'date-time',
+        'greeks' => null
     ];
 
     /**
@@ -94,17 +80,10 @@ class OptionQuote implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static array $openAPINullables = [
         'symbol' => false,
-		'bid_price' => false,
-		'bid_size' => false,
-		'ask_price' => false,
-		'ask_size' => false,
-		'last_price' => false,
-		'last_size' => false,
-		'open_interest' => false,
-		'volume' => false,
+		'synthetic_price' => false,
 		'implied_volatility' => false,
-		'underlying_price' => false,
-		'timestamp' => true
+		'timestamp' => true,
+		'greeks' => false
     ];
 
     /**
@@ -194,17 +173,10 @@ class OptionQuote implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $attributeMap = [
         'symbol' => 'symbol',
-        'bid_price' => 'bid_price',
-        'bid_size' => 'bid_size',
-        'ask_price' => 'ask_price',
-        'ask_size' => 'ask_size',
-        'last_price' => 'last_price',
-        'last_size' => 'last_size',
-        'open_interest' => 'open_interest',
-        'volume' => 'volume',
+        'synthetic_price' => 'synthetic_price',
         'implied_volatility' => 'implied_volatility',
-        'underlying_price' => 'underlying_price',
-        'timestamp' => 'timestamp'
+        'timestamp' => 'timestamp',
+        'greeks' => 'greeks'
     ];
 
     /**
@@ -214,17 +186,10 @@ class OptionQuote implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $setters = [
         'symbol' => 'setSymbol',
-        'bid_price' => 'setBidPrice',
-        'bid_size' => 'setBidSize',
-        'ask_price' => 'setAskPrice',
-        'ask_size' => 'setAskSize',
-        'last_price' => 'setLastPrice',
-        'last_size' => 'setLastSize',
-        'open_interest' => 'setOpenInterest',
-        'volume' => 'setVolume',
+        'synthetic_price' => 'setSyntheticPrice',
         'implied_volatility' => 'setImpliedVolatility',
-        'underlying_price' => 'setUnderlyingPrice',
-        'timestamp' => 'setTimestamp'
+        'timestamp' => 'setTimestamp',
+        'greeks' => 'setGreeks'
     ];
 
     /**
@@ -234,17 +199,10 @@ class OptionQuote implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $getters = [
         'symbol' => 'getSymbol',
-        'bid_price' => 'getBidPrice',
-        'bid_size' => 'getBidSize',
-        'ask_price' => 'getAskPrice',
-        'ask_size' => 'getAskSize',
-        'last_price' => 'getLastPrice',
-        'last_size' => 'getLastSize',
-        'open_interest' => 'getOpenInterest',
-        'volume' => 'getVolume',
+        'synthetic_price' => 'getSyntheticPrice',
         'implied_volatility' => 'getImpliedVolatility',
-        'underlying_price' => 'getUnderlyingPrice',
-        'timestamp' => 'getTimestamp'
+        'timestamp' => 'getTimestamp',
+        'greeks' => 'getGreeks'
     ];
 
     /**
@@ -305,17 +263,10 @@ class OptionQuote implements ModelInterface, ArrayAccess, \JsonSerializable
     public function __construct(array $data = null)
     {
         $this->setIfExists('symbol', $data ?? [], null);
-        $this->setIfExists('bid_price', $data ?? [], null);
-        $this->setIfExists('bid_size', $data ?? [], null);
-        $this->setIfExists('ask_price', $data ?? [], null);
-        $this->setIfExists('ask_size', $data ?? [], null);
-        $this->setIfExists('last_price', $data ?? [], null);
-        $this->setIfExists('last_size', $data ?? [], null);
-        $this->setIfExists('open_interest', $data ?? [], null);
-        $this->setIfExists('volume', $data ?? [], null);
+        $this->setIfExists('synthetic_price', $data ?? [], null);
         $this->setIfExists('implied_volatility', $data ?? [], null);
-        $this->setIfExists('underlying_price', $data ?? [], null);
         $this->setIfExists('timestamp', $data ?? [], null);
+        $this->setIfExists('greeks', $data ?? [], null);
     }
 
     /**
@@ -390,233 +341,30 @@ class OptionQuote implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets bid_price
+     * Gets synthetic_price
      *
      * @return float|null
      */
-    public function getBidPrice()
+    public function getSyntheticPrice()
     {
-        return $this->container['bid_price'];
+        return $this->container['synthetic_price'];
     }
 
     /**
-     * Sets bid_price
+     * Sets synthetic_price
      *
-     * @param float|null $bid_price The best bid price for the option contract.
+     * @param float|null $synthetic_price The derived synthetic price of the contract.
      *
      * @return self
      */
-    public function setBidPrice($bid_price)
+    public function setSyntheticPrice($synthetic_price)
     {
 
-        if (is_null($bid_price)) {
-            throw new \InvalidArgumentException('non-nullable bid_price cannot be null');
+        if (is_null($synthetic_price)) {
+            throw new \InvalidArgumentException('non-nullable synthetic_price cannot be null');
         }
 
-        $this->container['bid_price'] = $bid_price;
-
-        return $this;
-    }
-
-    /**
-     * Gets bid_size
-     *
-     * @return int|null
-     */
-    public function getBidSize()
-    {
-        return $this->container['bid_size'];
-    }
-
-    /**
-     * Sets bid_size
-     *
-     * @param int|null $bid_size The number of contracts available at the bid price.
-     *
-     * @return self
-     */
-    public function setBidSize($bid_size)
-    {
-
-        if (is_null($bid_size)) {
-            throw new \InvalidArgumentException('non-nullable bid_size cannot be null');
-        }
-
-        $this->container['bid_size'] = $bid_size;
-
-        return $this;
-    }
-
-    /**
-     * Gets ask_price
-     *
-     * @return float|null
-     */
-    public function getAskPrice()
-    {
-        return $this->container['ask_price'];
-    }
-
-    /**
-     * Sets ask_price
-     *
-     * @param float|null $ask_price The best ask price for the option contract.
-     *
-     * @return self
-     */
-    public function setAskPrice($ask_price)
-    {
-
-        if (is_null($ask_price)) {
-            throw new \InvalidArgumentException('non-nullable ask_price cannot be null');
-        }
-
-        $this->container['ask_price'] = $ask_price;
-
-        return $this;
-    }
-
-    /**
-     * Gets ask_size
-     *
-     * @return int|null
-     */
-    public function getAskSize()
-    {
-        return $this->container['ask_size'];
-    }
-
-    /**
-     * Sets ask_size
-     *
-     * @param int|null $ask_size The number of contracts available at the ask price.
-     *
-     * @return self
-     */
-    public function setAskSize($ask_size)
-    {
-
-        if (is_null($ask_size)) {
-            throw new \InvalidArgumentException('non-nullable ask_size cannot be null');
-        }
-
-        $this->container['ask_size'] = $ask_size;
-
-        return $this;
-    }
-
-    /**
-     * Gets last_price
-     *
-     * @return float|null
-     */
-    public function getLastPrice()
-    {
-        return $this->container['last_price'];
-    }
-
-    /**
-     * Sets last_price
-     *
-     * @param float|null $last_price The price of the last trade for the option contract.
-     *
-     * @return self
-     */
-    public function setLastPrice($last_price)
-    {
-
-        if (is_null($last_price)) {
-            throw new \InvalidArgumentException('non-nullable last_price cannot be null');
-        }
-
-        $this->container['last_price'] = $last_price;
-
-        return $this;
-    }
-
-    /**
-     * Gets last_size
-     *
-     * @return int|null
-     */
-    public function getLastSize()
-    {
-        return $this->container['last_size'];
-    }
-
-    /**
-     * Sets last_size
-     *
-     * @param int|null $last_size The number of contracts in the last trade.
-     *
-     * @return self
-     */
-    public function setLastSize($last_size)
-    {
-
-        if (is_null($last_size)) {
-            throw new \InvalidArgumentException('non-nullable last_size cannot be null');
-        }
-
-        $this->container['last_size'] = $last_size;
-
-        return $this;
-    }
-
-    /**
-     * Gets open_interest
-     *
-     * @return int|null
-     */
-    public function getOpenInterest()
-    {
-        return $this->container['open_interest'];
-    }
-
-    /**
-     * Sets open_interest
-     *
-     * @param int|null $open_interest The total number of outstanding contracts.
-     *
-     * @return self
-     */
-    public function setOpenInterest($open_interest)
-    {
-
-        if (is_null($open_interest)) {
-            throw new \InvalidArgumentException('non-nullable open_interest cannot be null');
-        }
-
-        $this->container['open_interest'] = $open_interest;
-
-        return $this;
-    }
-
-    /**
-     * Gets volume
-     *
-     * @return int|null
-     */
-    public function getVolume()
-    {
-        return $this->container['volume'];
-    }
-
-    /**
-     * Sets volume
-     *
-     * @param int|null $volume The total number of contracts traded during the current session.
-     *
-     * @return self
-     */
-    public function setVolume($volume)
-    {
-
-        if (is_null($volume)) {
-            throw new \InvalidArgumentException('non-nullable volume cannot be null');
-        }
-
-        $this->container['volume'] = $volume;
+        $this->container['synthetic_price'] = $synthetic_price;
 
         return $this;
     }
@@ -651,35 +399,6 @@ class OptionQuote implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets underlying_price
-     *
-     * @return float|null
-     */
-    public function getUnderlyingPrice()
-    {
-        return $this->container['underlying_price'];
-    }
-
-    /**
-     * Sets underlying_price
-     *
-     * @param float|null $underlying_price The current price of the underlying security.
-     *
-     * @return self
-     */
-    public function setUnderlyingPrice($underlying_price)
-    {
-
-        if (is_null($underlying_price)) {
-            throw new \InvalidArgumentException('non-nullable underlying_price cannot be null');
-        }
-
-        $this->container['underlying_price'] = $underlying_price;
-
-        return $this;
-    }
-
-    /**
      * Gets timestamp
      *
      * @return \DateTime|null
@@ -692,7 +411,7 @@ class OptionQuote implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets timestamp
      *
-     * @param \DateTime|null $timestamp The timestamp of the quote.
+     * @param \DateTime|null $timestamp The timestamp of the last update for the option quote.
      *
      * @return self
      */
@@ -711,6 +430,35 @@ class OptionQuote implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['timestamp'] = $timestamp;
+
+        return $this;
+    }
+
+    /**
+     * Gets greeks
+     *
+     * @return \SnapTrade\Model\OptionQuoteGreeks|null
+     */
+    public function getGreeks()
+    {
+        return $this->container['greeks'];
+    }
+
+    /**
+     * Sets greeks
+     *
+     * @param \SnapTrade\Model\OptionQuoteGreeks|null $greeks greeks
+     *
+     * @return self
+     */
+    public function setGreeks($greeks)
+    {
+
+        if (is_null($greeks)) {
+            throw new \InvalidArgumentException('non-nullable greeks cannot be null');
+        }
+
+        $this->container['greeks'] = $greeks;
 
         return $this;
     }

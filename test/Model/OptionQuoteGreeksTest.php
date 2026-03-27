@@ -1,6 +1,7 @@
 <?php
 /**
- * OptionsApiTest
+ * OptionQuoteGreeksTest
+ *
  * PHP version 7.4
  *
  * @category Class
@@ -20,18 +21,22 @@
  */
 
 
-namespace SnapTrade\Test\Api;
+namespace SnapTrade\Test\Model;
 
-use \SnapTrade\Configuration;
-use \SnapTrade\ApiException;
-use \SnapTrade\ObjectSerializer;
 use PHPUnit\Framework\TestCase;
 
-class OptionsApiTest extends TestCase
+/**
+ * OptionQuoteGreeksTest Class Doc Comment
+ *
+ * @category    Class
+ * @description The Greeks for the option contract.
+ * @package     SnapTrade
+ */
+class OptionQuoteGreeksTest extends TestCase
 {
 
     /**
-     * Setup before running any test cases
+     * Setup before running any test case
      */
     public static function setUpBeforeClass(): void
     {
@@ -59,24 +64,45 @@ class OptionsApiTest extends TestCase
     }
 
     /**
-     * Test case for getUserAccountOptionQuotes
-     *
-     * Get option quote.
-     *
+     * Test "OptionQuoteGreeks"
      */
-    public function testGetUserAccountOptionQuotes()
+    public function testOptionQuoteGreeks()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for listOptionHoldings
-     *
-     * List account option positions.
-     *
+     * Test attribute "delta"
      */
-    public function testListOptionHoldings()
+    public function testPropertyDelta()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "gamma"
+     */
+    public function testPropertyGamma()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "theta"
+     */
+    public function testPropertyTheta()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "vega"
+     */
+    public function testPropertyVega()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

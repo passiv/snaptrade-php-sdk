@@ -82,72 +82,9 @@ class OptionQuoteTest extends TestCase
     }
 
     /**
-     * Test attribute "bid_price"
+     * Test attribute "synthetic_price"
      */
-    public function testPropertyBidPrice()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "bid_size"
-     */
-    public function testPropertyBidSize()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "ask_price"
-     */
-    public function testPropertyAskPrice()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "ask_size"
-     */
-    public function testPropertyAskSize()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "last_price"
-     */
-    public function testPropertyLastPrice()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "last_size"
-     */
-    public function testPropertyLastSize()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "open_interest"
-     */
-    public function testPropertyOpenInterest()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "volume"
-     */
-    public function testPropertyVolume()
+    public function testPropertySyntheticPrice()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
@@ -163,18 +100,18 @@ class OptionQuoteTest extends TestCase
     }
 
     /**
-     * Test attribute "underlying_price"
+     * Test attribute "timestamp"
      */
-    public function testPropertyUnderlyingPrice()
+    public function testPropertyTimestamp()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "timestamp"
+     * Test attribute "greeks"
      */
-    public function testPropertyTimestamp()
+    public function testPropertyGreeks()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

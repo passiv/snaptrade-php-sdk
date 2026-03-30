@@ -381,7 +381,7 @@ class Position implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets units
      *
-     * @param float|null $units The number of shares of the position. This can be fractional or integer units.
+     * @param float|null $units The number of shares of the position. This can be fractional or integer units. A positive number indicates a long position, while a negative number indicates a short position.
      *
      * @return self
      */

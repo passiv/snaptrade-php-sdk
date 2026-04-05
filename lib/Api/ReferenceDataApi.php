@@ -83,6 +83,9 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
         'listAllBrokerageAuthorizationType' => [
             'application/json',
         ],
+        'listAllBrokerageInstruments' => [
+            'application/json',
+        ],
         'listAllBrokerages' => [
             'application/json',
         ],
@@ -170,6 +173,8 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      *
      * Get exchange rate of a currency pair
      *
+     * Returns an Exchange Rate Pair object for the specified Currency Pair.
+     *
      * @param  string $currency_pair A currency pair based on currency code for example, {CAD-USD} (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getCurrencyExchangeRatePair'] to see the possible values for this operation
      *
@@ -192,6 +197,8 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * Operation getCurrencyExchangeRatePairWithHttpInfo
      *
      * Get exchange rate of a currency pair
+     *
+     * Returns an Exchange Rate Pair object for the specified Currency Pair.
      *
      * @param  string $currency_pair A currency pair based on currency code for example, {CAD-USD} (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getCurrencyExchangeRatePair'] to see the possible values for this operation
@@ -308,6 +315,8 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      *
      * Get exchange rate of a currency pair
      *
+     * Returns an Exchange Rate Pair object for the specified Currency Pair.
+     *
      * @param  string $currency_pair A currency pair based on currency code for example, {CAD-USD} (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getCurrencyExchangeRatePair'] to see the possible values for this operation
      *
@@ -333,6 +342,8 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * Operation getCurrencyExchangeRatePairAsyncWithHttpInfo
      *
      * Get exchange rate of a currency pair
+     *
+     * Returns an Exchange Rate Pair object for the specified Currency Pair.
      *
      * @param  string $currency_pair A currency pair based on currency code for example, {CAD-USD} (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getCurrencyExchangeRatePair'] to see the possible values for this operation
@@ -504,7 +515,9 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
     /**
      * Operation getPartnerInfo
      *
-     * Get metadata related to Snaptrade partner
+     * Get Client Info
+     *
+     * Returns configurations for your SnapTrade Client ID, including allowed brokerages and data access.
      *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPartnerInfo'] to see the possible values for this operation
      *
@@ -526,7 +539,9 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
     /**
      * Operation getPartnerInfoWithHttpInfo
      *
-     * Get metadata related to Snaptrade partner
+     * Get Client Info
+     *
+     * Returns configurations for your SnapTrade Client ID, including allowed brokerages and data access.
      *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPartnerInfo'] to see the possible values for this operation
      *
@@ -708,7 +723,9 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
     /**
      * Operation getPartnerInfoAsync
      *
-     * Get metadata related to Snaptrade partner
+     * Get Client Info
+     *
+     * Returns configurations for your SnapTrade Client ID, including allowed brokerages and data access.
      *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPartnerInfo'] to see the possible values for this operation
      *
@@ -733,7 +750,9 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
     /**
      * Operation getPartnerInfoAsyncWithHttpInfo
      *
-     * Get metadata related to Snaptrade partner
+     * Get Client Info
+     *
+     * Returns configurations for your SnapTrade Client ID, including allowed brokerages and data access.
      *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPartnerInfo'] to see the possible values for this operation
      *
@@ -885,7 +904,9 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
     /**
      * Operation getSecurityTypes
      *
-     * List of all security types
+     * List security types
+     *
+     * Return all available security types supported by SnapTrade.
      *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getSecurityTypes'] to see the possible values for this operation
      *
@@ -907,7 +928,9 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
     /**
      * Operation getSecurityTypesWithHttpInfo
      *
-     * List of all security types
+     * List security types
+     *
+     * Return all available security types supported by SnapTrade.
      *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getSecurityTypes'] to see the possible values for this operation
      *
@@ -1020,7 +1043,9 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
     /**
      * Operation getSecurityTypesAsync
      *
-     * List of all security types
+     * List security types
+     *
+     * Return all available security types supported by SnapTrade.
      *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getSecurityTypes'] to see the possible values for this operation
      *
@@ -1045,7 +1070,9 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
     /**
      * Operation getSecurityTypesAsyncWithHttpInfo
      *
-     * List of all security types
+     * List security types
+     *
+     * Return all available security types supported by SnapTrade.
      *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getSecurityTypes'] to see the possible values for this operation
      *
@@ -1199,6 +1226,8 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      *
      * Get exchanges
      *
+     * Returns a list of all supported Exchanges.
+     *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getStockExchanges'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
@@ -1220,6 +1249,8 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * Operation getStockExchangesWithHttpInfo
      *
      * Get exchanges
+     *
+     * Returns a list of all supported Exchanges.
      *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getStockExchanges'] to see the possible values for this operation
      *
@@ -1334,6 +1365,8 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      *
      * Get exchanges
      *
+     * Returns a list of all supported Exchanges.
+     *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getStockExchanges'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1358,6 +1391,8 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * Operation getStockExchangesAsyncWithHttpInfo
      *
      * Get exchanges
+     *
+     * Returns a list of all supported Exchanges.
      *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getStockExchanges'] to see the possible values for this operation
      *
@@ -1509,7 +1544,9 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
     /**
      * Operation getSymbols
      *
-     * Search for symbols
+     * Search symbols
+     *
+     * Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned.
      *
      * @param  \SnapTrade\Model\SymbolQuery $symbol_query symbol_query (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getSymbols'] to see the possible values for this operation
@@ -1535,7 +1572,9 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
     /**
      * Operation getSymbolsWithHttpInfo
      *
-     * Search for symbols
+     * Search symbols
+     *
+     * Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned.
      *
      * @param  \SnapTrade\Model\SymbolQuery $symbol_query (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getSymbols'] to see the possible values for this operation
@@ -1650,7 +1689,9 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
     /**
      * Operation getSymbolsAsync
      *
-     * Search for symbols
+     * Search symbols
+     *
+     * Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned.
      *
      * @param  \SnapTrade\Model\SymbolQuery $symbol_query (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getSymbols'] to see the possible values for this operation
@@ -1679,7 +1720,9 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
     /**
      * Operation getSymbolsAsyncWithHttpInfo
      *
-     * Search for symbols
+     * Search symbols
+     *
+     * Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned.
      *
      * @param  \SnapTrade\Model\SymbolQuery $symbol_query (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getSymbols'] to see the possible values for this operation
@@ -1848,14 +1891,16 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
     /**
      * Operation getSymbolsByTicker
      *
-     * Get details of a symbol
+     * Get symbol detail
      *
-     * @param  string $query The ticker or universal_symbol_id of the UniversalSymbol to get. (required)
+     * Returns the Universal Symbol object specified by the ticker or the Universal Symbol ID. When a ticker is specified, the first matching result is returned. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on \&quot;Yahoo Finance Market Coverage and Data Delays\&quot;). For example, for securities traded on the Toronto Stock Exchange, the symbol has a &#39;.TO&#39; suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix. Please use the ticker with the proper suffix for the best results.
+     *
+     * @param  string $query The ticker or Universal Symbol ID to look up the symbol with. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getSymbolsByTicker'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \SnapTrade\Model\UniversalSymbol
+     * @return \SnapTrade\Model\UniversalSymbol|\SnapTrade\Model\Model404FailedRequestResponse
      */
     public function getSymbolsByTicker(
         $query,
@@ -1871,14 +1916,16 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
     /**
      * Operation getSymbolsByTickerWithHttpInfo
      *
-     * Get details of a symbol
+     * Get symbol detail
      *
-     * @param  string $query The ticker or universal_symbol_id of the UniversalSymbol to get. (required)
+     * Returns the Universal Symbol object specified by the ticker or the Universal Symbol ID. When a ticker is specified, the first matching result is returned. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on \&quot;Yahoo Finance Market Coverage and Data Delays\&quot;). For example, for securities traded on the Toronto Stock Exchange, the symbol has a &#39;.TO&#39; suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix. Please use the ticker with the proper suffix for the best results.
+     *
+     * @param  string $query The ticker or Universal Symbol ID to look up the symbol with. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getSymbolsByTicker'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \SnapTrade\Model\UniversalSymbol, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SnapTrade\Model\UniversalSymbol|\SnapTrade\Model\Model404FailedRequestResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function getSymbolsByTickerWithHttpInfo($query, string $contentType = self::contentTypes['getSymbolsByTicker'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
@@ -1950,6 +1997,21 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
+                case 404:
+                    if ('\SnapTrade\Model\Model404FailedRequestResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\SnapTrade\Model\Model404FailedRequestResponse' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\Model404FailedRequestResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
             }
 
             $returnType = '\SnapTrade\Model\UniversalSymbol';
@@ -1978,6 +2040,14 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
                     );
                     $e->setResponseObject($data);
                     break;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SnapTrade\Model\Model404FailedRequestResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
             }
             throw $e;
         }
@@ -1986,9 +2056,11 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
     /**
      * Operation getSymbolsByTickerAsync
      *
-     * Get details of a symbol
+     * Get symbol detail
      *
-     * @param  string $query The ticker or universal_symbol_id of the UniversalSymbol to get. (required)
+     * Returns the Universal Symbol object specified by the ticker or the Universal Symbol ID. When a ticker is specified, the first matching result is returned. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on \&quot;Yahoo Finance Market Coverage and Data Delays\&quot;). For example, for securities traded on the Toronto Stock Exchange, the symbol has a &#39;.TO&#39; suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix. Please use the ticker with the proper suffix for the best results.
+     *
+     * @param  string $query The ticker or Universal Symbol ID to look up the symbol with. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getSymbolsByTicker'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2012,9 +2084,11 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
     /**
      * Operation getSymbolsByTickerAsyncWithHttpInfo
      *
-     * Get details of a symbol
+     * Get symbol detail
      *
-     * @param  string $query The ticker or universal_symbol_id of the UniversalSymbol to get. (required)
+     * Returns the Universal Symbol object specified by the ticker or the Universal Symbol ID. When a ticker is specified, the first matching result is returned. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on \&quot;Yahoo Finance Market Coverage and Data Delays\&quot;). For example, for securities traded on the Toronto Stock Exchange, the symbol has a &#39;.TO&#39; suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix. Please use the ticker with the proper suffix for the best results.
+     *
+     * @param  string $query The ticker or Universal Symbol ID to look up the symbol with. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getSymbolsByTicker'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2067,7 +2141,7 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
     /**
      * Create request for operation 'getSymbolsByTicker'
      *
-     * @param  string $query The ticker or universal_symbol_id of the UniversalSymbol to get. (required)
+     * @param  string $query The ticker or Universal Symbol ID to look up the symbol with. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getSymbolsByTicker'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2108,7 +2182,7 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
 
 
         $headers = $this->headerSelector->selectHeaders(
-            ['*/*', ],
+            ['application/json', ],
             $contentType,
             $multipart
         );
@@ -2186,6 +2260,8 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      *
      * Get all brokerage authorization types
      *
+     * Returns a list of all defined Brokerage authorization Type objects.
+     *
      * @param  string $brokerage Comma separated value of brokerage slugs (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAllBrokerageAuthorizationType'] to see the possible values for this operation
      *
@@ -2208,6 +2284,8 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * Operation listAllBrokerageAuthorizationTypeWithHttpInfo
      *
      * Get all brokerage authorization types
+     *
+     * Returns a list of all defined Brokerage authorization Type objects.
      *
      * @param  string $brokerage Comma separated value of brokerage slugs (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAllBrokerageAuthorizationType'] to see the possible values for this operation
@@ -2324,6 +2402,8 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      *
      * Get all brokerage authorization types
      *
+     * Returns a list of all defined Brokerage authorization Type objects.
+     *
      * @param  string $brokerage Comma separated value of brokerage slugs (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAllBrokerageAuthorizationType'] to see the possible values for this operation
      *
@@ -2349,6 +2429,8 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * Operation listAllBrokerageAuthorizationTypeAsyncWithHttpInfo
      *
      * Get all brokerage authorization types
+     *
+     * Returns a list of all defined Brokerage authorization Type objects.
      *
      * @param  string $brokerage Comma separated value of brokerage slugs (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAllBrokerageAuthorizationType'] to see the possible values for this operation
@@ -2515,9 +2597,355 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
     }
 
     /**
+     * Operation listAllBrokerageInstruments
+     *
+     * Get brokerage instruments
+     *
+     * Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don&#39;t will return an empty list.
+     *
+     * @param  string $slug A short, unique identifier for the brokerage. It is usually the name of the brokerage in capital letters and will never change. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAllBrokerageInstruments'] to see the possible values for this operation
+     *
+     * @throws \SnapTrade\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SnapTrade\Model\BrokerageInstrumentsResponse
+     */
+    public function listAllBrokerageInstruments(
+        $slug,
+
+        string $contentType = self::contentTypes['listAllBrokerageInstruments'][0]
+    )
+    {
+
+        list($response) = $this->listAllBrokerageInstrumentsWithHttpInfo($slug, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation listAllBrokerageInstrumentsWithHttpInfo
+     *
+     * Get brokerage instruments
+     *
+     * Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don&#39;t will return an empty list.
+     *
+     * @param  string $slug A short, unique identifier for the brokerage. It is usually the name of the brokerage in capital letters and will never change. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAllBrokerageInstruments'] to see the possible values for this operation
+     *
+     * @throws \SnapTrade\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SnapTrade\Model\BrokerageInstrumentsResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function listAllBrokerageInstrumentsWithHttpInfo($slug, string $contentType = self::contentTypes['listAllBrokerageInstruments'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    {
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->listAllBrokerageInstrumentsRequest($slug, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                if (
+                    ($e->getCode() == 401 || $e->getCode() == 403) &&
+                    !empty($this->getConfig()->getAccessToken()) &&
+                    $requestOptions->shouldRetryOAuth()
+                ) {
+                    return $this->listAllBrokerageInstrumentsWithHttpInfo(
+                        $slug,
+                        $contentType,
+                        $requestOptions->setRetryOAuth(false)
+                    );
+                }
+
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('\SnapTrade\Model\BrokerageInstrumentsResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\SnapTrade\Model\BrokerageInstrumentsResponse' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\BrokerageInstrumentsResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\SnapTrade\Model\BrokerageInstrumentsResponse';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SnapTrade\Model\BrokerageInstrumentsResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation listAllBrokerageInstrumentsAsync
+     *
+     * Get brokerage instruments
+     *
+     * Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don&#39;t will return an empty list.
+     *
+     * @param  string $slug A short, unique identifier for the brokerage. It is usually the name of the brokerage in capital letters and will never change. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAllBrokerageInstruments'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listAllBrokerageInstrumentsAsync(
+        $slug,
+
+        string $contentType = self::contentTypes['listAllBrokerageInstruments'][0]
+    )
+    {
+
+        return $this->listAllBrokerageInstrumentsAsyncWithHttpInfo($slug, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation listAllBrokerageInstrumentsAsyncWithHttpInfo
+     *
+     * Get brokerage instruments
+     *
+     * Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don&#39;t will return an empty list.
+     *
+     * @param  string $slug A short, unique identifier for the brokerage. It is usually the name of the brokerage in capital letters and will never change. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAllBrokerageInstruments'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listAllBrokerageInstrumentsAsyncWithHttpInfo($slug, string $contentType = self::contentTypes['listAllBrokerageInstruments'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    {
+        $returnType = '\SnapTrade\Model\BrokerageInstrumentsResponse';
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->listAllBrokerageInstrumentsRequest($slug, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'listAllBrokerageInstruments'
+     *
+     * @param  string $slug A short, unique identifier for the brokerage. It is usually the name of the brokerage in capital letters and will never change. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAllBrokerageInstruments'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function listAllBrokerageInstrumentsRequest($slug, string $contentType = self::contentTypes['listAllBrokerageInstruments'][0])
+    {
+
+        // Check if $slug is a string
+        if ($slug !== SENTINEL_VALUE && !is_string($slug)) {
+            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($slug, true), gettype($slug)));
+        }
+        // verify the required parameter 'slug' is set
+        if ($slug === SENTINEL_VALUE || (is_array($slug) && count($slug) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter slug when calling listAllBrokerageInstruments'
+            );
+        }
+
+
+        $resourcePath = '/brokerages/{slug}/instruments';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($slug !== SENTINEL_VALUE) {
+            $resourcePath = str_replace(
+                '{' . 'slug' . '}',
+                ObjectSerializer::toPathValue($slug),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('clientId');
+        if ($apiKey !== null) {
+            $queryParams['clientId'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Signature');
+        if ($apiKey !== null) {
+            $headers['Signature'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('timestamp');
+        if ($apiKey !== null) {
+            $queryParams['timestamp'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $method = 'GET';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
+    }
+
+    /**
      * Operation listAllBrokerages
      *
      * Get brokerages
+     *
+     * Returns a list of all defined Brokerage objects.
      *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAllBrokerages'] to see the possible values for this operation
      *
@@ -2540,6 +2968,8 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * Operation listAllBrokeragesWithHttpInfo
      *
      * Get brokerages
+     *
+     * Returns a list of all defined Brokerage objects.
      *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAllBrokerages'] to see the possible values for this operation
      *
@@ -2654,6 +3084,8 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      *
      * Get brokerages
      *
+     * Returns a list of all defined Brokerage objects.
+     *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAllBrokerages'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2678,6 +3110,8 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * Operation listAllBrokeragesAsyncWithHttpInfo
      *
      * Get brokerages
+     *
+     * Returns a list of all defined Brokerage objects.
      *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAllBrokerages'] to see the possible values for this operation
      *
@@ -2831,6 +3265,8 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      *
      * Get currencies
      *
+     * Returns a list of all defined Currency objects.
+     *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAllCurrencies'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
@@ -2852,6 +3288,8 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * Operation listAllCurrenciesWithHttpInfo
      *
      * Get currencies
+     *
+     * Returns a list of all defined Currency objects.
      *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAllCurrencies'] to see the possible values for this operation
      *
@@ -2966,6 +3404,8 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      *
      * Get currencies
      *
+     * Returns a list of all defined Currency objects.
+     *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAllCurrencies'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2990,6 +3430,8 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * Operation listAllCurrenciesAsyncWithHttpInfo
      *
      * Get currencies
+     *
+     * Returns a list of all defined Currency objects.
      *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAllCurrencies'] to see the possible values for this operation
      *
@@ -3143,6 +3585,8 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      *
      * Get currency exchange rates
      *
+     * Returns a list of all Exchange Rate Pairs for all supported Currencies.
+     *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAllCurrenciesRates'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
@@ -3164,6 +3608,8 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * Operation listAllCurrenciesRatesWithHttpInfo
      *
      * Get currency exchange rates
+     *
+     * Returns a list of all Exchange Rate Pairs for all supported Currencies.
      *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAllCurrenciesRates'] to see the possible values for this operation
      *
@@ -3278,6 +3724,8 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      *
      * Get currency exchange rates
      *
+     * Returns a list of all Exchange Rate Pairs for all supported Currencies.
+     *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAllCurrenciesRates'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3302,6 +3750,8 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      * Operation listAllCurrenciesRatesAsyncWithHttpInfo
      *
      * Get currency exchange rates
+     *
+     * Returns a list of all Exchange Rate Pairs for all supported Currencies.
      *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAllCurrenciesRates'] to see the possible values for this operation
      *
@@ -3453,11 +3903,13 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
     /**
      * Operation symbolSearchUserAccount
      *
-     * Search for symbols available in an account
+     * Search account symbols
+     *
+     * Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned.  The search results are further limited to the symbols supported by the brokerage for which the account is under.
      *
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
-     * @param  string $account_id The ID of the account to search for symbols within. (required)
+     * @param  string $account_id account_id (required)
      * @param  \SnapTrade\Model\SymbolQuery $symbol_query symbol_query (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['symbolSearchUserAccount'] to see the possible values for this operation
      *
@@ -3485,11 +3937,13 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
     /**
      * Operation symbolSearchUserAccountWithHttpInfo
      *
-     * Search for symbols available in an account
+     * Search account symbols
+     *
+     * Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned.  The search results are further limited to the symbols supported by the brokerage for which the account is under.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $account_id The ID of the account to search for symbols within. (required)
+     * @param  string $account_id (required)
      * @param  \SnapTrade\Model\SymbolQuery $symbol_query (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['symbolSearchUserAccount'] to see the possible values for this operation
      *
@@ -3606,11 +4060,13 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
     /**
      * Operation symbolSearchUserAccountAsync
      *
-     * Search for symbols available in an account
+     * Search account symbols
+     *
+     * Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned.  The search results are further limited to the symbols supported by the brokerage for which the account is under.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $account_id The ID of the account to search for symbols within. (required)
+     * @param  string $account_id (required)
      * @param  \SnapTrade\Model\SymbolQuery $symbol_query (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['symbolSearchUserAccount'] to see the possible values for this operation
      *
@@ -3641,11 +4097,13 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
     /**
      * Operation symbolSearchUserAccountAsyncWithHttpInfo
      *
-     * Search for symbols available in an account
+     * Search account symbols
+     *
+     * Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned.  The search results are further limited to the symbols supported by the brokerage for which the account is under.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $account_id The ID of the account to search for symbols within. (required)
+     * @param  string $account_id (required)
      * @param  \SnapTrade\Model\SymbolQuery $symbol_query (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['symbolSearchUserAccount'] to see the possible values for this operation
      *
@@ -3701,7 +4159,7 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $account_id The ID of the account to search for symbols within. (required)
+     * @param  string $account_id (required)
      * @param  \SnapTrade\Model\SymbolQuery $symbol_query (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['symbolSearchUserAccount'] to see the possible values for this operation
      *
@@ -3793,7 +4251,7 @@ class ReferenceDataApi extends \SnapTrade\CustomApi
 
 
         $headers = $this->headerSelector->selectHeaders(
-            ['*/*', ],
+            ['application/json', ],
             $contentType,
             $multipart
         );

@@ -51,9 +51,9 @@ class OptionBrokerageSymbol implements ModelInterface, ArrayAccess, \JsonSeriali
       * @var string[]
       */
     protected static $openAPITypes = [
+        'option_symbol' => '\SnapTrade\Model\OptionsSymbol',
         'id' => 'string',
-        'description' => 'string',
-        'option_symbol' => '\SnapTrade\Model\OptionsSymbol'
+        'description' => 'string'
     ];
 
     /**
@@ -64,9 +64,9 @@ class OptionBrokerageSymbol implements ModelInterface, ArrayAccess, \JsonSeriali
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
+        'option_symbol' => null,
         'id' => 'uuid',
-        'description' => null,
-        'option_symbol' => null
+        'description' => null
     ];
 
     /**
@@ -75,9 +75,9 @@ class OptionBrokerageSymbol implements ModelInterface, ArrayAccess, \JsonSeriali
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'id' => false,
-		'description' => false,
-		'option_symbol' => false
+        'option_symbol' => false,
+		'id' => false,
+		'description' => false
     ];
 
     /**
@@ -166,9 +166,9 @@ class OptionBrokerageSymbol implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var string[]
      */
     protected static $attributeMap = [
+        'option_symbol' => 'option_symbol',
         'id' => 'id',
-        'description' => 'description',
-        'option_symbol' => 'option_symbol'
+        'description' => 'description'
     ];
 
     /**
@@ -177,9 +177,9 @@ class OptionBrokerageSymbol implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var string[]
      */
     protected static $setters = [
+        'option_symbol' => 'setOptionSymbol',
         'id' => 'setId',
-        'description' => 'setDescription',
-        'option_symbol' => 'setOptionSymbol'
+        'description' => 'setDescription'
     ];
 
     /**
@@ -188,9 +188,9 @@ class OptionBrokerageSymbol implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var string[]
      */
     protected static $getters = [
+        'option_symbol' => 'getOptionSymbol',
         'id' => 'getId',
-        'description' => 'getDescription',
-        'option_symbol' => 'getOptionSymbol'
+        'description' => 'getDescription'
     ];
 
     /**
@@ -250,9 +250,9 @@ class OptionBrokerageSymbol implements ModelInterface, ArrayAccess, \JsonSeriali
      */
     public function __construct(array $data = null)
     {
+        $this->setIfExists('option_symbol', $data ?? [], null);
         $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('description', $data ?? [], null);
-        $this->setIfExists('option_symbol', $data ?? [], null);
     }
 
     /**
@@ -296,6 +296,35 @@ class OptionBrokerageSymbol implements ModelInterface, ArrayAccess, \JsonSeriali
         return count($this->listInvalidProperties()) === 0;
     }
 
+
+    /**
+     * Gets option_symbol
+     *
+     * @return \SnapTrade\Model\OptionsSymbol|null
+     */
+    public function getOptionSymbol()
+    {
+        return $this->container['option_symbol'];
+    }
+
+    /**
+     * Sets option_symbol
+     *
+     * @param \SnapTrade\Model\OptionsSymbol|null $option_symbol option_symbol
+     *
+     * @return self
+     */
+    public function setOptionSymbol($option_symbol)
+    {
+
+        if (is_null($option_symbol)) {
+            throw new \InvalidArgumentException('non-nullable option_symbol cannot be null');
+        }
+
+        $this->container['option_symbol'] = $option_symbol;
+
+        return $this;
+    }
 
     /**
      * Gets id
@@ -355,35 +384,6 @@ class OptionBrokerageSymbol implements ModelInterface, ArrayAccess, \JsonSeriali
         }
 
         $this->container['description'] = $description;
-
-        return $this;
-    }
-
-    /**
-     * Gets option_symbol
-     *
-     * @return \SnapTrade\Model\OptionsSymbol|null
-     */
-    public function getOptionSymbol()
-    {
-        return $this->container['option_symbol'];
-    }
-
-    /**
-     * Sets option_symbol
-     *
-     * @param \SnapTrade\Model\OptionsSymbol|null $option_symbol option_symbol
-     *
-     * @return self
-     */
-    public function setOptionSymbol($option_symbol)
-    {
-
-        if (is_null($option_symbol)) {
-            throw new \InvalidArgumentException('non-nullable option_symbol cannot be null');
-        }
-
-        $this->container['option_symbol'] = $option_symbol;
 
         return $this;
     }

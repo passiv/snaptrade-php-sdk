@@ -53,14 +53,15 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     protected static $openAPITypes = [
         'brokerage_order_id' => 'string',
         'status' => '\SnapTrade\Model\AccountOrderRecordStatus',
-        'symbol' => 'string',
         'universal_symbol' => '\SnapTrade\Model\AccountOrderRecordUniversalSymbol',
         'option_symbol' => '\SnapTrade\Model\AccountOrderRecordOptionSymbol',
+        'quote_universal_symbol' => '\SnapTrade\Model\AccountOrderRecordQuoteUniversalSymbol',
+        'quote_currency' => '\SnapTrade\Model\AccountOrderRecordQuoteCurrency',
         'action' => 'string',
-        'total_quantity' => 'float',
-        'open_quantity' => 'float',
-        'canceled_quantity' => 'float',
-        'filled_quantity' => 'float',
+        'total_quantity' => 'string',
+        'open_quantity' => 'string',
+        'canceled_quantity' => 'string',
+        'filled_quantity' => 'string',
         'execution_price' => 'float',
         'limit_price' => 'float',
         'stop_price' => 'float',
@@ -69,7 +70,9 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
         'time_placed' => '\DateTime',
         'time_updated' => '\DateTime',
         'time_executed' => '\DateTime',
-        'expiry_date' => '\DateTime'
+        'expiry_date' => '\DateTime',
+        'symbol' => 'string',
+        'child_brokerage_order_ids' => '\SnapTrade\Model\AccountOrderRecordChildBrokerageOrderIds'
     ];
 
     /**
@@ -82,9 +85,10 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     protected static $openAPIFormats = [
         'brokerage_order_id' => null,
         'status' => null,
-        'symbol' => 'uuid',
         'universal_symbol' => null,
         'option_symbol' => null,
+        'quote_universal_symbol' => null,
+        'quote_currency' => null,
         'action' => null,
         'total_quantity' => null,
         'open_quantity' => null,
@@ -98,7 +102,9 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
         'time_placed' => 'date-time',
         'time_updated' => 'date-time',
         'time_executed' => 'date-time',
-        'expiry_date' => 'date-time'
+        'expiry_date' => 'date-time',
+        'symbol' => 'uuid',
+        'child_brokerage_order_ids' => null
     ];
 
     /**
@@ -109,9 +115,10 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     protected static array $openAPINullables = [
         'brokerage_order_id' => false,
 		'status' => false,
-		'symbol' => false,
 		'universal_symbol' => false,
 		'option_symbol' => false,
+		'quote_universal_symbol' => false,
+		'quote_currency' => false,
 		'action' => false,
 		'total_quantity' => true,
 		'open_quantity' => true,
@@ -125,7 +132,9 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
 		'time_placed' => false,
 		'time_updated' => true,
 		'time_executed' => true,
-		'expiry_date' => true
+		'expiry_date' => true,
+		'symbol' => false,
+		'child_brokerage_order_ids' => true
     ];
 
     /**
@@ -216,9 +225,10 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     protected static $attributeMap = [
         'brokerage_order_id' => 'brokerage_order_id',
         'status' => 'status',
-        'symbol' => 'symbol',
         'universal_symbol' => 'universal_symbol',
         'option_symbol' => 'option_symbol',
+        'quote_universal_symbol' => 'quote_universal_symbol',
+        'quote_currency' => 'quote_currency',
         'action' => 'action',
         'total_quantity' => 'total_quantity',
         'open_quantity' => 'open_quantity',
@@ -232,7 +242,9 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
         'time_placed' => 'time_placed',
         'time_updated' => 'time_updated',
         'time_executed' => 'time_executed',
-        'expiry_date' => 'expiry_date'
+        'expiry_date' => 'expiry_date',
+        'symbol' => 'symbol',
+        'child_brokerage_order_ids' => 'child_brokerage_order_ids'
     ];
 
     /**
@@ -243,9 +255,10 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     protected static $setters = [
         'brokerage_order_id' => 'setBrokerageOrderId',
         'status' => 'setStatus',
-        'symbol' => 'setSymbol',
         'universal_symbol' => 'setUniversalSymbol',
         'option_symbol' => 'setOptionSymbol',
+        'quote_universal_symbol' => 'setQuoteUniversalSymbol',
+        'quote_currency' => 'setQuoteCurrency',
         'action' => 'setAction',
         'total_quantity' => 'setTotalQuantity',
         'open_quantity' => 'setOpenQuantity',
@@ -259,7 +272,9 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
         'time_placed' => 'setTimePlaced',
         'time_updated' => 'setTimeUpdated',
         'time_executed' => 'setTimeExecuted',
-        'expiry_date' => 'setExpiryDate'
+        'expiry_date' => 'setExpiryDate',
+        'symbol' => 'setSymbol',
+        'child_brokerage_order_ids' => 'setChildBrokerageOrderIds'
     ];
 
     /**
@@ -270,9 +285,10 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     protected static $getters = [
         'brokerage_order_id' => 'getBrokerageOrderId',
         'status' => 'getStatus',
-        'symbol' => 'getSymbol',
         'universal_symbol' => 'getUniversalSymbol',
         'option_symbol' => 'getOptionSymbol',
+        'quote_universal_symbol' => 'getQuoteUniversalSymbol',
+        'quote_currency' => 'getQuoteCurrency',
         'action' => 'getAction',
         'total_quantity' => 'getTotalQuantity',
         'open_quantity' => 'getOpenQuantity',
@@ -286,7 +302,9 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
         'time_placed' => 'getTimePlaced',
         'time_updated' => 'getTimeUpdated',
         'time_executed' => 'getTimeExecuted',
-        'expiry_date' => 'getExpiryDate'
+        'expiry_date' => 'getExpiryDate',
+        'symbol' => 'getSymbol',
+        'child_brokerage_order_ids' => 'getChildBrokerageOrderIds'
     ];
 
     /**
@@ -348,9 +366,10 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     {
         $this->setIfExists('brokerage_order_id', $data ?? [], null);
         $this->setIfExists('status', $data ?? [], null);
-        $this->setIfExists('symbol', $data ?? [], null);
         $this->setIfExists('universal_symbol', $data ?? [], null);
         $this->setIfExists('option_symbol', $data ?? [], null);
+        $this->setIfExists('quote_universal_symbol', $data ?? [], null);
+        $this->setIfExists('quote_currency', $data ?? [], null);
         $this->setIfExists('action', $data ?? [], null);
         $this->setIfExists('total_quantity', $data ?? [], null);
         $this->setIfExists('open_quantity', $data ?? [], null);
@@ -365,6 +384,8 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
         $this->setIfExists('time_updated', $data ?? [], null);
         $this->setIfExists('time_executed', $data ?? [], null);
         $this->setIfExists('expiry_date', $data ?? [], null);
+        $this->setIfExists('symbol', $data ?? [], null);
+        $this->setIfExists('child_brokerage_order_ids', $data ?? [], null);
     }
 
     /**
@@ -468,37 +489,6 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     }
 
     /**
-     * Gets symbol
-     *
-     * @return string|null
-     * @deprecated
-     */
-    public function getSymbol()
-    {
-        return $this->container['symbol'];
-    }
-
-    /**
-     * Sets symbol
-     *
-     * @param string|null $symbol A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.
-     *
-     * @return self
-     * @deprecated
-     */
-    public function setSymbol($symbol)
-    {
-
-        if (is_null($symbol)) {
-            throw new \InvalidArgumentException('non-nullable symbol cannot be null');
-        }
-
-        $this->container['symbol'] = $symbol;
-
-        return $this;
-    }
-
-    /**
      * Gets universal_symbol
      *
      * @return \SnapTrade\Model\AccountOrderRecordUniversalSymbol|null
@@ -557,6 +547,64 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     }
 
     /**
+     * Gets quote_universal_symbol
+     *
+     * @return \SnapTrade\Model\AccountOrderRecordQuoteUniversalSymbol|null
+     */
+    public function getQuoteUniversalSymbol()
+    {
+        return $this->container['quote_universal_symbol'];
+    }
+
+    /**
+     * Sets quote_universal_symbol
+     *
+     * @param \SnapTrade\Model\AccountOrderRecordQuoteUniversalSymbol|null $quote_universal_symbol quote_universal_symbol
+     *
+     * @return self
+     */
+    public function setQuoteUniversalSymbol($quote_universal_symbol)
+    {
+
+        if (is_null($quote_universal_symbol)) {
+            throw new \InvalidArgumentException('non-nullable quote_universal_symbol cannot be null');
+        }
+
+        $this->container['quote_universal_symbol'] = $quote_universal_symbol;
+
+        return $this;
+    }
+
+    /**
+     * Gets quote_currency
+     *
+     * @return \SnapTrade\Model\AccountOrderRecordQuoteCurrency|null
+     */
+    public function getQuoteCurrency()
+    {
+        return $this->container['quote_currency'];
+    }
+
+    /**
+     * Sets quote_currency
+     *
+     * @param \SnapTrade\Model\AccountOrderRecordQuoteCurrency|null $quote_currency quote_currency
+     *
+     * @return self
+     */
+    public function setQuoteCurrency($quote_currency)
+    {
+
+        if (is_null($quote_currency)) {
+            throw new \InvalidArgumentException('non-nullable quote_currency cannot be null');
+        }
+
+        $this->container['quote_currency'] = $quote_currency;
+
+        return $this;
+    }
+
+    /**
      * Gets action
      *
      * @return string|null
@@ -588,7 +636,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Gets total_quantity
      *
-     * @return float|null
+     * @return string|null
      */
     public function getTotalQuantity()
     {
@@ -598,7 +646,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets total_quantity
      *
-     * @param float|null $total_quantity The total number of shares or contracts of the order. This should be the sum of the filled, canceled, and open quantities. Can be a decimal number for fractional shares.
+     * @param string|null $total_quantity The total number of shares or contracts of the order. This should be the sum of the filled, canceled, and open quantities. Can be a decimal number for fractional shares.
      *
      * @return self
      */
@@ -624,7 +672,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Gets open_quantity
      *
-     * @return float|null
+     * @return string|null
      */
     public function getOpenQuantity()
     {
@@ -634,7 +682,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets open_quantity
      *
-     * @param float|null $open_quantity The number of shares or contracts that are still open (waiting for execution). Can be a decimal number for fractional shares.
+     * @param string|null $open_quantity The number of shares or contracts that are still open (waiting for execution). Can be a decimal number for fractional shares.
      *
      * @return self
      */
@@ -660,7 +708,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Gets canceled_quantity
      *
-     * @return float|null
+     * @return string|null
      */
     public function getCanceledQuantity()
     {
@@ -670,7 +718,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets canceled_quantity
      *
-     * @param float|null $canceled_quantity The number of shares or contracts that have been canceled. Can be a decimal number for fractional shares.
+     * @param string|null $canceled_quantity The number of shares or contracts that have been canceled. Can be a decimal number for fractional shares.
      *
      * @return self
      */
@@ -696,7 +744,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Gets filled_quantity
      *
-     * @return float|null
+     * @return string|null
      */
     public function getFilledQuantity()
     {
@@ -706,7 +754,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets filled_quantity
      *
-     * @param float|null $filled_quantity The number of shares or contracts that have been filled. Can be a decimal number for fractional shares.
+     * @param string|null $filled_quantity The number of shares or contracts that have been filled. Can be a decimal number for fractional shares.
      *
      * @return self
      */
@@ -886,7 +934,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets time_in_force
      *
-     * @param string|null $time_in_force The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. We try our best to map brokerage time in force values to the following. When mapping fails, we will return the brokerage's time in force value.   - `Day` - Day. The order is valid only for the trading day on which it is placed.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - `GTD` - Good Til Date. The order is valid until the specified date.
+     * @param string|null $time_in_force The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. We try our best to map brokerage time in force values to the following. When mapping fails, we will return the brokerage's time in force value.   - `Day` - Day. The order is valid only for the trading day on which it is placed.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - `GTD` - Good Til Date. The order is valid until the specified date.   - `MOO` - Market On Open. The order is to be executed at the day's opening price.   - `EHP` - Extended Hours P.M. The order is to be placed during extended hour trading, after markets close.
      *
      * @return self
      */
@@ -1035,6 +1083,73 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
         }
 
         $this->container['expiry_date'] = $expiry_date;
+
+        return $this;
+    }
+
+    /**
+     * Gets symbol
+     *
+     * @return string|null
+     * @deprecated
+     */
+    public function getSymbol()
+    {
+        return $this->container['symbol'];
+    }
+
+    /**
+     * Sets symbol
+     *
+     * @param string|null $symbol A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.
+     *
+     * @return self
+     * @deprecated
+     */
+    public function setSymbol($symbol)
+    {
+
+        if (is_null($symbol)) {
+            throw new \InvalidArgumentException('non-nullable symbol cannot be null');
+        }
+
+        $this->container['symbol'] = $symbol;
+
+        return $this;
+    }
+
+    /**
+     * Gets child_brokerage_order_ids
+     *
+     * @return \SnapTrade\Model\AccountOrderRecordChildBrokerageOrderIds|null
+     */
+    public function getChildBrokerageOrderIds()
+    {
+        return $this->container['child_brokerage_order_ids'];
+    }
+
+    /**
+     * Sets child_brokerage_order_ids
+     *
+     * @param \SnapTrade\Model\AccountOrderRecordChildBrokerageOrderIds|null $child_brokerage_order_ids child_brokerage_order_ids
+     *
+     * @return self
+     */
+    public function setChildBrokerageOrderIds($child_brokerage_order_ids)
+    {
+
+        if (is_null($child_brokerage_order_ids)) {
+            array_push($this->openAPINullablesSetToNull, 'child_brokerage_order_ids');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('child_brokerage_order_ids', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['child_brokerage_order_ids'] = $child_brokerage_order_ids;
 
         return $this;
     }

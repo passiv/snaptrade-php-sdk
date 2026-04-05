@@ -495,6 +495,7 @@ class AccountHoldingsAccount implements ModelInterface, ArrayAccess, \JsonSerial
      * Gets total_value
      *
      * @return \SnapTrade\Model\SnapTradeHoldingsTotalValue|null
+     * @deprecated
      */
     public function getTotalValue()
     {
@@ -507,6 +508,7 @@ class AccountHoldingsAccount implements ModelInterface, ArrayAccess, \JsonSerial
      * @param \SnapTrade\Model\SnapTradeHoldingsTotalValue|null $total_value total_value
      *
      * @return self
+     * @deprecated
      */
     public function setTotalValue($total_value)
     {

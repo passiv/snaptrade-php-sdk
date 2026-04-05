@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * ManualTradeAndImpactTest Class Doc Comment
  *
  * @category    Class
- * @description Manual Trade and Impact object
+ * @description ManualTradeAndImpact
  * @package     SnapTrade
  */
 class ManualTradeAndImpactTest extends TestCase

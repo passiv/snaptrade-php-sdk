@@ -59,9 +59,21 @@ class ConnectionsApiTest extends TestCase
     }
 
     /**
+     * Test case for deleteConnection
+     *
+     * Delete connection.
+     *
+     */
+    public function testDeleteConnection()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for detailBrokerageAuthorization
      *
-     * Get brokerage authorization details.
+     * Get connection detail.
      *
      */
     public function testDetailBrokerageAuthorization()
@@ -73,7 +85,7 @@ class ConnectionsApiTest extends TestCase
     /**
      * Test case for disableBrokerageAuthorization
      *
-     * Manually disable a connection for testing.
+     * Force disable connection.
      *
      */
     public function testDisableBrokerageAuthorization()
@@ -85,7 +97,7 @@ class ConnectionsApiTest extends TestCase
     /**
      * Test case for listBrokerageAuthorizations
      *
-     * List all brokerage authorizations for the User.
+     * List all connections.
      *
      */
     public function testListBrokerageAuthorizations()
@@ -109,10 +121,22 @@ class ConnectionsApiTest extends TestCase
     /**
      * Test case for removeBrokerageAuthorization
      *
-     * Delete brokerage authorization.
+     * Delete connection.
      *
      */
     public function testRemoveBrokerageAuthorization()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for returnRates
+     *
+     * List connection rate of returns.
+     *
+     */
+    public function testReturnRates()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

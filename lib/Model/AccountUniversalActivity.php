@@ -502,7 +502,7 @@ class AccountUniversalActivity implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Sets price
      *
-     * @param float|null $price The price of the security for the transaction. This is mostly applicable to `BUY`, `SELL`, and `DIVIDEND` transactions.
+     * @param float|null $price The price of the security for the transaction. This is mostly applicable to `BUY`, `SELL`, and `DIVIDEND` transactions. For option transactions, this represents the price per share of the option contract.
      *
      * @return self
      */

@@ -59,18 +59,6 @@ class OptionsApiTest extends TestCase
     }
 
     /**
-     * Test case for getUserAccountOptionQuotes
-     *
-     * Get option quote.
-     *
-     */
-    public function testGetUserAccountOptionQuotes()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test case for listOptionHoldings
      *
      * List account option positions.

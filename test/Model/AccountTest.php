@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * AccountTest Class Doc Comment
  *
  * @category    Class
- * @description A single brokerage account at a financial institution.
+ * @description A single account at a brokerage.
  * @package     SnapTrade
  */
 class AccountTest extends TestCase
@@ -91,15 +91,6 @@ class AccountTest extends TestCase
     }
 
     /**
-     * Test attribute "portfolio_group"
-     */
-    public function testPropertyPortfolioGroup()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test attribute "name"
      */
     public function testPropertyName()
@@ -112,6 +103,15 @@ class AccountTest extends TestCase
      * Test attribute "number"
      */
     public function testPropertyNumber()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "institution_account_id"
+     */
+    public function testPropertyInstitutionAccountId()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
@@ -136,18 +136,18 @@ class AccountTest extends TestCase
     }
 
     /**
-     * Test attribute "meta"
+     * Test attribute "funding_date"
      */
-    public function testPropertyMeta()
+    public function testPropertyFundingDate()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "cash_restrictions"
+     * Test attribute "opening_date"
      */
-    public function testPropertyCashRestrictions()
+    public function testPropertyOpeningDate()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
@@ -166,6 +166,60 @@ class AccountTest extends TestCase
      * Test attribute "balance"
      */
     public function testPropertyBalance()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "status"
+     */
+    public function testPropertyStatus()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "raw_type"
+     */
+    public function testPropertyRawType()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "meta"
+     */
+    public function testPropertyMeta()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "portfolio_group"
+     */
+    public function testPropertyPortfolioGroup()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "cash_restrictions"
+     */
+    public function testPropertyCashRestrictions()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "is_paper"
+     */
+    public function testPropertyIsPaper()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

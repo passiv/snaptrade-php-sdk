@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * AccountSimpleTest Class Doc Comment
  *
  * @category    Class
- * @description SnapTradeUser Investment Account
+ * @description A single account at a brokerage.
  * @package     SnapTrade
  */
 class AccountSimpleTest extends TestCase
@@ -94,6 +94,15 @@ class AccountSimpleTest extends TestCase
      * Test attribute "number"
      */
     public function testPropertyNumber()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "institution_account_id"
+     */
+    public function testPropertyInstitutionAccountId()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

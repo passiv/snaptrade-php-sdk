@@ -30,6 +30,7 @@ use \SnapTrade\ObjectSerializer;
  * BrokerageAuthorization Class Doc Comment
  *
  * @category Class
+ * @description A single connection with a brokerage. Note that &#x60;Connection&#x60; and &#x60;Brokerage Authorization&#x60; are interchangeable, but the term &#x60;Connection&#x60; is preferred and used in the doc for consistency.  A connection is usually tied to a single login at a brokerage. A single connection can contain multiple brokerage accounts.  SnapTrade performs de-duping on connections for a given user. If the user has an existing connection with the brokerage, when connecting the brokerage with the same credentials, SnapTrade will return the existing connection instead of creating a new one.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
@@ -51,14 +52,15 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
       */
     protected static $openAPITypes = [
         'id' => 'string',
-        'created_date' => 'string',
-        'updated_date' => 'string',
+        'created_date' => '\DateTime',
         'brokerage' => '\SnapTrade\Model\Brokerage',
         'name' => 'string',
         'type' => 'string',
         'disabled' => 'bool',
-        'disabled_date' => 'string',
-        'meta' => 'array<string,mixed>'
+        'disabled_date' => '\DateTime',
+        'meta' => 'array<string,mixed>',
+        'updated_date' => '\DateTime',
+        'is_eligible_for_payout' => 'bool'
     ];
 
     /**
@@ -70,14 +72,15 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
       */
     protected static $openAPIFormats = [
         'id' => 'uuid',
-        'created_date' => null,
-        'updated_date' => null,
+        'created_date' => 'date-time',
         'brokerage' => null,
         'name' => null,
         'type' => null,
         'disabled' => null,
-        'disabled_date' => null,
-        'meta' => null
+        'disabled_date' => 'date-time',
+        'meta' => null,
+        'updated_date' => 'date-time',
+        'is_eligible_for_payout' => null
     ];
 
     /**
@@ -88,13 +91,14 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
     protected static array $openAPINullables = [
         'id' => false,
 		'created_date' => false,
-		'updated_date' => false,
 		'brokerage' => false,
 		'name' => false,
 		'type' => false,
 		'disabled' => false,
 		'disabled_date' => true,
-		'meta' => false
+		'meta' => false,
+		'updated_date' => false,
+		'is_eligible_for_payout' => false
     ];
 
     /**
@@ -185,13 +189,14 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
     protected static $attributeMap = [
         'id' => 'id',
         'created_date' => 'created_date',
-        'updated_date' => 'updated_date',
         'brokerage' => 'brokerage',
         'name' => 'name',
         'type' => 'type',
         'disabled' => 'disabled',
         'disabled_date' => 'disabled_date',
-        'meta' => 'meta'
+        'meta' => 'meta',
+        'updated_date' => 'updated_date',
+        'is_eligible_for_payout' => 'is_eligible_for_payout'
     ];
 
     /**
@@ -202,13 +207,14 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
     protected static $setters = [
         'id' => 'setId',
         'created_date' => 'setCreatedDate',
-        'updated_date' => 'setUpdatedDate',
         'brokerage' => 'setBrokerage',
         'name' => 'setName',
         'type' => 'setType',
         'disabled' => 'setDisabled',
         'disabled_date' => 'setDisabledDate',
-        'meta' => 'setMeta'
+        'meta' => 'setMeta',
+        'updated_date' => 'setUpdatedDate',
+        'is_eligible_for_payout' => 'setIsEligibleForPayout'
     ];
 
     /**
@@ -219,13 +225,14 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
     protected static $getters = [
         'id' => 'getId',
         'created_date' => 'getCreatedDate',
-        'updated_date' => 'getUpdatedDate',
         'brokerage' => 'getBrokerage',
         'name' => 'getName',
         'type' => 'getType',
         'disabled' => 'getDisabled',
         'disabled_date' => 'getDisabledDate',
-        'meta' => 'getMeta'
+        'meta' => 'getMeta',
+        'updated_date' => 'getUpdatedDate',
+        'is_eligible_for_payout' => 'getIsEligibleForPayout'
     ];
 
     /**
@@ -287,13 +294,14 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
     {
         $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('created_date', $data ?? [], null);
-        $this->setIfExists('updated_date', $data ?? [], null);
         $this->setIfExists('brokerage', $data ?? [], null);
         $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('type', $data ?? [], null);
         $this->setIfExists('disabled', $data ?? [], null);
         $this->setIfExists('disabled_date', $data ?? [], null);
         $this->setIfExists('meta', $data ?? [], null);
+        $this->setIfExists('updated_date', $data ?? [], null);
+        $this->setIfExists('is_eligible_for_payout', $data ?? [], null);
     }
 
     /**
@@ -351,7 +359,7 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets id
      *
-     * @param string|null $id id
+     * @param string|null $id Unique identifier for the connection. This is the UUID used to reference the connection in SnapTrade.
      *
      * @return self
      */
@@ -370,7 +378,7 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Gets created_date
      *
-     * @return string|null
+     * @return \DateTime|null
      */
     public function getCreatedDate()
     {
@@ -380,7 +388,7 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets created_date
      *
-     * @param string|null $created_date Time
+     * @param \DateTime|null $created_date Timestamp of when the connection was established in SnapTrade.
      *
      * @return self
      */
@@ -392,35 +400,6 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
         }
 
         $this->container['created_date'] = $created_date;
-
-        return $this;
-    }
-
-    /**
-     * Gets updated_date
-     *
-     * @return string|null
-     */
-    public function getUpdatedDate()
-    {
-        return $this->container['updated_date'];
-    }
-
-    /**
-     * Sets updated_date
-     *
-     * @param string|null $updated_date Time
-     *
-     * @return self
-     */
-    public function setUpdatedDate($updated_date)
-    {
-
-        if (is_null($updated_date)) {
-            throw new \InvalidArgumentException('non-nullable updated_date cannot be null');
-        }
-
-        $this->container['updated_date'] = $updated_date;
 
         return $this;
     }
@@ -467,7 +446,7 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets name
      *
-     * @param string|null $name Connection Name
+     * @param string|null $name A short, human-readable name for the connection.
      *
      * @return self
      */
@@ -496,7 +475,7 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets type
      *
-     * @param string|null $type type
+     * @param string|null $type Whether the connection is read-only or trade-enabled. A read-only connection can only be used to fetch data, while a trade-enabled connection can be used to place trades. Valid values are `read` and `trade`.
      *
      * @return self
      */
@@ -525,7 +504,7 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets disabled
      *
-     * @param bool|null $disabled disabled
+     * @param bool|null $disabled Whether the connection is disabled. A disabled connection can no longer access the latest data from the brokerage, but will continue to return the last cached state. A connection can become disabled for many reasons and differs by brokerage. Here are some common scenarios:  - The user has changed their username or password at the brokerage. - The user has explicitly removed the access grant at the brokerage. - The session has expired at the brokerage and now requires explicit user re-authentication.  Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
      *
      * @return self
      */
@@ -544,7 +523,7 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Gets disabled_date
      *
-     * @return string|null
+     * @return \DateTime|null
      */
     public function getDisabledDate()
     {
@@ -554,7 +533,7 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets disabled_date
      *
-     * @param string|null $disabled_date Disabled date
+     * @param \DateTime|null $disabled_date Timestamp of when the connection was disabled in SnapTrade.
      *
      * @return self
      */
@@ -581,6 +560,7 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
      * Gets meta
      *
      * @return array<string,mixed>|null
+     * @deprecated
      */
     public function getMeta()
     {
@@ -590,9 +570,10 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets meta
      *
-     * @param array<string,mixed>|null $meta Additional data about brokerage authorization
+     * @param array<string,mixed>|null $meta Additional data about the connection. This information is specific to the brokerage and there's no standard format for this data. This field is deprecated and subject to removal in a future version.
      *
      * @return self
+     * @deprecated
      */
     public function setMeta($meta)
     {
@@ -602,6 +583,66 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
         }
 
         $this->container['meta'] = $meta;
+
+        return $this;
+    }
+
+    /**
+     * Gets updated_date
+     *
+     * @return \DateTime|null
+     * @deprecated
+     */
+    public function getUpdatedDate()
+    {
+        return $this->container['updated_date'];
+    }
+
+    /**
+     * Sets updated_date
+     *
+     * @param \DateTime|null $updated_date Timestamp of when the connection was last updated in SnapTrade. This field is deprecated. Please let us know if you have a valid use case for this field.
+     *
+     * @return self
+     * @deprecated
+     */
+    public function setUpdatedDate($updated_date)
+    {
+
+        if (is_null($updated_date)) {
+            throw new \InvalidArgumentException('non-nullable updated_date cannot be null');
+        }
+
+        $this->container['updated_date'] = $updated_date;
+
+        return $this;
+    }
+
+    /**
+     * Gets is_eligible_for_payout
+     *
+     * @return bool|null
+     */
+    public function getIsEligibleForPayout()
+    {
+        return $this->container['is_eligible_for_payout'];
+    }
+
+    /**
+     * Sets is_eligible_for_payout
+     *
+     * @param bool|null $is_eligible_for_payout Whether the connection is eligible for a payout. This is an experimental field that is NOT generally available for all partners. Do not use in production without speaking to the SnapTrade team.
+     *
+     * @return self
+     */
+    public function setIsEligibleForPayout($is_eligible_for_payout)
+    {
+
+        if (is_null($is_eligible_for_payout)) {
+            throw new \InvalidArgumentException('non-nullable is_eligible_for_payout cannot be null');
+        }
+
+        $this->container['is_eligible_for_payout'] = $is_eligible_for_payout;
 
         return $this;
     }

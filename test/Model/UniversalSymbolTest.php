@@ -136,15 +136,6 @@ class UniversalSymbolTest extends TestCase
     }
 
     /**
-     * Test attribute "currencies"
-     */
-    public function testPropertyCurrencies()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test attribute "figi_code"
      */
     public function testPropertyFigiCode()
@@ -157,6 +148,15 @@ class UniversalSymbolTest extends TestCase
      * Test attribute "figi_instrument"
      */
     public function testPropertyFigiInstrument()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "currencies"
+     */
+    public function testPropertyCurrencies()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

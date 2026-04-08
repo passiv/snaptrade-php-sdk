@@ -150,7 +150,9 @@ class AuthenticationApi extends \SnapTrade\CustomApi
     /**
      * Operation deleteSnapTradeUser
      *
-     * Delete SnapTrade user
+     * Delete user
+     *
+     * Deletes a registered user and all associated data. This action is irreversible. This API is asynchronous and will return a 200 status code if the request is accepted. The user and all associated data will be queued for deletion. Once deleted, a &#x60;USER_DELETED&#x60; webhook will be sent.
      *
      * @param  string $user_id user_id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteSnapTradeUser'] to see the possible values for this operation
@@ -173,7 +175,9 @@ class AuthenticationApi extends \SnapTrade\CustomApi
     /**
      * Operation deleteSnapTradeUserWithHttpInfo
      *
-     * Delete SnapTrade user
+     * Delete user
+     *
+     * Deletes a registered user and all associated data. This action is irreversible. This API is asynchronous and will return a 200 status code if the request is accepted. The user and all associated data will be queued for deletion. Once deleted, a &#x60;USER_DELETED&#x60; webhook will be sent.
      *
      * @param  string $user_id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteSnapTradeUser'] to see the possible values for this operation
@@ -357,7 +361,9 @@ class AuthenticationApi extends \SnapTrade\CustomApi
     /**
      * Operation deleteSnapTradeUserAsync
      *
-     * Delete SnapTrade user
+     * Delete user
+     *
+     * Deletes a registered user and all associated data. This action is irreversible. This API is asynchronous and will return a 200 status code if the request is accepted. The user and all associated data will be queued for deletion. Once deleted, a &#x60;USER_DELETED&#x60; webhook will be sent.
      *
      * @param  string $user_id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteSnapTradeUser'] to see the possible values for this operation
@@ -383,7 +389,9 @@ class AuthenticationApi extends \SnapTrade\CustomApi
     /**
      * Operation deleteSnapTradeUserAsyncWithHttpInfo
      *
-     * Delete SnapTrade user
+     * Delete user
+     *
+     * Deletes a registered user and all associated data. This action is irreversible. This API is asynchronous and will return a 200 status code if the request is accepted. The user and all associated data will be queued for deletion. Once deleted, a &#x60;USER_DELETED&#x60; webhook will be sent.
      *
      * @param  string $user_id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteSnapTradeUser'] to see the possible values for this operation
@@ -558,7 +566,9 @@ class AuthenticationApi extends \SnapTrade\CustomApi
     /**
      * Operation listSnapTradeUsers
      *
-     * List SnapTrade users
+     * List all users
+     *
+     * Returns a list of all registered user IDs. Please note that the response is not currently paginated.
      *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listSnapTradeUsers'] to see the possible values for this operation
      *
@@ -580,7 +590,9 @@ class AuthenticationApi extends \SnapTrade\CustomApi
     /**
      * Operation listSnapTradeUsersWithHttpInfo
      *
-     * List SnapTrade users
+     * List all users
+     *
+     * Returns a list of all registered user IDs. Please note that the response is not currently paginated.
      *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listSnapTradeUsers'] to see the possible values for this operation
      *
@@ -762,7 +774,9 @@ class AuthenticationApi extends \SnapTrade\CustomApi
     /**
      * Operation listSnapTradeUsersAsync
      *
-     * List SnapTrade users
+     * List all users
+     *
+     * Returns a list of all registered user IDs. Please note that the response is not currently paginated.
      *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listSnapTradeUsers'] to see the possible values for this operation
      *
@@ -787,7 +801,9 @@ class AuthenticationApi extends \SnapTrade\CustomApi
     /**
      * Operation listSnapTradeUsersAsyncWithHttpInfo
      *
-     * List SnapTrade users
+     * List all users
+     *
+     * Returns a list of all registered user IDs. Please note that the response is not currently paginated.
      *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listSnapTradeUsers'] to see the possible values for this operation
      *
@@ -939,7 +955,9 @@ class AuthenticationApi extends \SnapTrade\CustomApi
     /**
      * Operation loginSnapTradeUser
      *
-     * Login user &amp; generate connection link
+     * Generate Connection Portal URL
+     *
+     * Authenticates a SnapTrade user and returns the Connection Portal URL used for connecting brokerage accounts. Please check [this guide](/docs/implement-connection-portal) for how to integrate the Connection Portal into your app.  Please note that the returned URL expires in 5 minutes.
      *
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
@@ -957,8 +975,10 @@ class AuthenticationApi extends \SnapTrade\CustomApi
         $immediate_redirect = SENTINEL_VALUE,
         $custom_redirect = SENTINEL_VALUE,
         $reconnect = SENTINEL_VALUE,
-        $connection_type = SENTINEL_VALUE,
-        $connection_portal_version = SENTINEL_VALUE,
+        $connection_type = 'read',
+        $show_close_button = SENTINEL_VALUE,
+        $dark_mode = SENTINEL_VALUE,
+        $connection_portal_version = 'v4',
 
         string $contentType = self::contentTypes['loginSnapTradeUser'][0]
     )
@@ -969,6 +989,8 @@ class AuthenticationApi extends \SnapTrade\CustomApi
         $this->setRequestBodyProperty($_body, "custom_redirect", $custom_redirect);
         $this->setRequestBodyProperty($_body, "reconnect", $reconnect);
         $this->setRequestBodyProperty($_body, "connection_type", $connection_type);
+        $this->setRequestBodyProperty($_body, "show_close_button", $show_close_button);
+        $this->setRequestBodyProperty($_body, "dark_mode", $dark_mode);
         $this->setRequestBodyProperty($_body, "connection_portal_version", $connection_portal_version);
         $snap_trade_login_user_request_body = $_body;
 
@@ -979,7 +1001,9 @@ class AuthenticationApi extends \SnapTrade\CustomApi
     /**
      * Operation loginSnapTradeUserWithHttpInfo
      *
-     * Login user &amp; generate connection link
+     * Generate Connection Portal URL
+     *
+     * Authenticates a SnapTrade user and returns the Connection Portal URL used for connecting brokerage accounts. Please check [this guide](/docs/implement-connection-portal) for how to integrate the Connection Portal into your app.  Please note that the returned URL expires in 5 minutes.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -1167,7 +1191,9 @@ class AuthenticationApi extends \SnapTrade\CustomApi
     /**
      * Operation loginSnapTradeUserAsync
      *
-     * Login user &amp; generate connection link
+     * Generate Connection Portal URL
+     *
+     * Authenticates a SnapTrade user and returns the Connection Portal URL used for connecting brokerage accounts. Please check [this guide](/docs/implement-connection-portal) for how to integrate the Connection Portal into your app.  Please note that the returned URL expires in 5 minutes.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -1184,8 +1210,10 @@ class AuthenticationApi extends \SnapTrade\CustomApi
         $immediate_redirect = SENTINEL_VALUE,
         $custom_redirect = SENTINEL_VALUE,
         $reconnect = SENTINEL_VALUE,
-        $connection_type = SENTINEL_VALUE,
-        $connection_portal_version = SENTINEL_VALUE,
+        $connection_type = 'read',
+        $show_close_button = SENTINEL_VALUE,
+        $dark_mode = SENTINEL_VALUE,
+        $connection_portal_version = 'v4',
 
         string $contentType = self::contentTypes['loginSnapTradeUser'][0]
     )
@@ -1196,6 +1224,8 @@ class AuthenticationApi extends \SnapTrade\CustomApi
         $this->setRequestBodyProperty($_body, "custom_redirect", $custom_redirect);
         $this->setRequestBodyProperty($_body, "reconnect", $reconnect);
         $this->setRequestBodyProperty($_body, "connection_type", $connection_type);
+        $this->setRequestBodyProperty($_body, "show_close_button", $show_close_button);
+        $this->setRequestBodyProperty($_body, "dark_mode", $dark_mode);
         $this->setRequestBodyProperty($_body, "connection_portal_version", $connection_portal_version);
         $snap_trade_login_user_request_body = $_body;
 
@@ -1210,7 +1240,9 @@ class AuthenticationApi extends \SnapTrade\CustomApi
     /**
      * Operation loginSnapTradeUserAsyncWithHttpInfo
      *
-     * Login user &amp; generate connection link
+     * Generate Connection Portal URL
+     *
+     * Authenticates a SnapTrade user and returns the Connection Portal URL used for connecting brokerage accounts. Please check [this guide](/docs/implement-connection-portal) for how to integrate the Connection Portal into your app.  Please note that the returned URL expires in 5 minutes.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -1425,7 +1457,9 @@ class AuthenticationApi extends \SnapTrade\CustomApi
     /**
      * Operation registerSnapTradeUser
      *
-     * Create SnapTrade user
+     * Register user
+     *
+     * Registers a new SnapTrade user under your Client ID. A user secret will be automatically generated for you and must be properly stored in your system. Most SnapTrade operations require a user ID and user secret to be passed in as parameters.
      *
      * @param  \SnapTrade\Model\SnapTradeRegisterUserRequestBody $snap_trade_register_user_request_body snap_trade_register_user_request_body (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['registerSnapTradeUser'] to see the possible values for this operation
@@ -1436,7 +1470,7 @@ class AuthenticationApi extends \SnapTrade\CustomApi
      */
     public function registerSnapTradeUser(
 
-        $user_id = SENTINEL_VALUE,
+        $user_id,
         string $contentType = self::contentTypes['registerSnapTradeUser'][0]
     )
     {
@@ -1451,7 +1485,9 @@ class AuthenticationApi extends \SnapTrade\CustomApi
     /**
      * Operation registerSnapTradeUserWithHttpInfo
      *
-     * Create SnapTrade user
+     * Register user
+     *
+     * Registers a new SnapTrade user under your Client ID. A user secret will be automatically generated for you and must be properly stored in your system. Most SnapTrade operations require a user ID and user secret to be passed in as parameters.
      *
      * @param  \SnapTrade\Model\SnapTradeRegisterUserRequestBody $snap_trade_register_user_request_body (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['registerSnapTradeUser'] to see the possible values for this operation
@@ -1635,7 +1671,9 @@ class AuthenticationApi extends \SnapTrade\CustomApi
     /**
      * Operation registerSnapTradeUserAsync
      *
-     * Create SnapTrade user
+     * Register user
+     *
+     * Registers a new SnapTrade user under your Client ID. A user secret will be automatically generated for you and must be properly stored in your system. Most SnapTrade operations require a user ID and user secret to be passed in as parameters.
      *
      * @param  \SnapTrade\Model\SnapTradeRegisterUserRequestBody $snap_trade_register_user_request_body (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['registerSnapTradeUser'] to see the possible values for this operation
@@ -1645,7 +1683,7 @@ class AuthenticationApi extends \SnapTrade\CustomApi
      */
     public function registerSnapTradeUserAsync(
 
-        $user_id = SENTINEL_VALUE,
+        $user_id,
         string $contentType = self::contentTypes['registerSnapTradeUser'][0]
     )
     {
@@ -1664,7 +1702,9 @@ class AuthenticationApi extends \SnapTrade\CustomApi
     /**
      * Operation registerSnapTradeUserAsyncWithHttpInfo
      *
-     * Create SnapTrade user
+     * Register user
+     *
+     * Registers a new SnapTrade user under your Client ID. A user secret will be automatically generated for you and must be properly stored in your system. Most SnapTrade operations require a user ID and user secret to be passed in as parameters.
      *
      * @param  \SnapTrade\Model\SnapTradeRegisterUserRequestBody $snap_trade_register_user_request_body (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['registerSnapTradeUser'] to see the possible values for this operation
@@ -1839,7 +1879,9 @@ class AuthenticationApi extends \SnapTrade\CustomApi
     /**
      * Operation resetSnapTradeUserSecret
      *
-     * Obtain a new user secret for a user
+     * Rotate user secret
+     *
+     * Rotates the secret for a SnapTrade user. You might use this if &#x60;userSecret&#x60; is compromised. Please note that if you call this endpoint and fail to save the new secret, you&#39;ll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect.
      *
      * @param  \SnapTrade\Model\UserIDandSecret $user_i_dand_secret user_i_dand_secret (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['resetSnapTradeUserSecret'] to see the possible values for this operation
@@ -1867,7 +1909,9 @@ class AuthenticationApi extends \SnapTrade\CustomApi
     /**
      * Operation resetSnapTradeUserSecretWithHttpInfo
      *
-     * Obtain a new user secret for a user
+     * Rotate user secret
+     *
+     * Rotates the secret for a SnapTrade user. You might use this if &#x60;userSecret&#x60; is compromised. Please note that if you call this endpoint and fail to save the new secret, you&#39;ll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect.
      *
      * @param  \SnapTrade\Model\UserIDandSecret $user_i_dand_secret (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['resetSnapTradeUserSecret'] to see the possible values for this operation
@@ -2051,7 +2095,9 @@ class AuthenticationApi extends \SnapTrade\CustomApi
     /**
      * Operation resetSnapTradeUserSecretAsync
      *
-     * Obtain a new user secret for a user
+     * Rotate user secret
+     *
+     * Rotates the secret for a SnapTrade user. You might use this if &#x60;userSecret&#x60; is compromised. Please note that if you call this endpoint and fail to save the new secret, you&#39;ll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect.
      *
      * @param  \SnapTrade\Model\UserIDandSecret $user_i_dand_secret (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['resetSnapTradeUserSecret'] to see the possible values for this operation
@@ -2082,7 +2128,9 @@ class AuthenticationApi extends \SnapTrade\CustomApi
     /**
      * Operation resetSnapTradeUserSecretAsyncWithHttpInfo
      *
-     * Obtain a new user secret for a user
+     * Rotate user secret
+     *
+     * Rotates the secret for a SnapTrade user. You might use this if &#x60;userSecret&#x60; is compromised. Please note that if you call this endpoint and fail to save the new secret, you&#39;ll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect.
      *
      * @param  \SnapTrade\Model\UserIDandSecret $user_i_dand_secret (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['resetSnapTradeUserSecret'] to see the possible values for this operation

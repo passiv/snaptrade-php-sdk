@@ -789,7 +789,7 @@ class OrderUpdatedResponseOrder implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets execution_price
      *
-     * @param float|null $execution_price The price at which the order was executed.
+     * @param float|null $execution_price The price at which the order was executed. For option orders, this represents the price per share.
      *
      * @return self
      */
@@ -825,7 +825,7 @@ class OrderUpdatedResponseOrder implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets limit_price
      *
-     * @param float|null $limit_price The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to `Limit` and `StopLimit` orders.
+     * @param float|null $limit_price The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to `Limit` and `StopLimit` orders. For option orders, this represents the price per share.
      *
      * @return self
      */
@@ -861,7 +861,7 @@ class OrderUpdatedResponseOrder implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets stop_price
      *
-     * @param float|null $stop_price The stop price is the price at which a stop order is triggered. Should only apply to `Stop` and `StopLimit` orders.
+     * @param float|null $stop_price The stop price is the price at which a stop order is triggered. Should only apply to `Stop` and `StopLimit` orders. For option orders, this represents the price per share.
      *
      * @return self
      */

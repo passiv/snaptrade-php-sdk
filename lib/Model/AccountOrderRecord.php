@@ -65,6 +65,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
         'execution_price' => 'float',
         'limit_price' => 'float',
         'stop_price' => 'float',
+        'trailing_stop' => '\SnapTrade\Model\AccountOrderRecordTrailingStop',
         'order_type' => 'string',
         'time_in_force' => 'string',
         'time_placed' => '\DateTime',
@@ -97,6 +98,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
         'execution_price' => null,
         'limit_price' => null,
         'stop_price' => null,
+        'trailing_stop' => null,
         'order_type' => null,
         'time_in_force' => null,
         'time_placed' => 'date-time',
@@ -127,6 +129,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
 		'execution_price' => true,
 		'limit_price' => true,
 		'stop_price' => true,
+		'trailing_stop' => true,
 		'order_type' => true,
 		'time_in_force' => false,
 		'time_placed' => false,
@@ -237,6 +240,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
         'execution_price' => 'execution_price',
         'limit_price' => 'limit_price',
         'stop_price' => 'stop_price',
+        'trailing_stop' => 'trailing_stop',
         'order_type' => 'order_type',
         'time_in_force' => 'time_in_force',
         'time_placed' => 'time_placed',
@@ -267,6 +271,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
         'execution_price' => 'setExecutionPrice',
         'limit_price' => 'setLimitPrice',
         'stop_price' => 'setStopPrice',
+        'trailing_stop' => 'setTrailingStop',
         'order_type' => 'setOrderType',
         'time_in_force' => 'setTimeInForce',
         'time_placed' => 'setTimePlaced',
@@ -297,6 +302,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
         'execution_price' => 'getExecutionPrice',
         'limit_price' => 'getLimitPrice',
         'stop_price' => 'getStopPrice',
+        'trailing_stop' => 'getTrailingStop',
         'order_type' => 'getOrderType',
         'time_in_force' => 'getTimeInForce',
         'time_placed' => 'getTimePlaced',
@@ -378,6 +384,7 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
         $this->setIfExists('execution_price', $data ?? [], null);
         $this->setIfExists('limit_price', $data ?? [], null);
         $this->setIfExists('stop_price', $data ?? [], null);
+        $this->setIfExists('trailing_stop', $data ?? [], null);
         $this->setIfExists('order_type', $data ?? [], null);
         $this->setIfExists('time_in_force', $data ?? [], null);
         $this->setIfExists('time_placed', $data ?? [], null);
@@ -881,6 +888,42 @@ class AccountOrderRecord implements ModelInterface, ArrayAccess, \JsonSerializab
         }
 
         $this->container['stop_price'] = $stop_price;
+
+        return $this;
+    }
+
+    /**
+     * Gets trailing_stop
+     *
+     * @return \SnapTrade\Model\AccountOrderRecordTrailingStop|null
+     */
+    public function getTrailingStop()
+    {
+        return $this->container['trailing_stop'];
+    }
+
+    /**
+     * Sets trailing_stop
+     *
+     * @param \SnapTrade\Model\AccountOrderRecordTrailingStop|null $trailing_stop trailing_stop
+     *
+     * @return self
+     */
+    public function setTrailingStop($trailing_stop)
+    {
+
+        if (is_null($trailing_stop)) {
+            array_push($this->openAPINullablesSetToNull, 'trailing_stop');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('trailing_stop', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['trailing_stop'] = $trailing_stop;
 
         return $this;
     }

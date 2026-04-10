@@ -199,6 +199,15 @@ class OrderUpdatedResponseOrderTest extends TestCase
     }
 
     /**
+     * Test attribute "trailing_stop"
+     */
+    public function testPropertyTrailingStop()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "order_type"
      */
     public function testPropertyOrderType()

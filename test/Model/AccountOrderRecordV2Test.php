@@ -163,6 +163,15 @@ class AccountOrderRecordV2Test extends TestCase
     }
 
     /**
+     * Test attribute "trailing_stop"
+     */
+    public function testPropertyTrailingStop()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "legs"
      */
     public function testPropertyLegs()

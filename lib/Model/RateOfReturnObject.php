@@ -236,9 +236,10 @@ class RateOfReturnObject implements ModelInterface, ArrayAccess, \JsonSerializab
 
     public const TIMEFRAME_ALL = 'ALL';
     public const TIMEFRAME__1_Y = '1Y';
-    public const TIMEFRAME__6_M = '6M';
-    public const TIMEFRAME__3_M = '3M';
+    public const TIMEFRAME_YTD = 'YTD';
     public const TIMEFRAME__1_M = '1M';
+    public const TIMEFRAME__1_W = '1W';
+    public const TIMEFRAME__1_D = '1D';
 
     /**
      * Gets allowable values of the enum
@@ -250,9 +251,10 @@ class RateOfReturnObject implements ModelInterface, ArrayAccess, \JsonSerializab
         return [
             self::TIMEFRAME_ALL,
             self::TIMEFRAME__1_Y,
-            self::TIMEFRAME__6_M,
-            self::TIMEFRAME__3_M,
+            self::TIMEFRAME_YTD,
             self::TIMEFRAME__1_M,
+            self::TIMEFRAME__1_W,
+            self::TIMEFRAME__1_D,
         ];
     }
 

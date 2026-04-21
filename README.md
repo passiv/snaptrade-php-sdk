@@ -546,7 +546,7 @@ Defaults to true. Indicates if request should fetch only executed orders. Set to
 
 ### `snaptrade.accountInformation.getUserAccountReturnRates`<a id="snaptradeaccountinformationgetuseraccountreturnrates"></a>
 
-Returns a list of rate of return percents for a given account. Will include timeframes available from the brokerage, for example "ALL", "1Y", "6M", "3M", "1M"
+Returns a list of rate of return percents for a given account.
 
 
 
@@ -556,7 +556,8 @@ Returns a list of rate of return percents for a given account. Will include time
 $result = $snaptrade->accountInformation->getUserAccountReturnRates(
     user_id: "snaptrade-user-123", 
     user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61", 
-    account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631"
+    account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631", 
+    timeframes: "ALL,1Y"
 );
 ```
 
@@ -567,6 +568,10 @@ $result = $snaptrade->accountInformation->getUserAccountReturnRates(
 ##### user_secret: `string`<a id="user_secret-string"></a>
 
 ##### account_id: `string`<a id="account_id-string"></a>
+
+##### timeframes: `string`<a id="timeframes-string"></a>
+
+Optional comma separated list of rate-of-return timeframes to return. Supported values are `ALL`, `1Y`, `YTD`, `1M`, `1W`, and `1D`. If omitted, SnapTrade returns all six supported timeframes.
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -1173,7 +1178,7 @@ void (empty response body)
 
 ### `snaptrade.connections.returnRates`<a id="snaptradeconnectionsreturnrates"></a>
 
-Returns a list of rate of return percents for a given connection. Will include timeframes available from the brokerage, for example "ALL", "1Y", "6M", "3M", "1M"
+Returns a list of rate of return percents for a given connection.
 
 
 
@@ -1183,7 +1188,8 @@ Returns a list of rate of return percents for a given connection. Will include t
 $result = $snaptrade->connections->returnRates(
     user_id: "snaptrade-user-123", 
     user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61", 
-    authorization_id: "87b24961-b51e-4db8-9226-f198f6518a89"
+    authorization_id: "87b24961-b51e-4db8-9226-f198f6518a89", 
+    timeframes: "ALL,1Y"
 );
 ```
 
@@ -1194,6 +1200,10 @@ $result = $snaptrade->connections->returnRates(
 ##### user_secret: `string`<a id="user_secret-string"></a>
 
 ##### authorization_id: `string`<a id="authorization_id-string"></a>
+
+##### timeframes: `string`<a id="timeframes-string"></a>
+
+Optional comma separated list of rate-of-return timeframes to return. Supported values are `ALL`, `1Y`, `YTD`, `1M`, `1W`, and `1D`. If omitted, SnapTrade returns all six supported timeframes.
 
 
 #### 🔄 Return<a id="🔄-return"></a>

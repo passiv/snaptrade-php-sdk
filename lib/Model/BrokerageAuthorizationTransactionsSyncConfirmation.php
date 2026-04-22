@@ -1,6 +1,6 @@
 <?php
 /**
- * TransactionsStatus
+ * BrokerageAuthorizationTransactionsSyncConfirmation
  *
  * PHP version 7.4
  *
@@ -27,14 +27,14 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * TransactionsStatus Class Doc Comment
+ * BrokerageAuthorizationTransactionsSyncConfirmation Class Doc Comment
  *
  * @category Class
- * @description Status of account transaction sync. SnapTrade syncs transactions from the brokerage under the following conditions: 1. Initial connection - SnapTrade syncs all transactions from the brokerage account as far back as the brokerage allows. Check [our integrations doc](https://support.snaptrade.com/brokerages-table?v&#x3D;6fab8012ade6441fa0c6d9af9c55ce3a) for details on how far back we sync for each brokerage. 2. Daily sync - Once a day SnapTrade syncs new transactions from the brokerage. 3. Manual sync - You can trigger an incremental sync of transactions with the [transactions sync](/reference/Experimental%20endpoints/Connections_syncBrokerageAuthorizationTransactions) endpoint.
+ * @description Confirmation that the transaction syncs have been scheduled.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class TransactionsStatus implements ModelInterface, ArrayAccess, \JsonSerializable
+class BrokerageAuthorizationTransactionsSyncConfirmation implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -43,7 +43,7 @@ class TransactionsStatus implements ModelInterface, ArrayAccess, \JsonSerializab
       *
       * @var string
       */
-    protected static $openAPIModelName = 'TransactionsStatus';
+    protected static $openAPIModelName = 'BrokerageAuthorizationTransactionsSyncConfirmation';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -51,9 +51,7 @@ class TransactionsStatus implements ModelInterface, ArrayAccess, \JsonSerializab
       * @var string[]
       */
     protected static $openAPITypes = [
-        'initial_sync_completed' => 'bool',
-        'last_successful_sync' => '\DateTime',
-        'first_transaction_date' => '\DateTime'
+        'detail' => 'string'
     ];
 
     /**
@@ -64,9 +62,7 @@ class TransactionsStatus implements ModelInterface, ArrayAccess, \JsonSerializab
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'initial_sync_completed' => null,
-        'last_successful_sync' => null,
-        'first_transaction_date' => null
+        'detail' => null
     ];
 
     /**
@@ -75,9 +71,7 @@ class TransactionsStatus implements ModelInterface, ArrayAccess, \JsonSerializab
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'initial_sync_completed' => false,
-		'last_successful_sync' => true,
-		'first_transaction_date' => true
+        'detail' => false
     ];
 
     /**
@@ -166,9 +160,7 @@ class TransactionsStatus implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $attributeMap = [
-        'initial_sync_completed' => 'initial_sync_completed',
-        'last_successful_sync' => 'last_successful_sync',
-        'first_transaction_date' => 'first_transaction_date'
+        'detail' => 'detail'
     ];
 
     /**
@@ -177,9 +169,7 @@ class TransactionsStatus implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $setters = [
-        'initial_sync_completed' => 'setInitialSyncCompleted',
-        'last_successful_sync' => 'setLastSuccessfulSync',
-        'first_transaction_date' => 'setFirstTransactionDate'
+        'detail' => 'setDetail'
     ];
 
     /**
@@ -188,9 +178,7 @@ class TransactionsStatus implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $getters = [
-        'initial_sync_completed' => 'getInitialSyncCompleted',
-        'last_successful_sync' => 'getLastSuccessfulSync',
-        'first_transaction_date' => 'getFirstTransactionDate'
+        'detail' => 'getDetail'
     ];
 
     /**
@@ -250,9 +238,7 @@ class TransactionsStatus implements ModelInterface, ArrayAccess, \JsonSerializab
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('initial_sync_completed', $data ?? [], null);
-        $this->setIfExists('last_successful_sync', $data ?? [], null);
-        $this->setIfExists('first_transaction_date', $data ?? [], null);
+        $this->setIfExists('detail', $data ?? [], null);
     }
 
     /**
@@ -298,102 +284,30 @@ class TransactionsStatus implements ModelInterface, ArrayAccess, \JsonSerializab
 
 
     /**
-     * Gets initial_sync_completed
+     * Gets detail
      *
-     * @return bool|null
+     * @return string|null
      */
-    public function getInitialSyncCompleted()
+    public function getDetail()
     {
-        return $this->container['initial_sync_completed'];
+        return $this->container['detail'];
     }
 
     /**
-     * Sets initial_sync_completed
+     * Sets detail
      *
-     * @param bool|null $initial_sync_completed Indicates if the initial sync of transactions has been completed. For accounts with a large number of transactions, the initial sync may take a while to complete.
+     * @param string|null $detail Transactions sync confirmation details
      *
      * @return self
      */
-    public function setInitialSyncCompleted($initial_sync_completed)
+    public function setDetail($detail)
     {
 
-        if (is_null($initial_sync_completed)) {
-            throw new \InvalidArgumentException('non-nullable initial_sync_completed cannot be null');
+        if (is_null($detail)) {
+            throw new \InvalidArgumentException('non-nullable detail cannot be null');
         }
 
-        $this->container['initial_sync_completed'] = $initial_sync_completed;
-
-        return $this;
-    }
-
-    /**
-     * Gets last_successful_sync
-     *
-     * @return \DateTime|null
-     */
-    public function getLastSuccessfulSync()
-    {
-        return $this->container['last_successful_sync'];
-    }
-
-    /**
-     * Sets last_successful_sync
-     *
-     * @param \DateTime|null $last_successful_sync All transactions up to this date have been successfully synced. Please note that this is not the date of the last transaction, nor the last time SnapTrade attempted to sync transactions.
-     *
-     * @return self
-     */
-    public function setLastSuccessfulSync($last_successful_sync)
-    {
-
-        if (is_null($last_successful_sync)) {
-            array_push($this->openAPINullablesSetToNull, 'last_successful_sync');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('last_successful_sync', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['last_successful_sync'] = $last_successful_sync;
-
-        return $this;
-    }
-
-    /**
-     * Gets first_transaction_date
-     *
-     * @return \DateTime|null
-     */
-    public function getFirstTransactionDate()
-    {
-        return $this->container['first_transaction_date'];
-    }
-
-    /**
-     * Sets first_transaction_date
-     *
-     * @param \DateTime|null $first_transaction_date The date of the first transaction in the account known to SnapTrade. It's possible that the account has transactions before this date, but they are not known to SnapTrade.
-     *
-     * @return self
-     */
-    public function setFirstTransactionDate($first_transaction_date)
-    {
-
-        if (is_null($first_transaction_date)) {
-            array_push($this->openAPINullablesSetToNull, 'first_transaction_date');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('first_transaction_date', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['first_transaction_date'] = $first_transaction_date;
+        $this->container['detail'] = $detail;
 
         return $this;
     }

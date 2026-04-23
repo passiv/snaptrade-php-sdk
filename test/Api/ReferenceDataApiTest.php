@@ -73,7 +73,7 @@ class ReferenceDataApiTest extends TestCase
     /**
      * Test case for getPartnerInfo
      *
-     * Get metadata related to Snaptrade partner.
+     * Get Client Info.
      *
      */
     public function testGetPartnerInfo()
@@ -85,7 +85,7 @@ class ReferenceDataApiTest extends TestCase
     /**
      * Test case for getSecurityTypes
      *
-     * List of all security types.
+     * List security types.
      *
      */
     public function testGetSecurityTypes()
@@ -109,7 +109,7 @@ class ReferenceDataApiTest extends TestCase
     /**
      * Test case for getSymbols
      *
-     * Search for symbols.
+     * Search symbols.
      *
      */
     public function testGetSymbols()
@@ -121,7 +121,7 @@ class ReferenceDataApiTest extends TestCase
     /**
      * Test case for getSymbolsByTicker
      *
-     * Get details of a symbol.
+     * Get symbol detail.
      *
      */
     public function testGetSymbolsByTicker()
@@ -137,6 +137,18 @@ class ReferenceDataApiTest extends TestCase
      *
      */
     public function testListAllBrokerageAuthorizationType()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listAllBrokerageInstruments
+     *
+     * Get brokerage instruments.
+     *
+     */
+    public function testListAllBrokerageInstruments()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
@@ -181,7 +193,7 @@ class ReferenceDataApiTest extends TestCase
     /**
      * Test case for symbolSearchUserAccount
      *
-     * Search for symbols available in an account.
+     * Search account symbols.
      *
      */
     public function testSymbolSearchUserAccount()

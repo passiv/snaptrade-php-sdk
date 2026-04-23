@@ -346,7 +346,7 @@ class UnderlyingSymbolType implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets code
      *
-     * @param string|null $code A short code representing the security type. For example, \"cs\" for Common Stock. Here are some common values:   ad - ADR   bnd - Bond   cs - Common Stock   cef - Closed End Fund   et - ETF   oef - Open Ended Fund   ps - Preferred Stock   rt - Right   struct - Structured Product   ut - Unit   wi - When Issued   wt - Warrant
+     * @param string|null $code A short code representing the security type. For example, \"cs\" for Common Stock. Here are some common values:   - `ad` - ADR   - `bnd` - Bond   - `cs` - Common Stock   - `cef` - Closed End Fund   - `crypto` - Cryptocurrency   - `et` - ETF   - `oef` - Open Ended Fund   - `pm` - Precious Metals   - `ps` - Preferred Stock   - `rt` - Right   - `struct` - Structured Product   - `ut` - Unit   - `wi` - When Issued   - `wt` - Warrant
      *
      * @return self
      */
@@ -405,7 +405,7 @@ class UnderlyingSymbolType implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets is_supported
      *
-     * @param bool|null $is_supported This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
+     * @param bool|null $is_supported This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this.
      *
      * @return self
      * @deprecated

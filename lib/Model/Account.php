@@ -64,6 +64,7 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
         'balance' => '\SnapTrade\Model\AccountBalance',
         'status' => 'string',
         'raw_type' => 'string',
+        'account_category' => 'string',
         'meta' => 'array<string,mixed>',
         'portfolio_group' => 'string',
         'cash_restrictions' => 'string[]',
@@ -91,6 +92,7 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
         'balance' => null,
         'status' => null,
         'raw_type' => null,
+        'account_category' => null,
         'meta' => null,
         'portfolio_group' => 'uuid',
         'cash_restrictions' => null,
@@ -116,6 +118,7 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
 		'balance' => false,
 		'status' => true,
 		'raw_type' => true,
+		'account_category' => true,
 		'meta' => false,
 		'portfolio_group' => false,
 		'cash_restrictions' => false,
@@ -221,6 +224,7 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
         'balance' => 'balance',
         'status' => 'status',
         'raw_type' => 'raw_type',
+        'account_category' => 'account_category',
         'meta' => 'meta',
         'portfolio_group' => 'portfolio_group',
         'cash_restrictions' => 'cash_restrictions',
@@ -246,6 +250,7 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
         'balance' => 'setBalance',
         'status' => 'setStatus',
         'raw_type' => 'setRawType',
+        'account_category' => 'setAccountCategory',
         'meta' => 'setMeta',
         'portfolio_group' => 'setPortfolioGroup',
         'cash_restrictions' => 'setCashRestrictions',
@@ -271,6 +276,7 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
         'balance' => 'getBalance',
         'status' => 'getStatus',
         'raw_type' => 'getRawType',
+        'account_category' => 'getAccountCategory',
         'meta' => 'getMeta',
         'portfolio_group' => 'getPortfolioGroup',
         'cash_restrictions' => 'getCashRestrictions',
@@ -322,6 +328,9 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
     public const STATUS_CLOSED = 'closed';
     public const STATUS_ARCHIVED = 'archived';
     public const STATUS_UNAVAILABLE = 'unavailable';
+    public const ACCOUNT_CATEGORY_INVESTMENT = 'INVESTMENT';
+    public const ACCOUNT_CATEGORY_DEPOSIT = 'DEPOSIT';
+    public const ACCOUNT_CATEGORY_LOC = 'LOC';
 
     /**
      * Gets allowable values of the enum
@@ -335,6 +344,20 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
             self::STATUS_CLOSED,
             self::STATUS_ARCHIVED,
             self::STATUS_UNAVAILABLE,
+        ];
+    }
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getAccountCategoryAllowableValues()
+    {
+        return [
+            self::ACCOUNT_CATEGORY_INVESTMENT,
+            self::ACCOUNT_CATEGORY_DEPOSIT,
+            self::ACCOUNT_CATEGORY_LOC,
         ];
     }
 
@@ -366,6 +389,7 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('balance', $data ?? [], null);
         $this->setIfExists('status', $data ?? [], null);
         $this->setIfExists('raw_type', $data ?? [], null);
+        $this->setIfExists('account_category', $data ?? [], null);
         $this->setIfExists('meta', $data ?? [], null);
         $this->setIfExists('portfolio_group', $data ?? [], null);
         $this->setIfExists('cash_restrictions', $data ?? [], null);
@@ -428,6 +452,15 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'status', must be one of '%s'",
                 $this->container['status'],
+                implode("', '", $allowedValues)
+            );
+        }
+
+        $allowedValues = $this->getAccountCategoryAllowableValues();
+        if (!is_null($this->container['account_category']) && !in_array($this->container['account_category'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'account_category', must be one of '%s'",
+                $this->container['account_category'],
                 implode("', '", $allowedValues)
             );
         }
@@ -875,6 +908,52 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['raw_type'] = $raw_type;
+
+        return $this;
+    }
+
+    /**
+     * Gets account_category
+     *
+     * @return string|null
+     */
+    public function getAccountCategory()
+    {
+        return $this->container['account_category'];
+    }
+
+    /**
+     * Sets account_category
+     *
+     * @param string|null $account_category The category of the account, normalized across institutions. Returns `null` if the category could not be determined. Use this field to filter out non-investment accounts if your integration only supports trading / holdings flows. See [Filtering Accounts by Category](https://docs.snaptrade.com/docs/filtering-accounts-by-category) for more information. - `INVESTMENT`: A brokerage / investment account (equities, options, crypto, etc.). - `DEPOSIT`: A bank deposit account (checking, savings). - `LOC`: A line of credit account.
+     *
+     * @return self
+     */
+    public function setAccountCategory($account_category)
+    {
+        $allowedValues = $this->getAccountCategoryAllowableValues();
+        if (!is_null($account_category) && !in_array($account_category, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'account_category', must be one of '%s'",
+                    $account_category,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+
+        if (is_null($account_category)) {
+            array_push($this->openAPINullablesSetToNull, 'account_category');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('account_category', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['account_category'] = $account_category;
 
         return $this;
     }

@@ -190,6 +190,15 @@ class AccountTest extends TestCase
     }
 
     /**
+     * Test attribute "account_category"
+     */
+    public function testPropertyAccountCategory()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "meta"
      */
     public function testPropertyMeta()

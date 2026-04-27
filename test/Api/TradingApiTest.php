@@ -155,6 +155,18 @@ class TradingApiTest extends TestCase
     }
 
     /**
+     * Test case for placeComplexOrder
+     *
+     * Place complex order.
+     *
+     */
+    public function testPlaceComplexOrder()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for placeCryptoOrder
      *
      * Place crypto order.

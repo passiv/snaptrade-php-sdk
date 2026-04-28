@@ -82,6 +82,24 @@ class OrderUpdatedResponseOrderTest extends TestCase
     }
 
     /**
+     * Test attribute "brokerage_group_order_id"
+     */
+    public function testPropertyBrokerageGroupOrderId()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "order_role"
+     */
+    public function testPropertyOrderRole()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "status"
      */
     public function testPropertyStatus()

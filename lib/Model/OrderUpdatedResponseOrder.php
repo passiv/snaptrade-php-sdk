@@ -51,6 +51,8 @@ class OrderUpdatedResponseOrder implements ModelInterface, ArrayAccess, \JsonSer
       */
     protected static $openAPITypes = [
         'brokerage_order_id' => 'string',
+        'brokerage_group_order_id' => 'string',
+        'order_role' => 'string',
         'status' => '\SnapTrade\Model\AccountOrderRecordStatus',
         'universal_symbol' => '\SnapTrade\Model\AccountOrderRecordUniversalSymbol',
         'option_symbol' => '\SnapTrade\Model\AccountOrderRecordOptionSymbol',
@@ -84,6 +86,8 @@ class OrderUpdatedResponseOrder implements ModelInterface, ArrayAccess, \JsonSer
       */
     protected static $openAPIFormats = [
         'brokerage_order_id' => null,
+        'brokerage_group_order_id' => null,
+        'order_role' => null,
         'status' => null,
         'universal_symbol' => null,
         'option_symbol' => null,
@@ -115,6 +119,8 @@ class OrderUpdatedResponseOrder implements ModelInterface, ArrayAccess, \JsonSer
       */
     protected static array $openAPINullables = [
         'brokerage_order_id' => false,
+		'brokerage_group_order_id' => true,
+		'order_role' => true,
 		'status' => false,
 		'universal_symbol' => false,
 		'option_symbol' => false,
@@ -226,6 +232,8 @@ class OrderUpdatedResponseOrder implements ModelInterface, ArrayAccess, \JsonSer
      */
     protected static $attributeMap = [
         'brokerage_order_id' => 'brokerage_order_id',
+        'brokerage_group_order_id' => 'brokerage_group_order_id',
+        'order_role' => 'order_role',
         'status' => 'status',
         'universal_symbol' => 'universal_symbol',
         'option_symbol' => 'option_symbol',
@@ -257,6 +265,8 @@ class OrderUpdatedResponseOrder implements ModelInterface, ArrayAccess, \JsonSer
      */
     protected static $setters = [
         'brokerage_order_id' => 'setBrokerageOrderId',
+        'brokerage_group_order_id' => 'setBrokerageGroupOrderId',
+        'order_role' => 'setOrderRole',
         'status' => 'setStatus',
         'universal_symbol' => 'setUniversalSymbol',
         'option_symbol' => 'setOptionSymbol',
@@ -288,6 +298,8 @@ class OrderUpdatedResponseOrder implements ModelInterface, ArrayAccess, \JsonSer
      */
     protected static $getters = [
         'brokerage_order_id' => 'getBrokerageOrderId',
+        'brokerage_group_order_id' => 'getBrokerageGroupOrderId',
+        'order_role' => 'getOrderRole',
         'status' => 'getStatus',
         'universal_symbol' => 'getUniversalSymbol',
         'option_symbol' => 'getOptionSymbol',
@@ -353,6 +365,23 @@ class OrderUpdatedResponseOrder implements ModelInterface, ArrayAccess, \JsonSer
         return self::$openAPIModelName;
     }
 
+    public const ORDER_ROLE_TRIGGER = 'TRIGGER';
+    public const ORDER_ROLE_CONDITIONAL = 'CONDITIONAL';
+    public const ORDER_ROLE_PEER = 'PEER';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getOrderRoleAllowableValues()
+    {
+        return [
+            self::ORDER_ROLE_TRIGGER,
+            self::ORDER_ROLE_CONDITIONAL,
+            self::ORDER_ROLE_PEER,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -370,6 +399,8 @@ class OrderUpdatedResponseOrder implements ModelInterface, ArrayAccess, \JsonSer
     public function __construct(array $data = null)
     {
         $this->setIfExists('brokerage_order_id', $data ?? [], null);
+        $this->setIfExists('brokerage_group_order_id', $data ?? [], null);
+        $this->setIfExists('order_role', $data ?? [], null);
         $this->setIfExists('status', $data ?? [], null);
         $this->setIfExists('universal_symbol', $data ?? [], null);
         $this->setIfExists('option_symbol', $data ?? [], null);
@@ -421,6 +452,15 @@ class OrderUpdatedResponseOrder implements ModelInterface, ArrayAccess, \JsonSer
     {
         $invalidProperties = [];
 
+        $allowedValues = $this->getOrderRoleAllowableValues();
+        if (!is_null($this->container['order_role']) && !in_array($this->container['order_role'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'order_role', must be one of '%s'",
+                $this->container['order_role'],
+                implode("', '", $allowedValues)
+            );
+        }
+
         return $invalidProperties;
     }
 
@@ -461,6 +501,88 @@ class OrderUpdatedResponseOrder implements ModelInterface, ArrayAccess, \JsonSer
         }
 
         $this->container['brokerage_order_id'] = $brokerage_order_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets brokerage_group_order_id
+     *
+     * @return string|null
+     */
+    public function getBrokerageGroupOrderId()
+    {
+        return $this->container['brokerage_group_order_id'];
+    }
+
+    /**
+     * Sets brokerage_group_order_id
+     *
+     * @param string|null $brokerage_group_order_id The brokerage-assigned identifier that links all orders within a complex order (OCO, OTO, OTOCO) together. Null for non-complex orders or when the brokerage does not return a group identifier.
+     *
+     * @return self
+     */
+    public function setBrokerageGroupOrderId($brokerage_group_order_id)
+    {
+
+        if (is_null($brokerage_group_order_id)) {
+            array_push($this->openAPINullablesSetToNull, 'brokerage_group_order_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('brokerage_group_order_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['brokerage_group_order_id'] = $brokerage_group_order_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets order_role
+     *
+     * @return string|null
+     */
+    public function getOrderRole()
+    {
+        return $this->container['order_role'];
+    }
+
+    /**
+     * Sets order_role
+     *
+     * @param string|null $order_role The role of this order within a complex order group (OCO, OTO, OTOCO). Null for non-complex orders.
+     *
+     * @return self
+     */
+    public function setOrderRole($order_role)
+    {
+        $allowedValues = $this->getOrderRoleAllowableValues();
+        if (!is_null($order_role) && !in_array($order_role, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'order_role', must be one of '%s'",
+                    $order_role,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+
+        if (is_null($order_role)) {
+            array_push($this->openAPINullablesSetToNull, 'order_role');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('order_role', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['order_role'] = $order_role;
 
         return $this;
     }

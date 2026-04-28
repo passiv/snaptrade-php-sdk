@@ -59,7 +59,7 @@ class AccountOrderRecordUniversalSymbol implements ModelInterface, ArrayAccess, 
         'exchange' => '\SnapTrade\Model\SymbolExchange',
         'type' => '\SnapTrade\Model\SecurityType',
         'figi_code' => 'string',
-        'figi_instrument' => '\SnapTrade\Model\SymbolFigiInstrument',
+        'figi_instrument' => '\SnapTrade\Model\StockInstrumentFigiInstrument',
         'currencies' => '\SnapTrade\Model\Currency[]'
     ];
 
@@ -613,7 +613,7 @@ class AccountOrderRecordUniversalSymbol implements ModelInterface, ArrayAccess, 
     /**
      * Gets figi_instrument
      *
-     * @return \SnapTrade\Model\SymbolFigiInstrument|null
+     * @return \SnapTrade\Model\StockInstrumentFigiInstrument|null
      */
     public function getFigiInstrument()
     {
@@ -623,7 +623,7 @@ class AccountOrderRecordUniversalSymbol implements ModelInterface, ArrayAccess, 
     /**
      * Sets figi_instrument
      *
-     * @param \SnapTrade\Model\SymbolFigiInstrument|null $figi_instrument figi_instrument
+     * @param \SnapTrade\Model\StockInstrumentFigiInstrument|null $figi_instrument figi_instrument
      *
      * @return self
      */

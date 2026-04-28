@@ -1,6 +1,7 @@
 <?php
 /**
- * ExperimentalEndpointsApiTest
+ * StockInstrumentTest
+ *
  * PHP version 7.4
  *
  * @category Class
@@ -20,18 +21,22 @@
  */
 
 
-namespace SnapTrade\Test\Api;
+namespace SnapTrade\Test\Model;
 
-use \SnapTrade\Configuration;
-use \SnapTrade\ApiException;
-use \SnapTrade\ObjectSerializer;
 use PHPUnit\Framework\TestCase;
 
-class ExperimentalEndpointsApiTest extends TestCase
+/**
+ * StockInstrumentTest Class Doc Comment
+ *
+ * @category    Class
+ * @description Security instrument metadata for stock positions.
+ * @package     SnapTrade
+ */
+class StockInstrumentTest extends TestCase
 {
 
     /**
-     * Setup before running any test cases
+     * Setup before running any test case
      */
     public static function setUpBeforeClass(): void
     {
@@ -59,72 +64,81 @@ class ExperimentalEndpointsApiTest extends TestCase
     }
 
     /**
-     * Test case for getAccountBalanceHistory
-     *
-     * List historical account total value.
-     *
+     * Test "StockInstrument"
      */
-    public function testGetAccountBalanceHistory()
+    public function testStockInstrument()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for getAllAccountPositions
-     *
-     * List all account positions.
-     *
+     * Test attribute "kind"
      */
-    public function testGetAllAccountPositions()
+    public function testPropertyKind()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for getUserAccountOrderDetailV2
-     *
-     * Get account order detail (V2).
-     *
+     * Test attribute "id"
      */
-    public function testGetUserAccountOrderDetailV2()
+    public function testPropertyId()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for getUserAccountOrdersV2
-     *
-     * List account orders v2.
-     *
+     * Test attribute "symbol"
      */
-    public function testGetUserAccountOrdersV2()
+    public function testPropertySymbol()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for getUserAccountRecentOrdersV2
-     *
-     * List account recent orders (V2, last 24 hours only).
-     *
+     * Test attribute "raw_symbol"
      */
-    public function testGetUserAccountRecentOrdersV2()
+    public function testPropertyRawSymbol()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for syncBrokerageAuthorizationTransactions
-     *
-     * Sync transactions for a connection.
-     *
+     * Test attribute "description"
      */
-    public function testSyncBrokerageAuthorizationTransactions()
+    public function testPropertyDescription()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "currency"
+     */
+    public function testPropertyCurrency()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "exchange"
+     */
+    public function testPropertyExchange()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "figi_instrument"
+     */
+    public function testPropertyFigiInstrument()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

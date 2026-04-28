@@ -1,6 +1,6 @@
 <?php
 /**
- * UnderlyingSymbol
+ * Instrument
  *
  * PHP version 7.4
  *
@@ -27,23 +27,23 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * UnderlyingSymbol Class Doc Comment
+ * Instrument Class Doc Comment
  *
  * @category Class
- * @description Symbol object for the underlying security of an option.
+ * @description Instrument metadata for a V2 position. Use &#x60;kind&#x60; to determine which schema is present.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class UnderlyingSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
+class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
 {
-    public const DISCRIMINATOR = null;
+    public const DISCRIMINATOR = 'kind';
 
     /**
       * The original name of the model.
       *
       * @var string
       */
-    protected static $openAPIModelName = 'UnderlyingSymbol';
+    protected static $openAPIModelName = 'Instrument';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -51,16 +51,21 @@ class UnderlyingSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
+        'kind' => 'string',
         'id' => 'string',
         'symbol' => 'string',
         'raw_symbol' => 'string',
         'description' => 'string',
-        'currency' => '\SnapTrade\Model\SymbolCurrency',
-        'exchange' => '\SnapTrade\Model\UnderlyingSymbolExchange',
-        'type' => '\SnapTrade\Model\UnderlyingSymbolType',
-        'figi_code' => 'string',
+        'currency' => 'string',
+        'exchange' => 'string',
         'figi_instrument' => '\SnapTrade\Model\StockInstrumentFigiInstrument',
-        'currencies' => '\SnapTrade\Model\Currency[]'
+        'root_symbol' => 'string',
+        'expiration_code' => 'string',
+        'expiration_date' => '\DateTime',
+        'multiplier' => 'float',
+        'option_type' => 'string',
+        'strike_price' => 'float',
+        'underlying' => '\SnapTrade\Model\UnderlyingOptionInstrument'
     ];
 
     /**
@@ -71,16 +76,21 @@ class UnderlyingSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
+        'kind' => null,
         'id' => 'uuid',
         'symbol' => null,
         'raw_symbol' => null,
         'description' => null,
         'currency' => null,
         'exchange' => null,
-        'type' => null,
-        'figi_code' => null,
         'figi_instrument' => null,
-        'currencies' => null
+        'root_symbol' => null,
+        'expiration_code' => null,
+        'expiration_date' => 'date',
+        'multiplier' => 'decimal',
+        'option_type' => null,
+        'strike_price' => 'decimal',
+        'underlying' => null
     ];
 
     /**
@@ -89,16 +99,21 @@ class UnderlyingSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'id' => false,
+        'kind' => false,
+		'id' => false,
 		'symbol' => false,
 		'raw_symbol' => false,
 		'description' => true,
-		'currency' => false,
-		'exchange' => false,
-		'type' => false,
-		'figi_code' => true,
+		'currency' => true,
+		'exchange' => true,
 		'figi_instrument' => true,
-		'currencies' => false
+		'root_symbol' => false,
+		'expiration_code' => false,
+		'expiration_date' => false,
+		'multiplier' => true,
+		'option_type' => false,
+		'strike_price' => false,
+		'underlying' => false
     ];
 
     /**
@@ -187,16 +202,21 @@ class UnderlyingSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
+        'kind' => 'kind',
         'id' => 'id',
         'symbol' => 'symbol',
         'raw_symbol' => 'raw_symbol',
         'description' => 'description',
         'currency' => 'currency',
         'exchange' => 'exchange',
-        'type' => 'type',
-        'figi_code' => 'figi_code',
         'figi_instrument' => 'figi_instrument',
-        'currencies' => 'currencies'
+        'root_symbol' => 'root_symbol',
+        'expiration_code' => 'expiration_code',
+        'expiration_date' => 'expiration_date',
+        'multiplier' => 'multiplier',
+        'option_type' => 'option_type',
+        'strike_price' => 'strike_price',
+        'underlying' => 'underlying'
     ];
 
     /**
@@ -205,16 +225,21 @@ class UnderlyingSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
+        'kind' => 'setKind',
         'id' => 'setId',
         'symbol' => 'setSymbol',
         'raw_symbol' => 'setRawSymbol',
         'description' => 'setDescription',
         'currency' => 'setCurrency',
         'exchange' => 'setExchange',
-        'type' => 'setType',
-        'figi_code' => 'setFigiCode',
         'figi_instrument' => 'setFigiInstrument',
-        'currencies' => 'setCurrencies'
+        'root_symbol' => 'setRootSymbol',
+        'expiration_code' => 'setExpirationCode',
+        'expiration_date' => 'setExpirationDate',
+        'multiplier' => 'setMultiplier',
+        'option_type' => 'setOptionType',
+        'strike_price' => 'setStrikePrice',
+        'underlying' => 'setUnderlying'
     ];
 
     /**
@@ -223,16 +248,21 @@ class UnderlyingSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
+        'kind' => 'getKind',
         'id' => 'getId',
         'symbol' => 'getSymbol',
         'raw_symbol' => 'getRawSymbol',
         'description' => 'getDescription',
         'currency' => 'getCurrency',
         'exchange' => 'getExchange',
-        'type' => 'getType',
-        'figi_code' => 'getFigiCode',
         'figi_instrument' => 'getFigiInstrument',
-        'currencies' => 'getCurrencies'
+        'root_symbol' => 'getRootSymbol',
+        'expiration_code' => 'getExpirationCode',
+        'expiration_date' => 'getExpirationDate',
+        'multiplier' => 'getMultiplier',
+        'option_type' => 'getOptionType',
+        'strike_price' => 'getStrikePrice',
+        'underlying' => 'getUnderlying'
     ];
 
     /**
@@ -276,6 +306,34 @@ class UnderlyingSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
+    public const KIND_OPTION = 'option';
+    public const OPTION_TYPE_CALL = 'CALL';
+    public const OPTION_TYPE_PUT = 'PUT';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getKindAllowableValues()
+    {
+        return [
+            self::KIND_OPTION,
+        ];
+    }
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getOptionTypeAllowableValues()
+    {
+        return [
+            self::OPTION_TYPE_CALL,
+            self::OPTION_TYPE_PUT,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -292,16 +350,24 @@ class UnderlyingSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
+        $this->setIfExists('kind', $data ?? [], null);
         $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('symbol', $data ?? [], null);
         $this->setIfExists('raw_symbol', $data ?? [], null);
         $this->setIfExists('description', $data ?? [], null);
         $this->setIfExists('currency', $data ?? [], null);
         $this->setIfExists('exchange', $data ?? [], null);
-        $this->setIfExists('type', $data ?? [], null);
-        $this->setIfExists('figi_code', $data ?? [], null);
         $this->setIfExists('figi_instrument', $data ?? [], null);
-        $this->setIfExists('currencies', $data ?? [], null);
+        $this->setIfExists('root_symbol', $data ?? [], null);
+        $this->setIfExists('expiration_code', $data ?? [], null);
+        $this->setIfExists('expiration_date', $data ?? [], null);
+        $this->setIfExists('multiplier', $data ?? [], null);
+        $this->setIfExists('option_type', $data ?? [], null);
+        $this->setIfExists('strike_price', $data ?? [], null);
+        $this->setIfExists('underlying', $data ?? [], null);
+
+        // Initialize discriminator property with the model name.
+        $this->container['kind'] = static::$openAPIModelName;
     }
 
     /**
@@ -331,6 +397,54 @@ class UnderlyingSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
+        if ($this->container['kind'] === null) {
+            $invalidProperties[] = "'kind' can't be null";
+        }
+        $allowedValues = $this->getKindAllowableValues();
+        if (!is_null($this->container['kind']) && !in_array($this->container['kind'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'kind', must be one of '%s'",
+                $this->container['kind'],
+                implode("', '", $allowedValues)
+            );
+        }
+
+        if ($this->container['id'] === null) {
+            $invalidProperties[] = "'id' can't be null";
+        }
+        if ($this->container['symbol'] === null) {
+            $invalidProperties[] = "'symbol' can't be null";
+        }
+        if ($this->container['raw_symbol'] === null) {
+            $invalidProperties[] = "'raw_symbol' can't be null";
+        }
+        if ($this->container['root_symbol'] === null) {
+            $invalidProperties[] = "'root_symbol' can't be null";
+        }
+        if ($this->container['expiration_code'] === null) {
+            $invalidProperties[] = "'expiration_code' can't be null";
+        }
+        if ($this->container['expiration_date'] === null) {
+            $invalidProperties[] = "'expiration_date' can't be null";
+        }
+        if ($this->container['option_type'] === null) {
+            $invalidProperties[] = "'option_type' can't be null";
+        }
+        $allowedValues = $this->getOptionTypeAllowableValues();
+        if (!is_null($this->container['option_type']) && !in_array($this->container['option_type'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'option_type', must be one of '%s'",
+                $this->container['option_type'],
+                implode("', '", $allowedValues)
+            );
+        }
+
+        if ($this->container['strike_price'] === null) {
+            $invalidProperties[] = "'strike_price' can't be null";
+        }
+        if ($this->container['underlying'] === null) {
+            $invalidProperties[] = "'underlying' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -347,9 +461,48 @@ class UnderlyingSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
+     * Gets kind
+     *
+     * @return string
+     */
+    public function getKind()
+    {
+        return $this->container['kind'];
+    }
+
+    /**
+     * Sets kind
+     *
+     * @param string $kind kind
+     *
+     * @return self
+     */
+    public function setKind($kind)
+    {
+        $allowedValues = $this->getKindAllowableValues();
+        if (!in_array($kind, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'kind', must be one of '%s'",
+                    $kind,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+
+        if (is_null($kind)) {
+            throw new \InvalidArgumentException('non-nullable kind cannot be null');
+        }
+
+        $this->container['kind'] = $kind;
+
+        return $this;
+    }
+
+    /**
      * Gets id
      *
-     * @return string|null
+     * @return string
      */
     public function getId()
     {
@@ -359,7 +512,7 @@ class UnderlyingSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets id
      *
-     * @param string|null $id Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
+     * @param string $id Unique identifier for the option instrument.
      *
      * @return self
      */
@@ -378,7 +531,7 @@ class UnderlyingSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets symbol
      *
-     * @return string|null
+     * @return string
      */
     public function getSymbol()
     {
@@ -388,7 +541,7 @@ class UnderlyingSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets symbol
      *
-     * @param string|null $symbol The security's trading ticker symbol. For example \"AAPL\" for Apple Inc. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on \"Yahoo Finance Market Coverage and Data Delays\"). For example, for securities traded on the Toronto Stock Exchange, the symbol has a '.TO' suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix.
+     * @param string $symbol OCC symbol for the option contract.
      *
      * @return self
      */
@@ -407,7 +560,7 @@ class UnderlyingSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets raw_symbol
      *
-     * @return string|null
+     * @return string
      */
     public function getRawSymbol()
     {
@@ -417,7 +570,7 @@ class UnderlyingSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets raw_symbol
      *
-     * @param string|null $raw_symbol The raw symbol is `symbol` with the exchange suffix removed. For example, if `symbol` is \"VAB.TO\", then `raw_symbol` is \"VAB\".
+     * @param string $raw_symbol The raw symbol without any exchange suffix.
      *
      * @return self
      */
@@ -446,7 +599,7 @@ class UnderlyingSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets description
      *
-     * @param string|null $description A human-readable description of the security. This is usually the company name or ETF name.
+     * @param string|null $description Human-readable description of the option contract.
      *
      * @return self
      */
@@ -472,7 +625,7 @@ class UnderlyingSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets currency
      *
-     * @return \SnapTrade\Model\SymbolCurrency|null
+     * @return string|null
      */
     public function getCurrency()
     {
@@ -482,7 +635,7 @@ class UnderlyingSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets currency
      *
-     * @param \SnapTrade\Model\SymbolCurrency|null $currency currency
+     * @param string|null $currency ISO-4217 currency code for the contract.
      *
      * @return self
      */
@@ -490,7 +643,14 @@ class UnderlyingSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     {
 
         if (is_null($currency)) {
-            throw new \InvalidArgumentException('non-nullable currency cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'currency');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('currency', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['currency'] = $currency;
@@ -501,7 +661,7 @@ class UnderlyingSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets exchange
      *
-     * @return \SnapTrade\Model\UnderlyingSymbolExchange|null
+     * @return string|null
      */
     public function getExchange()
     {
@@ -511,7 +671,7 @@ class UnderlyingSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets exchange
      *
-     * @param \SnapTrade\Model\UnderlyingSymbolExchange|null $exchange exchange
+     * @param string|null $exchange Exchange MIC code or exchange code for the contract.
      *
      * @return self
      */
@@ -519,75 +679,17 @@ class UnderlyingSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     {
 
         if (is_null($exchange)) {
-            throw new \InvalidArgumentException('non-nullable exchange cannot be null');
-        }
-
-        $this->container['exchange'] = $exchange;
-
-        return $this;
-    }
-
-    /**
-     * Gets type
-     *
-     * @return \SnapTrade\Model\UnderlyingSymbolType|null
-     */
-    public function getType()
-    {
-        return $this->container['type'];
-    }
-
-    /**
-     * Sets type
-     *
-     * @param \SnapTrade\Model\UnderlyingSymbolType|null $type type
-     *
-     * @return self
-     */
-    public function setType($type)
-    {
-
-        if (is_null($type)) {
-            throw new \InvalidArgumentException('non-nullable type cannot be null');
-        }
-
-        $this->container['type'] = $type;
-
-        return $this;
-    }
-
-    /**
-     * Gets figi_code
-     *
-     * @return string|null
-     */
-    public function getFigiCode()
-    {
-        return $this->container['figi_code'];
-    }
-
-    /**
-     * Sets figi_code
-     *
-     * @param string|null $figi_code This identifier is unique per security per trading venue. See section 1.4.1 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf) for more information. This value should be the same as the `figi_code` in the `figi_instrument` child property.
-     *
-     * @return self
-     */
-    public function setFigiCode($figi_code)
-    {
-
-        if (is_null($figi_code)) {
-            array_push($this->openAPINullablesSetToNull, 'figi_code');
+            array_push($this->openAPINullablesSetToNull, 'exchange');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('figi_code', $nullablesSetToNull);
+            $index = array_search('exchange', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
 
-        $this->container['figi_code'] = $figi_code;
+        $this->container['exchange'] = $exchange;
 
         return $this;
     }
@@ -629,32 +731,221 @@ class UnderlyingSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets currencies
+     * Gets root_symbol
      *
-     * @return \SnapTrade\Model\Currency[]|null
-     * @deprecated
+     * @return string
      */
-    public function getCurrencies()
+    public function getRootSymbol()
     {
-        return $this->container['currencies'];
+        return $this->container['root_symbol'];
     }
 
     /**
-     * Sets currencies
+     * Sets root_symbol
      *
-     * @param \SnapTrade\Model\Currency[]|null $currencies This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this.
+     * @param string $root_symbol Root symbol for the future contract.
      *
      * @return self
-     * @deprecated
      */
-    public function setCurrencies($currencies)
+    public function setRootSymbol($root_symbol)
     {
 
-        if (is_null($currencies)) {
-            throw new \InvalidArgumentException('non-nullable currencies cannot be null');
+        if (is_null($root_symbol)) {
+            throw new \InvalidArgumentException('non-nullable root_symbol cannot be null');
         }
 
-        $this->container['currencies'] = $currencies;
+        $this->container['root_symbol'] = $root_symbol;
+
+        return $this;
+    }
+
+    /**
+     * Gets expiration_code
+     *
+     * @return string
+     */
+    public function getExpirationCode()
+    {
+        return $this->container['expiration_code'];
+    }
+
+    /**
+     * Sets expiration_code
+     *
+     * @param string $expiration_code Exchange expiration code for the contract.
+     *
+     * @return self
+     */
+    public function setExpirationCode($expiration_code)
+    {
+
+        if (is_null($expiration_code)) {
+            throw new \InvalidArgumentException('non-nullable expiration_code cannot be null');
+        }
+
+        $this->container['expiration_code'] = $expiration_code;
+
+        return $this;
+    }
+
+    /**
+     * Gets expiration_date
+     *
+     * @return \DateTime
+     */
+    public function getExpirationDate()
+    {
+        return $this->container['expiration_date'];
+    }
+
+    /**
+     * Sets expiration_date
+     *
+     * @param \DateTime $expiration_date Expiration date of the option contract.
+     *
+     * @return self
+     */
+    public function setExpirationDate($expiration_date)
+    {
+
+        if (is_null($expiration_date)) {
+            throw new \InvalidArgumentException('non-nullable expiration_date cannot be null');
+        }
+
+        $this->container['expiration_date'] = $expiration_date;
+
+        return $this;
+    }
+
+    /**
+     * Gets multiplier
+     *
+     * @return float|null
+     */
+    public function getMultiplier()
+    {
+        return $this->container['multiplier'];
+    }
+
+    /**
+     * Sets multiplier
+     *
+     * @param float|null $multiplier Multiplier for the future contract.
+     *
+     * @return self
+     */
+    public function setMultiplier($multiplier)
+    {
+
+        if (is_null($multiplier)) {
+            array_push($this->openAPINullablesSetToNull, 'multiplier');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('multiplier', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['multiplier'] = $multiplier;
+
+        return $this;
+    }
+
+    /**
+     * Gets option_type
+     *
+     * @return string
+     */
+    public function getOptionType()
+    {
+        return $this->container['option_type'];
+    }
+
+    /**
+     * Sets option_type
+     *
+     * @param string $option_type Whether the contract is a call or put.
+     *
+     * @return self
+     */
+    public function setOptionType($option_type)
+    {
+        $allowedValues = $this->getOptionTypeAllowableValues();
+        if (!in_array($option_type, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'option_type', must be one of '%s'",
+                    $option_type,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+
+        if (is_null($option_type)) {
+            throw new \InvalidArgumentException('non-nullable option_type cannot be null');
+        }
+
+        $this->container['option_type'] = $option_type;
+
+        return $this;
+    }
+
+    /**
+     * Gets strike_price
+     *
+     * @return float
+     */
+    public function getStrikePrice()
+    {
+        return $this->container['strike_price'];
+    }
+
+    /**
+     * Sets strike_price
+     *
+     * @param float $strike_price Strike price for the option contract.
+     *
+     * @return self
+     */
+    public function setStrikePrice($strike_price)
+    {
+
+        if (is_null($strike_price)) {
+            throw new \InvalidArgumentException('non-nullable strike_price cannot be null');
+        }
+
+        $this->container['strike_price'] = $strike_price;
+
+        return $this;
+    }
+
+    /**
+     * Gets underlying
+     *
+     * @return \SnapTrade\Model\UnderlyingOptionInstrument
+     */
+    public function getUnderlying()
+    {
+        return $this->container['underlying'];
+    }
+
+    /**
+     * Sets underlying
+     *
+     * @param \SnapTrade\Model\UnderlyingOptionInstrument $underlying underlying
+     *
+     * @return self
+     */
+    public function setUnderlying($underlying)
+    {
+
+        if (is_null($underlying)) {
+            throw new \InvalidArgumentException('non-nullable underlying cannot be null');
+        }
+
+        $this->container['underlying'] = $underlying;
 
         return $this;
     }

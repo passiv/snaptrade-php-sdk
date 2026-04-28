@@ -1,6 +1,6 @@
 <?php
 /**
- * SymbolFigiInstrument
+ * AccountPosition
  *
  * PHP version 7.4
  *
@@ -27,13 +27,14 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * SymbolFigiInstrument Class Doc Comment
+ * AccountPosition Class Doc Comment
  *
  * @category Class
+ * @description Describes a single position.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class SymbolFigiInstrument implements ModelInterface, ArrayAccess, \JsonSerializable
+class AccountPosition implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -42,7 +43,7 @@ class SymbolFigiInstrument implements ModelInterface, ArrayAccess, \JsonSerializ
       *
       * @var string
       */
-    protected static $openAPIModelName = 'Symbol_figi_instrument';
+    protected static $openAPIModelName = 'AccountPosition';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -50,8 +51,13 @@ class SymbolFigiInstrument implements ModelInterface, ArrayAccess, \JsonSerializ
       * @var string[]
       */
     protected static $openAPITypes = [
-        'figi_code' => 'string',
-        'figi_share_class' => 'string'
+        'instrument' => '\SnapTrade\Model\Instrument',
+        'units' => 'float',
+        'price' => 'float',
+        'cost_basis' => 'float',
+        'currency' => 'string',
+        'cash_equivalent' => 'bool',
+        'tax_lots' => '\SnapTrade\Model\TaxLot[]'
     ];
 
     /**
@@ -62,8 +68,13 @@ class SymbolFigiInstrument implements ModelInterface, ArrayAccess, \JsonSerializ
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'figi_code' => null,
-        'figi_share_class' => null
+        'instrument' => null,
+        'units' => 'decimal',
+        'price' => 'decimal',
+        'cost_basis' => 'decimal',
+        'currency' => null,
+        'cash_equivalent' => null,
+        'tax_lots' => null
     ];
 
     /**
@@ -72,8 +83,13 @@ class SymbolFigiInstrument implements ModelInterface, ArrayAccess, \JsonSerializ
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'figi_code' => true,
-		'figi_share_class' => true
+        'instrument' => false,
+		'units' => true,
+		'price' => true,
+		'cost_basis' => true,
+		'currency' => true,
+		'cash_equivalent' => false,
+		'tax_lots' => false
     ];
 
     /**
@@ -162,8 +178,13 @@ class SymbolFigiInstrument implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $attributeMap = [
-        'figi_code' => 'figi_code',
-        'figi_share_class' => 'figi_share_class'
+        'instrument' => 'instrument',
+        'units' => 'units',
+        'price' => 'price',
+        'cost_basis' => 'cost_basis',
+        'currency' => 'currency',
+        'cash_equivalent' => 'cash_equivalent',
+        'tax_lots' => 'tax_lots'
     ];
 
     /**
@@ -172,8 +193,13 @@ class SymbolFigiInstrument implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $setters = [
-        'figi_code' => 'setFigiCode',
-        'figi_share_class' => 'setFigiShareClass'
+        'instrument' => 'setInstrument',
+        'units' => 'setUnits',
+        'price' => 'setPrice',
+        'cost_basis' => 'setCostBasis',
+        'currency' => 'setCurrency',
+        'cash_equivalent' => 'setCashEquivalent',
+        'tax_lots' => 'setTaxLots'
     ];
 
     /**
@@ -182,8 +208,13 @@ class SymbolFigiInstrument implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $getters = [
-        'figi_code' => 'getFigiCode',
-        'figi_share_class' => 'getFigiShareClass'
+        'instrument' => 'getInstrument',
+        'units' => 'getUnits',
+        'price' => 'getPrice',
+        'cost_basis' => 'getCostBasis',
+        'currency' => 'getCurrency',
+        'cash_equivalent' => 'getCashEquivalent',
+        'tax_lots' => 'getTaxLots'
     ];
 
     /**
@@ -243,8 +274,13 @@ class SymbolFigiInstrument implements ModelInterface, ArrayAccess, \JsonSerializ
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('figi_code', $data ?? [], null);
-        $this->setIfExists('figi_share_class', $data ?? [], null);
+        $this->setIfExists('instrument', $data ?? [], null);
+        $this->setIfExists('units', $data ?? [], null);
+        $this->setIfExists('price', $data ?? [], null);
+        $this->setIfExists('cost_basis', $data ?? [], null);
+        $this->setIfExists('currency', $data ?? [], null);
+        $this->setIfExists('cash_equivalent', $data ?? [], null);
+        $this->setIfExists('tax_lots', $data ?? [], null);
     }
 
     /**
@@ -274,6 +310,9 @@ class SymbolFigiInstrument implements ModelInterface, ArrayAccess, \JsonSerializ
     {
         $invalidProperties = [];
 
+        if ($this->container['instrument'] === null) {
+            $invalidProperties[] = "'instrument' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -290,73 +329,232 @@ class SymbolFigiInstrument implements ModelInterface, ArrayAccess, \JsonSerializ
 
 
     /**
-     * Gets figi_code
+     * Gets instrument
      *
-     * @return string|null
+     * @return \SnapTrade\Model\Instrument
      */
-    public function getFigiCode()
+    public function getInstrument()
     {
-        return $this->container['figi_code'];
+        return $this->container['instrument'];
     }
 
     /**
-     * Sets figi_code
+     * Sets instrument
      *
-     * @param string|null $figi_code This identifier is unique per security per trading venue. See section 1.4.1 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf) for more information.
+     * @param \SnapTrade\Model\Instrument $instrument instrument
      *
      * @return self
      */
-    public function setFigiCode($figi_code)
+    public function setInstrument($instrument)
     {
 
-        if (is_null($figi_code)) {
-            array_push($this->openAPINullablesSetToNull, 'figi_code');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('figi_code', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if (is_null($instrument)) {
+            throw new \InvalidArgumentException('non-nullable instrument cannot be null');
         }
 
-        $this->container['figi_code'] = $figi_code;
+        $this->container['instrument'] = $instrument;
 
         return $this;
     }
 
     /**
-     * Gets figi_share_class
+     * Gets units
      *
-     * @return string|null
+     * @return float|null
      */
-    public function getFigiShareClass()
+    public function getUnits()
     {
-        return $this->container['figi_share_class'];
+        return $this->container['units'];
     }
 
     /**
-     * Sets figi_share_class
+     * Sets units
      *
-     * @param string|null $figi_share_class This enables users to link multiple FIGIs for the same security in order to obtain an aggregated view across all countries and all exchanges. For example, `AAPL` has a different FIGI for each exchange/trading venue it is traded on. The `figi_share_class` is the same for all of these FIGIs. See section 1.4.3 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf) for more information.
+     * @param float|null $units The number of units held in the position. Positive numbers indicate long positions and negative numbers indicate short positions.
      *
      * @return self
      */
-    public function setFigiShareClass($figi_share_class)
+    public function setUnits($units)
     {
 
-        if (is_null($figi_share_class)) {
-            array_push($this->openAPINullablesSetToNull, 'figi_share_class');
+        if (is_null($units)) {
+            array_push($this->openAPINullablesSetToNull, 'units');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('figi_share_class', $nullablesSetToNull);
+            $index = array_search('units', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
 
-        $this->container['figi_share_class'] = $figi_share_class;
+        $this->container['units'] = $units;
+
+        return $this;
+    }
+
+    /**
+     * Gets price
+     *
+     * @return float|null
+     */
+    public function getPrice()
+    {
+        return $this->container['price'];
+    }
+
+    /**
+     * Sets price
+     *
+     * @param float|null $price Last known market price for the position.
+     *
+     * @return self
+     */
+    public function setPrice($price)
+    {
+
+        if (is_null($price)) {
+            array_push($this->openAPINullablesSetToNull, 'price');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('price', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['price'] = $price;
+
+        return $this;
+    }
+
+    /**
+     * Gets cost_basis
+     *
+     * @return float|null
+     */
+    public function getCostBasis()
+    {
+        return $this->container['cost_basis'];
+    }
+
+    /**
+     * Sets cost_basis
+     *
+     * @param float|null $cost_basis Book price or average purchase price for the position.
+     *
+     * @return self
+     */
+    public function setCostBasis($cost_basis)
+    {
+
+        if (is_null($cost_basis)) {
+            array_push($this->openAPINullablesSetToNull, 'cost_basis');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('cost_basis', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['cost_basis'] = $cost_basis;
+
+        return $this;
+    }
+
+    /**
+     * Gets currency
+     *
+     * @return string|null
+     */
+    public function getCurrency()
+    {
+        return $this->container['currency'];
+    }
+
+    /**
+     * Sets currency
+     *
+     * @param string|null $currency ISO-4217 currency code for the position `price` and `cost_basis`.
+     *
+     * @return self
+     */
+    public function setCurrency($currency)
+    {
+
+        if (is_null($currency)) {
+            array_push($this->openAPINullablesSetToNull, 'currency');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('currency', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['currency'] = $currency;
+
+        return $this;
+    }
+
+    /**
+     * Gets cash_equivalent
+     *
+     * @return bool|null
+     */
+    public function getCashEquivalent()
+    {
+        return $this->container['cash_equivalent'];
+    }
+
+    /**
+     * Sets cash_equivalent
+     *
+     * @param bool|null $cash_equivalent Present for stock positions that are also counted in cash balance or buying power.
+     *
+     * @return self
+     */
+    public function setCashEquivalent($cash_equivalent)
+    {
+
+        if (is_null($cash_equivalent)) {
+            throw new \InvalidArgumentException('non-nullable cash_equivalent cannot be null');
+        }
+
+        $this->container['cash_equivalent'] = $cash_equivalent;
+
+        return $this;
+    }
+
+    /**
+     * Gets tax_lots
+     *
+     * @return \SnapTrade\Model\TaxLot[]|null
+     */
+    public function getTaxLots()
+    {
+        return $this->container['tax_lots'];
+    }
+
+    /**
+     * Sets tax_lots
+     *
+     * @param \SnapTrade\Model\TaxLot[]|null $tax_lots Present for stock positions when tax lot data is enabled for the account.
+     *
+     * @return self
+     */
+    public function setTaxLots($tax_lots)
+    {
+
+        if (is_null($tax_lots)) {
+            throw new \InvalidArgumentException('non-nullable tax_lots cannot be null');
+        }
+
+        $this->container['tax_lots'] = $tax_lots;
 
         return $this;
     }

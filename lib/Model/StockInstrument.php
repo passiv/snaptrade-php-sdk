@@ -1,6 +1,6 @@
 <?php
 /**
- * AccountUniversalActivitySymbol
+ * StockInstrument
  *
  * PHP version 7.4
  *
@@ -27,14 +27,14 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * AccountUniversalActivitySymbol Class Doc Comment
+ * StockInstrument Class Doc Comment
  *
  * @category Class
- * @description The security for the transaction. The field is &#x60;null&#x60; if the transaction is not related to a security (like a deposit, withdrawal, fee, etc). SnapTrade does a best effort to map the brokerage&#39;s symbol. In cases where the brokerage symbol is not recognized, the field will be set to &#x60;null&#x60;.
+ * @description Security instrument metadata for stock positions.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class AccountUniversalActivitySymbol implements ModelInterface, ArrayAccess, \JsonSerializable
+class StockInstrument implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -43,7 +43,7 @@ class AccountUniversalActivitySymbol implements ModelInterface, ArrayAccess, \Js
       *
       * @var string
       */
-    protected static $openAPIModelName = 'AccountUniversalActivity_symbol';
+    protected static $openAPIModelName = 'StockInstrument';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -51,14 +51,13 @@ class AccountUniversalActivitySymbol implements ModelInterface, ArrayAccess, \Js
       * @var string[]
       */
     protected static $openAPITypes = [
+        'kind' => 'string',
         'id' => 'string',
         'symbol' => 'string',
         'raw_symbol' => 'string',
         'description' => 'string',
-        'currency' => '\SnapTrade\Model\SymbolCurrency',
-        'exchange' => '\SnapTrade\Model\SymbolExchange',
-        'type' => '\SnapTrade\Model\SecurityType',
-        'figi_code' => 'string',
+        'currency' => 'string',
+        'exchange' => 'string',
         'figi_instrument' => '\SnapTrade\Model\StockInstrumentFigiInstrument'
     ];
 
@@ -70,14 +69,13 @@ class AccountUniversalActivitySymbol implements ModelInterface, ArrayAccess, \Js
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
+        'kind' => null,
         'id' => 'uuid',
         'symbol' => null,
         'raw_symbol' => null,
         'description' => null,
         'currency' => null,
         'exchange' => null,
-        'type' => null,
-        'figi_code' => null,
         'figi_instrument' => null
     ];
 
@@ -87,14 +85,13 @@ class AccountUniversalActivitySymbol implements ModelInterface, ArrayAccess, \Js
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'id' => false,
+        'kind' => false,
+		'id' => false,
 		'symbol' => false,
 		'raw_symbol' => false,
 		'description' => true,
-		'currency' => false,
-		'exchange' => false,
-		'type' => false,
-		'figi_code' => true,
+		'currency' => true,
+		'exchange' => true,
 		'figi_instrument' => true
     ];
 
@@ -184,14 +181,13 @@ class AccountUniversalActivitySymbol implements ModelInterface, ArrayAccess, \Js
      * @var string[]
      */
     protected static $attributeMap = [
+        'kind' => 'kind',
         'id' => 'id',
         'symbol' => 'symbol',
         'raw_symbol' => 'raw_symbol',
         'description' => 'description',
         'currency' => 'currency',
         'exchange' => 'exchange',
-        'type' => 'type',
-        'figi_code' => 'figi_code',
         'figi_instrument' => 'figi_instrument'
     ];
 
@@ -201,14 +197,13 @@ class AccountUniversalActivitySymbol implements ModelInterface, ArrayAccess, \Js
      * @var string[]
      */
     protected static $setters = [
+        'kind' => 'setKind',
         'id' => 'setId',
         'symbol' => 'setSymbol',
         'raw_symbol' => 'setRawSymbol',
         'description' => 'setDescription',
         'currency' => 'setCurrency',
         'exchange' => 'setExchange',
-        'type' => 'setType',
-        'figi_code' => 'setFigiCode',
         'figi_instrument' => 'setFigiInstrument'
     ];
 
@@ -218,14 +213,13 @@ class AccountUniversalActivitySymbol implements ModelInterface, ArrayAccess, \Js
      * @var string[]
      */
     protected static $getters = [
+        'kind' => 'getKind',
         'id' => 'getId',
         'symbol' => 'getSymbol',
         'raw_symbol' => 'getRawSymbol',
         'description' => 'getDescription',
         'currency' => 'getCurrency',
         'exchange' => 'getExchange',
-        'type' => 'getType',
-        'figi_code' => 'getFigiCode',
         'figi_instrument' => 'getFigiInstrument'
     ];
 
@@ -270,6 +264,19 @@ class AccountUniversalActivitySymbol implements ModelInterface, ArrayAccess, \Js
         return self::$openAPIModelName;
     }
 
+    public const KIND_STOCK = 'stock';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getKindAllowableValues()
+    {
+        return [
+            self::KIND_STOCK,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -286,14 +293,13 @@ class AccountUniversalActivitySymbol implements ModelInterface, ArrayAccess, \Js
      */
     public function __construct(array $data = null)
     {
+        $this->setIfExists('kind', $data ?? [], null);
         $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('symbol', $data ?? [], null);
         $this->setIfExists('raw_symbol', $data ?? [], null);
         $this->setIfExists('description', $data ?? [], null);
         $this->setIfExists('currency', $data ?? [], null);
         $this->setIfExists('exchange', $data ?? [], null);
-        $this->setIfExists('type', $data ?? [], null);
-        $this->setIfExists('figi_code', $data ?? [], null);
         $this->setIfExists('figi_instrument', $data ?? [], null);
     }
 
@@ -324,6 +330,27 @@ class AccountUniversalActivitySymbol implements ModelInterface, ArrayAccess, \Js
     {
         $invalidProperties = [];
 
+        if ($this->container['kind'] === null) {
+            $invalidProperties[] = "'kind' can't be null";
+        }
+        $allowedValues = $this->getKindAllowableValues();
+        if (!is_null($this->container['kind']) && !in_array($this->container['kind'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'kind', must be one of '%s'",
+                $this->container['kind'],
+                implode("', '", $allowedValues)
+            );
+        }
+
+        if ($this->container['id'] === null) {
+            $invalidProperties[] = "'id' can't be null";
+        }
+        if ($this->container['symbol'] === null) {
+            $invalidProperties[] = "'symbol' can't be null";
+        }
+        if ($this->container['raw_symbol'] === null) {
+            $invalidProperties[] = "'raw_symbol' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -340,9 +367,48 @@ class AccountUniversalActivitySymbol implements ModelInterface, ArrayAccess, \Js
 
 
     /**
+     * Gets kind
+     *
+     * @return string
+     */
+    public function getKind()
+    {
+        return $this->container['kind'];
+    }
+
+    /**
+     * Sets kind
+     *
+     * @param string $kind Type of security instrument.
+     *
+     * @return self
+     */
+    public function setKind($kind)
+    {
+        $allowedValues = $this->getKindAllowableValues();
+        if (!in_array($kind, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'kind', must be one of '%s'",
+                    $kind,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+
+        if (is_null($kind)) {
+            throw new \InvalidArgumentException('non-nullable kind cannot be null');
+        }
+
+        $this->container['kind'] = $kind;
+
+        return $this;
+    }
+
+    /**
      * Gets id
      *
-     * @return string|null
+     * @return string
      */
     public function getId()
     {
@@ -352,7 +418,7 @@ class AccountUniversalActivitySymbol implements ModelInterface, ArrayAccess, \Js
     /**
      * Sets id
      *
-     * @param string|null $id Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
+     * @param string $id Unique identifier for the instrument.
      *
      * @return self
      */
@@ -371,7 +437,7 @@ class AccountUniversalActivitySymbol implements ModelInterface, ArrayAccess, \Js
     /**
      * Gets symbol
      *
-     * @return string|null
+     * @return string
      */
     public function getSymbol()
     {
@@ -381,7 +447,7 @@ class AccountUniversalActivitySymbol implements ModelInterface, ArrayAccess, \Js
     /**
      * Sets symbol
      *
-     * @param string|null $symbol The security's trading ticker symbol. For example \"AAPL\" for Apple Inc. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on \"Yahoo Finance Market Coverage and Data Delays\"). For example, for securities traded on the Toronto Stock Exchange, the symbol has a '.TO' suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix.
+     * @param string $symbol The formatted trading symbol for the security.
      *
      * @return self
      */
@@ -400,7 +466,7 @@ class AccountUniversalActivitySymbol implements ModelInterface, ArrayAccess, \Js
     /**
      * Gets raw_symbol
      *
-     * @return string|null
+     * @return string
      */
     public function getRawSymbol()
     {
@@ -410,7 +476,7 @@ class AccountUniversalActivitySymbol implements ModelInterface, ArrayAccess, \Js
     /**
      * Sets raw_symbol
      *
-     * @param string|null $raw_symbol The raw symbol is `symbol` with the exchange suffix removed. For example, if `symbol` is \"VAB.TO\", then `raw_symbol` is \"VAB\".
+     * @param string $raw_symbol The raw symbol without any exchange suffix.
      *
      * @return self
      */
@@ -439,7 +505,7 @@ class AccountUniversalActivitySymbol implements ModelInterface, ArrayAccess, \Js
     /**
      * Sets description
      *
-     * @param string|null $description A human-readable description of the security. This is usually the company name or ETF name.
+     * @param string|null $description Human-readable description of the security.
      *
      * @return self
      */
@@ -465,7 +531,7 @@ class AccountUniversalActivitySymbol implements ModelInterface, ArrayAccess, \Js
     /**
      * Gets currency
      *
-     * @return \SnapTrade\Model\SymbolCurrency|null
+     * @return string|null
      */
     public function getCurrency()
     {
@@ -475,7 +541,7 @@ class AccountUniversalActivitySymbol implements ModelInterface, ArrayAccess, \Js
     /**
      * Sets currency
      *
-     * @param \SnapTrade\Model\SymbolCurrency|null $currency currency
+     * @param string|null $currency ISO-4217 currency code for the security listing.
      *
      * @return self
      */
@@ -483,7 +549,14 @@ class AccountUniversalActivitySymbol implements ModelInterface, ArrayAccess, \Js
     {
 
         if (is_null($currency)) {
-            throw new \InvalidArgumentException('non-nullable currency cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'currency');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('currency', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['currency'] = $currency;
@@ -494,7 +567,7 @@ class AccountUniversalActivitySymbol implements ModelInterface, ArrayAccess, \Js
     /**
      * Gets exchange
      *
-     * @return \SnapTrade\Model\SymbolExchange|null
+     * @return string|null
      */
     public function getExchange()
     {
@@ -504,7 +577,7 @@ class AccountUniversalActivitySymbol implements ModelInterface, ArrayAccess, \Js
     /**
      * Sets exchange
      *
-     * @param \SnapTrade\Model\SymbolExchange|null $exchange exchange
+     * @param string|null $exchange Exchange MIC code or exchange code for the security.
      *
      * @return self
      */
@@ -512,75 +585,17 @@ class AccountUniversalActivitySymbol implements ModelInterface, ArrayAccess, \Js
     {
 
         if (is_null($exchange)) {
-            throw new \InvalidArgumentException('non-nullable exchange cannot be null');
-        }
-
-        $this->container['exchange'] = $exchange;
-
-        return $this;
-    }
-
-    /**
-     * Gets type
-     *
-     * @return \SnapTrade\Model\SecurityType|null
-     */
-    public function getType()
-    {
-        return $this->container['type'];
-    }
-
-    /**
-     * Sets type
-     *
-     * @param \SnapTrade\Model\SecurityType|null $type type
-     *
-     * @return self
-     */
-    public function setType($type)
-    {
-
-        if (is_null($type)) {
-            throw new \InvalidArgumentException('non-nullable type cannot be null');
-        }
-
-        $this->container['type'] = $type;
-
-        return $this;
-    }
-
-    /**
-     * Gets figi_code
-     *
-     * @return string|null
-     */
-    public function getFigiCode()
-    {
-        return $this->container['figi_code'];
-    }
-
-    /**
-     * Sets figi_code
-     *
-     * @param string|null $figi_code This identifier is unique per security per trading venue. See section 1.4.1 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf) for more information. This value should be the same as the `figi_code` in the `figi_instrument` child property.
-     *
-     * @return self
-     */
-    public function setFigiCode($figi_code)
-    {
-
-        if (is_null($figi_code)) {
-            array_push($this->openAPINullablesSetToNull, 'figi_code');
+            array_push($this->openAPINullablesSetToNull, 'exchange');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('figi_code', $nullablesSetToNull);
+            $index = array_search('exchange', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
 
-        $this->container['figi_code'] = $figi_code;
+        $this->container['exchange'] = $exchange;
 
         return $this;
     }

@@ -1,6 +1,6 @@
 <?php
 /**
- * SymbolFigiInstrumentTest
+ * StockInstrumentFigiInstrumentTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * SymbolFigiInstrumentTest Class Doc Comment
+ * StockInstrumentFigiInstrumentTest Class Doc Comment
  *
  * @category    Class
- * @description SymbolFigiInstrument
+ * @description StockInstrumentFigiInstrument
  * @package     SnapTrade
  */
-class SymbolFigiInstrumentTest extends TestCase
+class StockInstrumentFigiInstrumentTest extends TestCase
 {
 
     /**
@@ -64,9 +64,9 @@ class SymbolFigiInstrumentTest extends TestCase
     }
 
     /**
-     * Test "SymbolFigiInstrument"
+     * Test "StockInstrumentFigiInstrument"
      */
-    public function testSymbolFigiInstrument()
+    public function testStockInstrumentFigiInstrument()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

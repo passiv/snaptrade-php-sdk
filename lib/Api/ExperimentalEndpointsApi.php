@@ -65,6 +65,9 @@ class ExperimentalEndpointsApi extends \SnapTrade\CustomApi
         'getAccountBalanceHistory' => [
             'application/json',
         ],
+        'getAllAccountPositions' => [
+            'application/json',
+        ],
         'getUserAccountOrderDetailV2' => [
             'application/json',
         ],
@@ -484,6 +487,455 @@ class ExperimentalEndpointsApi extends \SnapTrade\CustomApi
                 'form', // style
                 true, // explode
                 true // required
+            ) ?? []);
+        }
+
+
+        // path params
+        if ($account_id !== SENTINEL_VALUE) {
+            $resourcePath = str_replace(
+                '{' . 'accountId' . '}',
+                ObjectSerializer::toPathValue($account_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('clientId');
+        if ($apiKey !== null) {
+            $queryParams['clientId'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Signature');
+        if ($apiKey !== null) {
+            $headers['Signature'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('timestamp');
+        if ($apiKey !== null) {
+            $queryParams['timestamp'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $method = 'GET';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
+    }
+
+    /**
+     * Operation getAllAccountPositions
+     *
+     * List all account positions
+     *
+     * Returns a paginated list of all positions in the specified account.  The &#x60;results&#x60; list can contain multiple instrument types in the same response page, including stocks, ETFs, crypto, futures, and option positions. Use the &#x60;instrument.kind&#x60; discriminator to determine the schema for each position&#39;s &#x60;instrument&#x60;.  Stock positions may also include &#x60;cash_equivalent&#x60;, and may include &#x60;tax_lots&#x60; when tax lot data is enabled for the account.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+     *
+     * @param  string $user_id user_id (required)
+     * @param  string $user_secret user_secret (required)
+     * @param  string $account_id account_id (required)
+     * @param  int $page The page number to return. Defaults to 1. (optional)
+     * @param  int $page_size The number of positions to return per page. Defaults to 100 with a maximum of 1000. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAllAccountPositions'] to see the possible values for this operation
+     *
+     * @throws \SnapTrade\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SnapTrade\Model\AllAccountPositionsResponse
+     */
+    public function getAllAccountPositions(
+        $user_id,
+        $user_secret,
+        $account_id,
+        $page = SENTINEL_VALUE,
+        $page_size = SENTINEL_VALUE,
+
+        string $contentType = self::contentTypes['getAllAccountPositions'][0]
+    )
+    {
+
+        list($response) = $this->getAllAccountPositionsWithHttpInfo($user_id, $user_secret, $account_id, $page, $page_size, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation getAllAccountPositionsWithHttpInfo
+     *
+     * List all account positions
+     *
+     * Returns a paginated list of all positions in the specified account.  The &#x60;results&#x60; list can contain multiple instrument types in the same response page, including stocks, ETFs, crypto, futures, and option positions. Use the &#x60;instrument.kind&#x60; discriminator to determine the schema for each position&#39;s &#x60;instrument&#x60;.  Stock positions may also include &#x60;cash_equivalent&#x60;, and may include &#x60;tax_lots&#x60; when tax lot data is enabled for the account.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+     *
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
+     * @param  string $account_id (required)
+     * @param  int $page The page number to return. Defaults to 1. (optional)
+     * @param  int $page_size The number of positions to return per page. Defaults to 100 with a maximum of 1000. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAllAccountPositions'] to see the possible values for this operation
+     *
+     * @throws \SnapTrade\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SnapTrade\Model\AllAccountPositionsResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getAllAccountPositionsWithHttpInfo($user_id, $user_secret, $account_id, $page = null, $page_size = null, string $contentType = self::contentTypes['getAllAccountPositions'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    {
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getAllAccountPositionsRequest($user_id, $user_secret, $account_id, $page, $page_size, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                if (
+                    ($e->getCode() == 401 || $e->getCode() == 403) &&
+                    !empty($this->getConfig()->getAccessToken()) &&
+                    $requestOptions->shouldRetryOAuth()
+                ) {
+                    return $this->getAllAccountPositionsWithHttpInfo(
+                        $user_id,
+                        $user_secret,
+                        $account_id,
+                        $page,
+                        $page_size,
+                        $contentType,
+                        $requestOptions->setRetryOAuth(false)
+                    );
+                }
+
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('\SnapTrade\Model\AllAccountPositionsResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\SnapTrade\Model\AllAccountPositionsResponse' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\AllAccountPositionsResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\SnapTrade\Model\AllAccountPositionsResponse';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SnapTrade\Model\AllAccountPositionsResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getAllAccountPositionsAsync
+     *
+     * List all account positions
+     *
+     * Returns a paginated list of all positions in the specified account.  The &#x60;results&#x60; list can contain multiple instrument types in the same response page, including stocks, ETFs, crypto, futures, and option positions. Use the &#x60;instrument.kind&#x60; discriminator to determine the schema for each position&#39;s &#x60;instrument&#x60;.  Stock positions may also include &#x60;cash_equivalent&#x60;, and may include &#x60;tax_lots&#x60; when tax lot data is enabled for the account.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+     *
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
+     * @param  string $account_id (required)
+     * @param  int $page The page number to return. Defaults to 1. (optional)
+     * @param  int $page_size The number of positions to return per page. Defaults to 100 with a maximum of 1000. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAllAccountPositions'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getAllAccountPositionsAsync(
+        $user_id,
+        $user_secret,
+        $account_id,
+        $page = SENTINEL_VALUE,
+        $page_size = SENTINEL_VALUE,
+
+        string $contentType = self::contentTypes['getAllAccountPositions'][0]
+    )
+    {
+
+        return $this->getAllAccountPositionsAsyncWithHttpInfo($user_id, $user_secret, $account_id, $page, $page_size, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getAllAccountPositionsAsyncWithHttpInfo
+     *
+     * List all account positions
+     *
+     * Returns a paginated list of all positions in the specified account.  The &#x60;results&#x60; list can contain multiple instrument types in the same response page, including stocks, ETFs, crypto, futures, and option positions. Use the &#x60;instrument.kind&#x60; discriminator to determine the schema for each position&#39;s &#x60;instrument&#x60;.  Stock positions may also include &#x60;cash_equivalent&#x60;, and may include &#x60;tax_lots&#x60; when tax lot data is enabled for the account.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+     *
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
+     * @param  string $account_id (required)
+     * @param  int $page The page number to return. Defaults to 1. (optional)
+     * @param  int $page_size The number of positions to return per page. Defaults to 100 with a maximum of 1000. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAllAccountPositions'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getAllAccountPositionsAsyncWithHttpInfo($user_id, $user_secret, $account_id, $page = null, $page_size = null, string $contentType = self::contentTypes['getAllAccountPositions'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    {
+        $returnType = '\SnapTrade\Model\AllAccountPositionsResponse';
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getAllAccountPositionsRequest($user_id, $user_secret, $account_id, $page, $page_size, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getAllAccountPositions'
+     *
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
+     * @param  string $account_id (required)
+     * @param  int $page The page number to return. Defaults to 1. (optional)
+     * @param  int $page_size The number of positions to return per page. Defaults to 100 with a maximum of 1000. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAllAccountPositions'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function getAllAccountPositionsRequest($user_id, $user_secret, $account_id, $page = SENTINEL_VALUE, $page_size = SENTINEL_VALUE, string $contentType = self::contentTypes['getAllAccountPositions'][0])
+    {
+
+        // Check if $user_id is a string
+        if ($user_id !== SENTINEL_VALUE && !is_string($user_id)) {
+            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_id, true), gettype($user_id)));
+        }
+        // verify the required parameter 'user_id' is set
+        if ($user_id === SENTINEL_VALUE || (is_array($user_id) && count($user_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter user_id when calling getAllAccountPositions'
+            );
+        }
+        // Check if $user_secret is a string
+        if ($user_secret !== SENTINEL_VALUE && !is_string($user_secret)) {
+            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
+        }
+        // verify the required parameter 'user_secret' is set
+        if ($user_secret === SENTINEL_VALUE || (is_array($user_secret) && count($user_secret) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter user_secret when calling getAllAccountPositions'
+            );
+        }
+        // Check if $account_id is a string
+        if ($account_id !== SENTINEL_VALUE && !is_string($account_id)) {
+            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($account_id, true), gettype($account_id)));
+        }
+        // verify the required parameter 'account_id' is set
+        if ($account_id === SENTINEL_VALUE || (is_array($account_id) && count($account_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter account_id when calling getAllAccountPositions'
+            );
+        }
+        if ($page !== SENTINEL_VALUE && $page < 1) {
+            throw new \InvalidArgumentException('invalid value for "page" when calling ExperimentalEndpointsApi.getAllAccountPositions, must be bigger than or equal to 1.');
+        }
+                if ($page_size !== SENTINEL_VALUE && $page_size > 1000) {
+            throw new \InvalidArgumentException('invalid value for "page_size" when calling ExperimentalEndpointsApi.getAllAccountPositions, must be smaller than or equal to 1000.');
+        }
+        if ($page_size !== SENTINEL_VALUE && $page_size < 1) {
+            throw new \InvalidArgumentException('invalid value for "page_size" when calling ExperimentalEndpointsApi.getAllAccountPositions, must be bigger than or equal to 1.');
+        }
+        
+
+        $resourcePath = '/accounts/{accountId}/positions/all';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        if ($user_id !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_id,
+                'userId', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
+        if ($user_secret !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_secret,
+                'userSecret', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
+        if ($page !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $page,
+                'page', // param base name
+                'integer', // openApiType
+                'form', // style
+                true, // explode
+                false // required
+            ) ?? []);
+        }
+        if ($page_size !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $page_size,
+                'page_size', // param base name
+                'integer', // openApiType
+                'form', // style
+                true, // explode
+                false // required
             ) ?? []);
         }
 

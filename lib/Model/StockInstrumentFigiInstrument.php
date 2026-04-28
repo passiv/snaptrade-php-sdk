@@ -1,6 +1,6 @@
 <?php
 /**
- * AccountUniversalActivitySymbol
+ * StockInstrumentFigiInstrument
  *
  * PHP version 7.4
  *
@@ -27,14 +27,13 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * AccountUniversalActivitySymbol Class Doc Comment
+ * StockInstrumentFigiInstrument Class Doc Comment
  *
  * @category Class
- * @description The security for the transaction. The field is &#x60;null&#x60; if the transaction is not related to a security (like a deposit, withdrawal, fee, etc). SnapTrade does a best effort to map the brokerage&#39;s symbol. In cases where the brokerage symbol is not recognized, the field will be set to &#x60;null&#x60;.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class AccountUniversalActivitySymbol implements ModelInterface, ArrayAccess, \JsonSerializable
+class StockInstrumentFigiInstrument implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -43,7 +42,7 @@ class AccountUniversalActivitySymbol implements ModelInterface, ArrayAccess, \Js
       *
       * @var string
       */
-    protected static $openAPIModelName = 'AccountUniversalActivity_symbol';
+    protected static $openAPIModelName = 'StockInstrument_figi_instrument';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -51,15 +50,8 @@ class AccountUniversalActivitySymbol implements ModelInterface, ArrayAccess, \Js
       * @var string[]
       */
     protected static $openAPITypes = [
-        'id' => 'string',
-        'symbol' => 'string',
-        'raw_symbol' => 'string',
-        'description' => 'string',
-        'currency' => '\SnapTrade\Model\SymbolCurrency',
-        'exchange' => '\SnapTrade\Model\SymbolExchange',
-        'type' => '\SnapTrade\Model\SecurityType',
         'figi_code' => 'string',
-        'figi_instrument' => '\SnapTrade\Model\StockInstrumentFigiInstrument'
+        'figi_share_class' => 'string'
     ];
 
     /**
@@ -70,15 +62,8 @@ class AccountUniversalActivitySymbol implements ModelInterface, ArrayAccess, \Js
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'id' => 'uuid',
-        'symbol' => null,
-        'raw_symbol' => null,
-        'description' => null,
-        'currency' => null,
-        'exchange' => null,
-        'type' => null,
         'figi_code' => null,
-        'figi_instrument' => null
+        'figi_share_class' => null
     ];
 
     /**
@@ -87,15 +72,8 @@ class AccountUniversalActivitySymbol implements ModelInterface, ArrayAccess, \Js
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'id' => false,
-		'symbol' => false,
-		'raw_symbol' => false,
-		'description' => true,
-		'currency' => false,
-		'exchange' => false,
-		'type' => false,
-		'figi_code' => true,
-		'figi_instrument' => true
+        'figi_code' => true,
+		'figi_share_class' => true
     ];
 
     /**
@@ -184,15 +162,8 @@ class AccountUniversalActivitySymbol implements ModelInterface, ArrayAccess, \Js
      * @var string[]
      */
     protected static $attributeMap = [
-        'id' => 'id',
-        'symbol' => 'symbol',
-        'raw_symbol' => 'raw_symbol',
-        'description' => 'description',
-        'currency' => 'currency',
-        'exchange' => 'exchange',
-        'type' => 'type',
         'figi_code' => 'figi_code',
-        'figi_instrument' => 'figi_instrument'
+        'figi_share_class' => 'figi_share_class'
     ];
 
     /**
@@ -201,15 +172,8 @@ class AccountUniversalActivitySymbol implements ModelInterface, ArrayAccess, \Js
      * @var string[]
      */
     protected static $setters = [
-        'id' => 'setId',
-        'symbol' => 'setSymbol',
-        'raw_symbol' => 'setRawSymbol',
-        'description' => 'setDescription',
-        'currency' => 'setCurrency',
-        'exchange' => 'setExchange',
-        'type' => 'setType',
         'figi_code' => 'setFigiCode',
-        'figi_instrument' => 'setFigiInstrument'
+        'figi_share_class' => 'setFigiShareClass'
     ];
 
     /**
@@ -218,15 +182,8 @@ class AccountUniversalActivitySymbol implements ModelInterface, ArrayAccess, \Js
      * @var string[]
      */
     protected static $getters = [
-        'id' => 'getId',
-        'symbol' => 'getSymbol',
-        'raw_symbol' => 'getRawSymbol',
-        'description' => 'getDescription',
-        'currency' => 'getCurrency',
-        'exchange' => 'getExchange',
-        'type' => 'getType',
         'figi_code' => 'getFigiCode',
-        'figi_instrument' => 'getFigiInstrument'
+        'figi_share_class' => 'getFigiShareClass'
     ];
 
     /**
@@ -286,15 +243,8 @@ class AccountUniversalActivitySymbol implements ModelInterface, ArrayAccess, \Js
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('id', $data ?? [], null);
-        $this->setIfExists('symbol', $data ?? [], null);
-        $this->setIfExists('raw_symbol', $data ?? [], null);
-        $this->setIfExists('description', $data ?? [], null);
-        $this->setIfExists('currency', $data ?? [], null);
-        $this->setIfExists('exchange', $data ?? [], null);
-        $this->setIfExists('type', $data ?? [], null);
         $this->setIfExists('figi_code', $data ?? [], null);
-        $this->setIfExists('figi_instrument', $data ?? [], null);
+        $this->setIfExists('figi_share_class', $data ?? [], null);
     }
 
     /**
@@ -340,216 +290,6 @@ class AccountUniversalActivitySymbol implements ModelInterface, ArrayAccess, \Js
 
 
     /**
-     * Gets id
-     *
-     * @return string|null
-     */
-    public function getId()
-    {
-        return $this->container['id'];
-    }
-
-    /**
-     * Sets id
-     *
-     * @param string|null $id Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
-     *
-     * @return self
-     */
-    public function setId($id)
-    {
-
-        if (is_null($id)) {
-            throw new \InvalidArgumentException('non-nullable id cannot be null');
-        }
-
-        $this->container['id'] = $id;
-
-        return $this;
-    }
-
-    /**
-     * Gets symbol
-     *
-     * @return string|null
-     */
-    public function getSymbol()
-    {
-        return $this->container['symbol'];
-    }
-
-    /**
-     * Sets symbol
-     *
-     * @param string|null $symbol The security's trading ticker symbol. For example \"AAPL\" for Apple Inc. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on \"Yahoo Finance Market Coverage and Data Delays\"). For example, for securities traded on the Toronto Stock Exchange, the symbol has a '.TO' suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix.
-     *
-     * @return self
-     */
-    public function setSymbol($symbol)
-    {
-
-        if (is_null($symbol)) {
-            throw new \InvalidArgumentException('non-nullable symbol cannot be null');
-        }
-
-        $this->container['symbol'] = $symbol;
-
-        return $this;
-    }
-
-    /**
-     * Gets raw_symbol
-     *
-     * @return string|null
-     */
-    public function getRawSymbol()
-    {
-        return $this->container['raw_symbol'];
-    }
-
-    /**
-     * Sets raw_symbol
-     *
-     * @param string|null $raw_symbol The raw symbol is `symbol` with the exchange suffix removed. For example, if `symbol` is \"VAB.TO\", then `raw_symbol` is \"VAB\".
-     *
-     * @return self
-     */
-    public function setRawSymbol($raw_symbol)
-    {
-
-        if (is_null($raw_symbol)) {
-            throw new \InvalidArgumentException('non-nullable raw_symbol cannot be null');
-        }
-
-        $this->container['raw_symbol'] = $raw_symbol;
-
-        return $this;
-    }
-
-    /**
-     * Gets description
-     *
-     * @return string|null
-     */
-    public function getDescription()
-    {
-        return $this->container['description'];
-    }
-
-    /**
-     * Sets description
-     *
-     * @param string|null $description A human-readable description of the security. This is usually the company name or ETF name.
-     *
-     * @return self
-     */
-    public function setDescription($description)
-    {
-
-        if (is_null($description)) {
-            array_push($this->openAPINullablesSetToNull, 'description');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('description', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['description'] = $description;
-
-        return $this;
-    }
-
-    /**
-     * Gets currency
-     *
-     * @return \SnapTrade\Model\SymbolCurrency|null
-     */
-    public function getCurrency()
-    {
-        return $this->container['currency'];
-    }
-
-    /**
-     * Sets currency
-     *
-     * @param \SnapTrade\Model\SymbolCurrency|null $currency currency
-     *
-     * @return self
-     */
-    public function setCurrency($currency)
-    {
-
-        if (is_null($currency)) {
-            throw new \InvalidArgumentException('non-nullable currency cannot be null');
-        }
-
-        $this->container['currency'] = $currency;
-
-        return $this;
-    }
-
-    /**
-     * Gets exchange
-     *
-     * @return \SnapTrade\Model\SymbolExchange|null
-     */
-    public function getExchange()
-    {
-        return $this->container['exchange'];
-    }
-
-    /**
-     * Sets exchange
-     *
-     * @param \SnapTrade\Model\SymbolExchange|null $exchange exchange
-     *
-     * @return self
-     */
-    public function setExchange($exchange)
-    {
-
-        if (is_null($exchange)) {
-            throw new \InvalidArgumentException('non-nullable exchange cannot be null');
-        }
-
-        $this->container['exchange'] = $exchange;
-
-        return $this;
-    }
-
-    /**
-     * Gets type
-     *
-     * @return \SnapTrade\Model\SecurityType|null
-     */
-    public function getType()
-    {
-        return $this->container['type'];
-    }
-
-    /**
-     * Sets type
-     *
-     * @param \SnapTrade\Model\SecurityType|null $type type
-     *
-     * @return self
-     */
-    public function setType($type)
-    {
-
-        if (is_null($type)) {
-            throw new \InvalidArgumentException('non-nullable type cannot be null');
-        }
-
-        $this->container['type'] = $type;
-
-        return $this;
-    }
-
-    /**
      * Gets figi_code
      *
      * @return string|null
@@ -562,7 +302,7 @@ class AccountUniversalActivitySymbol implements ModelInterface, ArrayAccess, \Js
     /**
      * Sets figi_code
      *
-     * @param string|null $figi_code This identifier is unique per security per trading venue. See section 1.4.1 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf) for more information. This value should be the same as the `figi_code` in the `figi_instrument` child property.
+     * @param string|null $figi_code This identifier is unique per security per trading venue. See section 1.4.1 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf) for more information.
      *
      * @return self
      */
@@ -586,37 +326,37 @@ class AccountUniversalActivitySymbol implements ModelInterface, ArrayAccess, \Js
     }
 
     /**
-     * Gets figi_instrument
+     * Gets figi_share_class
      *
-     * @return \SnapTrade\Model\StockInstrumentFigiInstrument|null
+     * @return string|null
      */
-    public function getFigiInstrument()
+    public function getFigiShareClass()
     {
-        return $this->container['figi_instrument'];
+        return $this->container['figi_share_class'];
     }
 
     /**
-     * Sets figi_instrument
+     * Sets figi_share_class
      *
-     * @param \SnapTrade\Model\StockInstrumentFigiInstrument|null $figi_instrument figi_instrument
+     * @param string|null $figi_share_class This enables users to link multiple FIGIs for the same security in order to obtain an aggregated view across all countries and all exchanges. For example, `AAPL` has a different FIGI for each exchange/trading venue it is traded on. The `figi_share_class` is the same for all of these FIGIs. See section 1.4.3 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf) for more information.
      *
      * @return self
      */
-    public function setFigiInstrument($figi_instrument)
+    public function setFigiShareClass($figi_share_class)
     {
 
-        if (is_null($figi_instrument)) {
-            array_push($this->openAPINullablesSetToNull, 'figi_instrument');
+        if (is_null($figi_share_class)) {
+            array_push($this->openAPINullablesSetToNull, 'figi_share_class');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('figi_instrument', $nullablesSetToNull);
+            $index = array_search('figi_share_class', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
 
-        $this->container['figi_instrument'] = $figi_instrument;
+        $this->container['figi_share_class'] = $figi_share_class;
 
         return $this;
     }

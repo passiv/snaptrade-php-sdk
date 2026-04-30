@@ -82,18 +82,27 @@ class AccountOrderRecordTest extends TestCase
     }
 
     /**
-     * Test attribute "status"
+     * Test attribute "brokerage_group_order_id"
      */
-    public function testPropertyStatus()
+    public function testPropertyBrokerageGroupOrderId()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "symbol"
+     * Test attribute "order_role"
      */
-    public function testPropertySymbol()
+    public function testPropertyOrderRole()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "status"
+     */
+    public function testPropertyStatus()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
@@ -112,6 +121,24 @@ class AccountOrderRecordTest extends TestCase
      * Test attribute "option_symbol"
      */
     public function testPropertyOptionSymbol()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "quote_universal_symbol"
+     */
+    public function testPropertyQuoteUniversalSymbol()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "quote_currency"
+     */
+    public function testPropertyQuoteCurrency()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
@@ -190,6 +217,15 @@ class AccountOrderRecordTest extends TestCase
     }
 
     /**
+     * Test attribute "trailing_stop"
+     */
+    public function testPropertyTrailingStop()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "order_type"
      */
     public function testPropertyOrderType()
@@ -238,6 +274,24 @@ class AccountOrderRecordTest extends TestCase
      * Test attribute "expiry_date"
      */
     public function testPropertyExpiryDate()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "symbol"
+     */
+    public function testPropertySymbol()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "child_brokerage_order_ids"
+     */
+    public function testPropertyChildBrokerageOrderIds()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

@@ -30,7 +30,7 @@ use \SnapTrade\ObjectSerializer;
  * TransactionsStatus Class Doc Comment
  *
  * @category Class
- * @description Status of account transaction sync. SnapTrade syncs transactions from the brokerage under the following conditions: 1. Initial connection - SnapTrade syncs all transactions from the brokerage account as far back as the brokerage allows. Check [our integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;6fab8012ade6441fa0c6d9af9c55ce3a) for details on how far back we sync for each brokerage. 2. Daily sync - Once a day SnapTrade syncs new transactions from the brokerage. 3. Manual sync - You can retrigger an incremental sync of transactions with the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
+ * @description Status of account transaction sync. SnapTrade syncs transactions from the brokerage under the following conditions: 1. Initial connection - SnapTrade syncs all transactions from the brokerage account as far back as the brokerage allows. Check [our integrations doc](https://support.snaptrade.com/brokerages-table?v&#x3D;6fab8012ade6441fa0c6d9af9c55ce3a) for details on how far back we sync for each brokerage. 2. Daily sync - Once a day SnapTrade syncs new transactions from the brokerage. 3. Manual sync - You can trigger an incremental sync of transactions with the [transactions sync](/reference/Experimental%20endpoints/Connections_syncBrokerageAuthorizationTransactions) endpoint.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
@@ -76,8 +76,8 @@ class TransactionsStatus implements ModelInterface, ArrayAccess, \JsonSerializab
       */
     protected static array $openAPINullables = [
         'initial_sync_completed' => false,
-		'last_successful_sync' => false,
-		'first_transaction_date' => false
+		'last_successful_sync' => true,
+		'first_transaction_date' => true
     ];
 
     /**
@@ -347,7 +347,14 @@ class TransactionsStatus implements ModelInterface, ArrayAccess, \JsonSerializab
     {
 
         if (is_null($last_successful_sync)) {
-            throw new \InvalidArgumentException('non-nullable last_successful_sync cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'last_successful_sync');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('last_successful_sync', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['last_successful_sync'] = $last_successful_sync;
@@ -376,7 +383,14 @@ class TransactionsStatus implements ModelInterface, ArrayAccess, \JsonSerializab
     {
 
         if (is_null($first_transaction_date)) {
-            throw new \InvalidArgumentException('non-nullable first_transaction_date cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'first_transaction_date');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('first_transaction_date', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['first_transaction_date'] = $first_transaction_date;

@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * AllAccountPositionsResponseTest Class Doc Comment
  *
  * @category    Class
- * @description A paginated list of all account positions.
+ * @description Information about all account positions.
  * @package     SnapTrade
  */
 class AllAccountPositionsResponseTest extends TestCase
@@ -67,33 +67,6 @@ class AllAccountPositionsResponseTest extends TestCase
      * Test "AllAccountPositionsResponse"
      */
     public function testAllAccountPositionsResponse()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "count"
-     */
-    public function testPropertyCount()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "next"
-     */
-    public function testPropertyNext()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "previous"
-     */
-    public function testPropertyPrevious()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

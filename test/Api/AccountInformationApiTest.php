@@ -71,6 +71,18 @@ class AccountInformationApiTest extends TestCase
     }
 
     /**
+     * Test case for getAccountBalanceHistory
+     *
+     * List historical account total value.
+     *
+     */
+    public function testGetAccountBalanceHistory()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for getAllUserHoldings
      *
      * List all accounts for the user, plus balances, positions, and orders for each account..

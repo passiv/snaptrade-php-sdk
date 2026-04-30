@@ -59,18 +59,6 @@ class ExperimentalEndpointsApiTest extends TestCase
     }
 
     /**
-     * Test case for getAccountBalanceHistory
-     *
-     * List historical account total value.
-     *
-     */
-    public function testGetAccountBalanceHistory()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test case for getAllAccountPositions
      *
      * List all account positions.

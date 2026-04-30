@@ -30,7 +30,7 @@ use \SnapTrade\ObjectSerializer;
  * AllAccountPositionsResponse Class Doc Comment
  *
  * @category Class
- * @description A paginated list of all account positions.
+ * @description Information about all account positions.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
@@ -51,9 +51,6 @@ class AllAccountPositionsResponse implements ModelInterface, ArrayAccess, \JsonS
       * @var string[]
       */
     protected static $openAPITypes = [
-        'count' => 'int',
-        'next' => 'string',
-        'previous' => 'string',
         'results' => '\SnapTrade\Model\AccountPosition[]'
     ];
 
@@ -65,9 +62,6 @@ class AllAccountPositionsResponse implements ModelInterface, ArrayAccess, \JsonS
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'count' => null,
-        'next' => 'uri',
-        'previous' => 'uri',
         'results' => null
     ];
 
@@ -77,10 +71,7 @@ class AllAccountPositionsResponse implements ModelInterface, ArrayAccess, \JsonS
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'count' => false,
-		'next' => true,
-		'previous' => true,
-		'results' => false
+        'results' => false
     ];
 
     /**
@@ -169,9 +160,6 @@ class AllAccountPositionsResponse implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $attributeMap = [
-        'count' => 'count',
-        'next' => 'next',
-        'previous' => 'previous',
         'results' => 'results'
     ];
 
@@ -181,9 +169,6 @@ class AllAccountPositionsResponse implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $setters = [
-        'count' => 'setCount',
-        'next' => 'setNext',
-        'previous' => 'setPrevious',
         'results' => 'setResults'
     ];
 
@@ -193,9 +178,6 @@ class AllAccountPositionsResponse implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $getters = [
-        'count' => 'getCount',
-        'next' => 'getNext',
-        'previous' => 'getPrevious',
         'results' => 'getResults'
     ];
 
@@ -256,9 +238,6 @@ class AllAccountPositionsResponse implements ModelInterface, ArrayAccess, \JsonS
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('count', $data ?? [], null);
-        $this->setIfExists('next', $data ?? [], null);
-        $this->setIfExists('previous', $data ?? [], null);
         $this->setIfExists('results', $data ?? [], null);
     }
 
@@ -289,15 +268,6 @@ class AllAccountPositionsResponse implements ModelInterface, ArrayAccess, \JsonS
     {
         $invalidProperties = [];
 
-        if ($this->container['count'] === null) {
-            $invalidProperties[] = "'count' can't be null";
-        }
-        if ($this->container['next'] === null) {
-            $invalidProperties[] = "'next' can't be null";
-        }
-        if ($this->container['previous'] === null) {
-            $invalidProperties[] = "'previous' can't be null";
-        }
         if ($this->container['results'] === null) {
             $invalidProperties[] = "'results' can't be null";
         }
@@ -317,107 +287,6 @@ class AllAccountPositionsResponse implements ModelInterface, ArrayAccess, \JsonS
 
 
     /**
-     * Gets count
-     *
-     * @return int
-     */
-    public function getCount()
-    {
-        return $this->container['count'];
-    }
-
-    /**
-     * Sets count
-     *
-     * @param int $count The total number of positions available across all pages.
-     *
-     * @return self
-     */
-    public function setCount($count)
-    {
-
-        if (is_null($count)) {
-            throw new \InvalidArgumentException('non-nullable count cannot be null');
-        }
-
-        $this->container['count'] = $count;
-
-        return $this;
-    }
-
-    /**
-     * Gets next
-     *
-     * @return string
-     */
-    public function getNext()
-    {
-        return $this->container['next'];
-    }
-
-    /**
-     * Sets next
-     *
-     * @param string $next The URL for the next page of results, or `null` if there is no next page.
-     *
-     * @return self
-     */
-    public function setNext($next)
-    {
-
-        if (is_null($next)) {
-            array_push($this->openAPINullablesSetToNull, 'next');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('next', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['next'] = $next;
-
-        return $this;
-    }
-
-    /**
-     * Gets previous
-     *
-     * @return string
-     */
-    public function getPrevious()
-    {
-        return $this->container['previous'];
-    }
-
-    /**
-     * Sets previous
-     *
-     * @param string $previous The URL for the previous page of results, or `null` if there is no previous page.
-     *
-     * @return self
-     */
-    public function setPrevious($previous)
-    {
-
-        if (is_null($previous)) {
-            array_push($this->openAPINullablesSetToNull, 'previous');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('previous', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['previous'] = $previous;
-
-        return $this;
-    }
-
-    /**
      * Gets results
      *
      * @return \SnapTrade\Model\AccountPosition[]
@@ -430,7 +299,7 @@ class AllAccountPositionsResponse implements ModelInterface, ArrayAccess, \JsonS
     /**
      * Sets results
      *
-     * @param \SnapTrade\Model\AccountPosition[] $results Positions returned for the current page.
+     * @param \SnapTrade\Model\AccountPosition[] $results Positions returned for the request.
      *
      * @return self
      */

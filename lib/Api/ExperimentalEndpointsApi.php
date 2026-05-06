@@ -1034,7 +1034,7 @@ class ExperimentalEndpointsApi extends \SnapTrade\CustomApi
      * @param  string $user_secret user_secret (required)
      * @param  string $account_id account_id (required)
      * @param  string $state defaults value is set to \&quot;all\&quot; (optional)
-     * @param  int $days Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. (optional)
+     * @param  int $days Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserAccountOrdersV2'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
@@ -1067,7 +1067,7 @@ class ExperimentalEndpointsApi extends \SnapTrade\CustomApi
      * @param  string $user_secret (required)
      * @param  string $account_id (required)
      * @param  string $state defaults value is set to \&quot;all\&quot; (optional)
-     * @param  int $days Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. (optional)
+     * @param  int $days Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserAccountOrdersV2'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
@@ -1215,7 +1215,7 @@ class ExperimentalEndpointsApi extends \SnapTrade\CustomApi
      * @param  string $user_secret (required)
      * @param  string $account_id (required)
      * @param  string $state defaults value is set to \&quot;all\&quot; (optional)
-     * @param  int $days Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. (optional)
+     * @param  int $days Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserAccountOrdersV2'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1251,7 +1251,7 @@ class ExperimentalEndpointsApi extends \SnapTrade\CustomApi
      * @param  string $user_secret (required)
      * @param  string $account_id (required)
      * @param  string $state defaults value is set to \&quot;all\&quot; (optional)
-     * @param  int $days Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. (optional)
+     * @param  int $days Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserAccountOrdersV2'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1308,7 +1308,7 @@ class ExperimentalEndpointsApi extends \SnapTrade\CustomApi
      * @param  string $user_secret (required)
      * @param  string $account_id (required)
      * @param  string $state defaults value is set to \&quot;all\&quot; (optional)
-     * @param  int $days Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. (optional)
+     * @param  int $days Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserAccountOrdersV2'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1350,6 +1350,9 @@ class ExperimentalEndpointsApi extends \SnapTrade\CustomApi
         // Check if $state is a string
         if ($state !== SENTINEL_VALUE && !is_string($state)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($state, true), gettype($state)));
+        }
+        if ($days !== SENTINEL_VALUE && $days > 90) {
+            throw new \InvalidArgumentException('invalid value for "days" when calling ExperimentalEndpointsApi.getUserAccountOrdersV2, must be smaller than or equal to 90.');
         }
         if ($days !== SENTINEL_VALUE && $days < 1) {
             throw new \InvalidArgumentException('invalid value for "days" when calling ExperimentalEndpointsApi.getUserAccountOrdersV2, must be bigger than or equal to 1.');

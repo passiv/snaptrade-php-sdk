@@ -43,6 +43,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.connections.deleteConnection`](#snaptradeconnectionsdeleteconnection)
   * [`snaptrade.connections.detailBrokerageAuthorization`](#snaptradeconnectionsdetailbrokerageauthorization)
   * [`snaptrade.connections.disableBrokerageAuthorization`](#snaptradeconnectionsdisablebrokerageauthorization)
+  * [`snaptrade.connections.listBrokerageAuthorizationAccounts`](#snaptradeconnectionslistbrokerageauthorizationaccounts)
   * [`snaptrade.connections.listBrokerageAuthorizations`](#snaptradeconnectionslistbrokerageauthorizations)
   * [`snaptrade.connections.refreshBrokerageAuthorization`](#snaptradeconnectionsrefreshbrokerageauthorization)
   * [`snaptrade.connections.removeBrokerageAuthorization`](#snaptradeconnectionsremovebrokerageauthorization)
@@ -673,14 +674,13 @@ $result = $snaptrade->accountInformation->getUserHoldings(
 
 
 ### `snaptrade.accountInformation.listUserAccounts`<a id="snaptradeaccountinformationlistuseraccounts"></a>
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
+
+**Deprecated, please use the [list accounts for a connection endpoint](/reference/Connections/Connections_listBrokerageAuthorizationAccounts) instead.**
 
 Returns all brokerage accounts across all connections known to SnapTrade for the authenticated user.
 
-Please note that this data is cached and only refreshed once a day.
-
-Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
-  - If you do, real-time data can be fetched using the [update account details endpoint](/reference/Account%20Information/AccountInformation_getUserAccountDetails).
-  - If you don't, the data is cached and refreshed once a day. If you need real-time, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
+This data is cached and only refreshed once a day, regardless of the customer's plan. To get real-time data on a real-time plan, use the connection-scoped endpoint linked above. Customers on delayed plans can force a refresh with the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
 
 
 
@@ -1093,6 +1093,50 @@ $result = $snaptrade->connections->disableBrokerageAuthorization(
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/authorizations/{authorizationId}/disable` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.connections.listBrokerageAuthorizationAccounts`<a id="snaptradeconnectionslistbrokerageauthorizationaccounts"></a>
+
+Returns all brokerage accounts that belong to the specified connection for the authenticated user.
+
+On real-time plans, this endpoint refreshes each account's opening date, funding date, and total value live from the brokerage on each call. 
+
+On delayed plans, this endpoint returns cached data that is refreshed once a day. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
+
+Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data.
+
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $snaptrade->connections->listBrokerageAuthorizationAccounts(
+    authorization_id: "87b24961-b51e-4db8-9226-f198f6518a89", 
+    user_id: "snaptrade-user-123", 
+    user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61"
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### authorization_id: `string`<a id="authorization_id-string"></a>
+
+##### user_id: `string`<a id="user_id-string"></a>
+
+##### user_secret: `string`<a id="user_secret-string"></a>
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[**Account**](./lib/Model/Account.php)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/authorizations/{authorizationId}/accounts` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

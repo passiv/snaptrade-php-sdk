@@ -95,6 +95,18 @@ class ConnectionsApiTest extends TestCase
     }
 
     /**
+     * Test case for listBrokerageAuthorizationAccounts
+     *
+     * List accounts for a connection.
+     *
+     */
+    public function testListBrokerageAuthorizationAccounts()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for listBrokerageAuthorizations
      *
      * List all connections.

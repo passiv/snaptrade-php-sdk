@@ -59,18 +59,6 @@ class ExperimentalEndpointsApiTest extends TestCase
     }
 
     /**
-     * Test case for getAllAccountPositions
-     *
-     * List all account positions.
-     *
-     */
-    public function testGetAllAccountPositions()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test case for getUserAccountOrderDetailV2
      *
      * Get account order detail (V2).

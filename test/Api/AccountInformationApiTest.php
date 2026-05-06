@@ -83,6 +83,18 @@ class AccountInformationApiTest extends TestCase
     }
 
     /**
+     * Test case for getAllAccountPositions
+     *
+     * List all account positions.
+     *
+     */
+    public function testGetAllAccountPositions()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for getAllUserHoldings
      *
      * List all accounts for the user, plus balances, positions, and orders for each account..

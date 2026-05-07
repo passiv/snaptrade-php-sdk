@@ -2296,7 +2296,7 @@ The OCC-formatted option symbol.
 
 ### `snaptrade.trading.getUserAccountQuotes`<a id="snaptradetradinggetuseraccountquotes"></a>
 
-Returns quotes from the brokerage for the specified symbols and account.
+Returns a maximum of 10 quotes from the brokerage for the specified symbols and account.
 
 The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.
 
@@ -2328,7 +2328,7 @@ $result = $snaptrade->trading->getUserAccountQuotes(
 
 ##### symbols: `string`<a id="symbols-string"></a>
 
-List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator
+List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator. Maximum of 10 values allowed
 
 ##### account_id: `string`<a id="account_id-string"></a>
 

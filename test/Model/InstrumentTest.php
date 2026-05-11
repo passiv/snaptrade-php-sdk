@@ -145,42 +145,6 @@ class InstrumentTest extends TestCase
     }
 
     /**
-     * Test attribute "root_symbol"
-     */
-    public function testPropertyRootSymbol()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "expiration_code"
-     */
-    public function testPropertyExpirationCode()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "expiration_date"
-     */
-    public function testPropertyExpirationDate()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "multiplier"
-     */
-    public function testPropertyMultiplier()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test attribute "option_type"
      */
     public function testPropertyOptionType()
@@ -199,9 +163,45 @@ class InstrumentTest extends TestCase
     }
 
     /**
+     * Test attribute "expiration_date"
+     */
+    public function testPropertyExpirationDate()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "underlying"
      */
     public function testPropertyUnderlying()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "root_symbol"
+     */
+    public function testPropertyRootSymbol()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "expiration_code"
+     */
+    public function testPropertyExpirationCode()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "multiplier"
+     */
+    public function testPropertyMultiplier()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

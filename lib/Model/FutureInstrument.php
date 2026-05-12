@@ -389,7 +389,7 @@ class FutureInstrument implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets kind
      *
-     * @param string $kind kind
+     * @param string $kind Type of security instrument.
      *
      * @return self
      */

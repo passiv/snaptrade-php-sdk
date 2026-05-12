@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![Packagist](https://img.shields.io/badge/Packagist-v2.0.191-blue)](https://packagist.org/packages/konfig/snaptrade-php-sdk)
+[![Packagist](https://img.shields.io/badge/Packagist-v2.0.192-blue)](https://packagist.org/packages/konfig/snaptrade-php-sdk)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -107,7 +107,7 @@ To install the bindings via [Composer](https://getcomposer.org/), add the follow
     }
   ],
   "require": {
-    "konfig/snaptrade-php-sdk": "2.0.191"
+    "konfig/snaptrade-php-sdk": "2.0.192"
   }
 }
 ```
@@ -265,7 +265,7 @@ Returns a list of all positions in the specified account.
 
 The `results` list can contain multiple instrument types in the same response, including stocks, ADRs, ETFs, mutual funds, closed-end funds, crypto, futures, and option positions. Use the `instrument.kind` discriminator to determine the schema for each position's `instrument`.
 
-Stock positions may also include `cash_equivalent`, and may include `tax_lots` when tax lot data is enabled for the account.
+`mutualfund` positions may also include `cash_equivalent`. `stock` positions may include `tax_lots` when tax lot data is enabled for the account.
 
 If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
 
@@ -676,8 +676,10 @@ Optional comma separated list of rate-of-return timeframes to return. Supported 
 
 
 ### `snaptrade.accountInformation.getUserHoldings`<a id="snaptradeaccountinformationgetuserholdings"></a>
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
-Returns a list of balances, positions, and recent orders for the specified account. The data returned is similar to the data returned over the more fine-grained [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getUserAccountPositions) and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders) endpoints. __The finer-grained APIs are preferred. They are easier to work with, faster, and have better error handling than this coarse-grained API.__
+**Deprecated.** Use the finer-grained account data endpoints instead: [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getAllAccountPositions), and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders).
+Returns a list of balances, positions, and recent orders for the specified account.
 
 Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
   - If you do, this endpoint returns real-time data.

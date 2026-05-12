@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * ManualTradeTest Class Doc Comment
  *
  * @category    Class
- * @description A manual trade object
+ * @description Contains the details of a submitted order.
  * @package     SnapTrade
  */
 class ManualTradeTest extends TestCase

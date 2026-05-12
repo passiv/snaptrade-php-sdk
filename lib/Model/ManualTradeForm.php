@@ -30,7 +30,7 @@ use \SnapTrade\ObjectSerializer;
  * ManualTradeForm Class Doc Comment
  *
  * @category Class
- * @description Manual Trade Form
+ * @description Inputs for placing an order with the brokerage.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
@@ -53,12 +53,12 @@ class ManualTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPITypes = [
         'account_id' => 'string',
         'action' => '\SnapTrade\Model\ActionStrict',
+        'universal_symbol_id' => 'string',
         'order_type' => '\SnapTrade\Model\OrderTypeStrict',
+        'time_in_force' => '\SnapTrade\Model\TimeInForceStrict',
         'price' => 'float',
         'stop' => 'float',
-        'time_in_force' => '\SnapTrade\Model\TimeInForceStrict',
         'units' => 'float',
-        'universal_symbol_id' => 'string',
         'notional_value' => '\SnapTrade\Model\ManualTradeFormNotionalValue'
     ];
 
@@ -72,12 +72,12 @@ class ManualTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPIFormats = [
         'account_id' => 'uuid',
         'action' => null,
+        'universal_symbol_id' => 'uuid',
         'order_type' => null,
+        'time_in_force' => null,
         'price' => null,
         'stop' => null,
-        'time_in_force' => null,
         'units' => null,
-        'universal_symbol_id' => 'uuid',
         'notional_value' => null
     ];
 
@@ -89,12 +89,12 @@ class ManualTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static array $openAPINullables = [
         'account_id' => false,
 		'action' => false,
+		'universal_symbol_id' => false,
 		'order_type' => false,
+		'time_in_force' => false,
 		'price' => true,
 		'stop' => true,
-		'time_in_force' => false,
 		'units' => true,
-		'universal_symbol_id' => false,
 		'notional_value' => true
     ];
 
@@ -186,12 +186,12 @@ class ManualTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $attributeMap = [
         'account_id' => 'account_id',
         'action' => 'action',
+        'universal_symbol_id' => 'universal_symbol_id',
         'order_type' => 'order_type',
+        'time_in_force' => 'time_in_force',
         'price' => 'price',
         'stop' => 'stop',
-        'time_in_force' => 'time_in_force',
         'units' => 'units',
-        'universal_symbol_id' => 'universal_symbol_id',
         'notional_value' => 'notional_value'
     ];
 
@@ -203,12 +203,12 @@ class ManualTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $setters = [
         'account_id' => 'setAccountId',
         'action' => 'setAction',
+        'universal_symbol_id' => 'setUniversalSymbolId',
         'order_type' => 'setOrderType',
+        'time_in_force' => 'setTimeInForce',
         'price' => 'setPrice',
         'stop' => 'setStop',
-        'time_in_force' => 'setTimeInForce',
         'units' => 'setUnits',
-        'universal_symbol_id' => 'setUniversalSymbolId',
         'notional_value' => 'setNotionalValue'
     ];
 
@@ -220,12 +220,12 @@ class ManualTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $getters = [
         'account_id' => 'getAccountId',
         'action' => 'getAction',
+        'universal_symbol_id' => 'getUniversalSymbolId',
         'order_type' => 'getOrderType',
+        'time_in_force' => 'getTimeInForce',
         'price' => 'getPrice',
         'stop' => 'getStop',
-        'time_in_force' => 'getTimeInForce',
         'units' => 'getUnits',
-        'universal_symbol_id' => 'getUniversalSymbolId',
         'notional_value' => 'getNotionalValue'
     ];
 
@@ -288,12 +288,12 @@ class ManualTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $this->setIfExists('account_id', $data ?? [], null);
         $this->setIfExists('action', $data ?? [], null);
+        $this->setIfExists('universal_symbol_id', $data ?? [], null);
         $this->setIfExists('order_type', $data ?? [], null);
+        $this->setIfExists('time_in_force', $data ?? [], null);
         $this->setIfExists('price', $data ?? [], null);
         $this->setIfExists('stop', $data ?? [], null);
-        $this->setIfExists('time_in_force', $data ?? [], null);
         $this->setIfExists('units', $data ?? [], null);
-        $this->setIfExists('universal_symbol_id', $data ?? [], null);
         $this->setIfExists('notional_value', $data ?? [], null);
     }
 
@@ -324,6 +324,21 @@ class ManualTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
+        if ($this->container['account_id'] === null) {
+            $invalidProperties[] = "'account_id' can't be null";
+        }
+        if ($this->container['action'] === null) {
+            $invalidProperties[] = "'action' can't be null";
+        }
+        if ($this->container['universal_symbol_id'] === null) {
+            $invalidProperties[] = "'universal_symbol_id' can't be null";
+        }
+        if ($this->container['order_type'] === null) {
+            $invalidProperties[] = "'order_type' can't be null";
+        }
+        if ($this->container['time_in_force'] === null) {
+            $invalidProperties[] = "'time_in_force' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -342,7 +357,7 @@ class ManualTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets account_id
      *
-     * @return string|null
+     * @return string
      */
     public function getAccountId()
     {
@@ -352,7 +367,7 @@ class ManualTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets account_id
      *
-     * @param string|null $account_id account_id
+     * @param string $account_id Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
      *
      * @return self
      */
@@ -371,7 +386,7 @@ class ManualTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets action
      *
-     * @return \SnapTrade\Model\ActionStrict|null
+     * @return \SnapTrade\Model\ActionStrict
      */
     public function getAction()
     {
@@ -381,7 +396,7 @@ class ManualTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets action
      *
-     * @param \SnapTrade\Model\ActionStrict|null $action action
+     * @param \SnapTrade\Model\ActionStrict $action action
      *
      * @return self
      */
@@ -398,9 +413,38 @@ class ManualTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
+     * Gets universal_symbol_id
+     *
+     * @return string
+     */
+    public function getUniversalSymbolId()
+    {
+        return $this->container['universal_symbol_id'];
+    }
+
+    /**
+     * Sets universal_symbol_id
+     *
+     * @param string $universal_symbol_id Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
+     *
+     * @return self
+     */
+    public function setUniversalSymbolId($universal_symbol_id)
+    {
+
+        if (is_null($universal_symbol_id)) {
+            throw new \InvalidArgumentException('non-nullable universal_symbol_id cannot be null');
+        }
+
+        $this->container['universal_symbol_id'] = $universal_symbol_id;
+
+        return $this;
+    }
+
+    /**
      * Gets order_type
      *
-     * @return \SnapTrade\Model\OrderTypeStrict|null
+     * @return \SnapTrade\Model\OrderTypeStrict
      */
     public function getOrderType()
     {
@@ -410,7 +454,7 @@ class ManualTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets order_type
      *
-     * @param \SnapTrade\Model\OrderTypeStrict|null $order_type order_type
+     * @param \SnapTrade\Model\OrderTypeStrict $order_type order_type
      *
      * @return self
      */
@@ -422,6 +466,35 @@ class ManualTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['order_type'] = $order_type;
+
+        return $this;
+    }
+
+    /**
+     * Gets time_in_force
+     *
+     * @return \SnapTrade\Model\TimeInForceStrict
+     */
+    public function getTimeInForce()
+    {
+        return $this->container['time_in_force'];
+    }
+
+    /**
+     * Sets time_in_force
+     *
+     * @param \SnapTrade\Model\TimeInForceStrict $time_in_force time_in_force
+     *
+     * @return self
+     */
+    public function setTimeInForce($time_in_force)
+    {
+
+        if (is_null($time_in_force)) {
+            throw new \InvalidArgumentException('non-nullable time_in_force cannot be null');
+        }
+
+        $this->container['time_in_force'] = $time_in_force;
 
         return $this;
     }
@@ -439,7 +512,7 @@ class ManualTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets price
      *
-     * @param float|null $price Trade Price if limit or stop limit order
+     * @param float|null $price The limit price for `Limit` and `StopLimit` orders.
      *
      * @return self
      */
@@ -475,7 +548,7 @@ class ManualTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets stop
      *
-     * @param float|null $stop Stop Price. If stop loss or stop limit order, the price to trigger the stop
+     * @param float|null $stop The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
      *
      * @return self
      */
@@ -494,35 +567,6 @@ class ManualTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['stop'] = $stop;
-
-        return $this;
-    }
-
-    /**
-     * Gets time_in_force
-     *
-     * @return \SnapTrade\Model\TimeInForceStrict|null
-     */
-    public function getTimeInForce()
-    {
-        return $this->container['time_in_force'];
-    }
-
-    /**
-     * Sets time_in_force
-     *
-     * @param \SnapTrade\Model\TimeInForceStrict|null $time_in_force time_in_force
-     *
-     * @return self
-     */
-    public function setTimeInForce($time_in_force)
-    {
-
-        if (is_null($time_in_force)) {
-            throw new \InvalidArgumentException('non-nullable time_in_force cannot be null');
-        }
-
-        $this->container['time_in_force'] = $time_in_force;
 
         return $this;
     }
@@ -559,35 +603,6 @@ class ManualTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['units'] = $units;
-
-        return $this;
-    }
-
-    /**
-     * Gets universal_symbol_id
-     *
-     * @return string|null
-     */
-    public function getUniversalSymbolId()
-    {
-        return $this->container['universal_symbol_id'];
-    }
-
-    /**
-     * Sets universal_symbol_id
-     *
-     * @param string|null $universal_symbol_id universal_symbol_id
-     *
-     * @return self
-     */
-    public function setUniversalSymbolId($universal_symbol_id)
-    {
-
-        if (is_null($universal_symbol_id)) {
-            throw new \InvalidArgumentException('non-nullable universal_symbol_id cannot be null');
-        }
-
-        $this->container['universal_symbol_id'] = $universal_symbol_id;
 
         return $this;
     }

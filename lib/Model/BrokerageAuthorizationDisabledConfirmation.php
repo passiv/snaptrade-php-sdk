@@ -30,6 +30,7 @@ use \SnapTrade\ObjectSerializer;
  * BrokerageAuthorizationDisabledConfirmation Class Doc Comment
  *
  * @category Class
+ * @description Confirmation that the connection has been disabled.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */

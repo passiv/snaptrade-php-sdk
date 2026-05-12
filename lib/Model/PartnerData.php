@@ -30,7 +30,7 @@ use \SnapTrade\ObjectSerializer;
  * PartnerData Class Doc Comment
  *
  * @category Class
- * @description SnapTrade Partner metadata
+ * @description Configurations for your SnapTrade Client ID, including allowed brokerages and data access.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
@@ -51,18 +51,18 @@ class PartnerData implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'redirect_uri' => 'string',
-        'allowed_brokerages' => '\SnapTrade\Model\Brokerage[]',
-        'name' => 'string',
         'slug' => 'string',
+        'name' => 'string',
         'logo_url' => 'string',
-        'pin_required' => 'bool',
+        'allowed_brokerages' => '\SnapTrade\Model\Brokerage[]',
         'can_access_trades' => 'bool',
         'can_access_holdings' => 'bool',
         'can_access_account_history' => 'bool',
         'can_access_reference_data' => 'bool',
         'can_access_portfolio_management' => 'bool',
-        'can_access_orders' => 'bool'
+        'can_access_orders' => 'bool',
+        'redirect_uri' => 'string',
+        'pin_required' => 'bool'
     ];
 
     /**
@@ -73,18 +73,18 @@ class PartnerData implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'redirect_uri' => null,
-        'allowed_brokerages' => null,
-        'name' => null,
         'slug' => null,
+        'name' => null,
         'logo_url' => null,
-        'pin_required' => null,
+        'allowed_brokerages' => null,
         'can_access_trades' => null,
         'can_access_holdings' => null,
         'can_access_account_history' => null,
         'can_access_reference_data' => null,
         'can_access_portfolio_management' => null,
-        'can_access_orders' => null
+        'can_access_orders' => null,
+        'redirect_uri' => null,
+        'pin_required' => null
     ];
 
     /**
@@ -93,18 +93,18 @@ class PartnerData implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'redirect_uri' => false,
-		'allowed_brokerages' => false,
+        'slug' => false,
 		'name' => false,
-		'slug' => false,
 		'logo_url' => false,
-		'pin_required' => false,
+		'allowed_brokerages' => false,
 		'can_access_trades' => false,
 		'can_access_holdings' => false,
 		'can_access_account_history' => false,
 		'can_access_reference_data' => false,
 		'can_access_portfolio_management' => false,
-		'can_access_orders' => false
+		'can_access_orders' => false,
+		'redirect_uri' => false,
+		'pin_required' => false
     ];
 
     /**
@@ -193,18 +193,18 @@ class PartnerData implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'redirect_uri' => 'redirect_uri',
-        'allowed_brokerages' => 'allowed_brokerages',
-        'name' => 'name',
         'slug' => 'slug',
+        'name' => 'name',
         'logo_url' => 'logo_url',
-        'pin_required' => 'pin_required',
+        'allowed_brokerages' => 'allowed_brokerages',
         'can_access_trades' => 'can_access_trades',
         'can_access_holdings' => 'can_access_holdings',
         'can_access_account_history' => 'can_access_account_history',
         'can_access_reference_data' => 'can_access_reference_data',
         'can_access_portfolio_management' => 'can_access_portfolio_management',
-        'can_access_orders' => 'can_access_orders'
+        'can_access_orders' => 'can_access_orders',
+        'redirect_uri' => 'redirect_uri',
+        'pin_required' => 'pin_required'
     ];
 
     /**
@@ -213,18 +213,18 @@ class PartnerData implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'redirect_uri' => 'setRedirectUri',
-        'allowed_brokerages' => 'setAllowedBrokerages',
-        'name' => 'setName',
         'slug' => 'setSlug',
+        'name' => 'setName',
         'logo_url' => 'setLogoUrl',
-        'pin_required' => 'setPinRequired',
+        'allowed_brokerages' => 'setAllowedBrokerages',
         'can_access_trades' => 'setCanAccessTrades',
         'can_access_holdings' => 'setCanAccessHoldings',
         'can_access_account_history' => 'setCanAccessAccountHistory',
         'can_access_reference_data' => 'setCanAccessReferenceData',
         'can_access_portfolio_management' => 'setCanAccessPortfolioManagement',
-        'can_access_orders' => 'setCanAccessOrders'
+        'can_access_orders' => 'setCanAccessOrders',
+        'redirect_uri' => 'setRedirectUri',
+        'pin_required' => 'setPinRequired'
     ];
 
     /**
@@ -233,18 +233,18 @@ class PartnerData implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'redirect_uri' => 'getRedirectUri',
-        'allowed_brokerages' => 'getAllowedBrokerages',
-        'name' => 'getName',
         'slug' => 'getSlug',
+        'name' => 'getName',
         'logo_url' => 'getLogoUrl',
-        'pin_required' => 'getPinRequired',
+        'allowed_brokerages' => 'getAllowedBrokerages',
         'can_access_trades' => 'getCanAccessTrades',
         'can_access_holdings' => 'getCanAccessHoldings',
         'can_access_account_history' => 'getCanAccessAccountHistory',
         'can_access_reference_data' => 'getCanAccessReferenceData',
         'can_access_portfolio_management' => 'getCanAccessPortfolioManagement',
-        'can_access_orders' => 'getCanAccessOrders'
+        'can_access_orders' => 'getCanAccessOrders',
+        'redirect_uri' => 'getRedirectUri',
+        'pin_required' => 'getPinRequired'
     ];
 
     /**
@@ -304,18 +304,18 @@ class PartnerData implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('redirect_uri', $data ?? [], null);
-        $this->setIfExists('allowed_brokerages', $data ?? [], null);
-        $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('slug', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('logo_url', $data ?? [], null);
-        $this->setIfExists('pin_required', $data ?? [], null);
+        $this->setIfExists('allowed_brokerages', $data ?? [], null);
         $this->setIfExists('can_access_trades', $data ?? [], null);
         $this->setIfExists('can_access_holdings', $data ?? [], null);
         $this->setIfExists('can_access_account_history', $data ?? [], null);
         $this->setIfExists('can_access_reference_data', $data ?? [], null);
         $this->setIfExists('can_access_portfolio_management', $data ?? [], null);
         $this->setIfExists('can_access_orders', $data ?? [], null);
+        $this->setIfExists('redirect_uri', $data ?? [], null);
+        $this->setIfExists('pin_required', $data ?? [], null);
     }
 
     /**
@@ -361,59 +361,30 @@ class PartnerData implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets redirect_uri
+     * Gets slug
      *
      * @return string|null
      */
-    public function getRedirectUri()
+    public function getSlug()
     {
-        return $this->container['redirect_uri'];
+        return $this->container['slug'];
     }
 
     /**
-     * Sets redirect_uri
+     * Sets slug
      *
-     * @param string|null $redirect_uri URI to redirect user back to after user is done adding brokerage connections
+     * @param string|null $slug A short, unique identifier for your company or product.
      *
      * @return self
      */
-    public function setRedirectUri($redirect_uri)
+    public function setSlug($slug)
     {
 
-        if (is_null($redirect_uri)) {
-            throw new \InvalidArgumentException('non-nullable redirect_uri cannot be null');
+        if (is_null($slug)) {
+            throw new \InvalidArgumentException('non-nullable slug cannot be null');
         }
 
-        $this->container['redirect_uri'] = $redirect_uri;
-
-        return $this;
-    }
-
-    /**
-     * Gets allowed_brokerages
-     *
-     * @return \SnapTrade\Model\Brokerage[]|null
-     */
-    public function getAllowedBrokerages()
-    {
-        return $this->container['allowed_brokerages'];
-    }
-
-    /**
-     * Sets allowed_brokerages
-     *
-     * @param \SnapTrade\Model\Brokerage[]|null $allowed_brokerages Brokerages that can be accessed by partners
-     *
-     * @return self
-     */
-    public function setAllowedBrokerages($allowed_brokerages)
-    {
-
-        if (is_null($allowed_brokerages)) {
-            throw new \InvalidArgumentException('non-nullable allowed_brokerages cannot be null');
-        }
-
-        $this->container['allowed_brokerages'] = $allowed_brokerages;
+        $this->container['slug'] = $slug;
 
         return $this;
     }
@@ -431,7 +402,7 @@ class PartnerData implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets name
      *
-     * @param string|null $name Name of Snaptrade Partner
+     * @param string|null $name Your company or product name.
      *
      * @return self
      */
@@ -443,35 +414,6 @@ class PartnerData implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['name'] = $name;
-
-        return $this;
-    }
-
-    /**
-     * Gets slug
-     *
-     * @return string|null
-     */
-    public function getSlug()
-    {
-        return $this->container['slug'];
-    }
-
-    /**
-     * Sets slug
-     *
-     * @param string|null $slug Slug of Snaptrade Partner
-     *
-     * @return self
-     */
-    public function setSlug($slug)
-    {
-
-        if (is_null($slug)) {
-            throw new \InvalidArgumentException('non-nullable slug cannot be null');
-        }
-
-        $this->container['slug'] = $slug;
 
         return $this;
     }
@@ -489,7 +431,7 @@ class PartnerData implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets logo_url
      *
-     * @param string|null $logo_url URL to partner's logo
+     * @param string|null $logo_url URL to your company or product logo.
      *
      * @return self
      */
@@ -506,30 +448,30 @@ class PartnerData implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets pin_required
+     * Gets allowed_brokerages
      *
-     * @return bool|null
+     * @return \SnapTrade\Model\Brokerage[]|null
      */
-    public function getPinRequired()
+    public function getAllowedBrokerages()
     {
-        return $this->container['pin_required'];
+        return $this->container['allowed_brokerages'];
     }
 
     /**
-     * Sets pin_required
+     * Sets allowed_brokerages
      *
-     * @param bool|null $pin_required Shows if pin is required by users to access connection page
+     * @param \SnapTrade\Model\Brokerage[]|null $allowed_brokerages Brokerages that can be accessed by your Client ID.
      *
      * @return self
      */
-    public function setPinRequired($pin_required)
+    public function setAllowedBrokerages($allowed_brokerages)
     {
 
-        if (is_null($pin_required)) {
-            throw new \InvalidArgumentException('non-nullable pin_required cannot be null');
+        if (is_null($allowed_brokerages)) {
+            throw new \InvalidArgumentException('non-nullable allowed_brokerages cannot be null');
         }
 
-        $this->container['pin_required'] = $pin_required;
+        $this->container['allowed_brokerages'] = $allowed_brokerages;
 
         return $this;
     }
@@ -547,7 +489,7 @@ class PartnerData implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets can_access_trades
      *
-     * @param bool|null $can_access_trades Shows if users of Snaptrade partners can access trade endpoints
+     * @param bool|null $can_access_trades Whether trading is enabled for your SnapTrade Client ID.
      *
      * @return self
      */
@@ -576,7 +518,7 @@ class PartnerData implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets can_access_holdings
      *
-     * @param bool|null $can_access_holdings Shows if Snaptrade partners can get user holdings data
+     * @param bool|null $can_access_holdings Whether holdings data is enabled for your SnapTrade Client ID.
      *
      * @return self
      */
@@ -605,7 +547,7 @@ class PartnerData implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets can_access_account_history
      *
-     * @param bool|null $can_access_account_history Shows if Snaptrade partners can get users account history data
+     * @param bool|null $can_access_account_history Whether account historical transactions is enabled for your SnapTrade Client ID.
      *
      * @return self
      */
@@ -634,7 +576,7 @@ class PartnerData implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets can_access_reference_data
      *
-     * @param bool|null $can_access_reference_data Shows if Snaptrade partners can get users holdings data
+     * @param bool|null $can_access_reference_data Whether reference data is enabled for your SnapTrade Client ID.
      *
      * @return self
      */
@@ -663,7 +605,7 @@ class PartnerData implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets can_access_portfolio_management
      *
-     * @param bool|null $can_access_portfolio_management Shows if users Snaptrade partners can access portfolio group management features
+     * @param bool|null $can_access_portfolio_management Whether portfolio management is enabled for your SnapTrade Client ID.
      *
      * @return self
      */
@@ -692,7 +634,7 @@ class PartnerData implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets can_access_orders
      *
-     * @param bool|null $can_access_orders Shows if Snaptrade partners can get users account order history
+     * @param bool|null $can_access_orders Whether recent order history is enabled for your SnapTrade Client ID.
      *
      * @return self
      */
@@ -704,6 +646,66 @@ class PartnerData implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['can_access_orders'] = $can_access_orders;
+
+        return $this;
+    }
+
+    /**
+     * Gets redirect_uri
+     *
+     * @return string|null
+     */
+    public function getRedirectUri()
+    {
+        return $this->container['redirect_uri'];
+    }
+
+    /**
+     * Sets redirect_uri
+     *
+     * @param string|null $redirect_uri URI to redirect user back to after user is done adding brokerage connections.
+     *
+     * @return self
+     */
+    public function setRedirectUri($redirect_uri)
+    {
+
+        if (is_null($redirect_uri)) {
+            throw new \InvalidArgumentException('non-nullable redirect_uri cannot be null');
+        }
+
+        $this->container['redirect_uri'] = $redirect_uri;
+
+        return $this;
+    }
+
+    /**
+     * Gets pin_required
+     *
+     * @return bool|null
+     * @deprecated
+     */
+    public function getPinRequired()
+    {
+        return $this->container['pin_required'];
+    }
+
+    /**
+     * Sets pin_required
+     *
+     * @param bool|null $pin_required Shows if pin is required by users to access connection page. This field has been deprecated.
+     *
+     * @return self
+     * @deprecated
+     */
+    public function setPinRequired($pin_required)
+    {
+
+        if (is_null($pin_required)) {
+            throw new \InvalidArgumentException('non-nullable pin_required cannot be null');
+        }
+
+        $this->container['pin_required'] = $pin_required;
 
         return $this;
     }

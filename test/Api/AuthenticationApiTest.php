@@ -61,7 +61,7 @@ class AuthenticationApiTest extends TestCase
     /**
      * Test case for deleteSnapTradeUser
      *
-     * Delete SnapTrade user.
+     * Delete user.
      *
      */
     public function testDeleteSnapTradeUser()
@@ -73,7 +73,7 @@ class AuthenticationApiTest extends TestCase
     /**
      * Test case for listSnapTradeUsers
      *
-     * List SnapTrade users.
+     * List all users.
      *
      */
     public function testListSnapTradeUsers()
@@ -85,7 +85,7 @@ class AuthenticationApiTest extends TestCase
     /**
      * Test case for loginSnapTradeUser
      *
-     * Login user & generate connection link.
+     * Generate Connection Portal URL.
      *
      */
     public function testLoginSnapTradeUser()
@@ -97,7 +97,7 @@ class AuthenticationApiTest extends TestCase
     /**
      * Test case for registerSnapTradeUser
      *
-     * Create SnapTrade user.
+     * Register user.
      *
      */
     public function testRegisterSnapTradeUser()
@@ -109,7 +109,7 @@ class AuthenticationApiTest extends TestCase
     /**
      * Test case for resetSnapTradeUserSecret
      *
-     * Obtain a new user secret for a user.
+     * Rotate user secret.
      *
      */
     public function testResetSnapTradeUserSecret()

@@ -409,6 +409,7 @@ class AccountHoldings implements ModelInterface, ArrayAccess, \JsonSerializable
      * Gets total_value
      *
      * @return \SnapTrade\Model\SnapTradeHoldingsTotalValue|null
+     * @deprecated
      */
     public function getTotalValue()
     {
@@ -421,6 +422,7 @@ class AccountHoldings implements ModelInterface, ArrayAccess, \JsonSerializable
      * @param \SnapTrade\Model\SnapTradeHoldingsTotalValue|null $total_value total_value
      *
      * @return self
+     * @deprecated
      */
     public function setTotalValue($total_value)
     {

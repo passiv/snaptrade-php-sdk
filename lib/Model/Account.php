@@ -120,7 +120,7 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
 		'raw_type' => true,
 		'account_category' => true,
 		'meta' => false,
-		'portfolio_group' => false,
+		'portfolio_group' => true,
 		'cash_restrictions' => false,
 		'is_paper' => false
     ];
@@ -1012,7 +1012,14 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
     {
 
         if (is_null($portfolio_group)) {
-            throw new \InvalidArgumentException('non-nullable portfolio_group cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'portfolio_group');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('portfolio_group', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['portfolio_group'] = $portfolio_group;

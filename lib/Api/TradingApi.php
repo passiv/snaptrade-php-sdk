@@ -3526,7 +3526,7 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * Place bracket order
      *
-     * Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages
+     * **This endpoint is deprecated. Please switch to [the new complex order endpoint](/reference/Trading/Trading_placeComplexOrder) ** Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages
      *
      * @param  string $account_id The ID of the account to execute the trade on. (required)
      * @param  string $user_id user_id (required)
@@ -3537,6 +3537,7 @@ class TradingApi extends \SnapTrade\CustomApi
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\AccountOrderRecord|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\Model403FailedRequestResponse
+     * @deprecated
      */
     public function placeBracketOrder(
 
@@ -3576,7 +3577,7 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * Place bracket order
      *
-     * Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages
+     * **This endpoint is deprecated. Please switch to [the new complex order endpoint](/reference/Trading/Trading_placeComplexOrder) ** Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages
      *
      * @param  string $account_id The ID of the account to execute the trade on. (required)
      * @param  string $user_id (required)
@@ -3587,6 +3588,7 @@ class TradingApi extends \SnapTrade\CustomApi
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \SnapTrade\Model\AccountOrderRecord|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\Model403FailedRequestResponse, HTTP status code, HTTP response headers (array of strings)
+     * @deprecated
      */
     public function placeBracketOrderWithHttpInfo($account_id, $user_id, $user_secret, $manual_trade_form_bracket, string $contentType = self::contentTypes['placeBracketOrder'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
@@ -3745,7 +3747,7 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * Place bracket order
      *
-     * Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages
+     * **This endpoint is deprecated. Please switch to [the new complex order endpoint](/reference/Trading/Trading_placeComplexOrder) ** Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages
      *
      * @param  string $account_id The ID of the account to execute the trade on. (required)
      * @param  string $user_id (required)
@@ -3755,6 +3757,7 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @deprecated
      */
     public function placeBracketOrderAsync(
 
@@ -3798,7 +3801,7 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * Place bracket order
      *
-     * Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages
+     * **This endpoint is deprecated. Please switch to [the new complex order endpoint](/reference/Trading/Trading_placeComplexOrder) ** Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages
      *
      * @param  string $account_id The ID of the account to execute the trade on. (required)
      * @param  string $user_id (required)
@@ -3808,6 +3811,7 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @deprecated
      */
     public function placeBracketOrderAsyncWithHttpInfo($account_id, $user_id, $user_secret, $manual_trade_form_bracket, string $contentType = self::contentTypes['placeBracketOrder'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
@@ -3864,6 +3868,7 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
+     * @deprecated
      */
     public function placeBracketOrderRequest($account_id, $user_id, $user_secret, $manual_trade_form_bracket, string $contentType = self::contentTypes['placeBracketOrder'][0])
     {

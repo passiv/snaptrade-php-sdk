@@ -30,7 +30,7 @@ use \SnapTrade\ObjectSerializer;
  * AccountValueHistoryItem Class Doc Comment
  *
  * @category Class
- * @description The estimeated account value at a specific point in time.
+ * @description The estimated account value at a specific point in time.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */

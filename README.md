@@ -516,7 +516,7 @@ $result = $snaptrade->accountInformation->getUserAccountOrders(
 
 ##### state: `string`<a id="state-string"></a>
 
-defaults value is set to \"all\"
+defaults to \"all\"
 
 ##### days: `int`<a id="days-int"></a>
 

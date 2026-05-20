@@ -374,7 +374,7 @@ class SymbolExchange implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets code
      *
-     * @param string|null $code A short name for the exchange. For standardized exchange code, please us the `mic_code` field.
+     * @param string|null $code A short name for the exchange. For standardized exchange code, please use the `mic_code` field.
      *
      * @return self
      */

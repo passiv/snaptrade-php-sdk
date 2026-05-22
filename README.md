@@ -50,6 +50,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.connections.removeBrokerageAuthorization`](#snaptradeconnectionsremovebrokerageauthorization)
   * [`snaptrade.connections.returnRates`](#snaptradeconnectionsreturnrates)
   * [`snaptrade.connections.sessionEvents`](#snaptradeconnectionssessionevents)
+  * [`snaptrade.connections.syncBrokerageAuthorizationTransactions`](#snaptradeconnectionssyncbrokerageauthorizationtransactions)
   * [`snaptrade.options.listOptionHoldings`](#snaptradeoptionslistoptionholdings)
   * [`snaptrade.referenceData.getCurrencyExchangeRatePair`](#snaptradereferencedatagetcurrencyexchangeratepair)
   * [`snaptrade.referenceData.getPartnerInfo`](#snaptradereferencedatagetpartnerinfo)
@@ -516,7 +517,7 @@ $result = $snaptrade->accountInformation->getUserAccountOrders(
 
 ##### state: `string`<a id="state-string"></a>
 
-defaults value is set to \"all\"
+defaults to \"all\"
 
 ##### days: `int`<a id="days-int"></a>
 
@@ -1383,6 +1384,44 @@ Optional comma separated list of session IDs used to filter the request on speci
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/sessionEvents` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.connections.syncBrokerageAuthorizationTransactions`<a id="snaptradeconnectionssyncbrokerageauthorizationtransactions"></a>
+
+Trigger a transactions sync for all accounts under this connection. Updates will be queued asynchronously. Transactions are not updated intra-day, but calling this endpoint can ensure that the previous day's transactions have been synced. For more information on sync behaviour, see: https://docs.snaptrade.com/docs/syncing
+
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $snaptrade->connections->syncBrokerageAuthorizationTransactions(
+    authorization_id: "87b24961-b51e-4db8-9226-f198f6518a89", 
+    user_id: "snaptrade-user-123", 
+    user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61"
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### authorization_id: `string`<a id="authorization_id-string"></a>
+
+##### user_id: `string`<a id="user_id-string"></a>
+
+##### user_secret: `string`<a id="user_secret-string"></a>
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[**BrokerageAuthorizationTransactionsSyncConfirmation**](./lib/Model/BrokerageAuthorizationTransactionsSyncConfirmation.php)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/authorizations/{authorizationId}/transactions/sync` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

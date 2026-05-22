@@ -567,7 +567,7 @@ class PerformanceCustom implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets contribution_streak
      *
-     * @param float|null $contribution_streak Current streak of cosecutive months where contributions were made
+     * @param float|null $contribution_streak Current streak of consecutive months where contributions were made
      *
      * @return self
      */

@@ -165,4 +165,16 @@ class ConnectionsApiTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test case for syncBrokerageAuthorizationTransactions
+     *
+     * Sync transactions for a connection.
+     *
+     */
+    public function testSyncBrokerageAuthorizationTransactions()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

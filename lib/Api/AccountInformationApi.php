@@ -3769,7 +3769,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * List account positions
      *
-     * Returns a list of stock/ETF/crypto/mutual fund positions in the specified account. For option positions, please use the [options endpoint](/reference/Options/Options_listOptionHoldings).  Consider using the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions). This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+     * Returns a list of stock/ETF/crypto/mutual fund positions in the specified account. For option positions, please use the [options endpoint](/reference/Options/Options_listOptionHoldings).  This endpoint is deprecated. Consider using the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions). This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
      *
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
@@ -3779,6 +3779,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\Position[]
+     * @deprecated
      */
     public function getUserAccountPositions(
         $user_id,
@@ -3798,7 +3799,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * List account positions
      *
-     * Returns a list of stock/ETF/crypto/mutual fund positions in the specified account. For option positions, please use the [options endpoint](/reference/Options/Options_listOptionHoldings).  Consider using the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions). This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+     * Returns a list of stock/ETF/crypto/mutual fund positions in the specified account. For option positions, please use the [options endpoint](/reference/Options/Options_listOptionHoldings).  This endpoint is deprecated. Consider using the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions). This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -3808,6 +3809,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \SnapTrade\Model\Position[], HTTP status code, HTTP response headers (array of strings)
+     * @deprecated
      */
     public function getUserAccountPositionsWithHttpInfo($user_id, $user_secret, $account_id, string $contentType = self::contentTypes['getUserAccountPositions'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
@@ -3919,7 +3921,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * List account positions
      *
-     * Returns a list of stock/ETF/crypto/mutual fund positions in the specified account. For option positions, please use the [options endpoint](/reference/Options/Options_listOptionHoldings).  Consider using the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions). This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+     * Returns a list of stock/ETF/crypto/mutual fund positions in the specified account. For option positions, please use the [options endpoint](/reference/Options/Options_listOptionHoldings).  This endpoint is deprecated. Consider using the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions). This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -3928,6 +3930,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @deprecated
      */
     public function getUserAccountPositionsAsync(
         $user_id,
@@ -3951,7 +3954,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * List account positions
      *
-     * Returns a list of stock/ETF/crypto/mutual fund positions in the specified account. For option positions, please use the [options endpoint](/reference/Options/Options_listOptionHoldings).  Consider using the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions). This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+     * Returns a list of stock/ETF/crypto/mutual fund positions in the specified account. For option positions, please use the [options endpoint](/reference/Options/Options_listOptionHoldings).  This endpoint is deprecated. Consider using the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions). This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -3960,6 +3963,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @deprecated
      */
     public function getUserAccountPositionsAsyncWithHttpInfo($user_id, $user_secret, $account_id, string $contentType = self::contentTypes['getUserAccountPositions'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
@@ -4015,6 +4019,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
+     * @deprecated
      */
     public function getUserAccountPositionsRequest($user_id, $user_secret, $account_id, string $contentType = self::contentTypes['getUserAccountPositions'][0])
     {

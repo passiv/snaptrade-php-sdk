@@ -140,7 +140,7 @@ class OptionsApi extends \SnapTrade\CustomApi
      *
      * List account option positions
      *
-     * Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  Consider using the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions). This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
+     * Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  This endpoint is deprecatd. Consider using the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions). This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
      *
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
@@ -150,6 +150,7 @@ class OptionsApi extends \SnapTrade\CustomApi
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\OptionsPosition[]|\SnapTrade\Model\Model500UnexpectedExceptionResponse
+     * @deprecated
      */
     public function listOptionHoldings(
         $user_id,
@@ -169,7 +170,7 @@ class OptionsApi extends \SnapTrade\CustomApi
      *
      * List account option positions
      *
-     * Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  Consider using the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions). This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
+     * Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  This endpoint is deprecatd. Consider using the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions). This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -179,6 +180,7 @@ class OptionsApi extends \SnapTrade\CustomApi
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \SnapTrade\Model\OptionsPosition[]|\SnapTrade\Model\Model500UnexpectedExceptionResponse, HTTP status code, HTTP response headers (array of strings)
+     * @deprecated
      */
     public function listOptionHoldingsWithHttpInfo($user_id, $user_secret, $account_id, string $contentType = self::contentTypes['listOptionHoldings'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
@@ -313,7 +315,7 @@ class OptionsApi extends \SnapTrade\CustomApi
      *
      * List account option positions
      *
-     * Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  Consider using the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions). This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
+     * Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  This endpoint is deprecatd. Consider using the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions). This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -322,6 +324,7 @@ class OptionsApi extends \SnapTrade\CustomApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @deprecated
      */
     public function listOptionHoldingsAsync(
         $user_id,
@@ -345,7 +348,7 @@ class OptionsApi extends \SnapTrade\CustomApi
      *
      * List account option positions
      *
-     * Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  Consider using the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions). This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
+     * Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  This endpoint is deprecatd. Consider using the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions). This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -354,6 +357,7 @@ class OptionsApi extends \SnapTrade\CustomApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @deprecated
      */
     public function listOptionHoldingsAsyncWithHttpInfo($user_id, $user_secret, $account_id, string $contentType = self::contentTypes['listOptionHoldings'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
@@ -409,6 +413,7 @@ class OptionsApi extends \SnapTrade\CustomApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
+     * @deprecated
      */
     public function listOptionHoldingsRequest($user_id, $user_secret, $account_id, string $contentType = self::contentTypes['listOptionHoldings'][0])
     {

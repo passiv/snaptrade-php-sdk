@@ -72,7 +72,7 @@ class AccountOrderRecordLeg implements ModelInterface, ArrayAccess, \JsonSeriali
         'leg_id' => null,
         'instrument' => null,
         'action' => null,
-        'execution_price' => null,
+        'execution_price' => 'decimal',
         'total_quantity' => null,
         'canceled_quantity' => null,
         'filled_quantity' => null,

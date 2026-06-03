@@ -98,9 +98,9 @@ class OrderUpdatedResponseOrder implements ModelInterface, ArrayAccess, \JsonSer
         'open_quantity' => null,
         'canceled_quantity' => null,
         'filled_quantity' => null,
-        'execution_price' => null,
-        'limit_price' => null,
-        'stop_price' => null,
+        'execution_price' => 'decimal',
+        'limit_price' => 'decimal',
+        'stop_price' => 'decimal',
         'trailing_stop' => null,
         'order_type' => null,
         'time_in_force' => null,
@@ -122,10 +122,10 @@ class OrderUpdatedResponseOrder implements ModelInterface, ArrayAccess, \JsonSer
 		'brokerage_group_order_id' => true,
 		'order_role' => true,
 		'status' => false,
-		'universal_symbol' => false,
-		'option_symbol' => false,
-		'quote_universal_symbol' => false,
-		'quote_currency' => false,
+		'universal_symbol' => true,
+		'option_symbol' => true,
+		'quote_universal_symbol' => true,
+		'quote_currency' => true,
 		'action' => false,
 		'total_quantity' => true,
 		'open_quantity' => true,
@@ -637,7 +637,14 @@ class OrderUpdatedResponseOrder implements ModelInterface, ArrayAccess, \JsonSer
     {
 
         if (is_null($universal_symbol)) {
-            throw new \InvalidArgumentException('non-nullable universal_symbol cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'universal_symbol');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('universal_symbol', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['universal_symbol'] = $universal_symbol;
@@ -666,7 +673,14 @@ class OrderUpdatedResponseOrder implements ModelInterface, ArrayAccess, \JsonSer
     {
 
         if (is_null($option_symbol)) {
-            throw new \InvalidArgumentException('non-nullable option_symbol cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'option_symbol');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('option_symbol', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['option_symbol'] = $option_symbol;
@@ -695,7 +709,14 @@ class OrderUpdatedResponseOrder implements ModelInterface, ArrayAccess, \JsonSer
     {
 
         if (is_null($quote_universal_symbol)) {
-            throw new \InvalidArgumentException('non-nullable quote_universal_symbol cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'quote_universal_symbol');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('quote_universal_symbol', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['quote_universal_symbol'] = $quote_universal_symbol;
@@ -724,7 +745,14 @@ class OrderUpdatedResponseOrder implements ModelInterface, ArrayAccess, \JsonSer
     {
 
         if (is_null($quote_currency)) {
-            throw new \InvalidArgumentException('non-nullable quote_currency cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'quote_currency');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('quote_currency', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['quote_currency'] = $quote_currency;

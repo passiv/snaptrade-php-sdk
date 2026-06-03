@@ -84,9 +84,9 @@ class AccountOrderRecordV2 implements ModelInterface, ArrayAccess, \JsonSerializ
         'time_placed' => 'date-time',
         'time_executed' => 'date-time',
         'quote_currency' => null,
-        'execution_price' => null,
-        'limit_price' => null,
-        'stop_price' => null,
+        'execution_price' => 'decimal',
+        'limit_price' => 'decimal',
+        'stop_price' => 'decimal',
         'trailing_stop' => null,
         'legs' => null
     ];

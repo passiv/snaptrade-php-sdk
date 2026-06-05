@@ -1,6 +1,6 @@
 <?php
 /**
- * AllAccountPositionsResponse
+ * TradeDetectionCancelSubscriptionRequest
  *
  * PHP version 7.4
  *
@@ -27,14 +27,13 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * AllAccountPositionsResponse Class Doc Comment
+ * TradeDetectionCancelSubscriptionRequest Class Doc Comment
  *
  * @category Class
- * @description Information about all account positions.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class AllAccountPositionsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
+class TradeDetectionCancelSubscriptionRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -43,7 +42,7 @@ class AllAccountPositionsResponse implements ModelInterface, ArrayAccess, \JsonS
       *
       * @var string
       */
-    protected static $openAPIModelName = 'AllAccountPositionsResponse';
+    protected static $openAPIModelName = 'TradeDetection_cancelSubscription_request';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -51,8 +50,7 @@ class AllAccountPositionsResponse implements ModelInterface, ArrayAccess, \JsonS
       * @var string[]
       */
     protected static $openAPITypes = [
-        'results' => '\SnapTrade\Model\AccountPosition[]',
-        'data_freshness' => '\SnapTrade\Model\AllAccountPositionsResponseDataFreshness'
+        'account_id' => 'string'
     ];
 
     /**
@@ -63,8 +61,7 @@ class AllAccountPositionsResponse implements ModelInterface, ArrayAccess, \JsonS
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'results' => null,
-        'data_freshness' => null
+        'account_id' => 'uuid'
     ];
 
     /**
@@ -73,8 +70,7 @@ class AllAccountPositionsResponse implements ModelInterface, ArrayAccess, \JsonS
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'results' => false,
-		'data_freshness' => false
+        'account_id' => false
     ];
 
     /**
@@ -163,8 +159,7 @@ class AllAccountPositionsResponse implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $attributeMap = [
-        'results' => 'results',
-        'data_freshness' => 'data_freshness'
+        'account_id' => 'account_id'
     ];
 
     /**
@@ -173,8 +168,7 @@ class AllAccountPositionsResponse implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $setters = [
-        'results' => 'setResults',
-        'data_freshness' => 'setDataFreshness'
+        'account_id' => 'setAccountId'
     ];
 
     /**
@@ -183,8 +177,7 @@ class AllAccountPositionsResponse implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $getters = [
-        'results' => 'getResults',
-        'data_freshness' => 'getDataFreshness'
+        'account_id' => 'getAccountId'
     ];
 
     /**
@@ -244,8 +237,7 @@ class AllAccountPositionsResponse implements ModelInterface, ArrayAccess, \JsonS
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('results', $data ?? [], null);
-        $this->setIfExists('data_freshness', $data ?? [], null);
+        $this->setIfExists('account_id', $data ?? [], null);
     }
 
     /**
@@ -275,11 +267,8 @@ class AllAccountPositionsResponse implements ModelInterface, ArrayAccess, \JsonS
     {
         $invalidProperties = [];
 
-        if ($this->container['results'] === null) {
-            $invalidProperties[] = "'results' can't be null";
-        }
-        if ($this->container['data_freshness'] === null) {
-            $invalidProperties[] = "'data_freshness' can't be null";
+        if ($this->container['account_id'] === null) {
+            $invalidProperties[] = "'account_id' can't be null";
         }
         return $invalidProperties;
     }
@@ -297,59 +286,30 @@ class AllAccountPositionsResponse implements ModelInterface, ArrayAccess, \JsonS
 
 
     /**
-     * Gets results
+     * Gets account_id
      *
-     * @return \SnapTrade\Model\AccountPosition[]
+     * @return string
      */
-    public function getResults()
+    public function getAccountId()
     {
-        return $this->container['results'];
+        return $this->container['account_id'];
     }
 
     /**
-     * Sets results
+     * Sets account_id
      *
-     * @param \SnapTrade\Model\AccountPosition[] $results Positions returned for the request.
+     * @param string $account_id Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
      *
      * @return self
      */
-    public function setResults($results)
+    public function setAccountId($account_id)
     {
 
-        if (is_null($results)) {
-            throw new \InvalidArgumentException('non-nullable results cannot be null');
+        if (is_null($account_id)) {
+            throw new \InvalidArgumentException('non-nullable account_id cannot be null');
         }
 
-        $this->container['results'] = $results;
-
-        return $this;
-    }
-
-    /**
-     * Gets data_freshness
-     *
-     * @return \SnapTrade\Model\AllAccountPositionsResponseDataFreshness
-     */
-    public function getDataFreshness()
-    {
-        return $this->container['data_freshness'];
-    }
-
-    /**
-     * Sets data_freshness
-     *
-     * @param \SnapTrade\Model\AllAccountPositionsResponseDataFreshness $data_freshness data_freshness
-     *
-     * @return self
-     */
-    public function setDataFreshness($data_freshness)
-    {
-
-        if (is_null($data_freshness)) {
-            throw new \InvalidArgumentException('non-nullable data_freshness cannot be null');
-        }
-
-        $this->container['data_freshness'] = $data_freshness;
+        $this->container['account_id'] = $account_id;
 
         return $this;
     }

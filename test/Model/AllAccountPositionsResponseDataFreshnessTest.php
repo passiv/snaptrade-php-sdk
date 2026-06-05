@@ -1,6 +1,6 @@
 <?php
 /**
- * TradeDetectionAddSubscriptionRequestTest
+ * AllAccountPositionsResponseDataFreshnessTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * TradeDetectionAddSubscriptionRequestTest Class Doc Comment
+ * AllAccountPositionsResponseDataFreshnessTest Class Doc Comment
  *
  * @category    Class
- * @description TradeDetectionAddSubscriptionRequest
+ * @description Metadata describing freshness of the returned positions data.
  * @package     SnapTrade
  */
-class TradeDetectionAddSubscriptionRequestTest extends TestCase
+class AllAccountPositionsResponseDataFreshnessTest extends TestCase
 {
 
     /**
@@ -64,27 +64,18 @@ class TradeDetectionAddSubscriptionRequestTest extends TestCase
     }
 
     /**
-     * Test "TradeDetectionAddSubscriptionRequest"
+     * Test "AllAccountPositionsResponseDataFreshness"
      */
-    public function testTradeDetectionAddSubscriptionRequest()
+    public function testAllAccountPositionsResponseDataFreshness()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "account_id"
+     * Test attribute "as_of"
      */
-    public function testPropertyAccountId()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "check_interval_seconds"
-     */
-    public function testPropertyCheckIntervalSeconds()
+    public function testPropertyAsOf()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

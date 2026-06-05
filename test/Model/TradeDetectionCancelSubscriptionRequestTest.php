@@ -1,6 +1,6 @@
 <?php
 /**
- * TradeDetectionAddSubscriptionRequestTest
+ * TradeDetectionCancelSubscriptionRequestTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * TradeDetectionAddSubscriptionRequestTest Class Doc Comment
+ * TradeDetectionCancelSubscriptionRequestTest Class Doc Comment
  *
  * @category    Class
- * @description TradeDetectionAddSubscriptionRequest
+ * @description TradeDetectionCancelSubscriptionRequest
  * @package     SnapTrade
  */
-class TradeDetectionAddSubscriptionRequestTest extends TestCase
+class TradeDetectionCancelSubscriptionRequestTest extends TestCase
 {
 
     /**
@@ -64,9 +64,9 @@ class TradeDetectionAddSubscriptionRequestTest extends TestCase
     }
 
     /**
-     * Test "TradeDetectionAddSubscriptionRequest"
+     * Test "TradeDetectionCancelSubscriptionRequest"
      */
-    public function testTradeDetectionAddSubscriptionRequest()
+    public function testTradeDetectionCancelSubscriptionRequest()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
@@ -76,15 +76,6 @@ class TradeDetectionAddSubscriptionRequestTest extends TestCase
      * Test attribute "account_id"
      */
     public function testPropertyAccountId()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "check_interval_seconds"
-     */
-    public function testPropertyCheckIntervalSeconds()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

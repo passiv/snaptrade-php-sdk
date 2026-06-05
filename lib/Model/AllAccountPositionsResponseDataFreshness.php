@@ -1,6 +1,6 @@
 <?php
 /**
- * AllAccountPositionsResponse
+ * AllAccountPositionsResponseDataFreshness
  *
  * PHP version 7.4
  *
@@ -27,14 +27,14 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * AllAccountPositionsResponse Class Doc Comment
+ * AllAccountPositionsResponseDataFreshness Class Doc Comment
  *
  * @category Class
- * @description Information about all account positions.
+ * @description Metadata describing freshness of the returned positions data.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class AllAccountPositionsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
+class AllAccountPositionsResponseDataFreshness implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -43,7 +43,7 @@ class AllAccountPositionsResponse implements ModelInterface, ArrayAccess, \JsonS
       *
       * @var string
       */
-    protected static $openAPIModelName = 'AllAccountPositionsResponse';
+    protected static $openAPIModelName = 'AllAccountPositionsResponse_data_freshness';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -51,8 +51,7 @@ class AllAccountPositionsResponse implements ModelInterface, ArrayAccess, \JsonS
       * @var string[]
       */
     protected static $openAPITypes = [
-        'results' => '\SnapTrade\Model\AccountPosition[]',
-        'data_freshness' => '\SnapTrade\Model\AllAccountPositionsResponseDataFreshness'
+        'as_of' => '\DateTime'
     ];
 
     /**
@@ -63,8 +62,7 @@ class AllAccountPositionsResponse implements ModelInterface, ArrayAccess, \JsonS
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'results' => null,
-        'data_freshness' => null
+        'as_of' => 'date-time'
     ];
 
     /**
@@ -73,8 +71,7 @@ class AllAccountPositionsResponse implements ModelInterface, ArrayAccess, \JsonS
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'results' => false,
-		'data_freshness' => false
+        'as_of' => false
     ];
 
     /**
@@ -163,8 +160,7 @@ class AllAccountPositionsResponse implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $attributeMap = [
-        'results' => 'results',
-        'data_freshness' => 'data_freshness'
+        'as_of' => 'as_of'
     ];
 
     /**
@@ -173,8 +169,7 @@ class AllAccountPositionsResponse implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $setters = [
-        'results' => 'setResults',
-        'data_freshness' => 'setDataFreshness'
+        'as_of' => 'setAsOf'
     ];
 
     /**
@@ -183,8 +178,7 @@ class AllAccountPositionsResponse implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $getters = [
-        'results' => 'getResults',
-        'data_freshness' => 'getDataFreshness'
+        'as_of' => 'getAsOf'
     ];
 
     /**
@@ -244,8 +238,7 @@ class AllAccountPositionsResponse implements ModelInterface, ArrayAccess, \JsonS
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('results', $data ?? [], null);
-        $this->setIfExists('data_freshness', $data ?? [], null);
+        $this->setIfExists('as_of', $data ?? [], null);
     }
 
     /**
@@ -275,11 +268,8 @@ class AllAccountPositionsResponse implements ModelInterface, ArrayAccess, \JsonS
     {
         $invalidProperties = [];
 
-        if ($this->container['results'] === null) {
-            $invalidProperties[] = "'results' can't be null";
-        }
-        if ($this->container['data_freshness'] === null) {
-            $invalidProperties[] = "'data_freshness' can't be null";
+        if ($this->container['as_of'] === null) {
+            $invalidProperties[] = "'as_of' can't be null";
         }
         return $invalidProperties;
     }
@@ -297,59 +287,30 @@ class AllAccountPositionsResponse implements ModelInterface, ArrayAccess, \JsonS
 
 
     /**
-     * Gets results
+     * Gets as_of
      *
-     * @return \SnapTrade\Model\AccountPosition[]
+     * @return \DateTime
      */
-    public function getResults()
+    public function getAsOf()
     {
-        return $this->container['results'];
+        return $this->container['as_of'];
     }
 
     /**
-     * Sets results
+     * Sets as_of
      *
-     * @param \SnapTrade\Model\AccountPosition[] $results Positions returned for the request.
+     * @param \DateTime $as_of The time the returned positions data was fetched from the brokerage.
      *
      * @return self
      */
-    public function setResults($results)
+    public function setAsOf($as_of)
     {
 
-        if (is_null($results)) {
-            throw new \InvalidArgumentException('non-nullable results cannot be null');
+        if (is_null($as_of)) {
+            throw new \InvalidArgumentException('non-nullable as_of cannot be null');
         }
 
-        $this->container['results'] = $results;
-
-        return $this;
-    }
-
-    /**
-     * Gets data_freshness
-     *
-     * @return \SnapTrade\Model\AllAccountPositionsResponseDataFreshness
-     */
-    public function getDataFreshness()
-    {
-        return $this->container['data_freshness'];
-    }
-
-    /**
-     * Sets data_freshness
-     *
-     * @param \SnapTrade\Model\AllAccountPositionsResponseDataFreshness $data_freshness data_freshness
-     *
-     * @return self
-     */
-    public function setDataFreshness($data_freshness)
-    {
-
-        if (is_null($data_freshness)) {
-            throw new \InvalidArgumentException('non-nullable data_freshness cannot be null');
-        }
-
-        $this->container['data_freshness'] = $data_freshness;
+        $this->container['as_of'] = $as_of;
 
         return $this;
     }

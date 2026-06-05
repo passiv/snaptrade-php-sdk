@@ -80,4 +80,13 @@ class AllAccountPositionsResponseTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "data_freshness"
+     */
+    public function testPropertyDataFreshness()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

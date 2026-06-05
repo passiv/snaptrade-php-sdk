@@ -50,7 +50,8 @@ class TradeDetectionAddSubscriptionRequest implements ModelInterface, ArrayAcces
       * @var string[]
       */
     protected static $openAPITypes = [
-        'account_id' => 'string'
+        'account_id' => 'string',
+        'check_interval_seconds' => 'int'
     ];
 
     /**
@@ -61,7 +62,8 @@ class TradeDetectionAddSubscriptionRequest implements ModelInterface, ArrayAcces
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'account_id' => 'uuid'
+        'account_id' => 'uuid',
+        'check_interval_seconds' => null
     ];
 
     /**
@@ -70,7 +72,8 @@ class TradeDetectionAddSubscriptionRequest implements ModelInterface, ArrayAcces
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'account_id' => false
+        'account_id' => false,
+		'check_interval_seconds' => false
     ];
 
     /**
@@ -159,7 +162,8 @@ class TradeDetectionAddSubscriptionRequest implements ModelInterface, ArrayAcces
      * @var string[]
      */
     protected static $attributeMap = [
-        'account_id' => 'account_id'
+        'account_id' => 'account_id',
+        'check_interval_seconds' => 'check_interval_seconds'
     ];
 
     /**
@@ -168,7 +172,8 @@ class TradeDetectionAddSubscriptionRequest implements ModelInterface, ArrayAcces
      * @var string[]
      */
     protected static $setters = [
-        'account_id' => 'setAccountId'
+        'account_id' => 'setAccountId',
+        'check_interval_seconds' => 'setCheckIntervalSeconds'
     ];
 
     /**
@@ -177,7 +182,8 @@ class TradeDetectionAddSubscriptionRequest implements ModelInterface, ArrayAcces
      * @var string[]
      */
     protected static $getters = [
-        'account_id' => 'getAccountId'
+        'account_id' => 'getAccountId',
+        'check_interval_seconds' => 'getCheckIntervalSeconds'
     ];
 
     /**
@@ -238,6 +244,7 @@ class TradeDetectionAddSubscriptionRequest implements ModelInterface, ArrayAcces
     public function __construct(array $data = null)
     {
         $this->setIfExists('account_id', $data ?? [], null);
+        $this->setIfExists('check_interval_seconds', $data ?? [], null);
     }
 
     /**
@@ -270,6 +277,13 @@ class TradeDetectionAddSubscriptionRequest implements ModelInterface, ArrayAcces
         if ($this->container['account_id'] === null) {
             $invalidProperties[] = "'account_id' can't be null";
         }
+        if ($this->container['check_interval_seconds'] === null) {
+            $invalidProperties[] = "'check_interval_seconds' can't be null";
+        }
+        if (($this->container['check_interval_seconds'] < 1)) {
+            $invalidProperties[] = "invalid value for 'check_interval_seconds', must be bigger than or equal to 1.";
+        }
+
         return $invalidProperties;
     }
 
@@ -310,6 +324,40 @@ class TradeDetectionAddSubscriptionRequest implements ModelInterface, ArrayAcces
         }
 
         $this->container['account_id'] = $account_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets check_interval_seconds
+     *
+     * @return int
+     */
+    public function getCheckIntervalSeconds()
+    {
+        return $this->container['check_interval_seconds'];
+    }
+
+    /**
+     * Sets check_interval_seconds
+     *
+     * @param int $check_interval_seconds How often the subscribed account should be checked for new trades. Must match an active Trade Detection plan.
+     *
+     * @return self
+     */
+    public function setCheckIntervalSeconds($check_interval_seconds)
+    {
+
+        if (($check_interval_seconds < 1)) {
+            throw new \InvalidArgumentException('invalid value for $check_interval_seconds when calling TradeDetectionAddSubscriptionRequest., must be bigger than or equal to 1.');
+        }
+
+
+        if (is_null($check_interval_seconds)) {
+            throw new \InvalidArgumentException('non-nullable check_interval_seconds cannot be null');
+        }
+
+        $this->container['check_interval_seconds'] = $check_interval_seconds;
 
         return $this;
     }

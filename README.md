@@ -2725,6 +2725,7 @@ $result = $snaptrade->trading->placeForceOrder(
     universal_symbol_id: "2bcd7cc3-e922-4976-bce1-9858296801c3", 
     symbol: "AAPL", 
     trading_session: "REGULAR", 
+    expiry_date: "2026-08-21T23:27:55.027Z", 
     price: 31.33, 
     stop: 31.33, 
     units: 10.5, 
@@ -2757,6 +2758,10 @@ The universal symbol ID of the security to trade. Must be 'null' if `symbol` is 
 The security's trading ticker symbol. If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
 
 ##### trading_session:<a id="trading_session"></a>
+
+##### expiry_date: `\DateTime`<a id="expiry_date-datetime"></a>
+
+Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the order expires. Required when `time_in_force` is `GTD`. Include a timezone offset or `Z` for UTC; if no timezone is provided, UTC is assumed. GTD orders are only available on certain brokerages. Visit https://support.snaptrade.com/brokerages for brokerage support.
 
 ##### price: `float`<a id="price-float"></a>
 

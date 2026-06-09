@@ -136,6 +136,15 @@ class ManualTradeFormWithOptionsTest extends TestCase
     }
 
     /**
+     * Test attribute "expiry_date"
+     */
+    public function testPropertyExpiryDate()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "price"
      */
     public function testPropertyPrice()
@@ -166,6 +175,15 @@ class ManualTradeFormWithOptionsTest extends TestCase
      * Test attribute "notional_value"
      */
     public function testPropertyNotionalValue()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "client_order_id"
+     */
+    public function testPropertyClientOrderId()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

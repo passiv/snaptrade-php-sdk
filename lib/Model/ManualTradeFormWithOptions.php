@@ -56,12 +56,14 @@ class ManualTradeFormWithOptions implements ModelInterface, ArrayAccess, \JsonSe
         'universal_symbol_id' => 'string',
         'symbol' => 'string',
         'order_type' => '\SnapTrade\Model\OrderTypeStrict',
-        'time_in_force' => '\SnapTrade\Model\TimeInForceStrict',
+        'time_in_force' => '\SnapTrade\Model\ManualTradePlaceTimeInForceStrict',
         'trading_session' => '\SnapTrade\Model\TradingSession',
+        'expiry_date' => '\DateTime',
         'price' => 'float',
         'stop' => 'float',
         'units' => 'float',
-        'notional_value' => '\SnapTrade\Model\ManualTradeFormNotionalValue'
+        'notional_value' => '\SnapTrade\Model\ManualTradeFormNotionalValue',
+        'client_order_id' => 'string'
     ];
 
     /**
@@ -79,10 +81,12 @@ class ManualTradeFormWithOptions implements ModelInterface, ArrayAccess, \JsonSe
         'order_type' => null,
         'time_in_force' => null,
         'trading_session' => null,
+        'expiry_date' => 'date-time',
         'price' => null,
         'stop' => null,
         'units' => null,
-        'notional_value' => null
+        'notional_value' => null,
+        'client_order_id' => null
     ];
 
     /**
@@ -98,10 +102,12 @@ class ManualTradeFormWithOptions implements ModelInterface, ArrayAccess, \JsonSe
 		'order_type' => false,
 		'time_in_force' => false,
 		'trading_session' => false,
+		'expiry_date' => true,
 		'price' => true,
 		'stop' => true,
 		'units' => true,
-		'notional_value' => true
+		'notional_value' => true,
+		'client_order_id' => true
     ];
 
     /**
@@ -197,10 +203,12 @@ class ManualTradeFormWithOptions implements ModelInterface, ArrayAccess, \JsonSe
         'order_type' => 'order_type',
         'time_in_force' => 'time_in_force',
         'trading_session' => 'trading_session',
+        'expiry_date' => 'expiry_date',
         'price' => 'price',
         'stop' => 'stop',
         'units' => 'units',
-        'notional_value' => 'notional_value'
+        'notional_value' => 'notional_value',
+        'client_order_id' => 'client_order_id'
     ];
 
     /**
@@ -216,10 +224,12 @@ class ManualTradeFormWithOptions implements ModelInterface, ArrayAccess, \JsonSe
         'order_type' => 'setOrderType',
         'time_in_force' => 'setTimeInForce',
         'trading_session' => 'setTradingSession',
+        'expiry_date' => 'setExpiryDate',
         'price' => 'setPrice',
         'stop' => 'setStop',
         'units' => 'setUnits',
-        'notional_value' => 'setNotionalValue'
+        'notional_value' => 'setNotionalValue',
+        'client_order_id' => 'setClientOrderId'
     ];
 
     /**
@@ -235,10 +245,12 @@ class ManualTradeFormWithOptions implements ModelInterface, ArrayAccess, \JsonSe
         'order_type' => 'getOrderType',
         'time_in_force' => 'getTimeInForce',
         'trading_session' => 'getTradingSession',
+        'expiry_date' => 'getExpiryDate',
         'price' => 'getPrice',
         'stop' => 'getStop',
         'units' => 'getUnits',
-        'notional_value' => 'getNotionalValue'
+        'notional_value' => 'getNotionalValue',
+        'client_order_id' => 'getClientOrderId'
     ];
 
     /**
@@ -305,10 +317,12 @@ class ManualTradeFormWithOptions implements ModelInterface, ArrayAccess, \JsonSe
         $this->setIfExists('order_type', $data ?? [], null);
         $this->setIfExists('time_in_force', $data ?? [], null);
         $this->setIfExists('trading_session', $data ?? [], null);
+        $this->setIfExists('expiry_date', $data ?? [], null);
         $this->setIfExists('price', $data ?? [], null);
         $this->setIfExists('stop', $data ?? [], null);
         $this->setIfExists('units', $data ?? [], null);
         $this->setIfExists('notional_value', $data ?? [], null);
+        $this->setIfExists('client_order_id', $data ?? [], null);
     }
 
     /**
@@ -527,7 +541,7 @@ class ManualTradeFormWithOptions implements ModelInterface, ArrayAccess, \JsonSe
     /**
      * Gets time_in_force
      *
-     * @return \SnapTrade\Model\TimeInForceStrict
+     * @return \SnapTrade\Model\ManualTradePlaceTimeInForceStrict
      */
     public function getTimeInForce()
     {
@@ -537,7 +551,7 @@ class ManualTradeFormWithOptions implements ModelInterface, ArrayAccess, \JsonSe
     /**
      * Sets time_in_force
      *
-     * @param \SnapTrade\Model\TimeInForceStrict $time_in_force time_in_force
+     * @param \SnapTrade\Model\ManualTradePlaceTimeInForceStrict $time_in_force time_in_force
      *
      * @return self
      */
@@ -578,6 +592,42 @@ class ManualTradeFormWithOptions implements ModelInterface, ArrayAccess, \JsonSe
         }
 
         $this->container['trading_session'] = $trading_session;
+
+        return $this;
+    }
+
+    /**
+     * Gets expiry_date
+     *
+     * @return \DateTime|null
+     */
+    public function getExpiryDate()
+    {
+        return $this->container['expiry_date'];
+    }
+
+    /**
+     * Sets expiry_date
+     *
+     * @param \DateTime|null $expiry_date Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the order expires. Required when `time_in_force` is `GTD`. Include a timezone offset or `Z` for UTC; if no timezone is provided, UTC is assumed. GTD orders are only available on certain brokerages. Visit https://support.snaptrade.com/brokerages for brokerage support.
+     *
+     * @return self
+     */
+    public function setExpiryDate($expiry_date)
+    {
+
+        if (is_null($expiry_date)) {
+            array_push($this->openAPINullablesSetToNull, 'expiry_date');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('expiry_date', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['expiry_date'] = $expiry_date;
 
         return $this;
     }
@@ -722,6 +772,42 @@ class ManualTradeFormWithOptions implements ModelInterface, ArrayAccess, \JsonSe
         }
 
         $this->container['notional_value'] = $notional_value;
+
+        return $this;
+    }
+
+    /**
+     * Gets client_order_id
+     *
+     * @return string|null
+     */
+    public function getClientOrderId()
+    {
+        return $this->container['client_order_id'];
+    }
+
+    /**
+     * Sets client_order_id
+     *
+     * @param string|null $client_order_id client_order_id
+     *
+     * @return self
+     */
+    public function setClientOrderId($client_order_id)
+    {
+
+        if (is_null($client_order_id)) {
+            array_push($this->openAPINullablesSetToNull, 'client_order_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('client_order_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['client_order_id'] = $client_order_id;
 
         return $this;
     }

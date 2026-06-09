@@ -410,7 +410,7 @@ class ManualTradeFormComplex implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets client_order_id
      *
-     * @param string|null $client_order_id An optional client-provided identifier for this complex order. Passed through to the brokerage and returned in the response.
+     * @param string|null $client_order_id client_order_id
      *
      * @return self
      */

@@ -2579,7 +2579,7 @@ $result = $snaptrade->trading->placeComplexOrder(
     account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631", 
     user_id: "snaptrade-user-123", 
     user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61", 
-    client_order_id: "my-order-123"
+    client_order_id: "550e8400-e29b-41d4-a716-446655440000"
 );
 ```
 
@@ -2601,9 +2601,7 @@ The ID of the account to execute the trade on.
 
 ##### user_secret: `string`<a id="user_secret-string"></a>
 
-##### client_order_id: `string`<a id="client_order_id-string"></a>
-
-An optional client-provided identifier for this complex order. Passed through to the brokerage and returned in the response.
+##### client_order_id: [`string`](./lib/Model/string.php)<a id="client_order_id-stringlibmodelstringphp"></a>
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -2725,10 +2723,12 @@ $result = $snaptrade->trading->placeForceOrder(
     universal_symbol_id: "2bcd7cc3-e922-4976-bce1-9858296801c3", 
     symbol: "AAPL", 
     trading_session: "REGULAR", 
+    expiry_date: "2026-08-21T23:27:55.027Z", 
     price: 31.33, 
     stop: 31.33, 
     units: 10.5, 
-    notional_value: None
+    notional_value: None, 
+    client_order_id: "550e8400-e29b-41d4-a716-446655440000"
 );
 ```
 
@@ -2758,6 +2758,10 @@ The security's trading ticker symbol. If 'symbol' is provided, then 'universal_s
 
 ##### trading_session:<a id="trading_session"></a>
 
+##### expiry_date: `\DateTime`<a id="expiry_date-datetime"></a>
+
+Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the order expires. Required when `time_in_force` is `GTD`. Include a timezone offset or `Z` for UTC; if no timezone is provided, UTC is assumed. GTD orders are only available on certain brokerages. Visit https://support.snaptrade.com/brokerages for brokerage support.
+
 ##### price: `float`<a id="price-float"></a>
 
 The limit price for `Limit` and `StopLimit` orders.
@@ -2771,6 +2775,8 @@ The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
 For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract = 100 shares).
 
 ##### notional_value: [`ManualTradeFormNotionalValue`](./lib/Model/ManualTradeFormNotionalValue.php)<a id="notional_value-manualtradeformnotionalvaluelibmodelmanualtradeformnotionalvaluephp"></a>
+
+##### client_order_id: [`string`](./lib/Model/string.php)<a id="client_order_id-stringlibmodelstringphp"></a>
 
 
 #### 🔄 Return<a id="🔄-return"></a>

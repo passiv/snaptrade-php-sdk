@@ -60,7 +60,8 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
         'disabled_date' => '\DateTime',
         'meta' => 'array<string,mixed>',
         'updated_date' => '\DateTime',
-        'is_eligible_for_payout' => 'bool'
+        'is_eligible_for_payout' => 'bool',
+        'data_freshness_mode' => 'string'
     ];
 
     /**
@@ -80,7 +81,8 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
         'disabled_date' => 'date-time',
         'meta' => null,
         'updated_date' => 'date-time',
-        'is_eligible_for_payout' => null
+        'is_eligible_for_payout' => null,
+        'data_freshness_mode' => null
     ];
 
     /**
@@ -98,7 +100,8 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
 		'disabled_date' => true,
 		'meta' => false,
 		'updated_date' => false,
-		'is_eligible_for_payout' => false
+		'is_eligible_for_payout' => false,
+		'data_freshness_mode' => false
     ];
 
     /**
@@ -196,7 +199,8 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
         'disabled_date' => 'disabled_date',
         'meta' => 'meta',
         'updated_date' => 'updated_date',
-        'is_eligible_for_payout' => 'is_eligible_for_payout'
+        'is_eligible_for_payout' => 'is_eligible_for_payout',
+        'data_freshness_mode' => 'data_freshness_mode'
     ];
 
     /**
@@ -214,7 +218,8 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
         'disabled_date' => 'setDisabledDate',
         'meta' => 'setMeta',
         'updated_date' => 'setUpdatedDate',
-        'is_eligible_for_payout' => 'setIsEligibleForPayout'
+        'is_eligible_for_payout' => 'setIsEligibleForPayout',
+        'data_freshness_mode' => 'setDataFreshnessMode'
     ];
 
     /**
@@ -232,7 +237,8 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
         'disabled_date' => 'getDisabledDate',
         'meta' => 'getMeta',
         'updated_date' => 'getUpdatedDate',
-        'is_eligible_for_payout' => 'getIsEligibleForPayout'
+        'is_eligible_for_payout' => 'getIsEligibleForPayout',
+        'data_freshness_mode' => 'getDataFreshnessMode'
     ];
 
     /**
@@ -302,6 +308,7 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
         $this->setIfExists('meta', $data ?? [], null);
         $this->setIfExists('updated_date', $data ?? [], null);
         $this->setIfExists('is_eligible_for_payout', $data ?? [], null);
+        $this->setIfExists('data_freshness_mode', $data ?? [], null);
     }
 
     /**
@@ -643,6 +650,35 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
         }
 
         $this->container['is_eligible_for_payout'] = $is_eligible_for_payout;
+
+        return $this;
+    }
+
+    /**
+     * Gets data_freshness_mode
+     *
+     * @return string|null
+     */
+    public function getDataFreshnessMode()
+    {
+        return $this->container['data_freshness_mode'];
+    }
+
+    /**
+     * Sets data_freshness_mode
+     *
+     * @param string|null $data_freshness_mode Possible values include: - realtime - delayed Indicates whether SnapTrade will provide delayed or realtime data for this connection. `delayed` means SnapTrade uses cached data for the connection because of the customer's plan, or because of brokerage limitations. `realtime` means SnapTrade retrieves current data from the brokerage during API calls.
+     *
+     * @return self
+     */
+    public function setDataFreshnessMode($data_freshness_mode)
+    {
+
+        if (is_null($data_freshness_mode)) {
+            throw new \InvalidArgumentException('non-nullable data_freshness_mode cannot be null');
+        }
+
+        $this->container['data_freshness_mode'] = $data_freshness_mode;
 
         return $this;
     }

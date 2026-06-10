@@ -2289,7 +2289,7 @@ class ConnectionsApi extends \SnapTrade\CustomApi
      *
      * Refresh holdings for a connection
      *
-     * Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [&#x60;ACCOUNT_HOLDINGS_UPDATED&#x60; webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection. This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.  **Because of the cost of refreshing a connection, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)** **Please note this endpoint is disabled for Personal and Pay as you Go Real-time plans. Real-time plans do not benefit from this feature since data is refreshed when calls are made**
+     * Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [&#x60;ACCOUNT_HOLDINGS_UPDATED&#x60; webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection. This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.  **Because of the cost of refreshing a connection, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)** **Please note this endpoint is disabled for Real-time plans (Personal and Pay as you go) unless the connection is delayed. Real-time connections do not benefit from this feature since data is refreshed when calls are made. Refer to the &#x60;data_freshness_mode&#x60; field on a connection to determine this.**
      *
      * @param  string $authorization_id authorization_id (required)
      * @param  string $user_id user_id (required)
@@ -2298,7 +2298,7 @@ class ConnectionsApi extends \SnapTrade\CustomApi
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \SnapTrade\Model\BrokerageAuthorizationRefreshConfirmation|\SnapTrade\Model\Model401FailedRequestResponse|\SnapTrade\Model\Model402BrokerageAuthDisabledResponse|\SnapTrade\Model\Model403FeatureNotEnabledResponse|\SnapTrade\Model\Model404FailedRequestResponse
+     * @return \SnapTrade\Model\BrokerageAuthorizationRefreshConfirmation|\SnapTrade\Model\Model401FailedRequestResponse|\SnapTrade\Model\Model402BrokerageAuthDisabledResponse|\SnapTrade\Model\Model403FeatureNotEnabledResponse|\SnapTrade\Model\Model404FailedRequestResponse|\SnapTrade\Model\Model429TooManyRequestsResponse
      */
     public function refreshBrokerageAuthorization(
         $authorization_id,
@@ -2318,7 +2318,7 @@ class ConnectionsApi extends \SnapTrade\CustomApi
      *
      * Refresh holdings for a connection
      *
-     * Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [&#x60;ACCOUNT_HOLDINGS_UPDATED&#x60; webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection. This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.  **Because of the cost of refreshing a connection, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)** **Please note this endpoint is disabled for Personal and Pay as you Go Real-time plans. Real-time plans do not benefit from this feature since data is refreshed when calls are made**
+     * Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [&#x60;ACCOUNT_HOLDINGS_UPDATED&#x60; webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection. This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.  **Because of the cost of refreshing a connection, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)** **Please note this endpoint is disabled for Real-time plans (Personal and Pay as you go) unless the connection is delayed. Real-time connections do not benefit from this feature since data is refreshed when calls are made. Refer to the &#x60;data_freshness_mode&#x60; field on a connection to determine this.**
      *
      * @param  string $authorization_id (required)
      * @param  string $user_id (required)
@@ -2327,7 +2327,7 @@ class ConnectionsApi extends \SnapTrade\CustomApi
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \SnapTrade\Model\BrokerageAuthorizationRefreshConfirmation|\SnapTrade\Model\Model401FailedRequestResponse|\SnapTrade\Model\Model402BrokerageAuthDisabledResponse|\SnapTrade\Model\Model403FeatureNotEnabledResponse|\SnapTrade\Model\Model404FailedRequestResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SnapTrade\Model\BrokerageAuthorizationRefreshConfirmation|\SnapTrade\Model\Model401FailedRequestResponse|\SnapTrade\Model\Model402BrokerageAuthDisabledResponse|\SnapTrade\Model\Model403FeatureNotEnabledResponse|\SnapTrade\Model\Model404FailedRequestResponse|\SnapTrade\Model\Model429TooManyRequestsResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function refreshBrokerageAuthorizationWithHttpInfo($authorization_id, $user_id, $user_secret, string $contentType = self::contentTypes['refreshBrokerageAuthorization'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
@@ -2461,6 +2461,21 @@ class ConnectionsApi extends \SnapTrade\CustomApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
+                case 429:
+                    if ('\SnapTrade\Model\Model429TooManyRequestsResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\SnapTrade\Model\Model429TooManyRequestsResponse' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\Model429TooManyRequestsResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
             }
 
             $returnType = '\SnapTrade\Model\BrokerageAuthorizationRefreshConfirmation';
@@ -2521,6 +2536,14 @@ class ConnectionsApi extends \SnapTrade\CustomApi
                     );
                     $e->setResponseObject($data);
                     break;
+                case 429:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SnapTrade\Model\Model429TooManyRequestsResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
             }
             throw $e;
         }
@@ -2531,7 +2554,7 @@ class ConnectionsApi extends \SnapTrade\CustomApi
      *
      * Refresh holdings for a connection
      *
-     * Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [&#x60;ACCOUNT_HOLDINGS_UPDATED&#x60; webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection. This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.  **Because of the cost of refreshing a connection, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)** **Please note this endpoint is disabled for Personal and Pay as you Go Real-time plans. Real-time plans do not benefit from this feature since data is refreshed when calls are made**
+     * Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [&#x60;ACCOUNT_HOLDINGS_UPDATED&#x60; webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection. This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.  **Because of the cost of refreshing a connection, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)** **Please note this endpoint is disabled for Real-time plans (Personal and Pay as you go) unless the connection is delayed. Real-time connections do not benefit from this feature since data is refreshed when calls are made. Refer to the &#x60;data_freshness_mode&#x60; field on a connection to determine this.**
      *
      * @param  string $authorization_id (required)
      * @param  string $user_id (required)
@@ -2563,7 +2586,7 @@ class ConnectionsApi extends \SnapTrade\CustomApi
      *
      * Refresh holdings for a connection
      *
-     * Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [&#x60;ACCOUNT_HOLDINGS_UPDATED&#x60; webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection. This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.  **Because of the cost of refreshing a connection, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)** **Please note this endpoint is disabled for Personal and Pay as you Go Real-time plans. Real-time plans do not benefit from this feature since data is refreshed when calls are made**
+     * Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [&#x60;ACCOUNT_HOLDINGS_UPDATED&#x60; webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection. This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.  **Because of the cost of refreshing a connection, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)** **Please note this endpoint is disabled for Real-time plans (Personal and Pay as you go) unless the connection is delayed. Real-time connections do not benefit from this feature since data is refreshed when calls are made. Refer to the &#x60;data_freshness_mode&#x60; field on a connection to determine this.**
      *
      * @param  string $authorization_id (required)
      * @param  string $user_id (required)

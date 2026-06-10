@@ -1,6 +1,6 @@
 <?php
 /**
- * BrokerageAuthorizationTest
+ * AccountUniversalActivityCurrencyUniversalSymbolTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * BrokerageAuthorizationTest Class Doc Comment
+ * AccountUniversalActivityCurrencyUniversalSymbolTest Class Doc Comment
  *
  * @category    Class
- * @description A single connection with a brokerage. Note that &#x60;Connection&#x60; and &#x60;Brokerage Authorization&#x60; are interchangeable, but the term &#x60;Connection&#x60; is preferred and used in the doc for consistency.  A connection is usually tied to a single login at a brokerage. A single connection can contain multiple brokerage accounts.  SnapTrade performs de-duping on connections for a given user. If the user has an existing connection with the brokerage, when connecting the brokerage with the same credentials, SnapTrade will return the existing connection instead of creating a new one.
+ * @description The quote security for the transaction when &#x60;price&#x60;, &#x60;amount&#x60;, and &#x60;fee&#x60; are denominated in a security instead of a fiat currency. This is most common for cryptocurrency trades. The field is &#x60;null&#x60; when the transaction is denominated in &#x60;currency&#x60;.
  * @package     SnapTrade
  */
-class BrokerageAuthorizationTest extends TestCase
+class AccountUniversalActivityCurrencyUniversalSymbolTest extends TestCase
 {
 
     /**
@@ -64,9 +64,9 @@ class BrokerageAuthorizationTest extends TestCase
     }
 
     /**
-     * Test "BrokerageAuthorization"
+     * Test "AccountUniversalActivityCurrencyUniversalSymbol"
      */
-    public function testBrokerageAuthorization()
+    public function testAccountUniversalActivityCurrencyUniversalSymbol()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
@@ -82,27 +82,45 @@ class BrokerageAuthorizationTest extends TestCase
     }
 
     /**
-     * Test attribute "created_date"
+     * Test attribute "symbol"
      */
-    public function testPropertyCreatedDate()
+    public function testPropertySymbol()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "brokerage"
+     * Test attribute "raw_symbol"
      */
-    public function testPropertyBrokerage()
+    public function testPropertyRawSymbol()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "name"
+     * Test attribute "description"
      */
-    public function testPropertyName()
+    public function testPropertyDescription()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "currency"
+     */
+    public function testPropertyCurrency()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "exchange"
+     */
+    public function testPropertyExchange()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
@@ -118,54 +136,18 @@ class BrokerageAuthorizationTest extends TestCase
     }
 
     /**
-     * Test attribute "disabled"
+     * Test attribute "figi_code"
      */
-    public function testPropertyDisabled()
+    public function testPropertyFigiCode()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "disabled_date"
+     * Test attribute "figi_instrument"
      */
-    public function testPropertyDisabledDate()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "meta"
-     */
-    public function testPropertyMeta()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "updated_date"
-     */
-    public function testPropertyUpdatedDate()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "is_eligible_for_payout"
-     */
-    public function testPropertyIsEligibleForPayout()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "data_freshness_mode"
-     */
-    public function testPropertyDataFreshnessMode()
+    public function testPropertyFigiInstrument()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

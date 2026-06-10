@@ -54,6 +54,7 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
         'id' => 'string',
         'account' => '\SnapTrade\Model\AccountSimple',
         'symbol' => '\SnapTrade\Model\AccountUniversalActivitySymbol',
+        'currency_universal_symbol' => '\SnapTrade\Model\AccountUniversalActivityCurrencyUniversalSymbol',
         'option_symbol' => '\SnapTrade\Model\AccountUniversalActivityOptionSymbol',
         'price' => 'float',
         'units' => 'float',
@@ -81,6 +82,7 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
         'id' => null,
         'account' => null,
         'symbol' => null,
+        'currency_universal_symbol' => null,
         'option_symbol' => null,
         'price' => null,
         'units' => null,
@@ -106,11 +108,12 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
         'id' => false,
 		'account' => false,
 		'symbol' => true,
+		'currency_universal_symbol' => true,
 		'option_symbol' => true,
 		'price' => false,
 		'units' => false,
 		'amount' => true,
-		'currency' => false,
+		'currency' => true,
 		'type' => false,
 		'option_type' => false,
 		'description' => false,
@@ -211,6 +214,7 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
         'id' => 'id',
         'account' => 'account',
         'symbol' => 'symbol',
+        'currency_universal_symbol' => 'currency_universal_symbol',
         'option_symbol' => 'option_symbol',
         'price' => 'price',
         'units' => 'units',
@@ -236,6 +240,7 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
         'id' => 'setId',
         'account' => 'setAccount',
         'symbol' => 'setSymbol',
+        'currency_universal_symbol' => 'setCurrencyUniversalSymbol',
         'option_symbol' => 'setOptionSymbol',
         'price' => 'setPrice',
         'units' => 'setUnits',
@@ -261,6 +266,7 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
         'id' => 'getId',
         'account' => 'getAccount',
         'symbol' => 'getSymbol',
+        'currency_universal_symbol' => 'getCurrencyUniversalSymbol',
         'option_symbol' => 'getOptionSymbol',
         'price' => 'getPrice',
         'units' => 'getUnits',
@@ -337,6 +343,7 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
         $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('account', $data ?? [], null);
         $this->setIfExists('symbol', $data ?? [], null);
+        $this->setIfExists('currency_universal_symbol', $data ?? [], null);
         $this->setIfExists('option_symbol', $data ?? [], null);
         $this->setIfExists('price', $data ?? [], null);
         $this->setIfExists('units', $data ?? [], null);
@@ -485,6 +492,42 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
         }
 
         $this->container['symbol'] = $symbol;
+
+        return $this;
+    }
+
+    /**
+     * Gets currency_universal_symbol
+     *
+     * @return \SnapTrade\Model\AccountUniversalActivityCurrencyUniversalSymbol|null
+     */
+    public function getCurrencyUniversalSymbol()
+    {
+        return $this->container['currency_universal_symbol'];
+    }
+
+    /**
+     * Sets currency_universal_symbol
+     *
+     * @param \SnapTrade\Model\AccountUniversalActivityCurrencyUniversalSymbol|null $currency_universal_symbol currency_universal_symbol
+     *
+     * @return self
+     */
+    public function setCurrencyUniversalSymbol($currency_universal_symbol)
+    {
+
+        if (is_null($currency_universal_symbol)) {
+            array_push($this->openAPINullablesSetToNull, 'currency_universal_symbol');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('currency_universal_symbol', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['currency_universal_symbol'] = $currency_universal_symbol;
 
         return $this;
     }
@@ -640,7 +683,14 @@ class UniversalActivity implements ModelInterface, ArrayAccess, \JsonSerializabl
     {
 
         if (is_null($currency)) {
-            throw new \InvalidArgumentException('non-nullable currency cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'currency');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('currency', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['currency'] = $currency;

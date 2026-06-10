@@ -1,6 +1,6 @@
 <?php
 /**
- * AccountUniversalActivityCurrencyTest
+ * Model429TooManyRequestsResponseTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * AccountUniversalActivityCurrencyTest Class Doc Comment
+ * Model429TooManyRequestsResponseTest Class Doc Comment
  *
  * @category    Class
- * @description The currency in which the transaction &#x60;price&#x60;, &#x60;amount&#x60;, and &#x60;fee&#x60; are denominated. This is &#x60;null&#x60; when those values are denominated in &#x60;currency_universal_symbol&#x60;.
+ * @description Example for a rate-limited request response
  * @package     SnapTrade
  */
-class AccountUniversalActivityCurrencyTest extends TestCase
+class Model429TooManyRequestsResponseTest extends TestCase
 {
 
     /**
@@ -64,18 +64,27 @@ class AccountUniversalActivityCurrencyTest extends TestCase
     }
 
     /**
-     * Test "AccountUniversalActivityCurrency"
+     * Test "Model429TooManyRequestsResponse"
      */
-    public function testAccountUniversalActivityCurrency()
+    public function testModel429TooManyRequestsResponse()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "id"
+     * Test attribute "detail"
      */
-    public function testPropertyId()
+    public function testPropertyDetail()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "status_code"
+     */
+    public function testPropertyStatusCode()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
@@ -85,15 +94,6 @@ class AccountUniversalActivityCurrencyTest extends TestCase
      * Test attribute "code"
      */
     public function testPropertyCode()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "name"
-     */
-    public function testPropertyName()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

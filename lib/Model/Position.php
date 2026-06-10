@@ -628,7 +628,7 @@ class Position implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets tax_lots
      *
-     * @param \SnapTrade\Model\TaxLot[]|null $tax_lots List of tax lots for the given position (disabled by default, contact support if needed)
+     * @param \SnapTrade\Model\TaxLot[]|null $tax_lots List of tax lots for the given position (disabled by default, only available on paid plans, contact support if needed)
      *
      * @return self
      */

@@ -91,6 +91,15 @@ class AccountUniversalActivityTest extends TestCase
     }
 
     /**
+     * Test attribute "currency_universal_symbol"
+     */
+    public function testPropertyCurrencyUniversalSymbol()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "option_symbol"
      */
     public function testPropertyOptionSymbol()

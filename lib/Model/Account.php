@@ -525,7 +525,7 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets brokerage_authorization
      *
-     * @param string $brokerage_authorization Unique identifier for the connection. This is the UUID used to reference the connection in SnapTrade.
+     * @param string $brokerage_authorization Unique identifier for the connection (brokerage_authorization_id). This is the UUID used to reference the connection in SnapTrade.
      *
      * @return self
      */

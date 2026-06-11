@@ -339,7 +339,7 @@ class Balance implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets cash
      *
-     * @param float|null $cash The amount of available cash in the account denominated in the currency of the `currency` field.
+     * @param float|null $cash The amount of available cash in the account denominated in the currency of the `currency` field. This value can be negative in a margin account with a margin balance. Money market funds will be included in this field, and also returned in positions endpoints with `cash_equivalent` = true
      *
      * @return self
      */

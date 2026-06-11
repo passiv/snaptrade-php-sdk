@@ -62,6 +62,15 @@ class AccountInformationApi extends \SnapTrade\CustomApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
+        'getAccountActivities' => [
+            'application/json',
+        ],
+        'getAccountBalanceHistory' => [
+            'application/json',
+        ],
+        'getAllAccountPositions' => [
+            'application/json',
+        ],
         'getAllUserHoldings' => [
             'application/json',
         ],
@@ -71,10 +80,19 @@ class AccountInformationApi extends \SnapTrade\CustomApi
         'getUserAccountDetails' => [
             'application/json',
         ],
+        'getUserAccountOrderDetail' => [
+            'application/json',
+        ],
         'getUserAccountOrders' => [
             'application/json',
         ],
         'getUserAccountPositions' => [
+            'application/json',
+        ],
+        'getUserAccountRecentOrders' => [
+            'application/json',
+        ],
+        'getUserAccountReturnRates' => [
             'application/json',
         ],
         'getUserHoldings' => [
@@ -157,18 +175,1354 @@ class AccountInformationApi extends \SnapTrade\CustomApi
     }
 
     /**
+     * Operation getAccountActivities
+     *
+     * List account activities
+     *
+     * Returns all historical transactions for the specified account.  This endpoint is paginated with a default page size of 1000. The endpoint will return a maximum of 1000 transactions per request. See the query parameters for pagination options.  Transaction are returned in reverse chronological order, using the &#x60;trade_date&#x60; field.  This endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+     *
+     * @param  string $account_id account_id (required)
+     * @param  string $user_id user_id (required)
+     * @param  string $user_secret user_secret (required)
+     * @param  \DateTime $start_date The start date (inclusive) of the transaction history to retrieve. If not provided, the default is the first transaction known to SnapTrade based on &#x60;trade_date&#x60;. (optional)
+     * @param  \DateTime $end_date The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on &#x60;trade_date&#x60;. (optional)
+     * @param  int $offset An integer that specifies the starting point of the paginated results. Default is 0. (optional)
+     * @param  int $limit An integer that specifies the maximum number of transactions to return. Default of 1000. (optional)
+     * @param  string $type Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - &#x60;BUY&#x60; - Asset bought.   - &#x60;SELL&#x60; - Asset sold.   - &#x60;DIVIDEND&#x60; - Dividend payout.   - &#x60;CONTRIBUTION&#x60; - Cash contribution.   - &#x60;WITHDRAWAL&#x60; - Cash withdrawal.   - &#x60;REI&#x60; - Dividend reinvestment.   - &#x60;STOCK_DIVIDEND&#x60; - A type of dividend where a company distributes shares instead of cash   - &#x60;INTEREST&#x60; - Interest deposited into the account.   - &#x60;FEE&#x60; - Fee withdrawn from the account.   - &#x60;TAX&#x60; - A tax related fee.   - &#x60;OPTIONEXPIRATION&#x60; - Option expiration event.   - &#x60;OPTIONASSIGNMENT&#x60; - Option assignment event.   - &#x60;OPTIONEXERCISE&#x60; - Option exercise event.   - &#x60;TRANSFER&#x60; - Transfer of assets from one account to another.   - &#x60;SPLIT&#x60; - A stock share split. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAccountActivities'] to see the possible values for this operation
+     *
+     * @throws \SnapTrade\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SnapTrade\Model\PaginatedUniversalActivity
+     */
+    public function getAccountActivities(
+        $account_id,
+        $user_id,
+        $user_secret,
+        $start_date = SENTINEL_VALUE,
+        $end_date = SENTINEL_VALUE,
+        $offset = SENTINEL_VALUE,
+        $limit = SENTINEL_VALUE,
+        $type = SENTINEL_VALUE,
+
+        string $contentType = self::contentTypes['getAccountActivities'][0]
+    )
+    {
+
+        list($response) = $this->getAccountActivitiesWithHttpInfo($account_id, $user_id, $user_secret, $start_date, $end_date, $offset, $limit, $type, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation getAccountActivitiesWithHttpInfo
+     *
+     * List account activities
+     *
+     * Returns all historical transactions for the specified account.  This endpoint is paginated with a default page size of 1000. The endpoint will return a maximum of 1000 transactions per request. See the query parameters for pagination options.  Transaction are returned in reverse chronological order, using the &#x60;trade_date&#x60; field.  This endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+     *
+     * @param  string $account_id (required)
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
+     * @param  \DateTime $start_date The start date (inclusive) of the transaction history to retrieve. If not provided, the default is the first transaction known to SnapTrade based on &#x60;trade_date&#x60;. (optional)
+     * @param  \DateTime $end_date The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on &#x60;trade_date&#x60;. (optional)
+     * @param  int $offset An integer that specifies the starting point of the paginated results. Default is 0. (optional)
+     * @param  int $limit An integer that specifies the maximum number of transactions to return. Default of 1000. (optional)
+     * @param  string $type Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - &#x60;BUY&#x60; - Asset bought.   - &#x60;SELL&#x60; - Asset sold.   - &#x60;DIVIDEND&#x60; - Dividend payout.   - &#x60;CONTRIBUTION&#x60; - Cash contribution.   - &#x60;WITHDRAWAL&#x60; - Cash withdrawal.   - &#x60;REI&#x60; - Dividend reinvestment.   - &#x60;STOCK_DIVIDEND&#x60; - A type of dividend where a company distributes shares instead of cash   - &#x60;INTEREST&#x60; - Interest deposited into the account.   - &#x60;FEE&#x60; - Fee withdrawn from the account.   - &#x60;TAX&#x60; - A tax related fee.   - &#x60;OPTIONEXPIRATION&#x60; - Option expiration event.   - &#x60;OPTIONASSIGNMENT&#x60; - Option assignment event.   - &#x60;OPTIONEXERCISE&#x60; - Option exercise event.   - &#x60;TRANSFER&#x60; - Transfer of assets from one account to another.   - &#x60;SPLIT&#x60; - A stock share split. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAccountActivities'] to see the possible values for this operation
+     *
+     * @throws \SnapTrade\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SnapTrade\Model\PaginatedUniversalActivity, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getAccountActivitiesWithHttpInfo($account_id, $user_id, $user_secret, $start_date = null, $end_date = null, $offset = null, $limit = null, $type = null, string $contentType = self::contentTypes['getAccountActivities'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    {
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getAccountActivitiesRequest($account_id, $user_id, $user_secret, $start_date, $end_date, $offset, $limit, $type, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                if (
+                    ($e->getCode() == 401 || $e->getCode() == 403) &&
+                    !empty($this->getConfig()->getAccessToken()) &&
+                    $requestOptions->shouldRetryOAuth()
+                ) {
+                    return $this->getAccountActivitiesWithHttpInfo(
+                        $account_id,
+                        $user_id,
+                        $user_secret,
+                        $start_date,
+                        $end_date,
+                        $offset,
+                        $limit,
+                        $type,
+                        $contentType,
+                        $requestOptions->setRetryOAuth(false)
+                    );
+                }
+
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('\SnapTrade\Model\PaginatedUniversalActivity' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\SnapTrade\Model\PaginatedUniversalActivity' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\PaginatedUniversalActivity', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\SnapTrade\Model\PaginatedUniversalActivity';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SnapTrade\Model\PaginatedUniversalActivity',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getAccountActivitiesAsync
+     *
+     * List account activities
+     *
+     * Returns all historical transactions for the specified account.  This endpoint is paginated with a default page size of 1000. The endpoint will return a maximum of 1000 transactions per request. See the query parameters for pagination options.  Transaction are returned in reverse chronological order, using the &#x60;trade_date&#x60; field.  This endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+     *
+     * @param  string $account_id (required)
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
+     * @param  \DateTime $start_date The start date (inclusive) of the transaction history to retrieve. If not provided, the default is the first transaction known to SnapTrade based on &#x60;trade_date&#x60;. (optional)
+     * @param  \DateTime $end_date The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on &#x60;trade_date&#x60;. (optional)
+     * @param  int $offset An integer that specifies the starting point of the paginated results. Default is 0. (optional)
+     * @param  int $limit An integer that specifies the maximum number of transactions to return. Default of 1000. (optional)
+     * @param  string $type Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - &#x60;BUY&#x60; - Asset bought.   - &#x60;SELL&#x60; - Asset sold.   - &#x60;DIVIDEND&#x60; - Dividend payout.   - &#x60;CONTRIBUTION&#x60; - Cash contribution.   - &#x60;WITHDRAWAL&#x60; - Cash withdrawal.   - &#x60;REI&#x60; - Dividend reinvestment.   - &#x60;STOCK_DIVIDEND&#x60; - A type of dividend where a company distributes shares instead of cash   - &#x60;INTEREST&#x60; - Interest deposited into the account.   - &#x60;FEE&#x60; - Fee withdrawn from the account.   - &#x60;TAX&#x60; - A tax related fee.   - &#x60;OPTIONEXPIRATION&#x60; - Option expiration event.   - &#x60;OPTIONASSIGNMENT&#x60; - Option assignment event.   - &#x60;OPTIONEXERCISE&#x60; - Option exercise event.   - &#x60;TRANSFER&#x60; - Transfer of assets from one account to another.   - &#x60;SPLIT&#x60; - A stock share split. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAccountActivities'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getAccountActivitiesAsync(
+        $account_id,
+        $user_id,
+        $user_secret,
+        $start_date = SENTINEL_VALUE,
+        $end_date = SENTINEL_VALUE,
+        $offset = SENTINEL_VALUE,
+        $limit = SENTINEL_VALUE,
+        $type = SENTINEL_VALUE,
+
+        string $contentType = self::contentTypes['getAccountActivities'][0]
+    )
+    {
+
+        return $this->getAccountActivitiesAsyncWithHttpInfo($account_id, $user_id, $user_secret, $start_date, $end_date, $offset, $limit, $type, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getAccountActivitiesAsyncWithHttpInfo
+     *
+     * List account activities
+     *
+     * Returns all historical transactions for the specified account.  This endpoint is paginated with a default page size of 1000. The endpoint will return a maximum of 1000 transactions per request. See the query parameters for pagination options.  Transaction are returned in reverse chronological order, using the &#x60;trade_date&#x60; field.  This endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+     *
+     * @param  string $account_id (required)
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
+     * @param  \DateTime $start_date The start date (inclusive) of the transaction history to retrieve. If not provided, the default is the first transaction known to SnapTrade based on &#x60;trade_date&#x60;. (optional)
+     * @param  \DateTime $end_date The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on &#x60;trade_date&#x60;. (optional)
+     * @param  int $offset An integer that specifies the starting point of the paginated results. Default is 0. (optional)
+     * @param  int $limit An integer that specifies the maximum number of transactions to return. Default of 1000. (optional)
+     * @param  string $type Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - &#x60;BUY&#x60; - Asset bought.   - &#x60;SELL&#x60; - Asset sold.   - &#x60;DIVIDEND&#x60; - Dividend payout.   - &#x60;CONTRIBUTION&#x60; - Cash contribution.   - &#x60;WITHDRAWAL&#x60; - Cash withdrawal.   - &#x60;REI&#x60; - Dividend reinvestment.   - &#x60;STOCK_DIVIDEND&#x60; - A type of dividend where a company distributes shares instead of cash   - &#x60;INTEREST&#x60; - Interest deposited into the account.   - &#x60;FEE&#x60; - Fee withdrawn from the account.   - &#x60;TAX&#x60; - A tax related fee.   - &#x60;OPTIONEXPIRATION&#x60; - Option expiration event.   - &#x60;OPTIONASSIGNMENT&#x60; - Option assignment event.   - &#x60;OPTIONEXERCISE&#x60; - Option exercise event.   - &#x60;TRANSFER&#x60; - Transfer of assets from one account to another.   - &#x60;SPLIT&#x60; - A stock share split. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAccountActivities'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getAccountActivitiesAsyncWithHttpInfo($account_id, $user_id, $user_secret, $start_date = null, $end_date = null, $offset = null, $limit = null, $type = null, string $contentType = self::contentTypes['getAccountActivities'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    {
+        $returnType = '\SnapTrade\Model\PaginatedUniversalActivity';
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getAccountActivitiesRequest($account_id, $user_id, $user_secret, $start_date, $end_date, $offset, $limit, $type, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getAccountActivities'
+     *
+     * @param  string $account_id (required)
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
+     * @param  \DateTime $start_date The start date (inclusive) of the transaction history to retrieve. If not provided, the default is the first transaction known to SnapTrade based on &#x60;trade_date&#x60;. (optional)
+     * @param  \DateTime $end_date The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on &#x60;trade_date&#x60;. (optional)
+     * @param  int $offset An integer that specifies the starting point of the paginated results. Default is 0. (optional)
+     * @param  int $limit An integer that specifies the maximum number of transactions to return. Default of 1000. (optional)
+     * @param  string $type Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - &#x60;BUY&#x60; - Asset bought.   - &#x60;SELL&#x60; - Asset sold.   - &#x60;DIVIDEND&#x60; - Dividend payout.   - &#x60;CONTRIBUTION&#x60; - Cash contribution.   - &#x60;WITHDRAWAL&#x60; - Cash withdrawal.   - &#x60;REI&#x60; - Dividend reinvestment.   - &#x60;STOCK_DIVIDEND&#x60; - A type of dividend where a company distributes shares instead of cash   - &#x60;INTEREST&#x60; - Interest deposited into the account.   - &#x60;FEE&#x60; - Fee withdrawn from the account.   - &#x60;TAX&#x60; - A tax related fee.   - &#x60;OPTIONEXPIRATION&#x60; - Option expiration event.   - &#x60;OPTIONASSIGNMENT&#x60; - Option assignment event.   - &#x60;OPTIONEXERCISE&#x60; - Option exercise event.   - &#x60;TRANSFER&#x60; - Transfer of assets from one account to another.   - &#x60;SPLIT&#x60; - A stock share split. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAccountActivities'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function getAccountActivitiesRequest($account_id, $user_id, $user_secret, $start_date = SENTINEL_VALUE, $end_date = SENTINEL_VALUE, $offset = SENTINEL_VALUE, $limit = SENTINEL_VALUE, $type = SENTINEL_VALUE, string $contentType = self::contentTypes['getAccountActivities'][0])
+    {
+
+        // Check if $account_id is a string
+        if ($account_id !== SENTINEL_VALUE && !is_string($account_id)) {
+            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($account_id, true), gettype($account_id)));
+        }
+        // verify the required parameter 'account_id' is set
+        if ($account_id === SENTINEL_VALUE || (is_array($account_id) && count($account_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter account_id when calling getAccountActivities'
+            );
+        }
+        // Check if $user_id is a string
+        if ($user_id !== SENTINEL_VALUE && !is_string($user_id)) {
+            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_id, true), gettype($user_id)));
+        }
+        // verify the required parameter 'user_id' is set
+        if ($user_id === SENTINEL_VALUE || (is_array($user_id) && count($user_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter user_id when calling getAccountActivities'
+            );
+        }
+        // Check if $user_secret is a string
+        if ($user_secret !== SENTINEL_VALUE && !is_string($user_secret)) {
+            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
+        }
+        // verify the required parameter 'user_secret' is set
+        if ($user_secret === SENTINEL_VALUE || (is_array($user_secret) && count($user_secret) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter user_secret when calling getAccountActivities'
+            );
+        }
+        if ($offset !== SENTINEL_VALUE && $offset < 0) {
+            throw new \InvalidArgumentException('invalid value for "offset" when calling AccountInformationApi.getAccountActivities, must be bigger than or equal to 0.');
+        }
+                if ($limit !== SENTINEL_VALUE && $limit < 1) {
+            throw new \InvalidArgumentException('invalid value for "limit" when calling AccountInformationApi.getAccountActivities, must be bigger than or equal to 1.');
+        }
+                // Check if $type is a string
+        if ($type !== SENTINEL_VALUE && !is_string($type)) {
+            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($type, true), gettype($type)));
+        }
+
+
+        $resourcePath = '/accounts/{accountId}/activities';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        if ($start_date !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $start_date,
+                'startDate', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                false // required
+            ) ?? []);
+        }
+        if ($end_date !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $end_date,
+                'endDate', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                false // required
+            ) ?? []);
+        }
+        if ($offset !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $offset,
+                'offset', // param base name
+                'integer', // openApiType
+                'form', // style
+                true, // explode
+                false // required
+            ) ?? []);
+        }
+        if ($limit !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $limit,
+                'limit', // param base name
+                'integer', // openApiType
+                'form', // style
+                true, // explode
+                false // required
+            ) ?? []);
+        }
+        if ($type !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $type,
+                'type', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                false // required
+            ) ?? []);
+        }
+        if ($user_id !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_id,
+                'userId', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
+        if ($user_secret !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_secret,
+                'userSecret', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
+
+
+        // path params
+        if ($account_id !== SENTINEL_VALUE) {
+            $resourcePath = str_replace(
+                '{' . 'accountId' . '}',
+                ObjectSerializer::toPathValue($account_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('clientId');
+        if ($apiKey !== null) {
+            $queryParams['clientId'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Signature');
+        if ($apiKey !== null) {
+            $headers['Signature'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('timestamp');
+        if ($apiKey !== null) {
+            $queryParams['timestamp'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $method = 'GET';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
+    }
+
+    /**
+     * Operation getAccountBalanceHistory
+     *
+     * List historical account total value
+     *
+     * An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and has a maximum lookback of 1 year.
+     *
+     * @param  string $user_id user_id (required)
+     * @param  string $user_secret user_secret (required)
+     * @param  string $account_id account_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAccountBalanceHistory'] to see the possible values for this operation
+     *
+     * @throws \SnapTrade\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SnapTrade\Model\AccountValueHistoryResponse|\SnapTrade\Model\Model403FeatureNotEnabledResponse
+     */
+    public function getAccountBalanceHistory(
+        $user_id,
+        $user_secret,
+        $account_id,
+
+        string $contentType = self::contentTypes['getAccountBalanceHistory'][0]
+    )
+    {
+
+        list($response) = $this->getAccountBalanceHistoryWithHttpInfo($user_id, $user_secret, $account_id, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation getAccountBalanceHistoryWithHttpInfo
+     *
+     * List historical account total value
+     *
+     * An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and has a maximum lookback of 1 year.
+     *
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
+     * @param  string $account_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAccountBalanceHistory'] to see the possible values for this operation
+     *
+     * @throws \SnapTrade\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SnapTrade\Model\AccountValueHistoryResponse|\SnapTrade\Model\Model403FeatureNotEnabledResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getAccountBalanceHistoryWithHttpInfo($user_id, $user_secret, $account_id, string $contentType = self::contentTypes['getAccountBalanceHistory'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    {
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getAccountBalanceHistoryRequest($user_id, $user_secret, $account_id, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                if (
+                    ($e->getCode() == 401 || $e->getCode() == 403) &&
+                    !empty($this->getConfig()->getAccessToken()) &&
+                    $requestOptions->shouldRetryOAuth()
+                ) {
+                    return $this->getAccountBalanceHistoryWithHttpInfo(
+                        $user_id,
+                        $user_secret,
+                        $account_id,
+                        $contentType,
+                        $requestOptions->setRetryOAuth(false)
+                    );
+                }
+
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('\SnapTrade\Model\AccountValueHistoryResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\SnapTrade\Model\AccountValueHistoryResponse' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\AccountValueHistoryResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 403:
+                    if ('\SnapTrade\Model\Model403FeatureNotEnabledResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\SnapTrade\Model\Model403FeatureNotEnabledResponse' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\Model403FeatureNotEnabledResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\SnapTrade\Model\AccountValueHistoryResponse';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SnapTrade\Model\AccountValueHistoryResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 403:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SnapTrade\Model\Model403FeatureNotEnabledResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getAccountBalanceHistoryAsync
+     *
+     * List historical account total value
+     *
+     * An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and has a maximum lookback of 1 year.
+     *
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
+     * @param  string $account_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAccountBalanceHistory'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getAccountBalanceHistoryAsync(
+        $user_id,
+        $user_secret,
+        $account_id,
+
+        string $contentType = self::contentTypes['getAccountBalanceHistory'][0]
+    )
+    {
+
+        return $this->getAccountBalanceHistoryAsyncWithHttpInfo($user_id, $user_secret, $account_id, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getAccountBalanceHistoryAsyncWithHttpInfo
+     *
+     * List historical account total value
+     *
+     * An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and has a maximum lookback of 1 year.
+     *
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
+     * @param  string $account_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAccountBalanceHistory'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getAccountBalanceHistoryAsyncWithHttpInfo($user_id, $user_secret, $account_id, string $contentType = self::contentTypes['getAccountBalanceHistory'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    {
+        $returnType = '\SnapTrade\Model\AccountValueHistoryResponse';
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getAccountBalanceHistoryRequest($user_id, $user_secret, $account_id, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getAccountBalanceHistory'
+     *
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
+     * @param  string $account_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAccountBalanceHistory'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function getAccountBalanceHistoryRequest($user_id, $user_secret, $account_id, string $contentType = self::contentTypes['getAccountBalanceHistory'][0])
+    {
+
+        // Check if $user_id is a string
+        if ($user_id !== SENTINEL_VALUE && !is_string($user_id)) {
+            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_id, true), gettype($user_id)));
+        }
+        // verify the required parameter 'user_id' is set
+        if ($user_id === SENTINEL_VALUE || (is_array($user_id) && count($user_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter user_id when calling getAccountBalanceHistory'
+            );
+        }
+        // Check if $user_secret is a string
+        if ($user_secret !== SENTINEL_VALUE && !is_string($user_secret)) {
+            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
+        }
+        // verify the required parameter 'user_secret' is set
+        if ($user_secret === SENTINEL_VALUE || (is_array($user_secret) && count($user_secret) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter user_secret when calling getAccountBalanceHistory'
+            );
+        }
+        // Check if $account_id is a string
+        if ($account_id !== SENTINEL_VALUE && !is_string($account_id)) {
+            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($account_id, true), gettype($account_id)));
+        }
+        // verify the required parameter 'account_id' is set
+        if ($account_id === SENTINEL_VALUE || (is_array($account_id) && count($account_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter account_id when calling getAccountBalanceHistory'
+            );
+        }
+
+
+        $resourcePath = '/accounts/{accountId}/balanceHistory';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        if ($user_id !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_id,
+                'userId', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
+        if ($user_secret !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_secret,
+                'userSecret', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
+
+
+        // path params
+        if ($account_id !== SENTINEL_VALUE) {
+            $resourcePath = str_replace(
+                '{' . 'accountId' . '}',
+                ObjectSerializer::toPathValue($account_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('clientId');
+        if ($apiKey !== null) {
+            $queryParams['clientId'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Signature');
+        if ($apiKey !== null) {
+            $headers['Signature'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('timestamp');
+        if ($apiKey !== null) {
+            $queryParams['timestamp'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $method = 'GET';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
+    }
+
+    /**
+     * Operation getAllAccountPositions
+     *
+     * List all account positions
+     *
+     * Returns a list of all positions in the specified account.  The &#x60;results&#x60; list can contain multiple instrument types in the same response, including stocks, ADRs, ETFs, mutual funds, closed-end funds, crypto, futures, and option positions. Use the &#x60;instrument.kind&#x60; discriminator to determine the schema for each position&#39;s &#x60;instrument&#x60;.  &#x60;mutualfund&#x60; positions may also include &#x60;cash_equivalent&#x60;. &#x60;stock&#x60; positions may include &#x60;tax_lots&#x60; when tax lot data is enabled for the account.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+     *
+     * @param  string $user_id user_id (required)
+     * @param  string $user_secret user_secret (required)
+     * @param  string $account_id account_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAllAccountPositions'] to see the possible values for this operation
+     *
+     * @throws \SnapTrade\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SnapTrade\Model\AllAccountPositionsResponse
+     */
+    public function getAllAccountPositions(
+        $user_id,
+        $user_secret,
+        $account_id,
+
+        string $contentType = self::contentTypes['getAllAccountPositions'][0]
+    )
+    {
+
+        list($response) = $this->getAllAccountPositionsWithHttpInfo($user_id, $user_secret, $account_id, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation getAllAccountPositionsWithHttpInfo
+     *
+     * List all account positions
+     *
+     * Returns a list of all positions in the specified account.  The &#x60;results&#x60; list can contain multiple instrument types in the same response, including stocks, ADRs, ETFs, mutual funds, closed-end funds, crypto, futures, and option positions. Use the &#x60;instrument.kind&#x60; discriminator to determine the schema for each position&#39;s &#x60;instrument&#x60;.  &#x60;mutualfund&#x60; positions may also include &#x60;cash_equivalent&#x60;. &#x60;stock&#x60; positions may include &#x60;tax_lots&#x60; when tax lot data is enabled for the account.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+     *
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
+     * @param  string $account_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAllAccountPositions'] to see the possible values for this operation
+     *
+     * @throws \SnapTrade\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SnapTrade\Model\AllAccountPositionsResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getAllAccountPositionsWithHttpInfo($user_id, $user_secret, $account_id, string $contentType = self::contentTypes['getAllAccountPositions'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    {
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getAllAccountPositionsRequest($user_id, $user_secret, $account_id, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                if (
+                    ($e->getCode() == 401 || $e->getCode() == 403) &&
+                    !empty($this->getConfig()->getAccessToken()) &&
+                    $requestOptions->shouldRetryOAuth()
+                ) {
+                    return $this->getAllAccountPositionsWithHttpInfo(
+                        $user_id,
+                        $user_secret,
+                        $account_id,
+                        $contentType,
+                        $requestOptions->setRetryOAuth(false)
+                    );
+                }
+
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('\SnapTrade\Model\AllAccountPositionsResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\SnapTrade\Model\AllAccountPositionsResponse' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\AllAccountPositionsResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\SnapTrade\Model\AllAccountPositionsResponse';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SnapTrade\Model\AllAccountPositionsResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getAllAccountPositionsAsync
+     *
+     * List all account positions
+     *
+     * Returns a list of all positions in the specified account.  The &#x60;results&#x60; list can contain multiple instrument types in the same response, including stocks, ADRs, ETFs, mutual funds, closed-end funds, crypto, futures, and option positions. Use the &#x60;instrument.kind&#x60; discriminator to determine the schema for each position&#39;s &#x60;instrument&#x60;.  &#x60;mutualfund&#x60; positions may also include &#x60;cash_equivalent&#x60;. &#x60;stock&#x60; positions may include &#x60;tax_lots&#x60; when tax lot data is enabled for the account.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+     *
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
+     * @param  string $account_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAllAccountPositions'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getAllAccountPositionsAsync(
+        $user_id,
+        $user_secret,
+        $account_id,
+
+        string $contentType = self::contentTypes['getAllAccountPositions'][0]
+    )
+    {
+
+        return $this->getAllAccountPositionsAsyncWithHttpInfo($user_id, $user_secret, $account_id, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getAllAccountPositionsAsyncWithHttpInfo
+     *
+     * List all account positions
+     *
+     * Returns a list of all positions in the specified account.  The &#x60;results&#x60; list can contain multiple instrument types in the same response, including stocks, ADRs, ETFs, mutual funds, closed-end funds, crypto, futures, and option positions. Use the &#x60;instrument.kind&#x60; discriminator to determine the schema for each position&#39;s &#x60;instrument&#x60;.  &#x60;mutualfund&#x60; positions may also include &#x60;cash_equivalent&#x60;. &#x60;stock&#x60; positions may include &#x60;tax_lots&#x60; when tax lot data is enabled for the account.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+     *
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
+     * @param  string $account_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAllAccountPositions'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getAllAccountPositionsAsyncWithHttpInfo($user_id, $user_secret, $account_id, string $contentType = self::contentTypes['getAllAccountPositions'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    {
+        $returnType = '\SnapTrade\Model\AllAccountPositionsResponse';
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getAllAccountPositionsRequest($user_id, $user_secret, $account_id, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getAllAccountPositions'
+     *
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
+     * @param  string $account_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAllAccountPositions'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function getAllAccountPositionsRequest($user_id, $user_secret, $account_id, string $contentType = self::contentTypes['getAllAccountPositions'][0])
+    {
+
+        // Check if $user_id is a string
+        if ($user_id !== SENTINEL_VALUE && !is_string($user_id)) {
+            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_id, true), gettype($user_id)));
+        }
+        // verify the required parameter 'user_id' is set
+        if ($user_id === SENTINEL_VALUE || (is_array($user_id) && count($user_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter user_id when calling getAllAccountPositions'
+            );
+        }
+        // Check if $user_secret is a string
+        if ($user_secret !== SENTINEL_VALUE && !is_string($user_secret)) {
+            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
+        }
+        // verify the required parameter 'user_secret' is set
+        if ($user_secret === SENTINEL_VALUE || (is_array($user_secret) && count($user_secret) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter user_secret when calling getAllAccountPositions'
+            );
+        }
+        // Check if $account_id is a string
+        if ($account_id !== SENTINEL_VALUE && !is_string($account_id)) {
+            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($account_id, true), gettype($account_id)));
+        }
+        // verify the required parameter 'account_id' is set
+        if ($account_id === SENTINEL_VALUE || (is_array($account_id) && count($account_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter account_id when calling getAllAccountPositions'
+            );
+        }
+
+
+        $resourcePath = '/accounts/{accountId}/positions/all';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        if ($user_id !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_id,
+                'userId', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
+        if ($user_secret !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_secret,
+                'userSecret', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
+
+
+        // path params
+        if ($account_id !== SENTINEL_VALUE) {
+            $resourcePath = str_replace(
+                '{' . 'accountId' . '}',
+                ObjectSerializer::toPathValue($account_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('clientId');
+        if ($apiKey !== null) {
+            $queryParams['clientId'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Signature');
+        if ($apiKey !== null) {
+            $headers['Signature'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('timestamp');
+        if ($apiKey !== null) {
+            $queryParams['timestamp'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $method = 'GET';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
+    }
+
+    /**
      * Operation getAllUserHoldings
      *
      * List all accounts for the user, plus balances, positions, and orders for each account.
      *
+     * **Deprecated, please use the account-specific holdings endpoint instead.**  List all accounts for the user, plus balances, positions, and orders for each account.  **Note:** This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026.
+     *
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
-     * @param  string $brokerage_authorizations Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations). (optional)
+     * @param  string $brokerage_authorizations Optional. Comma separated list of authorization IDs (only use if filtering is needed on one or more authorizations). (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAllUserHoldings'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \SnapTrade\Model\AccountHoldings[]|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\Model403FailedRequestResponse
+     * @return \SnapTrade\Model\AccountHoldings[]|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\Model403FailedRequestResponse|\SnapTrade\Model\Model425FailedRequestResponse
      * @deprecated
      */
     public function getAllUserHoldings(
@@ -189,14 +1543,16 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * List all accounts for the user, plus balances, positions, and orders for each account.
      *
+     * **Deprecated, please use the account-specific holdings endpoint instead.**  List all accounts for the user, plus balances, positions, and orders for each account.  **Note:** This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026.
+     *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $brokerage_authorizations Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations). (optional)
+     * @param  string $brokerage_authorizations Optional. Comma separated list of authorization IDs (only use if filtering is needed on one or more authorizations). (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAllUserHoldings'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \SnapTrade\Model\AccountHoldings[]|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\Model403FailedRequestResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SnapTrade\Model\AccountHoldings[]|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\Model403FailedRequestResponse|\SnapTrade\Model\Model425FailedRequestResponse, HTTP status code, HTTP response headers (array of strings)
      * @deprecated
      */
     public function getAllUserHoldingsWithHttpInfo($user_id, $user_secret, $brokerage_authorizations = null, string $contentType = self::contentTypes['getAllUserHoldings'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
@@ -301,6 +1657,21 @@ class AccountInformationApi extends \SnapTrade\CustomApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
+                case 425:
+                    if ('\SnapTrade\Model\Model425FailedRequestResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\SnapTrade\Model\Model425FailedRequestResponse' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\Model425FailedRequestResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
             }
 
             $returnType = '\SnapTrade\Model\AccountHoldings[]';
@@ -345,6 +1716,14 @@ class AccountInformationApi extends \SnapTrade\CustomApi
                     );
                     $e->setResponseObject($data);
                     break;
+                case 425:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SnapTrade\Model\Model425FailedRequestResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
             }
             throw $e;
         }
@@ -355,9 +1734,11 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * List all accounts for the user, plus balances, positions, and orders for each account.
      *
+     * **Deprecated, please use the account-specific holdings endpoint instead.**  List all accounts for the user, plus balances, positions, and orders for each account.  **Note:** This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026.
+     *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $brokerage_authorizations Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations). (optional)
+     * @param  string $brokerage_authorizations Optional. Comma separated list of authorization IDs (only use if filtering is needed on one or more authorizations). (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAllUserHoldings'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -386,9 +1767,11 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * List all accounts for the user, plus balances, positions, and orders for each account.
      *
+     * **Deprecated, please use the account-specific holdings endpoint instead.**  List all accounts for the user, plus balances, positions, and orders for each account.  **Note:** This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026.
+     *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $brokerage_authorizations Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations). (optional)
+     * @param  string $brokerage_authorizations Optional. Comma separated list of authorization IDs (only use if filtering is needed on one or more authorizations). (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAllUserHoldings'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -444,7 +1827,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  string $brokerage_authorizations Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations). (optional)
+     * @param  string $brokerage_authorizations Optional. Comma separated list of authorization IDs (only use if filtering is needed on one or more authorizations). (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAllUserHoldings'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -603,6 +1986,8 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * List account balances
      *
+     * Returns a list of balances for the account. Each element of the list has a distinct currency. Some brokerages like Questrade [allows holding multiple currencies in the same account](https://www.questrade.com/learning/questrade-basics/balances-and-reports/understanding-your-account-balances).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+     *
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
      * @param  string $account_id account_id (required)
@@ -629,6 +2014,8 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      * Operation getUserAccountBalanceWithHttpInfo
      *
      * List account balances
+     *
+     * Returns a list of balances for the account. Each element of the list has a distinct currency. Some brokerages like Questrade [allows holding multiple currencies in the same account](https://www.questrade.com/learning/questrade-basics/balances-and-reports/understanding-your-account-balances).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -749,6 +2136,8 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * List account balances
      *
+     * Returns a list of balances for the account. Each element of the list has a distinct currency. Some brokerages like Questrade [allows holding multiple currencies in the same account](https://www.questrade.com/learning/questrade-basics/balances-and-reports/understanding-your-account-balances).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+     *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
      * @param  string $account_id (required)
@@ -778,6 +2167,8 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      * Operation getUserAccountBalanceAsyncWithHttpInfo
      *
      * List account balances
+     *
+     * Returns a list of balances for the account. Each element of the list has a distinct currency. Some brokerages like Questrade [allows holding multiple currencies in the same account](https://www.questrade.com/learning/questrade-basics/balances-and-reports/understanding-your-account-balances).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -997,6 +2388,8 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * Get account detail
      *
+     * Returns account detail known to SnapTrade for the specified account.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+     *
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
      * @param  string $account_id account_id (required)
@@ -1023,6 +2416,8 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      * Operation getUserAccountDetailsWithHttpInfo
      *
      * Get account detail
+     *
+     * Returns account detail known to SnapTrade for the specified account.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -1143,6 +2538,8 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * Get account detail
      *
+     * Returns account detail known to SnapTrade for the specified account.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+     *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
      * @param  string $account_id (required)
@@ -1172,6 +2569,8 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      * Operation getUserAccountDetailsAsyncWithHttpInfo
      *
      * Get account detail
+     *
+     * Returns account detail known to SnapTrade for the specified account.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -1387,15 +2786,523 @@ class AccountInformationApi extends \SnapTrade\CustomApi
     }
 
     /**
+     * Operation getUserAccountOrderDetail
+     *
+     * Get account order detail
+     *
+     * Returns the detail of a single order using the external order ID provided in the request body.  This endpoint only works for single-leg orders at this time. Support for multi-leg orders will be added in the future.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.
+     *
+     * @param  string $account_id account_id (required)
+     * @param  string $user_id user_id (required)
+     * @param  string $user_secret user_secret (required)
+     * @param  \SnapTrade\Model\AccountInformationGetUserAccountOrderDetailRequest $account_information_get_user_account_order_detail_request account_information_get_user_account_order_detail_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserAccountOrderDetail'] to see the possible values for this operation
+     *
+     * @throws \SnapTrade\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SnapTrade\Model\AccountOrderRecord|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\Model404FailedRequestResponse|\SnapTrade\Model\Model500UnexpectedExceptionResponse
+     */
+    public function getUserAccountOrderDetail(
+
+        $brokerage_order_id,
+        $account_id,
+        $user_id,
+        $user_secret,
+        string $contentType = self::contentTypes['getUserAccountOrderDetail'][0]
+    )
+    {
+        $_body = [];
+        $this->setRequestBodyProperty($_body, "brokerage_order_id", $brokerage_order_id);
+        $account_information_get_user_account_order_detail_request = $_body;
+
+        list($response) = $this->getUserAccountOrderDetailWithHttpInfo($account_id, $user_id, $user_secret, $account_information_get_user_account_order_detail_request, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation getUserAccountOrderDetailWithHttpInfo
+     *
+     * Get account order detail
+     *
+     * Returns the detail of a single order using the external order ID provided in the request body.  This endpoint only works for single-leg orders at this time. Support for multi-leg orders will be added in the future.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.
+     *
+     * @param  string $account_id (required)
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
+     * @param  \SnapTrade\Model\AccountInformationGetUserAccountOrderDetailRequest $account_information_get_user_account_order_detail_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserAccountOrderDetail'] to see the possible values for this operation
+     *
+     * @throws \SnapTrade\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SnapTrade\Model\AccountOrderRecord|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\Model404FailedRequestResponse|\SnapTrade\Model\Model500UnexpectedExceptionResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getUserAccountOrderDetailWithHttpInfo($account_id, $user_id, $user_secret, $account_information_get_user_account_order_detail_request, string $contentType = self::contentTypes['getUserAccountOrderDetail'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    {
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getUserAccountOrderDetailRequest($account_id, $user_id, $user_secret, $account_information_get_user_account_order_detail_request, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                if (
+                    ($e->getCode() == 401 || $e->getCode() == 403) &&
+                    !empty($this->getConfig()->getAccessToken()) &&
+                    $requestOptions->shouldRetryOAuth()
+                ) {
+                    return $this->getUserAccountOrderDetailWithHttpInfo(
+                        $account_id,
+                        $user_id,
+                        $user_secret,
+                        $account_information_get_user_account_order_detail_request,
+                        $contentType,
+                        $requestOptions->setRetryOAuth(false)
+                    );
+                }
+
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('\SnapTrade\Model\AccountOrderRecord' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\SnapTrade\Model\AccountOrderRecord' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\AccountOrderRecord', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if ('\SnapTrade\Model\Model400FailedRequestResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\SnapTrade\Model\Model400FailedRequestResponse' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\Model400FailedRequestResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\SnapTrade\Model\Model404FailedRequestResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\SnapTrade\Model\Model404FailedRequestResponse' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\Model404FailedRequestResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 500:
+                    if ('\SnapTrade\Model\Model500UnexpectedExceptionResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\SnapTrade\Model\Model500UnexpectedExceptionResponse' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\Model500UnexpectedExceptionResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\SnapTrade\Model\AccountOrderRecord';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SnapTrade\Model\AccountOrderRecord',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SnapTrade\Model\Model400FailedRequestResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SnapTrade\Model\Model404FailedRequestResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 500:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SnapTrade\Model\Model500UnexpectedExceptionResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getUserAccountOrderDetailAsync
+     *
+     * Get account order detail
+     *
+     * Returns the detail of a single order using the external order ID provided in the request body.  This endpoint only works for single-leg orders at this time. Support for multi-leg orders will be added in the future.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.
+     *
+     * @param  string $account_id (required)
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
+     * @param  \SnapTrade\Model\AccountInformationGetUserAccountOrderDetailRequest $account_information_get_user_account_order_detail_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserAccountOrderDetail'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getUserAccountOrderDetailAsync(
+
+        $brokerage_order_id,
+        $account_id,
+        $user_id,
+        $user_secret,
+        string $contentType = self::contentTypes['getUserAccountOrderDetail'][0]
+    )
+    {
+        $_body = [];
+        $this->setRequestBodyProperty($_body, "brokerage_order_id", $brokerage_order_id);
+        $account_information_get_user_account_order_detail_request = $_body;
+
+        return $this->getUserAccountOrderDetailAsyncWithHttpInfo($account_id, $user_id, $user_secret, $account_information_get_user_account_order_detail_request, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getUserAccountOrderDetailAsyncWithHttpInfo
+     *
+     * Get account order detail
+     *
+     * Returns the detail of a single order using the external order ID provided in the request body.  This endpoint only works for single-leg orders at this time. Support for multi-leg orders will be added in the future.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.
+     *
+     * @param  string $account_id (required)
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
+     * @param  \SnapTrade\Model\AccountInformationGetUserAccountOrderDetailRequest $account_information_get_user_account_order_detail_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserAccountOrderDetail'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getUserAccountOrderDetailAsyncWithHttpInfo($account_id, $user_id, $user_secret, $account_information_get_user_account_order_detail_request, string $contentType = self::contentTypes['getUserAccountOrderDetail'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    {
+        $returnType = '\SnapTrade\Model\AccountOrderRecord';
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getUserAccountOrderDetailRequest($account_id, $user_id, $user_secret, $account_information_get_user_account_order_detail_request, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getUserAccountOrderDetail'
+     *
+     * @param  string $account_id (required)
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
+     * @param  \SnapTrade\Model\AccountInformationGetUserAccountOrderDetailRequest $account_information_get_user_account_order_detail_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserAccountOrderDetail'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function getUserAccountOrderDetailRequest($account_id, $user_id, $user_secret, $account_information_get_user_account_order_detail_request, string $contentType = self::contentTypes['getUserAccountOrderDetail'][0])
+    {
+
+        // Check if $account_id is a string
+        if ($account_id !== SENTINEL_VALUE && !is_string($account_id)) {
+            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($account_id, true), gettype($account_id)));
+        }
+        // verify the required parameter 'account_id' is set
+        if ($account_id === SENTINEL_VALUE || (is_array($account_id) && count($account_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter account_id when calling getUserAccountOrderDetail'
+            );
+        }
+        // Check if $user_id is a string
+        if ($user_id !== SENTINEL_VALUE && !is_string($user_id)) {
+            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_id, true), gettype($user_id)));
+        }
+        // verify the required parameter 'user_id' is set
+        if ($user_id === SENTINEL_VALUE || (is_array($user_id) && count($user_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter user_id when calling getUserAccountOrderDetail'
+            );
+        }
+        // Check if $user_secret is a string
+        if ($user_secret !== SENTINEL_VALUE && !is_string($user_secret)) {
+            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
+        }
+        // verify the required parameter 'user_secret' is set
+        if ($user_secret === SENTINEL_VALUE || (is_array($user_secret) && count($user_secret) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter user_secret when calling getUserAccountOrderDetail'
+            );
+        }
+        if ($account_information_get_user_account_order_detail_request !== SENTINEL_VALUE) {
+            if (!($account_information_get_user_account_order_detail_request instanceof \SnapTrade\Model\AccountInformationGetUserAccountOrderDetailRequest)) {
+                if (!is_array($account_information_get_user_account_order_detail_request))
+                    throw new \InvalidArgumentException('"account_information_get_user_account_order_detail_request" must be associative array or an instance of \SnapTrade\Model\AccountInformationGetUserAccountOrderDetailRequest AccountInformationApi.getUserAccountOrderDetail.');
+                else
+                    $account_information_get_user_account_order_detail_request = new \SnapTrade\Model\AccountInformationGetUserAccountOrderDetailRequest($account_information_get_user_account_order_detail_request);
+            }
+        }
+        // verify the required parameter 'account_information_get_user_account_order_detail_request' is set
+        if ($account_information_get_user_account_order_detail_request === SENTINEL_VALUE || (is_array($account_information_get_user_account_order_detail_request) && count($account_information_get_user_account_order_detail_request) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter account_information_get_user_account_order_detail_request when calling getUserAccountOrderDetail'
+            );
+        }
+
+
+        $resourcePath = '/accounts/{accountId}/orders/details';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        if ($user_id !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_id,
+                'userId', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
+        if ($user_secret !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_secret,
+                'userSecret', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
+
+
+        // path params
+        if ($account_id !== SENTINEL_VALUE) {
+            $resourcePath = str_replace(
+                '{' . 'accountId' . '}',
+                ObjectSerializer::toPathValue($account_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($account_information_get_user_account_order_detail_request)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($account_information_get_user_account_order_detail_request));
+            } else {
+                $httpBody = $account_information_get_user_account_order_detail_request;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('clientId');
+        if ($apiKey !== null) {
+            $queryParams['clientId'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Signature');
+        if ($apiKey !== null) {
+            $headers['Signature'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('timestamp');
+        if ($apiKey !== null) {
+            $queryParams['timestamp'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $method = 'POST';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
+    }
+
+    /**
      * Operation getUserAccountOrders
      *
-     * List account recent orders
+     * List account orders
+     *
+     * Returns a list of recent orders in the specified account.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
      *
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
      * @param  string $account_id account_id (required)
-     * @param  string $state defaults value is set to \&quot;all\&quot; (optional)
-     * @param  int $days Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. (optional)
+     * @param  string $state defaults to \&quot;all\&quot; (optional)
+     * @param  int $days Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserAccountOrders'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
@@ -1420,13 +3327,15 @@ class AccountInformationApi extends \SnapTrade\CustomApi
     /**
      * Operation getUserAccountOrdersWithHttpInfo
      *
-     * List account recent orders
+     * List account orders
+     *
+     * Returns a list of recent orders in the specified account.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
      * @param  string $account_id (required)
-     * @param  string $state defaults value is set to \&quot;all\&quot; (optional)
-     * @param  int $days Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. (optional)
+     * @param  string $state defaults to \&quot;all\&quot; (optional)
+     * @param  int $days Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserAccountOrders'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
@@ -1566,13 +3475,15 @@ class AccountInformationApi extends \SnapTrade\CustomApi
     /**
      * Operation getUserAccountOrdersAsync
      *
-     * List account recent orders
+     * List account orders
+     *
+     * Returns a list of recent orders in the specified account.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
      * @param  string $account_id (required)
-     * @param  string $state defaults value is set to \&quot;all\&quot; (optional)
-     * @param  int $days Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. (optional)
+     * @param  string $state defaults to \&quot;all\&quot; (optional)
+     * @param  int $days Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserAccountOrders'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1600,13 +3511,15 @@ class AccountInformationApi extends \SnapTrade\CustomApi
     /**
      * Operation getUserAccountOrdersAsyncWithHttpInfo
      *
-     * List account recent orders
+     * List account orders
+     *
+     * Returns a list of recent orders in the specified account.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
      * @param  string $account_id (required)
-     * @param  string $state defaults value is set to \&quot;all\&quot; (optional)
-     * @param  int $days Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. (optional)
+     * @param  string $state defaults to \&quot;all\&quot; (optional)
+     * @param  int $days Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserAccountOrders'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1662,8 +3575,8 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
      * @param  string $account_id (required)
-     * @param  string $state defaults value is set to \&quot;all\&quot; (optional)
-     * @param  int $days Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. (optional)
+     * @param  string $state defaults to \&quot;all\&quot; (optional)
+     * @param  int $days Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserAccountOrders'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1705,6 +3618,9 @@ class AccountInformationApi extends \SnapTrade\CustomApi
         // Check if $state is a string
         if ($state !== SENTINEL_VALUE && !is_string($state)) {
             throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($state, true), gettype($state)));
+        }
+        if ($days !== SENTINEL_VALUE && $days > 90) {
+            throw new \InvalidArgumentException('invalid value for "days" when calling AccountInformationApi.getUserAccountOrders, must be smaller than or equal to 90.');
         }
         if ($days !== SENTINEL_VALUE && $days < 1) {
             throw new \InvalidArgumentException('invalid value for "days" when calling AccountInformationApi.getUserAccountOrders, must be bigger than or equal to 1.');
@@ -1853,6 +3769,8 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * List account positions
      *
+     * Returns a list of stock/ETF/crypto/mutual fund positions in the specified account. For option positions, please use the [options endpoint](/reference/Options/Options_listOptionHoldings).  This endpoint is deprecated. Consider using the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions). This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+     *
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
      * @param  string $account_id account_id (required)
@@ -1861,6 +3779,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\Position[]
+     * @deprecated
      */
     public function getUserAccountPositions(
         $user_id,
@@ -1880,6 +3799,8 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * List account positions
      *
+     * Returns a list of stock/ETF/crypto/mutual fund positions in the specified account. For option positions, please use the [options endpoint](/reference/Options/Options_listOptionHoldings).  This endpoint is deprecated. Consider using the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions). This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+     *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
      * @param  string $account_id (required)
@@ -1888,6 +3809,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \SnapTrade\Model\Position[], HTTP status code, HTTP response headers (array of strings)
+     * @deprecated
      */
     public function getUserAccountPositionsWithHttpInfo($user_id, $user_secret, $account_id, string $contentType = self::contentTypes['getUserAccountPositions'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
@@ -1999,6 +3921,8 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * List account positions
      *
+     * Returns a list of stock/ETF/crypto/mutual fund positions in the specified account. For option positions, please use the [options endpoint](/reference/Options/Options_listOptionHoldings).  This endpoint is deprecated. Consider using the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions). This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+     *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
      * @param  string $account_id (required)
@@ -2006,6 +3930,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @deprecated
      */
     public function getUserAccountPositionsAsync(
         $user_id,
@@ -2029,6 +3954,8 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * List account positions
      *
+     * Returns a list of stock/ETF/crypto/mutual fund positions in the specified account. For option positions, please use the [options endpoint](/reference/Options/Options_listOptionHoldings).  This endpoint is deprecated. Consider using the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions). This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+     *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
      * @param  string $account_id (required)
@@ -2036,6 +3963,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @deprecated
      */
     public function getUserAccountPositionsAsyncWithHttpInfo($user_id, $user_secret, $account_id, string $contentType = self::contentTypes['getUserAccountPositions'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
@@ -2091,6 +4019,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
+     * @deprecated
      */
     public function getUserAccountPositionsRequest($user_id, $user_secret, $account_id, string $contentType = self::contentTypes['getUserAccountPositions'][0])
     {
@@ -2243,9 +4172,949 @@ class AccountInformationApi extends \SnapTrade\CustomApi
     }
 
     /**
+     * Operation getUserAccountRecentOrders
+     *
+     * List account recent orders (last 24 hours only)
+     *
+     * A lightweight endpoint that returns the latest page of orders placed in the last 24 hours in the specified account. For most brokerages, the default page size is 100 meaning the endpoint will return a max of 100 orders. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders Differs from /orders in that it is always realtime, and only checks the last 24 hours By default only returns executed orders, but that can be changed by setting *only_executed* to false
+     *
+     * @param  string $user_id user_id (required)
+     * @param  string $user_secret user_secret (required)
+     * @param  string $account_id account_id (required)
+     * @param  bool $only_executed Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserAccountRecentOrders'] to see the possible values for this operation
+     *
+     * @throws \SnapTrade\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SnapTrade\Model\RecentOrdersResponse|\SnapTrade\Model\Model403FeatureNotEnabledResponse|\SnapTrade\Model\Model500UnexpectedExceptionResponse
+     */
+    public function getUserAccountRecentOrders(
+        $user_id,
+        $user_secret,
+        $account_id,
+        $only_executed = SENTINEL_VALUE,
+
+        string $contentType = self::contentTypes['getUserAccountRecentOrders'][0]
+    )
+    {
+
+        list($response) = $this->getUserAccountRecentOrdersWithHttpInfo($user_id, $user_secret, $account_id, $only_executed, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation getUserAccountRecentOrdersWithHttpInfo
+     *
+     * List account recent orders (last 24 hours only)
+     *
+     * A lightweight endpoint that returns the latest page of orders placed in the last 24 hours in the specified account. For most brokerages, the default page size is 100 meaning the endpoint will return a max of 100 orders. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders Differs from /orders in that it is always realtime, and only checks the last 24 hours By default only returns executed orders, but that can be changed by setting *only_executed* to false
+     *
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
+     * @param  string $account_id (required)
+     * @param  bool $only_executed Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserAccountRecentOrders'] to see the possible values for this operation
+     *
+     * @throws \SnapTrade\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SnapTrade\Model\RecentOrdersResponse|\SnapTrade\Model\Model403FeatureNotEnabledResponse|\SnapTrade\Model\Model500UnexpectedExceptionResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getUserAccountRecentOrdersWithHttpInfo($user_id, $user_secret, $account_id, $only_executed = null, string $contentType = self::contentTypes['getUserAccountRecentOrders'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    {
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getUserAccountRecentOrdersRequest($user_id, $user_secret, $account_id, $only_executed, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                if (
+                    ($e->getCode() == 401 || $e->getCode() == 403) &&
+                    !empty($this->getConfig()->getAccessToken()) &&
+                    $requestOptions->shouldRetryOAuth()
+                ) {
+                    return $this->getUserAccountRecentOrdersWithHttpInfo(
+                        $user_id,
+                        $user_secret,
+                        $account_id,
+                        $only_executed,
+                        $contentType,
+                        $requestOptions->setRetryOAuth(false)
+                    );
+                }
+
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('\SnapTrade\Model\RecentOrdersResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\SnapTrade\Model\RecentOrdersResponse' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\RecentOrdersResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 403:
+                    if ('\SnapTrade\Model\Model403FeatureNotEnabledResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\SnapTrade\Model\Model403FeatureNotEnabledResponse' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\Model403FeatureNotEnabledResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 500:
+                    if ('\SnapTrade\Model\Model500UnexpectedExceptionResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\SnapTrade\Model\Model500UnexpectedExceptionResponse' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\Model500UnexpectedExceptionResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\SnapTrade\Model\RecentOrdersResponse';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SnapTrade\Model\RecentOrdersResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 403:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SnapTrade\Model\Model403FeatureNotEnabledResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 500:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SnapTrade\Model\Model500UnexpectedExceptionResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getUserAccountRecentOrdersAsync
+     *
+     * List account recent orders (last 24 hours only)
+     *
+     * A lightweight endpoint that returns the latest page of orders placed in the last 24 hours in the specified account. For most brokerages, the default page size is 100 meaning the endpoint will return a max of 100 orders. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders Differs from /orders in that it is always realtime, and only checks the last 24 hours By default only returns executed orders, but that can be changed by setting *only_executed* to false
+     *
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
+     * @param  string $account_id (required)
+     * @param  bool $only_executed Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserAccountRecentOrders'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getUserAccountRecentOrdersAsync(
+        $user_id,
+        $user_secret,
+        $account_id,
+        $only_executed = SENTINEL_VALUE,
+
+        string $contentType = self::contentTypes['getUserAccountRecentOrders'][0]
+    )
+    {
+
+        return $this->getUserAccountRecentOrdersAsyncWithHttpInfo($user_id, $user_secret, $account_id, $only_executed, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getUserAccountRecentOrdersAsyncWithHttpInfo
+     *
+     * List account recent orders (last 24 hours only)
+     *
+     * A lightweight endpoint that returns the latest page of orders placed in the last 24 hours in the specified account. For most brokerages, the default page size is 100 meaning the endpoint will return a max of 100 orders. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders Differs from /orders in that it is always realtime, and only checks the last 24 hours By default only returns executed orders, but that can be changed by setting *only_executed* to false
+     *
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
+     * @param  string $account_id (required)
+     * @param  bool $only_executed Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserAccountRecentOrders'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getUserAccountRecentOrdersAsyncWithHttpInfo($user_id, $user_secret, $account_id, $only_executed = null, string $contentType = self::contentTypes['getUserAccountRecentOrders'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    {
+        $returnType = '\SnapTrade\Model\RecentOrdersResponse';
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getUserAccountRecentOrdersRequest($user_id, $user_secret, $account_id, $only_executed, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getUserAccountRecentOrders'
+     *
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
+     * @param  string $account_id (required)
+     * @param  bool $only_executed Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserAccountRecentOrders'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function getUserAccountRecentOrdersRequest($user_id, $user_secret, $account_id, $only_executed = SENTINEL_VALUE, string $contentType = self::contentTypes['getUserAccountRecentOrders'][0])
+    {
+
+        // Check if $user_id is a string
+        if ($user_id !== SENTINEL_VALUE && !is_string($user_id)) {
+            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_id, true), gettype($user_id)));
+        }
+        // verify the required parameter 'user_id' is set
+        if ($user_id === SENTINEL_VALUE || (is_array($user_id) && count($user_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter user_id when calling getUserAccountRecentOrders'
+            );
+        }
+        // Check if $user_secret is a string
+        if ($user_secret !== SENTINEL_VALUE && !is_string($user_secret)) {
+            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
+        }
+        // verify the required parameter 'user_secret' is set
+        if ($user_secret === SENTINEL_VALUE || (is_array($user_secret) && count($user_secret) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter user_secret when calling getUserAccountRecentOrders'
+            );
+        }
+        // Check if $account_id is a string
+        if ($account_id !== SENTINEL_VALUE && !is_string($account_id)) {
+            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($account_id, true), gettype($account_id)));
+        }
+        // verify the required parameter 'account_id' is set
+        if ($account_id === SENTINEL_VALUE || (is_array($account_id) && count($account_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter account_id when calling getUserAccountRecentOrders'
+            );
+        }
+
+
+        $resourcePath = '/accounts/{accountId}/recentOrders';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        if ($user_id !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_id,
+                'userId', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
+        if ($user_secret !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_secret,
+                'userSecret', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
+        if ($only_executed !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $only_executed,
+                'only_executed', // param base name
+                'boolean', // openApiType
+                'form', // style
+                true, // explode
+                false // required
+            ) ?? []);
+        }
+
+
+        // path params
+        if ($account_id !== SENTINEL_VALUE) {
+            $resourcePath = str_replace(
+                '{' . 'accountId' . '}',
+                ObjectSerializer::toPathValue($account_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('clientId');
+        if ($apiKey !== null) {
+            $queryParams['clientId'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Signature');
+        if ($apiKey !== null) {
+            $headers['Signature'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('timestamp');
+        if ($apiKey !== null) {
+            $queryParams['timestamp'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $method = 'GET';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
+    }
+
+    /**
+     * Operation getUserAccountReturnRates
+     *
+     * List account rate of returns
+     *
+     * Returns a list of rate of return percents for a given account.
+     *
+     * @param  string $user_id user_id (required)
+     * @param  string $user_secret user_secret (required)
+     * @param  string $account_id account_id (required)
+     * @param  string $timeframes Optional comma separated list of rate-of-return timeframes to return. Supported values are &#x60;ALL&#x60;, &#x60;1Y&#x60;, &#x60;YTD&#x60;, &#x60;1M&#x60;, &#x60;1W&#x60;, and &#x60;1D&#x60;. If omitted, SnapTrade returns all six supported timeframes. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserAccountReturnRates'] to see the possible values for this operation
+     *
+     * @throws \SnapTrade\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SnapTrade\Model\RateOfReturnResponse|\SnapTrade\Model\Model403FeatureNotEnabledResponse|\SnapTrade\Model\Model500UnexpectedExceptionResponse
+     */
+    public function getUserAccountReturnRates(
+        $user_id,
+        $user_secret,
+        $account_id,
+        $timeframes = SENTINEL_VALUE,
+
+        string $contentType = self::contentTypes['getUserAccountReturnRates'][0]
+    )
+    {
+
+        list($response) = $this->getUserAccountReturnRatesWithHttpInfo($user_id, $user_secret, $account_id, $timeframes, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation getUserAccountReturnRatesWithHttpInfo
+     *
+     * List account rate of returns
+     *
+     * Returns a list of rate of return percents for a given account.
+     *
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
+     * @param  string $account_id (required)
+     * @param  string $timeframes Optional comma separated list of rate-of-return timeframes to return. Supported values are &#x60;ALL&#x60;, &#x60;1Y&#x60;, &#x60;YTD&#x60;, &#x60;1M&#x60;, &#x60;1W&#x60;, and &#x60;1D&#x60;. If omitted, SnapTrade returns all six supported timeframes. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserAccountReturnRates'] to see the possible values for this operation
+     *
+     * @throws \SnapTrade\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SnapTrade\Model\RateOfReturnResponse|\SnapTrade\Model\Model403FeatureNotEnabledResponse|\SnapTrade\Model\Model500UnexpectedExceptionResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getUserAccountReturnRatesWithHttpInfo($user_id, $user_secret, $account_id, $timeframes = null, string $contentType = self::contentTypes['getUserAccountReturnRates'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    {
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getUserAccountReturnRatesRequest($user_id, $user_secret, $account_id, $timeframes, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                if (
+                    ($e->getCode() == 401 || $e->getCode() == 403) &&
+                    !empty($this->getConfig()->getAccessToken()) &&
+                    $requestOptions->shouldRetryOAuth()
+                ) {
+                    return $this->getUserAccountReturnRatesWithHttpInfo(
+                        $user_id,
+                        $user_secret,
+                        $account_id,
+                        $timeframes,
+                        $contentType,
+                        $requestOptions->setRetryOAuth(false)
+                    );
+                }
+
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('\SnapTrade\Model\RateOfReturnResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\SnapTrade\Model\RateOfReturnResponse' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\RateOfReturnResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 403:
+                    if ('\SnapTrade\Model\Model403FeatureNotEnabledResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\SnapTrade\Model\Model403FeatureNotEnabledResponse' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\Model403FeatureNotEnabledResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 500:
+                    if ('\SnapTrade\Model\Model500UnexpectedExceptionResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\SnapTrade\Model\Model500UnexpectedExceptionResponse' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\Model500UnexpectedExceptionResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\SnapTrade\Model\RateOfReturnResponse';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SnapTrade\Model\RateOfReturnResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 403:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SnapTrade\Model\Model403FeatureNotEnabledResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 500:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SnapTrade\Model\Model500UnexpectedExceptionResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getUserAccountReturnRatesAsync
+     *
+     * List account rate of returns
+     *
+     * Returns a list of rate of return percents for a given account.
+     *
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
+     * @param  string $account_id (required)
+     * @param  string $timeframes Optional comma separated list of rate-of-return timeframes to return. Supported values are &#x60;ALL&#x60;, &#x60;1Y&#x60;, &#x60;YTD&#x60;, &#x60;1M&#x60;, &#x60;1W&#x60;, and &#x60;1D&#x60;. If omitted, SnapTrade returns all six supported timeframes. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserAccountReturnRates'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getUserAccountReturnRatesAsync(
+        $user_id,
+        $user_secret,
+        $account_id,
+        $timeframes = SENTINEL_VALUE,
+
+        string $contentType = self::contentTypes['getUserAccountReturnRates'][0]
+    )
+    {
+
+        return $this->getUserAccountReturnRatesAsyncWithHttpInfo($user_id, $user_secret, $account_id, $timeframes, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getUserAccountReturnRatesAsyncWithHttpInfo
+     *
+     * List account rate of returns
+     *
+     * Returns a list of rate of return percents for a given account.
+     *
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
+     * @param  string $account_id (required)
+     * @param  string $timeframes Optional comma separated list of rate-of-return timeframes to return. Supported values are &#x60;ALL&#x60;, &#x60;1Y&#x60;, &#x60;YTD&#x60;, &#x60;1M&#x60;, &#x60;1W&#x60;, and &#x60;1D&#x60;. If omitted, SnapTrade returns all six supported timeframes. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserAccountReturnRates'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getUserAccountReturnRatesAsyncWithHttpInfo($user_id, $user_secret, $account_id, $timeframes = null, string $contentType = self::contentTypes['getUserAccountReturnRates'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    {
+        $returnType = '\SnapTrade\Model\RateOfReturnResponse';
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getUserAccountReturnRatesRequest($user_id, $user_secret, $account_id, $timeframes, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getUserAccountReturnRates'
+     *
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
+     * @param  string $account_id (required)
+     * @param  string $timeframes Optional comma separated list of rate-of-return timeframes to return. Supported values are &#x60;ALL&#x60;, &#x60;1Y&#x60;, &#x60;YTD&#x60;, &#x60;1M&#x60;, &#x60;1W&#x60;, and &#x60;1D&#x60;. If omitted, SnapTrade returns all six supported timeframes. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserAccountReturnRates'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function getUserAccountReturnRatesRequest($user_id, $user_secret, $account_id, $timeframes = SENTINEL_VALUE, string $contentType = self::contentTypes['getUserAccountReturnRates'][0])
+    {
+
+        // Check if $user_id is a string
+        if ($user_id !== SENTINEL_VALUE && !is_string($user_id)) {
+            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_id, true), gettype($user_id)));
+        }
+        // verify the required parameter 'user_id' is set
+        if ($user_id === SENTINEL_VALUE || (is_array($user_id) && count($user_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter user_id when calling getUserAccountReturnRates'
+            );
+        }
+        // Check if $user_secret is a string
+        if ($user_secret !== SENTINEL_VALUE && !is_string($user_secret)) {
+            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
+        }
+        // verify the required parameter 'user_secret' is set
+        if ($user_secret === SENTINEL_VALUE || (is_array($user_secret) && count($user_secret) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter user_secret when calling getUserAccountReturnRates'
+            );
+        }
+        // Check if $account_id is a string
+        if ($account_id !== SENTINEL_VALUE && !is_string($account_id)) {
+            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($account_id, true), gettype($account_id)));
+        }
+        // verify the required parameter 'account_id' is set
+        if ($account_id === SENTINEL_VALUE || (is_array($account_id) && count($account_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter account_id when calling getUserAccountReturnRates'
+            );
+        }
+        // Check if $timeframes is a string
+        if ($timeframes !== SENTINEL_VALUE && !is_string($timeframes)) {
+            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($timeframes, true), gettype($timeframes)));
+        }
+
+
+        $resourcePath = '/accounts/{accountId}/returnRates';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        if ($user_id !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_id,
+                'userId', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
+        if ($user_secret !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_secret,
+                'userSecret', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
+        if ($timeframes !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $timeframes,
+                'timeframes', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                false // required
+            ) ?? []);
+        }
+
+
+        // path params
+        if ($account_id !== SENTINEL_VALUE) {
+            $resourcePath = str_replace(
+                '{' . 'accountId' . '}',
+                ObjectSerializer::toPathValue($account_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('clientId');
+        if ($apiKey !== null) {
+            $queryParams['clientId'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Signature');
+        if ($apiKey !== null) {
+            $headers['Signature'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('timestamp');
+        if ($apiKey !== null) {
+            $queryParams['timestamp'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $method = 'GET';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
+    }
+
+    /**
      * Operation getUserHoldings
      *
      * List account holdings
+     *
+     * **Deprecated.** Use the finer-grained account data endpoints instead: [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getAllAccountPositions), and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders). Returns a list of balances, positions, and recent orders for the specified account.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
      *
      * @param  string $account_id account_id (required)
      * @param  string $user_id user_id (required)
@@ -2254,7 +5123,8 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \SnapTrade\Model\AccountHoldingsAccount|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\Model403FailedRequestResponse
+     * @return \SnapTrade\Model\AccountHoldingsAccount|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\Model403FailedRequestResponse|\SnapTrade\Model\Model425FailedRequestResponse
+     * @deprecated
      */
     public function getUserHoldings(
         $account_id,
@@ -2274,6 +5144,8 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * List account holdings
      *
+     * **Deprecated.** Use the finer-grained account data endpoints instead: [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getAllAccountPositions), and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders). Returns a list of balances, positions, and recent orders for the specified account.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+     *
      * @param  string $account_id (required)
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -2281,7 +5153,8 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \SnapTrade\Model\AccountHoldingsAccount|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\Model403FailedRequestResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SnapTrade\Model\AccountHoldingsAccount|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\Model403FailedRequestResponse|\SnapTrade\Model\Model425FailedRequestResponse, HTTP status code, HTTP response headers (array of strings)
+     * @deprecated
      */
     public function getUserHoldingsWithHttpInfo($account_id, $user_id, $user_secret, string $contentType = self::contentTypes['getUserHoldings'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
@@ -2385,6 +5258,21 @@ class AccountInformationApi extends \SnapTrade\CustomApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
+                case 425:
+                    if ('\SnapTrade\Model\Model425FailedRequestResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\SnapTrade\Model\Model425FailedRequestResponse' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\Model425FailedRequestResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
             }
 
             $returnType = '\SnapTrade\Model\AccountHoldingsAccount';
@@ -2429,6 +5317,14 @@ class AccountInformationApi extends \SnapTrade\CustomApi
                     );
                     $e->setResponseObject($data);
                     break;
+                case 425:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SnapTrade\Model\Model425FailedRequestResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
             }
             throw $e;
         }
@@ -2439,6 +5335,8 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * List account holdings
      *
+     * **Deprecated.** Use the finer-grained account data endpoints instead: [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getAllAccountPositions), and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders). Returns a list of balances, positions, and recent orders for the specified account.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+     *
      * @param  string $account_id (required)
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -2446,6 +5344,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @deprecated
      */
     public function getUserHoldingsAsync(
         $account_id,
@@ -2469,6 +5368,8 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * List account holdings
      *
+     * **Deprecated.** Use the finer-grained account data endpoints instead: [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getAllAccountPositions), and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders). Returns a list of balances, positions, and recent orders for the specified account.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+     *
      * @param  string $account_id (required)
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -2476,6 +5377,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @deprecated
      */
     public function getUserHoldingsAsyncWithHttpInfo($account_id, $user_id, $user_secret, string $contentType = self::contentTypes['getUserHoldings'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
@@ -2531,6 +5433,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
+     * @deprecated
      */
     public function getUserHoldingsRequest($account_id, $user_id, $user_secret, string $contentType = self::contentTypes['getUserHoldings'][0])
     {
@@ -2687,6 +5590,8 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * List accounts
      *
+     * Returns all brokerage accounts across all connections known to SnapTrade for the authenticated user.  This endpoint returns Daily data regardless of the customer&#39;s plan. Daily data is cached and refreshed once a day, which makes this endpoint fast and well-suited to listing accounts across all of a user&#39;s connections in a single call. Exact refresh timing may vary by brokerage. To get real-time data on Pay as you Go / Real-time, use the [list accounts for a connection endpoint](/reference/Connections/Connections_listBrokerageAuthorizationAccounts). Customers on Pay as you Go / Daily can force a refresh with the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
+     *
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listUserAccounts'] to see the possible values for this operation
@@ -2711,6 +5616,8 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      * Operation listUserAccountsWithHttpInfo
      *
      * List accounts
+     *
+     * Returns all brokerage accounts across all connections known to SnapTrade for the authenticated user.  This endpoint returns Daily data regardless of the customer&#39;s plan. Daily data is cached and refreshed once a day, which makes this endpoint fast and well-suited to listing accounts across all of a user&#39;s connections in a single call. Exact refresh timing may vary by brokerage. To get real-time data on Pay as you Go / Real-time, use the [list accounts for a connection endpoint](/reference/Connections/Connections_listBrokerageAuthorizationAccounts). Customers on Pay as you Go / Daily can force a refresh with the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -2829,6 +5736,8 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * List accounts
      *
+     * Returns all brokerage accounts across all connections known to SnapTrade for the authenticated user.  This endpoint returns Daily data regardless of the customer&#39;s plan. Daily data is cached and refreshed once a day, which makes this endpoint fast and well-suited to listing accounts across all of a user&#39;s connections in a single call. Exact refresh timing may vary by brokerage. To get real-time data on Pay as you Go / Real-time, use the [list accounts for a connection endpoint](/reference/Connections/Connections_listBrokerageAuthorizationAccounts). Customers on Pay as you Go / Daily can force a refresh with the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
+     *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listUserAccounts'] to see the possible values for this operation
@@ -2856,6 +5765,8 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      * Operation listUserAccountsAsyncWithHttpInfo
      *
      * List accounts
+     *
+     * Returns all brokerage accounts across all connections known to SnapTrade for the authenticated user.  This endpoint returns Daily data regardless of the customer&#39;s plan. Daily data is cached and refreshed once a day, which makes this endpoint fast and well-suited to listing accounts across all of a user&#39;s connections in a single call. Exact refresh timing may vary by brokerage. To get real-time data on Pay as you Go / Real-time, use the [list accounts for a connection endpoint](/reference/Connections/Connections_listBrokerageAuthorizationAccounts). Customers on Pay as you Go / Daily can force a refresh with the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -3055,6 +5966,8 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * Update details of an investment account
      *
+     * Updates various properties of a specified account.
+     *
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
      * @param  string $account_id The ID of the account to update. (required)
@@ -3081,6 +5994,8 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      * Operation updateUserAccountWithHttpInfo
      *
      * Update details of an investment account
+     *
+     * Updates various properties of a specified account.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -3201,6 +6116,8 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * Update details of an investment account
      *
+     * Updates various properties of a specified account.
+     *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
      * @param  string $account_id The ID of the account to update. (required)
@@ -3230,6 +6147,8 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      * Operation updateUserAccountAsyncWithHttpInfo
      *
      * Update details of an investment account
+     *
+     * Updates various properties of a specified account.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)

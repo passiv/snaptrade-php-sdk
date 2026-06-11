@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * BrokerageAuthorizationRefreshConfirmationTest Class Doc Comment
  *
  * @category    Class
- * @description BrokerageAuthorizationRefreshConfirmation
+ * @description Confirmation that the syncs have been scheduled.
  * @package     SnapTrade
  */
 class BrokerageAuthorizationRefreshConfirmationTest extends TestCase

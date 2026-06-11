@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * ManualTradeSymbolTest Class Doc Comment
  *
  * @category    Class
- * @description Manual trade symbol object
+ * @description Information about the security for the order.
  * @package     SnapTrade
  */
 class ManualTradeSymbolTest extends TestCase
@@ -67,15 +67,6 @@ class ManualTradeSymbolTest extends TestCase
      * Test "ManualTradeSymbol"
      */
     public function testManualTradeSymbol()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "brokerage_symbol_id"
-     */
-    public function testPropertyBrokerageSymbolId()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
@@ -121,6 +112,15 @@ class ManualTradeSymbolTest extends TestCase
      * Test attribute "symbol"
      */
     public function testPropertySymbol()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "brokerage_symbol_id"
+     */
+    public function testPropertyBrokerageSymbolId()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

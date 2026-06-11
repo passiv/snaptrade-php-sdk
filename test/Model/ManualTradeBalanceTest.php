@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * ManualTradeBalanceTest Class Doc Comment
  *
  * @category    Class
- * @description Balance
+ * @description Estimated remaining balance of the account after the trade is executed.
  * @package     SnapTrade
  */
 class ManualTradeBalanceTest extends TestCase

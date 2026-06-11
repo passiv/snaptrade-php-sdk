@@ -112,7 +112,7 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
 		'description' => false,
 		'aws_s3_logo_url' => false,
 		'aws_s3_square_logo_url' => true,
-		'url' => false,
+		'url' => true,
 		'enabled' => false,
 		'maintenance_mode' => false,
 		'is_degraded' => false,
@@ -625,7 +625,7 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets url
      *
-     * @param string|null $url URL to the brokerage's website.
+     * @param string|null $url URL to the brokerage's website. Returns null if the brokerage has no website on record.
      *
      * @return self
      */
@@ -633,7 +633,14 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
     {
 
         if (is_null($url)) {
-            throw new \InvalidArgumentException('non-nullable url cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'url');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('url', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['url'] = $url;

@@ -95,7 +95,7 @@ class PartnerData implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static array $openAPINullables = [
         'slug' => false,
 		'name' => false,
-		'logo_url' => false,
+		'logo_url' => true,
 		'allowed_brokerages' => false,
 		'can_access_trades' => false,
 		'can_access_holdings' => false,
@@ -103,7 +103,7 @@ class PartnerData implements ModelInterface, ArrayAccess, \JsonSerializable
 		'can_access_reference_data' => false,
 		'can_access_portfolio_management' => false,
 		'can_access_orders' => false,
-		'redirect_uri' => false,
+		'redirect_uri' => true,
 		'pin_required' => false
     ];
 
@@ -431,7 +431,7 @@ class PartnerData implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets logo_url
      *
-     * @param string|null $logo_url URL to your company or product logo.
+     * @param string|null $logo_url URL to your company or product logo. Returns null if no logo has been configured (always the case for personal access clients).
      *
      * @return self
      */
@@ -439,7 +439,14 @@ class PartnerData implements ModelInterface, ArrayAccess, \JsonSerializable
     {
 
         if (is_null($logo_url)) {
-            throw new \InvalidArgumentException('non-nullable logo_url cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'logo_url');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('logo_url', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['logo_url'] = $logo_url;
@@ -663,7 +670,7 @@ class PartnerData implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets redirect_uri
      *
-     * @param string|null $redirect_uri URI to redirect user back to after user is done adding brokerage connections.
+     * @param string|null $redirect_uri URI to redirect user back to after user is done adding brokerage connections. Returns null if no redirect URI has been configured (always the case for personal access clients).
      *
      * @return self
      */
@@ -671,7 +678,14 @@ class PartnerData implements ModelInterface, ArrayAccess, \JsonSerializable
     {
 
         if (is_null($redirect_uri)) {
-            throw new \InvalidArgumentException('non-nullable redirect_uri cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'redirect_uri');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('redirect_uri', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['redirect_uri'] = $redirect_uri;

@@ -90,7 +90,7 @@ class Configuration
      *
      * @var string
      */
-    protected $host = 'https://api.snaptrade.com/api/v1';
+    protected $host = 'https://api.snaptrade.com';
 
     /**
      * User agent of the HTTP request, set to "Konfig/{version}/PHP" by default
@@ -151,7 +151,7 @@ class Configuration
         string $clientId = null,
         string $Signature = null,
         string $timestamp = null,
-        string $host = 'https://api.snaptrade.com/api/v1'
+        string $host = 'https://api.snaptrade.com'
     )
     {
         $this->host = $host;
@@ -527,7 +527,7 @@ class Configuration
     {
         return [
             [
-                "url" => "https://api.snaptrade.com/api/v1",
+                "url" => "https://api.snaptrade.com",
                 "description" => "SnapTrade Production API",
             ]
         ];

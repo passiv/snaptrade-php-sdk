@@ -32,7 +32,7 @@ class Client
         string $Signature = null,
         string $timestamp = null,
         bool $verifySsl = null,
-        string $host = 'https://api.snaptrade.com/api/v1',
+        string $host = 'https://api.snaptrade.com',
         \SnapTrade\Configuration $config = null
     )
     {

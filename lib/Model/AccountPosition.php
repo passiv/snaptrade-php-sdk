@@ -406,7 +406,7 @@ class AccountPosition implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets price
      *
-     * @param float|null $price Last known market price for the position.
+     * @param float|null $price Last known market price _per share_. The freshness of this price depends on the brokerage. Some brokerages provide real-time prices, while others provide delayed prices. It is recommended that you rely on your own third-party market data provider for most up to date prices.
      *
      * @return self
      */
@@ -442,7 +442,7 @@ class AccountPosition implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets cost_basis
      *
-     * @param float|null $cost_basis Book price or average purchase price for the position.
+     * @param float|null $cost_basis Book price or average purchase price for the position. For options, this is per-contract.
      *
      * @return self
      */

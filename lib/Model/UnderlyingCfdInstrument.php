@@ -1,6 +1,6 @@
 <?php
 /**
- * Instrument
+ * UnderlyingCfdInstrument
  *
  * PHP version 7.4
  *
@@ -27,14 +27,14 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * Instrument Class Doc Comment
+ * UnderlyingCfdInstrument Class Doc Comment
  *
  * @category Class
- * @description Instrument metadata for a V2 position. Use &#x60;kind&#x60; to determine which schema is present.
+ * @description The underlying instrument referenced by a CFD contract.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
+class UnderlyingCfdInstrument implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = 'kind';
 
@@ -43,7 +43,7 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'Instrument';
+    protected static $openAPIModelName = 'UnderlyingCfdInstrument';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,15 +58,7 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
         'description' => 'string',
         'currency' => 'string',
         'exchange' => 'string',
-        'figi_instrument' => '\SnapTrade\Model\StockInstrumentFigiInstrument',
-        'option_type' => 'string',
-        'strike_price' => 'float',
-        'expiration_date' => '\DateTime',
-        'underlying' => '\SnapTrade\Model\UnderlyingOptionInstrument',
-        'root_symbol' => 'string',
-        'expiration_code' => 'string',
-        'multiplier' => 'float',
-        'underlying_instrument' => '\SnapTrade\Model\CfdInstrumentUnderlyingInstrument'
+        'figi_instrument' => '\SnapTrade\Model\StockInstrumentFigiInstrument'
     ];
 
     /**
@@ -84,15 +76,7 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
         'description' => null,
         'currency' => null,
         'exchange' => null,
-        'figi_instrument' => null,
-        'option_type' => null,
-        'strike_price' => 'decimal',
-        'expiration_date' => 'date',
-        'underlying' => null,
-        'root_symbol' => null,
-        'expiration_code' => null,
-        'multiplier' => 'decimal',
-        'underlying_instrument' => null
+        'figi_instrument' => null
     ];
 
     /**
@@ -108,15 +92,7 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
 		'description' => true,
 		'currency' => true,
 		'exchange' => true,
-		'figi_instrument' => true,
-		'option_type' => false,
-		'strike_price' => false,
-		'expiration_date' => true,
-		'underlying' => false,
-		'root_symbol' => false,
-		'expiration_code' => false,
-		'multiplier' => true,
-		'underlying_instrument' => false
+		'figi_instrument' => true
     ];
 
     /**
@@ -212,15 +188,7 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
         'description' => 'description',
         'currency' => 'currency',
         'exchange' => 'exchange',
-        'figi_instrument' => 'figi_instrument',
-        'option_type' => 'option_type',
-        'strike_price' => 'strike_price',
-        'expiration_date' => 'expiration_date',
-        'underlying' => 'underlying',
-        'root_symbol' => 'root_symbol',
-        'expiration_code' => 'expiration_code',
-        'multiplier' => 'multiplier',
-        'underlying_instrument' => 'underlying_instrument'
+        'figi_instrument' => 'figi_instrument'
     ];
 
     /**
@@ -236,15 +204,7 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
         'description' => 'setDescription',
         'currency' => 'setCurrency',
         'exchange' => 'setExchange',
-        'figi_instrument' => 'setFigiInstrument',
-        'option_type' => 'setOptionType',
-        'strike_price' => 'setStrikePrice',
-        'expiration_date' => 'setExpirationDate',
-        'underlying' => 'setUnderlying',
-        'root_symbol' => 'setRootSymbol',
-        'expiration_code' => 'setExpirationCode',
-        'multiplier' => 'setMultiplier',
-        'underlying_instrument' => 'setUnderlyingInstrument'
+        'figi_instrument' => 'setFigiInstrument'
     ];
 
     /**
@@ -260,15 +220,7 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
         'description' => 'getDescription',
         'currency' => 'getCurrency',
         'exchange' => 'getExchange',
-        'figi_instrument' => 'getFigiInstrument',
-        'option_type' => 'getOptionType',
-        'strike_price' => 'getStrikePrice',
-        'expiration_date' => 'getExpirationDate',
-        'underlying' => 'getUnderlying',
-        'root_symbol' => 'getRootSymbol',
-        'expiration_code' => 'getExpirationCode',
-        'multiplier' => 'getMultiplier',
-        'underlying_instrument' => 'getUnderlyingInstrument'
+        'figi_instrument' => 'getFigiInstrument'
     ];
 
     /**
@@ -313,8 +265,6 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     public const KIND_OTHER = 'other';
-    public const OPTION_TYPE_CALL = 'CALL';
-    public const OPTION_TYPE_PUT = 'PUT';
 
     /**
      * Gets allowable values of the enum
@@ -325,19 +275,6 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         return [
             self::KIND_OTHER,
-        ];
-    }
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getOptionTypeAllowableValues()
-    {
-        return [
-            self::OPTION_TYPE_CALL,
-            self::OPTION_TYPE_PUT,
         ];
     }
 
@@ -364,14 +301,6 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('currency', $data ?? [], null);
         $this->setIfExists('exchange', $data ?? [], null);
         $this->setIfExists('figi_instrument', $data ?? [], null);
-        $this->setIfExists('option_type', $data ?? [], null);
-        $this->setIfExists('strike_price', $data ?? [], null);
-        $this->setIfExists('expiration_date', $data ?? [], null);
-        $this->setIfExists('underlying', $data ?? [], null);
-        $this->setIfExists('root_symbol', $data ?? [], null);
-        $this->setIfExists('expiration_code', $data ?? [], null);
-        $this->setIfExists('multiplier', $data ?? [], null);
-        $this->setIfExists('underlying_instrument', $data ?? [], null);
 
         // Initialize discriminator property with the model name.
         $this->container['kind'] = static::$openAPIModelName;
@@ -424,36 +353,6 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['raw_symbol'] === null) {
             $invalidProperties[] = "'raw_symbol' can't be null";
-        }
-        if ($this->container['option_type'] === null) {
-            $invalidProperties[] = "'option_type' can't be null";
-        }
-        $allowedValues = $this->getOptionTypeAllowableValues();
-        if (!is_null($this->container['option_type']) && !in_array($this->container['option_type'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'option_type', must be one of '%s'",
-                $this->container['option_type'],
-                implode("', '", $allowedValues)
-            );
-        }
-
-        if ($this->container['strike_price'] === null) {
-            $invalidProperties[] = "'strike_price' can't be null";
-        }
-        if ($this->container['expiration_date'] === null) {
-            $invalidProperties[] = "'expiration_date' can't be null";
-        }
-        if ($this->container['underlying'] === null) {
-            $invalidProperties[] = "'underlying' can't be null";
-        }
-        if ($this->container['root_symbol'] === null) {
-            $invalidProperties[] = "'root_symbol' can't be null";
-        }
-        if ($this->container['expiration_code'] === null) {
-            $invalidProperties[] = "'expiration_code' can't be null";
-        }
-        if ($this->container['underlying_instrument'] === null) {
-            $invalidProperties[] = "'underlying_instrument' can't be null";
         }
         return $invalidProperties;
     }
@@ -736,262 +635,6 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['figi_instrument'] = $figi_instrument;
-
-        return $this;
-    }
-
-    /**
-     * Gets option_type
-     *
-     * @return string
-     */
-    public function getOptionType()
-    {
-        return $this->container['option_type'];
-    }
-
-    /**
-     * Sets option_type
-     *
-     * @param string $option_type Whether the contract is a call or put.
-     *
-     * @return self
-     */
-    public function setOptionType($option_type)
-    {
-        $allowedValues = $this->getOptionTypeAllowableValues();
-        if (!in_array($option_type, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'option_type', must be one of '%s'",
-                    $option_type,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-
-        if (is_null($option_type)) {
-            throw new \InvalidArgumentException('non-nullable option_type cannot be null');
-        }
-
-        $this->container['option_type'] = $option_type;
-
-        return $this;
-    }
-
-    /**
-     * Gets strike_price
-     *
-     * @return float
-     */
-    public function getStrikePrice()
-    {
-        return $this->container['strike_price'];
-    }
-
-    /**
-     * Sets strike_price
-     *
-     * @param float $strike_price Strike price for the option contract.
-     *
-     * @return self
-     */
-    public function setStrikePrice($strike_price)
-    {
-
-        if (is_null($strike_price)) {
-            throw new \InvalidArgumentException('non-nullable strike_price cannot be null');
-        }
-
-        $this->container['strike_price'] = $strike_price;
-
-        return $this;
-    }
-
-    /**
-     * Gets expiration_date
-     *
-     * @return \DateTime
-     */
-    public function getExpirationDate()
-    {
-        return $this->container['expiration_date'];
-    }
-
-    /**
-     * Sets expiration_date
-     *
-     * @param \DateTime $expiration_date Expiration date of the contract.
-     *
-     * @return self
-     */
-    public function setExpirationDate($expiration_date)
-    {
-
-        if (is_null($expiration_date)) {
-            array_push($this->openAPINullablesSetToNull, 'expiration_date');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('expiration_date', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['expiration_date'] = $expiration_date;
-
-        return $this;
-    }
-
-    /**
-     * Gets underlying
-     *
-     * @return \SnapTrade\Model\UnderlyingOptionInstrument
-     */
-    public function getUnderlying()
-    {
-        return $this->container['underlying'];
-    }
-
-    /**
-     * Sets underlying
-     *
-     * @param \SnapTrade\Model\UnderlyingOptionInstrument $underlying underlying
-     *
-     * @return self
-     */
-    public function setUnderlying($underlying)
-    {
-
-        if (is_null($underlying)) {
-            throw new \InvalidArgumentException('non-nullable underlying cannot be null');
-        }
-
-        $this->container['underlying'] = $underlying;
-
-        return $this;
-    }
-
-    /**
-     * Gets root_symbol
-     *
-     * @return string
-     */
-    public function getRootSymbol()
-    {
-        return $this->container['root_symbol'];
-    }
-
-    /**
-     * Sets root_symbol
-     *
-     * @param string $root_symbol Root symbol for the future contract.
-     *
-     * @return self
-     */
-    public function setRootSymbol($root_symbol)
-    {
-
-        if (is_null($root_symbol)) {
-            throw new \InvalidArgumentException('non-nullable root_symbol cannot be null');
-        }
-
-        $this->container['root_symbol'] = $root_symbol;
-
-        return $this;
-    }
-
-    /**
-     * Gets expiration_code
-     *
-     * @return string
-     */
-    public function getExpirationCode()
-    {
-        return $this->container['expiration_code'];
-    }
-
-    /**
-     * Sets expiration_code
-     *
-     * @param string $expiration_code Exchange expiration code for the contract.
-     *
-     * @return self
-     */
-    public function setExpirationCode($expiration_code)
-    {
-
-        if (is_null($expiration_code)) {
-            throw new \InvalidArgumentException('non-nullable expiration_code cannot be null');
-        }
-
-        $this->container['expiration_code'] = $expiration_code;
-
-        return $this;
-    }
-
-    /**
-     * Gets multiplier
-     *
-     * @return float|null
-     */
-    public function getMultiplier()
-    {
-        return $this->container['multiplier'];
-    }
-
-    /**
-     * Sets multiplier
-     *
-     * @param float|null $multiplier Multiplier for the future contract.
-     *
-     * @return self
-     */
-    public function setMultiplier($multiplier)
-    {
-
-        if (is_null($multiplier)) {
-            array_push($this->openAPINullablesSetToNull, 'multiplier');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('multiplier', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['multiplier'] = $multiplier;
-
-        return $this;
-    }
-
-    /**
-     * Gets underlying_instrument
-     *
-     * @return \SnapTrade\Model\CfdInstrumentUnderlyingInstrument
-     */
-    public function getUnderlyingInstrument()
-    {
-        return $this->container['underlying_instrument'];
-    }
-
-    /**
-     * Sets underlying_instrument
-     *
-     * @param \SnapTrade\Model\CfdInstrumentUnderlyingInstrument $underlying_instrument underlying_instrument
-     *
-     * @return self
-     */
-    public function setUnderlyingInstrument($underlying_instrument)
-    {
-
-        if (is_null($underlying_instrument)) {
-            throw new \InvalidArgumentException('non-nullable underlying_instrument cannot be null');
-        }
-
-        $this->container['underlying_instrument'] = $underlying_instrument;
 
         return $this;
     }

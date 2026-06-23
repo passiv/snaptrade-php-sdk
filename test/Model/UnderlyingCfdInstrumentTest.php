@@ -1,6 +1,6 @@
 <?php
 /**
- * InstrumentTest
+ * UnderlyingCfdInstrumentTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * InstrumentTest Class Doc Comment
+ * UnderlyingCfdInstrumentTest Class Doc Comment
  *
  * @category    Class
- * @description Instrument metadata for a V2 position. Use &#x60;kind&#x60; to determine which schema is present.
+ * @description The underlying instrument referenced by a CFD contract.
  * @package     SnapTrade
  */
-class InstrumentTest extends TestCase
+class UnderlyingCfdInstrumentTest extends TestCase
 {
 
     /**
@@ -64,9 +64,9 @@ class InstrumentTest extends TestCase
     }
 
     /**
-     * Test "Instrument"
+     * Test "UnderlyingCfdInstrument"
      */
-    public function testInstrument()
+    public function testUnderlyingCfdInstrument()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
@@ -139,78 +139,6 @@ class InstrumentTest extends TestCase
      * Test attribute "figi_instrument"
      */
     public function testPropertyFigiInstrument()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "option_type"
-     */
-    public function testPropertyOptionType()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "strike_price"
-     */
-    public function testPropertyStrikePrice()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "expiration_date"
-     */
-    public function testPropertyExpirationDate()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "underlying"
-     */
-    public function testPropertyUnderlying()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "root_symbol"
-     */
-    public function testPropertyRootSymbol()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "expiration_code"
-     */
-    public function testPropertyExpirationCode()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "multiplier"
-     */
-    public function testPropertyMultiplier()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "underlying_instrument"
-     */
-    public function testPropertyUnderlyingInstrument()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

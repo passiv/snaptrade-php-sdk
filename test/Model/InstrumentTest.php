@@ -172,6 +172,15 @@ class InstrumentTest extends TestCase
     }
 
     /**
+     * Test attribute "multiplier"
+     */
+    public function testPropertyMultiplier()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "underlying"
      */
     public function testPropertyUnderlying()
@@ -193,15 +202,6 @@ class InstrumentTest extends TestCase
      * Test attribute "expiration_code"
      */
     public function testPropertyExpirationCode()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "multiplier"
-     */
-    public function testPropertyMultiplier()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

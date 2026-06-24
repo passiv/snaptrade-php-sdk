@@ -127,6 +127,15 @@ class OptionInstrumentTest extends TestCase
     }
 
     /**
+     * Test attribute "multiplier"
+     */
+    public function testPropertyMultiplier()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "description"
      */
     public function testPropertyDescription()

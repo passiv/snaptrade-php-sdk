@@ -57,6 +57,7 @@ class OptionInstrument implements ModelInterface, ArrayAccess, \JsonSerializable
         'option_type' => 'string',
         'strike_price' => 'float',
         'expiration_date' => '\DateTime',
+        'multiplier' => 'float',
         'description' => 'string',
         'underlying' => '\SnapTrade\Model\UnderlyingOptionInstrument'
     ];
@@ -75,6 +76,7 @@ class OptionInstrument implements ModelInterface, ArrayAccess, \JsonSerializable
         'option_type' => null,
         'strike_price' => 'decimal',
         'expiration_date' => 'date',
+        'multiplier' => 'decimal',
         'description' => null,
         'underlying' => null
     ];
@@ -91,6 +93,7 @@ class OptionInstrument implements ModelInterface, ArrayAccess, \JsonSerializable
 		'option_type' => false,
 		'strike_price' => false,
 		'expiration_date' => false,
+		'multiplier' => false,
 		'description' => true,
 		'underlying' => false
     ];
@@ -187,6 +190,7 @@ class OptionInstrument implements ModelInterface, ArrayAccess, \JsonSerializable
         'option_type' => 'option_type',
         'strike_price' => 'strike_price',
         'expiration_date' => 'expiration_date',
+        'multiplier' => 'multiplier',
         'description' => 'description',
         'underlying' => 'underlying'
     ];
@@ -203,6 +207,7 @@ class OptionInstrument implements ModelInterface, ArrayAccess, \JsonSerializable
         'option_type' => 'setOptionType',
         'strike_price' => 'setStrikePrice',
         'expiration_date' => 'setExpirationDate',
+        'multiplier' => 'setMultiplier',
         'description' => 'setDescription',
         'underlying' => 'setUnderlying'
     ];
@@ -219,6 +224,7 @@ class OptionInstrument implements ModelInterface, ArrayAccess, \JsonSerializable
         'option_type' => 'getOptionType',
         'strike_price' => 'getStrikePrice',
         'expiration_date' => 'getExpirationDate',
+        'multiplier' => 'getMultiplier',
         'description' => 'getDescription',
         'underlying' => 'getUnderlying'
     ];
@@ -314,6 +320,7 @@ class OptionInstrument implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('option_type', $data ?? [], null);
         $this->setIfExists('strike_price', $data ?? [], null);
         $this->setIfExists('expiration_date', $data ?? [], null);
+        $this->setIfExists('multiplier', $data ?? [], null);
         $this->setIfExists('description', $data ?? [], null);
         $this->setIfExists('underlying', $data ?? [], null);
     }
@@ -380,6 +387,9 @@ class OptionInstrument implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['expiration_date'] === null) {
             $invalidProperties[] = "'expiration_date' can't be null";
+        }
+        if ($this->container['multiplier'] === null) {
+            $invalidProperties[] = "'multiplier' can't be null";
         }
         if ($this->container['underlying'] === null) {
             $invalidProperties[] = "'underlying' can't be null";
@@ -589,6 +599,35 @@ class OptionInstrument implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['expiration_date'] = $expiration_date;
+
+        return $this;
+    }
+
+    /**
+     * Gets multiplier
+     *
+     * @return float
+     */
+    public function getMultiplier()
+    {
+        return $this->container['multiplier'];
+    }
+
+    /**
+     * Sets multiplier
+     *
+     * @param float $multiplier Number of underlying shares per contract. Standard options are 100, mini options are 10.
+     *
+     * @return self
+     */
+    public function setMultiplier($multiplier)
+    {
+
+        if (is_null($multiplier)) {
+            throw new \InvalidArgumentException('non-nullable multiplier cannot be null');
+        }
+
+        $this->container['multiplier'] = $multiplier;
 
         return $this;
     }

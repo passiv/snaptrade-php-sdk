@@ -62,10 +62,10 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
         'option_type' => 'string',
         'strike_price' => 'float',
         'expiration_date' => '\DateTime',
+        'multiplier' => 'float',
         'underlying' => '\SnapTrade\Model\UnderlyingOptionInstrument',
         'root_symbol' => 'string',
         'expiration_code' => 'string',
-        'multiplier' => 'float',
         'underlying_instrument' => '\SnapTrade\Model\UnderlyingCfdInstrument'
     ];
 
@@ -88,10 +88,10 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
         'option_type' => null,
         'strike_price' => 'decimal',
         'expiration_date' => 'date',
+        'multiplier' => 'decimal',
         'underlying' => null,
         'root_symbol' => null,
         'expiration_code' => null,
-        'multiplier' => 'decimal',
         'underlying_instrument' => null
     ];
 
@@ -112,10 +112,10 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
 		'option_type' => false,
 		'strike_price' => false,
 		'expiration_date' => true,
+		'multiplier' => true,
 		'underlying' => false,
 		'root_symbol' => false,
 		'expiration_code' => false,
-		'multiplier' => true,
 		'underlying_instrument' => false
     ];
 
@@ -216,10 +216,10 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
         'option_type' => 'option_type',
         'strike_price' => 'strike_price',
         'expiration_date' => 'expiration_date',
+        'multiplier' => 'multiplier',
         'underlying' => 'underlying',
         'root_symbol' => 'root_symbol',
         'expiration_code' => 'expiration_code',
-        'multiplier' => 'multiplier',
         'underlying_instrument' => 'underlying_instrument'
     ];
 
@@ -240,10 +240,10 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
         'option_type' => 'setOptionType',
         'strike_price' => 'setStrikePrice',
         'expiration_date' => 'setExpirationDate',
+        'multiplier' => 'setMultiplier',
         'underlying' => 'setUnderlying',
         'root_symbol' => 'setRootSymbol',
         'expiration_code' => 'setExpirationCode',
-        'multiplier' => 'setMultiplier',
         'underlying_instrument' => 'setUnderlyingInstrument'
     ];
 
@@ -264,10 +264,10 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
         'option_type' => 'getOptionType',
         'strike_price' => 'getStrikePrice',
         'expiration_date' => 'getExpirationDate',
+        'multiplier' => 'getMultiplier',
         'underlying' => 'getUnderlying',
         'root_symbol' => 'getRootSymbol',
         'expiration_code' => 'getExpirationCode',
-        'multiplier' => 'getMultiplier',
         'underlying_instrument' => 'getUnderlyingInstrument'
     ];
 
@@ -367,10 +367,10 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('option_type', $data ?? [], null);
         $this->setIfExists('strike_price', $data ?? [], null);
         $this->setIfExists('expiration_date', $data ?? [], null);
+        $this->setIfExists('multiplier', $data ?? [], null);
         $this->setIfExists('underlying', $data ?? [], null);
         $this->setIfExists('root_symbol', $data ?? [], null);
         $this->setIfExists('expiration_code', $data ?? [], null);
-        $this->setIfExists('multiplier', $data ?? [], null);
         $this->setIfExists('underlying_instrument', $data ?? [], null);
 
         // Initialize discriminator property with the model name.
@@ -442,6 +442,9 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['expiration_date'] === null) {
             $invalidProperties[] = "'expiration_date' can't be null";
+        }
+        if ($this->container['multiplier'] === null) {
+            $invalidProperties[] = "'multiplier' can't be null";
         }
         if ($this->container['underlying'] === null) {
             $invalidProperties[] = "'underlying' can't be null";
@@ -845,6 +848,42 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
+     * Gets multiplier
+     *
+     * @return float
+     */
+    public function getMultiplier()
+    {
+        return $this->container['multiplier'];
+    }
+
+    /**
+     * Sets multiplier
+     *
+     * @param float $multiplier Multiplier for the future contract.
+     *
+     * @return self
+     */
+    public function setMultiplier($multiplier)
+    {
+
+        if (is_null($multiplier)) {
+            array_push($this->openAPINullablesSetToNull, 'multiplier');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('multiplier', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['multiplier'] = $multiplier;
+
+        return $this;
+    }
+
+    /**
      * Gets underlying
      *
      * @return \SnapTrade\Model\UnderlyingOptionInstrument
@@ -927,42 +966,6 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['expiration_code'] = $expiration_code;
-
-        return $this;
-    }
-
-    /**
-     * Gets multiplier
-     *
-     * @return float|null
-     */
-    public function getMultiplier()
-    {
-        return $this->container['multiplier'];
-    }
-
-    /**
-     * Sets multiplier
-     *
-     * @param float|null $multiplier Multiplier for the future contract.
-     *
-     * @return self
-     */
-    public function setMultiplier($multiplier)
-    {
-
-        if (is_null($multiplier)) {
-            array_push($this->openAPINullablesSetToNull, 'multiplier');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('multiplier', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['multiplier'] = $multiplier;
 
         return $this;
     }

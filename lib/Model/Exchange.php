@@ -87,7 +87,7 @@ class Exchange implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static array $openAPINullables = [
         'id' => false,
 		'code' => false,
-		'mic_code' => false,
+		'mic_code' => true,
 		'name' => false,
 		'timezone' => false,
 		'start_time' => false,
@@ -374,7 +374,7 @@ class Exchange implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets code
      *
-     * @param string|null $code A short name for the exchange. For standardized exchange code, please us the `mic_code` field.
+     * @param string|null $code A short name for the exchange. For standardized exchange code, please use the `mic_code` field.
      *
      * @return self
      */
@@ -411,7 +411,14 @@ class Exchange implements ModelInterface, ArrayAccess, \JsonSerializable
     {
 
         if (is_null($mic_code)) {
-            throw new \InvalidArgumentException('non-nullable mic_code cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'mic_code');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('mic_code', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['mic_code'] = $mic_code;

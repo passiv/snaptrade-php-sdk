@@ -51,9 +51,9 @@ class PositionSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
+        'symbol' => '\SnapTrade\Model\UniversalSymbol',
         'id' => 'string',
         'description' => 'string',
-        'symbol' => '\SnapTrade\Model\UniversalSymbol',
         'local_id' => 'string',
         'is_quotable' => 'bool',
         'is_tradable' => 'bool'
@@ -67,9 +67,9 @@ class PositionSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
+        'symbol' => null,
         'id' => 'uuid',
         'description' => null,
-        'symbol' => null,
         'local_id' => null,
         'is_quotable' => null,
         'is_tradable' => null
@@ -81,9 +81,9 @@ class PositionSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'id' => false,
+        'symbol' => false,
+		'id' => false,
 		'description' => false,
-		'symbol' => false,
 		'local_id' => true,
 		'is_quotable' => false,
 		'is_tradable' => false
@@ -175,9 +175,9 @@ class PositionSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
+        'symbol' => 'symbol',
         'id' => 'id',
         'description' => 'description',
-        'symbol' => 'symbol',
         'local_id' => 'local_id',
         'is_quotable' => 'is_quotable',
         'is_tradable' => 'is_tradable'
@@ -189,9 +189,9 @@ class PositionSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
+        'symbol' => 'setSymbol',
         'id' => 'setId',
         'description' => 'setDescription',
-        'symbol' => 'setSymbol',
         'local_id' => 'setLocalId',
         'is_quotable' => 'setIsQuotable',
         'is_tradable' => 'setIsTradable'
@@ -203,9 +203,9 @@ class PositionSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
+        'symbol' => 'getSymbol',
         'id' => 'getId',
         'description' => 'getDescription',
-        'symbol' => 'getSymbol',
         'local_id' => 'getLocalId',
         'is_quotable' => 'getIsQuotable',
         'is_tradable' => 'getIsTradable'
@@ -268,9 +268,9 @@ class PositionSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
+        $this->setIfExists('symbol', $data ?? [], null);
         $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('description', $data ?? [], null);
-        $this->setIfExists('symbol', $data ?? [], null);
         $this->setIfExists('local_id', $data ?? [], null);
         $this->setIfExists('is_quotable', $data ?? [], null);
         $this->setIfExists('is_tradable', $data ?? [], null);
@@ -317,6 +317,35 @@ class PositionSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
         return count($this->listInvalidProperties()) === 0;
     }
 
+
+    /**
+     * Gets symbol
+     *
+     * @return \SnapTrade\Model\UniversalSymbol|null
+     */
+    public function getSymbol()
+    {
+        return $this->container['symbol'];
+    }
+
+    /**
+     * Sets symbol
+     *
+     * @param \SnapTrade\Model\UniversalSymbol|null $symbol symbol
+     *
+     * @return self
+     */
+    public function setSymbol($symbol)
+    {
+
+        if (is_null($symbol)) {
+            throw new \InvalidArgumentException('non-nullable symbol cannot be null');
+        }
+
+        $this->container['symbol'] = $symbol;
+
+        return $this;
+    }
 
     /**
      * Gets id
@@ -381,35 +410,6 @@ class PositionSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets symbol
-     *
-     * @return \SnapTrade\Model\UniversalSymbol|null
-     */
-    public function getSymbol()
-    {
-        return $this->container['symbol'];
-    }
-
-    /**
-     * Sets symbol
-     *
-     * @param \SnapTrade\Model\UniversalSymbol|null $symbol symbol
-     *
-     * @return self
-     */
-    public function setSymbol($symbol)
-    {
-
-        if (is_null($symbol)) {
-            throw new \InvalidArgumentException('non-nullable symbol cannot be null');
-        }
-
-        $this->container['symbol'] = $symbol;
-
-        return $this;
-    }
-
-    /**
      * Gets local_id
      *
      * @return string|null
@@ -423,7 +423,7 @@ class PositionSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets local_id
      *
-     * @param string|null $local_id This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
+     * @param string|null $local_id This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this.
      *
      * @return self
      * @deprecated
@@ -461,7 +461,7 @@ class PositionSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets is_quotable
      *
-     * @param bool|null $is_quotable This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
+     * @param bool|null $is_quotable This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this.
      *
      * @return self
      * @deprecated
@@ -492,7 +492,7 @@ class PositionSymbol implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets is_tradable
      *
-     * @param bool|null $is_tradable This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
+     * @param bool|null $is_tradable This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this.
      *
      * @return self
      * @deprecated

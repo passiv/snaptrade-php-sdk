@@ -89,7 +89,7 @@ class UnderlyingSymbolExchange implements ModelInterface, ArrayAccess, \JsonSeri
     protected static array $openAPINullables = [
         'id' => false,
 		'code' => false,
-		'mic_code' => false,
+		'mic_code' => true,
 		'name' => false,
 		'timezone' => false,
 		'start_time' => false,
@@ -418,7 +418,14 @@ class UnderlyingSymbolExchange implements ModelInterface, ArrayAccess, \JsonSeri
     {
 
         if (is_null($mic_code)) {
-            throw new \InvalidArgumentException('non-nullable mic_code cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'mic_code');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('mic_code', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['mic_code'] = $mic_code;

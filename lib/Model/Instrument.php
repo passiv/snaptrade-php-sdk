@@ -65,7 +65,8 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
         'underlying' => '\SnapTrade\Model\UnderlyingOptionInstrument',
         'root_symbol' => 'string',
         'expiration_code' => 'string',
-        'multiplier' => 'float'
+        'multiplier' => 'float',
+        'underlying_instrument' => '\SnapTrade\Model\UnderlyingCfdInstrument'
     ];
 
     /**
@@ -90,7 +91,8 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
         'underlying' => null,
         'root_symbol' => null,
         'expiration_code' => null,
-        'multiplier' => 'decimal'
+        'multiplier' => 'decimal',
+        'underlying_instrument' => null
     ];
 
     /**
@@ -113,7 +115,8 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
 		'underlying' => false,
 		'root_symbol' => false,
 		'expiration_code' => false,
-		'multiplier' => true
+		'multiplier' => true,
+		'underlying_instrument' => false
     ];
 
     /**
@@ -216,7 +219,8 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
         'underlying' => 'underlying',
         'root_symbol' => 'root_symbol',
         'expiration_code' => 'expiration_code',
-        'multiplier' => 'multiplier'
+        'multiplier' => 'multiplier',
+        'underlying_instrument' => 'underlying_instrument'
     ];
 
     /**
@@ -239,7 +243,8 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
         'underlying' => 'setUnderlying',
         'root_symbol' => 'setRootSymbol',
         'expiration_code' => 'setExpirationCode',
-        'multiplier' => 'setMultiplier'
+        'multiplier' => 'setMultiplier',
+        'underlying_instrument' => 'setUnderlyingInstrument'
     ];
 
     /**
@@ -262,7 +267,8 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
         'underlying' => 'getUnderlying',
         'root_symbol' => 'getRootSymbol',
         'expiration_code' => 'getExpirationCode',
-        'multiplier' => 'getMultiplier'
+        'multiplier' => 'getMultiplier',
+        'underlying_instrument' => 'getUnderlyingInstrument'
     ];
 
     /**
@@ -365,6 +371,7 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('root_symbol', $data ?? [], null);
         $this->setIfExists('expiration_code', $data ?? [], null);
         $this->setIfExists('multiplier', $data ?? [], null);
+        $this->setIfExists('underlying_instrument', $data ?? [], null);
 
         // Initialize discriminator property with the model name.
         $this->container['kind'] = static::$openAPIModelName;
@@ -444,6 +451,9 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['expiration_code'] === null) {
             $invalidProperties[] = "'expiration_code' can't be null";
+        }
+        if ($this->container['underlying_instrument'] === null) {
+            $invalidProperties[] = "'underlying_instrument' can't be null";
         }
         return $invalidProperties;
     }
@@ -953,6 +963,35 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['multiplier'] = $multiplier;
+
+        return $this;
+    }
+
+    /**
+     * Gets underlying_instrument
+     *
+     * @return \SnapTrade\Model\UnderlyingCfdInstrument
+     */
+    public function getUnderlyingInstrument()
+    {
+        return $this->container['underlying_instrument'];
+    }
+
+    /**
+     * Sets underlying_instrument
+     *
+     * @param \SnapTrade\Model\UnderlyingCfdInstrument $underlying_instrument underlying_instrument
+     *
+     * @return self
+     */
+    public function setUnderlyingInstrument($underlying_instrument)
+    {
+
+        if (is_null($underlying_instrument)) {
+            throw new \InvalidArgumentException('non-nullable underlying_instrument cannot be null');
+        }
+
+        $this->container['underlying_instrument'] = $underlying_instrument;
 
         return $this;
     }

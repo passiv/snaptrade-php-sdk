@@ -58,7 +58,7 @@ class CfdInstrument implements ModelInterface, ArrayAccess, \JsonSerializable
         'description' => 'string',
         'currency' => 'string',
         'exchange' => 'string',
-        'underlying_instrument' => '\SnapTrade\Model\CfdInstrumentUnderlyingInstrument'
+        'underlying_instrument' => '\SnapTrade\Model\UnderlyingCfdInstrument'
     ];
 
     /**
@@ -606,7 +606,7 @@ class CfdInstrument implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets underlying_instrument
      *
-     * @return \SnapTrade\Model\CfdInstrumentUnderlyingInstrument
+     * @return \SnapTrade\Model\UnderlyingCfdInstrument
      */
     public function getUnderlyingInstrument()
     {
@@ -616,7 +616,7 @@ class CfdInstrument implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets underlying_instrument
      *
-     * @param \SnapTrade\Model\CfdInstrumentUnderlyingInstrument $underlying_instrument underlying_instrument
+     * @param \SnapTrade\Model\UnderlyingCfdInstrument $underlying_instrument underlying_instrument
      *
      * @return self
      */

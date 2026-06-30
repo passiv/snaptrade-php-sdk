@@ -149,7 +149,7 @@ class OptionsApi extends \SnapTrade\CustomApi
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \SnapTrade\Model\OptionsPosition[]|\SnapTrade\Model\Model500UnexpectedExceptionResponse
+     * @return \SnapTrade\Model\OptionsPosition[]|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\Model500UnexpectedExceptionResponse
      * @deprecated
      */
     public function listOptionHoldings(
@@ -179,7 +179,7 @@ class OptionsApi extends \SnapTrade\CustomApi
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \SnapTrade\Model\OptionsPosition[]|\SnapTrade\Model\Model500UnexpectedExceptionResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SnapTrade\Model\OptionsPosition[]|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\Model500UnexpectedExceptionResponse, HTTP status code, HTTP response headers (array of strings)
      * @deprecated
      */
     public function listOptionHoldingsWithHttpInfo($user_id, $user_secret, $account_id, string $contentType = self::contentTypes['listOptionHoldings'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
@@ -254,6 +254,21 @@ class OptionsApi extends \SnapTrade\CustomApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
+                case 400:
+                    if ('\SnapTrade\Model\Model400FailedRequestResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\SnapTrade\Model\Model400FailedRequestResponse' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\Model400FailedRequestResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
                 case 500:
                     if ('\SnapTrade\Model\Model500UnexpectedExceptionResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
@@ -293,6 +308,14 @@ class OptionsApi extends \SnapTrade\CustomApi
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\SnapTrade\Model\OptionsPosition[]',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SnapTrade\Model\Model400FailedRequestResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);

@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![Packagist](https://img.shields.io/badge/Packagist-v2.0.212-blue)](https://packagist.org/packages/konfig/snaptrade-php-sdk)
+[![Packagist](https://img.shields.io/badge/Packagist-v2.0.213-blue)](https://packagist.org/packages/konfig/snaptrade-php-sdk)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -110,7 +110,7 @@ To install the bindings via [Composer](https://getcomposer.org/), add the follow
     }
   ],
   "require": {
-    "konfig/snaptrade-php-sdk": "2.0.212"
+    "konfig/snaptrade-php-sdk": "2.0.213"
   }
 }
 ```
@@ -1690,7 +1690,7 @@ $result = $snaptrade->experimentalEndpoints->listSubscriptions();
 
 Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).
 
-This endpoint is deprecatd. Consider using the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions). This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.
+This endpoint is deprecated. Consider using the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions). This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.
 
 Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
   - If you do, this endpoint returns real-time data.

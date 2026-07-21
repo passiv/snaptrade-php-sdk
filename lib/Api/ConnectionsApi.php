@@ -3164,7 +3164,7 @@ class ConnectionsApi extends \SnapTrade\CustomApi
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \SnapTrade\Model\RateOfReturnResponse|\SnapTrade\Model\Model403FeatureNotEnabledResponse|\SnapTrade\Model\Model500UnexpectedExceptionResponse|\SnapTrade\Model\Model503BrokerageRequestResponse
+     * @return \SnapTrade\Model\RateOfReturnResponse|\SnapTrade\Model\Model403FeatureNotEnabledResponse|\SnapTrade\Model\Model500UnexpectedExceptionResponse|\SnapTrade\Model\Model501NotImplementedResponse|\SnapTrade\Model\Model503BrokerageRequestResponse
      */
     public function returnRates(
         $user_id,
@@ -3195,7 +3195,7 @@ class ConnectionsApi extends \SnapTrade\CustomApi
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \SnapTrade\Model\RateOfReturnResponse|\SnapTrade\Model\Model403FeatureNotEnabledResponse|\SnapTrade\Model\Model500UnexpectedExceptionResponse|\SnapTrade\Model\Model503BrokerageRequestResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SnapTrade\Model\RateOfReturnResponse|\SnapTrade\Model\Model403FeatureNotEnabledResponse|\SnapTrade\Model\Model500UnexpectedExceptionResponse|\SnapTrade\Model\Model501NotImplementedResponse|\SnapTrade\Model\Model503BrokerageRequestResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function returnRatesWithHttpInfo($user_id, $user_secret, $authorization_id, $timeframes = null, string $contentType = self::contentTypes['returnRates'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
@@ -3300,6 +3300,21 @@ class ConnectionsApi extends \SnapTrade\CustomApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
+                case 501:
+                    if ('\SnapTrade\Model\Model501NotImplementedResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\SnapTrade\Model\Model501NotImplementedResponse' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\Model501NotImplementedResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
                 case 503:
                     if ('\SnapTrade\Model\Model503BrokerageRequestResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
@@ -3355,6 +3370,14 @@ class ConnectionsApi extends \SnapTrade\CustomApi
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\SnapTrade\Model\Model500UnexpectedExceptionResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 501:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SnapTrade\Model\Model501NotImplementedResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);

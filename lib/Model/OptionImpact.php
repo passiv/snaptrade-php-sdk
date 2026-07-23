@@ -267,7 +267,7 @@ class OptionImpact implements ModelInterface, ArrayAccess, \JsonSerializable
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->setIfExists('estimated_cash_change', $data ?? [], null);
         $this->setIfExists('cash_change_direction', $data ?? [], null);

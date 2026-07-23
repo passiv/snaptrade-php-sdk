@@ -27,13 +27,13 @@ class Client
      * Constructor
      */
     public function __construct(
-        string $consumerKey = null,
-        string $clientId = null,
-        string $Signature = null,
-        string $timestamp = null,
-        bool $verifySsl = null,
+        ?string $consumerKey = null,
+        ?string $clientId = null,
+        ?string $Signature = null,
+        ?string $timestamp = null,
+        ?bool $verifySsl = null,
         string $host = 'https://api.snaptrade.com',
-        \SnapTrade\Configuration $config = null
+        ?\SnapTrade\Configuration $config = null
     )
     {
         if ($config == null) {

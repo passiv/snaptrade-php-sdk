@@ -77,9 +77,9 @@ class TransactionsAndReportingApi extends \SnapTrade\CustomApi
      * @param int             $hostIndex (Optional) host index to select the list of hosts if defined in the OpenAPI spec
      */
     public function __construct(
-        Configuration $config = null,
-        ClientInterface $client = null,
-        HeaderSelector $selector = null,
+        ?Configuration $config = null,
+        ?ClientInterface $client = null,
+        ?HeaderSelector $selector = null,
         $hostIndex = 0
     ) {
         $clientOptions = [];
@@ -143,7 +143,7 @@ class TransactionsAndReportingApi extends \SnapTrade\CustomApi
      *
      * Get transaction history for a user
      *
-     * This endpoint is being deprecated but will continue to be available for use via SDKs, please use [the account level endpoint](/reference/Account%20Information/AccountInformation_getAccountActivities) if possible  Returns all historical transactions for the specified user and filtering criteria. It&#39;s recommended to use &#x60;startDate&#x60; and &#x60;endDate&#x60; to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There&#39;s a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the &#x60;trade_date&#x60; field if you need them in a specific order.  This endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage.  **Note:** This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026.
+     * **Deprecated.** Use [the account level endpoint](/reference/Account%20Information/AccountInformation_getAccountActivities) instead, if possible.  This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026.  Returns all historical transactions for the specified user and filtering criteria. It&#39;s recommended to use &#x60;startDate&#x60; and &#x60;endDate&#x60; to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There&#39;s a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the &#x60;trade_date&#x60; field if you need them in a specific order.  This endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage.
      *
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
@@ -181,7 +181,7 @@ class TransactionsAndReportingApi extends \SnapTrade\CustomApi
      *
      * Get transaction history for a user
      *
-     * This endpoint is being deprecated but will continue to be available for use via SDKs, please use [the account level endpoint](/reference/Account%20Information/AccountInformation_getAccountActivities) if possible  Returns all historical transactions for the specified user and filtering criteria. It&#39;s recommended to use &#x60;startDate&#x60; and &#x60;endDate&#x60; to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There&#39;s a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the &#x60;trade_date&#x60; field if you need them in a specific order.  This endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage.  **Note:** This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026.
+     * **Deprecated.** Use [the account level endpoint](/reference/Account%20Information/AccountInformation_getAccountActivities) instead, if possible.  This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026.  Returns all historical transactions for the specified user and filtering criteria. It&#39;s recommended to use &#x60;startDate&#x60; and &#x60;endDate&#x60; to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There&#39;s a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the &#x60;trade_date&#x60; field if you need them in a specific order.  This endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -311,7 +311,7 @@ class TransactionsAndReportingApi extends \SnapTrade\CustomApi
      *
      * Get transaction history for a user
      *
-     * This endpoint is being deprecated but will continue to be available for use via SDKs, please use [the account level endpoint](/reference/Account%20Information/AccountInformation_getAccountActivities) if possible  Returns all historical transactions for the specified user and filtering criteria. It&#39;s recommended to use &#x60;startDate&#x60; and &#x60;endDate&#x60; to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There&#39;s a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the &#x60;trade_date&#x60; field if you need them in a specific order.  This endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage.  **Note:** This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026.
+     * **Deprecated.** Use [the account level endpoint](/reference/Account%20Information/AccountInformation_getAccountActivities) instead, if possible.  This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026.  Returns all historical transactions for the specified user and filtering criteria. It&#39;s recommended to use &#x60;startDate&#x60; and &#x60;endDate&#x60; to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There&#39;s a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the &#x60;trade_date&#x60; field if you need them in a specific order.  This endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -352,7 +352,7 @@ class TransactionsAndReportingApi extends \SnapTrade\CustomApi
      *
      * Get transaction history for a user
      *
-     * This endpoint is being deprecated but will continue to be available for use via SDKs, please use [the account level endpoint](/reference/Account%20Information/AccountInformation_getAccountActivities) if possible  Returns all historical transactions for the specified user and filtering criteria. It&#39;s recommended to use &#x60;startDate&#x60; and &#x60;endDate&#x60; to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There&#39;s a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the &#x60;trade_date&#x60; field if you need them in a specific order.  This endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage.  **Note:** This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026.
+     * **Deprecated.** Use [the account level endpoint](/reference/Account%20Information/AccountInformation_getAccountActivities) instead, if possible.  This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026.  Returns all historical transactions for the specified user and filtering criteria. It&#39;s recommended to use &#x60;startDate&#x60; and &#x60;endDate&#x60; to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There&#39;s a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the &#x60;trade_date&#x60; field if you need them in a specific order.  This endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -631,7 +631,7 @@ class TransactionsAndReportingApi extends \SnapTrade\CustomApi
      *
      * Get performance information for a specific timeframe
      *
-     * Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Please note that Total Equity Timeframe and Rate of Returns are experimental features. Please contact support@snaptrade.com if you notice any inconsistencies.
+     * **Deprecated.** Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Please note that Total Equity Timeframe and Rate of Returns are experimental features. Please contact support@snaptrade.com if you notice any inconsistencies.
      *
      * @param  \DateTime $start_date start_date (required)
      * @param  \DateTime $end_date end_date (required)
@@ -669,7 +669,7 @@ class TransactionsAndReportingApi extends \SnapTrade\CustomApi
      *
      * Get performance information for a specific timeframe
      *
-     * Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Please note that Total Equity Timeframe and Rate of Returns are experimental features. Please contact support@snaptrade.com if you notice any inconsistencies.
+     * **Deprecated.** Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Please note that Total Equity Timeframe and Rate of Returns are experimental features. Please contact support@snaptrade.com if you notice any inconsistencies.
      *
      * @param  \DateTime $start_date (required)
      * @param  \DateTime $end_date (required)
@@ -799,7 +799,7 @@ class TransactionsAndReportingApi extends \SnapTrade\CustomApi
      *
      * Get performance information for a specific timeframe
      *
-     * Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Please note that Total Equity Timeframe and Rate of Returns are experimental features. Please contact support@snaptrade.com if you notice any inconsistencies.
+     * **Deprecated.** Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Please note that Total Equity Timeframe and Rate of Returns are experimental features. Please contact support@snaptrade.com if you notice any inconsistencies.
      *
      * @param  \DateTime $start_date (required)
      * @param  \DateTime $end_date (required)
@@ -840,7 +840,7 @@ class TransactionsAndReportingApi extends \SnapTrade\CustomApi
      *
      * Get performance information for a specific timeframe
      *
-     * Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Please note that Total Equity Timeframe and Rate of Returns are experimental features. Please contact support@snaptrade.com if you notice any inconsistencies.
+     * **Deprecated.** Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Please note that Total Equity Timeframe and Rate of Returns are experimental features. Please contact support@snaptrade.com if you notice any inconsistencies.
      *
      * @param  \DateTime $start_date (required)
      * @param  \DateTime $end_date (required)

@@ -247,7 +247,7 @@ class OptionChainInnerChainPerRootInnerChainPerStrikePriceInner implements Model
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->setIfExists('strike_price', $data ?? [], null);
         $this->setIfExists('call_symbol_id', $data ?? [], null);

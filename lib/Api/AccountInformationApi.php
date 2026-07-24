@@ -113,9 +113,9 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      * @param int             $hostIndex (Optional) host index to select the list of hosts if defined in the OpenAPI spec
      */
     public function __construct(
-        Configuration $config = null,
-        ClientInterface $client = null,
-        HeaderSelector $selector = null,
+        ?Configuration $config = null,
+        ?ClientInterface $client = null,
+        ?HeaderSelector $selector = null,
         $hostIndex = 0
     ) {
         $clientOptions = [];

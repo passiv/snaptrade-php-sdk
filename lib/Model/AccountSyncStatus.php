@@ -242,7 +242,7 @@ class AccountSyncStatus implements ModelInterface, ArrayAccess, \JsonSerializabl
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->setIfExists('transactions', $data ?? [], null);
         $this->setIfExists('holdings', $data ?? [], null);

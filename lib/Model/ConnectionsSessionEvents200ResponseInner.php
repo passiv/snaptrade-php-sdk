@@ -312,7 +312,7 @@ class ConnectionsSessionEvents200ResponseInner implements ModelInterface, ArrayA
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('session_event_type', $data ?? [], null);

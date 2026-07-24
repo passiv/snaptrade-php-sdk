@@ -147,10 +147,10 @@ class Configuration
      * Constructor
      */
     public function __construct(
-        string $consumerKey = null,
-        string $clientId = null,
-        string $Signature = null,
-        string $timestamp = null,
+        ?string $consumerKey = null,
+        ?string $clientId = null,
+        ?string $Signature = null,
+        ?string $timestamp = null,
         string $host = 'https://api.snaptrade.com'
     )
     {
@@ -541,7 +541,7 @@ class Configuration
      * @param array|null $variables    hash of variable and the corresponding value (optional)
      * @return string URL based on host settings
      */
-    public static function getHostString(array $hostsSettings, $hostIndex, array $variables = null)
+    public static function getHostString(array $hostsSettings, $hostIndex, ?array $variables = null)
     {
         if (null === $variables) {
             $variables = [];

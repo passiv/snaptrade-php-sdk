@@ -241,7 +241,7 @@ class ChildBrokerageOrderIDs implements ModelInterface, ArrayAccess, \JsonSerial
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->setIfExists('take_profit_order_id', $data ?? [], null);
         $this->setIfExists('stop_loss_order_id', $data ?? [], null);

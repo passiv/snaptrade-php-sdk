@@ -52,7 +52,8 @@ class HoldingsStatus implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPITypes = [
         'initial_sync_completed' => 'bool',
-        'last_successful_sync' => '\DateTime'
+        'last_successful_sync' => '\DateTime',
+        'holdings_unavailable' => 'bool'
     ];
 
     /**
@@ -64,7 +65,8 @@ class HoldingsStatus implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPIFormats = [
         'initial_sync_completed' => null,
-        'last_successful_sync' => null
+        'last_successful_sync' => null,
+        'holdings_unavailable' => null
     ];
 
     /**
@@ -74,7 +76,8 @@ class HoldingsStatus implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static array $openAPINullables = [
         'initial_sync_completed' => false,
-		'last_successful_sync' => true
+		'last_successful_sync' => true,
+		'holdings_unavailable' => false
     ];
 
     /**
@@ -164,7 +167,8 @@ class HoldingsStatus implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $attributeMap = [
         'initial_sync_completed' => 'initial_sync_completed',
-        'last_successful_sync' => 'last_successful_sync'
+        'last_successful_sync' => 'last_successful_sync',
+        'holdings_unavailable' => 'holdings_unavailable'
     ];
 
     /**
@@ -174,7 +178,8 @@ class HoldingsStatus implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $setters = [
         'initial_sync_completed' => 'setInitialSyncCompleted',
-        'last_successful_sync' => 'setLastSuccessfulSync'
+        'last_successful_sync' => 'setLastSuccessfulSync',
+        'holdings_unavailable' => 'setHoldingsUnavailable'
     ];
 
     /**
@@ -184,7 +189,8 @@ class HoldingsStatus implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $getters = [
         'initial_sync_completed' => 'getInitialSyncCompleted',
-        'last_successful_sync' => 'getLastSuccessfulSync'
+        'last_successful_sync' => 'getLastSuccessfulSync',
+        'holdings_unavailable' => 'getHoldingsUnavailable'
     ];
 
     /**
@@ -246,6 +252,7 @@ class HoldingsStatus implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $this->setIfExists('initial_sync_completed', $data ?? [], null);
         $this->setIfExists('last_successful_sync', $data ?? [], null);
+        $this->setIfExists('holdings_unavailable', $data ?? [], null);
     }
 
     /**
@@ -351,6 +358,35 @@ class HoldingsStatus implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['last_successful_sync'] = $last_successful_sync;
+
+        return $this;
+    }
+
+    /**
+     * Gets holdings_unavailable
+     *
+     * @return bool|null
+     */
+    public function getHoldingsUnavailable()
+    {
+        return $this->container['holdings_unavailable'];
+    }
+
+    /**
+     * Sets holdings_unavailable
+     *
+     * @param bool|null $holdings_unavailable Indicates that the brokerage does not expose this account's holdings to SnapTrade, so the empty positions and balances reported for it do not mean the account is empty. This is set for accounts served by a separate brokerage system that we cannot read, such as Vanguard employer-sponsored retirement plans. When this is `true`, prefer the account's total value over the sum of its positions and cash, and note that `initial_sync_completed` and `last_successful_sync` may still reflect an earlier sync.
+     *
+     * @return self
+     */
+    public function setHoldingsUnavailable($holdings_unavailable)
+    {
+
+        if (is_null($holdings_unavailable)) {
+            throw new \InvalidArgumentException('non-nullable holdings_unavailable cannot be null');
+        }
+
+        $this->container['holdings_unavailable'] = $holdings_unavailable;
 
         return $this;
     }

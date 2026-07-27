@@ -89,4 +89,13 @@ class HoldingsStatusTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "holdings_unavailable"
+     */
+    public function testPropertyHoldingsUnavailable()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

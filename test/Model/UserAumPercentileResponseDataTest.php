@@ -1,6 +1,6 @@
 <?php
 /**
- * SnapTradeLoginUserRequestBodyTest
+ * UserAumPercentileResponseDataTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * SnapTradeLoginUserRequestBodyTest Class Doc Comment
+ * UserAumPercentileResponseDataTest Class Doc Comment
  *
  * @category    Class
- * @description Data to login a user via SnapTrade Partner
+ * @description UserAumPercentileResponseData
  * @package     SnapTrade
  */
-class SnapTradeLoginUserRequestBodyTest extends TestCase
+class UserAumPercentileResponseDataTest extends TestCase
 {
 
     /**
@@ -64,90 +64,54 @@ class SnapTradeLoginUserRequestBodyTest extends TestCase
     }
 
     /**
-     * Test "SnapTradeLoginUserRequestBody"
+     * Test "UserAumPercentileResponseData"
      */
-    public function testSnapTradeLoginUserRequestBody()
+    public function testUserAumPercentileResponseData()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "broker"
+     * Test attribute "bucket"
      */
-    public function testPropertyBroker()
+    public function testPropertyBucket()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "immediate_redirect"
+     * Test attribute "percentile"
      */
-    public function testPropertyImmediateRedirect()
+    public function testPropertyPercentile()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "custom_redirect"
+     * Test attribute "cohort_size"
      */
-    public function testPropertyCustomRedirect()
+    public function testPropertyCohortSize()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "reconnect"
+     * Test attribute "as_of"
      */
-    public function testPropertyReconnect()
+    public function testPropertyAsOf()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "connection_type"
+     * Test attribute "currency"
      */
-    public function testPropertyConnectionType()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "show_close_button"
-     */
-    public function testPropertyShowCloseButton()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "dark_mode"
-     */
-    public function testPropertyDarkMode()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "locale"
-     */
-    public function testPropertyLocale()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "connection_portal_version"
-     */
-    public function testPropertyConnectionPortalVersion()
+    public function testPropertyCurrency()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

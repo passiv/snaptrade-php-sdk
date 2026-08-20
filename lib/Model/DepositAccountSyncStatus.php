@@ -1,6 +1,6 @@
 <?php
 /**
- * DepositAccountBalance
+ * DepositAccountSyncStatus
  *
  * PHP version 7.4
  *
@@ -27,14 +27,14 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * DepositAccountBalance Class Doc Comment
+ * DepositAccountSyncStatus Class Doc Comment
  *
  * @category Class
- * @description Cash balance of the account. Null when unknown (e.g. a real-time fetch failed and no cached value exists).
+ * @description Contains status updates for the account sync process between SnapTrade and the institution, used by &#x60;DepositAccount&#x60; in &#x60;Connections_listConnectionAccounts&#x60;. Each property is optional -- an institution may not report sync status for every data type. Deposit accounts don&#39;t place orders or hold positions, so unlike &#x60;ConnectionAccountSyncStatus&#x60; this type has no &#x60;orders&#x60; or &#x60;positions&#x60; field. &#x60;balances&#x60; is the timestamp of the last successful sync of that data type (null if never synced).
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class DepositAccountBalance implements ModelInterface, ArrayAccess, \JsonSerializable
+class DepositAccountSyncStatus implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -43,7 +43,7 @@ class DepositAccountBalance implements ModelInterface, ArrayAccess, \JsonSeriali
       *
       * @var string
       */
-    protected static $openAPIModelName = 'DepositAccount_balance';
+    protected static $openAPIModelName = 'DepositAccountSyncStatus';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -51,8 +51,8 @@ class DepositAccountBalance implements ModelInterface, ArrayAccess, \JsonSeriali
       * @var string[]
       */
     protected static $openAPITypes = [
-        'amount' => 'float',
-        'currency' => 'string'
+        'transactions' => '\SnapTrade\Model\TransactionsStatus',
+        'balances' => '\DateTime'
     ];
 
     /**
@@ -63,8 +63,8 @@ class DepositAccountBalance implements ModelInterface, ArrayAccess, \JsonSeriali
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'amount' => null,
-        'currency' => null
+        'transactions' => null,
+        'balances' => null
     ];
 
     /**
@@ -73,8 +73,8 @@ class DepositAccountBalance implements ModelInterface, ArrayAccess, \JsonSeriali
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'amount' => true,
-		'currency' => true
+        'transactions' => false,
+		'balances' => true
     ];
 
     /**
@@ -163,8 +163,8 @@ class DepositAccountBalance implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var string[]
      */
     protected static $attributeMap = [
-        'amount' => 'amount',
-        'currency' => 'currency'
+        'transactions' => 'transactions',
+        'balances' => 'balances'
     ];
 
     /**
@@ -173,8 +173,8 @@ class DepositAccountBalance implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var string[]
      */
     protected static $setters = [
-        'amount' => 'setAmount',
-        'currency' => 'setCurrency'
+        'transactions' => 'setTransactions',
+        'balances' => 'setBalances'
     ];
 
     /**
@@ -183,8 +183,8 @@ class DepositAccountBalance implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var string[]
      */
     protected static $getters = [
-        'amount' => 'getAmount',
-        'currency' => 'getCurrency'
+        'transactions' => 'getTransactions',
+        'balances' => 'getBalances'
     ];
 
     /**
@@ -244,8 +244,8 @@ class DepositAccountBalance implements ModelInterface, ArrayAccess, \JsonSeriali
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('amount', $data ?? [], null);
-        $this->setIfExists('currency', $data ?? [], null);
+        $this->setIfExists('transactions', $data ?? [], null);
+        $this->setIfExists('balances', $data ?? [], null);
     }
 
     /**
@@ -291,73 +291,66 @@ class DepositAccountBalance implements ModelInterface, ArrayAccess, \JsonSeriali
 
 
     /**
-     * Gets amount
+     * Gets transactions
      *
-     * @return float|null
+     * @return \SnapTrade\Model\TransactionsStatus|null
      */
-    public function getAmount()
+    public function getTransactions()
     {
-        return $this->container['amount'];
+        return $this->container['transactions'];
     }
 
     /**
-     * Sets amount
+     * Sets transactions
      *
-     * @param float|null $amount amount
+     * @param \SnapTrade\Model\TransactionsStatus|null $transactions transactions
      *
      * @return self
      */
-    public function setAmount($amount)
+    public function setTransactions($transactions)
     {
 
-        if (is_null($amount)) {
-            array_push($this->openAPINullablesSetToNull, 'amount');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('amount', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if (is_null($transactions)) {
+            throw new \InvalidArgumentException('non-nullable transactions cannot be null');
         }
 
-        $this->container['amount'] = $amount;
+        $this->container['transactions'] = $transactions;
 
         return $this;
     }
 
     /**
-     * Gets currency
+     * Gets balances
      *
-     * @return string|null
+     * @return \DateTime|null
      */
-    public function getCurrency()
+    public function getBalances()
     {
-        return $this->container['currency'];
+        return $this->container['balances'];
     }
 
     /**
-     * Sets currency
+     * Sets balances
      *
-     * @param string|null $currency currency
+     * @param \DateTime|null $balances The last time balances were successfully synced by SnapTrade.
      *
      * @return self
      */
-    public function setCurrency($currency)
+    public function setBalances($balances)
     {
 
-        if (is_null($currency)) {
-            array_push($this->openAPINullablesSetToNull, 'currency');
+        if (is_null($balances)) {
+            array_push($this->openAPINullablesSetToNull, 'balances');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('currency', $nullablesSetToNull);
+            $index = array_search('balances', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
 
-        $this->container['currency'] = $currency;
+        $this->container['balances'] = $balances;
 
         return $this;
     }

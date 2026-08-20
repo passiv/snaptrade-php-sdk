@@ -1,6 +1,6 @@
 <?php
 /**
- * InvestmentAccountMarketValueTest
+ * AccountOrderRecordV2OrderRoleTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * InvestmentAccountMarketValueTest Class Doc Comment
+ * AccountOrderRecordV2OrderRoleTest Class Doc Comment
  *
  * @category    Class
- * @description Total market value of the account. Null when unknown (e.g. a real-time fetch failed and no cached value exists).
+ * @description The role of an order within a complex order group (OCO, OTO, OTOCO).
  * @package     SnapTrade
  */
-class InvestmentAccountMarketValueTest extends TestCase
+class AccountOrderRecordV2OrderRoleTest extends TestCase
 {
 
     /**
@@ -64,27 +64,9 @@ class InvestmentAccountMarketValueTest extends TestCase
     }
 
     /**
-     * Test "InvestmentAccountMarketValue"
+     * Test "AccountOrderRecordV2OrderRole"
      */
-    public function testInvestmentAccountMarketValue()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "amount"
-     */
-    public function testPropertyAmount()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "currency"
-     */
-    public function testPropertyCurrency()
+    public function testAccountOrderRecordV2OrderRole()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

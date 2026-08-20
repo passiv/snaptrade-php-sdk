@@ -1,6 +1,6 @@
 <?php
 /**
- * DepositAccountBalanceTest
+ * DepositAccountSyncStatusTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * DepositAccountBalanceTest Class Doc Comment
+ * DepositAccountSyncStatusTest Class Doc Comment
  *
  * @category    Class
- * @description Cash balance of the account. Null when unknown (e.g. a real-time fetch failed and no cached value exists).
+ * @description Contains status updates for the account sync process between SnapTrade and the institution, used by &#x60;DepositAccount&#x60; in &#x60;Connections_listConnectionAccounts&#x60;. Each property is optional -- an institution may not report sync status for every data type. Deposit accounts don&#39;t place orders or hold positions, so unlike &#x60;ConnectionAccountSyncStatus&#x60; this type has no &#x60;orders&#x60; or &#x60;positions&#x60; field. &#x60;balances&#x60; is the timestamp of the last successful sync of that data type (null if never synced).
  * @package     SnapTrade
  */
-class DepositAccountBalanceTest extends TestCase
+class DepositAccountSyncStatusTest extends TestCase
 {
 
     /**
@@ -64,27 +64,27 @@ class DepositAccountBalanceTest extends TestCase
     }
 
     /**
-     * Test "DepositAccountBalance"
+     * Test "DepositAccountSyncStatus"
      */
-    public function testDepositAccountBalance()
+    public function testDepositAccountSyncStatus()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "amount"
+     * Test attribute "transactions"
      */
-    public function testPropertyAmount()
+    public function testPropertyTransactions()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "currency"
+     * Test attribute "balances"
      */
-    public function testPropertyCurrency()
+    public function testPropertyBalances()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

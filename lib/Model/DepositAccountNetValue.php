@@ -1,6 +1,6 @@
 <?php
 /**
- * ConnectionAccountSyncStatus
+ * DepositAccountNetValue
  *
  * PHP version 7.4
  *
@@ -27,14 +27,14 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * ConnectionAccountSyncStatus Class Doc Comment
+ * DepositAccountNetValue Class Doc Comment
  *
  * @category Class
- * @description Contains status updates for the account sync process between SnapTrade and the institution, used by &#x60;InvestmentAccount&#x60; in &#x60;Connections_listConnectionAccounts&#x60;. Each property is optional -- an institution may not report sync status for every data type. &#x60;orders&#x60;/&#x60;positions&#x60;/&#x60;balances&#x60; are the timestamp of the last successful sync of that data type (null if never synced). See &#x60;DepositAccountSyncStatus&#x60; for the deposit-account counterpart, which omits &#x60;orders&#x60;/&#x60;positions&#x60; since deposit accounts don&#39;t place orders or hold positions.
+ * @description Net value of the account -- cash balance for deposit accounts. Shared across all account kinds so that, e.g., a future &#x60;line_of_credit&#x60; account can report a negative net value here. Null when unknown (e.g. a real-time fetch failed and no cached value exists).
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class ConnectionAccountSyncStatus implements ModelInterface, ArrayAccess, \JsonSerializable
+class DepositAccountNetValue implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -43,7 +43,7 @@ class ConnectionAccountSyncStatus implements ModelInterface, ArrayAccess, \JsonS
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ConnectionAccountSyncStatus';
+    protected static $openAPIModelName = 'DepositAccount_net_value';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -51,10 +51,8 @@ class ConnectionAccountSyncStatus implements ModelInterface, ArrayAccess, \JsonS
       * @var string[]
       */
     protected static $openAPITypes = [
-        'transactions' => '\SnapTrade\Model\TransactionsStatus',
-        'orders' => '\DateTime',
-        'positions' => '\DateTime',
-        'balances' => '\DateTime'
+        'amount' => 'float',
+        'currency' => 'string'
     ];
 
     /**
@@ -65,10 +63,8 @@ class ConnectionAccountSyncStatus implements ModelInterface, ArrayAccess, \JsonS
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'transactions' => null,
-        'orders' => null,
-        'positions' => null,
-        'balances' => null
+        'amount' => null,
+        'currency' => null
     ];
 
     /**
@@ -77,10 +73,8 @@ class ConnectionAccountSyncStatus implements ModelInterface, ArrayAccess, \JsonS
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'transactions' => false,
-		'orders' => true,
-		'positions' => true,
-		'balances' => true
+        'amount' => true,
+		'currency' => true
     ];
 
     /**
@@ -169,10 +163,8 @@ class ConnectionAccountSyncStatus implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $attributeMap = [
-        'transactions' => 'transactions',
-        'orders' => 'orders',
-        'positions' => 'positions',
-        'balances' => 'balances'
+        'amount' => 'amount',
+        'currency' => 'currency'
     ];
 
     /**
@@ -181,10 +173,8 @@ class ConnectionAccountSyncStatus implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $setters = [
-        'transactions' => 'setTransactions',
-        'orders' => 'setOrders',
-        'positions' => 'setPositions',
-        'balances' => 'setBalances'
+        'amount' => 'setAmount',
+        'currency' => 'setCurrency'
     ];
 
     /**
@@ -193,10 +183,8 @@ class ConnectionAccountSyncStatus implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $getters = [
-        'transactions' => 'getTransactions',
-        'orders' => 'getOrders',
-        'positions' => 'getPositions',
-        'balances' => 'getBalances'
+        'amount' => 'getAmount',
+        'currency' => 'getCurrency'
     ];
 
     /**
@@ -256,10 +244,8 @@ class ConnectionAccountSyncStatus implements ModelInterface, ArrayAccess, \JsonS
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('transactions', $data ?? [], null);
-        $this->setIfExists('orders', $data ?? [], null);
-        $this->setIfExists('positions', $data ?? [], null);
-        $this->setIfExists('balances', $data ?? [], null);
+        $this->setIfExists('amount', $data ?? [], null);
+        $this->setIfExists('currency', $data ?? [], null);
     }
 
     /**
@@ -305,138 +291,73 @@ class ConnectionAccountSyncStatus implements ModelInterface, ArrayAccess, \JsonS
 
 
     /**
-     * Gets transactions
+     * Gets amount
      *
-     * @return \SnapTrade\Model\TransactionsStatus|null
+     * @return float|null
      */
-    public function getTransactions()
+    public function getAmount()
     {
-        return $this->container['transactions'];
+        return $this->container['amount'];
     }
 
     /**
-     * Sets transactions
+     * Sets amount
      *
-     * @param \SnapTrade\Model\TransactionsStatus|null $transactions transactions
+     * @param float|null $amount amount
      *
      * @return self
      */
-    public function setTransactions($transactions)
+    public function setAmount($amount)
     {
 
-        if (is_null($transactions)) {
-            throw new \InvalidArgumentException('non-nullable transactions cannot be null');
-        }
-
-        $this->container['transactions'] = $transactions;
-
-        return $this;
-    }
-
-    /**
-     * Gets orders
-     *
-     * @return \DateTime|null
-     */
-    public function getOrders()
-    {
-        return $this->container['orders'];
-    }
-
-    /**
-     * Sets orders
-     *
-     * @param \DateTime|null $orders The last time orders were successfully synced by SnapTrade.
-     *
-     * @return self
-     */
-    public function setOrders($orders)
-    {
-
-        if (is_null($orders)) {
-            array_push($this->openAPINullablesSetToNull, 'orders');
+        if (is_null($amount)) {
+            array_push($this->openAPINullablesSetToNull, 'amount');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('orders', $nullablesSetToNull);
+            $index = array_search('amount', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
 
-        $this->container['orders'] = $orders;
+        $this->container['amount'] = $amount;
 
         return $this;
     }
 
     /**
-     * Gets positions
+     * Gets currency
      *
-     * @return \DateTime|null
+     * @return string|null
      */
-    public function getPositions()
+    public function getCurrency()
     {
-        return $this->container['positions'];
+        return $this->container['currency'];
     }
 
     /**
-     * Sets positions
+     * Sets currency
      *
-     * @param \DateTime|null $positions The last time positions were successfully synced by SnapTrade.
+     * @param string|null $currency currency
      *
      * @return self
      */
-    public function setPositions($positions)
+    public function setCurrency($currency)
     {
 
-        if (is_null($positions)) {
-            array_push($this->openAPINullablesSetToNull, 'positions');
+        if (is_null($currency)) {
+            array_push($this->openAPINullablesSetToNull, 'currency');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('positions', $nullablesSetToNull);
+            $index = array_search('currency', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
 
-        $this->container['positions'] = $positions;
-
-        return $this;
-    }
-
-    /**
-     * Gets balances
-     *
-     * @return \DateTime|null
-     */
-    public function getBalances()
-    {
-        return $this->container['balances'];
-    }
-
-    /**
-     * Sets balances
-     *
-     * @param \DateTime|null $balances The last time balances were successfully synced by SnapTrade.
-     *
-     * @return self
-     */
-    public function setBalances($balances)
-    {
-
-        if (is_null($balances)) {
-            array_push($this->openAPINullablesSetToNull, 'balances');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('balances', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['balances'] = $balances;
+        $this->container['currency'] = $currency;
 
         return $this;
     }

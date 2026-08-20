@@ -1,6 +1,6 @@
 <?php
 /**
- * InvestmentAccountMarketValue
+ * InvestmentAccountNetValue
  *
  * PHP version 7.4
  *
@@ -27,14 +27,14 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * InvestmentAccountMarketValue Class Doc Comment
+ * InvestmentAccountNetValue Class Doc Comment
  *
  * @category Class
- * @description Total market value of the account. Null when unknown (e.g. a real-time fetch failed and no cached value exists).
+ * @description Net value of the account -- total market value for investment accounts. Shared across all account kinds so that, e.g., a future &#x60;line_of_credit&#x60; account can report a negative net value here. Null when unknown (e.g. a real-time fetch failed and no cached value exists).
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class InvestmentAccountMarketValue implements ModelInterface, ArrayAccess, \JsonSerializable
+class InvestmentAccountNetValue implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -43,7 +43,7 @@ class InvestmentAccountMarketValue implements ModelInterface, ArrayAccess, \Json
       *
       * @var string
       */
-    protected static $openAPIModelName = 'InvestmentAccount_market_value';
+    protected static $openAPIModelName = 'InvestmentAccount_net_value';
 
     /**
       * Array of property to type mappings. Used for (de)serialization

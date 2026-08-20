@@ -1,6 +1,6 @@
 <?php
 /**
- * ConnectionAccount
+ * DepositAccount
  *
  * PHP version 7.4
  *
@@ -27,23 +27,23 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * ConnectionAccount Class Doc Comment
+ * DepositAccount Class Doc Comment
  *
  * @category Class
- * @description A single account under a connection, from the &#x60;kind&#x60;-discriminated union used by &#x60;Connections_listConnectionAccounts&#x60;. Use &#x60;kind&#x60; to determine which schema is present.  &#x60;investment&#x60; and &#x60;deposit&#x60; are implemented today; &#x60;line_of_credit&#x60; will be added as an additional variant in a future release.
+ * @description A deposit account (checking, savings) under a connection.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializable
+class DepositAccount implements ModelInterface, ArrayAccess, \JsonSerializable
 {
-    public const DISCRIMINATOR = 'kind';
+    public const DISCRIMINATOR = null;
 
     /**
       * The original name of the model.
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ConnectionAccount';
+    protected static $openAPIModelName = 'DepositAccount';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -61,9 +61,6 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         'opening_date' => '\DateTime',
         'sync_status' => '\SnapTrade\Model\ConnectionAccountSyncStatus',
         'raw_type' => 'string',
-        'funding_date' => '\DateTime',
-        'is_paper' => 'bool',
-        'market_value' => '\SnapTrade\Model\InvestmentAccountMarketValue',
         'balance' => '\SnapTrade\Model\DepositAccountBalance'
     ];
 
@@ -85,9 +82,6 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         'opening_date' => 'date-time',
         'sync_status' => null,
         'raw_type' => null,
-        'funding_date' => 'date-time',
-        'is_paper' => null,
-        'market_value' => null,
         'balance' => null
     ];
 
@@ -107,9 +101,6 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
 		'opening_date' => true,
 		'sync_status' => false,
 		'raw_type' => true,
-		'funding_date' => true,
-		'is_paper' => false,
-		'market_value' => true,
 		'balance' => true
     ];
 
@@ -209,9 +200,6 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         'opening_date' => 'opening_date',
         'sync_status' => 'sync_status',
         'raw_type' => 'raw_type',
-        'funding_date' => 'funding_date',
-        'is_paper' => 'is_paper',
-        'market_value' => 'market_value',
         'balance' => 'balance'
     ];
 
@@ -231,9 +219,6 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         'opening_date' => 'setOpeningDate',
         'sync_status' => 'setSyncStatus',
         'raw_type' => 'setRawType',
-        'funding_date' => 'setFundingDate',
-        'is_paper' => 'setIsPaper',
-        'market_value' => 'setMarketValue',
         'balance' => 'setBalance'
     ];
 
@@ -253,9 +238,6 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         'opening_date' => 'getOpeningDate',
         'sync_status' => 'getSyncStatus',
         'raw_type' => 'getRawType',
-        'funding_date' => 'getFundingDate',
-        'is_paper' => 'getIsPaper',
-        'market_value' => 'getMarketValue',
         'balance' => 'getBalance'
     ];
 
@@ -339,13 +321,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         $this->setIfExists('opening_date', $data ?? [], null);
         $this->setIfExists('sync_status', $data ?? [], null);
         $this->setIfExists('raw_type', $data ?? [], null);
-        $this->setIfExists('funding_date', $data ?? [], null);
-        $this->setIfExists('is_paper', $data ?? [], null);
-        $this->setIfExists('market_value', $data ?? [], null);
         $this->setIfExists('balance', $data ?? [], null);
-
-        // Initialize discriminator property with the model name.
-        $this->container['kind'] = static::$openAPIModelName;
     }
 
     /**
@@ -398,9 +374,6 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         }
         if ($this->container['sync_status'] === null) {
             $invalidProperties[] = "'sync_status' can't be null";
-        }
-        if ($this->container['is_paper'] === null) {
-            $invalidProperties[] = "'is_paper' can't be null";
         }
         return $invalidProperties;
     }
@@ -741,107 +714,6 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         }
 
         $this->container['raw_type'] = $raw_type;
-
-        return $this;
-    }
-
-    /**
-     * Gets funding_date
-     *
-     * @return \DateTime|null
-     */
-    public function getFundingDate()
-    {
-        return $this->container['funding_date'];
-    }
-
-    /**
-     * Sets funding_date
-     *
-     * @param \DateTime|null $funding_date Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was funded. Only populated for brokerages that expose this data (Tastytrade, eToro, moomoo, Public, and Unlok); `null` for all other brokerages.
-     *
-     * @return self
-     */
-    public function setFundingDate($funding_date)
-    {
-
-        if (is_null($funding_date)) {
-            array_push($this->openAPINullablesSetToNull, 'funding_date');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('funding_date', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['funding_date'] = $funding_date;
-
-        return $this;
-    }
-
-    /**
-     * Gets is_paper
-     *
-     * @return bool
-     */
-    public function getIsPaper()
-    {
-        return $this->container['is_paper'];
-    }
-
-    /**
-     * Sets is_paper
-     *
-     * @param bool $is_paper Indicates whether the account is a paper (simulated) trading account.
-     *
-     * @return self
-     */
-    public function setIsPaper($is_paper)
-    {
-
-        if (is_null($is_paper)) {
-            throw new \InvalidArgumentException('non-nullable is_paper cannot be null');
-        }
-
-        $this->container['is_paper'] = $is_paper;
-
-        return $this;
-    }
-
-    /**
-     * Gets market_value
-     *
-     * @return \SnapTrade\Model\InvestmentAccountMarketValue|null
-     */
-    public function getMarketValue()
-    {
-        return $this->container['market_value'];
-    }
-
-    /**
-     * Sets market_value
-     *
-     * @param \SnapTrade\Model\InvestmentAccountMarketValue|null $market_value market_value
-     *
-     * @return self
-     */
-    public function setMarketValue($market_value)
-    {
-
-        if (is_null($market_value)) {
-            array_push($this->openAPINullablesSetToNull, 'market_value');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('market_value', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['market_value'] = $market_value;
 
         return $this;
     }

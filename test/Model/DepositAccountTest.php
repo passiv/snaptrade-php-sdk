@@ -1,6 +1,6 @@
 <?php
 /**
- * ConnectionAccountTest
+ * DepositAccountTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * ConnectionAccountTest Class Doc Comment
+ * DepositAccountTest Class Doc Comment
  *
  * @category    Class
- * @description A single account under a connection, from the &#x60;kind&#x60;-discriminated union used by &#x60;Connections_listConnectionAccounts&#x60;. Use &#x60;kind&#x60; to determine which schema is present.  &#x60;investment&#x60; and &#x60;deposit&#x60; are implemented today; &#x60;line_of_credit&#x60; will be added as an additional variant in a future release.
+ * @description A deposit account (checking, savings) under a connection.
  * @package     SnapTrade
  */
-class ConnectionAccountTest extends TestCase
+class DepositAccountTest extends TestCase
 {
 
     /**
@@ -64,9 +64,9 @@ class ConnectionAccountTest extends TestCase
     }
 
     /**
-     * Test "ConnectionAccount"
+     * Test "DepositAccount"
      */
-    public function testConnectionAccount()
+    public function testDepositAccount()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
@@ -157,33 +157,6 @@ class ConnectionAccountTest extends TestCase
      * Test attribute "raw_type"
      */
     public function testPropertyRawType()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "funding_date"
-     */
-    public function testPropertyFundingDate()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "is_paper"
-     */
-    public function testPropertyIsPaper()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "market_value"
-     */
-    public function testPropertyMarketValue()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

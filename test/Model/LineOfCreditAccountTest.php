@@ -1,6 +1,7 @@
 <?php
 /**
- * AccountInformationApiTest
+ * LineOfCreditAccountTest
+ *
  * PHP version 7.4
  *
  * @category Class
@@ -20,18 +21,22 @@
  */
 
 
-namespace SnapTrade\Test\Api;
+namespace SnapTrade\Test\Model;
 
-use \SnapTrade\Configuration;
-use \SnapTrade\ApiException;
-use \SnapTrade\ObjectSerializer;
 use PHPUnit\Framework\TestCase;
 
-class AccountInformationApiTest extends TestCase
+/**
+ * LineOfCreditAccountTest Class Doc Comment
+ *
+ * @category    Class
+ * @description A line-of-credit account (e.g. a credit card) under a connection.
+ * @package     SnapTrade
+ */
+class LineOfCreditAccountTest extends TestCase
 {
 
     /**
-     * Setup before running any test cases
+     * Setup before running any test case
      */
     public static function setUpBeforeClass(): void
     {
@@ -59,144 +64,117 @@ class AccountInformationApiTest extends TestCase
     }
 
     /**
-     * Test case for getAccountActivities
-     *
-     * List account activities.
-     *
+     * Test "LineOfCreditAccount"
      */
-    public function testGetAccountActivities()
+    public function testLineOfCreditAccount()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for getAccountBalanceHistory
-     *
-     * List historical account total value.
-     *
+     * Test attribute "kind"
      */
-    public function testGetAccountBalanceHistory()
+    public function testPropertyKind()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for getAllAccountPositions
-     *
-     * List all account positions.
-     *
+     * Test attribute "id"
      */
-    public function testGetAllAccountPositions()
+    public function testPropertyId()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for getUserAccountBalance
-     *
-     * List account balances.
-     *
+     * Test attribute "connection_id"
      */
-    public function testGetUserAccountBalance()
+    public function testPropertyConnectionId()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for getUserAccountDetails
-     *
-     * Get account detail.
-     *
+     * Test attribute "display_name"
      */
-    public function testGetUserAccountDetails()
+    public function testPropertyDisplayName()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for getUserAccountOrderDetail
-     *
-     * Get account order detail.
-     *
+     * Test attribute "number"
      */
-    public function testGetUserAccountOrderDetail()
+    public function testPropertyNumber()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for getUserAccountOrders
-     *
-     * List account orders.
-     *
+     * Test attribute "institution_account_id"
      */
-    public function testGetUserAccountOrders()
+    public function testPropertyInstitutionAccountId()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for getUserAccountRecentOrders
-     *
-     * List account recent orders (last 24 hours only).
-     *
+     * Test attribute "institution_id"
      */
-    public function testGetUserAccountRecentOrders()
+    public function testPropertyInstitutionId()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for getUserAccountReturnRates
-     *
-     * List account rate of returns.
-     *
+     * Test attribute "opening_date"
      */
-    public function testGetUserAccountReturnRates()
+    public function testPropertyOpeningDate()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for getUserHoldings
-     *
-     * List account holdings.
-     *
+     * Test attribute "sync_status"
      */
-    public function testGetUserHoldings()
+    public function testPropertySyncStatus()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for listUserAccounts
-     *
-     * List accounts.
-     *
+     * Test attribute "raw_type"
      */
-    public function testListUserAccounts()
+    public function testPropertyRawType()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for updateUserAccount
-     *
-     * Update details of an investment account.
-     *
+     * Test attribute "net_value"
      */
-    public function testUpdateUserAccount()
+    public function testPropertyNetValue()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "credit_details"
+     */
+    public function testPropertyCreditDetails()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

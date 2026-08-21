@@ -1,6 +1,6 @@
 <?php
 /**
- * DepositAccountNetValueTest
+ * LineOfCreditAccountNetValueTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * DepositAccountNetValueTest Class Doc Comment
+ * LineOfCreditAccountNetValueTest Class Doc Comment
  *
  * @category    Class
- * @description Net value of the account -- cash balance for deposit accounts. Shared across all account kinds -- negative for &#x60;line_of_credit&#x60; accounts, representing money owed. Null when unknown (e.g. a real-time fetch failed and no cached value exists).
+ * @description Net value of the account -- negative, representing money owed. Shared across all account kinds. Null when unknown (e.g. a real-time fetch failed and no cached value exists).
  * @package     SnapTrade
  */
-class DepositAccountNetValueTest extends TestCase
+class LineOfCreditAccountNetValueTest extends TestCase
 {
 
     /**
@@ -64,9 +64,9 @@ class DepositAccountNetValueTest extends TestCase
     }
 
     /**
-     * Test "DepositAccountNetValue"
+     * Test "LineOfCreditAccountNetValue"
      */
-    public function testDepositAccountNetValue()
+    public function testLineOfCreditAccountNetValue()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

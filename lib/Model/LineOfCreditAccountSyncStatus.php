@@ -1,6 +1,6 @@
 <?php
 /**
- * UserAumPercentileResponseData
+ * LineOfCreditAccountSyncStatus
  *
  * PHP version 7.4
  *
@@ -27,13 +27,14 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * UserAumPercentileResponseData Class Doc Comment
+ * LineOfCreditAccountSyncStatus Class Doc Comment
  *
  * @category Class
+ * @description Contains status updates for the account sync process between SnapTrade and the institution, used by &#x60;LineOfCreditAccount&#x60; in &#x60;Connections_listConnectionAccounts&#x60;. Each property is optional -- an institution may not report sync status for every data type. Line-of-credit accounts don&#39;t place orders or hold positions, so like &#x60;DepositAccountSyncStatus&#x60; this type has no &#x60;orders&#x60; or &#x60;positions&#x60; field. &#x60;balances&#x60; is the timestamp of the last successful sync of that data type (null if never synced).
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class UserAumPercentileResponseData implements ModelInterface, ArrayAccess, \JsonSerializable
+class LineOfCreditAccountSyncStatus implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -42,7 +43,7 @@ class UserAumPercentileResponseData implements ModelInterface, ArrayAccess, \Jso
       *
       * @var string
       */
-    protected static $openAPIModelName = 'UserAumPercentileResponse_data';
+    protected static $openAPIModelName = 'LineOfCreditAccountSyncStatus';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -50,11 +51,8 @@ class UserAumPercentileResponseData implements ModelInterface, ArrayAccess, \Jso
       * @var string[]
       */
     protected static $openAPITypes = [
-        'bucket' => 'string',
-        'percentile' => 'int',
-        'cohort_size' => 'int',
-        'as_of' => '\DateTime',
-        'currency' => 'string'
+        'transactions' => '\SnapTrade\Model\TransactionsStatus',
+        'balances' => '\DateTime'
     ];
 
     /**
@@ -65,11 +63,8 @@ class UserAumPercentileResponseData implements ModelInterface, ArrayAccess, \Jso
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'bucket' => null,
-        'percentile' => null,
-        'cohort_size' => null,
-        'as_of' => 'date',
-        'currency' => null
+        'transactions' => null,
+        'balances' => null
     ];
 
     /**
@@ -78,11 +73,8 @@ class UserAumPercentileResponseData implements ModelInterface, ArrayAccess, \Jso
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'bucket' => false,
-		'percentile' => false,
-		'cohort_size' => false,
-		'as_of' => false,
-		'currency' => false
+        'transactions' => false,
+		'balances' => true
     ];
 
     /**
@@ -171,11 +163,8 @@ class UserAumPercentileResponseData implements ModelInterface, ArrayAccess, \Jso
      * @var string[]
      */
     protected static $attributeMap = [
-        'bucket' => 'bucket',
-        'percentile' => 'percentile',
-        'cohort_size' => 'cohort_size',
-        'as_of' => 'as_of',
-        'currency' => 'currency'
+        'transactions' => 'transactions',
+        'balances' => 'balances'
     ];
 
     /**
@@ -184,11 +173,8 @@ class UserAumPercentileResponseData implements ModelInterface, ArrayAccess, \Jso
      * @var string[]
      */
     protected static $setters = [
-        'bucket' => 'setBucket',
-        'percentile' => 'setPercentile',
-        'cohort_size' => 'setCohortSize',
-        'as_of' => 'setAsOf',
-        'currency' => 'setCurrency'
+        'transactions' => 'setTransactions',
+        'balances' => 'setBalances'
     ];
 
     /**
@@ -197,11 +183,8 @@ class UserAumPercentileResponseData implements ModelInterface, ArrayAccess, \Jso
      * @var string[]
      */
     protected static $getters = [
-        'bucket' => 'getBucket',
-        'percentile' => 'getPercentile',
-        'cohort_size' => 'getCohortSize',
-        'as_of' => 'getAsOf',
-        'currency' => 'getCurrency'
+        'transactions' => 'getTransactions',
+        'balances' => 'getBalances'
     ];
 
     /**
@@ -245,29 +228,6 @@ class UserAumPercentileResponseData implements ModelInterface, ArrayAccess, \Jso
         return self::$openAPIModelName;
     }
 
-    public const BUCKET_TOP_1_PERCENT = 'TOP_1_PERCENT';
-    public const BUCKET_TOP_5_PERCENT = 'TOP_5_PERCENT';
-    public const BUCKET_TOP_10_PERCENT = 'TOP_10_PERCENT';
-    public const BUCKET_TOP_25_PERCENT = 'TOP_25_PERCENT';
-    public const BUCKET_TOP_50_PERCENT = 'TOP_50_PERCENT';
-    public const BUCKET_BOTTOM_50_PERCENT = 'BOTTOM_50_PERCENT';
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getBucketAllowableValues()
-    {
-        return [
-            self::BUCKET_TOP_1_PERCENT,
-            self::BUCKET_TOP_5_PERCENT,
-            self::BUCKET_TOP_10_PERCENT,
-            self::BUCKET_TOP_25_PERCENT,
-            self::BUCKET_TOP_50_PERCENT,
-            self::BUCKET_BOTTOM_50_PERCENT,
-        ];
-    }
 
     /**
      * Associative array for storing property values
@@ -284,11 +244,8 @@ class UserAumPercentileResponseData implements ModelInterface, ArrayAccess, \Jso
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('bucket', $data ?? [], null);
-        $this->setIfExists('percentile', $data ?? [], null);
-        $this->setIfExists('cohort_size', $data ?? [], null);
-        $this->setIfExists('as_of', $data ?? [], null);
-        $this->setIfExists('currency', $data ?? [], null);
+        $this->setIfExists('transactions', $data ?? [], null);
+        $this->setIfExists('balances', $data ?? [], null);
     }
 
     /**
@@ -318,23 +275,6 @@ class UserAumPercentileResponseData implements ModelInterface, ArrayAccess, \Jso
     {
         $invalidProperties = [];
 
-        $allowedValues = $this->getBucketAllowableValues();
-        if (!is_null($this->container['bucket']) && !in_array($this->container['bucket'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'bucket', must be one of '%s'",
-                $this->container['bucket'],
-                implode("', '", $allowedValues)
-            );
-        }
-
-        if (!is_null($this->container['percentile']) && ($this->container['percentile'] > 100)) {
-            $invalidProperties[] = "invalid value for 'percentile', must be smaller than or equal to 100.";
-        }
-
-        if (!is_null($this->container['percentile']) && ($this->container['percentile'] < 0)) {
-            $invalidProperties[] = "invalid value for 'percentile', must be bigger than or equal to 0.";
-        }
-
         return $invalidProperties;
     }
 
@@ -351,164 +291,66 @@ class UserAumPercentileResponseData implements ModelInterface, ArrayAccess, \Jso
 
 
     /**
-     * Gets bucket
+     * Gets transactions
      *
-     * @return string|null
+     * @return \SnapTrade\Model\TransactionsStatus|null
      */
-    public function getBucket()
+    public function getTransactions()
     {
-        return $this->container['bucket'];
+        return $this->container['transactions'];
     }
 
     /**
-     * Sets bucket
+     * Sets transactions
      *
-     * @param string|null $bucket The band the user falls into. Deliberately coarse: the underlying totals are only as current as each brokerage's last sync, so an exact percentile would imply more precision than the data supports.
+     * @param \SnapTrade\Model\TransactionsStatus|null $transactions transactions
      *
      * @return self
      */
-    public function setBucket($bucket)
+    public function setTransactions($transactions)
     {
-        $allowedValues = $this->getBucketAllowableValues();
-        if (!is_null($bucket) && !in_array($bucket, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'bucket', must be one of '%s'",
-                    $bucket,
-                    implode("', '", $allowedValues)
-                )
-            );
+
+        if (is_null($transactions)) {
+            throw new \InvalidArgumentException('non-nullable transactions cannot be null');
         }
 
-        if (is_null($bucket)) {
-            throw new \InvalidArgumentException('non-nullable bucket cannot be null');
-        }
-
-        $this->container['bucket'] = $bucket;
+        $this->container['transactions'] = $transactions;
 
         return $this;
     }
 
     /**
-     * Gets percentile
-     *
-     * @return int|null
-     */
-    public function getPercentile()
-    {
-        return $this->container['percentile'];
-    }
-
-    /**
-     * Sets percentile
-     *
-     * @param int|null $percentile The percent of the cohort the user's assets are strictly above, 0-100. Integer by design: the distribution is stored as 101 interpolated cutoffs, so a fractional percentile would not mean anything.  Prefer `bucket` for anything you display prominently. The distribution is recomputed monthly, so a user's percentile can move a few points on its own as other users' holdings refresh, while their bucket stays put. Users tied on the same total all receive the lowest percentile that total spans.
-     *
-     * @return self
-     */
-    public function setPercentile($percentile)
-    {
-
-        if (!is_null($percentile) && ($percentile > 100)) {
-            throw new \InvalidArgumentException('invalid value for $percentile when calling UserAumPercentileResponseData., must be smaller than or equal to 100.');
-        }
-        if (!is_null($percentile) && ($percentile < 0)) {
-            throw new \InvalidArgumentException('invalid value for $percentile when calling UserAumPercentileResponseData., must be bigger than or equal to 0.');
-        }
-
-
-        if (is_null($percentile)) {
-            throw new \InvalidArgumentException('non-nullable percentile cannot be null');
-        }
-
-        $this->container['percentile'] = $percentile;
-
-        return $this;
-    }
-
-    /**
-     * Gets cohort_size
-     *
-     * @return int|null
-     */
-    public function getCohortSize()
-    {
-        return $this->container['cohort_size'];
-    }
-
-    /**
-     * Sets cohort_size
-     *
-     * @param int|null $cohort_size Number of your users the distribution was computed from.
-     *
-     * @return self
-     */
-    public function setCohortSize($cohort_size)
-    {
-
-        if (is_null($cohort_size)) {
-            throw new \InvalidArgumentException('non-nullable cohort_size cannot be null');
-        }
-
-        $this->container['cohort_size'] = $cohort_size;
-
-        return $this;
-    }
-
-    /**
-     * Gets as_of
+     * Gets balances
      *
      * @return \DateTime|null
      */
-    public function getAsOf()
+    public function getBalances()
     {
-        return $this->container['as_of'];
+        return $this->container['balances'];
     }
 
     /**
-     * Sets as_of
+     * Sets balances
      *
-     * @param \DateTime|null $as_of The month whose distribution produced this placement.
+     * @param \DateTime|null $balances The last time balances were successfully synced by SnapTrade.
      *
      * @return self
      */
-    public function setAsOf($as_of)
+    public function setBalances($balances)
     {
 
-        if (is_null($as_of)) {
-            throw new \InvalidArgumentException('non-nullable as_of cannot be null');
+        if (is_null($balances)) {
+            array_push($this->openAPINullablesSetToNull, 'balances');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('balances', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
-        $this->container['as_of'] = $as_of;
-
-        return $this;
-    }
-
-    /**
-     * Gets currency
-     *
-     * @return string|null
-     */
-    public function getCurrency()
-    {
-        return $this->container['currency'];
-    }
-
-    /**
-     * Sets currency
-     *
-     * @param string|null $currency The currency the distribution was computed in.
-     *
-     * @return self
-     */
-    public function setCurrency($currency)
-    {
-
-        if (is_null($currency)) {
-            throw new \InvalidArgumentException('non-nullable currency cannot be null');
-        }
-
-        $this->container['currency'] = $currency;
+        $this->container['balances'] = $balances;
 
         return $this;
     }

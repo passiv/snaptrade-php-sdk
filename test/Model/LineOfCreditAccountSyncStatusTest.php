@@ -1,6 +1,6 @@
 <?php
 /**
- * UserAumPercentileObjectTest
+ * LineOfCreditAccountSyncStatusTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * UserAumPercentileObjectTest Class Doc Comment
+ * LineOfCreditAccountSyncStatusTest Class Doc Comment
  *
  * @category    Class
- * @description A user&#39;s AUM placement within a single SnapTrade customer&#39;s book
+ * @description Contains status updates for the account sync process between SnapTrade and the institution, used by &#x60;LineOfCreditAccount&#x60; in &#x60;Connections_listConnectionAccounts&#x60;. Each property is optional -- an institution may not report sync status for every data type. Line-of-credit accounts don&#39;t place orders or hold positions, so like &#x60;DepositAccountSyncStatus&#x60; this type has no &#x60;orders&#x60; or &#x60;positions&#x60; field. &#x60;balances&#x60; is the timestamp of the last successful sync of that data type (null if never synced).
  * @package     SnapTrade
  */
-class UserAumPercentileObjectTest extends TestCase
+class LineOfCreditAccountSyncStatusTest extends TestCase
 {
 
     /**
@@ -64,54 +64,27 @@ class UserAumPercentileObjectTest extends TestCase
     }
 
     /**
-     * Test "UserAumPercentileObject"
+     * Test "LineOfCreditAccountSyncStatus"
      */
-    public function testUserAumPercentileObject()
+    public function testLineOfCreditAccountSyncStatus()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "bucket"
+     * Test attribute "transactions"
      */
-    public function testPropertyBucket()
+    public function testPropertyTransactions()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "percentile"
+     * Test attribute "balances"
      */
-    public function testPropertyPercentile()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "cohort_size"
-     */
-    public function testPropertyCohortSize()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "as_of"
-     */
-    public function testPropertyAsOf()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "currency"
-     */
-    public function testPropertyCurrency()
+    public function testPropertyBalances()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

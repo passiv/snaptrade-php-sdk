@@ -1,6 +1,6 @@
 <?php
 /**
- * UserAumPercentileResponse
+ * LineOfCreditAccountCreditDetailsMinimumPaymentAmount
  *
  * PHP version 7.4
  *
@@ -27,14 +27,14 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * UserAumPercentileResponse Class Doc Comment
+ * LineOfCreditAccountCreditDetailsMinimumPaymentAmount Class Doc Comment
  *
  * @category Class
- * @description The user&#39;s placement within your book, or null when SnapTrade declines to place them
+ * @description The minimum payment due on the account&#39;s next statement.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class UserAumPercentileResponse implements ModelInterface, ArrayAccess, \JsonSerializable
+class LineOfCreditAccountCreditDetailsMinimumPaymentAmount implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -43,7 +43,7 @@ class UserAumPercentileResponse implements ModelInterface, ArrayAccess, \JsonSer
       *
       * @var string
       */
-    protected static $openAPIModelName = 'UserAumPercentileResponse';
+    protected static $openAPIModelName = 'LineOfCreditAccount_credit_details_minimum_payment_amount';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -51,7 +51,8 @@ class UserAumPercentileResponse implements ModelInterface, ArrayAccess, \JsonSer
       * @var string[]
       */
     protected static $openAPITypes = [
-        'data' => '\SnapTrade\Model\UserAumPercentileResponseData'
+        'amount' => 'float',
+        'currency' => 'string'
     ];
 
     /**
@@ -62,7 +63,8 @@ class UserAumPercentileResponse implements ModelInterface, ArrayAccess, \JsonSer
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'data' => null
+        'amount' => null,
+        'currency' => null
     ];
 
     /**
@@ -71,7 +73,8 @@ class UserAumPercentileResponse implements ModelInterface, ArrayAccess, \JsonSer
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'data' => true
+        'amount' => true,
+		'currency' => true
     ];
 
     /**
@@ -160,7 +163,8 @@ class UserAumPercentileResponse implements ModelInterface, ArrayAccess, \JsonSer
      * @var string[]
      */
     protected static $attributeMap = [
-        'data' => 'data'
+        'amount' => 'amount',
+        'currency' => 'currency'
     ];
 
     /**
@@ -169,7 +173,8 @@ class UserAumPercentileResponse implements ModelInterface, ArrayAccess, \JsonSer
      * @var string[]
      */
     protected static $setters = [
-        'data' => 'setData'
+        'amount' => 'setAmount',
+        'currency' => 'setCurrency'
     ];
 
     /**
@@ -178,7 +183,8 @@ class UserAumPercentileResponse implements ModelInterface, ArrayAccess, \JsonSer
      * @var string[]
      */
     protected static $getters = [
-        'data' => 'getData'
+        'amount' => 'getAmount',
+        'currency' => 'getCurrency'
     ];
 
     /**
@@ -238,7 +244,8 @@ class UserAumPercentileResponse implements ModelInterface, ArrayAccess, \JsonSer
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('data', $data ?? [], null);
+        $this->setIfExists('amount', $data ?? [], null);
+        $this->setIfExists('currency', $data ?? [], null);
     }
 
     /**
@@ -284,37 +291,73 @@ class UserAumPercentileResponse implements ModelInterface, ArrayAccess, \JsonSer
 
 
     /**
-     * Gets data
+     * Gets amount
      *
-     * @return \SnapTrade\Model\UserAumPercentileResponseData|null
+     * @return float|null
      */
-    public function getData()
+    public function getAmount()
     {
-        return $this->container['data'];
+        return $this->container['amount'];
     }
 
     /**
-     * Sets data
+     * Sets amount
      *
-     * @param \SnapTrade\Model\UserAumPercentileResponseData|null $data data
+     * @param float|null $amount amount
      *
      * @return self
      */
-    public function setData($data)
+    public function setAmount($amount)
     {
 
-        if (is_null($data)) {
-            array_push($this->openAPINullablesSetToNull, 'data');
+        if (is_null($amount)) {
+            array_push($this->openAPINullablesSetToNull, 'amount');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('data', $nullablesSetToNull);
+            $index = array_search('amount', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
 
-        $this->container['data'] = $data;
+        $this->container['amount'] = $amount;
+
+        return $this;
+    }
+
+    /**
+     * Gets currency
+     *
+     * @return string|null
+     */
+    public function getCurrency()
+    {
+        return $this->container['currency'];
+    }
+
+    /**
+     * Sets currency
+     *
+     * @param string|null $currency currency
+     *
+     * @return self
+     */
+    public function setCurrency($currency)
+    {
+
+        if (is_null($currency)) {
+            array_push($this->openAPINullablesSetToNull, 'currency');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('currency', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['currency'] = $currency;
 
         return $this;
     }

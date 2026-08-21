@@ -1,6 +1,6 @@
 <?php
 /**
- * UserAumPercentileResponseTest
+ * LineOfCreditAccountCreditDetailsMinimumPaymentAmountTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * UserAumPercentileResponseTest Class Doc Comment
+ * LineOfCreditAccountCreditDetailsMinimumPaymentAmountTest Class Doc Comment
  *
  * @category    Class
- * @description The user&#39;s placement within your book, or null when SnapTrade declines to place them
+ * @description The minimum payment due on the account&#39;s next statement.
  * @package     SnapTrade
  */
-class UserAumPercentileResponseTest extends TestCase
+class LineOfCreditAccountCreditDetailsMinimumPaymentAmountTest extends TestCase
 {
 
     /**
@@ -64,18 +64,27 @@ class UserAumPercentileResponseTest extends TestCase
     }
 
     /**
-     * Test "UserAumPercentileResponse"
+     * Test "LineOfCreditAccountCreditDetailsMinimumPaymentAmount"
      */
-    public function testUserAumPercentileResponse()
+    public function testLineOfCreditAccountCreditDetailsMinimumPaymentAmount()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "data"
+     * Test attribute "amount"
      */
-    public function testPropertyData()
+    public function testPropertyAmount()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "currency"
+     */
+    public function testPropertyCurrency()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

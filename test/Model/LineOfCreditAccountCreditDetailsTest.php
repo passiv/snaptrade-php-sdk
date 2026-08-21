@@ -1,6 +1,6 @@
 <?php
 /**
- * UserAumPercentileResponseDataTest
+ * LineOfCreditAccountCreditDetailsTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * UserAumPercentileResponseDataTest Class Doc Comment
+ * LineOfCreditAccountCreditDetailsTest Class Doc Comment
  *
  * @category    Class
- * @description UserAumPercentileResponseData
+ * @description Additional line-of-credit details. Currently only &#x60;minimum_payment_amount&#x60;; more properties (e.g. credit limit) may be added later without a breaking change. Omitted when no such data is available.
  * @package     SnapTrade
  */
-class UserAumPercentileResponseDataTest extends TestCase
+class LineOfCreditAccountCreditDetailsTest extends TestCase
 {
 
     /**
@@ -64,54 +64,18 @@ class UserAumPercentileResponseDataTest extends TestCase
     }
 
     /**
-     * Test "UserAumPercentileResponseData"
+     * Test "LineOfCreditAccountCreditDetails"
      */
-    public function testUserAumPercentileResponseData()
+    public function testLineOfCreditAccountCreditDetails()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "bucket"
+     * Test attribute "minimum_payment_amount"
      */
-    public function testPropertyBucket()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "percentile"
-     */
-    public function testPropertyPercentile()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "cohort_size"
-     */
-    public function testPropertyCohortSize()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "as_of"
-     */
-    public function testPropertyAsOf()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "currency"
-     */
-    public function testPropertyCurrency()
+    public function testPropertyMinimumPaymentAmount()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

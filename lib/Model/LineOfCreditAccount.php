@@ -1,6 +1,6 @@
 <?php
 /**
- * ConnectionAccount
+ * LineOfCreditAccount
  *
  * PHP version 7.4
  *
@@ -27,34 +27,23 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * ConnectionAccount Class Doc Comment
+ * LineOfCreditAccount Class Doc Comment
  *
  * @category Class
- * @description A single account under a connection, from the &#x60;kind&#x60;-discriminated union used by &#x60;Connections_listConnectionAccounts&#x60;. Use &#x60;kind&#x60; to determine which schema is present.  &#x60;investment&#x60;, &#x60;deposit&#x60;, and &#x60;line_of_credit&#x60; are implemented today.
+ * @description A line-of-credit account (e.g. a credit card) under a connection.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializable
+class LineOfCreditAccount implements ModelInterface, ArrayAccess, \JsonSerializable
 {
-    public const DISCRIMINATOR = 'kind';
-
-    /**
-     * Map discriminator values to model classes.
-     *
-     * @var array<string, class-string<ModelInterface>>
-     */
-    public const DISCRIMINATOR_MAPPING = [
-        'deposit' => \SnapTrade\Model\DepositAccount::class,
-        'investment' => \SnapTrade\Model\InvestmentAccount::class,
-        'line_of_credit' => \SnapTrade\Model\LineOfCreditAccount::class,
-    ];
+    public const DISCRIMINATOR = null;
 
     /**
       * The original name of the model.
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ConnectionAccount';
+    protected static $openAPIModelName = 'LineOfCreditAccount';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -70,10 +59,8 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         'institution_account_id' => 'string',
         'institution_id' => 'string',
         'opening_date' => '\DateTime',
-        'funding_date' => '\DateTime',
         'sync_status' => '\SnapTrade\Model\LineOfCreditAccountSyncStatus',
         'raw_type' => 'string',
-        'is_paper' => 'bool',
         'net_value' => '\SnapTrade\Model\LineOfCreditAccountNetValue',
         'credit_details' => '\SnapTrade\Model\LineOfCreditAccountCreditDetails'
     ];
@@ -94,10 +81,8 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         'institution_account_id' => null,
         'institution_id' => 'uuid',
         'opening_date' => 'date-time',
-        'funding_date' => 'date-time',
         'sync_status' => null,
         'raw_type' => null,
-        'is_paper' => null,
         'net_value' => null,
         'credit_details' => null
     ];
@@ -116,10 +101,8 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
 		'institution_account_id' => true,
 		'institution_id' => false,
 		'opening_date' => true,
-		'funding_date' => true,
 		'sync_status' => false,
 		'raw_type' => true,
-		'is_paper' => false,
 		'net_value' => true,
 		'credit_details' => true
     ];
@@ -218,10 +201,8 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         'institution_account_id' => 'institution_account_id',
         'institution_id' => 'institution_id',
         'opening_date' => 'opening_date',
-        'funding_date' => 'funding_date',
         'sync_status' => 'sync_status',
         'raw_type' => 'raw_type',
-        'is_paper' => 'is_paper',
         'net_value' => 'net_value',
         'credit_details' => 'credit_details'
     ];
@@ -240,10 +221,8 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         'institution_account_id' => 'setInstitutionAccountId',
         'institution_id' => 'setInstitutionId',
         'opening_date' => 'setOpeningDate',
-        'funding_date' => 'setFundingDate',
         'sync_status' => 'setSyncStatus',
         'raw_type' => 'setRawType',
-        'is_paper' => 'setIsPaper',
         'net_value' => 'setNetValue',
         'credit_details' => 'setCreditDetails'
     ];
@@ -262,10 +241,8 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         'institution_account_id' => 'getInstitutionAccountId',
         'institution_id' => 'getInstitutionId',
         'opening_date' => 'getOpeningDate',
-        'funding_date' => 'getFundingDate',
         'sync_status' => 'getSyncStatus',
         'raw_type' => 'getRawType',
-        'is_paper' => 'getIsPaper',
         'net_value' => 'getNetValue',
         'credit_details' => 'getCreditDetails'
     ];
@@ -348,15 +325,10 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         $this->setIfExists('institution_account_id', $data ?? [], null);
         $this->setIfExists('institution_id', $data ?? [], null);
         $this->setIfExists('opening_date', $data ?? [], null);
-        $this->setIfExists('funding_date', $data ?? [], null);
         $this->setIfExists('sync_status', $data ?? [], null);
         $this->setIfExists('raw_type', $data ?? [], null);
-        $this->setIfExists('is_paper', $data ?? [], null);
         $this->setIfExists('net_value', $data ?? [], null);
         $this->setIfExists('credit_details', $data ?? [], null);
-
-        // Initialize discriminator property with the model name.
-        $this->container['kind'] = static::$openAPIModelName;
     }
 
     /**
@@ -409,9 +381,6 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         }
         if ($this->container['sync_status'] === null) {
             $invalidProperties[] = "'sync_status' can't be null";
-        }
-        if ($this->container['is_paper'] === null) {
-            $invalidProperties[] = "'is_paper' can't be null";
         }
         return $invalidProperties;
     }
@@ -692,42 +661,6 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
     }
 
     /**
-     * Gets funding_date
-     *
-     * @return \DateTime|null
-     */
-    public function getFundingDate()
-    {
-        return $this->container['funding_date'];
-    }
-
-    /**
-     * Sets funding_date
-     *
-     * @param \DateTime|null $funding_date Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was funded. Only populated for institutions that expose this data; `null` for all other institutions. See [supported institutions](https://support.snaptrade.com/brokerages) for the full list.
-     *
-     * @return self
-     */
-    public function setFundingDate($funding_date)
-    {
-
-        if (is_null($funding_date)) {
-            array_push($this->openAPINullablesSetToNull, 'funding_date');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('funding_date', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['funding_date'] = $funding_date;
-
-        return $this;
-    }
-
-    /**
      * Gets sync_status
      *
      * @return \SnapTrade\Model\LineOfCreditAccountSyncStatus
@@ -788,35 +721,6 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         }
 
         $this->container['raw_type'] = $raw_type;
-
-        return $this;
-    }
-
-    /**
-     * Gets is_paper
-     *
-     * @return bool
-     */
-    public function getIsPaper()
-    {
-        return $this->container['is_paper'];
-    }
-
-    /**
-     * Sets is_paper
-     *
-     * @param bool $is_paper Indicates whether the account is a paper (simulated) trading account.
-     *
-     * @return self
-     */
-    public function setIsPaper($is_paper)
-    {
-
-        if (is_null($is_paper)) {
-            throw new \InvalidArgumentException('non-nullable is_paper cannot be null');
-        }
-
-        $this->container['is_paper'] = $is_paper;
 
         return $this;
     }

@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![Packagist](https://img.shields.io/badge/Packagist-v3.0.9-blue)](https://packagist.org/packages/konfig/snaptrade-php-sdk)
+[![Packagist](https://img.shields.io/badge/Packagist-v3.0.10-blue)](https://packagist.org/packages/konfig/snaptrade-php-sdk)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -98,7 +98,7 @@ To install the bindings via [Composer](https://getcomposer.org/), add the follow
     }
   ],
   "require": {
-    "konfig/snaptrade-php-sdk": "3.0.9"
+    "konfig/snaptrade-php-sdk": "3.0.10"
   }
 }
 ```
@@ -216,7 +216,7 @@ Optional comma separated list of transaction types to filter by. SnapTrade does 
 
 ### `snaptrade.accountInformation.getAccountBalanceHistory`<a id="snaptradeaccountinformationgetaccountbalancehistory"></a>
 
-An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and has a maximum lookback of 1 year.
+An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and has a maximum lookback of 1 year. Enable this feature in the Add-on section of the Billing page: https://dashboard.snaptrade.com/settings/billing
 
 
 

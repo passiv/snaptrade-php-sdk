@@ -1,6 +1,6 @@
 <?php
 /**
- * LineOfCreditAccountCreditDetailsMinimumPaymentAmountTest
+ * BrokerageAuthorizationDataFreshnessModeTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * LineOfCreditAccountCreditDetailsMinimumPaymentAmountTest Class Doc Comment
+ * BrokerageAuthorizationDataFreshnessModeTest Class Doc Comment
  *
  * @category    Class
- * @description The minimum payment due on the account&#39;s next statement.
+ * @description Indicates the data freshness provided by the brokerage institution and by SnapTrade for this connection.  &#x60;institution&#x60; is &#x60;delayed&#x60; when the brokerage itself provides delayed data. See the \&quot;Data freshness\&quot; column on the \&quot;Positions &amp; recent orders\&quot; tab at https://support.snaptrade.com/brokerages.  &#x60;snaptrade&#x60; is &#x60;delayed&#x60; when SnapTrade uses cached data for the connection because of the customer&#39;s plan or the integration. Otherwise, it is &#x60;realtime&#x60; and SnapTrade retrieves current data from the brokerage during API calls.
  * @package     SnapTrade
  */
-class LineOfCreditAccountCreditDetailsMinimumPaymentAmountTest extends TestCase
+class BrokerageAuthorizationDataFreshnessModeTest extends TestCase
 {
 
     /**
@@ -64,27 +64,27 @@ class LineOfCreditAccountCreditDetailsMinimumPaymentAmountTest extends TestCase
     }
 
     /**
-     * Test "LineOfCreditAccountCreditDetailsMinimumPaymentAmount"
+     * Test "BrokerageAuthorizationDataFreshnessMode"
      */
-    public function testLineOfCreditAccountCreditDetailsMinimumPaymentAmount()
+    public function testBrokerageAuthorizationDataFreshnessMode()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "amount"
+     * Test attribute "institution"
      */
-    public function testPropertyAmount()
+    public function testPropertyInstitution()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "currency"
+     * Test attribute "snaptrade"
      */
-    public function testPropertyCurrency()
+    public function testPropertySnaptrade()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

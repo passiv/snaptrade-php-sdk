@@ -1,6 +1,6 @@
 <?php
 /**
- * LineOfCreditAccountCreditDetailsMinimumPaymentAmount
+ * BrokerageAuthorizationDataFreshnessMode
  *
  * PHP version 7.4
  *
@@ -27,14 +27,14 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * LineOfCreditAccountCreditDetailsMinimumPaymentAmount Class Doc Comment
+ * BrokerageAuthorizationDataFreshnessMode Class Doc Comment
  *
  * @category Class
- * @description The minimum payment due on the account&#39;s next statement.
+ * @description Indicates the data freshness provided by the brokerage institution and by SnapTrade for this connection.  &#x60;institution&#x60; is &#x60;delayed&#x60; when the brokerage itself provides delayed data. See the \&quot;Data freshness\&quot; column on the \&quot;Positions &amp; recent orders\&quot; tab at https://support.snaptrade.com/brokerages.  &#x60;snaptrade&#x60; is &#x60;delayed&#x60; when SnapTrade uses cached data for the connection because of the customer&#39;s plan or the integration. Otherwise, it is &#x60;realtime&#x60; and SnapTrade retrieves current data from the brokerage during API calls.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class LineOfCreditAccountCreditDetailsMinimumPaymentAmount implements ModelInterface, ArrayAccess, \JsonSerializable
+class BrokerageAuthorizationDataFreshnessMode implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -43,7 +43,7 @@ class LineOfCreditAccountCreditDetailsMinimumPaymentAmount implements ModelInter
       *
       * @var string
       */
-    protected static $openAPIModelName = 'LineOfCreditAccount_credit_details_minimum_payment_amount';
+    protected static $openAPIModelName = 'BrokerageAuthorization_data_freshness_mode';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -51,8 +51,8 @@ class LineOfCreditAccountCreditDetailsMinimumPaymentAmount implements ModelInter
       * @var string[]
       */
     protected static $openAPITypes = [
-        'amount' => 'float',
-        'currency' => 'string'
+        'institution' => 'string',
+        'snaptrade' => 'string'
     ];
 
     /**
@@ -63,8 +63,8 @@ class LineOfCreditAccountCreditDetailsMinimumPaymentAmount implements ModelInter
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'amount' => null,
-        'currency' => null
+        'institution' => null,
+        'snaptrade' => null
     ];
 
     /**
@@ -73,8 +73,8 @@ class LineOfCreditAccountCreditDetailsMinimumPaymentAmount implements ModelInter
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'amount' => true,
-		'currency' => true
+        'institution' => false,
+		'snaptrade' => false
     ];
 
     /**
@@ -163,8 +163,8 @@ class LineOfCreditAccountCreditDetailsMinimumPaymentAmount implements ModelInter
      * @var string[]
      */
     protected static $attributeMap = [
-        'amount' => 'amount',
-        'currency' => 'currency'
+        'institution' => 'institution',
+        'snaptrade' => 'snaptrade'
     ];
 
     /**
@@ -173,8 +173,8 @@ class LineOfCreditAccountCreditDetailsMinimumPaymentAmount implements ModelInter
      * @var string[]
      */
     protected static $setters = [
-        'amount' => 'setAmount',
-        'currency' => 'setCurrency'
+        'institution' => 'setInstitution',
+        'snaptrade' => 'setSnaptrade'
     ];
 
     /**
@@ -183,8 +183,8 @@ class LineOfCreditAccountCreditDetailsMinimumPaymentAmount implements ModelInter
      * @var string[]
      */
     protected static $getters = [
-        'amount' => 'getAmount',
-        'currency' => 'getCurrency'
+        'institution' => 'getInstitution',
+        'snaptrade' => 'getSnaptrade'
     ];
 
     /**
@@ -228,6 +228,36 @@ class LineOfCreditAccountCreditDetailsMinimumPaymentAmount implements ModelInter
         return self::$openAPIModelName;
     }
 
+    public const INSTITUTION_REALTIME = 'realtime';
+    public const INSTITUTION_DELAYED = 'delayed';
+    public const SNAPTRADE_REALTIME = 'realtime';
+    public const SNAPTRADE_DELAYED = 'delayed';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getInstitutionAllowableValues()
+    {
+        return [
+            self::INSTITUTION_REALTIME,
+            self::INSTITUTION_DELAYED,
+        ];
+    }
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getSnaptradeAllowableValues()
+    {
+        return [
+            self::SNAPTRADE_REALTIME,
+            self::SNAPTRADE_DELAYED,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -244,8 +274,8 @@ class LineOfCreditAccountCreditDetailsMinimumPaymentAmount implements ModelInter
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('amount', $data ?? [], null);
-        $this->setIfExists('currency', $data ?? [], null);
+        $this->setIfExists('institution', $data ?? [], null);
+        $this->setIfExists('snaptrade', $data ?? [], null);
     }
 
     /**
@@ -275,6 +305,30 @@ class LineOfCreditAccountCreditDetailsMinimumPaymentAmount implements ModelInter
     {
         $invalidProperties = [];
 
+        if ($this->container['institution'] === null) {
+            $invalidProperties[] = "'institution' can't be null";
+        }
+        $allowedValues = $this->getInstitutionAllowableValues();
+        if (!is_null($this->container['institution']) && !in_array($this->container['institution'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'institution', must be one of '%s'",
+                $this->container['institution'],
+                implode("', '", $allowedValues)
+            );
+        }
+
+        if ($this->container['snaptrade'] === null) {
+            $invalidProperties[] = "'snaptrade' can't be null";
+        }
+        $allowedValues = $this->getSnaptradeAllowableValues();
+        if (!is_null($this->container['snaptrade']) && !in_array($this->container['snaptrade'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'snaptrade', must be one of '%s'",
+                $this->container['snaptrade'],
+                implode("', '", $allowedValues)
+            );
+        }
+
         return $invalidProperties;
     }
 
@@ -291,73 +345,79 @@ class LineOfCreditAccountCreditDetailsMinimumPaymentAmount implements ModelInter
 
 
     /**
-     * Gets amount
+     * Gets institution
      *
-     * @return float|null
+     * @return string
      */
-    public function getAmount()
+    public function getInstitution()
     {
-        return $this->container['amount'];
+        return $this->container['institution'];
     }
 
     /**
-     * Sets amount
+     * Sets institution
      *
-     * @param float|null $amount amount
+     * @param string $institution institution
      *
      * @return self
      */
-    public function setAmount($amount)
+    public function setInstitution($institution)
     {
-
-        if (is_null($amount)) {
-            array_push($this->openAPINullablesSetToNull, 'amount');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('amount', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        $allowedValues = $this->getInstitutionAllowableValues();
+        if (!in_array($institution, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'institution', must be one of '%s'",
+                    $institution,
+                    implode("', '", $allowedValues)
+                )
+            );
         }
 
-        $this->container['amount'] = $amount;
+        if (is_null($institution)) {
+            throw new \InvalidArgumentException('non-nullable institution cannot be null');
+        }
+
+        $this->container['institution'] = $institution;
 
         return $this;
     }
 
     /**
-     * Gets currency
+     * Gets snaptrade
      *
-     * @return string|null
+     * @return string
      */
-    public function getCurrency()
+    public function getSnaptrade()
     {
-        return $this->container['currency'];
+        return $this->container['snaptrade'];
     }
 
     /**
-     * Sets currency
+     * Sets snaptrade
      *
-     * @param string|null $currency currency
+     * @param string $snaptrade snaptrade
      *
      * @return self
      */
-    public function setCurrency($currency)
+    public function setSnaptrade($snaptrade)
     {
-
-        if (is_null($currency)) {
-            array_push($this->openAPINullablesSetToNull, 'currency');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('currency', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        $allowedValues = $this->getSnaptradeAllowableValues();
+        if (!in_array($snaptrade, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'snaptrade', must be one of '%s'",
+                    $snaptrade,
+                    implode("', '", $allowedValues)
+                )
+            );
         }
 
-        $this->container['currency'] = $currency;
+        if (is_null($snaptrade)) {
+            throw new \InvalidArgumentException('non-nullable snaptrade cannot be null');
+        }
+
+        $this->container['snaptrade'] = $snaptrade;
 
         return $this;
     }

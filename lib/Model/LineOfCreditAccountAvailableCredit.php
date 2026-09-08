@@ -1,6 +1,6 @@
 <?php
 /**
- * ComplexOrderLeg
+ * LineOfCreditAccountAvailableCredit
  *
  * PHP version 7.4
  *
@@ -27,14 +27,14 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * ComplexOrderLeg Class Doc Comment
+ * LineOfCreditAccountAvailableCredit Class Doc Comment
  *
  * @category Class
- * @description A single leg within a complex order.
+ * @description The remaining credit available to spend on the account (credit limit less the current balance). Omitted when no such data is available.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class ComplexOrderLeg implements ModelInterface, ArrayAccess, \JsonSerializable
+class LineOfCreditAccountAvailableCredit implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -43,7 +43,7 @@ class ComplexOrderLeg implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ComplexOrderLeg';
+    protected static $openAPIModelName = 'LineOfCreditAccount_available_credit';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -51,14 +51,8 @@ class ComplexOrderLeg implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'order_role' => 'string',
-        'action' => '\SnapTrade\Model\ActionStrict',
-        'instrument' => '\SnapTrade\Model\TradingInstrument',
-        'order_type' => '\SnapTrade\Model\OrderTypeStrict',
-        'units' => 'float',
-        'time_in_force' => '\SnapTrade\Model\TimeInForceStrict',
-        'price' => 'float',
-        'stop' => 'float'
+        'amount' => 'float',
+        'currency' => 'string'
     ];
 
     /**
@@ -69,14 +63,8 @@ class ComplexOrderLeg implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'order_role' => null,
-        'action' => null,
-        'instrument' => null,
-        'order_type' => null,
-        'units' => null,
-        'time_in_force' => null,
-        'price' => null,
-        'stop' => null
+        'amount' => null,
+        'currency' => null
     ];
 
     /**
@@ -85,14 +73,8 @@ class ComplexOrderLeg implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'order_role' => false,
-		'action' => false,
-		'instrument' => false,
-		'order_type' => false,
-		'units' => false,
-		'time_in_force' => false,
-		'price' => true,
-		'stop' => true
+        'amount' => true,
+		'currency' => true
     ];
 
     /**
@@ -181,14 +163,8 @@ class ComplexOrderLeg implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'order_role' => 'order_role',
-        'action' => 'action',
-        'instrument' => 'instrument',
-        'order_type' => 'order_type',
-        'units' => 'units',
-        'time_in_force' => 'time_in_force',
-        'price' => 'price',
-        'stop' => 'stop'
+        'amount' => 'amount',
+        'currency' => 'currency'
     ];
 
     /**
@@ -197,14 +173,8 @@ class ComplexOrderLeg implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'order_role' => 'setOrderRole',
-        'action' => 'setAction',
-        'instrument' => 'setInstrument',
-        'order_type' => 'setOrderType',
-        'units' => 'setUnits',
-        'time_in_force' => 'setTimeInForce',
-        'price' => 'setPrice',
-        'stop' => 'setStop'
+        'amount' => 'setAmount',
+        'currency' => 'setCurrency'
     ];
 
     /**
@@ -213,14 +183,8 @@ class ComplexOrderLeg implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'order_role' => 'getOrderRole',
-        'action' => 'getAction',
-        'instrument' => 'getInstrument',
-        'order_type' => 'getOrderType',
-        'units' => 'getUnits',
-        'time_in_force' => 'getTimeInForce',
-        'price' => 'getPrice',
-        'stop' => 'getStop'
+        'amount' => 'getAmount',
+        'currency' => 'getCurrency'
     ];
 
     /**
@@ -264,23 +228,6 @@ class ComplexOrderLeg implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
-    public const ORDER_ROLE_TRIGGER = 'TRIGGER';
-    public const ORDER_ROLE_CONDITIONAL = 'CONDITIONAL';
-    public const ORDER_ROLE_PEER = 'PEER';
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getOrderRoleAllowableValues()
-    {
-        return [
-            self::ORDER_ROLE_TRIGGER,
-            self::ORDER_ROLE_CONDITIONAL,
-            self::ORDER_ROLE_PEER,
-        ];
-    }
 
     /**
      * Associative array for storing property values
@@ -297,14 +244,8 @@ class ComplexOrderLeg implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('order_role', $data ?? [], null);
-        $this->setIfExists('action', $data ?? [], null);
-        $this->setIfExists('instrument', $data ?? [], null);
-        $this->setIfExists('order_type', $data ?? [], null);
-        $this->setIfExists('units', $data ?? [], null);
-        $this->setIfExists('time_in_force', $data ?? [], null);
-        $this->setIfExists('price', $data ?? [], null);
-        $this->setIfExists('stop', $data ?? [], null);
+        $this->setIfExists('amount', $data ?? [], null);
+        $this->setIfExists('currency', $data ?? [], null);
     }
 
     /**
@@ -334,33 +275,6 @@ class ComplexOrderLeg implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['order_role'] === null) {
-            $invalidProperties[] = "'order_role' can't be null";
-        }
-        $allowedValues = $this->getOrderRoleAllowableValues();
-        if (!is_null($this->container['order_role']) && !in_array($this->container['order_role'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'order_role', must be one of '%s'",
-                $this->container['order_role'],
-                implode("', '", $allowedValues)
-            );
-        }
-
-        if ($this->container['action'] === null) {
-            $invalidProperties[] = "'action' can't be null";
-        }
-        if ($this->container['instrument'] === null) {
-            $invalidProperties[] = "'instrument' can't be null";
-        }
-        if ($this->container['order_type'] === null) {
-            $invalidProperties[] = "'order_type' can't be null";
-        }
-        if ($this->container['units'] === null) {
-            $invalidProperties[] = "'units' can't be null";
-        }
-        if ($this->container['time_in_force'] === null) {
-            $invalidProperties[] = "'time_in_force' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -377,257 +291,73 @@ class ComplexOrderLeg implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets order_role
-     *
-     * @return string
-     */
-    public function getOrderRole()
-    {
-        return $this->container['order_role'];
-    }
-
-    /**
-     * Sets order_role
-     *
-     * @param string $order_role The role of this leg within the complex order.
-     *
-     * @return self
-     */
-    public function setOrderRole($order_role)
-    {
-        $allowedValues = $this->getOrderRoleAllowableValues();
-        if (!in_array($order_role, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'order_role', must be one of '%s'",
-                    $order_role,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-
-        if (is_null($order_role)) {
-            throw new \InvalidArgumentException('non-nullable order_role cannot be null');
-        }
-
-        $this->container['order_role'] = $order_role;
-
-        return $this;
-    }
-
-    /**
-     * Gets action
-     *
-     * @return \SnapTrade\Model\ActionStrict
-     */
-    public function getAction()
-    {
-        return $this->container['action'];
-    }
-
-    /**
-     * Sets action
-     *
-     * @param \SnapTrade\Model\ActionStrict $action action
-     *
-     * @return self
-     */
-    public function setAction($action)
-    {
-
-        if (is_null($action)) {
-            throw new \InvalidArgumentException('non-nullable action cannot be null');
-        }
-
-        $this->container['action'] = $action;
-
-        return $this;
-    }
-
-    /**
-     * Gets instrument
-     *
-     * @return \SnapTrade\Model\TradingInstrument
-     */
-    public function getInstrument()
-    {
-        return $this->container['instrument'];
-    }
-
-    /**
-     * Sets instrument
-     *
-     * @param \SnapTrade\Model\TradingInstrument $instrument instrument
-     *
-     * @return self
-     */
-    public function setInstrument($instrument)
-    {
-
-        if (is_null($instrument)) {
-            throw new \InvalidArgumentException('non-nullable instrument cannot be null');
-        }
-
-        $this->container['instrument'] = $instrument;
-
-        return $this;
-    }
-
-    /**
-     * Gets order_type
-     *
-     * @return \SnapTrade\Model\OrderTypeStrict
-     */
-    public function getOrderType()
-    {
-        return $this->container['order_type'];
-    }
-
-    /**
-     * Sets order_type
-     *
-     * @param \SnapTrade\Model\OrderTypeStrict $order_type order_type
-     *
-     * @return self
-     */
-    public function setOrderType($order_type)
-    {
-
-        if (is_null($order_type)) {
-            throw new \InvalidArgumentException('non-nullable order_type cannot be null');
-        }
-
-        $this->container['order_type'] = $order_type;
-
-        return $this;
-    }
-
-    /**
-     * Gets units
-     *
-     * @return float
-     */
-    public function getUnits()
-    {
-        return $this->container['units'];
-    }
-
-    /**
-     * Sets units
-     *
-     * @param float $units Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
-     *
-     * @return self
-     */
-    public function setUnits($units)
-    {
-
-        if (is_null($units)) {
-            throw new \InvalidArgumentException('non-nullable units cannot be null');
-        }
-
-        $this->container['units'] = $units;
-
-        return $this;
-    }
-
-    /**
-     * Gets time_in_force
-     *
-     * @return \SnapTrade\Model\TimeInForceStrict
-     */
-    public function getTimeInForce()
-    {
-        return $this->container['time_in_force'];
-    }
-
-    /**
-     * Sets time_in_force
-     *
-     * @param \SnapTrade\Model\TimeInForceStrict $time_in_force time_in_force
-     *
-     * @return self
-     */
-    public function setTimeInForce($time_in_force)
-    {
-
-        if (is_null($time_in_force)) {
-            throw new \InvalidArgumentException('non-nullable time_in_force cannot be null');
-        }
-
-        $this->container['time_in_force'] = $time_in_force;
-
-        return $this;
-    }
-
-    /**
-     * Gets price
+     * Gets amount
      *
      * @return float|null
      */
-    public function getPrice()
+    public function getAmount()
     {
-        return $this->container['price'];
+        return $this->container['amount'];
     }
 
     /**
-     * Sets price
+     * Sets amount
      *
-     * @param float|null $price The limit price. Required when `order_type` is `Limit` or `StopLimit`.
+     * @param float|null $amount amount
      *
      * @return self
      */
-    public function setPrice($price)
+    public function setAmount($amount)
     {
 
-        if (is_null($price)) {
-            array_push($this->openAPINullablesSetToNull, 'price');
+        if (is_null($amount)) {
+            array_push($this->openAPINullablesSetToNull, 'amount');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('price', $nullablesSetToNull);
+            $index = array_search('amount', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
 
-        $this->container['price'] = $price;
+        $this->container['amount'] = $amount;
 
         return $this;
     }
 
     /**
-     * Gets stop
+     * Gets currency
      *
-     * @return float|null
+     * @return string|null
      */
-    public function getStop()
+    public function getCurrency()
     {
-        return $this->container['stop'];
+        return $this->container['currency'];
     }
 
     /**
-     * Sets stop
+     * Sets currency
      *
-     * @param float|null $stop The stop trigger price. Required when `order_type` is `Stop` or `StopLimit`.
+     * @param string|null $currency currency
      *
      * @return self
      */
-    public function setStop($stop)
+    public function setCurrency($currency)
     {
 
-        if (is_null($stop)) {
-            array_push($this->openAPINullablesSetToNull, 'stop');
+        if (is_null($currency)) {
+            array_push($this->openAPINullablesSetToNull, 'currency');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('stop', $nullablesSetToNull);
+            $index = array_search('currency', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
 
-        $this->container['stop'] = $stop;
+        $this->container['currency'] = $currency;
 
         return $this;
     }

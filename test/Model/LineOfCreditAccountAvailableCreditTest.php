@@ -1,6 +1,6 @@
 <?php
 /**
- * Model401FailedRequestResponseTest
+ * LineOfCreditAccountAvailableCreditTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Model401FailedRequestResponseTest Class Doc Comment
+ * LineOfCreditAccountAvailableCreditTest Class Doc Comment
  *
  * @category    Class
- * @description Example for failed request response
+ * @description The remaining credit available to spend on the account (credit limit less the current balance). Omitted when no such data is available.
  * @package     SnapTrade
  */
-class Model401FailedRequestResponseTest extends TestCase
+class LineOfCreditAccountAvailableCreditTest extends TestCase
 {
 
     /**
@@ -64,27 +64,27 @@ class Model401FailedRequestResponseTest extends TestCase
     }
 
     /**
-     * Test "Model401FailedRequestResponse"
+     * Test "LineOfCreditAccountAvailableCredit"
      */
-    public function testModel401FailedRequestResponse()
+    public function testLineOfCreditAccountAvailableCredit()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "default_detail"
+     * Test attribute "amount"
      */
-    public function testPropertyDefaultDetail()
+    public function testPropertyAmount()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "default_code"
+     * Test attribute "currency"
      */
-    public function testPropertyDefaultCode()
+    public function testPropertyCurrency()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

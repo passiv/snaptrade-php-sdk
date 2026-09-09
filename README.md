@@ -63,7 +63,7 @@ backoff with jitter rather than from the headers.
 See https://docs.snaptrade.com/docs/ratelimiting.
 
 
-[![Packagist](https://img.shields.io/badge/Packagist-v3.0.16-blue)](https://packagist.org/packages/konfig/snaptrade-php-sdk)
+[![Packagist](https://img.shields.io/badge/Packagist-v3.0.17-blue)](https://packagist.org/packages/konfig/snaptrade-php-sdk)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -155,7 +155,7 @@ To install the bindings via [Composer](https://getcomposer.org/), add the follow
     }
   ],
   "require": {
-    "konfig/snaptrade-php-sdk": "3.0.16"
+    "konfig/snaptrade-php-sdk": "3.0.17"
   }
 }
 ```
@@ -2221,7 +2221,7 @@ $result = $snaptrade->trading->placeComplexOrder(
                 "type" => "EQUITY",
             ],
             "order_type" => "Market",
-            "units" => 10.5,
+            "units" => 1,
             "time_in_force" => "Day",
             "price" => 31.33,
             "stop" => 29.5,

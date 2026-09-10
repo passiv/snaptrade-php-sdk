@@ -63,7 +63,7 @@ backoff with jitter rather than from the headers.
 See https://docs.snaptrade.com/docs/ratelimiting.
 
 
-[![Packagist](https://img.shields.io/badge/Packagist-v3.0.17-blue)](https://packagist.org/packages/konfig/snaptrade-php-sdk)
+[![Packagist](https://img.shields.io/badge/Packagist-v3.0.18-blue)](https://packagist.org/packages/konfig/snaptrade-php-sdk)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -155,7 +155,7 @@ To install the bindings via [Composer](https://getcomposer.org/), add the follow
     }
   ],
   "require": {
-    "konfig/snaptrade-php-sdk": "3.0.17"
+    "konfig/snaptrade-php-sdk": "3.0.18"
   }
 }
 ```
@@ -2204,6 +2204,22 @@ Please refer to the [brokerage trading support page](https://support.snaptrade.c
 - **OCO** (One Cancels the Other): Two peer orders; when one fills the other is cancelled.
 - **OTO** (One Triggers the Other): A trigger order that, when filled, activates a conditional order.
 - **OTOCO** (One Triggers a One Cancels the Other): A trigger order that, when filled, activates an OCO pair of two peer orders.
+
+Option OCO peers must trade the same OCC option symbol with the same closing
+action and positive whole-contract quantity.
+
+On tastytrade, option OCO supports closing an existing long or short option
+position with one `Limit` order and one `Stop` or `StopLimit` order. Both
+`PEER` orders must use `SELL_TO_CLOSE` or both must use `BUY_TO_CLOSE`, with
+`Day` or `GTC` time in force. Opening option OCOs are not supported.
+
+On enabled Webull US v3 accounts, option OCO supports closing an existing long
+option position with one `Limit` take-profit order and one `Stop` stop-loss order.
+Both `PEER` orders must use `SELL_TO_CLOSE`, `Day`, the same OCC option symbol,
+and the same positive whole-contract quantity. Webull receives these as
+`STOP_PROFIT` and `STOP_LOSS` orders sharing a combo ID, without a MASTER order.
+Opening option OCOs, `BUY_TO_CLOSE`, `StopLimit`, and other option order pairs
+are not supported on Webull. Equity complex-order behavior is unchanged.
 
 
 

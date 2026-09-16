@@ -1,6 +1,7 @@
 <?php
 /**
- * ConnectionsApiTest
+ * ConnectionAccountsResponseTest
+ *
  * PHP version 7.4
  *
  * @category Class
@@ -20,18 +21,22 @@
  */
 
 
-namespace SnapTrade\Test\Api;
+namespace SnapTrade\Test\Model;
 
-use \SnapTrade\Configuration;
-use \SnapTrade\ApiException;
-use \SnapTrade\ObjectSerializer;
 use PHPUnit\Framework\TestCase;
 
-class ConnectionsApiTest extends TestCase
+/**
+ * ConnectionAccountsResponseTest Class Doc Comment
+ *
+ * @category    Class
+ * @description Accounts under the specified connection.
+ * @package     SnapTrade
+ */
+class ConnectionAccountsResponseTest extends TestCase
 {
 
     /**
-     * Setup before running any test cases
+     * Setup before running any test case
      */
     public static function setUpBeforeClass(): void
     {
@@ -59,108 +64,18 @@ class ConnectionsApiTest extends TestCase
     }
 
     /**
-     * Test case for deleteConnection
-     *
-     * Delete connection.
-     *
+     * Test "ConnectionAccountsResponse"
      */
-    public function testDeleteConnection()
+    public function testConnectionAccountsResponse()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for detailBrokerageAuthorization
-     *
-     * Get connection detail.
-     *
+     * Test attribute "results"
      */
-    public function testDetailBrokerageAuthorization()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for disableBrokerageAuthorization
-     *
-     * Force disable connection.
-     *
-     */
-    public function testDisableBrokerageAuthorization()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for listBrokerageAuthorizationAccounts
-     *
-     * List accounts for a connection.
-     *
-     */
-    public function testListBrokerageAuthorizationAccounts()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for listBrokerageAuthorizations
-     *
-     * List all connections.
-     *
-     */
-    public function testListBrokerageAuthorizations()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for listConnectionAccounts
-     *
-     * List accounts.
-     *
-     */
-    public function testListConnectionAccounts()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for refreshBrokerageAuthorization
-     *
-     * Refresh holdings for a connection.
-     *
-     */
-    public function testRefreshBrokerageAuthorization()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for returnRates
-     *
-     * List connection rate of returns.
-     *
-     */
-    public function testReturnRates()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for syncBrokerageAuthorizationTransactions
-     *
-     * Sync transactions for a connection.
-     *
-     */
-    public function testSyncBrokerageAuthorizationTransactions()
+    public function testPropertyResults()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

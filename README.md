@@ -63,7 +63,7 @@ backoff with jitter rather than from the headers.
 See https://docs.snaptrade.com/docs/ratelimiting.
 
 
-[![Packagist](https://img.shields.io/badge/Packagist-v3.0.22-blue)](https://packagist.org/packages/konfig/snaptrade-php-sdk)
+[![Packagist](https://img.shields.io/badge/Packagist-v3.0.23-blue)](https://packagist.org/packages/konfig/snaptrade-php-sdk)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -155,7 +155,7 @@ To install the bindings via [Composer](https://getcomposer.org/), add the follow
     }
   ],
   "require": {
-    "konfig/snaptrade-php-sdk": "3.0.22"
+    "konfig/snaptrade-php-sdk": "3.0.23"
   }
 }
 ```
@@ -313,7 +313,7 @@ $result = $snaptrade->accountInformation->getAccountBalanceHistory(
 
 Returns a list of all positions in the specified account.
 
-The `results` list can contain multiple instrument types in the same response, including stocks, ADRs, ETFs, mutual funds, closed-end funds, bonds, crypto, futures, option positions, future option positions, and CFD positions. Use the `instrument.kind` discriminator to determine the schema for each position's `instrument`.
+The `results` list can contain multiple instrument types in the same response, including stocks, ADRs, ETFs, mutual funds, closed-end funds, bonds, crypto, futures, option positions, future option positions, CFD positions, and tokenized asset positions. Use the `instrument.kind` discriminator to determine the schema for each position's `instrument`.
 
 **Beta:** future option positions (`instrument.kind: future_option`) are in beta. They are currently returned only for tastytrade and Interactive Brokers connections, and only for partners they have been enabled for — please contact the SnapTrade team to enable them. The `FutureOptionInstrument` schema may change.
 

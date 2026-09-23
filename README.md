@@ -63,7 +63,7 @@ backoff with jitter rather than from the headers.
 See https://docs.snaptrade.com/docs/ratelimiting.
 
 
-[![Packagist](https://img.shields.io/badge/Packagist-v3.0.24-blue)](https://packagist.org/packages/konfig/snaptrade-php-sdk)
+[![Packagist](https://img.shields.io/badge/Packagist-v3.0.25-blue)](https://packagist.org/packages/konfig/snaptrade-php-sdk)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -155,7 +155,7 @@ To install the bindings via [Composer](https://getcomposer.org/), add the follow
     }
   ],
   "require": {
-    "konfig/snaptrade-php-sdk": "3.0.24"
+    "konfig/snaptrade-php-sdk": "3.0.25"
   }
 }
 ```
@@ -273,7 +273,7 @@ Optional comma separated list of transaction types to filter by. SnapTrade does 
 
 ### `snaptrade.accountInformation.getAccountBalanceHistory`<a id="snaptradeaccountinformationgetaccountbalancehistory"></a>
 
-An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and has a maximum lookback of 1 year. Because the data is dynamically generated, we recommend replacing your dataset with each request as opposed to combining data from multiple requests. Enable this feature for free in the Add-on section of the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)
+An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and has a maximum lookback of 1 year. Because the data is dynamically generated, we recommend replacing your dataset with each request as opposed to combining data from multiple requests. Enable this feature for free in the [Add-on page of the Customer Dashboard](https://dashboard.snaptrade.com/add-ons)
 
 
 

@@ -1,6 +1,7 @@
 <?php
 /**
- * ReferenceDataApiTest
+ * InstitutionTest
+ *
  * PHP version 7.4
  *
  * @category Class
@@ -20,18 +21,22 @@
  */
 
 
-namespace SnapTrade\Test\Api;
+namespace SnapTrade\Test\Model;
 
-use \SnapTrade\Configuration;
-use \SnapTrade\ApiException;
-use \SnapTrade\ObjectSerializer;
 use PHPUnit\Framework\TestCase;
 
-class ReferenceDataApiTest extends TestCase
+/**
+ * InstitutionTest Class Doc Comment
+ *
+ * @category    Class
+ * @description An institution in SnapTrade&#39;s public catalog and what it supports. A &#x60;null&#x60; field means the information is not documented yet.
+ * @package     SnapTrade
+ */
+class InstitutionTest extends TestCase
 {
 
     /**
-     * Setup before running any test cases
+     * Setup before running any test case
      */
     public static function setUpBeforeClass(): void
     {
@@ -59,108 +64,99 @@ class ReferenceDataApiTest extends TestCase
     }
 
     /**
-     * Test case for getPartnerInfo
-     *
-     * Get Client Info.
-     *
+     * Test "Institution"
      */
-    public function testGetPartnerInfo()
+    public function testInstitution()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for getStockExchanges
-     *
-     * Get exchanges.
-     *
+     * Test attribute "slug"
      */
-    public function testGetStockExchanges()
+    public function testPropertySlug()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for getSymbols
-     *
-     * Search symbols.
-     *
+     * Test attribute "name"
      */
-    public function testGetSymbols()
+    public function testPropertyName()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for getSymbolsByTicker
-     *
-     * Get symbol detail.
-     *
+     * Test attribute "display_name"
      */
-    public function testGetSymbolsByTicker()
+    public function testPropertyDisplayName()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for listAllBrokerageAuthorizationType
-     *
-     * Get all brokerage authorization types.
-     *
+     * Test attribute "description"
      */
-    public function testListAllBrokerageAuthorizationType()
+    public function testPropertyDescription()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for listAllBrokerageInstruments
-     *
-     * Get brokerage instruments.
-     *
+     * Test attribute "website"
      */
-    public function testListAllBrokerageInstruments()
+    public function testPropertyWebsite()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for listAllBrokerages
-     *
-     * Get brokerages.
-     *
+     * Test attribute "logo_url"
      */
-    public function testListAllBrokerages()
+    public function testPropertyLogoUrl()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for listInstitutions
-     *
-     * List institutions.
-     *
+     * Test attribute "square_logo_url"
      */
-    public function testListInstitutions()
+    public function testPropertySquareLogoUrl()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for symbolSearchUserAccount
-     *
-     * Search account symbols.
-     *
+     * Test attribute "release_stage"
      */
-    public function testSymbolSearchUserAccount()
+    public function testPropertyReleaseStage()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "regions"
+     */
+    public function testPropertyRegions()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "connection"
+     */
+    public function testPropertyConnection()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

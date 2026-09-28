@@ -1,6 +1,7 @@
 <?php
 /**
- * ReferenceDataApiTest
+ * InstitutionConnectionTest
+ *
  * PHP version 7.4
  *
  * @category Class
@@ -20,18 +21,22 @@
  */
 
 
-namespace SnapTrade\Test\Api;
+namespace SnapTrade\Test\Model;
 
-use \SnapTrade\Configuration;
-use \SnapTrade\ApiException;
-use \SnapTrade\ObjectSerializer;
 use PHPUnit\Framework\TestCase;
 
-class ReferenceDataApiTest extends TestCase
+/**
+ * InstitutionConnectionTest Class Doc Comment
+ *
+ * @category    Class
+ * @description InstitutionConnection
+ * @package     SnapTrade
+ */
+class InstitutionConnectionTest extends TestCase
 {
 
     /**
-     * Setup before running any test cases
+     * Setup before running any test case
      */
     public static function setUpBeforeClass(): void
     {
@@ -59,108 +64,27 @@ class ReferenceDataApiTest extends TestCase
     }
 
     /**
-     * Test case for getPartnerInfo
-     *
-     * Get Client Info.
-     *
+     * Test "InstitutionConnection"
      */
-    public function testGetPartnerInfo()
+    public function testInstitutionConnection()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for getStockExchanges
-     *
-     * Get exchanges.
-     *
+     * Test attribute "methods"
      */
-    public function testGetStockExchanges()
+    public function testPropertyMethods()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for getSymbols
-     *
-     * Search symbols.
-     *
+     * Test attribute "scopes"
      */
-    public function testGetSymbols()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for getSymbolsByTicker
-     *
-     * Get symbol detail.
-     *
-     */
-    public function testGetSymbolsByTicker()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for listAllBrokerageAuthorizationType
-     *
-     * Get all brokerage authorization types.
-     *
-     */
-    public function testListAllBrokerageAuthorizationType()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for listAllBrokerageInstruments
-     *
-     * Get brokerage instruments.
-     *
-     */
-    public function testListAllBrokerageInstruments()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for listAllBrokerages
-     *
-     * Get brokerages.
-     *
-     */
-    public function testListAllBrokerages()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for listInstitutions
-     *
-     * List institutions.
-     *
-     */
-    public function testListInstitutions()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for symbolSearchUserAccount
-     *
-     * Search account symbols.
-     *
-     */
-    public function testSymbolSearchUserAccount()
+    public function testPropertyScopes()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

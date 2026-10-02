@@ -63,7 +63,7 @@ backoff with jitter rather than from the headers.
 See https://docs.snaptrade.com/docs/ratelimiting.
 
 
-[![Packagist](https://img.shields.io/badge/Packagist-v3.0.28-blue)](https://packagist.org/packages/konfig/snaptrade-php-sdk)
+[![Packagist](https://img.shields.io/badge/Packagist-v3.0.29-blue)](https://packagist.org/packages/konfig/snaptrade-php-sdk)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -156,7 +156,7 @@ To install the bindings via [Composer](https://getcomposer.org/), add the follow
     }
   ],
   "require": {
-    "konfig/snaptrade-php-sdk": "3.0.28"
+    "konfig/snaptrade-php-sdk": "3.0.29"
   }
 }
 ```
@@ -2126,10 +2126,10 @@ The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
 ### `snaptrade.trading.getUserAccountOptionQuotes`<a id="snaptradetradinggetuseraccountoptionquotes"></a>
 ![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
+**Deprecated.** This endpoint was sunset on October 1, 2026 and now always returns `410 Gone`.
+
 Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)
 **Note:** These are derived values and are not suitable for trading purposes.
-
-**This Endpoint is deprecated and will cease to return data as of October 1, 2026**
 
 
 

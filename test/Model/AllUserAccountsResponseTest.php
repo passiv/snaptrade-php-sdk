@@ -1,6 +1,7 @@
 <?php
 /**
- * ExperimentalEndpointsApiTest
+ * AllUserAccountsResponseTest
+ *
  * PHP version 7.4
  *
  * @category Class
@@ -20,18 +21,22 @@
  */
 
 
-namespace SnapTrade\Test\Api;
+namespace SnapTrade\Test\Model;
 
-use \SnapTrade\Configuration;
-use \SnapTrade\ApiException;
-use \SnapTrade\ObjectSerializer;
 use PHPUnit\Framework\TestCase;
 
-class ExperimentalEndpointsApiTest extends TestCase
+/**
+ * AllUserAccountsResponseTest Class Doc Comment
+ *
+ * @category    Class
+ * @description Accounts across all of the user&#39;s connections.
+ * @package     SnapTrade
+ */
+class AllUserAccountsResponseTest extends TestCase
 {
 
     /**
-     * Setup before running any test cases
+     * Setup before running any test case
      */
     public static function setUpBeforeClass(): void
     {
@@ -59,96 +64,18 @@ class ExperimentalEndpointsApiTest extends TestCase
     }
 
     /**
-     * Test case for addSubscription
-     *
-     * Add a Trade Detection subscription.
-     *
+     * Test "AllUserAccountsResponse"
      */
-    public function testAddSubscription()
+    public function testAllUserAccountsResponse()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for cancelSubscription
-     *
-     * Cancel a Trade Detection subscription.
-     *
+     * Test attribute "results"
      */
-    public function testCancelSubscription()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for getAccountDetails
-     *
-     * Get account details.
-     *
-     */
-    public function testGetAccountDetails()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for getUserAccountOrderDetailV2
-     *
-     * Get account order detail (V2).
-     *
-     */
-    public function testGetUserAccountOrderDetailV2()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for getUserAccountOrdersV2
-     *
-     * List account orders v2.
-     *
-     */
-    public function testGetUserAccountOrdersV2()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for getUserAccountRecentOrdersV2
-     *
-     * List account recent orders (V2, last 24 hours only).
-     *
-     */
-    public function testGetUserAccountRecentOrdersV2()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for listAllUserAccounts
-     *
-     * List all user accounts.
-     *
-     */
-    public function testListAllUserAccounts()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for listSubscriptions
-     *
-     * List active Trade Detection subscriptions.
-     *
-     */
-    public function testListSubscriptions()
+    public function testPropertyResults()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

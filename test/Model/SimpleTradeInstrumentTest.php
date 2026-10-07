@@ -1,6 +1,6 @@
 <?php
 /**
- * ConnectionAccountTest
+ * SimpleTradeInstrumentTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * ConnectionAccountTest Class Doc Comment
+ * SimpleTradeInstrumentTest Class Doc Comment
  *
  * @category    Class
- * @description A single account under a connection, from the &#x60;kind&#x60;-discriminated union used by &#x60;Connections_listConnectionAccounts&#x60; and &#x60;AccountInformation_listAllUserAccounts&#x60;. Use &#x60;kind&#x60; to determine which schema is present.  &#x60;investment&#x60;, &#x60;deposit&#x60;, and &#x60;line_of_credit&#x60; are implemented today.
+ * @description SimpleTradeInstrument
  * @package     SnapTrade
  */
-class ConnectionAccountTest extends TestCase
+class SimpleTradeInstrumentTest extends TestCase
 {
 
     /**
@@ -64,9 +64,9 @@ class ConnectionAccountTest extends TestCase
     }
 
     /**
-     * Test "ConnectionAccount"
+     * Test "SimpleTradeInstrument"
      */
-    public function testConnectionAccount()
+    public function testSimpleTradeInstrument()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
@@ -82,144 +82,9 @@ class ConnectionAccountTest extends TestCase
     }
 
     /**
-     * Test attribute "id"
+     * Test attribute "symbol"
      */
-    public function testPropertyId()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "connection_id"
-     */
-    public function testPropertyConnectionId()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "display_name"
-     */
-    public function testPropertyDisplayName()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "masked_account_number"
-     */
-    public function testPropertyMaskedAccountNumber()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "institution_account_id"
-     */
-    public function testPropertyInstitutionAccountId()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "institution_id"
-     */
-    public function testPropertyInstitutionId()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "opening_date"
-     */
-    public function testPropertyOpeningDate()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "funding_date"
-     */
-    public function testPropertyFundingDate()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "sync_status"
-     */
-    public function testPropertySyncStatus()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "raw_type"
-     */
-    public function testPropertyRawType()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "cash_or_margin"
-     */
-    public function testPropertyCashOrMargin()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "is_paper"
-     */
-    public function testPropertyIsPaper()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "net_value"
-     */
-    public function testPropertyNetValue()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "minimum_payment_amount"
-     */
-    public function testPropertyMinimumPaymentAmount()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "available_credit"
-     */
-    public function testPropertyAvailableCredit()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "next_payment_date"
-     */
-    public function testPropertyNextPaymentDate()
+    public function testPropertySymbol()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

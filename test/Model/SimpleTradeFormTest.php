@@ -1,6 +1,6 @@
 <?php
 /**
- * ConnectionAccountTest
+ * SimpleTradeFormTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * ConnectionAccountTest Class Doc Comment
+ * SimpleTradeFormTest Class Doc Comment
  *
  * @category    Class
- * @description A single account under a connection, from the &#x60;kind&#x60;-discriminated union used by &#x60;Connections_listConnectionAccounts&#x60; and &#x60;AccountInformation_listAllUserAccounts&#x60;. Use &#x60;kind&#x60; to determine which schema is present.  &#x60;investment&#x60;, &#x60;deposit&#x60;, and &#x60;line_of_credit&#x60; are implemented today.
+ * @description SimpleTradeForm
  * @package     SnapTrade
  */
-class ConnectionAccountTest extends TestCase
+class SimpleTradeFormTest extends TestCase
 {
 
     /**
@@ -64,162 +64,99 @@ class ConnectionAccountTest extends TestCase
     }
 
     /**
-     * Test "ConnectionAccount"
+     * Test "SimpleTradeForm"
      */
-    public function testConnectionAccount()
+    public function testSimpleTradeForm()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "kind"
+     * Test attribute "order_type"
      */
-    public function testPropertyKind()
+    public function testPropertyOrderType()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "id"
+     * Test attribute "time_in_force"
      */
-    public function testPropertyId()
+    public function testPropertyTimeInForce()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "connection_id"
+     * Test attribute "legs"
      */
-    public function testPropertyConnectionId()
+    public function testPropertyLegs()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "display_name"
+     * Test attribute "limit_price"
      */
-    public function testPropertyDisplayName()
+    public function testPropertyLimitPrice()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "masked_account_number"
+     * Test attribute "stop_price"
      */
-    public function testPropertyMaskedAccountNumber()
+    public function testPropertyStopPrice()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "institution_account_id"
+     * Test attribute "price_effect"
      */
-    public function testPropertyInstitutionAccountId()
+    public function testPropertyPriceEffect()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "institution_id"
+     * Test attribute "client_order_id"
      */
-    public function testPropertyInstitutionId()
+    public function testPropertyClientOrderId()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "opening_date"
+     * Test attribute "expiry_date"
      */
-    public function testPropertyOpeningDate()
+    public function testPropertyExpiryDate()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "funding_date"
+     * Test attribute "notional_value"
      */
-    public function testPropertyFundingDate()
+    public function testPropertyNotionalValue()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "sync_status"
+     * Test attribute "trading_session"
      */
-    public function testPropertySyncStatus()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "raw_type"
-     */
-    public function testPropertyRawType()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "cash_or_margin"
-     */
-    public function testPropertyCashOrMargin()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "is_paper"
-     */
-    public function testPropertyIsPaper()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "net_value"
-     */
-    public function testPropertyNetValue()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "minimum_payment_amount"
-     */
-    public function testPropertyMinimumPaymentAmount()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "available_credit"
-     */
-    public function testPropertyAvailableCredit()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "next_payment_date"
-     */
-    public function testPropertyNextPaymentDate()
+    public function testPropertyTradingSession()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

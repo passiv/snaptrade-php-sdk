@@ -63,7 +63,7 @@ backoff with jitter rather than from the headers.
 See https://docs.snaptrade.com/docs/ratelimiting.
 
 
-[![Packagist](https://img.shields.io/badge/Packagist-v3.0.58-blue)](https://packagist.org/packages/konfig/snaptrade-php-sdk)
+[![Packagist](https://img.shields.io/badge/Packagist-v3.0.59-blue)](https://packagist.org/packages/konfig/snaptrade-php-sdk)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -165,7 +165,7 @@ To install the bindings via [Composer](https://getcomposer.org/), add the follow
     }
   ],
   "require": {
-    "konfig/snaptrade-php-sdk": "3.0.58"
+    "konfig/snaptrade-php-sdk": "3.0.59"
   }
 }
 ```
@@ -576,8 +576,6 @@ By default only returns executed orders, but that can be changed by setting *onl
 Every order carries a `legs` list with at least one leg; switch on `legs[].instrument.kind` and `order_type.kind` to know which fields are present. `data_freshness.as_of` is the time of this live request.
 
 **Beta:** this endpoint and its response schema may change.
-
-**Because of the cost of realtime requests, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)**
 
 
 
@@ -1861,7 +1859,6 @@ A lightweight endpoint that returns a list of orders executed in the last 24 hou
 This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders.
 Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days.
 By default only returns executed orders, but that can be changed by setting *only_executed* to false.
-**Because of the cost of realtime requests, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)**
 
 
 

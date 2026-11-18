@@ -63,7 +63,7 @@ backoff with jitter rather than from the headers.
 See https://docs.snaptrade.com/docs/ratelimiting.
 
 
-[![Packagist](https://img.shields.io/badge/Packagist-v3.0.60-blue)](https://packagist.org/packages/konfig/snaptrade-php-sdk)
+[![Packagist](https://img.shields.io/badge/Packagist-v3.0.61-blue)](https://packagist.org/packages/konfig/snaptrade-php-sdk)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -166,7 +166,7 @@ To install the bindings via [Composer](https://getcomposer.org/), add the follow
     }
   ],
   "require": {
-    "konfig/snaptrade-php-sdk": "3.0.60"
+    "konfig/snaptrade-php-sdk": "3.0.61"
   }
 }
 ```
@@ -482,7 +482,7 @@ $result = $snaptrade->accountInformation->getAccountTransactions(
     user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61", 
     start_date: "2022-01-24", 
     end_date: "2022-01-24", 
-    type: "BUY_TO_OPEN,DIVIDEND", 
+    type: "BUY,DIVIDEND", 
     offset: 0, 
     limit: 1000
 );

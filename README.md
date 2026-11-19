@@ -63,7 +63,7 @@ backoff with jitter rather than from the headers.
 See https://docs.snaptrade.com/docs/ratelimiting.
 
 
-[![Packagist](https://img.shields.io/badge/Packagist-v3.0.61-blue)](https://packagist.org/packages/konfig/snaptrade-php-sdk)
+[![Packagist](https://img.shields.io/badge/Packagist-v3.0.62-blue)](https://packagist.org/packages/konfig/snaptrade-php-sdk)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -166,7 +166,7 @@ To install the bindings via [Composer](https://getcomposer.org/), add the follow
     }
   ],
   "require": {
-    "konfig/snaptrade-php-sdk": "3.0.61"
+    "konfig/snaptrade-php-sdk": "3.0.62"
   }
 }
 ```
@@ -467,7 +467,7 @@ $result = $snaptrade->accountInformation->getAccountOrder(
 
 ### `snaptrade.accountInformation.getAccountTransactions`<a id="snaptradeaccountinformationgetaccounttransactions"></a>
 
-Returns the account's cached transaction history, most recent trade date first. Transactions with the same timestamp are ordered by descending internal activity ID.
+Returns the account's cached transaction history, most recent date first. Transactions with the same timestamp are ordered by descending internal activity ID.
 
 History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history.
 
@@ -498,11 +498,11 @@ $result = $snaptrade->accountInformation->getAccountTransactions(
 
 ##### start_date: `\DateTime`<a id="start_date-datetime"></a>
 
-First trade date to include (UTC). Defaults to the earliest available transaction.
+First date to include (UTC). Defaults to the earliest available transaction.
 
 ##### end_date: `\DateTime`<a id="end_date-datetime"></a>
 
-Last trade date to include (UTC). Defaults to the latest available transaction.
+Last date to include (UTC). Defaults to the latest available transaction.
 
 ##### type: `string`<a id="type-string"></a>
 

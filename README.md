@@ -63,7 +63,7 @@ backoff with jitter rather than from the headers.
 See https://docs.snaptrade.com/docs/ratelimiting.
 
 
-[![Packagist](https://img.shields.io/badge/Packagist-v3.0.68-blue)](https://packagist.org/packages/konfig/snaptrade-php-sdk)
+[![Packagist](https://img.shields.io/badge/Packagist-v3.0.69-blue)](https://packagist.org/packages/konfig/snaptrade-php-sdk)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -166,7 +166,7 @@ To install the bindings via [Composer](https://getcomposer.org/), add the follow
     }
   ],
   "require": {
-    "konfig/snaptrade-php-sdk": "3.0.68"
+    "konfig/snaptrade-php-sdk": "3.0.69"
   }
 }
 ```
@@ -210,8 +210,11 @@ $result = $snaptrade->accountInformation->getAccountActivities(
 
 
 ### `snaptrade.accountInformation.getAccountActivities`<a id="snaptradeaccountinformationgetaccountactivities"></a>
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
-This endpoint is not deprecated and has no planned sunset. Responses to requests using the legacy `/api/v1` path prefix include `Deprecation: @1781222400` (June 12, 2026); that header applies only to the path prefix. Use the canonical root path `/accounts/{accountId}/activities`.
+**Deprecated.** Use the [list account transactions](/reference/Account%20Information/AccountInformation_getAccountTransactions) endpoint instead. This endpoint currently has no planned sunset.
+
+The `Deprecation: @1781222400` header (June 12, 2026) applies only to the legacy `/api/v1` path prefix. The canonical path for account activities is `/accounts/{accountId}/activities`.
 
 Returns all historical transactions for the specified account.
 
@@ -464,6 +467,8 @@ $result = $snaptrade->accountInformation->getAccountOrder(
 
 
 ### `snaptrade.accountInformation.getAccountTransactions`<a id="snaptradeaccountinformationgetaccounttransactions"></a>
+
+This endpoint replaces the deprecated [list account activities](/reference/Account%20Information/AccountInformation_getAccountActivities) endpoint.
 
 Returns the account's cached transaction history, most recent date first. Transactions with the same timestamp are ordered by descending internal activity ID.
 
